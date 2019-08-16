@@ -19,11 +19,15 @@ public class Player : MonoBehaviour
     public Pool poolObjectAttack;
     public Button Button_Attack;
     public Button Button_Deffense;
+    public Button Button_Dodge;//Boton De esquivar.
     public Button Button_Jump;
     public Button Button_Duck; //Agacharse;
-    public Button Button_TargetHead; //Atacar a la cabeza
-    public Button Button_TargetChest; // Atacar al pecho
-    public Button Button_TargetLegs; // Atacar a las piernas
+    public Button Button_AttackHead; //Atacar a la cabeza
+    public Button Button_AttackChest; // Atacar al pecho
+    public Button Button_AttackLegs; // Atacar a las piernas
+    public Button Button_DefenseHead;
+    public Button Button_DefenseChest;
+    public Button Button_DefenseLegs;
     private Objetivo objetivo;
     public float timeButtonActivate = 0.5f;
     private float auxButtonActivate;
@@ -40,20 +44,31 @@ public class Player : MonoBehaviour
     }
     public void AttackButton() {
         Button_Deffense.gameObject.SetActive(false);
-        Button_Jump.gameObject.SetActive(false);
-        Button_Duck.gameObject.SetActive(false);
+        Button_Dodge.gameObject.SetActive(false);
         while (timeButtonActivate > 0) {
             timeButtonActivate = timeButtonActivate - Time.deltaTime;
         }
         if (timeButtonActivate <= 0) {
             timeButtonActivate = auxButtonActivate;
             Button_Attack.gameObject.SetActive(false);
-            Button_TargetChest.gameObject.SetActive(true);
-            Button_TargetHead.gameObject.SetActive(true);
-            Button_TargetLegs.gameObject.SetActive(true);
+            Button_AttackChest.gameObject.SetActive(true);
+            Button_AttackHead.gameObject.SetActive(true);
+            Button_AttackLegs.gameObject.SetActive(true);
         }
     }
-    public void Attack()
+    public void AttackHead() {
+        objetivo = Objetivo.Cabeza;
+        Attack(objetivo);
+    }
+    public void AttackChest() {
+        objetivo = Objetivo.Torso;
+        Attack(objetivo);
+    }
+    public void AttackLegs() {
+        objetivo = Objetivo.Piernas;
+        Attack(objetivo);
+    }
+    public void Attack(Objetivo ob)
     {
         if(Time.timeScale > 0)
         {
@@ -67,6 +82,7 @@ public class Player : MonoBehaviour
                 GameObject go = poolObjectAttack.GetObject();
                 Proyectil proyectil = go.GetComponent<Proyectil>();
                 go.transform.position = tranformAtaque.position;
+                proyectil.On();
                 switch (objetivo)
                 {
                     case Objetivo.Cabeza:
@@ -79,7 +95,6 @@ public class Player : MonoBehaviour
                         proyectil.ShootForwardDown();
                         break;
                 }
-                
                 
             }
         }
