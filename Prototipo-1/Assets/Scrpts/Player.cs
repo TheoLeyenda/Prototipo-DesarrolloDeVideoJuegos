@@ -28,13 +28,26 @@ public class Player : MonoBehaviour
     public Button Button_DefenseHead;
     public Button Button_DefenseChest;
     public Button Button_DefenseLegs;
+    public Button Button_Back;
+    public BoxCollider2D ShildHead;
+    public BoxCollider2D ShildChest;
+    public BoxCollider2D ShildLegs;
+    public BoxCollider2D BoxColliderHead;
+    public BoxCollider2D BoxColliderChest;
+    public BoxCollider2D BoxColliderLegs;
     private Objetivo objetivo;
-    public float timeButtonActivate = 0.5f;
-    private float auxButtonActivate;
+    public float timeButtonActivate;
+    public float SpeedJump;
     public Transform tranformAtaque;
+    private GameManager gm;
+    private Rigidbody2D rg2D;
     void Start()
     {
-        auxButtonActivate = timeButtonActivate;
+        if(GameManager.instanceGameManager != null){
+            gm = GameManager.instanceGameManager;
+        }
+        rg2D = GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
@@ -42,19 +55,36 @@ public class Player : MonoBehaviour
     {
 
     }
+    public void Back() {
+        Button_Jump.gameObject.SetActive(false);
+        Button_Duck.gameObject.SetActive(false);
+        Button_AttackHead.gameObject.SetActive(false);
+        Button_AttackChest.gameObject.SetActive(false);
+        Button_AttackLegs.gameObject.SetActive(false);
+        Button_DefenseHead.gameObject.SetActive(false);
+        Button_DefenseChest.gameObject.SetActive(false);
+        Button_DefenseLegs.gameObject.SetActive(false);
+        Button_Back.gameObject.SetActive(false);
+        Button_Attack.gameObject.SetActive(true);
+        Button_Deffense.gameObject.SetActive(true);
+        Button_Dodge.gameObject.SetActive(true);
+        ShildChest.gameObject.SetActive(false);
+        ShildHead.gameObject.SetActive(false);
+        ShildLegs.gameObject.SetActive(false);
+
+    }
     public void AttackButton() {
         Button_Deffense.gameObject.SetActive(false);
         Button_Dodge.gameObject.SetActive(false);
-        while (timeButtonActivate > 0) {
-            timeButtonActivate = timeButtonActivate - Time.deltaTime;
-        }
-        if (timeButtonActivate <= 0) {
-            timeButtonActivate = auxButtonActivate;
-            Button_Attack.gameObject.SetActive(false);
-            Button_AttackChest.gameObject.SetActive(true);
-            Button_AttackHead.gameObject.SetActive(true);
-            Button_AttackLegs.gameObject.SetActive(true);
-        }
+        
+        Button_Attack.gameObject.SetActive(false);
+        Button_AttackChest.gameObject.SetActive(true);
+        Button_AttackHead.gameObject.SetActive(true);
+        Button_AttackLegs.gameObject.SetActive(true);
+        Button_Back.gameObject.SetActive(true);
+
+
+
     }
     public void AttackHead() {
         objetivo = Objetivo.Cabeza;
@@ -99,17 +129,78 @@ public class Player : MonoBehaviour
             }
         }
     }
-    public void Deffense()
-    {
+    public void DefenseButton() {
+        Button_Attack.gameObject.SetActive(false);
+        Button_Dodge.gameObject.SetActive(false);
 
+        Button_Deffense.gameObject.SetActive(false);
+        Button_DefenseChest.gameObject.SetActive(true);
+        Button_DefenseHead.gameObject.SetActive(true);
+        Button_DefenseLegs.gameObject.SetActive(true);
+        Button_Back.gameObject.SetActive(true);
+        
+    }
+    public void DeffenseHead()
+    {
+        objetivo = Objetivo.Cabeza;
+        Deffense(objetivo);
+    }
+    public void DeffenseChest()
+    {
+        objetivo = Objetivo.Torso;
+        Deffense(objetivo);
+    }
+    public void DeffenseLegs()
+    {
+        objetivo = Objetivo.Piernas;
+        Deffense(objetivo);
+    }
+    public void Deffense(Objetivo ob)
+    {
+        if(Time.timeScale > 0)
+        {
+            switch (objetivo) {
+                case Objetivo.Cabeza:
+                    ShildHead.gameObject.SetActive(true);
+                    ShildChest.gameObject.SetActive(false);
+                    ShildLegs.gameObject.SetActive(false);
+                    break;
+                case Objetivo.Torso:
+                    ShildHead.gameObject.SetActive(false);
+                    ShildChest.gameObject.SetActive(true);
+                    ShildLegs.gameObject.SetActive(false);
+                    break;
+                case Objetivo.Piernas:
+                    ShildHead.gameObject.SetActive(false);
+                    ShildChest.gameObject.SetActive(false);
+                    ShildLegs.gameObject.SetActive(true);
+                    break;
+            }
+        }
+    }
+    public void DodgeButton() {
+        Button_Attack.gameObject.SetActive(false);
+        Button_Deffense.gameObject.SetActive(false);
+
+        Button_Dodge.gameObject.SetActive(false);
+        Button_Jump.gameObject.SetActive(true);
+        Button_Duck.gameObject.SetActive(true);
+        Button_Back.gameObject.SetActive(true);
     }
     public void Jump()
     {
-        
+        Debug.Log("Animacion De Salto");
+        rg2D.AddForce(transform.up * SpeedJump, ForceMode2D.Impulse);
+        BoxColliderHead.gameObject.SetActive(true);
+        BoxColliderChest.gameObject.SetActive(true);
+        BoxColliderLegs.gameObject.SetActive(true);
     }
     public void Duck()
     {
-
+        Debug.Log("Animacion De Agacharse");
+        BoxColliderHead.gameObject.SetActive(false);
+        BoxColliderChest.gameObject.SetActive(true);
+        BoxColliderLegs.gameObject.SetActive(true);
     }
     public void TargetHead()
     {

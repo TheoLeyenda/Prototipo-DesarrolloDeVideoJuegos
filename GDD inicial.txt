@@ -1,0 +1,25 @@
+Gameplay General
+
+2 Modos. Historia y Supervivencia.
+
+Modo Supervivencia es un modo en el cual vienen enemigos de forma aleatoria y tienes que sobrevivir lo más que puedas.
+
+Niveles/Jefes: Las 8 aulas de IMAGE. Cada aula tiene su jefe (profe). Baretto es el final. ESCOLTADO POR EL  G R A N   LAUTARO
+
+Jugador estático. Tendra 3 BOX COLLIDERS (Representan: CABEZA, PECHO, PIERNAS.) Se desactivaran dependiendo de la acción ESQUIVAR y PROTEGER. 
+
+Enemigo estático. Combate: 3 botones para PROTEGER, ATACAR y ESQUIVAR. Se puede cancelar la accion.
+
+ATACAR: Despliega 3 botones màs, borrando los otros. Atacar a: CABEZA, PECHO, PIERNAS. Ataques son con PROYECTILES. Cada profesor tiene su proyectil previamente definido.
+El jugador tiene proyectiles al azar (Ej. mochilas, camperas, etc). El proyectil siempre hace el mismo daño.
+
+PROTEGER: Despliega 3 botones mas, borrando los otros. Defender a: Cabeza, Pecho, Piernas. En caso de defender correctamente (Si el enemigo ataca al pecho y vos defendes al pecho, por ejemplo) el jugador no recibe daño.
+
+ESQUIVAR: Despliega 3 botones mas, borrando los otros. Esquivar: Arriba y Abajo. Si el jugador esquiva un ataque correctamente (si el enemigo ataca abajo y esquivas arriba), el jugador
+contraatacará automaticamente. Ataques al pecho no se pueden esquivar, solo bloquear.
+
+-Que los dos elijan al mismo(jugadores y enemigos) tiempo y que se vea que opcion esta elijiendo cada uno y que a ultimo momento cualquiera de los jugadores/Enemigo pueda cambiar su opcion a ultimo momento.
+
+-Que haya un timer que delimite el tiempo que tiene cada uno para elejir el ataque y si alguno de los dos jugadores/enemigo no elije nada que mande un random de decision que elija movimiento(ataque,defensa, esquivar) y accion(Atacar/Defender CABEZA, Atacar/Defender TORSO, Atacar/Defender PIES | EN CASO QUE SEA ESQUIVAR QUE EL RANDOM ELIJA SI ESQUIBAR ARRIBA O ABAJO).
+
+-Agregar un Multijugador en donde puedas hacer duelos 1vs1(ESTE MODO SOLO ES PARA COMPUTADORA).  

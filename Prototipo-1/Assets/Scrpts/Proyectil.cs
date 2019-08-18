@@ -21,7 +21,6 @@ public class Proyectil : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(auxTimeLife);
         CheckTimeLife();
     }
     public void On()
