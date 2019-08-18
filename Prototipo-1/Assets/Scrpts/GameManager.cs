@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
             currentTime = currentTime + step;
         }
     }
+
 }
     
 

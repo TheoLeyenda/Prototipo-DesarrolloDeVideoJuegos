@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum Objetivo {
-    Cabeza,
-    Torso,
-    Piernas,
-}
+
 public class Player : MonoBehaviour
 {
+    public enum Objetivo
+    {
+        Cabeza,
+        Torso,
+        Piernas,
+    }
     //El player elije su movimiento.
     //El enemigo tira un random de movimiento.
     //dependiendo de la accion que aparezca un escudo que el player se mueva o que se dispare un objeto
@@ -35,6 +37,7 @@ public class Player : MonoBehaviour
     public BoxCollider2D BoxColliderHead;
     public BoxCollider2D BoxColliderChest;
     public BoxCollider2D BoxColliderLegs;
+    private bool ContraAtaque;
     private Objetivo objetivo;
     public float timeButtonActivate;
     public float SpeedJump;
@@ -43,6 +46,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rg2D;
     void Start()
     {
+        ContraAtaque = false;
         if(GameManager.instanceGameManager != null){
             gm = GameManager.instanceGameManager;
         }
@@ -98,6 +102,16 @@ public class Player : MonoBehaviour
         objetivo = Objetivo.Piernas;
         Attack(objetivo);
     }
+    public void DisableShild() {
+        ShildChest.gameObject.SetActive(false);
+        ShildHead.gameObject.SetActive(false);
+        ShildLegs.gameObject.SetActive(false);
+    }
+    public void ActivateShild() {
+        ShildChest.gameObject.SetActive(true);
+        ShildHead.gameObject.SetActive(true);
+        ShildLegs.gameObject.SetActive(true);
+    }
     public void Attack(Objetivo ob)
     {
         if(Time.timeScale > 0)
@@ -109,6 +123,7 @@ public class Player : MonoBehaviour
                 //go.transform.position = generator.transform.position + generator.transform.right;
                 //go.transform.rotation = generator.transform.rotation;
                 //pelota.Shoot();
+                DisableShild();
                 GameObject go = poolObjectAttack.GetObject();
                 Proyectil proyectil = go.GetComponent<Proyectil>();
                 go.transform.position = tranformAtaque.position;
