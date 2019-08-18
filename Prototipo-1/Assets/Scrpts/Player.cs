@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rg2D;
     void Start()
     {
+        DisableShild();
         ContraAtaque = false;
         if(GameManager.instanceGameManager != null){
             gm = GameManager.instanceGameManager;

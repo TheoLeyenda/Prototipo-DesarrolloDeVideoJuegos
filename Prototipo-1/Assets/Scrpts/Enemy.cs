@@ -40,9 +40,12 @@ public class Enemy : MonoBehaviour
     private float DeffensePorcentage;
     private float AttackPorcentage;
     private float DodgePorcentage;
-    private float HeadPorcentage;
-    private float ChestPorcentage;
-    private float LegsPorcentage;
+    private float AttackHeadPorcentage;
+    private float AttackChestPorcentage;
+    private float AttackLegsPorcentage;
+    private float DeffenseHeadPorcentage;
+    private float DeffenseChestPorcentage;
+    private float DeffenseLegsPorcentage;
     private float JumpPorcentage;
     private float DuckPorcentage;
     private bool ContraAtaque;
@@ -53,6 +56,7 @@ public class Enemy : MonoBehaviour
     {
         ContraAtaque = false;
         mover = true;
+        DisableShild();
         imagenMovimientoElejido.gameObject.SetActive(false);
         imagenAccionElejida.gameObject.SetActive(false);
         if (GameManager.instanceGameManager != null)
@@ -68,10 +72,14 @@ public class Enemy : MonoBehaviour
                 AttackPorcentage = 45;
                 DeffensePorcentage = 45;
                 DodgePorcentage = 10;
-                //----Objetivo----//
-                HeadPorcentage = 33.3f;
-                ChestPorcentage = 33.4f;
-                LegsPorcentage = 33.3f;
+                //----Objetivo Atacar----//
+                AttackHeadPorcentage = 33.3f;
+                AttackChestPorcentage = 33.4f;
+                AttackLegsPorcentage = 33.3f;
+                //----Objetivo Defender----//
+                DeffenseHeadPorcentage = 33.3f;
+                DeffenseChestPorcentage = 33.4f;
+                DeffenseLegsPorcentage = 33.3f;
                 //----Esquivar Arriba/Abajo----//
                 JumpPorcentage = 50;
                 DuckPorcentage = 50;
@@ -81,10 +89,14 @@ public class Enemy : MonoBehaviour
                 AttackPorcentage = 80;
                 DeffensePorcentage = 20;
                 DodgePorcentage = 0;
-                //----Objetivo----//
-                LegsPorcentage = 60;
-                ChestPorcentage = 30;
-                HeadPorcentage = 10;
+                //----Objetivo Atacar----//
+                AttackLegsPorcentage = 60;
+                AttackChestPorcentage = 30;
+                AttackHeadPorcentage = 10;
+                //----Objetivo Defender----//
+                DeffenseHeadPorcentage = 33.3f;
+                DeffenseChestPorcentage = 33.4f;
+                DeffenseLegsPorcentage = 33.3f;
                 //----Esquivar Arriba/Abajo----//
                 JumpPorcentage = 0;
                 DuckPorcentage = 0;
@@ -94,10 +106,14 @@ public class Enemy : MonoBehaviour
                 AttackPorcentage = 40;
                 DeffensePorcentage = 60;
                 DodgePorcentage = 0;
-                //----Objetivo----//
-                HeadPorcentage = 100;
-                ChestPorcentage = 0;
-                LegsPorcentage = 0;
+                //----Objetivo Atacar----//
+                AttackHeadPorcentage = 100;
+                AttackChestPorcentage = 0;
+                AttackLegsPorcentage = 0;
+                //----Objetivo Defender----//
+                DeffenseHeadPorcentage = 33.3f;
+                DeffenseChestPorcentage = 33.4f;
+                DeffenseLegsPorcentage = 33.3f;
                 //----Esquivar Arriba/Abajo----//
                 JumpPorcentage = 0;
                 DuckPorcentage = 0;
@@ -117,38 +133,85 @@ public class Enemy : MonoBehaviour
     public void CheckMovement() {
         mover = false;
         float movimientoElejir = Random.Range(0,100);
-        float objetivoElejido = Random.Range(0, 100);
-        if (movimientoElejido <= AttackPorcentage)
+        //Debug.Log("Movimiento: "+ movimientoElejir);
+        
+        if (movimientoElejir <= AttackPorcentage)
         {
-            //Atacar
+            //ATACAR
             //Debug.Log("ATACANDO");
             if (poolObjectAttack.count > 0) {
-                
-                if (objetivoElejido <= HeadPorcentage)
+                float objetivoElejir = Random.Range(0, 100);
+                objetivoElejido = Random.Range(0, 100);
+                //Debug.Log("Objetivo: " + objetivoElejir);
+                if (objetivoElejir <= AttackHeadPorcentage)
                 {
                     //ATACAR A LA CABEZA
                     Attack(Objetivo.Cabeza);
                 }
-                else if (objetivoElejido > HeadPorcentage && objetivoElejido <= HeadPorcentage + ChestPorcentage)
+                else if (objetivoElejir > AttackHeadPorcentage && objetivoElejir <= AttackHeadPorcentage + AttackChestPorcentage)
                 {
                     //ATACAR AL TORSO
                     Attack(Objetivo.Torso);
                 }
-                else if(objetivoElejido > HeadPorcentage + ChestPorcentage){
+                else if(objetivoElejir > AttackHeadPorcentage + AttackChestPorcentage){
                     //ATACAR A LOS PIES
                     Attack(Objetivo.Piernas);
                 }
             }
-
-
         }
-        else if (movimientoElejido > AttackPorcentage && movimientoElejido <= AttackPorcentage + DeffensePorcentage)
+        else if (movimientoElejir > AttackPorcentage && movimientoElejir <= AttackPorcentage + DeffensePorcentage)
         {
-            //Defender
+            //DEFENDER
+            //Debug.Log("DEFENDIENDO");
+            float objetivoElejir = Random.Range(0, 100);
+            objetivoElejido = Random.Range(0, 100);
+            //Debug.Log("Objetivo: " + objetivoElejir);
+            if (typeEnemy == Categoria.Defensivo)
+            {
+                //SI LOGRA BLOQUEAR EL TIRO CONTRATACA
+            }
+            else {
+                if (objetivoElejir <= DeffenseHeadPorcentage)
+                {
+                    //DEFENDER A LA CABEZA
+                    //Debug.Log("DEFENDI CABEZA");
+                    Deffense(Objetivo.Cabeza);
+                }
+                else if (objetivoElejir > DeffenseHeadPorcentage && objetivoElejir <= DeffenseHeadPorcentage + DeffenseChestPorcentage)
+                {
+                    //DEFENDER AL TORSO
+                    //Debug.Log("DEFENDI TORSO");
+                    Deffense(Objetivo.Torso);
+                }
+                else if (objetivoElejir > DeffenseHeadPorcentage + DeffenseChestPorcentage)
+                {
+                    //DEFENDER A LOS PIES
+                    //Debug.Log("DEFENDI PIES");
+                    Deffense(Objetivo.Piernas);
+                }
+            }
         }
-        else if (movimientoElejido > AttackPorcentage + DeffensePorcentage)
+        else if (movimientoElejir > AttackPorcentage + DeffensePorcentage)
         {
             //Esquivar
+            float objetivoElejir = Random.Range(0, 100);
+            objetivoElejido = Random.Range(0, 100);
+            Debug.Log("Objetivo: " + objetivoElejir);
+            if (typeEnemy == Categoria.Balanceado)
+            {
+                //SI ESQUIVA CONTRATACA
+                if (objetivoElejido <= JumpPorcentage)
+                {
+                    Jump();
+                }
+                else if(objetivoElejido > DuckPorcentage)
+                {
+                    Duck();
+                }
+            }
+            else {
+
+            }
         }
         
     }
@@ -185,14 +248,39 @@ public class Enemy : MonoBehaviour
     }
 
     public void Deffense(Objetivo ob) {
-
+        switch (ob)
+        {
+            case Objetivo.Cabeza:
+                ShildHead.gameObject.SetActive(true);
+                ShildChest.gameObject.SetActive(false);
+                ShildLegs.gameObject.SetActive(false);
+                break;
+            case Objetivo.Torso:
+                ShildHead.gameObject.SetActive(false);
+                ShildChest.gameObject.SetActive(true);
+                ShildLegs.gameObject.SetActive(false);
+                break;
+            case Objetivo.Piernas:
+                ShildHead.gameObject.SetActive(false);
+                ShildChest.gameObject.SetActive(false);
+                ShildLegs.gameObject.SetActive(true);
+                break;
+        }
     }
 
-    public void Jump() {
-
+    public void Jump()
+    {
+        Debug.Log("Animacion De Salto");
+        rg2D.AddForce(transform.up * SpeedJump, ForceMode2D.Impulse);
+        BoxColliderHead.gameObject.SetActive(true);
+        BoxColliderChest.gameObject.SetActive(true);
+        BoxColliderLegs.gameObject.SetActive(true);
     }
-
-    public void Duck() {
-
+    public void Duck()
+    {
+        Debug.Log("Animacion De Agacharse");
+        BoxColliderHead.gameObject.SetActive(false);
+        BoxColliderChest.gameObject.SetActive(true);
+        BoxColliderLegs.gameObject.SetActive(true);
     }
 }
