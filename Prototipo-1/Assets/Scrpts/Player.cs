@@ -44,8 +44,26 @@ public class Player : MonoBehaviour
     public Transform tranformAtaque;
     private GameManager gm;
     private Rigidbody2D rg2D;
+    private bool ataqueCabeza;
+    private bool ataqueTorso;
+    private bool ataquePies;
+    private bool defensaCabeza;
+    private bool defensaTorso;
+    private bool defensaPies;
+    private bool agacharse;
+    public bool AviableModoIA;
+    public bool AviableDefenseHead;
+    private bool ModoIA;
+    private bool saltar;
+    private float MinRangeRandom = 0;
+    private float MaxRangeRandomMovement = 3;
+    private float MaxRangeRandomTargertAttack = 3;
+    private float MaxRangeRandomTargetDefense = 3;
+    private float MaxRangeRandomDodge = 2;
+    private bool SelectMovement = false;
     void Start()
     {
+        ModoIA = false;
         DisableShild();
         ContraAtaque = false;
         if(GameManager.instanceGameManager != null){
@@ -58,7 +76,142 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (gm.timeSelectionAttack <= 0 && !SelectMovement)
+        {
+            ModoIA = true;
+            SelectMovement = true;
+            //Debug.Log("ModoIA activado"); ENTRA CORRECTAMENTE
+        }
+        else if (gm.timeSelectionAttack <= 0 && SelectMovement) {
+            //HACER TODOS LOS Ifs.
+            if (ataqueCabeza)
+            {
+                AttackHead();
+            }
+            else if (ataqueTorso)
+            {
+                AttackChest();
+            }
+            else if (ataquePies)
+            {
+                AttackLegs();
+            }
+            else if (defensaCabeza)
+            {
+                DeffenseHead();
+            }
+            else if (defensaTorso)
+            {
+                DeffenseChest();
+            }
+            else if (defensaPies)
+            {
+                DeffenseLegs();
+            }
+            else if (saltar)
+            {
+                Jump();
+            }
+            else if (agacharse)
+            {
+                Duck();
+            }
+            ModoIA = false;
+            ataqueCabeza = false;
+            ataqueTorso = false;
+            ataquePies = false;
+            defensaCabeza = false;
+            defensaTorso = false;
+            defensaPies = false;
+            saltar = false;
+            agacharse = false;
+        }
+        if (AviableModoIA)
+        {
+            
+            if (ModoIA)
+            {
+                //Debug.Log("ENTRE AL FONDO DEL MODO IA");
+                ModoIA = false;
+                switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomMovement)) {
+                    case 0:
+                        switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomTargertAttack)) {
+                            case 0:
+                                AttackHead();
+                                break;
+                            case 1:
+                                AttackHead();
+                                break;
+                            case 2:
+                                AttackChest();
+                                break;
+                            case 3:
+                                AttackLegs();
+                                break;
+                        }
+                        break;
+                    case 1:
+                        switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomTargertAttack))
+                        {
+                            case 0:
+                                AttackHead();
+                                break;
+                            case 1:
+                                AttackHead();
+                                break;
+                            case 2:
+                                AttackChest();
+                                break;
+                            case 3:
+                                AttackLegs();
+                                break;
+                        }
+                        break;
+                    case 2:
+                        switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomTargetDefense)) {
+                            case 0:
+                                if (AviableDefenseHead)
+                                {
+                                    DeffenseHead();
+                                }
+                                else {
+                                    DeffenseChest();
+                                }
+                                break;
+                            case 1:
+                                if (AviableDefenseHead)
+                                {
+                                    DeffenseHead();
+                                }
+                                else {
+                                    DeffenseLegs();
+                                }
+                                break;
+                            case 2:
+                                DeffenseChest();
+                                break;
+                            case 3:
+                                DeffenseLegs();
+                                break;
+                        }
+                        break;
+                    case 3:
+                        switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomDodge))
+                        {
+                            case 0:
+                                Jump();
+                                break;
+                            case 1:
+                                Jump();
+                                break;
+                            case 3:
+                                Duck();
+                                break;
+                        }
+                        break;
+                }
+            }
+        }
     }
     public void Back() {
         Button_Jump.gameObject.SetActive(false);
@@ -76,6 +229,15 @@ public class Player : MonoBehaviour
         ShildChest.gameObject.SetActive(false);
         ShildHead.gameObject.SetActive(false);
         ShildLegs.gameObject.SetActive(false);
+        ataqueCabeza = false;
+        ataqueTorso = false;
+        ataquePies = false;
+        defensaCabeza = false;
+        defensaTorso = false;
+        defensaPies = false;
+        saltar = false;
+        agacharse = false;
+        SelectMovement = false;
 
     }
     public void AttackButton() {
@@ -87,8 +249,6 @@ public class Player : MonoBehaviour
         Button_AttackHead.gameObject.SetActive(true);
         Button_AttackLegs.gameObject.SetActive(true);
         Button_Back.gameObject.SetActive(true);
-
-
 
     }
     public void AttackHead() {
@@ -151,7 +311,10 @@ public class Player : MonoBehaviour
 
         Button_Deffense.gameObject.SetActive(false);
         Button_DefenseChest.gameObject.SetActive(true);
-        Button_DefenseHead.gameObject.SetActive(true);
+        if (AviableDefenseHead)
+        {
+            Button_DefenseHead.gameObject.SetActive(true);
+        }
         Button_DefenseLegs.gameObject.SetActive(true);
         Button_Back.gameObject.SetActive(true);
         
@@ -228,5 +391,73 @@ public class Player : MonoBehaviour
     public void targetLegs()
     {
         objetivo = Objetivo.Piernas;
+    }
+
+    public void SetAtaqueCabeza(bool _ataqueCabeza)
+    {
+        ataqueCabeza = _ataqueCabeza;
+    }
+    public void SetSelectMovement(bool _selectMovement) {
+        SelectMovement = _selectMovement;
+    }
+    public void SetAtaqueTorso(bool _ataqueTorso)
+    {
+        ataqueTorso = _ataqueTorso;
+    }
+    public void SetAtaquePies(bool _ataquePies)
+    {
+        ataquePies = _ataquePies;
+    }
+    public void SetDefensaCabeza(bool _defensaCabeza)
+    {
+        defensaCabeza = _defensaCabeza;
+    }
+    public void SetDefensaTorso(bool _defensaTorso)
+    {
+        defensaTorso = _defensaTorso;
+    }
+    public void SetDefensaPies(bool _defensaPies)
+    {
+        defensaPies = _defensaPies;
+    }
+    public void SetSaltar(bool _saltar)
+    {
+        saltar = _saltar;
+    }
+    public void SetAgacharse(bool _agacharse)
+    {
+        agacharse = _agacharse;
+    }
+    public bool GetAtaqueCabeza()
+    {
+        return ataqueCabeza;
+    }
+    public bool GetAtaqueTorso()
+    {
+        return ataqueTorso;
+    }
+    public bool GetAtaquePies()
+    {
+        return ataquePies;
+    }
+    public bool GetDefensaCabeza()
+    {
+        return defensaCabeza;
+    }
+    public bool GetDefensaTorso()
+    {
+        return defensaTorso;
+    }
+    public bool GetDefensaPies()
+    {
+        return defensaPies;
+    }
+    public bool GetAgacharse()
+    {
+        return agacharse;
+    }
+    public bool GetSaltar()
+    {
+        return saltar;
     }
 }

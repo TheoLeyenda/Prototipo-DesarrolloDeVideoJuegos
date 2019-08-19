@@ -10,10 +10,13 @@ public class GameManager : MonoBehaviour
 
 
     // Use this for initialization
-
+    public Text TextTimeOfAttack;
     public static GameManager instanceGameManager;
-    public float step;
-    public float timeOFF;
+    public float timeSelectionAttack;
+    [HideInInspector]
+    public float auxTimeSelectionAttack;
+    private List<Enemy> enemies;
+    private List<Player> players;
     private float currentTime;
     [HideInInspector]
     public float auxTimeOFF;
@@ -34,6 +37,28 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        auxTimeSelectionAttack = timeSelectionAttack;
+        enemies = new List<Enemy>();
+        players = new List<Player>();
+        for (int i = 0; i < SceneManager.GetActiveScene().GetRootGameObjects().Length; i++) {
+            if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Enemy")
+            {
+                if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Enemy>() != null)
+                {
+                    enemies.Add(SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Enemy>());
+                }
+            }
+            if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player")
+            {
+                if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>() != null)
+                {
+                    players.Add(SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>());
+                }
+            }
+        }
+        for (int i = 0; i < enemies.Count; i++) {
+            enemies[i].mover = false;
+        }
         currentTime = 0;
         DontDestroyOnLoad(gameObject);
     }
@@ -42,12 +67,16 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (TextTimeOfAttack != null)
+        {
+            CheckTimeAttackCharacters();
+        }
     }
-    public IEnumerator Weit() {
-        while (currentTime < timeOFF) {
-            yield return new WaitForSeconds(step);
-            currentTime = currentTime + step;
+    private void CheckTimeAttackCharacters() {
+        if (timeSelectionAttack > 0)
+        {
+            timeSelectionAttack = timeSelectionAttack - Time.deltaTime;
+            TextTimeOfAttack.text = "" + (int)timeSelectionAttack;
         }
     }
 

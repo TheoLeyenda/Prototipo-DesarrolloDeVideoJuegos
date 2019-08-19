@@ -49,13 +49,26 @@ public class Enemy : MonoBehaviour
     private float JumpPorcentage;
     private float DuckPorcentage;
     private bool ContraAtaque;
-    private bool mover;
+    private bool ataqueCabeza;
+    private bool ataqueTorso;
+    private bool ataquePies;
+    private bool defensaCabeza;
+    private bool defensaTorso;
+    private bool defensaPies;
+    private bool agacharse;
+    private bool saltar;
+    private bool SelectDefinitive = false;
+    private float MinRangeRandom = 0;
+    private float MaxRangeRandom = 100;
+    [HideInInspector]
+    public bool mover;
     // Start is called before the first frame update
     public Categoria typeEnemy;
     void Start()
     {
+        SelectDefinitive = false;
         ContraAtaque = false;
-        mover = true;
+        mover = false;
         DisableShild();
         imagenMovimientoElejido.gameObject.SetActive(false);
         imagenAccionElejida.gameObject.SetActive(false);
@@ -125,37 +138,145 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         if (Time.timeScale > 0) {
-            if (mover) {
+            if (gm.timeSelectionAttack > 0)
+            {
+                if (mover)
+                {
+                    CheckMovement();
+                }
+
+            }
+            else if(gm.timeSelectionAttack <= 0 && gm.timeSelectionAttack > -1) {
+                mover = true;
+                gm.timeSelectionAttack = -1;
+                Debug.Log(mover);
+            }
+            if(mover){
+                Debug.Log("ENTRE");
+                SelectDefinitive = true;
                 CheckMovement();
+                if (ataqueCabeza)
+                {
+                    Debug.Log("ATACO CABEZA");
+                    Attack(Objetivo.Cabeza);
+                }
+                else if (ataqueTorso)
+                {
+                    Debug.Log("ATACO TORSO");
+                    Attack(Objetivo.Torso);
+                }
+                else if (ataquePies)
+                {
+                    Debug.Log("ATACO PIERNAS");
+                    Attack(Objetivo.Piernas);
+                }
+                else if (defensaCabeza)
+                {
+                    Debug.Log("DEFENDIO CABEZA");
+                    Deffense(Objetivo.Cabeza);
+                }
+                else if (defensaTorso)
+                {
+                    Debug.Log("DEFENDIO TORSO");
+                    Deffense(Objetivo.Torso);
+                }
+                else if (defensaPies)
+                {
+                    Debug.Log("DEFENDIO PIES");
+                    Deffense(Objetivo.Piernas);
+                }
+                else if (saltar)
+                {
+                    Debug.Log("SALTAR");
+                    Jump();
+                }
+                else if (agacharse) {
+                    Debug.Log("AGACHARSE");
+                    Duck();
+                }
+                ataqueCabeza = false;
+                ataqueTorso = false;
+                ataquePies = false;
+                defensaCabeza = false;
+                defensaTorso = false;
+                defensaPies = false;
+                saltar = false;
+                agacharse = false;
             }
         }
     }
     public void CheckMovement() {
         mover = false;
-        float movimientoElejir = Random.Range(0,100);
+        float movimientoElejir = Random.Range(MinRangeRandom, MaxRangeRandom);
         //Debug.Log("Movimiento: "+ movimientoElejir);
-        
+
         if (movimientoElejir <= AttackPorcentage)
         {
             //ATACAR
             //Debug.Log("ATACANDO");
             if (poolObjectAttack.count > 0) {
-                float objetivoElejir = Random.Range(0, 100);
-                objetivoElejido = Random.Range(0, 100);
+                float objetivoElejir = Random.Range(MinRangeRandom, MaxRangeRandom);
                 //Debug.Log("Objetivo: " + objetivoElejir);
                 if (objetivoElejir <= AttackHeadPorcentage)
                 {
-                    //ATACAR A LA CABEZA
-                    Attack(Objetivo.Cabeza);
+
+                    if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
+                    {
+                        //ATACAR A LA CABEZA
+                        //Attack(Objetivo.Cabeza);
+                        ataqueCabeza = true;
+                        ataqueTorso = false;
+                        ataquePies = false;
+                        defensaCabeza = false;
+                        defensaTorso = false;
+                        defensaPies = false;
+                        saltar = false;
+                        agacharse = false;
+                    }
+                    else {
+                        CheckMovement();
+                    }
+
                 }
                 else if (objetivoElejir > AttackHeadPorcentage && objetivoElejir <= AttackHeadPorcentage + AttackChestPorcentage)
                 {
-                    //ATACAR AL TORSO
-                    Attack(Objetivo.Torso);
+                    if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
+                    {
+                        //ATACAR AL TORSO
+                        //Attack(Objetivo.Torso);
+                        ataqueCabeza = false;
+                        ataqueTorso = true;
+                        ataquePies = false;
+                        defensaCabeza = false;
+                        defensaTorso = false;
+                        defensaPies = false;
+                        saltar = false;
+                        agacharse = false;
+                    }
+                    else {
+                        CheckMovement();
+                    }
                 }
-                else if(objetivoElejir > AttackHeadPorcentage + AttackChestPorcentage){
-                    //ATACAR A LOS PIES
-                    Attack(Objetivo.Piernas);
+                else if (objetivoElejir > AttackHeadPorcentage + AttackChestPorcentage)
+                {
+                    if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
+                    {
+                        //ATACAR A LOS PIES
+                        //Attack(Objetivo.Piernas);
+                        ataqueCabeza = false;
+                        ataqueTorso = false;
+                        ataquePies = true;
+                        defensaCabeza = false;
+                        defensaTorso = false;
+                        defensaPies = false;
+                        saltar = false;
+                        agacharse = false;
+
+                    }
+                    else {
+                        CheckMovement();
+                    }
+
                 }
             }
         }
@@ -164,7 +285,6 @@ public class Enemy : MonoBehaviour
             //DEFENDER
             //Debug.Log("DEFENDIENDO");
             float objetivoElejir = Random.Range(0, 100);
-            objetivoElejido = Random.Range(0, 100);
             //Debug.Log("Objetivo: " + objetivoElejir);
             if (typeEnemy == Categoria.Defensivo)
             {
@@ -173,21 +293,60 @@ public class Enemy : MonoBehaviour
             else {
                 if (objetivoElejir <= DeffenseHeadPorcentage)
                 {
-                    //DEFENDER A LA CABEZA
-                    //Debug.Log("DEFENDI CABEZA");
-                    Deffense(Objetivo.Cabeza);
+                    if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
+                    {
+                        //DEFENDER A LA CABEZA
+                        //Deffense(Objetivo.Cabeza);
+                        ataqueCabeza = false;
+                        ataqueTorso = false;
+                        ataquePies = false;
+                        defensaCabeza = true;
+                        defensaTorso = false;
+                        defensaPies = false;
+                        saltar = false;
+                        agacharse = false;
+                    }
+                    else {
+                        CheckMovement();
+                    }
                 }
                 else if (objetivoElejir > DeffenseHeadPorcentage && objetivoElejir <= DeffenseHeadPorcentage + DeffenseChestPorcentage)
                 {
-                    //DEFENDER AL TORSO
-                    //Debug.Log("DEFENDI TORSO");
-                    Deffense(Objetivo.Torso);
+                    if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
+                    {
+                        //DEFENDER AL TORSO
+                        //Deffense(Objetivo.Torso);
+                        ataqueCabeza = false;
+                        ataqueTorso = false;
+                        ataquePies = false;
+                        defensaCabeza = false;
+                        defensaTorso = true;
+                        defensaPies = false;
+                        saltar = false;
+                        agacharse = false;
+                    }
+                    else {
+                        CheckMovement();
+                    }
                 }
                 else if (objetivoElejir > DeffenseHeadPorcentage + DeffenseChestPorcentage)
                 {
-                    //DEFENDER A LOS PIES
-                    //Debug.Log("DEFENDI PIES");
-                    Deffense(Objetivo.Piernas);
+                    if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
+                    {
+                        //DEFENDER A LOS PIES
+                        //Deffense(Objetivo.Piernas);
+                        ataqueCabeza = false;
+                        ataqueTorso = false;
+                        ataquePies = false;
+                        defensaCabeza = false;
+                        defensaTorso = false;
+                        defensaPies = true;
+                        saltar = false;
+                        agacharse = false;
+                    }
+                    else {
+                        CheckMovement();
+                    }
                 }
             }
         }
@@ -196,24 +355,49 @@ public class Enemy : MonoBehaviour
             //Esquivar
             float objetivoElejir = Random.Range(0, 100);
             objetivoElejido = Random.Range(0, 100);
-            Debug.Log("Objetivo: " + objetivoElejir);
+            //Debug.Log("Objetivo: " + objetivoElejir);
             if (typeEnemy == Categoria.Balanceado)
             {
-                //SI ESQUIVA CONTRATACA
+                //SI ESQUIVA CONTRATACA (EL BALANCEADO ES EL UNICO QUE PUEDE ESQUIVAR)
                 if (objetivoElejido <= JumpPorcentage)
                 {
-                    Jump();
+                    if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
+                    {
+                        ataqueCabeza = false;
+                        ataqueTorso = false;
+                        ataquePies = false;
+                        defensaCabeza = false;
+                        defensaTorso = false;
+                        defensaPies = false;
+                        saltar = true;
+                        agacharse = false;
+                        //Jump();
+                    }
+                    else {
+                        CheckMovement();
+                    }
                 }
-                else if(objetivoElejido > DuckPorcentage)
+                else if (objetivoElejido > DuckPorcentage)
                 {
-                    Duck();
+                    if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
+                    {
+                        ataqueCabeza = false;
+                        ataqueTorso = false;
+                        ataquePies = false;
+                        defensaCabeza = false;
+                        defensaTorso = false;
+                        defensaPies = false;
+                        saltar = false;
+                        agacharse = true;
+                        //Duck();
+                    }
+                    else {
+                        CheckMovement();
+                    }
                 }
-            }
-            else {
-
             }
         }
-        
+
     }
     public void DisableShild()
     {
@@ -228,22 +412,27 @@ public class Enemy : MonoBehaviour
         ShildLegs.gameObject.SetActive(true);
     }
     public void Attack(Objetivo ob) {
-        DisableShild();
-        GameObject go = poolObjectAttack.GetObject();
-        Proyectil proyectil = go.GetComponent<Proyectil>();
-        go.transform.position = tranformAtaque.position;
-        go.transform.rotation = new Quaternion(go.transform.rotation.x, go.transform.rotation.y + 180, go.transform.rotation.z, go.transform.rotation.w);
-        proyectil.On();
-        switch (ob) {
-            case Objetivo.Cabeza:
-                proyectil.ShootForwardUp();
-                break;
-            case Objetivo.Torso:
-                proyectil.ShootForward();
-                break;
-            case Objetivo.Piernas:
-                proyectil.ShootForwardDown();
-                break;
+        
+        if (poolObjectAttack.count > 0)
+        {
+            DisableShild();
+            GameObject go = poolObjectAttack.GetObject();
+            Proyectil proyectil = go.GetComponent<Proyectil>();
+            go.transform.position = tranformAtaque.position;
+            go.transform.rotation = new Quaternion(go.transform.rotation.x, go.transform.rotation.y + 180, go.transform.rotation.z, go.transform.rotation.w);
+            proyectil.On();
+            switch (ob)
+            {
+                case Objetivo.Cabeza:
+                    proyectil.ShootForwardUp();
+                    break;
+                case Objetivo.Torso:
+                    proyectil.ShootForward();
+                    break;
+                case Objetivo.Piernas:
+                    proyectil.ShootForwardDown();
+                    break;
+            }
         }
     }
 
@@ -282,5 +471,54 @@ public class Enemy : MonoBehaviour
         BoxColliderHead.gameObject.SetActive(false);
         BoxColliderChest.gameObject.SetActive(true);
         BoxColliderLegs.gameObject.SetActive(true);
+    }
+    public void SetAtaqueCabeza(bool _ataqueCabeza)
+    {
+        ataqueCabeza = _ataqueCabeza;
+    }
+    public void SetAtaqueTorso(bool _ataqueTorso) {
+        ataqueTorso = _ataqueTorso;
+    }
+    public void SetAtaquePies(bool _ataquePies) {
+        ataquePies = _ataquePies;
+    }
+    public void SetDefensaCabeza(bool _defensaCabeza) {
+        defensaCabeza = _defensaCabeza;
+    }
+    public void SetDefensaTorso(bool _defensaTorso) {
+        defensaTorso = _defensaTorso;
+    }
+    public void SetDefensaPies(bool _defensaPies) {
+        defensaPies = _defensaPies;
+    }
+    public void SetSaltar(bool _saltar) {
+        saltar = _saltar;
+    }
+    public void SetAgacharse(bool _agacharse) {
+        agacharse = _agacharse;
+    }
+    public bool GetAtaqueCabeza() {
+        return ataqueCabeza;
+    }
+    public bool GetAtaqueTorso() {
+        return ataqueTorso;
+    }
+    public bool GetAtaquePies() {
+        return ataquePies;
+    }
+    public bool GetDefensaCabeza() {
+        return defensaCabeza;
+    }
+    public bool GetDefensaTorso() {
+        return defensaTorso;
+    }
+    public bool GetDefensaPies() {
+        return defensaPies;
+    }
+    public bool GetAgacharse() {
+        return agacharse;
+    }
+    public bool GetSaltar() {
+        return saltar;
     }
 }
