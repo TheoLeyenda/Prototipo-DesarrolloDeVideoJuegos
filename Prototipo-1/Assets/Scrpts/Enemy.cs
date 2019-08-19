@@ -82,8 +82,6 @@ public class Enemy : MonoBehaviour
         ContraAtaque = false;
         mover = false;
         DisableShild();
-        imagenMovimiento.gameObject.SetActive(false);
-        imagenAccion.gameObject.SetActive(false);
         if (GameManager.instanceGameManager != null)
         {
             gm = GameManager.instanceGameManager;
@@ -152,10 +150,9 @@ public class Enemy : MonoBehaviour
         if (Time.timeScale > 0) {
             if (gm.timeSelectionAttack > 0)
             {
-                if (mover)
-                {
-                    CheckMovement();
-                }
+
+                //CheckMovement();
+                
 
             }
             else if(gm.timeSelectionAttack <= 0 && gm.timeSelectionAttack > -1) {
@@ -169,40 +166,48 @@ public class Enemy : MonoBehaviour
                 if (ataqueCabeza)
                 {
                     Debug.Log("Enemigo: ATACO CABEZA");
+                    imagenAccion.sprite = SpriteAtaqueCabeza;
                     Attack(Objetivo.Cabeza);
                 }
                 else if (ataqueTorso)
                 {
                     Debug.Log("Enemigo: ATACO TORSO");
+                    imagenAccion.sprite = SpriteAtaqueTorso;
                     Attack(Objetivo.Torso);
                 }
                 else if (ataquePies)
                 {
                     Debug.Log("Enemigo: ATACO PIERNAS");
+                    imagenAccion.sprite = SpriteAtaquePies;
                     Attack(Objetivo.Piernas);
                 }
                 else if (defensaCabeza)
                 {
                     Debug.Log("Enemigo: DEFENDIO CABEZA");
+                    imagenAccion.sprite = SpriteDefensaCabeza;
                     Deffense(Objetivo.Cabeza);
                 }
                 else if (defensaTorso)
                 {
                     Debug.Log("Enemigo: DEFENDIO TORSO");
+                    imagenAccion.sprite = SpriteDefensaTorso;
                     Deffense(Objetivo.Torso);
                 }
                 else if (defensaPies)
                 {
                     Debug.Log("Enemigo: DEFENDIO PIES");
+                    imagenAccion.sprite = SpriteDefensaPies;
                     Deffense(Objetivo.Piernas);
                 }
                 else if (saltar)
                 {
                     Debug.Log("Enemigo: SALTAR");
+                    imagenAccion.sprite = SpriteSalto;
                     Jump();
                 }
                 else if (agacharse) {
                     Debug.Log("Enemigo: AGACHARSE");
+                    imagenAccion.sprite = SpriteAgacharse;
                     Duck();
                 }
                 ataqueCabeza = false;
@@ -225,6 +230,7 @@ public class Enemy : MonoBehaviour
         {
             //ATACAR
             //Debug.Log("ATACANDO");
+            imagenMovimiento.sprite = SpriteMovimientoAtaque;
             if (poolObjectAttack.count > 0) {
                 float objetivoElejir = Random.Range(MinRangeRandom, MaxRangeRandom);
                 //Debug.Log("Objetivo: " + objetivoElejir);
@@ -235,6 +241,7 @@ public class Enemy : MonoBehaviour
                     {
                         //ATACAR A LA CABEZA
                         //Attack(Objetivo.Cabeza);
+                        imagenAccion.sprite = SpriteAtaqueCabeza;
                         ataqueCabeza = true;
                         ataqueTorso = false;
                         ataquePies = false;
@@ -255,6 +262,7 @@ public class Enemy : MonoBehaviour
                     {
                         //ATACAR AL TORSO
                         //Attack(Objetivo.Torso);
+                        imagenAccion.sprite = SpriteAtaqueTorso;
                         ataqueCabeza = false;
                         ataqueTorso = true;
                         ataquePies = false;
@@ -274,6 +282,7 @@ public class Enemy : MonoBehaviour
                     {
                         //ATACAR A LOS PIES
                         //Attack(Objetivo.Piernas);
+                        imagenAccion.sprite = SpriteAtaquePies;
                         ataqueCabeza = false;
                         ataqueTorso = false;
                         ataquePies = true;
@@ -295,6 +304,7 @@ public class Enemy : MonoBehaviour
         {
             //DEFENDER
             //Debug.Log("DEFENDIENDO");
+            imagenMovimiento.sprite = SpriteMovimientoDefensa;
             float objetivoElejir = Random.Range(0, 100);
             //Debug.Log("Objetivo: " + objetivoElejir);
             if (typeEnemy == Categoria.Defensivo)
@@ -307,6 +317,7 @@ public class Enemy : MonoBehaviour
                     if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
                     {
                         //DEFENDER A LA CABEZA
+                        imagenAccion.sprite = SpriteDefensaCabeza;
                         //Deffense(Objetivo.Cabeza);
                         ataqueCabeza = false;
                         ataqueTorso = false;
@@ -327,6 +338,7 @@ public class Enemy : MonoBehaviour
                     {
                         //DEFENDER AL TORSO
                         //Deffense(Objetivo.Torso);
+                        imagenAccion.sprite = SpriteDefensaTorso;
                         ataqueCabeza = false;
                         ataqueTorso = false;
                         ataquePies = false;
@@ -346,6 +358,7 @@ public class Enemy : MonoBehaviour
                     {
                         //DEFENDER A LOS PIES
                         //Deffense(Objetivo.Piernas);
+                        imagenAccion.sprite = SpriteDefensaPies;
                         ataqueCabeza = false;
                         ataqueTorso = false;
                         ataquePies = false;
@@ -364,6 +377,7 @@ public class Enemy : MonoBehaviour
         else if (movimientoElejir > AttackPorcentage + DeffensePorcentage)
         {
             //Esquivar
+            imagenMovimiento.sprite = SpriteMovimientoEsquive;
             float objetivoElejir = Random.Range(0, 100);
             objetivoElejido = Random.Range(0, 100);
             //Debug.Log("Objetivo: " + objetivoElejir);
@@ -374,6 +388,7 @@ public class Enemy : MonoBehaviour
                 {
                     if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
                     {
+                        imagenAccion.sprite = SpriteSalto;
                         ataqueCabeza = false;
                         ataqueTorso = false;
                         ataquePies = false;
@@ -392,6 +407,7 @@ public class Enemy : MonoBehaviour
                 {
                     if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
                     {
+                        imagenAccion.sprite = SpriteAgacharse;
                         ataqueCabeza = false;
                         ataqueTorso = false;
                         ataquePies = false;
