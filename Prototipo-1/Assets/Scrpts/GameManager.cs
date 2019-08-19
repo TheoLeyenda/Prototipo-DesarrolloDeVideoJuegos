@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     public float auxTimeSelectionAttack;
     private List<Enemy> enemies;
     private List<Player> players;
-    private float currentTime;
     [HideInInspector]
     public float auxTimeOFF;
 
@@ -59,7 +58,6 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < enemies.Count; i++) {
             enemies[i].mover = false;
         }
-        currentTime = 0;
         DontDestroyOnLoad(gameObject);
     }
 

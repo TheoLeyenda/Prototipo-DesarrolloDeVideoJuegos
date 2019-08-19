@@ -49,13 +49,10 @@ public class Proyectil : MonoBehaviour
     public void ShootForwardDown() {
         rg2D.AddRelativeForce(vectorForwardDown.right*speed, ForceMode2D.Force);
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    public PoolObject GetPoolObject()
     {
-        poolObject.Recycle();
+        return poolObject;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        poolObject.Recycle();
-    }
+
 
 }

@@ -150,10 +150,7 @@ public class Enemy : MonoBehaviour
         if (Time.timeScale > 0) {
             if (gm.timeSelectionAttack > 0)
             {
-
-                //CheckMovement();
-                
-
+                CheckMovement();
             }
             else if(gm.timeSelectionAttack <= 0 && gm.timeSelectionAttack > -1) {
                 mover = true;
@@ -218,6 +215,54 @@ public class Enemy : MonoBehaviour
                 defensaPies = false;
                 saltar = false;
                 agacharse = false;
+            }
+        }
+    }
+    public void CounterAttack()
+    {
+        ShildChest.gameObject.SetActive(false);
+        ShildHead.gameObject.SetActive(false);
+        ShildLegs.gameObject.SetActive(false);
+        imagenMovimiento.sprite = SpriteMovimientoAtaque;
+        if (poolObjectAttack.count > 0)
+        {
+            float objetivoElejir = Random.Range(MinRangeRandom, MaxRangeRandom);
+            //Debug.Log("Objetivo: " + objetivoElejir);
+            if (objetivoElejir <= AttackHeadPorcentage)
+            {
+
+                if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
+                {
+                    //ATACAR A LA CABEZA
+                    //Attack(Objetivo.Cabeza);
+                    imagenAccion.sprite = SpriteAtaqueCabeza;
+                    Attack(Objetivo.Cabeza);
+
+
+                }
+                else if (objetivoElejir > AttackHeadPorcentage && objetivoElejir <= AttackHeadPorcentage + AttackChestPorcentage)
+                {
+                    if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
+                    {
+                        //ATACAR AL TORSO
+                        //Attack(Objetivo.Torso);
+                        imagenAccion.sprite = SpriteAtaqueTorso;
+                        Attack(Objetivo.Torso);
+
+                    }
+                    else if (objetivoElejir > AttackHeadPorcentage + AttackChestPorcentage)
+                    {
+                        if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
+                        {
+                            //ATACAR A LOS PIES
+                            //Attack(Objetivo.Piernas);
+                            imagenAccion.sprite = SpriteAtaquePies;
+                            Attack(Objetivo.Piernas);
+
+
+                        }
+                    }
+                }
             }
         }
     }
@@ -307,70 +352,65 @@ public class Enemy : MonoBehaviour
             imagenMovimiento.sprite = SpriteMovimientoDefensa;
             float objetivoElejir = Random.Range(0, 100);
             //Debug.Log("Objetivo: " + objetivoElejir);
-            if (typeEnemy == Categoria.Defensivo)
+            
+            if (objetivoElejir <= DeffenseHeadPorcentage)
             {
-                //SI LOGRA BLOQUEAR EL TIRO CONTRATACA
+                if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
+                {
+                    //DEFENDER A LA CABEZA
+                    imagenAccion.sprite = SpriteDefensaCabeza;
+                    //Deffense(Objetivo.Cabeza);
+                    ataqueCabeza = false;
+                    ataqueTorso = false;
+                    ataquePies = false;
+                    defensaCabeza = true;
+                    defensaTorso = false;
+                    defensaPies = false;
+                    saltar = false;
+                    agacharse = false;
+                }
+                else {
+                    CheckMovement();
+                }
             }
-            else {
-                if (objetivoElejir <= DeffenseHeadPorcentage)
+            else if (objetivoElejir > DeffenseHeadPorcentage && objetivoElejir <= DeffenseHeadPorcentage + DeffenseChestPorcentage)
+            {
+                if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
                 {
-                    if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
-                    {
-                        //DEFENDER A LA CABEZA
-                        imagenAccion.sprite = SpriteDefensaCabeza;
-                        //Deffense(Objetivo.Cabeza);
-                        ataqueCabeza = false;
-                        ataqueTorso = false;
-                        ataquePies = false;
-                        defensaCabeza = true;
-                        defensaTorso = false;
-                        defensaPies = false;
-                        saltar = false;
-                        agacharse = false;
-                    }
-                    else {
-                        CheckMovement();
-                    }
+                    //DEFENDER AL TORSO
+                    //Deffense(Objetivo.Torso);
+                    imagenAccion.sprite = SpriteDefensaTorso;
+                    ataqueCabeza = false;
+                    ataqueTorso = false;
+                    ataquePies = false;
+                    defensaCabeza = false;
+                    defensaTorso = true;
+                    defensaPies = false;
+                    saltar = false;
+                    agacharse = false;
                 }
-                else if (objetivoElejir > DeffenseHeadPorcentage && objetivoElejir <= DeffenseHeadPorcentage + DeffenseChestPorcentage)
-                {
-                    if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
-                    {
-                        //DEFENDER AL TORSO
-                        //Deffense(Objetivo.Torso);
-                        imagenAccion.sprite = SpriteDefensaTorso;
-                        ataqueCabeza = false;
-                        ataqueTorso = false;
-                        ataquePies = false;
-                        defensaCabeza = false;
-                        defensaTorso = true;
-                        defensaPies = false;
-                        saltar = false;
-                        agacharse = false;
-                    }
-                    else {
-                        CheckMovement();
-                    }
+                else {
+                    CheckMovement();
                 }
-                else if (objetivoElejir > DeffenseHeadPorcentage + DeffenseChestPorcentage)
+            }
+            else if (objetivoElejir > DeffenseHeadPorcentage + DeffenseChestPorcentage)
+            {
+                if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
                 {
-                    if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
-                    {
-                        //DEFENDER A LOS PIES
-                        //Deffense(Objetivo.Piernas);
-                        imagenAccion.sprite = SpriteDefensaPies;
-                        ataqueCabeza = false;
-                        ataqueTorso = false;
-                        ataquePies = false;
-                        defensaCabeza = false;
-                        defensaTorso = false;
-                        defensaPies = true;
-                        saltar = false;
-                        agacharse = false;
-                    }
-                    else {
-                        CheckMovement();
-                    }
+                    //DEFENDER A LOS PIES
+                    //Deffense(Objetivo.Piernas);
+                    imagenAccion.sprite = SpriteDefensaPies;
+                    ataqueCabeza = false;
+                    ataqueTorso = false;
+                    ataquePies = false;
+                    defensaCabeza = false;
+                    defensaTorso = false;
+                    defensaPies = true;
+                    saltar = false;
+                    agacharse = false;
+                }
+                else {
+                    CheckMovement();
                 }
             }
         }
