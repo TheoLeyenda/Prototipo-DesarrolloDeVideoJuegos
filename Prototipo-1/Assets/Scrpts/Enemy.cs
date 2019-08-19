@@ -26,8 +26,20 @@ public class Enemy : MonoBehaviour
     private int movimientoElejido;
     private int objetivoElejido;
     private int modoDeEsquiveElejido;
-    public Image imagenMovimientoElejido;
-    public Image imagenAccionElejida;
+    public Sprite SpriteBlanco;
+    public Image imagenAccion;
+    public Image imagenMovimiento;
+    public Sprite SpriteMovimientoAtaque;
+    public Sprite SpriteMovimientoDefensa;
+    public Sprite SpriteMovimientoEsquive;
+    public Sprite SpriteAtaqueCabeza;
+    public Sprite SpriteAtaqueTorso;
+    public Sprite SpriteAtaquePies;
+    public Sprite SpriteDefensaCabeza;
+    public Sprite SpriteDefensaTorso;
+    public Sprite SpriteDefensaPies;
+    public Sprite SpriteSalto;
+    public Sprite SpriteAgacharse;
     public BoxCollider2D ShildHead;
     public BoxCollider2D ShildChest;
     public BoxCollider2D ShildLegs;
@@ -70,8 +82,8 @@ public class Enemy : MonoBehaviour
         ContraAtaque = false;
         mover = false;
         DisableShild();
-        imagenMovimientoElejido.gameObject.SetActive(false);
-        imagenAccionElejida.gameObject.SetActive(false);
+        imagenMovimiento.gameObject.SetActive(false);
+        imagenAccion.gameObject.SetActive(false);
         if (GameManager.instanceGameManager != null)
         {
             gm = GameManager.instanceGameManager;
