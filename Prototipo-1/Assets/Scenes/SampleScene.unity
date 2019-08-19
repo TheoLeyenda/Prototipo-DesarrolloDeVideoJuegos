@@ -636,6 +636,7 @@ GameObject:
   - component: {fileID: 349023316}
   - component: {fileID: 349023317}
   - component: {fileID: 349023318}
+  - component: {fileID: 349023319}
   m_Layer: 0
   m_Name: BoxColliderCabeza
   m_TagString: CabezaJugador
@@ -692,18 +693,34 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349023315}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &349023319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349023315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1a416675f92e04e9f5621333f25fcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  InEnemy: 0
+  player: {fileID: 1119127498}
+  InPlayer: 1
 --- !u!1 &363081398
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,6 +732,7 @@ GameObject:
   - component: {fileID: 363081399}
   - component: {fileID: 363081400}
   - component: {fileID: 363081401}
+  - component: {fileID: 363081402}
   m_Layer: 0
   m_Name: BoxColliderPies
   m_TagString: PiesJugador
@@ -771,18 +789,34 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 363081398}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &363081402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363081398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1a416675f92e04e9f5621333f25fcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  InEnemy: 0
+  player: {fileID: 1119127498}
+  InPlayer: 1
 --- !u!1 &419363100
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,6 +907,7 @@ GameObject:
   - component: {fileID: 427379744}
   - component: {fileID: 427379745}
   - component: {fileID: 427379746}
+  - component: {fileID: 427379747}
   m_Layer: 0
   m_Name: BoxColliderTorso
   m_TagString: TorsoEnemigo
@@ -929,18 +964,34 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 427379743}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &427379747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427379743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1a416675f92e04e9f5621333f25fcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 1873146609}
+  InEnemy: 1
+  player: {fileID: 0}
+  InPlayer: 0
 --- !u!1 &500192982
 GameObject:
   m_ObjectHideFlags: 0
@@ -2642,6 +2693,7 @@ GameObject:
   - component: {fileID: 1052938949}
   - component: {fileID: 1052938950}
   - component: {fileID: 1052938951}
+  - component: {fileID: 1052938952}
   m_Layer: 0
   m_Name: BoxColliderTorso
   m_TagString: TorsoJugador
@@ -2698,18 +2750,34 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1052938948}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1052938952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052938948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1a416675f92e04e9f5621333f25fcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  InEnemy: 0
+  player: {fileID: 1119127498}
+  InPlayer: 1
 --- !u!1 &1088303088
 GameObject:
   m_ObjectHideFlags: 0
@@ -2934,7 +3002,7 @@ MonoBehaviour:
   SpeedJump: 5
   tranformAtaque: {fileID: 119153588}
   AviableModoIA: 1
-  AviableDefenseHead: 0
+  AviableDefenseHead: 1
 --- !u!50 &1119127499
 Rigidbody2D:
   serializedVersion: 4
@@ -2967,6 +3035,7 @@ GameObject:
   - component: {fileID: 1144256343}
   - component: {fileID: 1144256344}
   - component: {fileID: 1144256345}
+  - component: {fileID: 1144256346}
   m_Layer: 0
   m_Name: EscudoCabeza
   m_TagString: Untagged
@@ -3023,18 +3092,34 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1144256342}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1144256346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144256342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f98125be61ce943bf649d1466af77e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  Player: {fileID: 1119127498}
+  InEnemy: 0
+  InPlayer: 1
 --- !u!1 &1162066902
 GameObject:
   m_ObjectHideFlags: 0
@@ -3997,6 +4082,7 @@ GameObject:
   - component: {fileID: 1626324661}
   - component: {fileID: 1626324662}
   - component: {fileID: 1626324663}
+  - component: {fileID: 1626324664}
   m_Layer: 0
   m_Name: EscudoTorso
   m_TagString: Untagged
@@ -4053,18 +4139,34 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1626324660}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1626324664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626324660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f98125be61ce943bf649d1466af77e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  Player: {fileID: 1119127498}
+  InEnemy: 0
+  InPlayer: 1
 --- !u!1 &1641787533
 GameObject:
   m_ObjectHideFlags: 0
@@ -4076,6 +4178,7 @@ GameObject:
   - component: {fileID: 1641787534}
   - component: {fileID: 1641787535}
   - component: {fileID: 1641787536}
+  - component: {fileID: 1641787537}
   m_Layer: 0
   m_Name: BoxColliderPies
   m_TagString: PiesEnemigo
@@ -4132,18 +4235,34 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1641787533}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1641787537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641787533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1a416675f92e04e9f5621333f25fcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 1873146609}
+  InEnemy: 1
+  player: {fileID: 0}
+  InPlayer: 0
 --- !u!1 &1650684084
 GameObject:
   m_ObjectHideFlags: 0
@@ -4446,6 +4565,7 @@ GameObject:
   - component: {fileID: 1724915741}
   - component: {fileID: 1724915742}
   - component: {fileID: 1724915743}
+  - component: {fileID: 1724915744}
   m_Layer: 0
   m_Name: BoxColliderCabeza
   m_TagString: CabezaEnemigo
@@ -4502,18 +4622,34 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1724915740}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1724915744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724915740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1a416675f92e04e9f5621333f25fcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 1873146609}
+  InEnemy: 1
+  player: {fileID: 0}
+  InPlayer: 0
 --- !u!1 &1741181730
 GameObject:
   m_ObjectHideFlags: 0
@@ -4927,6 +5063,7 @@ GameObject:
   - component: {fileID: 1811029460}
   - component: {fileID: 1811029461}
   - component: {fileID: 1811029462}
+  - component: {fileID: 1811029463}
   m_Layer: 0
   m_Name: EscudoPies
   m_TagString: Untagged
@@ -4983,18 +5120,34 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811029459}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1811029463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811029459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f98125be61ce943bf649d1466af77e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  Player: {fileID: 1119127498}
+  InEnemy: 0
+  InPlayer: 1
 --- !u!1 &1864227431
 GameObject:
   m_ObjectHideFlags: 0
@@ -5465,7 +5618,7 @@ MonoBehaviour:
   BoxColliderLegs: {fileID: 1641787535}
   tranformAtaque: {fileID: 1623275474}
   mover: 0
-  typeEnemy: 2
+  typeEnemy: 1
 --- !u!1 &1883625452
 GameObject:
   m_ObjectHideFlags: 0
