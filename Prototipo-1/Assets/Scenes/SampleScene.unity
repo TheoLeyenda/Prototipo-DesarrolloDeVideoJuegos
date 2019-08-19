@@ -210,6 +210,8 @@ MonoBehaviour:
   timeSelectionAttack: 6
   auxTimeSelectionAttack: 0
   auxTimeOFF: 0
+  SiglePlayer: 1
+  MultiPlayer: 0
 --- !u!4 &61962151
 Transform:
   m_ObjectHideFlags: 0
@@ -222,7 +224,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &119153587
 GameObject:
@@ -2947,7 +2949,7 @@ Transform:
   - {fileID: 1144256343}
   - {fileID: 9737626}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1119127498
 MonoBehaviour:
@@ -3023,7 +3025,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &1144256342
 GameObject:
   m_ObjectHideFlags: 0
@@ -5555,7 +5557,7 @@ Transform:
   - {fileID: 703736295}
   - {fileID: 509380623}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1873146608
 Rigidbody2D:
@@ -5577,7 +5579,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1873146609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5591,7 +5593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolObjectAttack: {fileID: 703736294}
-  SpeedJump: 5
+  SpeedJump: 20
   SpriteBlanco: {fileID: 21300000, guid: e88a4fdc599bbbd4596d72ddee337938, type: 3}
   imagenAccion: {fileID: 271844500}
   imagenMovimiento: {fileID: 1575560690}
@@ -5618,7 +5620,7 @@ MonoBehaviour:
   BoxColliderLegs: {fileID: 1641787535}
   tranformAtaque: {fileID: 1623275474}
   mover: 0
-  typeEnemy: 1
+  typeEnemy: 0
 --- !u!1 &1883625452
 GameObject:
   m_ObjectHideFlags: 0
@@ -6345,7 +6347,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2108986304
 GameObject:
