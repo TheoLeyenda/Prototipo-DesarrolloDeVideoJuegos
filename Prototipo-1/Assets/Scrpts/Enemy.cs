@@ -152,46 +152,45 @@ public class Enemy : MonoBehaviour
                 Debug.Log(mover);
             }
             if(mover){
-                Debug.Log("ENTRE");
                 SelectDefinitive = true;
                 CheckMovement();
                 if (ataqueCabeza)
                 {
-                    Debug.Log("ATACO CABEZA");
+                    Debug.Log("Enemigo: ATACO CABEZA");
                     Attack(Objetivo.Cabeza);
                 }
                 else if (ataqueTorso)
                 {
-                    Debug.Log("ATACO TORSO");
+                    Debug.Log("Enemigo: ATACO TORSO");
                     Attack(Objetivo.Torso);
                 }
                 else if (ataquePies)
                 {
-                    Debug.Log("ATACO PIERNAS");
+                    Debug.Log("Enemigo: ATACO PIERNAS");
                     Attack(Objetivo.Piernas);
                 }
                 else if (defensaCabeza)
                 {
-                    Debug.Log("DEFENDIO CABEZA");
+                    Debug.Log("Enemigo: DEFENDIO CABEZA");
                     Deffense(Objetivo.Cabeza);
                 }
                 else if (defensaTorso)
                 {
-                    Debug.Log("DEFENDIO TORSO");
+                    Debug.Log("Enemigo: DEFENDIO TORSO");
                     Deffense(Objetivo.Torso);
                 }
                 else if (defensaPies)
                 {
-                    Debug.Log("DEFENDIO PIES");
+                    Debug.Log("Enemigo: DEFENDIO PIES");
                     Deffense(Objetivo.Piernas);
                 }
                 else if (saltar)
                 {
-                    Debug.Log("SALTAR");
+                    Debug.Log("Enemigo: SALTAR");
                     Jump();
                 }
                 else if (agacharse) {
-                    Debug.Log("AGACHARSE");
+                    Debug.Log("Enemigo: AGACHARSE");
                     Duck();
                 }
                 ataqueCabeza = false;
@@ -459,7 +458,7 @@ public class Enemy : MonoBehaviour
 
     public void Jump()
     {
-        Debug.Log("Animacion De Salto");
+        Debug.Log("Enemigo: Animacion De Salto");
         rg2D.AddForce(transform.up * SpeedJump, ForceMode2D.Impulse);
         BoxColliderHead.gameObject.SetActive(true);
         BoxColliderChest.gameObject.SetActive(true);
@@ -467,7 +466,7 @@ public class Enemy : MonoBehaviour
     }
     public void Duck()
     {
-        Debug.Log("Animacion De Agacharse");
+        Debug.Log("Enemigo: Animacion De Agacharse");
         BoxColliderHead.gameObject.SetActive(false);
         BoxColliderChest.gameObject.SetActive(true);
         BoxColliderLegs.gameObject.SetActive(true);

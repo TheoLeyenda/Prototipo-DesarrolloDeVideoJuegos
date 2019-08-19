@@ -19,6 +19,20 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     //Cada enemigo se especializa en alguna accion (Esquivar,Ataque o Defensa)
     public Pool poolObjectAttack;
+    public Sprite SpriteBlanco;
+    public Image imagenAccion;
+    public Image imagenMovimiento;
+    public Sprite SpriteMovimientoAtaque;
+    public Sprite SpriteMovimientoDefensa;
+    public Sprite SpriteMovimientoEsquive;
+    public Sprite SpriteAtaqueCabeza;
+    public Sprite SpriteAtaqueTorso;
+    public Sprite SpriteAtaquePies;
+    public Sprite SpriteDefensaCabeza;
+    public Sprite SpriteDefensaTorso;
+    public Sprite SpriteDefensaPies;
+    public Sprite SpriteSalto;
+    public Sprite SpriteAgacharse;
     public Button Button_Attack;
     public Button Button_Deffense;
     public Button Button_Dodge;//Boton De esquivar.
@@ -80,40 +94,50 @@ public class Player : MonoBehaviour
         {
             ModoIA = true;
             SelectMovement = true;
+            
             //Debug.Log("ModoIA activado"); ENTRA CORRECTAMENTE
         }
         else if (gm.timeSelectionAttack <= 0 && SelectMovement) {
-            //HACER TODOS LOS Ifs.
             if (ataqueCabeza)
             {
+                
+                imagenAccion.sprite = SpriteAtaqueCabeza;
                 AttackHead();
             }
             else if (ataqueTorso)
             {
+                imagenAccion.sprite = SpriteAtaqueTorso;
                 AttackChest();
             }
             else if (ataquePies)
             {
+                //Debug.Log("HOLA SOY FORRO");
+                imagenAccion.sprite = SpriteAtaquePies;
                 AttackLegs();
             }
             else if (defensaCabeza)
             {
+                imagenAccion.sprite = SpriteDefensaCabeza;
                 DeffenseHead();
             }
             else if (defensaTorso)
             {
+                imagenAccion.sprite = SpriteDefensaTorso;
                 DeffenseChest();
             }
             else if (defensaPies)
             {
+                imagenAccion.sprite = SpriteDefensaPies;
                 DeffenseLegs();
             }
             else if (saltar)
             {
+                imagenAccion.sprite = SpriteSalto;
                 Jump();
             }
             else if (agacharse)
             {
+                imagenAccion.sprite = SpriteAgacharse;
                 Duck();
             }
             ModoIA = false;
@@ -129,82 +153,103 @@ public class Player : MonoBehaviour
         if (AviableModoIA)
         {
             
-            if (ModoIA)
+            if (ModoIA && gm.timeSelectionAttack <= 0)
             {
                 //Debug.Log("ENTRE AL FONDO DEL MODO IA");
                 ModoIA = false;
                 switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomMovement)) {
                     case 0:
+                        imagenMovimiento.sprite = SpriteMovimientoAtaque;
                         switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomTargertAttack)) {
                             case 0:
+                                imagenAccion.sprite = SpriteAtaqueCabeza;
                                 AttackHead();
                                 break;
                             case 1:
+                                imagenAccion.sprite = SpriteAtaqueCabeza;
                                 AttackHead();
                                 break;
                             case 2:
+                                imagenAccion.sprite = SpriteAtaqueTorso;
                                 AttackChest();
                                 break;
                             case 3:
+                                imagenAccion.sprite = SpriteAtaquePies;
                                 AttackLegs();
                                 break;
                         }
                         break;
                     case 1:
+                        imagenMovimiento.sprite = SpriteMovimientoAtaque;
                         switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomTargertAttack))
                         {
                             case 0:
+                                imagenAccion.sprite = SpriteAtaqueCabeza;
                                 AttackHead();
                                 break;
                             case 1:
+                                imagenAccion.sprite = SpriteAtaqueCabeza;
                                 AttackHead();
                                 break;
                             case 2:
+                                imagenAccion.sprite = SpriteAtaqueTorso;
                                 AttackChest();
                                 break;
                             case 3:
+                                imagenAccion.sprite = SpriteAtaquePies;
                                 AttackLegs();
                                 break;
                         }
                         break;
                     case 2:
+                        imagenMovimiento.sprite = SpriteMovimientoDefensa;
                         switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomTargetDefense)) {
                             case 0:
                                 if (AviableDefenseHead)
                                 {
+                                    imagenAccion.sprite = SpriteDefensaCabeza;
                                     DeffenseHead();
                                 }
                                 else {
+                                    imagenAccion.sprite = SpriteDefensaTorso;
                                     DeffenseChest();
                                 }
                                 break;
                             case 1:
                                 if (AviableDefenseHead)
                                 {
+                                    imagenAccion.sprite = SpriteDefensaCabeza;
                                     DeffenseHead();
                                 }
                                 else {
+                                    imagenAccion.sprite = SpriteDefensaPies;
                                     DeffenseLegs();
                                 }
                                 break;
                             case 2:
+                                imagenAccion.sprite = SpriteDefensaTorso;
                                 DeffenseChest();
                                 break;
                             case 3:
+                                imagenAccion.sprite = SpriteDefensaPies;
                                 DeffenseLegs();
                                 break;
                         }
                         break;
                     case 3:
+                        imagenMovimiento.sprite = SpriteMovimientoEsquive;
                         switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomDodge))
                         {
                             case 0:
+                                imagenAccion.sprite = SpriteSalto;
                                 Jump();
                                 break;
                             case 1:
+                                imagenAccion.sprite = SpriteSalto;
                                 Jump();
                                 break;
                             case 3:
+                                imagenAccion.sprite = SpriteAgacharse;
                                 Duck();
                                 break;
                         }
@@ -214,33 +259,39 @@ public class Player : MonoBehaviour
         }
     }
     public void Back() {
-        Button_Jump.gameObject.SetActive(false);
-        Button_Duck.gameObject.SetActive(false);
-        Button_AttackHead.gameObject.SetActive(false);
-        Button_AttackChest.gameObject.SetActive(false);
-        Button_AttackLegs.gameObject.SetActive(false);
-        Button_DefenseHead.gameObject.SetActive(false);
-        Button_DefenseChest.gameObject.SetActive(false);
-        Button_DefenseLegs.gameObject.SetActive(false);
-        Button_Back.gameObject.SetActive(false);
-        Button_Attack.gameObject.SetActive(true);
-        Button_Deffense.gameObject.SetActive(true);
-        Button_Dodge.gameObject.SetActive(true);
-        ShildChest.gameObject.SetActive(false);
-        ShildHead.gameObject.SetActive(false);
-        ShildLegs.gameObject.SetActive(false);
-        ataqueCabeza = false;
-        ataqueTorso = false;
-        ataquePies = false;
-        defensaCabeza = false;
-        defensaTorso = false;
-        defensaPies = false;
-        saltar = false;
-        agacharse = false;
-        SelectMovement = false;
+        if (gm.timeSelectionAttack > 0)
+        {
+            Button_Jump.gameObject.SetActive(false);
+            Button_Duck.gameObject.SetActive(false);
+            Button_AttackHead.gameObject.SetActive(false);
+            Button_AttackChest.gameObject.SetActive(false);
+            Button_AttackLegs.gameObject.SetActive(false);
+            Button_DefenseHead.gameObject.SetActive(false);
+            Button_DefenseChest.gameObject.SetActive(false);
+            Button_DefenseLegs.gameObject.SetActive(false);
+            Button_Back.gameObject.SetActive(false);
+            Button_Attack.gameObject.SetActive(true);
+            Button_Deffense.gameObject.SetActive(true);
+            Button_Dodge.gameObject.SetActive(true);
+            ShildChest.gameObject.SetActive(false);
+            ShildHead.gameObject.SetActive(false);
+            ShildLegs.gameObject.SetActive(false);
+            ataqueCabeza = false;
+            ataqueTorso = false;
+            ataquePies = false;
+            defensaCabeza = false;
+            defensaTorso = false;
+            defensaPies = false;
+            saltar = false;
+            agacharse = false;
+            SelectMovement = false;
+            imagenAccion.sprite = SpriteBlanco;
+            imagenMovimiento.sprite = SpriteBlanco;
+        }
 
     }
     public void AttackButton() {
+        imagenMovimiento.sprite = SpriteMovimientoAtaque;
         Button_Deffense.gameObject.SetActive(false);
         Button_Dodge.gameObject.SetActive(false);
         
@@ -306,6 +357,7 @@ public class Player : MonoBehaviour
         }
     }
     public void DefenseButton() {
+        imagenMovimiento.sprite = SpriteMovimientoDefensa;
         Button_Attack.gameObject.SetActive(false);
         Button_Dodge.gameObject.SetActive(false);
 
@@ -357,7 +409,14 @@ public class Player : MonoBehaviour
             }
         }
     }
+    public void Listo()
+    {
+        gm.timeSelectionAttack = 0;
+        gm.TextTimeOfAttack.text = "0";
+    }
+
     public void DodgeButton() {
+        imagenMovimiento.sprite = SpriteMovimientoEsquive;
         Button_Attack.gameObject.SetActive(false);
         Button_Deffense.gameObject.SetActive(false);
 
@@ -388,45 +447,78 @@ public class Player : MonoBehaviour
     public void TargetCheest() {
         objetivo = Objetivo.Torso;
     }
-    public void targetLegs()
+    public void TargetLegs()
     {
         objetivo = Objetivo.Piernas;
     }
 
-    public void SetAtaqueCabeza(bool _ataqueCabeza)
-    {
-        ataqueCabeza = _ataqueCabeza;
-    }
+
     public void SetSelectMovement(bool _selectMovement) {
         SelectMovement = _selectMovement;
     }
+    public void SetAtaqueCabeza(bool _ataqueCabeza)
+    {
+        if (_ataqueCabeza)
+        {
+            imagenAccion.sprite = SpriteAtaqueCabeza;
+        }
+        ataqueCabeza = _ataqueCabeza;
+    }
     public void SetAtaqueTorso(bool _ataqueTorso)
     {
+        if (_ataqueTorso)
+        {
+            imagenAccion.sprite = SpriteAtaqueTorso;
+        }
         ataqueTorso = _ataqueTorso;
     }
     public void SetAtaquePies(bool _ataquePies)
     {
+        if (_ataquePies)
+        {
+            imagenAccion.sprite = SpriteAtaquePies;
+        }
         ataquePies = _ataquePies;
     }
     public void SetDefensaCabeza(bool _defensaCabeza)
     {
+        if (_defensaCabeza)
+        {
+            imagenAccion.sprite = SpriteDefensaCabeza;
+        }
         defensaCabeza = _defensaCabeza;
     }
     public void SetDefensaTorso(bool _defensaTorso)
     {
+        if (_defensaTorso)
+        {
+            imagenAccion.sprite = SpriteDefensaTorso;
+        }
         defensaTorso = _defensaTorso;
     }
     public void SetDefensaPies(bool _defensaPies)
     {
+        if (_defensaPies)
+        {
+            imagenAccion.sprite = SpriteDefensaPies;
+        }
         defensaPies = _defensaPies;
     }
     public void SetSaltar(bool _saltar)
     {
-        saltar = _saltar;
+        if (_saltar)
+        {
+            imagenAccion.sprite = SpriteSalto;
+            saltar = _saltar;
+        }
     }
     public void SetAgacharse(bool _agacharse)
     {
-        agacharse = _agacharse;
+        if (_agacharse)
+        {
+            imagenAccion.sprite = SpriteAgacharse;
+            agacharse = _agacharse;
+        }
     }
     public bool GetAtaqueCabeza()
     {
