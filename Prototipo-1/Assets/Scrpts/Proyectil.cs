@@ -8,6 +8,7 @@ public class Proyectil : MonoBehaviour
     public float speed;
     public float timeLife;
     public float auxTimeLife;
+    public float damage;
     public Rigidbody2D rg2D;
     public Transform vectorForward;
     public Transform vectorForwardUp;

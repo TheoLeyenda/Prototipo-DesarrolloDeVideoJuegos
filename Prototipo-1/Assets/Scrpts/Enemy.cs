@@ -21,6 +21,9 @@ public class Enemy : MonoBehaviour
         Piernas,
     }
     private Objetivo objetivo;
+    public float life;
+    public float maxLife;
+    public Image ImageHP;
     public Pool poolObjectAttack;
     public float SpeedJump;
     private int movimientoElejido;
@@ -72,12 +75,17 @@ public class Enemy : MonoBehaviour
     private bool SelectDefinitive = false;
     private float MinRangeRandom = 0;
     private float MaxRangeRandom = 100;
+    private bool timeOut;
+    [HideInInspector]
+    public bool STOP;
     [HideInInspector]
     public bool mover;
     // Start is called before the first frame update
     public Categoria typeEnemy;
     void Start()
     {
+        STOP = false;
+        timeOut = false;
         SelectDefinitive = false;
         ContraAtaque = false;
         mover = false;
@@ -147,78 +155,95 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.timeScale > 0) {
-            if (gm.timeSelectionAttack > 0)
+        if (!STOP)
+        {
+            //CheckLifeBar();
+            if (Time.timeScale > 0)
             {
-                CheckMovement();
-            }
-            else if(gm.timeSelectionAttack <= 0 && gm.timeSelectionAttack > -1) {
-                mover = true;
-                gm.timeSelectionAttack = -1;
-            }
-            if(mover){
-                SelectDefinitive = true;
-                CheckMovement();
-                if (ataqueCabeza)
+                if (gm.timeSelectionAttack > 0)
                 {
-                    Debug.Log("Enemigo: ATACO CABEZA");
-                    imagenAccion.sprite = SpriteAtaqueCabeza;
-                    Attack(Objetivo.Cabeza);
+                    CheckMovement();
                 }
-                else if (ataqueTorso)
+                else if (gm.timeSelectionAttack <= 0 && !timeOut)
                 {
-                    Debug.Log("Enemigo: ATACO TORSO");
-                    imagenAccion.sprite = SpriteAtaqueTorso;
-                    Attack(Objetivo.Torso);
+                    mover = true;
+                    gm.timeSelectionAttack = -1;
+                    timeOut = true;
                 }
-                else if (ataquePies)
+                if (mover)
                 {
-                    Debug.Log("Enemigo: ATACO PIERNAS");
-                    imagenAccion.sprite = SpriteAtaquePies;
-                    Attack(Objetivo.Piernas);
-                }
-                else if (defensaCabeza)
-                {
-                    Debug.Log("Enemigo: DEFENDIO CABEZA");
-                    imagenAccion.sprite = SpriteDefensaCabeza;
-                    Deffense(Objetivo.Cabeza);
-                }
-                else if (defensaTorso)
-                {
-                    Debug.Log("Enemigo: DEFENDIO TORSO");
-                    imagenAccion.sprite = SpriteDefensaTorso;
-                    Deffense(Objetivo.Torso);
-                }
-                else if (defensaPies)
-                {
-                    Debug.Log("Enemigo: DEFENDIO PIES");
-                    imagenAccion.sprite = SpriteDefensaPies;
-                    Deffense(Objetivo.Piernas);
-                }
-                else if (saltar)
-                {
-                    Debug.Log("Enemigo: SALTAR");
-                    imagenAccion.sprite = SpriteSalto;
-                    Jump();
-                }
-                else if (agacharse) {
-                    Debug.Log("Enemigo: AGACHARSE");
-                    imagenAccion.sprite = SpriteAgacharse;
-                    Duck();
-                }
-                ataqueCabeza = false;
-                ataqueTorso = false;
-                ataquePies = false;
-                defensaCabeza = false;
-                defensaTorso = false;
-                defensaPies = false;
-                if (typeEnemy != Categoria.Balanceado)
-                {
-                    saltar = false;
-                    agacharse = false;
+                    gm.timeSelectionAttack = -1.5f;
+                    SelectDefinitive = true;
+                    CheckMovement();
+                    if (ataqueCabeza)
+                    {
+                        Debug.Log("Enemigo: ATACO CABEZA");
+                        imagenAccion.sprite = SpriteAtaqueCabeza;
+                        Attack(Objetivo.Cabeza);
+                    }
+                    else if (ataqueTorso)
+                    {
+                        Debug.Log("Enemigo: ATACO TORSO");
+                        imagenAccion.sprite = SpriteAtaqueTorso;
+                        Attack(Objetivo.Torso);
+                    }
+                    else if (ataquePies)
+                    {
+                        Debug.Log("Enemigo: ATACO PIERNAS");
+                        imagenAccion.sprite = SpriteAtaquePies;
+                        Attack(Objetivo.Piernas);
+                    }
+                    else if (defensaCabeza)
+                    {
+                        Debug.Log("Enemigo: DEFENDIO CABEZA");
+                        imagenAccion.sprite = SpriteDefensaCabeza;
+                        Deffense(Objetivo.Cabeza);
+                    }
+                    else if (defensaTorso)
+                    {
+                        Debug.Log("Enemigo: DEFENDIO TORSO");
+                        imagenAccion.sprite = SpriteDefensaTorso;
+                        Deffense(Objetivo.Torso);
+                    }
+                    else if (defensaPies)
+                    {
+                        Debug.Log("Enemigo: DEFENDIO PIES");
+                        imagenAccion.sprite = SpriteDefensaPies;
+                        Deffense(Objetivo.Piernas);
+                    }
+                    else if (saltar)
+                    {
+                        Debug.Log("Enemigo: SALTAR");
+                        imagenAccion.sprite = SpriteSalto;
+                        Jump();
+                    }
+                    else if (agacharse)
+                    {
+                        Debug.Log("Enemigo: AGACHARSE");
+                        imagenAccion.sprite = SpriteAgacharse;
+                        Duck();
+                    }
+                    ataqueCabeza = false;
+                    ataqueTorso = false;
+                    ataquePies = false;
+                    defensaCabeza = false;
+                    defensaTorso = false;
+                    defensaPies = false;
+                    if (typeEnemy != Categoria.Balanceado)
+                    {
+                        saltar = false;
+                        agacharse = false;
+                    }
                 }
             }
         }
+    }
+    public void ResetEnemy() {
+        timeOut = false;
+    }
+    public void CheckLifeBar()
+    {
+        ImageHP.fillAmount = maxLife/life;
     }
     public void CounterAttack()
     {
@@ -257,6 +282,7 @@ public class Enemy : MonoBehaviour
         }
     }
     public void CheckMovement() {
+
         mover = false;
         float movimientoElejir = Random.Range(MinRangeRandom, MaxRangeRandom);
         //Debug.Log("Movimiento: "+ movimientoElejir);
@@ -269,6 +295,7 @@ public class Enemy : MonoBehaviour
             if (poolObjectAttack.count > 0) {
                 float objetivoElejir = Random.Range(MinRangeRandom, MaxRangeRandom);
                 //Debug.Log("Objetivo: " + objetivoElejir);
+                
                 if (objetivoElejir <= AttackHeadPorcentage)
                 {
 
@@ -276,6 +303,7 @@ public class Enemy : MonoBehaviour
                     {
                         //ATACAR A LA CABEZA
                         //Attack(Objetivo.Cabeza);
+
                         imagenAccion.sprite = SpriteAtaqueCabeza;
                         ataqueCabeza = true;
                         ataqueTorso = false;

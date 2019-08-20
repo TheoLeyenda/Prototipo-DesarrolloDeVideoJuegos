@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public float auxTimeSelectionAttack;
     private float auxTimerNextRond;
     private List<Enemy> enemies;
+    [HideInInspector]
+    public bool STOP;
     private Player player1;
     private Player player2;
     private Player player3;
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        STOP = false;
         auxTimerNextRond = timerNextRond;
         auxTimeSelectionAttack = timeSelectionAttack;
         enemies = new List<Enemy>();
@@ -86,9 +89,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        for (int i = 0; i < enemies.Count; i++) {
-            enemies[i].mover = false;
-        }
+        
         DontDestroyOnLoad(gameObject);
     }
 
@@ -96,59 +97,62 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckTimerNextRound();
-        if (TextTimeOfAttack != null)
+        if (!STOP)
         {
-            CheckTimeAttackCharacters();
-        }
-        if(enemies.Count > 0 && timeSelectionAttack > -2 && timeSelectionAttack <= 0)
-        {
-            enemies.Clear();
-            timeSelectionAttack = -2;
-            
-            if (timeSelectionAttack <= 0)
+            CheckTimerNextRound();
+            if (TextTimeOfAttack != null)
             {
-                for (int i = 0; i < SceneManager.GetActiveScene().GetRootGameObjects().Length; i++)
+                CheckTimeAttackCharacters();
+            }
+            if (enemies.Count > 0 && timeSelectionAttack > -2 && timeSelectionAttack <= 0)
+            {
+                enemies.Clear();
+                timeSelectionAttack = -2;
+
+                if (timeSelectionAttack <= 0)
                 {
-                    if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Enemy")
+                    for (int i = 0; i < SceneManager.GetActiveScene().GetRootGameObjects().Length; i++)
                     {
-                        if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Enemy>() != null)
+                        if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Enemy")
                         {
-                            enemies.Add(SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Enemy>());
+                            if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Enemy>() != null)
+                            {
+                                enemies.Add(SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Enemy>());
+                            }
                         }
-                    }
-                    if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player")
-                    {
-                        if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>() != null)
+                        if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player")
                         {
-                            player1 = SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>();
+                            if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>() != null)
+                            {
+                                player1 = SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>();
+                            }
                         }
-                    }
-                    if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player2")
-                    {
-                        if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>() != null)
+                        if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player2")
                         {
-                            player2 = SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>();
+                            if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>() != null)
+                            {
+                                player2 = SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>();
+                            }
+
+                        }
+                        if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player3")
+                        {
+                            if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>() != null)
+                            {
+                                player3 = SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>();
+                            }
+                        }
+                        if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player4")
+                        {
+                            if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>() != null)
+                            {
+                                player4 = SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>();
+                            }
                         }
 
                     }
-                    if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player3")
-                    {
-                        if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>() != null)
-                        {
-                            player3 = SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>();
-                        }
-                    }
-                    if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player4")
-                    {
-                        if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>() != null)
-                        {
-                            player4 = SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>();
-                        }
-                    }
-
+                    CheckMovementCharcaters();
                 }
-                CheckMovementCharcaters();
             }
         }
 
@@ -187,24 +191,27 @@ public class GameManager : MonoBehaviour
         {
             player4.RestartPlayer();
         }
-        //for (int i = 0; i < enemies.Count; i++)
-        //{
-            //if (enemies[i] != null)
-            //{
-                //El enemigo resetea automaticamente.
-            //}
-        //}
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            if (enemies[i] != null)
+            {
+                enemies[i].ResetEnemy();
+            }
+        }
     }
     private void CheckTimeAttackCharacters() {
-        if (timeSelectionAttack > 0)
+        if (!STOP)
         {
-            timeSelectionAttack = timeSelectionAttack - Time.deltaTime;
-            TextTimeOfAttack.text = "" + (int)timeSelectionAttack;
-        }
-        if (timerNextRond > 0 && timeSelectionAttack <= -2)
-        {
+            if (timeSelectionAttack > 0)
+            {
+                timeSelectionAttack = timeSelectionAttack - Time.deltaTime;
+                TextTimeOfAttack.text = "" + (int)timeSelectionAttack;
+            }
+            if (timerNextRond > 0 && timeSelectionAttack <= -2)
+            {
 
-            TextTimeOfAttack.text = "" + (int)timerNextRond;
+                TextTimeOfAttack.text = "" + (int)timerNextRond;
+            }
         }
     }
     public void CheckMovementCharcaters()
@@ -216,9 +223,9 @@ public class GameManager : MonoBehaviour
             {
                 if (player1 != null && enemies[i] != null)
                 {
-                    if (enemies[i].typeEnemy == Enemy.Categoria.Balanceado)
+                    if (enemies[i].gameObject.activeSelf)
                     {
-                        if (enemies[i].gameObject.activeSelf)
+                        if (enemies[i].typeEnemy == Enemy.Categoria.Balanceado)
                         {
                             //Debug.Log("ATAQUE CABEZA JUGADOR: " + player1.GetAtaqueCabeza());
                             //Debug.Log("AGACHARSE ENEMIGO: " + enemies[i].GetAgacharse());
@@ -232,6 +239,13 @@ public class GameManager : MonoBehaviour
                                 
                                 enemies[i].CounterAttack();
                             }
+                            
+                        }
+                        //Debug.Log(player1.life);
+                        if (player1.life <= 0)
+                        {
+                            enemies[i].STOP = true;
+                            STOP = true;
                         }
                     }
                 }

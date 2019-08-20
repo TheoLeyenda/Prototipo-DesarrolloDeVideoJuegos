@@ -18,6 +18,11 @@ public class Player : MonoBehaviour
     //que pueda elejir donde disparar(arriba, medio, abajo);
     // Start is called before the first frame update
     //Cada enemigo se especializa en alguna accion (Esquivar,Ataque o Defensa)
+
+    public float life;
+    public float maxLife;
+    public Image ImageHP;
+    private SpriteRenderer mySelfSprite;
     public Pool poolObjectAttack;
     public Sprite SpriteBlanco;
     public Image imagenAccion;
@@ -75,185 +80,201 @@ public class Player : MonoBehaviour
     private float MaxRangeRandomTargetDefense = 3;
     private float MaxRangeRandomDodge = 2;
     private bool SelectMovement = false;
+    [HideInInspector]
+    public bool STOP;
     void Start()
     {
+        STOP = false;
+        mySelfSprite = GetComponent<SpriteRenderer>();
         ModoIA = false;
         DisableShild();
         ContraAtaque = false;
-        if(GameManager.instanceGameManager != null){
+        if (GameManager.instanceGameManager != null) {
             gm = GameManager.instanceGameManager;
         }
         rg2D = GetComponent<Rigidbody2D>();
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gm.timeSelectionAttack <= 0 && !SelectMovement)
+        if (!STOP)
         {
-            ModoIA = true;
-            SelectMovement = true;
-            
-            //Debug.Log("ModoIA activado"); ENTRA CORRECTAMENTE
-        }
-        else if (gm.timeSelectionAttack <= 0 && SelectMovement) {
-            if (ataqueCabeza)
+            CheckDead();
+            CheckLifeBar();
+            if (gm.timeSelectionAttack <= 0 && !SelectMovement)
             {
-                
-                imagenAccion.sprite = SpriteAtaqueCabeza;
-                AttackHead();
+                ModoIA = true;
+                SelectMovement = true;
+
+                //Debug.Log("ModoIA activado"); ENTRA CORRECTAMENTE
             }
-            else if (ataqueTorso)
+            else if (gm.timeSelectionAttack <= 0 && SelectMovement)
             {
-                imagenAccion.sprite = SpriteAtaqueTorso;
-                AttackChest();
-            }
-            else if (ataquePies)
-            {
-                //Debug.Log("HOLA SOY FORRO");
-                imagenAccion.sprite = SpriteAtaquePies;
-                AttackLegs();
-            }
-            else if (defensaCabeza)
-            {
-                imagenAccion.sprite = SpriteDefensaCabeza;
-                DeffenseHead();
-            }
-            else if (defensaTorso)
-            {
-                imagenAccion.sprite = SpriteDefensaTorso;
-                DeffenseChest();
-            }
-            else if (defensaPies)
-            {
-                imagenAccion.sprite = SpriteDefensaPies;
-                DeffenseLegs();
-            }
-            else if (saltar)
-            {
-                imagenAccion.sprite = SpriteSalto;
-                Jump();
-            }
-            else if (agacharse)
-            {
-                imagenAccion.sprite = SpriteAgacharse;
-                Duck();
-            }
-            ModoIA = false;
-            ataqueCabeza = false;
-            ataqueTorso = false;
-            ataquePies = false;
-            defensaCabeza = false;
-            defensaTorso = false;
-            defensaPies = false;
-            saltar = false;
-            agacharse = false;
-        }
-        if (AviableModoIA)
-        {
-            
-            if (ModoIA && gm.timeSelectionAttack <= 0)
-            {
-                //Debug.Log("ENTRE AL FONDO DEL MODO IA");
+                if (ataqueCabeza)
+                {
+
+                    imagenAccion.sprite = SpriteAtaqueCabeza;
+                    AttackHead();
+                }
+                else if (ataqueTorso)
+                {
+                    imagenAccion.sprite = SpriteAtaqueTorso;
+                    AttackChest();
+                }
+                else if (ataquePies)
+                {
+                    //Debug.Log("HOLA SOY FORRO");
+                    imagenAccion.sprite = SpriteAtaquePies;
+                    AttackLegs();
+                }
+                else if (defensaCabeza)
+                {
+                    imagenAccion.sprite = SpriteDefensaCabeza;
+                    DeffenseHead();
+                }
+                else if (defensaTorso)
+                {
+                    imagenAccion.sprite = SpriteDefensaTorso;
+                    DeffenseChest();
+                }
+                else if (defensaPies)
+                {
+                    imagenAccion.sprite = SpriteDefensaPies;
+                    DeffenseLegs();
+                }
+                else if (saltar)
+                {
+                    imagenAccion.sprite = SpriteSalto;
+                    Jump();
+                }
+                else if (agacharse)
+                {
+                    imagenAccion.sprite = SpriteAgacharse;
+                    Duck();
+                }
                 ModoIA = false;
-                switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomMovement)) {
-                    case 0:
-                        imagenMovimiento.sprite = SpriteMovimientoAtaque;
-                        switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomTargertAttack)) {
-                            case 0:
-                                imagenAccion.sprite = SpriteAtaqueCabeza;
-                                AttackHead();
-                                break;
-                            case 1:
-                                imagenAccion.sprite = SpriteAtaqueCabeza;
-                                AttackHead();
-                                break;
-                            case 2:
-                                imagenAccion.sprite = SpriteAtaqueTorso;
-                                AttackChest();
-                                break;
-                            case 3:
-                                imagenAccion.sprite = SpriteAtaquePies;
-                                AttackLegs();
-                                break;
-                        }
-                        break;
-                    case 1:
-                        imagenMovimiento.sprite = SpriteMovimientoAtaque;
-                        switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomTargertAttack))
-                        {
-                            case 0:
-                                imagenAccion.sprite = SpriteAtaqueCabeza;
-                                AttackHead();
-                                break;
-                            case 1:
-                                imagenAccion.sprite = SpriteAtaqueCabeza;
-                                AttackHead();
-                                break;
-                            case 2:
-                                imagenAccion.sprite = SpriteAtaqueTorso;
-                                AttackChest();
-                                break;
-                            case 3:
-                                imagenAccion.sprite = SpriteAtaquePies;
-                                AttackLegs();
-                                break;
-                        }
-                        break;
-                    case 2:
-                        imagenMovimiento.sprite = SpriteMovimientoDefensa;
-                        switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomTargetDefense)) {
-                            case 0:
-                                if (AviableDefenseHead)
-                                {
-                                    imagenAccion.sprite = SpriteDefensaCabeza;
-                                    DeffenseHead();
-                                }
-                                else {
+                ataqueCabeza = false;
+                ataqueTorso = false;
+                ataquePies = false;
+                defensaCabeza = false;
+                defensaTorso = false;
+                defensaPies = false;
+                saltar = false;
+                agacharse = false;
+            }
+
+            if (AviableModoIA)
+            {
+
+                if (ModoIA && gm.timeSelectionAttack <= 0)
+                {
+                    //Debug.Log("ENTRE AL FONDO DEL MODO IA");
+                    ModoIA = false;
+                    switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomMovement))
+                    {
+                        case 0:
+                            imagenMovimiento.sprite = SpriteMovimientoAtaque;
+                            switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomTargertAttack))
+                            {
+                                case 0:
+                                    imagenAccion.sprite = SpriteAtaqueCabeza;
+                                    AttackHead();
+                                    break;
+                                case 1:
+                                    imagenAccion.sprite = SpriteAtaqueCabeza;
+                                    AttackHead();
+                                    break;
+                                case 2:
+                                    imagenAccion.sprite = SpriteAtaqueTorso;
+                                    AttackChest();
+                                    break;
+                                case 3:
+                                    imagenAccion.sprite = SpriteAtaquePies;
+                                    AttackLegs();
+                                    break;
+                            }
+                            break;
+                        case 1:
+                            imagenMovimiento.sprite = SpriteMovimientoAtaque;
+                            switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomTargertAttack))
+                            {
+                                case 0:
+                                    imagenAccion.sprite = SpriteAtaqueCabeza;
+                                    AttackHead();
+                                    break;
+                                case 1:
+                                    imagenAccion.sprite = SpriteAtaqueCabeza;
+                                    AttackHead();
+                                    break;
+                                case 2:
+                                    imagenAccion.sprite = SpriteAtaqueTorso;
+                                    AttackChest();
+                                    break;
+                                case 3:
+                                    imagenAccion.sprite = SpriteAtaquePies;
+                                    AttackLegs();
+                                    break;
+                            }
+                            break;
+                        case 2:
+                            imagenMovimiento.sprite = SpriteMovimientoDefensa;
+                            switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomTargetDefense))
+                            {
+                                case 0:
+                                    if (AviableDefenseHead)
+                                    {
+                                        imagenAccion.sprite = SpriteDefensaCabeza;
+                                        DeffenseHead();
+                                    }
+                                    else
+                                    {
+                                        imagenAccion.sprite = SpriteDefensaTorso;
+                                        DeffenseChest();
+                                    }
+                                    break;
+                                case 1:
+                                    if (AviableDefenseHead)
+                                    {
+                                        imagenAccion.sprite = SpriteDefensaCabeza;
+                                        DeffenseHead();
+                                    }
+                                    else
+                                    {
+                                        imagenAccion.sprite = SpriteDefensaPies;
+                                        DeffenseLegs();
+                                    }
+                                    break;
+                                case 2:
                                     imagenAccion.sprite = SpriteDefensaTorso;
                                     DeffenseChest();
-                                }
-                                break;
-                            case 1:
-                                if (AviableDefenseHead)
-                                {
-                                    imagenAccion.sprite = SpriteDefensaCabeza;
-                                    DeffenseHead();
-                                }
-                                else {
+                                    break;
+                                case 3:
                                     imagenAccion.sprite = SpriteDefensaPies;
                                     DeffenseLegs();
-                                }
-                                break;
-                            case 2:
-                                imagenAccion.sprite = SpriteDefensaTorso;
-                                DeffenseChest();
-                                break;
-                            case 3:
-                                imagenAccion.sprite = SpriteDefensaPies;
-                                DeffenseLegs();
-                                break;
-                        }
-                        break;
-                    case 3:
-                        imagenMovimiento.sprite = SpriteMovimientoEsquive;
-                        switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomDodge))
-                        {
-                            case 0:
-                                imagenAccion.sprite = SpriteSalto;
-                                Jump();
-                                break;
-                            case 1:
-                                imagenAccion.sprite = SpriteSalto;
-                                Jump();
-                                break;
-                            case 3:
-                                imagenAccion.sprite = SpriteAgacharse;
-                                Duck();
-                                break;
-                        }
-                        break;
+                                    break;
+                            }
+                            break;
+                        case 3:
+                            imagenMovimiento.sprite = SpriteMovimientoEsquive;
+                            switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomDodge))
+                            {
+                                case 0:
+                                    imagenAccion.sprite = SpriteSalto;
+                                    Jump();
+                                    break;
+                                case 1:
+                                    imagenAccion.sprite = SpriteSalto;
+                                    Jump();
+                                    break;
+                                case 3:
+                                    imagenAccion.sprite = SpriteAgacharse;
+                                    Duck();
+                                    break;
+                            }
+                            break;
+                    }
                 }
             }
         }
@@ -289,6 +310,26 @@ public class Player : MonoBehaviour
             imagenMovimiento.sprite = SpriteBlanco;
         }
 
+    }
+    public void CheckLifeBar()
+    {
+        if (life <= maxLife)
+        {
+            ImageHP.fillAmount = life / maxLife;
+        }
+        else if (life > maxLife)
+        {
+            life = maxLife;
+        }
+        else if (life < 0) {
+            life = 0;
+        }
+    }
+    public void CheckDead() {
+        if (life <= 0) {
+            mySelfSprite.enabled = false;
+            STOP = true;
+        }
     }
     public void AttackButton() {
         imagenMovimiento.sprite = SpriteMovimientoAtaque;
