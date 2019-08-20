@@ -414,7 +414,33 @@ public class Player : MonoBehaviour
         gm.timeSelectionAttack = 0;
         gm.TextTimeOfAttack.text = "0";
     }
+    public void RestartPlayer()
+    {
+        
+        imagenAccion.sprite = SpriteBlanco;
+        imagenMovimiento.sprite = SpriteBlanco;
+        Button_Jump.gameObject.SetActive(false);
+        Button_Duck.gameObject.SetActive(false);
+        Button_AttackHead.gameObject.SetActive(false);
+        Button_AttackChest.gameObject.SetActive(false);
+        Button_AttackLegs.gameObject.SetActive(false);
+        Button_DefenseHead.gameObject.SetActive(false);
+        Button_DefenseChest.gameObject.SetActive(false);
+        Button_DefenseLegs.gameObject.SetActive(false);
+        Button_Back.gameObject.SetActive(false);
+        Button_Attack.gameObject.SetActive(true);
+        Button_Deffense.gameObject.SetActive(true);
+        Button_Dodge.gameObject.SetActive(true);
+        ShildChest.gameObject.SetActive(false);
+        ShildHead.gameObject.SetActive(false);
+        ShildLegs.gameObject.SetActive(false);
+        BoxColliderHead.gameObject.SetActive(true);
+        BoxColliderChest.gameObject.SetActive(true);
+        BoxColliderLegs.gameObject.SetActive(true);
+        ContraAtaque = false;
+        SelectMovement = false;
 
+    }
     public void DodgeButton() {
         imagenMovimiento.sprite = SpriteMovimientoEsquive;
         Button_Attack.gameObject.SetActive(false);
@@ -552,4 +578,6 @@ public class Player : MonoBehaviour
     {
         return saltar;
     }
+    
+
 }

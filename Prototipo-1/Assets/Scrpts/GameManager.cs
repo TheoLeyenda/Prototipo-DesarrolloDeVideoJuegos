@@ -11,10 +11,13 @@ public class GameManager : MonoBehaviour
 
     // Use this for initialization
     public Text TextTimeOfAttack;
+    public Text TextTitulo;
     public static GameManager instanceGameManager;
     public float timeSelectionAttack;
+    public float timerNextRond;
     [HideInInspector]
     public float auxTimeSelectionAttack;
+    private float auxTimerNextRond;
     private List<Enemy> enemies;
     private Player player1;
     private Player player2;
@@ -41,6 +44,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        auxTimerNextRond = timerNextRond;
         auxTimeSelectionAttack = timeSelectionAttack;
         enemies = new List<Enemy>();
         
@@ -92,6 +96,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckTimerNextRound();
         if (TextTimeOfAttack != null)
         {
             CheckTimeAttackCharacters();
@@ -147,12 +152,59 @@ public class GameManager : MonoBehaviour
             }
         }
 
+
+    }
+    private void CheckTimerNextRound()
+    {
+        if (timerNextRond > 0 && timeSelectionAttack <= -2)
+        {
+            timerNextRond = timerNextRond - Time.deltaTime;
+            TextTitulo.text = "LA SIGUIENTE RONDA COMIENZA EN";
+        }
+        if (timerNextRond <= 0)
+        {
+            ResetAll();
+        }
+    }
+    public void ResetAll()
+    {
+        timerNextRond = auxTimerNextRond;
+        timeSelectionAttack = auxTimeSelectionAttack;
+        TextTitulo.text = "TIEMPO RESTANTE";
+        if (player1 != null)
+        {
+            player1.RestartPlayer();
+        }
+        if (player2 != null)
+        {
+            player2.RestartPlayer();
+        }
+        if (player3 != null)
+        {
+            player3.RestartPlayer();
+        }
+        if (player4 != null)
+        {
+            player4.RestartPlayer();
+        }
+        //for (int i = 0; i < enemies.Count; i++)
+        //{
+            //if (enemies[i] != null)
+            //{
+                //El enemigo resetea automaticamente.
+            //}
+        //}
     }
     private void CheckTimeAttackCharacters() {
         if (timeSelectionAttack > 0)
         {
             timeSelectionAttack = timeSelectionAttack - Time.deltaTime;
             TextTimeOfAttack.text = "" + (int)timeSelectionAttack;
+        }
+        if (timerNextRond > 0 && timeSelectionAttack <= -2)
+        {
+
+            TextTimeOfAttack.text = "" + (int)timerNextRond;
         }
     }
     public void CheckMovementCharcaters()
