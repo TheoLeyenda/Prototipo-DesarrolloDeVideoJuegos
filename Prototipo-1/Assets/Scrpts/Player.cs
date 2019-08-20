@@ -525,66 +525,90 @@ public class Player : MonoBehaviour
     }
     public void SetAtaqueCabeza(bool _ataqueCabeza)
     {
-        if (_ataqueCabeza)
+        if (gm.timeSelectionAttack > 0)
         {
-            imagenAccion.sprite = SpriteAtaqueCabeza;
+            if (_ataqueCabeza)
+            {
+                imagenAccion.sprite = SpriteAtaqueCabeza;
+            }
+            ataqueCabeza = _ataqueCabeza;
         }
-        ataqueCabeza = _ataqueCabeza;
     }
     public void SetAtaqueTorso(bool _ataqueTorso)
     {
-        if (_ataqueTorso)
+        if (gm.timeSelectionAttack > 0)
         {
-            imagenAccion.sprite = SpriteAtaqueTorso;
+            if (_ataqueTorso)
+            {
+                imagenAccion.sprite = SpriteAtaqueTorso;
+            }
+            ataqueTorso = _ataqueTorso;
         }
-        ataqueTorso = _ataqueTorso;
     }
     public void SetAtaquePies(bool _ataquePies)
     {
-        if (_ataquePies)
+        if (gm.timeSelectionAttack > 0)
         {
-            imagenAccion.sprite = SpriteAtaquePies;
+            if (_ataquePies)
+            {
+                imagenAccion.sprite = SpriteAtaquePies;
+            }
+            ataquePies = _ataquePies;
         }
-        ataquePies = _ataquePies;
     }
     public void SetDefensaCabeza(bool _defensaCabeza)
     {
-        if (_defensaCabeza)
+        if (gm.timeSelectionAttack > 0)
         {
-            imagenAccion.sprite = SpriteDefensaCabeza;
+            if (_defensaCabeza)
+            {
+                imagenAccion.sprite = SpriteDefensaCabeza;
+            }
+            defensaCabeza = _defensaCabeza;
         }
-        defensaCabeza = _defensaCabeza;
     }
     public void SetDefensaTorso(bool _defensaTorso)
     {
-        if (_defensaTorso)
+        if (gm.timeSelectionAttack > 0)
         {
-            imagenAccion.sprite = SpriteDefensaTorso;
+            if (_defensaTorso)
+            {
+                imagenAccion.sprite = SpriteDefensaTorso;
+            }
+            defensaTorso = _defensaTorso;
         }
-        defensaTorso = _defensaTorso;
     }
     public void SetDefensaPies(bool _defensaPies)
     {
-        if (_defensaPies)
+        if (gm.timeSelectionAttack > 0)
         {
-            imagenAccion.sprite = SpriteDefensaPies;
+            if (_defensaPies)
+            {
+                imagenAccion.sprite = SpriteDefensaPies;
+            }
+            defensaPies = _defensaPies;
         }
-        defensaPies = _defensaPies;
     }
     public void SetSaltar(bool _saltar)
     {
-        if (_saltar)
+        if (gm.timeSelectionAttack > 0)
         {
-            imagenAccion.sprite = SpriteSalto;
-            saltar = _saltar;
+            if (_saltar)
+            {
+                imagenAccion.sprite = SpriteSalto;
+                saltar = _saltar;
+            }
         }
     }
     public void SetAgacharse(bool _agacharse)
     {
-        if (_agacharse)
+        if (gm.timeSelectionAttack > 0)
         {
-            imagenAccion.sprite = SpriteAgacharse;
-            agacharse = _agacharse;
+            if (_agacharse)
+            {
+                imagenAccion.sprite = SpriteAgacharse;
+                agacharse = _agacharse;
+            }
         }
     }
     public bool GetAtaqueCabeza()
