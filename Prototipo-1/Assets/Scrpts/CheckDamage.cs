@@ -18,12 +18,16 @@ public class CheckDamage : MonoBehaviour
         {
             //ACA PROGRAMAR QUE LE BAJE VIDA TANTO AL ENEMIGO COMO AL JUGADOR DEPENDIENDO DE LOS BOOLEANOS YA DEFINIDOS
             Proyectil proyect = collision.GetComponent<Proyectil>();
-           
+
             if (proyect != null)
             {
                 if (InPlayer)
                 {
                     player.life = player.life - proyect.damage;
+                }
+                if (InEnemy)
+                {
+                    enemy.life = enemy.life - proyect.damage;
                 }
                 proyect.GetPoolObject().Recycle();
             }

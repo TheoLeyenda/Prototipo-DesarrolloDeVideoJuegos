@@ -157,7 +157,8 @@ public class Enemy : MonoBehaviour
     {
         if (!STOP)
         {
-            //CheckLifeBar();
+            CheckDead();
+            CheckLifeBar();
             if (Time.timeScale > 0)
             {
                 if (gm.timeSelectionAttack > 0)
@@ -243,7 +244,26 @@ public class Enemy : MonoBehaviour
     }
     public void CheckLifeBar()
     {
-        ImageHP.fillAmount = maxLife/life;
+        if (life <= maxLife)
+        {
+            ImageHP.fillAmount = life / maxLife;
+        }
+        else if (life > maxLife)
+        {
+            life = maxLife;
+        }
+        else if (life < 0)
+        {
+            life = 0;
+        }
+    }
+    public void CheckDead()
+    {
+        if (life <= 0)
+        {
+            // SI SU VIDA ES IGUAL A 0 POS MUERE DESACTIVADO
+            gameObject.SetActive(false);
+        }
     }
     public void CounterAttack()
     {
