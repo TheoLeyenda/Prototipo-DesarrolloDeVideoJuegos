@@ -54,6 +54,22 @@ public class Proyectil : MonoBehaviour
     {
         return poolObject;
     }
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        switch (collision.tag)
+        {
+            case "Escudo":
+                timeLife = 0;
+                break;
+            case "Player":
+                collision.GetComponent<Player>().life = collision.GetComponent<Player>().life - damage;
+                timeLife = 0;
+                break;
+            case "Enemy":
+                collision.GetComponent<Enemy>().life = collision.GetComponent<Enemy>().life - damage;
+                timeLife = 0;
+                break;
+        }
+    }
 
 }

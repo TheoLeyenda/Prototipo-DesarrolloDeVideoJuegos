@@ -442,18 +442,4 @@ public class Player : MonoBehaviour
     {
         _estado = EstadoJugador.muerto;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Proyectil")
-        {
-            Proyectil proyect = collision.GetComponent<Proyectil>();
-
-            if (proyect != null)
-            {
-                life = life - proyect.damage;
-                proyect.timeLife = 0;
-            }
-            
-        }
-    }
 }

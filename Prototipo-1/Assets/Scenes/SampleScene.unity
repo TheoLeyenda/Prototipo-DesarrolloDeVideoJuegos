@@ -397,11 +397,9 @@ GameObject:
   m_Component:
   - component: {fileID: 153172209}
   - component: {fileID: 153172212}
-  - component: {fileID: 153172211}
-  - component: {fileID: 153172210}
   m_Layer: 0
   m_Name: EscudoCuerpo
-  m_TagString: Untagged
+  m_TagString: Escudo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -414,49 +412,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153172208}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07, y: -0.046999987, z: 0}
+  m_LocalPosition: {x: -0.069999695, y: -0.04699993, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1873146607}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &153172210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 153172208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7f98125be61ce943bf649d1466af77e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
-  Player: {fileID: 1119127498}
-  InEnemy: 0
-  InPlayer: 1
---- !u!50 &153172211
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 153172208}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &153172212
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -467,7 +428,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0036298684, y: 0.028733045}
@@ -2464,11 +2425,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1109100240}
   - component: {fileID: 1109100243}
-  - component: {fileID: 1109100242}
-  - component: {fileID: 1109100241}
   m_Layer: 0
   m_Name: EscudoCuerpo
-  m_TagString: Untagged
+  m_TagString: Escudo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2487,43 +2446,6 @@ Transform:
   m_Father: {fileID: 1119127497}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1109100241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1109100239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7f98125be61ce943bf649d1466af77e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
-  Player: {fileID: 1119127498}
-  InEnemy: 0
-  InPlayer: 1
---- !u!50 &1109100242
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1109100239}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &1109100243
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2534,7 +2456,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0036298684, y: 0.028733045}
@@ -2824,11 +2746,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1144256343}
   - component: {fileID: 1144256344}
-  - component: {fileID: 1144256345}
-  - component: {fileID: 1144256346}
   m_Layer: 0
   m_Name: EscudoCabeza
-  m_TagString: Untagged
+  m_TagString: Escudo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2857,7 +2777,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0036298684, y: 0.018587338}
@@ -2873,43 +2793,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.0013495442, y: 0.043067437}
   m_EdgeRadius: 0
---- !u!50 &1144256345
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1144256342}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &1144256346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1144256342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7f98125be61ce943bf649d1466af77e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
-  Player: {fileID: 1119127498}
-  InEnemy: 0
-  InPlayer: 1
 --- !u!1 &1162066902
 GameObject:
   m_ObjectHideFlags: 0
@@ -4560,11 +4443,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1864227432}
   - component: {fileID: 1864227433}
-  - component: {fileID: 1864227435}
-  - component: {fileID: 1864227434}
   m_Layer: 0
   m_Name: EscudoCabeza
-  m_TagString: Untagged
+  m_TagString: Escudo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4577,11 +4458,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1864227431}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07, y: 0.036199998, z: 0}
+  m_LocalPosition: {x: -0.069999695, y: 0.03619957, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1873146607}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1864227433
 BoxCollider2D:
@@ -4593,7 +4474,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0036298684, y: 0.018118635}
@@ -4609,43 +4490,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.0013495442, y: 0.041899927}
   m_EdgeRadius: 0
---- !u!114 &1864227434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1864227431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7f98125be61ce943bf649d1466af77e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 1873146609}
-  Player: {fileID: 0}
-  InEnemy: 1
-  InPlayer: 0
---- !u!50 &1864227435
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1864227431}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &1869378498
 GameObject:
   m_ObjectHideFlags: 0
@@ -4864,10 +4708,10 @@ Transform:
   m_Children:
   - {fileID: 767395958}
   - {fileID: 1623275474}
-  - {fileID: 1894093753}
-  - {fileID: 2144659731}
-  - {fileID: 1864227432}
   - {fileID: 153172209}
+  - {fileID: 2144659731}
+  - {fileID: 1894093753}
+  - {fileID: 1864227432}
   - {fileID: 509380623}
   - {fileID: 703736295}
   m_Father: {fileID: 0}
@@ -4940,8 +4784,6 @@ MonoBehaviour:
   BoxColliderChest: {fileID: 1873146611}
   BoxColliderLegs: {fileID: 1873146610}
   tranformAtaque: {fileID: 1623275474}
-  STOP: 0
-  mover: 0
   typeEnemy: 0
 --- !u!61 &1873146610
 BoxCollider2D:
@@ -5395,8 +5237,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1894093753}
   - component: {fileID: 1894093754}
-  - component: {fileID: 1894093756}
-  - component: {fileID: 1894093755}
   m_Layer: 0
   m_Name: EscudoTorso
   m_TagString: Escudo
@@ -5412,11 +5252,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1894093752}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07, y: 0, z: 0}
+  m_LocalPosition: {x: -0.069999695, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1873146607}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1894093754
 BoxCollider2D:
@@ -5428,7 +5268,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0036298684, y: 0.0011188779}
@@ -5444,43 +5284,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.0013495442, y: 0.0691275}
   m_EdgeRadius: 0
---- !u!114 &1894093755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1894093752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7f98125be61ce943bf649d1466af77e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 1873146609}
-  Player: {fileID: 0}
-  InEnemy: 1
-  InPlayer: 0
---- !u!50 &1894093756
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1894093752}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &1978220988
 GameObject:
   m_ObjectHideFlags: 0
@@ -5917,11 +5720,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2144659731}
   - component: {fileID: 2144659732}
-  - component: {fileID: 2144659734}
-  - component: {fileID: 2144659733}
   m_Layer: 0
   m_Name: EscudoPies
-  m_TagString: Untagged
+  m_TagString: Escudo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5934,7 +5735,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144659730}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07, y: -0.0717, z: 0}
+  m_LocalPosition: {x: -0.069999695, y: -0.071700096, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1873146607}
@@ -5950,7 +5751,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0036298684, y: 0.019924287}
@@ -5966,43 +5767,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.0013495442, y: 0.03151668}
   m_EdgeRadius: 0
---- !u!114 &2144659733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2144659730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7f98125be61ce943bf649d1466af77e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 1873146609}
-  Player: {fileID: 0}
-  InEnemy: 1
-  InPlayer: 0
---- !u!50 &2144659734
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2144659730}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1001 &5142444626961068515
 PrefabInstance:
   m_ObjectHideFlags: 0
