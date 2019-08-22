@@ -183,6 +183,9 @@ public class Enemy : MonoBehaviour
     }
     public void ResetEnemy() {
         timeOut = false;
+        BoxColliderChest.enabled = true;
+        BoxColliderHead.enabled = true;
+        BoxColliderLegs.enabled = true;
     }
     public void CheckLifeBar()
     {
