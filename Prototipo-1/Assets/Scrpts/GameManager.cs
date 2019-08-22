@@ -34,6 +34,9 @@ public class GameManager : MonoBehaviour
     private FSM fsm;
     private Player.Movimiento movimientoJugador1;
     private Player.EstadoJugador estadoJugador1;
+
+    private Enemy.EstadoEnemigo estadoEnemigo;
+    private Enemy.Movimiento movimientoEnemigo;
     // HACER LO MISMO PERO PARA EL ENEMIGO 
 
     private EstadoResultado estadoResultado; 
@@ -270,7 +273,7 @@ public class GameManager : MonoBehaviour
         {
             //Debug.Log("ENTRE");
             enemiesActivate.Clear();
-            Debug.Log("Estado:" + estadoJugador1);
+            //Debug.Log("Estado:" + estadoJugador1);
             for (int i = 0; i < SceneManager.GetActiveScene().GetRootGameObjects().Length; i++)
             {
                 if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Enemy")
@@ -312,6 +315,42 @@ public class GameManager : MonoBehaviour
                     player1.Duck();
                     break;
             }
+            for (int i = 0; i < enemiesActivate.Count; i++)
+            {
+                if (enemiesActivate != null)
+                {
+                    switch (movimientoEnemigo)
+                    {
+                        case Enemy.Movimiento.AtacarCabeza:
+                            enemiesActivate[i].Attack(Enemy.Objetivo.Cabeza);
+                            break;
+                        case Enemy.Movimiento.AtacarTorso:
+                            enemiesActivate[i].Attack(Enemy.Objetivo.Torso);
+                            break;
+                        case Enemy.Movimiento.AtacarPies:
+                            enemiesActivate[i].Attack(Enemy.Objetivo.Piernas);
+                            break;
+                        case Enemy.Movimiento.DefenderCabeza:
+                            enemiesActivate[i].Deffense(Enemy.Objetivo.Cabeza);
+                            break;
+                        case Enemy.Movimiento.DefenderTorso:
+                            enemiesActivate[i].Deffense(Enemy.Objetivo.Torso);
+                            break;
+                        case Enemy.Movimiento.DefenderPies:
+                            enemiesActivate[i].Deffense(Enemy.Objetivo.Piernas);
+                            break;
+                        case Enemy.Movimiento.DefenderTorsoPies:
+                            enemiesActivate[i].Deffense(Enemy.Objetivo.Cuerpo);
+                            break;
+                        case Enemy.Movimiento.Saltar:
+                            enemiesActivate[i].Jump();
+                            break;
+                        case Enemy.Movimiento.Agacharse:
+                            enemiesActivate[i].Duck();
+                            break;
+                    }
+                }
+            }
             
             //EL SWITCH DEL ENEMIGO
             
@@ -328,6 +367,14 @@ public class GameManager : MonoBehaviour
     public void SetEstadoJugador1(Player.EstadoJugador estado)
     {
         estadoJugador1 = estado;
+    }
+    public void SetEstadoEnemigo(Enemy.EstadoEnemigo estado)
+    {
+        estadoEnemigo = estado;
+    }
+    public void SetMovimientoEnemigo(Enemy.Movimiento movimiento)
+    {
+        movimientoEnemigo = movimiento;
     }
     public GameState GetGameState()
     {

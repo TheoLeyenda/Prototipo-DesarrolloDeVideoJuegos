@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
     private bool IaModeActivate;
     private const float MaxRangeRandomMovementOption1 = 40;
     private const float MaxRangeRandomMovementOption2 = 40;
-    private Vector3 PosicionGeneracionBala = new Vector3(-3.5f, -3.2f, 0);
+    private Vector3 PosicionGeneracionBalaRelativa = new Vector3(-3.5f, -3.2f, 0);
     void Start()
     {
         IaModeActivate = false;
@@ -253,7 +253,7 @@ public class Player : MonoBehaviour
                 GameObject go = poolObjectAttack.GetObject();
                 Proyectil proyectil = go.GetComponent<Proyectil>();
                 go.transform.position = generadorProyectiles.transform.localPosition;
-                go.transform.position = go.transform.position + PosicionGeneracionBala;
+                go.transform.position = go.transform.position + PosicionGeneracionBalaRelativa;
                 proyectil.On();
                 switch (ob)
                 {
@@ -340,9 +340,9 @@ public class Player : MonoBehaviour
         Button_Dodge.gameObject.SetActive(true);
         ShildHead.gameObject.SetActive(false);
         ShildBoody.gameObject.SetActive(false);
-        BoxColliderHead.gameObject.SetActive(true);
-        BoxColliderChest.gameObject.SetActive(true);
-        BoxColliderLegs.gameObject.SetActive(true);
+        BoxColliderHead.enabled = true;
+        BoxColliderChest.enabled =true;
+        BoxColliderLegs.enabled =true;
         ContraAtaque = false;
         _movimiento = Movimiento.Nulo;
 
@@ -363,21 +363,19 @@ public class Player : MonoBehaviour
     public void Jump()
     {
         Debug.Log("Animacion De Salto");
-        animator.Play("Animacion Salto");
-        //rg2D.AddForce(transform.up * SpeedJump, ForceMode2D.Impulse);
-        //rg2D.velocity = new Vector2(0, 0);
-        //rg2D.velocity = new Vector2(rg2D.velocity.x, SpeedJump);
+        animator.Play("Animacion SaltoJugador");
+        BoxColliderHead.enabled = true;
+        BoxColliderChest.enabled = true;
+        BoxColliderLegs.enabled = false;
 
-        //BoxColliderHead.gameObject.SetActive(true);
-        //BoxColliderChest.gameObject.SetActive(true);
-        //BoxColliderLegs.gameObject.SetActive(true);
+
     }
     public void Duck()
     {
         Debug.Log("Animacion De Agacharse");
-        BoxColliderHead.gameObject.SetActive(false);
-        BoxColliderChest.gameObject.SetActive(true);
-        BoxColliderLegs.gameObject.SetActive(true);
+        BoxColliderHead.enabled= false;
+        BoxColliderChest.enabled = true;
+        BoxColliderLegs.enabled = true;
     }
 
     public void EstadoMovimiento_AtacarCabeza()
@@ -416,7 +414,7 @@ public class Player : MonoBehaviour
     {
         if (gm.GetGameState() == GameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
         {
-            //HACER UN SPRITE PARA DEFENDER CUERPO
+            imagenAccion.sprite = SpriteDefensaCuerpo;
             _movimiento = Movimiento.DefenderTorsoPies;
         }
     }
@@ -444,8 +442,18 @@ public class Player : MonoBehaviour
     {
         _estado = EstadoJugador.muerto;
     }
-    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Proyectil")
+        {
+            Proyectil proyect = collision.GetComponent<Proyectil>();
 
-
-
+            if (proyect != null)
+            {
+                life = life - proyect.damage;
+                proyect.timeLife = 0;
+            }
+            
+        }
+    }
 }
