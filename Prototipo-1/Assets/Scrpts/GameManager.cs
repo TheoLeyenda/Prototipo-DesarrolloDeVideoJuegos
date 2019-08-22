@@ -7,20 +7,49 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public enum GameState
+    {
+        Idle,
+        EnComienzo,
+        RespuestaJugadores,
+        Resultado,
+        Count
+    }
+    public enum GameEvents
+    {
+        Quieto,
+        Comenzar,
+        JugadasElejidas,
+        TiempoFuera,
+        Count
+    }
+    public enum EstadoResultado
+    {
+        Nulo,
+        GanastePelea,
+        GanasteNivel,
+        Perdiste,
+        Count,
+    }
+    private FSM fsm;
+    private Player.Movimiento movimientoJugador1;
+    private Player.EstadoJugador estadoJugador1;
+    // HACER LO MISMO PERO PARA EL ENEMIGO 
 
-
-    // Use this for initialization
+    private EstadoResultado estadoResultado; 
     public Text TextTimeOfAttack;
     public Text TextTitulo;
+    public Text START;
+    public Text TextTimeStart;
     public static GameManager instanceGameManager;
     public float timeSelectionAttack;
     public float timerNextRond;
-    [HideInInspector]
-    public float auxTimeSelectionAttack;
+    public float timerStart;
+
+    private float auxTimeSelectionAttack;
     private float auxTimerNextRond;
-    private List<Enemy> enemies;
-    [HideInInspector]
-    public bool STOP;
+    private float auxTimerStart;
+    public List<Enemy> enemiesActivate;
     private Player player1;
     private Player player2;
     private Player player3;
@@ -34,6 +63,14 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        estadoResultado = EstadoResultado.Nulo;
+        fsm = new FSM((int)GameState.Count,(int)GameEvents.Count,(int)GameState.Idle);
+        fsm.SetRelations((int)GameState.Idle, (int)GameState.EnComienzo, (int)GameEvents.Comenzar);
+        fsm.SetRelations((int)GameState.EnComienzo, (int)GameState.RespuestaJugadores, (int)GameEvents.JugadasElejidas);
+        fsm.SetRelations((int)GameState.RespuestaJugadores, (int)GameState.Resultado, (int)GameEvents.TiempoFuera);
+        fsm.SetRelations((int)GameState.Resultado, (int)GameState.EnComienzo, (int)GameEvents.Comenzar);
+        fsm.SetRelations((int)GameState.Resultado, (int)GameState.Idle, (int)GameEvents.Quieto);
+
         if (instanceGameManager == null)
         {
             instanceGameManager = this;
@@ -46,17 +83,17 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        STOP = false;
         auxTimerNextRond = timerNextRond;
         auxTimeSelectionAttack = timeSelectionAttack;
-        enemies = new List<Enemy>();
+        auxTimerStart = timerStart;
+        enemiesActivate = new List<Enemy>();
         
-        for (int i = 0; i < SceneManager.GetActiveScene().GetRootGameObjects().Length; i++) {
+        /*for (int i = 0; i < SceneManager.GetActiveScene().GetRootGameObjects().Length; i++) {
             if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Enemy")
             {
-                if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Enemy>() != null)
+                if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Enemy>().gameObject.activeSelf)
                 {
-                    enemies.Add(SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Enemy>());
+                    enemiesActivate.Add(SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Enemy>());
                 }
             }
             if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player")
@@ -88,7 +125,7 @@ public class GameManager : MonoBehaviour
                     player4 = SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>();
                 }
             }
-        }
+        }*/
         
         DontDestroyOnLoad(gameObject);
     }
@@ -97,79 +134,75 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!STOP)
+        switch (fsm.GetCurrentState())
         {
-            CheckTimerNextRound();
-            if (TextTimeOfAttack != null)
-            {
-                CheckTimeAttackCharacters();
-            }
-            if (enemies.Count > 0 && timeSelectionAttack > -2 && timeSelectionAttack <= 0)
-            {
-                enemies.Clear();
-                timeSelectionAttack = -2;
-
-                if (timeSelectionAttack <= 0)
-                {
-                    for (int i = 0; i < SceneManager.GetActiveScene().GetRootGameObjects().Length; i++)
-                    {
-                        if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Enemy")
-                        {
-                            if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Enemy>() != null)
-                            {
-                                enemies.Add(SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Enemy>());
-                            }
-                        }
-                        if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player")
-                        {
-                            if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>() != null)
-                            {
-                                player1 = SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>();
-                            }
-                        }
-                        if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player2")
-                        {
-                            if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>() != null)
-                            {
-                                player2 = SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>();
-                            }
-
-                        }
-                        if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player3")
-                        {
-                            if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>() != null)
-                            {
-                                player3 = SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>();
-                            }
-                        }
-                        if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player4")
-                        {
-                            if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>() != null)
-                            {
-                                player4 = SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>();
-                            }
-                        }
-
-                    }
-                    CheckMovementCharcaters();
-                }
-            }
+            case (int)GameState.Idle:
+                Idle();
+                break;
+            case (int)GameState.EnComienzo:
+                EnComienzo();
+                break;
+            case (int)GameState.RespuestaJugadores:
+                RespuestaJugadores();
+                break;
+            case (int)GameState.Resultado:
+                Resultado();
+                break;
         }
 
-
     }
-    private void CheckTimerNextRound()
+    public void Idle()
     {
-        if (timerNextRond > 0 && timeSelectionAttack <= -2)
+        //NO OCURRE NADA
+        if (estadoResultado == EstadoResultado.Nulo)
         {
-            timerNextRond = timerNextRond - Time.deltaTime;
-            TextTitulo.text = "LA SIGUIENTE RONDA COMIENZA EN";
+            if (timerStart > 0)
+            {
+
+                TextTimeStart.gameObject.SetActive(true);
+                START.gameObject.SetActive(true);
+                timerStart = timerStart - Time.deltaTime;
+                TextTimeStart.text = "" + Mathf.Ceil(timerStart);
+            }
+            else if (timerStart <= 0)
+            {
+                timerStart = auxTimerStart;
+                fsm.SendEvent((int)GameEvents.Comenzar);
+                TextTimeStart.gameObject.SetActive(false);
+                START.gameObject.SetActive(false);
+            }
+
         }
-        if (timerNextRond <= 0)
+        else if (estadoResultado == EstadoResultado.GanasteNivel)
         {
-            ResetAll();
+            //HAGO UNA LISTA DE NIVELES Y PASO AL SIGUIENTE NIVEL EN LA LISTA
+            //RESETEO EL GAME MANAGER
+            estadoResultado = EstadoResultado.Nulo;
+            fsm.SendEvent((int)GameEvents.Quieto);
+            
+        }
+
+    }
+    public void EnComienzo()
+    {
+        if (TextTimeOfAttack != null)
+        {
+            CheckTimeAttackCharacters();
         }
     }
+    public void RespuestaJugadores()
+    {
+        CheckCharcaters();
+        fsm.SendEvent((int)GameEvents.TiempoFuera);
+
+    }
+    public void Resultado()
+    {
+        // POR AHORA SOLAMENTE VOLVEMOS AL COMIENZO
+        
+        CheckTimerNextRound();
+    }
+    
     public void ResetAll()
     {
         timerNextRond = auxTimerNextRond;
@@ -191,70 +224,114 @@ public class GameManager : MonoBehaviour
         {
             player4.RestartPlayer();
         }
-        for (int i = 0; i < enemies.Count; i++)
+        for (int i = 0; i < enemiesActivate.Count; i++)
         {
-            if (enemies[i] != null)
+            if (enemiesActivate[i] != null)
             {
-                enemies[i].ResetEnemy();
+                enemiesActivate[i].ResetEnemy();
             }
         }
     }
     private void CheckTimeAttackCharacters() {
-        if (!STOP)
+        if (timeSelectionAttack > 0)
         {
-            if (timeSelectionAttack > 0)
+            timeSelectionAttack = timeSelectionAttack - Time.deltaTime;
+            TextTimeOfAttack.text = "" + ((int)timeSelectionAttack-1);
+            if (((int)timeSelectionAttack - 1) < 0)
             {
-                timeSelectionAttack = timeSelectionAttack - Time.deltaTime;
-                TextTimeOfAttack.text = "" + (int)timeSelectionAttack;
-            }
-            if (timerNextRond > 0 && timeSelectionAttack <= -2)
-            {
-
-                TextTimeOfAttack.text = "" + (int)timerNextRond;
+                TextTimeOfAttack.text = "0";
             }
         }
+        else if(timeSelectionAttack <= 0)
+        {
+            fsm.SendEvent((int)GameEvents.JugadasElejidas);
+        }
+        
+        
     }
-    public void CheckMovementCharcaters()
+    private void CheckTimerNextRound()
+    {
+        if (timerNextRond > 0 )
+        {
+            timerNextRond = timerNextRond - Time.deltaTime;
+            TextTitulo.text = "LA SIGUIENTE RONDA COMIENZA EN";
+            TextTimeOfAttack.text = "" + (int)timerNextRond;
+
+        }
+        if (timerNextRond <= 0)
+        {
+            fsm.SendEvent((int)GameEvents.Comenzar);
+            ResetAll();
+        }
+    }
+    public void CheckCharcaters()
     {
         if (SiglePlayer)
         {
             //Debug.Log("ENTRE");
-            for (int i = 0; i < enemies.Count; i++)
+            enemiesActivate.Clear();
+            Debug.Log("Estado:" + estadoJugador1);
+            for (int i = 0; i < SceneManager.GetActiveScene().GetRootGameObjects().Length; i++)
             {
-                if (player1 != null && enemies[i] != null)
+                if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Enemy")
                 {
-                    if (enemies[i].gameObject.activeSelf)
+                    if (SceneManager.GetActiveScene().GetRootGameObjects()[i].activeSelf)
                     {
-                        if (enemies[i].typeEnemy == Enemy.Categoria.Balanceado)
-                        {
-                            //Debug.Log("ATAQUE CABEZA JUGADOR: " + player1.GetAtaqueCabeza());
-                            //Debug.Log("AGACHARSE ENEMIGO: " + enemies[i].GetAgacharse());
-                            if (player1.GetAtaqueCabeza() && enemies[i].GetAgacharse())
-                            {
-                                //Debug.Log("CONTRA ATAQUE");
-                                enemies[i].CounterAttack();
-                            }
-                            else if (player1.GetAtaquePies() && enemies[i].GetSaltar())
-                            {
-                                
-                                enemies[i].CounterAttack();
-                            }
-                            
-                        }
-                        //Debug.Log(player1.life);
-                        if (player1.life <= 0)
-                        {
-                            enemies[i].STOP = true;
-                            STOP = true;
-                        }
+                        enemiesActivate.Add(SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Enemy>());
+                    }
+                }
+                if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player")
+                {
+                    if (SceneManager.GetActiveScene().GetRootGameObjects()[i].activeSelf)
+                    {
+                        player1 = SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>();
                     }
                 }
             }
+            switch (movimientoJugador1)
+            {
+                case Player.Movimiento.AtacarCabeza:
+                    player1.Attack(Player.Objetivo.Cabeza);
+                    break;
+                case Player.Movimiento.AtacarTorso:
+                    player1.Attack(Player.Objetivo.Torso);
+                    break;
+                case Player.Movimiento.AtacarPies:
+                    player1.Attack(Player.Objetivo.Piernas);
+                    break;
+                case Player.Movimiento.DefenderCabeza:
+                    player1.Deffense(Player.Objetivo.Cabeza);
+                    break;
+                case Player.Movimiento.DefenderTorsoPies:
+                    player1.Deffense(Player.Objetivo.Cuerpo);
+                    break;
+                case Player.Movimiento.Saltar:
+                    player1.Jump();
+                    break;
+                case Player.Movimiento.Agacharse:
+                    player1.Duck();
+                    break;
+            }
+            
+            //EL SWITCH DEL ENEMIGO
+            
         }
         if (MultiPlayer)
         {
-            //PROGRAMAR LA REACCION DEL ENEMIGO ANTE UN ESQUIVE DE ATAQUE SI FUERAN DOS JUGADORES 
+             
         }
+    }
+    public void SetRespuestaJugador1(Player.Movimiento movimiento)
+    {
+        movimientoJugador1 = movimiento;
+    }
+    public void SetEstadoJugador1(Player.EstadoJugador estado)
+    {
+        estadoJugador1 = estado;
+    }
+    public GameState GetGameState()
+    {
+        return (GameState)fsm.GetCurrentState();
     }
 
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
+//CAMBIAR TODOS LOS BOOLEANOS DE MOVIMIENTO POR UN ENUM (basarme en el player)
 
 public class Enemy : MonoBehaviour
 {
@@ -19,6 +19,24 @@ public class Enemy : MonoBehaviour
         Cabeza,
         Torso,
         Piernas,
+    }
+    public enum Movimiento
+    {
+        Nulo,
+        AtacarCabeza,
+        AtacarTorso,
+        AtacarPies,
+        DefenderCabeza,
+        DefenderTorsoPies,
+        Saltar,
+        Agacharse,
+        Count,
+    }
+    public enum EstadoJugador
+    {
+        vivo,
+        muerto,
+        Count,
     }
     private Objetivo objetivo;
     public float life;
@@ -64,14 +82,6 @@ public class Enemy : MonoBehaviour
     private float JumpPorcentage;
     private float DuckPorcentage;
     private bool ContraAtaque;
-    private bool ataqueCabeza;
-    private bool ataqueTorso;
-    private bool ataquePies;
-    private bool defensaCabeza;
-    private bool defensaTorso;
-    private bool defensaPies;
-    private bool agacharse;
-    private bool saltar;
     private bool SelectDefinitive = false;
     private float MinRangeRandom = 0;
     private float MaxRangeRandom = 100;
@@ -155,7 +165,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!STOP)
+        /*if (!STOP)
         {
             CheckDead();
             CheckLifeBar();
@@ -238,6 +248,7 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
+        */
     }
     public void ResetEnemy() {
         timeOut = false;
@@ -325,14 +336,14 @@ public class Enemy : MonoBehaviour
                         //Attack(Objetivo.Cabeza);
 
                         imagenAccion.sprite = SpriteAtaqueCabeza;
-                        ataqueCabeza = true;
-                        ataqueTorso = false;
-                        ataquePies = false;
-                        defensaCabeza = false;
-                        defensaTorso = false;
-                        defensaPies = false;
-                        saltar = false;
-                        agacharse = false;
+                        //ataqueCabeza = true;
+                        //ataqueTorso = false;
+                        //ataquePies = false;
+                        //defensaCabeza = false;
+                        //defensaTorso = false;
+                        //defensaPies = false;
+                        //saltar = false;
+                        //agacharse = false;
                     }
                     else {
                         CheckMovement();
@@ -346,14 +357,14 @@ public class Enemy : MonoBehaviour
                         //ATACAR AL TORSO
                         //Attack(Objetivo.Torso);
                         imagenAccion.sprite = SpriteAtaqueTorso;
-                        ataqueCabeza = false;
-                        ataqueTorso = true;
-                        ataquePies = false;
-                        defensaCabeza = false;
-                        defensaTorso = false;
-                        defensaPies = false;
-                        saltar = false;
-                        agacharse = false;
+                        //ataqueCabeza = false;
+                        //ataqueTorso = true;
+                        //ataquePies = false;
+                        //defensaCabeza = false;
+                        //defensaTorso = false;
+                        //defensaPies = false;
+                        //saltar = false;
+                        //agacharse = false;
                     }
                     else {
                         CheckMovement();
@@ -366,14 +377,14 @@ public class Enemy : MonoBehaviour
                         //ATACAR A LOS PIES
                         //Attack(Objetivo.Piernas);
                         imagenAccion.sprite = SpriteAtaquePies;
-                        ataqueCabeza = false;
-                        ataqueTorso = false;
-                        ataquePies = true;
-                        defensaCabeza = false;
-                        defensaTorso = false;
-                        defensaPies = false;
-                        saltar = false;
-                        agacharse = false;
+                        //ataqueCabeza = false;
+                        //ataqueTorso = false;
+                        //ataquePies = true;
+                        //defensaCabeza = false;
+                        //defensaTorso = false;
+                        //defensaPies = false;
+                        //saltar = false;
+                        //agacharse = false;
 
                     }
                     else {
@@ -398,14 +409,14 @@ public class Enemy : MonoBehaviour
                     //DEFENDER A LA CABEZA
                     imagenAccion.sprite = SpriteDefensaCabeza;
                     //Deffense(Objetivo.Cabeza);
-                    ataqueCabeza = false;
-                    ataqueTorso = false;
-                    ataquePies = false;
-                    defensaCabeza = true;
-                    defensaTorso = false;
-                    defensaPies = false;
-                    saltar = false;
-                    agacharse = false;
+                    //ataqueCabeza = false;
+                    //ataqueTorso = false;
+                    //ataquePies = false;
+                    //defensaCabeza = true;
+                    //defensaTorso = false;
+                    //defensaPies = false;
+                    //saltar = false;
+                    //agacharse = false;
                 }
                 else {
                     CheckMovement();
@@ -418,14 +429,14 @@ public class Enemy : MonoBehaviour
                     //DEFENDER AL TORSO
                     //Deffense(Objetivo.Torso);
                     imagenAccion.sprite = SpriteDefensaTorso;
-                    ataqueCabeza = false;
-                    ataqueTorso = false;
-                    ataquePies = false;
-                    defensaCabeza = false;
-                    defensaTorso = true;
-                    defensaPies = false;
-                    saltar = false;
-                    agacharse = false;
+                    //ataqueCabeza = false;
+                    //ataqueTorso = false;
+                    //ataquePies = false;
+                    //defensaCabeza = false;
+                    //defensaTorso = true;
+                    //defensaPies = false;
+                    //saltar = false;
+                    //agacharse = false;
                 }
                 else {
                     CheckMovement();
@@ -438,14 +449,14 @@ public class Enemy : MonoBehaviour
                     //DEFENDER A LOS PIES
                     //Deffense(Objetivo.Piernas);
                     imagenAccion.sprite = SpriteDefensaPies;
-                    ataqueCabeza = false;
-                    ataqueTorso = false;
-                    ataquePies = false;
-                    defensaCabeza = false;
-                    defensaTorso = false;
-                    defensaPies = true;
-                    saltar = false;
-                    agacharse = false;
+                    //ataqueCabeza = false;
+                    //ataqueTorso = false;
+                    //ataquePies = false;
+                    //defensaCabeza = false;
+                    //defensaTorso = false;
+                    //defensaPies = true;
+                    //saltar = false;
+                    //agacharse = false;
                 }
                 else {
                     CheckMovement();
@@ -467,14 +478,14 @@ public class Enemy : MonoBehaviour
                     if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
                     {
                         imagenAccion.sprite = SpriteSalto;
-                        ataqueCabeza = false;
-                        ataqueTorso = false;
-                        ataquePies = false;
-                        defensaCabeza = false;
-                        defensaTorso = false;
-                        defensaPies = false;
-                        saltar = true;
-                        agacharse = false;
+                        //ataqueCabeza = false;
+                        //ataqueTorso = false;
+                        //ataquePies = false;
+                        //defensaCabeza = false;
+                        //defensaTorso = false;
+                        //defensaPies = false;
+                        //saltar = true;
+                        //agacharse = false;
                         //Jump();
                     }
                     else {
@@ -486,14 +497,14 @@ public class Enemy : MonoBehaviour
                     if (Random.Range(MinRangeRandom, MaxRangeRandom) > MaxRangeRandom / 2 || SelectDefinitive)
                     {
                         imagenAccion.sprite = SpriteAgacharse;
-                        ataqueCabeza = false;
-                        ataqueTorso = false;
-                        ataquePies = false;
-                        defensaCabeza = false;
-                        defensaTorso = false;
-                        defensaPies = false;
-                        saltar = false;
-                        agacharse = true;
+                        //ataqueCabeza = false;
+                        //ataqueTorso = false;
+                        //ataquePies = false;
+                        //defensaCabeza = false;
+                        //defensaTorso = false;
+                        //defensaPies = false;
+                        //saltar = false;
+                        //agacharse = true;
                         //Duck();
                     }
                     else {
@@ -577,6 +588,7 @@ public class Enemy : MonoBehaviour
         BoxColliderChest.gameObject.SetActive(true);
         BoxColliderLegs.gameObject.SetActive(true);
     }
+    /*
     public void SetAtaqueCabeza(bool _ataqueCabeza)
     {
         ataqueCabeza = _ataqueCabeza;
@@ -626,4 +638,5 @@ public class Enemy : MonoBehaviour
     public bool GetSaltar() {
         return saltar;
     }
+    */
 }

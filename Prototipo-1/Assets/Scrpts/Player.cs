@@ -8,9 +8,29 @@ public class Player : MonoBehaviour
 {
     public enum Objetivo
     {
+        Cuerpo,
         Cabeza,
         Torso,
         Piernas,
+        Count,
+    }
+    public enum Movimiento
+    {
+        Nulo,
+        AtacarCabeza,
+        AtacarTorso,
+        AtacarPies,
+        DefenderCabeza,
+        DefenderTorsoPies,
+        Saltar,
+        Agacharse,
+        Count,
+    }
+    public enum EstadoJugador
+    {
+        vivo,
+        muerto,
+        Count,
     }
     //El player elije su movimiento.
     //El enemigo tira un random de movimiento.
@@ -18,7 +38,11 @@ public class Player : MonoBehaviour
     //que pueda elejir donde disparar(arriba, medio, abajo);
     // Start is called before the first frame update
     //Cada enemigo se especializa en alguna accion (Esquivar,Ataque o Defensa)
-
+    public GameObject generadorProyectiles;
+    private Objetivo _objetivo;
+    private Movimiento _movimiento;
+    private EstadoJugador _estado;
+    private Animator animator;
     public float life;
     public float maxLife;
     public Image ImageHP;
@@ -34,8 +58,7 @@ public class Player : MonoBehaviour
     public Sprite SpriteAtaqueTorso;
     public Sprite SpriteAtaquePies;
     public Sprite SpriteDefensaCabeza;
-    public Sprite SpriteDefensaTorso;
-    public Sprite SpriteDefensaPies;
+    public Sprite SpriteDefensaCuerpo;
     public Sprite SpriteSalto;
     public Sprite SpriteAgacharse;
     public Button Button_Attack;
@@ -47,235 +70,109 @@ public class Player : MonoBehaviour
     public Button Button_AttackChest; // Atacar al pecho
     public Button Button_AttackLegs; // Atacar a las piernas
     public Button Button_DefenseHead;
-    public Button Button_DefenseChest;
-    public Button Button_DefenseLegs;
+    public Button Button_DefenseBoody;
     public Button Button_Back;
     public BoxCollider2D ShildHead;
-    public BoxCollider2D ShildChest;
-    public BoxCollider2D ShildLegs;
+    public BoxCollider2D ShildBoody;
     public BoxCollider2D BoxColliderHead;
     public BoxCollider2D BoxColliderChest;
     public BoxCollider2D BoxColliderLegs;
     private bool ContraAtaque;
-    private Objetivo objetivo;
     public float timeButtonActivate;
     public float SpeedJump;
-    public Transform tranformAtaque;
+    //public Transform tranformAtaque;
     private GameManager gm;
     private Rigidbody2D rg2D;
-    private bool ataqueCabeza;
-    private bool ataqueTorso;
-    private bool ataquePies;
-    private bool defensaCabeza;
-    private bool defensaTorso;
-    private bool defensaPies;
-    private bool agacharse;
-    public bool AviableModoIA;
     public bool AviableDefenseHead;
-    private bool ModoIA;
-    private bool saltar;
     private float MinRangeRandom = 0;
-    private float MaxRangeRandomMovement = 3;
+    private float MaxRangeRandomMovement = 120;
     private float MaxRangeRandomTargertAttack = 3;
-    private float MaxRangeRandomTargetDefense = 3;
     private float MaxRangeRandomDodge = 2;
-    private bool SelectMovement = false;
-    [HideInInspector]
-    public bool STOP;
+    private bool IaModeActivate;
+    private const float MaxRangeRandomMovementOption1 = 40;
+    private const float MaxRangeRandomMovementOption2 = 40;
+    private Vector3 PosicionGeneracionBala = new Vector3(-3.5f, -3.2f, 0);
     void Start()
     {
-        STOP = false;
+        IaModeActivate = false;
+        _movimiento = Movimiento.Nulo;
+        _estado = EstadoJugador.vivo;
         mySelfSprite = GetComponent<SpriteRenderer>();
-        ModoIA = false;
         DisableShild();
         ContraAtaque = false;
         if (GameManager.instanceGameManager != null) {
             gm = GameManager.instanceGameManager;
         }
         rg2D = GetComponent<Rigidbody2D>();
-
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!STOP)
+        CheckDead();
+        CheckLifeBar();
+        if (gm.GetGameState() == GameManager.GameState.EnComienzo)
         {
-            CheckDead();
-            CheckLifeBar();
-            if (gm.timeSelectionAttack <= 0 && !SelectMovement)
+            if (_movimiento == Movimiento.Nulo && gm.timeSelectionAttack < 1)
             {
-                ModoIA = true;
-                SelectMovement = true;
-
-                //Debug.Log("ModoIA activado"); ENTRA CORRECTAMENTE
+                IaMode();
+                gm.SetRespuestaJugador1(_movimiento);
+                gm.timeSelectionAttack = 0;
             }
-            else if (gm.timeSelectionAttack <= 0 && SelectMovement)
+            else if (_movimiento != Movimiento.Nulo && gm.timeSelectionAttack < 1)
             {
-                if (ataqueCabeza)
-                {
-
+                gm.timeSelectionAttack = -1;
+            }
+            //Debug.Log((Movimiento)_movimiento);
+            gm.SetRespuestaJugador1(_movimiento);
+            
+        }
+    }
+    public void IaMode()
+    {
+        float option = Random.Range(MinRangeRandom, MaxRangeRandomMovement);
+        //Debug.Log(option);
+        if (option <= MaxRangeRandomMovementOption1)
+        {
+            imagenMovimiento.sprite = SpriteMovimientoAtaque;
+            option = Random.Range(MinRangeRandom, MaxRangeRandomTargertAttack);
+            switch ((int)option)
+            {
+                case 0:
                     imagenAccion.sprite = SpriteAtaqueCabeza;
-                    AttackHead();
-                }
-                else if (ataqueTorso)
-                {
+                    _movimiento = Movimiento.AtacarCabeza;
+                    break;
+                case 1:
                     imagenAccion.sprite = SpriteAtaqueTorso;
-                    AttackChest();
-                }
-                else if (ataquePies)
-                {
-                    //Debug.Log("HOLA SOY FORRO");
+                    _movimiento = Movimiento.AtacarTorso;
+                    break;
+                case 2:
                     imagenAccion.sprite = SpriteAtaquePies;
-                    AttackLegs();
-                }
-                else if (defensaCabeza)
-                {
-                    imagenAccion.sprite = SpriteDefensaCabeza;
-                    DeffenseHead();
-                }
-                else if (defensaTorso)
-                {
-                    imagenAccion.sprite = SpriteDefensaTorso;
-                    DeffenseChest();
-                }
-                else if (defensaPies)
-                {
-                    imagenAccion.sprite = SpriteDefensaPies;
-                    DeffenseLegs();
-                }
-                else if (saltar)
-                {
-                    imagenAccion.sprite = SpriteSalto;
-                    Jump();
-                }
-                else if (agacharse)
-                {
-                    imagenAccion.sprite = SpriteAgacharse;
-                    Duck();
-                }
-                ModoIA = false;
-                ataqueCabeza = false;
-                ataqueTorso = false;
-                ataquePies = false;
-                defensaCabeza = false;
-                defensaTorso = false;
-                defensaPies = false;
-                saltar = false;
-                agacharse = false;
+                    _movimiento = Movimiento.AtacarPies; 
+                    break;
             }
-
-            if (AviableModoIA)
+        }
+        else if (option > MaxRangeRandomMovementOption1 && option <= MaxRangeRandomMovementOption2)
+        {
+            imagenMovimiento.sprite = SpriteMovimientoDefensa;
+            imagenAccion.sprite = SpriteDefensaCuerpo;
+            _movimiento = Movimiento.DefenderTorsoPies;
+        }
+        else if (option > MaxRangeRandomMovementOption2)
+        {
+            imagenMovimiento.sprite = SpriteMovimientoEsquive;
+            option = Random.Range(MinRangeRandom, MaxRangeRandomDodge);
+            switch ((int)option)
             {
-
-                if (ModoIA && gm.timeSelectionAttack <= 0)
-                {
-                    //Debug.Log("ENTRE AL FONDO DEL MODO IA");
-                    ModoIA = false;
-                    switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomMovement))
-                    {
-                        case 0:
-                            imagenMovimiento.sprite = SpriteMovimientoAtaque;
-                            switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomTargertAttack))
-                            {
-                                case 0:
-                                    imagenAccion.sprite = SpriteAtaqueCabeza;
-                                    AttackHead();
-                                    break;
-                                case 1:
-                                    imagenAccion.sprite = SpriteAtaqueCabeza;
-                                    AttackHead();
-                                    break;
-                                case 2:
-                                    imagenAccion.sprite = SpriteAtaqueTorso;
-                                    AttackChest();
-                                    break;
-                                case 3:
-                                    imagenAccion.sprite = SpriteAtaquePies;
-                                    AttackLegs();
-                                    break;
-                            }
-                            break;
-                        case 1:
-                            imagenMovimiento.sprite = SpriteMovimientoAtaque;
-                            switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomTargertAttack))
-                            {
-                                case 0:
-                                    imagenAccion.sprite = SpriteAtaqueCabeza;
-                                    AttackHead();
-                                    break;
-                                case 1:
-                                    imagenAccion.sprite = SpriteAtaqueCabeza;
-                                    AttackHead();
-                                    break;
-                                case 2:
-                                    imagenAccion.sprite = SpriteAtaqueTorso;
-                                    AttackChest();
-                                    break;
-                                case 3:
-                                    imagenAccion.sprite = SpriteAtaquePies;
-                                    AttackLegs();
-                                    break;
-                            }
-                            break;
-                        case 2:
-                            imagenMovimiento.sprite = SpriteMovimientoDefensa;
-                            switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomTargetDefense))
-                            {
-                                case 0:
-                                    if (AviableDefenseHead)
-                                    {
-                                        imagenAccion.sprite = SpriteDefensaCabeza;
-                                        DeffenseHead();
-                                    }
-                                    else
-                                    {
-                                        imagenAccion.sprite = SpriteDefensaTorso;
-                                        DeffenseChest();
-                                    }
-                                    break;
-                                case 1:
-                                    if (AviableDefenseHead)
-                                    {
-                                        imagenAccion.sprite = SpriteDefensaCabeza;
-                                        DeffenseHead();
-                                    }
-                                    else
-                                    {
-                                        imagenAccion.sprite = SpriteDefensaPies;
-                                        DeffenseLegs();
-                                    }
-                                    break;
-                                case 2:
-                                    imagenAccion.sprite = SpriteDefensaTorso;
-                                    DeffenseChest();
-                                    break;
-                                case 3:
-                                    imagenAccion.sprite = SpriteDefensaPies;
-                                    DeffenseLegs();
-                                    break;
-                            }
-                            break;
-                        case 3:
-                            imagenMovimiento.sprite = SpriteMovimientoEsquive;
-                            switch ((int)Random.Range(MinRangeRandom, MaxRangeRandomDodge))
-                            {
-                                case 0:
-                                    imagenAccion.sprite = SpriteSalto;
-                                    Jump();
-                                    break;
-                                case 1:
-                                    imagenAccion.sprite = SpriteSalto;
-                                    Jump();
-                                    break;
-                                case 3:
-                                    imagenAccion.sprite = SpriteAgacharse;
-                                    Duck();
-                                    break;
-                            }
-                            break;
-                    }
-                }
+                case 0:
+                    imagenAccion.sprite = SpriteAgacharse;
+                    _movimiento = Movimiento.Agacharse;
+                    break;
+                case 1:
+                    imagenAccion.sprite = SpriteSalto;
+                    _movimiento = Movimiento.Saltar;
+                    break;
             }
         }
     }
@@ -288,26 +185,16 @@ public class Player : MonoBehaviour
             Button_AttackChest.gameObject.SetActive(false);
             Button_AttackLegs.gameObject.SetActive(false);
             Button_DefenseHead.gameObject.SetActive(false);
-            Button_DefenseChest.gameObject.SetActive(false);
-            Button_DefenseLegs.gameObject.SetActive(false);
+            Button_DefenseBoody.gameObject.SetActive(false);
             Button_Back.gameObject.SetActive(false);
             Button_Attack.gameObject.SetActive(true);
             Button_Deffense.gameObject.SetActive(true);
             Button_Dodge.gameObject.SetActive(true);
-            ShildChest.gameObject.SetActive(false);
             ShildHead.gameObject.SetActive(false);
-            ShildLegs.gameObject.SetActive(false);
-            ataqueCabeza = false;
-            ataqueTorso = false;
-            ataquePies = false;
-            defensaCabeza = false;
-            defensaTorso = false;
-            defensaPies = false;
-            saltar = false;
-            agacharse = false;
-            SelectMovement = false;
+            ShildBoody.gameObject.SetActive(false);
             imagenAccion.sprite = SpriteBlanco;
             imagenMovimiento.sprite = SpriteBlanco;
+            _movimiento = Movimiento.Nulo;
         }
 
     }
@@ -327,43 +214,33 @@ public class Player : MonoBehaviour
     }
     public void CheckDead() {
         if (life <= 0) {
+            _estado = EstadoJugador.muerto;
+            gm.SetEstadoJugador1(_estado);
             mySelfSprite.enabled = false;
-            STOP = true;
         }
     }
     public void AttackButton() {
-        imagenMovimiento.sprite = SpriteMovimientoAtaque;
-        Button_Deffense.gameObject.SetActive(false);
-        Button_Dodge.gameObject.SetActive(false);
-        
-        Button_Attack.gameObject.SetActive(false);
-        Button_AttackChest.gameObject.SetActive(true);
-        Button_AttackHead.gameObject.SetActive(true);
-        Button_AttackLegs.gameObject.SetActive(true);
-        Button_Back.gameObject.SetActive(true);
+        if (gm.GetGameState() == GameManager.GameState.EnComienzo)
+        {
+            imagenMovimiento.sprite = SpriteMovimientoAtaque;
+            Button_Deffense.gameObject.SetActive(false);
+            Button_Dodge.gameObject.SetActive(false);
+
+            Button_Attack.gameObject.SetActive(false);
+            Button_AttackChest.gameObject.SetActive(true);
+            Button_AttackHead.gameObject.SetActive(true);
+            Button_AttackLegs.gameObject.SetActive(true);
+            Button_Back.gameObject.SetActive(true);
+        }
 
     }
-    public void AttackHead() {
-        objetivo = Objetivo.Cabeza;
-        Attack(objetivo);
-    }
-    public void AttackChest() {
-        objetivo = Objetivo.Torso;
-        Attack(objetivo);
-    }
-    public void AttackLegs() {
-        objetivo = Objetivo.Piernas;
-        Attack(objetivo);
-    }
     public void DisableShild() {
-        ShildChest.gameObject.SetActive(false);
+        ShildBoody.gameObject.SetActive(false);
         ShildHead.gameObject.SetActive(false);
-        ShildLegs.gameObject.SetActive(false);
     }
     public void ActivateShild() {
-        ShildChest.gameObject.SetActive(true);
+        ShildBoody.gameObject.SetActive(true);
         ShildHead.gameObject.SetActive(true);
-        ShildLegs.gameObject.SetActive(true);
     }
     public void Attack(Objetivo ob)
     {
@@ -371,17 +248,14 @@ public class Player : MonoBehaviour
         {
             if(poolObjectAttack.count > 0)
             {
-                //GameObject go = CommonBall.GetObject();
-                //Ball pelota = go.GetComponent<Ball>();
-                //go.transform.position = generator.transform.position + generator.transform.right;
-                //go.transform.rotation = generator.transform.rotation;
-                //pelota.Shoot();
+               
                 DisableShild();
                 GameObject go = poolObjectAttack.GetObject();
                 Proyectil proyectil = go.GetComponent<Proyectil>();
-                go.transform.position = tranformAtaque.position;
+                go.transform.position = generadorProyectiles.transform.localPosition;
+                go.transform.position = go.transform.position + PosicionGeneracionBala;
                 proyectil.On();
-                switch (objetivo)
+                switch (ob)
                 {
                     case Objetivo.Cabeza:
                         proyectil.ShootForwardUp();
@@ -398,62 +272,55 @@ public class Player : MonoBehaviour
         }
     }
     public void DefenseButton() {
-        imagenMovimiento.sprite = SpriteMovimientoDefensa;
-        Button_Attack.gameObject.SetActive(false);
-        Button_Dodge.gameObject.SetActive(false);
-
-        Button_Deffense.gameObject.SetActive(false);
-        Button_DefenseChest.gameObject.SetActive(true);
-        if (AviableDefenseHead)
+        if (gm.GetGameState() == GameManager.GameState.EnComienzo)
         {
-            Button_DefenseHead.gameObject.SetActive(true);
+            imagenMovimiento.sprite = SpriteMovimientoDefensa;
+            Button_Deffense.gameObject.SetActive(false);
+            Button_Dodge.gameObject.SetActive(false);
+
+            Button_Attack.gameObject.SetActive(false);
+            Button_AttackChest.gameObject.SetActive(false);
+            Button_AttackHead.gameObject.SetActive(false);
+            Button_AttackLegs.gameObject.SetActive(false);
+            Button_Back.gameObject.SetActive(true);
+
+            if (AviableDefenseHead)
+            {
+                Button_DefenseHead.gameObject.SetActive(true);
+            }
+            Button_DefenseBoody.gameObject.SetActive(true);
+
         }
-        Button_DefenseLegs.gameObject.SetActive(true);
-        Button_Back.gameObject.SetActive(true);
         
     }
-    public void DeffenseHead()
-    {
-        objetivo = Objetivo.Cabeza;
-        Deffense(objetivo);
-    }
-    public void DeffenseChest()
-    {
-        objetivo = Objetivo.Torso;
-        Deffense(objetivo);
-    }
-    public void DeffenseLegs()
-    {
-        objetivo = Objetivo.Piernas;
-        Deffense(objetivo);
-    }
+    
     public void Deffense(Objetivo ob)
     {
-        if(Time.timeScale > 0)
+        if (Time.timeScale > 0)
         {
-            switch (objetivo) {
-                case Objetivo.Cabeza:
+            if (AviableDefenseHead)
+            {
+                if (ob == Objetivo.Cabeza)
+                {
                     ShildHead.gameObject.SetActive(true);
-                    ShildChest.gameObject.SetActive(false);
-                    ShildLegs.gameObject.SetActive(false);
-                    break;
-                case Objetivo.Torso:
-                    ShildHead.gameObject.SetActive(false);
-                    ShildChest.gameObject.SetActive(true);
-                    ShildLegs.gameObject.SetActive(false);
-                    break;
-                case Objetivo.Piernas:
-                    ShildHead.gameObject.SetActive(false);
-                    ShildChest.gameObject.SetActive(false);
-                    ShildLegs.gameObject.SetActive(true);
-                    break;
+                }
+            }
+            else
+            {
+                if (ob == Objetivo.Cuerpo)
+                {
+                    ShildBoody.gameObject.SetActive(true);
+                }
             }
         }
     }
     public void Listo()
     {
-        gm.timeSelectionAttack = 0;
-        gm.TextTimeOfAttack.text = "0";
+        if (gm.GetGameState() == GameManager.GameState.EnComienzo)
+        {
+            gm.timeSelectionAttack = 1;
+            //gm.TextTimeOfAttack.text = "0";
+        }
     }
     public void RestartPlayer()
     {
@@ -466,39 +333,44 @@ public class Player : MonoBehaviour
         Button_AttackChest.gameObject.SetActive(false);
         Button_AttackLegs.gameObject.SetActive(false);
         Button_DefenseHead.gameObject.SetActive(false);
-        Button_DefenseChest.gameObject.SetActive(false);
-        Button_DefenseLegs.gameObject.SetActive(false);
+        Button_DefenseBoody.gameObject.SetActive(false);
         Button_Back.gameObject.SetActive(false);
         Button_Attack.gameObject.SetActive(true);
         Button_Deffense.gameObject.SetActive(true);
         Button_Dodge.gameObject.SetActive(true);
-        ShildChest.gameObject.SetActive(false);
         ShildHead.gameObject.SetActive(false);
-        ShildLegs.gameObject.SetActive(false);
+        ShildBoody.gameObject.SetActive(false);
         BoxColliderHead.gameObject.SetActive(true);
         BoxColliderChest.gameObject.SetActive(true);
         BoxColliderLegs.gameObject.SetActive(true);
         ContraAtaque = false;
-        SelectMovement = false;
+        _movimiento = Movimiento.Nulo;
 
     }
     public void DodgeButton() {
-        imagenMovimiento.sprite = SpriteMovimientoEsquive;
-        Button_Attack.gameObject.SetActive(false);
-        Button_Deffense.gameObject.SetActive(false);
+        if (gm.GetGameState() == GameManager.GameState.EnComienzo)
+        {
+            imagenMovimiento.sprite = SpriteMovimientoEsquive;
+            Button_Attack.gameObject.SetActive(false);
+            Button_Deffense.gameObject.SetActive(false);
 
-        Button_Dodge.gameObject.SetActive(false);
-        Button_Jump.gameObject.SetActive(true);
-        Button_Duck.gameObject.SetActive(true);
-        Button_Back.gameObject.SetActive(true);
+            Button_Dodge.gameObject.SetActive(false);
+            Button_Jump.gameObject.SetActive(true);
+            Button_Duck.gameObject.SetActive(true);
+            Button_Back.gameObject.SetActive(true);
+        }
     }
     public void Jump()
     {
         Debug.Log("Animacion De Salto");
-        rg2D.AddForce(transform.up * SpeedJump, ForceMode2D.Impulse);
-        BoxColliderHead.gameObject.SetActive(true);
-        BoxColliderChest.gameObject.SetActive(true);
-        BoxColliderLegs.gameObject.SetActive(true);
+        animator.Play("Animacion Salto");
+        //rg2D.AddForce(transform.up * SpeedJump, ForceMode2D.Impulse);
+        //rg2D.velocity = new Vector2(0, 0);
+        //rg2D.velocity = new Vector2(rg2D.velocity.x, SpeedJump);
+
+        //BoxColliderHead.gameObject.SetActive(true);
+        //BoxColliderChest.gameObject.SetActive(true);
+        //BoxColliderLegs.gameObject.SetActive(true);
     }
     public void Duck()
     {
@@ -507,142 +379,73 @@ public class Player : MonoBehaviour
         BoxColliderChest.gameObject.SetActive(true);
         BoxColliderLegs.gameObject.SetActive(true);
     }
-    public void TargetHead()
-    {
-        objetivo = Objetivo.Cabeza;
-    }
-    public void TargetCheest() {
-        objetivo = Objetivo.Torso;
-    }
-    public void TargetLegs()
-    {
-        objetivo = Objetivo.Piernas;
-    }
 
-
-    public void SetSelectMovement(bool _selectMovement) {
-        SelectMovement = _selectMovement;
-    }
-    public void SetAtaqueCabeza(bool _ataqueCabeza)
+    public void EstadoMovimiento_AtacarCabeza()
     {
-        if (gm.timeSelectionAttack > 0)
+        if (gm.GetGameState() == GameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
         {
-            if (_ataqueCabeza)
-            {
-                imagenAccion.sprite = SpriteAtaqueCabeza;
-            }
-            ataqueCabeza = _ataqueCabeza;
+            imagenAccion.sprite = SpriteAtaqueCabeza;
+            _movimiento = Movimiento.AtacarCabeza;
         }
     }
-    public void SetAtaqueTorso(bool _ataqueTorso)
+    public void EstadoMovimiento_AtacarTorso()
     {
-        if (gm.timeSelectionAttack > 0)
+        if (gm.GetGameState() == GameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
         {
-            if (_ataqueTorso)
-            {
-                imagenAccion.sprite = SpriteAtaqueTorso;
-            }
-            ataqueTorso = _ataqueTorso;
+            imagenAccion.sprite = SpriteAtaqueTorso;
+            _movimiento = Movimiento.AtacarTorso;
         }
     }
-    public void SetAtaquePies(bool _ataquePies)
+    public void EstadoMovimiento_AtacarPies()
     {
-        if (gm.timeSelectionAttack > 0)
+        if (gm.GetGameState() == GameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
         {
-            if (_ataquePies)
-            {
-                imagenAccion.sprite = SpriteAtaquePies;
-            }
-            ataquePies = _ataquePies;
+            imagenAccion.sprite = SpriteAtaquePies;
+            _movimiento = Movimiento.AtacarPies;
         }
     }
-    public void SetDefensaCabeza(bool _defensaCabeza)
+    public void EstadoMovimiento_DefenderCabeza()
     {
-        if (gm.timeSelectionAttack > 0)
+        if (gm.GetGameState() == GameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
         {
-            if (_defensaCabeza)
-            {
-                imagenAccion.sprite = SpriteDefensaCabeza;
-            }
-            defensaCabeza = _defensaCabeza;
+            imagenAccion.sprite = SpriteDefensaCabeza;
+            _movimiento = Movimiento.DefenderCabeza;
         }
     }
-    public void SetDefensaTorso(bool _defensaTorso)
+    public void EstadoMovimiento_DefenderTorsoPies()
     {
-        if (gm.timeSelectionAttack > 0)
+        if (gm.GetGameState() == GameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
         {
-            if (_defensaTorso)
-            {
-                imagenAccion.sprite = SpriteDefensaTorso;
-            }
-            defensaTorso = _defensaTorso;
+            //HACER UN SPRITE PARA DEFENDER CUERPO
+            _movimiento = Movimiento.DefenderTorsoPies;
         }
     }
-    public void SetDefensaPies(bool _defensaPies)
+    public void EstadoMovimiento_Saltar()
     {
-        if (gm.timeSelectionAttack > 0)
+        if (gm.GetGameState() == GameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
         {
-            if (_defensaPies)
-            {
-                imagenAccion.sprite = SpriteDefensaPies;
-            }
-            defensaPies = _defensaPies;
+            imagenAccion.sprite = SpriteSalto;
+            _movimiento = Movimiento.Saltar;
         }
     }
-    public void SetSaltar(bool _saltar)
+    public void EstadoMovimiento_Agacharse()
     {
-        if (gm.timeSelectionAttack > 0)
+        if (gm.GetGameState() == GameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
         {
-            if (_saltar)
-            {
-                imagenAccion.sprite = SpriteSalto;
-                saltar = _saltar;
-            }
+            imagenAccion.sprite = SpriteAgacharse;
+            _movimiento = Movimiento.Agacharse;
         }
     }
-    public void SetAgacharse(bool _agacharse)
+    public void EstadoJugador_vivo()
     {
-        if (gm.timeSelectionAttack > 0)
-        {
-            if (_agacharse)
-            {
-                imagenAccion.sprite = SpriteAgacharse;
-                agacharse = _agacharse;
-            }
-        }
+        _estado = EstadoJugador.vivo;
     }
-    public bool GetAtaqueCabeza()
+    public void EstadoJugador_muerto()
     {
-        return ataqueCabeza;
-    }
-    public bool GetAtaqueTorso()
-    {
-        return ataqueTorso;
-    }
-    public bool GetAtaquePies()
-    {
-        return ataquePies;
-    }
-    public bool GetDefensaCabeza()
-    {
-        return defensaCabeza;
-    }
-    public bool GetDefensaTorso()
-    {
-        return defensaTorso;
-    }
-    public bool GetDefensaPies()
-    {
-        return defensaPies;
-    }
-    public bool GetAgacharse()
-    {
-        return agacharse;
-    }
-    public bool GetSaltar()
-    {
-        return saltar;
+        _estado = EstadoJugador.muerto;
     }
     
+
+
 
 }
