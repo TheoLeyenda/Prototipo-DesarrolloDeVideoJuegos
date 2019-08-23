@@ -364,9 +364,6 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Animacion De Salto");
         animator.Play("Animacion SaltoJugador");
-        
-
-
     }
     public void Duck()
     {
@@ -375,7 +372,35 @@ public class Player : MonoBehaviour
         BoxColliderChest.enabled = true;
         BoxColliderLegs.enabled = true;
     }
+    public void CounterAttack()
+    {
+        ShildHead.enabled = false;
+        //ShildChest.enabled = false;
+        //ShildLegs.enabled = false;
+        ShildBoody.enabled = false;
+        imagenMovimiento.sprite = SpriteMovimientoAtaque;
+        if (poolObjectAttack.count > 0)
+        {
 
+            //Debug.Log("Objetivo: " + objetivoElejir);
+            switch (_movimiento)
+            {
+                case Movimiento.Agacharse:
+                    //ATACAR A LA CABEZA
+                    //Attack(Objetivo.Cabeza);
+                    imagenAccion.sprite = SpriteAtaqueCabeza;
+                    Attack(Objetivo.Cabeza);
+                    break;
+                case Movimiento.Saltar:
+                    //ATACAR A LOS PIES
+                    //Attack(Objetivo.Piernas);
+                    imagenAccion.sprite = SpriteAtaquePies;
+                    Attack(Objetivo.Piernas);
+
+                    break;
+            }
+        }
+    }
     public void EstadoMovimiento_AtacarCabeza()
     {
         if (gm.GetGameState() == GameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)

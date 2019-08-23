@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     private Enemy.Movimiento movimientoEnemigo;
     // HACER LO MISMO PERO PARA EL ENEMIGO 
 
+    private bool EventoEspecial;
     private EstadoResultado estadoResultado; 
     public Text TextTimeOfAttack;
     public Text TextTitulo;
@@ -86,6 +87,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        EventoEspecial = false;
         auxTimerNextRond = timerNextRond;
         auxTimeSelectionAttack = timeSelectionAttack;
         auxTimerStart = timerStart;
@@ -291,63 +293,126 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
-            switch (movimientoJugador1)
+            if (movimientoEnemigo == Enemy.Movimiento.AtacarCabeza && movimientoJugador1 == Player.Movimiento.AtacarCabeza)
             {
-                case Player.Movimiento.AtacarCabeza:
-                    player1.Attack(Player.Objetivo.Cabeza);
-                    break;
-                case Player.Movimiento.AtacarTorso:
-                    player1.Attack(Player.Objetivo.Torso);
-                    break;
-                case Player.Movimiento.AtacarPies:
-                    player1.Attack(Player.Objetivo.Piernas);
-                    break;
-                case Player.Movimiento.DefenderCabeza:
-                    player1.Deffense(Player.Objetivo.Cabeza);
-                    break;
-                case Player.Movimiento.DefenderTorsoPies:
-                    player1.Deffense(Player.Objetivo.Cuerpo);
-                    break;
-                case Player.Movimiento.Saltar:
-                    player1.Jump();
-                    break;
-                case Player.Movimiento.Agacharse:
-                    player1.Duck();
-                    break;
+                EventPushButton();
+                EventoEspecial = true;
             }
-            for (int i = 0; i < enemiesActivate.Count; i++)
+            else if (movimientoEnemigo == Enemy.Movimiento.AtacarTorso && movimientoJugador1 == Player.Movimiento.AtacarTorso)
             {
-                if (enemiesActivate != null)
+                EventPushButton();
+                EventoEspecial = true;
+            }
+            else if (movimientoEnemigo == Enemy.Movimiento.AtacarPies && movimientoJugador1 == Player.Movimiento.AtacarPies)
+            {
+                EventPushButton();
+                EventoEspecial = true;
+            }
+            else if (movimientoEnemigo == Enemy.Movimiento.Saltar && movimientoJugador1 == Player.Movimiento.AtacarPies)
+            {
+
+                for (int i = 0; i < enemiesActivate.Count; i++)
                 {
-                    switch (movimientoEnemigo)
+                    if (enemiesActivate[i].typeEnemy == Enemy.Categoria.Balanceado)
                     {
-                        case Enemy.Movimiento.AtacarCabeza:
-                            enemiesActivate[i].Attack(Enemy.Objetivo.Cabeza);
-                            break;
-                        case Enemy.Movimiento.AtacarTorso:
-                            enemiesActivate[i].Attack(Enemy.Objetivo.Torso);
-                            break;
-                        case Enemy.Movimiento.AtacarPies:
-                            enemiesActivate[i].Attack(Enemy.Objetivo.Piernas);
-                            break;
-                        case Enemy.Movimiento.DefenderCabeza:
-                            enemiesActivate[i].Deffense(Enemy.Objetivo.Cabeza);
-                            break;
-                        case Enemy.Movimiento.DefenderTorso:
-                            enemiesActivate[i].Deffense(Enemy.Objetivo.Torso);
-                            break;
-                        case Enemy.Movimiento.DefenderPies:
-                            enemiesActivate[i].Deffense(Enemy.Objetivo.Piernas);
-                            break;
-                        case Enemy.Movimiento.DefenderTorsoPies:
-                            enemiesActivate[i].Deffense(Enemy.Objetivo.Cuerpo);
-                            break;
-                        case Enemy.Movimiento.Saltar:
-                            enemiesActivate[i].Jump();
-                            break;
-                        case Enemy.Movimiento.Agacharse:
-                            enemiesActivate[i].Duck();
-                            break;
+                        enemiesActivate[i].CounterAttack();
+                    }
+                }
+                EventoEspecial = true;
+            }
+            else if (movimientoEnemigo == Enemy.Movimiento.Agacharse && movimientoJugador1 == Player.Movimiento.AtacarCabeza)
+            {
+                for (int i = 0; i < enemiesActivate.Count; i++)
+                {
+                    if (enemiesActivate[i].typeEnemy == Enemy.Categoria.Balanceado)
+                    {
+                        enemiesActivate[i].CounterAttack();
+                    }
+                }
+                EventoEspecial = true;
+            }
+            else if (movimientoEnemigo == Enemy.Movimiento.DefenderTorsoPies &&
+                (movimientoJugador1 == Player.Movimiento.AtacarPies || movimientoJugador1 == Player.Movimiento.AtacarTorso))
+            {
+                for (int i = 0; i < enemiesActivate.Count; i++)
+                {
+                    if (enemiesActivate[i].typeEnemy == Enemy.Categoria.Defensivo)
+                    {
+                        enemiesActivate[i].CounterAttack();
+                    }
+                }
+                EventoEspecial = true;
+            }
+            else if (movimientoJugador1 == Player.Movimiento.Agacharse && movimientoEnemigo == Enemy.Movimiento.AtacarCabeza)
+            {
+                player1.CounterAttack();
+                EventoEspecial = true;
+            }
+            else if (movimientoJugador1 == Player.Movimiento.Saltar && movimientoEnemigo == Enemy.Movimiento.AtacarPies)
+            {
+                player1.CounterAttack();
+                EventoEspecial = true;
+            }
+            else if (!EventoEspecial)
+            {
+                switch (movimientoJugador1)
+                {
+                    case Player.Movimiento.AtacarCabeza:
+                        player1.Attack(Player.Objetivo.Cabeza);
+                        break;
+                    case Player.Movimiento.AtacarTorso:
+                        player1.Attack(Player.Objetivo.Torso);
+                        break;
+                    case Player.Movimiento.AtacarPies:
+                        player1.Attack(Player.Objetivo.Piernas);
+                        break;
+                    case Player.Movimiento.DefenderCabeza:
+                        player1.Deffense(Player.Objetivo.Cabeza);
+                        break;
+                    case Player.Movimiento.DefenderTorsoPies:
+                        player1.Deffense(Player.Objetivo.Cuerpo);
+                        break;
+                    case Player.Movimiento.Saltar:
+                        player1.Jump();
+                        break;
+                    case Player.Movimiento.Agacharse:
+                        player1.Duck();
+                        break;
+                }
+                for (int i = 0; i < enemiesActivate.Count; i++)
+                {
+                    if (enemiesActivate != null)
+                    {
+                        switch (movimientoEnemigo)
+                        {
+                            case Enemy.Movimiento.AtacarCabeza:
+                                enemiesActivate[i].Attack(Enemy.Objetivo.Cabeza);
+                                break;
+                            case Enemy.Movimiento.AtacarTorso:
+                                enemiesActivate[i].Attack(Enemy.Objetivo.Torso);
+                                break;
+                            case Enemy.Movimiento.AtacarPies:
+                                enemiesActivate[i].Attack(Enemy.Objetivo.Piernas);
+                                break;
+                            case Enemy.Movimiento.DefenderCabeza:
+                                enemiesActivate[i].Deffense(Enemy.Objetivo.Cabeza);
+                                break;
+                            case Enemy.Movimiento.DefenderTorso:
+                                enemiesActivate[i].Deffense(Enemy.Objetivo.Torso);
+                                break;
+                            case Enemy.Movimiento.DefenderPies:
+                                enemiesActivate[i].Deffense(Enemy.Objetivo.Piernas);
+                                break;
+                            case Enemy.Movimiento.DefenderTorsoPies:
+                                enemiesActivate[i].Deffense(Enemy.Objetivo.Cuerpo);
+                                break;
+                            case Enemy.Movimiento.Saltar:
+                                enemiesActivate[i].Jump();
+                                break;
+                            case Enemy.Movimiento.Agacharse:
+                                enemiesActivate[i].Duck();
+                                break;
+                        }
                     }
                 }
             }
@@ -359,6 +424,11 @@ public class GameManager : MonoBehaviour
         {
              
         }
+        EventoEspecial = false;
+    }
+    public void EventPushButton()
+    {
+        Debug.Log("Event Push Button");
     }
     public void SetRespuestaJugador1(Player.Movimiento movimiento)
     {

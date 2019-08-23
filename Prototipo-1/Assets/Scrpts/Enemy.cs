@@ -212,37 +212,31 @@ public class Enemy : MonoBehaviour
     }
     public void CounterAttack()
     {
-        ShildChest.gameObject.SetActive(false);
-        ShildHead.gameObject.SetActive(false);
-        ShildLegs.gameObject.SetActive(false);
+        
+        ShildHead.enabled = false;
+        ShildChest.enabled = false;
+        ShildLegs.enabled = false;
+        ShildBoody.enabled = false;
         imagenMovimiento.sprite = SpriteMovimientoAtaque;
         if (poolObjectAttack.count > 0)
         {
-            float objetivoElejir = Random.Range(MinRangeRandom, MaxRangeRandom);
+
             //Debug.Log("Objetivo: " + objetivoElejir);
-            if (objetivoElejir <= AttackHeadPorcentage)
+            switch (_movimiento)
             {
-                //ATACAR A LA CABEZA
-                //Attack(Objetivo.Cabeza);
-                imagenAccion.sprite = SpriteAtaqueCabeza;
-                Attack(Objetivo.Cabeza);
-            }
-            else if (objetivoElejir > AttackHeadPorcentage && objetivoElejir <= AttackHeadPorcentage + AttackChestPorcentage)
-            {
-
-                //ATACAR AL TORSO
-                //Attack(Objetivo.Torso);
-                imagenAccion.sprite = SpriteAtaqueTorso;
-                Attack(Objetivo.Torso);
-            }
-
-            else if (objetivoElejir > AttackHeadPorcentage + AttackChestPorcentage)
-            {
+                case Movimiento.Agacharse:
+                    //ATACAR A LA CABEZA
+                    //Attack(Objetivo.Cabeza);
+                    imagenAccion.sprite = SpriteAtaqueCabeza;
+                    Attack(Objetivo.Cabeza);
+                    break;
+                case Movimiento.Saltar:
                     //ATACAR A LOS PIES
                     //Attack(Objetivo.Piernas);
                     imagenAccion.sprite = SpriteAtaquePies;
                     Attack(Objetivo.Piernas);
-      
+
+                    break;
             }
         }
     }
