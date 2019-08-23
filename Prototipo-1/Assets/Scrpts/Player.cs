@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
     private Animator animator;
     public float life;
     public float maxLife;
-    public Image ImageHP;
+    public Scrollbar ImageHP;
     private SpriteRenderer mySelfSprite;
     public Pool poolObjectAttack;
     public Sprite SpriteBlanco;
@@ -202,7 +202,7 @@ public class Player : MonoBehaviour
     {
         if (life <= maxLife)
         {
-            ImageHP.fillAmount = life / maxLife;
+            ImageHP.size = life / maxLife;
         }
         else if (life > maxLife)
         {

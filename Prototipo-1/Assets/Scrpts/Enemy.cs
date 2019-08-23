@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
     private EstadoEnemigo _estadoEnemigo;
     public float life;
     public float maxLife;
-    public Image ImageHP;
+    public Scrollbar ImageHP;
     public Pool poolObjectAttack;
     public float SpeedJump;
     private int movimientoElejido;
@@ -193,7 +193,7 @@ public class Enemy : MonoBehaviour
     {
         if (life <= maxLife)
         {
-            ImageHP.fillAmount = life / maxLife;
+            ImageHP.size = life / maxLife;
         }
         else if (life > maxLife)
         {
