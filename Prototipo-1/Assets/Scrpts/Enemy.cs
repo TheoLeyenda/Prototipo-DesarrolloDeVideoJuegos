@@ -94,6 +94,7 @@ public class Enemy : MonoBehaviour
     private float MinRangeRandom = 0;
     private float MaxRangeRandom = 100;
     private bool timeOut;
+    private float opcionesContraAtaque = 3;
     private Vector3 PosicionGeneracionBalaRelativa = new Vector3(2f, -3.2f, 0); 
     // Start is called before the first frame update
     public Categoria typeEnemy;
@@ -186,6 +187,7 @@ public class Enemy : MonoBehaviour
         BoxColliderChest.enabled = true;
         BoxColliderHead.enabled = true;
         BoxColliderLegs.enabled = true;
+        DisableShild();
     }
     public void CheckLifeBar()
     {
@@ -212,30 +214,46 @@ public class Enemy : MonoBehaviour
     }
     public void CounterAttack()
     {
-        
-        ShildHead.enabled = false;
-        ShildChest.enabled = false;
-        ShildLegs.enabled = false;
-        ShildBoody.enabled = false;
-        imagenMovimiento.sprite = SpriteMovimientoAtaque;
-        if (poolObjectAttack.count > 0)
-        {
 
-            //Debug.Log("Objetivo: " + objetivoElejir);
-            switch (_movimiento)
+        DisableShild();
+        imagenMovimiento.sprite = SpriteMovimientoAtaque;
+        if (typeEnemy == Categoria.Balanceado)
+        {
+            if (poolObjectAttack.count > 0)
             {
-                case Movimiento.Agacharse:
-                    //ATACAR A LA CABEZA
-                    //Attack(Objetivo.Cabeza);
-                    imagenAccion.sprite = SpriteAtaqueCabeza;
+
+                //Debug.Log("Objetivo: " + objetivoElejir);
+                switch (_movimiento)
+                {
+                    case Movimiento.Agacharse:
+                        //ATACAR A LA CABEZA
+                        //Attack(Objetivo.Cabeza);
+                        imagenAccion.sprite = SpriteAtaqueCabeza;
+                        Attack(Objetivo.Cabeza);
+                        break;
+                    case Movimiento.Saltar:
+                        //ATACAR A LOS PIES
+                        //Attack(Objetivo.Piernas);
+                        imagenAccion.sprite = SpriteAtaquePies;
+                        Attack(Objetivo.Piernas);
+
+                        break;
+                }
+            }
+        }
+        else if (typeEnemy == Categoria.Defensivo)
+        {
+            float option = Random.Range(MinRangeRandom, opcionesContraAtaque);
+            switch ((int)option)
+            {
+                case 0:
                     Attack(Objetivo.Cabeza);
                     break;
-                case Movimiento.Saltar:
-                    //ATACAR A LOS PIES
-                    //Attack(Objetivo.Piernas);
-                    imagenAccion.sprite = SpriteAtaquePies;
+                case 1:
+                    Attack(Objetivo.Torso);
+                    break;
+                case 2:
                     Attack(Objetivo.Piernas);
-
                     break;
             }
         }

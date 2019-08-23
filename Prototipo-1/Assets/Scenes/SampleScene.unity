@@ -397,6 +397,8 @@ GameObject:
   m_Component:
   - component: {fileID: 153172209}
   - component: {fileID: 153172212}
+  - component: {fileID: 153172210}
+  - component: {fileID: 153172211}
   m_Layer: 0
   m_Name: EscudoCuerpo
   m_TagString: Escudo
@@ -418,6 +420,43 @@ Transform:
   m_Father: {fileID: 1873146607}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &153172210
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153172208}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &153172211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153172208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f98125be61ce943bf649d1466af77e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 1873146609}
+  Player: {fileID: 0}
+  InEnemy: 1
+  InPlayer: 0
 --- !u!61 &153172212
 BoxCollider2D:
   m_ObjectHideFlags: 0

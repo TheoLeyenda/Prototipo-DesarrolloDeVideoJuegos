@@ -295,61 +295,67 @@ public class GameManager : MonoBehaviour
             }
             if (movimientoEnemigo == Enemy.Movimiento.AtacarCabeza && movimientoJugador1 == Player.Movimiento.AtacarCabeza)
             {
+                //EVENTO CUANDO EL ENEMIGO Y EL JUGADOR ATACAN AL MISMO OBJETIVO
                 EventPushButton();
                 EventoEspecial = true;
             }
             else if (movimientoEnemigo == Enemy.Movimiento.AtacarTorso && movimientoJugador1 == Player.Movimiento.AtacarTorso)
             {
+                //EVENTO CUANDO EL ENEMIGO Y EL JUGADOR ATACAN AL MISMO OBJETIVO
                 EventPushButton();
                 EventoEspecial = true;
             }
             else if (movimientoEnemigo == Enemy.Movimiento.AtacarPies && movimientoJugador1 == Player.Movimiento.AtacarPies)
             {
+                //EVENTO CUANDO EL ENEMIGO Y EL JUGADOR ATACAN AL MISMO OBJETIVO
                 EventPushButton();
                 EventoEspecial = true;
             }
             else if (movimientoEnemigo == Enemy.Movimiento.Saltar && movimientoJugador1 == Player.Movimiento.AtacarPies)
             {
-
+                player1.Attack(Player.Objetivo.Piernas);
                 for (int i = 0; i < enemiesActivate.Count; i++)
                 {
                     if (enemiesActivate[i].typeEnemy == Enemy.Categoria.Balanceado)
                     {
+                        enemiesActivate[i].Jump();
                         enemiesActivate[i].CounterAttack();
+                        EventoEspecial = true;
                     }
                 }
-                EventoEspecial = true;
+                
             }
             else if (movimientoEnemigo == Enemy.Movimiento.Agacharse && movimientoJugador1 == Player.Movimiento.AtacarCabeza)
             {
+                player1.Attack(Player.Objetivo.Cabeza);
                 for (int i = 0; i < enemiesActivate.Count; i++)
                 {
                     if (enemiesActivate[i].typeEnemy == Enemy.Categoria.Balanceado)
                     {
+                        enemiesActivate[i].Duck();
                         enemiesActivate[i].CounterAttack();
+                        EventoEspecial = true;
                     }
                 }
-                EventoEspecial = true;
-            }
-            else if (movimientoEnemigo == Enemy.Movimiento.DefenderTorsoPies &&
-                (movimientoJugador1 == Player.Movimiento.AtacarPies || movimientoJugador1 == Player.Movimiento.AtacarTorso))
-            {
-                for (int i = 0; i < enemiesActivate.Count; i++)
-                {
-                    if (enemiesActivate[i].typeEnemy == Enemy.Categoria.Defensivo)
-                    {
-                        enemiesActivate[i].CounterAttack();
-                    }
-                }
-                EventoEspecial = true;
+                
             }
             else if (movimientoJugador1 == Player.Movimiento.Agacharse && movimientoEnemigo == Enemy.Movimiento.AtacarCabeza)
             {
+                for (int i = 0; i < enemiesActivate.Count; i++)
+                {
+                    enemiesActivate[i].Attack(Enemy.Objetivo.Cabeza);
+                }
+                player1.Duck();
                 player1.CounterAttack();
                 EventoEspecial = true;
             }
             else if (movimientoJugador1 == Player.Movimiento.Saltar && movimientoEnemigo == Enemy.Movimiento.AtacarPies)
             {
+                for (int i = 0; i < enemiesActivate.Count; i++)
+                {
+                    enemiesActivate[i].Attack(Enemy.Objetivo.Piernas);
+                }
+                player1.Jump();
                 player1.CounterAttack();
                 EventoEspecial = true;
             }
