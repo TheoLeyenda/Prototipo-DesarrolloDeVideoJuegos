@@ -364,9 +364,7 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Animacion De Salto");
         animator.Play("Animacion SaltoJugador");
-        BoxColliderHead.enabled = true;
-        BoxColliderChest.enabled = true;
-        BoxColliderLegs.enabled = false;
+        
 
 
     }

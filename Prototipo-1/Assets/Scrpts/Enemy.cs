@@ -433,9 +433,7 @@ public class Enemy : MonoBehaviour
         Debug.Log("Enemigo: Animacion De Salto");
         animator.Play("Animacion SaltoEnemigo");
         rg2D.AddForce(transform.up * SpeedJump, ForceMode2D.Impulse);
-        BoxColliderHead.enabled = true;
-        BoxColliderChest.enabled =true;
-        BoxColliderLegs.enabled = false;
+        
     }
     public void Duck()
     {
