@@ -7,12 +7,18 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public enum Categoria
+    public enum TiposDeEnemigo
     {
+        Jefe,
         Balanceado,
         Agresivo,
         Defensivo,
         Count
+    }
+    public enum TiposDeJefe
+    {
+        ProfeAnatomia,
+        Count,
     }
     public enum Objetivo
     {
@@ -42,6 +48,9 @@ public class Enemy : MonoBehaviour
         Count,
     }
     private Animator animator;
+    public bool InPool;
+    public Pool EnemyPool;
+    private PoolObject poolObjectEnemy;
     public bool DefensaVariada;
     private Objetivo _objetivo;
     private Movimiento _movimiento;
@@ -93,13 +102,16 @@ public class Enemy : MonoBehaviour
     private bool SelectDefinitive = false;
     private float MinRangeRandom = 0;
     private float MaxRangeRandom = 100;
+    private float TypeRandom = 3;
     private bool timeOut;
     private float opcionesContraAtaque = 3;
     private Vector3 PosicionGeneracionBalaRelativa = new Vector3(2f, -3.2f, 0); 
     // Start is called before the first frame update
-    public Categoria typeEnemy;
+    public TiposDeEnemigo typeEnemy;
+    private TiposDeJefe typeBoss;
     void Start()
     {
+        poolObjectEnemy = GetComponent<PoolObject>();
         animator = GetComponent<Animator>();
         timeOut = false;
         SelectDefinitive = false;
@@ -113,7 +125,7 @@ public class Enemy : MonoBehaviour
         switch (typeEnemy)
         {
             //PANEL DE CONFIGURACION DE PORCENTAJES
-            case Categoria.Balanceado:
+            case TiposDeEnemigo.Balanceado:
                 //----Movimiento----//
                 AttackPorcentage = 45;
                 DeffensePorcentage = 45;
@@ -130,7 +142,7 @@ public class Enemy : MonoBehaviour
                 JumpPorcentage = 50;
                 DuckPorcentage = 50;
                 break;
-            case Categoria.Agresivo:
+            case TiposDeEnemigo.Agresivo:
                 //----Movimiento----//
                 AttackPorcentage = 80;
                 DeffensePorcentage = 20;
@@ -147,7 +159,7 @@ public class Enemy : MonoBehaviour
                 JumpPorcentage = 0;
                 DuckPorcentage = 0;
                 break;
-            case Categoria.Defensivo:
+            case TiposDeEnemigo.Defensivo:
                 //---Movimiento---//
                 AttackPorcentage = 40;
                 DeffensePorcentage = 60;
@@ -178,6 +190,35 @@ public class Enemy : MonoBehaviour
             gm.SetMovimientoEnemigo(_movimiento);
         }
     }
+    public void OnEnemySurvival()
+    {
+        poolObjectEnemy = GetComponent<PoolObject>();
+        float opcion = Random.Range(MinRangeRandom, TypeRandom);
+        if ((gm.countEnemysDead % gm.RondasPorJefe) != 0)
+        {
+            switch ((int)opcion)
+            {
+                case 0:
+                    //Cambiar el sprite del enemigo Balanceado.
+                    typeEnemy = TiposDeEnemigo.Balanceado;
+                    break;
+                case 1:
+                    //Cambiar el sprite del enemigo Agresivo.
+                    typeEnemy = TiposDeEnemigo.Agresivo;
+                    break;
+                case 2:
+                    //Cambiar el sprite del enemigo Defensivo.
+                    typeEnemy = TiposDeEnemigo.Defensivo;
+                    break;
+            }
+        }
+        else if ((gm.countEnemysDead % gm.RondasPorJefe) == 0)
+        {
+            //Cambiar el sprite del jefe correspondiente
+            typeEnemy = TiposDeEnemigo.Jefe;
+            typeBoss = TiposDeJefe.ProfeAnatomia;
+        }
+    }
     public void IA()
     {
         CheckMovement();
@@ -206,10 +247,18 @@ public class Enemy : MonoBehaviour
     }
     public void CheckDead()
     {
-        if (life <= 0)
+        gm.countEnemysDead++;
+        if (!InPool)
         {
-            // SI SU VIDA ES IGUAL A 0 POS MUERE DESACTIVADO
-            gameObject.SetActive(false);
+            if (life <= 0)
+            {
+                // SI SU VIDA ES IGUAL A 0 POS MUERE DESACTIVADO
+                gameObject.SetActive(false);
+            }
+        }
+        else if (InPool)
+        {
+            poolObjectEnemy.Recycle();
         }
     }
     public void CounterAttack()
@@ -217,7 +266,7 @@ public class Enemy : MonoBehaviour
 
         DisableShild();
         imagenMovimiento.sprite = SpriteMovimientoAtaque;
-        if (typeEnemy == Categoria.Balanceado)
+        if (typeEnemy == TiposDeEnemigo.Balanceado)
         {
             if (poolObjectAttack.count > 0)
             {
@@ -241,7 +290,7 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-        else if (typeEnemy == Categoria.Defensivo)
+        else if (typeEnemy == TiposDeEnemigo.Defensivo)
         {
             float option = Random.Range(MinRangeRandom, opcionesContraAtaque);
             switch ((int)option)
@@ -347,7 +396,7 @@ public class Enemy : MonoBehaviour
             float objetivoElejir = Random.Range(MinRangeRandom, MaxRangeRandom);
             objetivoElejir = Random.Range(MinRangeRandom, MaxRangeRandom);
             //Debug.Log("Objetivo: " + objetivoElejir);
-            if (typeEnemy == Categoria.Balanceado)
+            if (typeEnemy == TiposDeEnemigo.Balanceado)
             {
                 //SI ESQUIVA CONTRATACA (EL BALANCEADO ES EL UNICO QUE PUEDE ESQUIVAR)
                 if (objetivoElejir <= JumpPorcentage)

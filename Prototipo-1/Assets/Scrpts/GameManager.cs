@@ -7,6 +7,12 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public enum ModosDeJuego
+    {
+        Supervivencia,
+        Historia,
+        Count
+    }
     public enum GameState
     {
         Idle,
@@ -31,6 +37,10 @@ public class GameManager : MonoBehaviour
         Perdiste,
         Count,
     }
+    [HideInInspector]
+    public int countEnemysDead;
+    public int RondasPorJefe;
+    public ModosDeJuego modoDeJuego;
     private FSM fsm;
     private Player.Movimiento movimientoJugador1;
     private Player.EstadoJugador estadoJugador1;
@@ -40,7 +50,7 @@ public class GameManager : MonoBehaviour
     // HACER LO MISMO PERO PARA EL ENEMIGO 
 
     private bool EventoEspecial;
-    private EstadoResultado estadoResultado; 
+    private EstadoResultado estadoResultado;
     public Text TextTimeOfAttack;
     public Text TextTitulo;
     public Text START;
@@ -68,7 +78,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         estadoResultado = EstadoResultado.Nulo;
-        fsm = new FSM((int)GameState.Count,(int)GameEvents.Count,(int)GameState.Idle);
+        fsm = new FSM((int)GameState.Count, (int)GameEvents.Count, (int)GameState.Idle);
         fsm.SetRelations((int)GameState.Idle, (int)GameState.EnComienzo, (int)GameEvents.Comenzar);
         fsm.SetRelations((int)GameState.EnComienzo, (int)GameState.RespuestaJugadores, (int)GameEvents.JugadasElejidas);
         fsm.SetRelations((int)GameState.RespuestaJugadores, (int)GameState.Resultado, (int)GameEvents.TiempoFuera);
@@ -87,12 +97,13 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        countEnemysDead = 0;
         EventoEspecial = false;
         auxTimerNextRond = timerNextRond;
         auxTimeSelectionAttack = timeSelectionAttack;
         auxTimerStart = timerStart;
         enemiesActivate = new List<Enemy>();
-        
+
         /*for (int i = 0; i < SceneManager.GetActiveScene().GetRootGameObjects().Length; i++) {
             if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Enemy")
             {
@@ -131,7 +142,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }*/
-        
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -154,7 +165,13 @@ public class GameManager : MonoBehaviour
                 Resultado();
                 break;
         }
-
+        switch (modoDeJuego)
+        {
+            case ModosDeJuego.Historia:
+                break;
+            case ModosDeJuego.Supervivencia:
+                break;
+        }
     }
     public void Idle()
     {
@@ -184,7 +201,7 @@ public class GameManager : MonoBehaviour
             //RESETEO EL GAME MANAGER
             estadoResultado = EstadoResultado.Nulo;
             fsm.SendEvent((int)GameEvents.Quieto);
-            
+
         }
 
     }
@@ -204,10 +221,10 @@ public class GameManager : MonoBehaviour
     public void Resultado()
     {
         // POR AHORA SOLAMENTE VOLVEMOS AL COMIENZO
-        
+
         CheckTimerNextRound();
     }
-    
+
     public void ResetAll()
     {
         timerNextRond = auxTimerNextRond;
@@ -241,22 +258,22 @@ public class GameManager : MonoBehaviour
         if (timeSelectionAttack > 0)
         {
             timeSelectionAttack = timeSelectionAttack - Time.deltaTime;
-            TextTimeOfAttack.text = "" + ((int)timeSelectionAttack-1);
+            TextTimeOfAttack.text = "" + ((int)timeSelectionAttack - 1);
             if (((int)timeSelectionAttack - 1) < 0)
             {
                 TextTimeOfAttack.text = "0";
             }
         }
-        else if(timeSelectionAttack <= 0)
+        else if (timeSelectionAttack <= 0)
         {
             fsm.SendEvent((int)GameEvents.JugadasElejidas);
         }
-        
-        
+
+
     }
     private void CheckTimerNextRound()
     {
-        if (timerNextRond > 0 )
+        if (timerNextRond > 0)
         {
             timerNextRond = timerNextRond - Time.deltaTime;
             TextTitulo.text = "LA SIGUIENTE RONDA COMIENZA EN";
@@ -316,28 +333,28 @@ public class GameManager : MonoBehaviour
                 player1.Attack(Player.Objetivo.Piernas);
                 for (int i = 0; i < enemiesActivate.Count; i++)
                 {
-                    if (enemiesActivate[i].typeEnemy == Enemy.Categoria.Balanceado)
+                    if (enemiesActivate[i].typeEnemy == Enemy.TiposDeEnemigo.Balanceado)
                     {
                         enemiesActivate[i].Jump();
                         enemiesActivate[i].CounterAttack();
                         EventoEspecial = true;
                     }
                 }
-                
+
             }
             else if (movimientoEnemigo == Enemy.Movimiento.Agacharse && movimientoJugador1 == Player.Movimiento.AtacarCabeza)
             {
                 player1.Attack(Player.Objetivo.Cabeza);
                 for (int i = 0; i < enemiesActivate.Count; i++)
                 {
-                    if (enemiesActivate[i].typeEnemy == Enemy.Categoria.Balanceado)
+                    if (enemiesActivate[i].typeEnemy == Enemy.TiposDeEnemigo.Balanceado)
                     {
                         enemiesActivate[i].Duck();
                         enemiesActivate[i].CounterAttack();
                         EventoEspecial = true;
                     }
                 }
-                
+
             }
             else if (movimientoJugador1 == Player.Movimiento.Agacharse && movimientoEnemigo == Enemy.Movimiento.AtacarCabeza)
             {
@@ -422,13 +439,13 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
-            
+
             //EL SWITCH DEL ENEMIGO
-            
+
         }
         if (MultiPlayer)
         {
-             
+
         }
         EventoEspecial = false;
     }
@@ -456,7 +473,16 @@ public class GameManager : MonoBehaviour
     {
         return (GameState)fsm.GetCurrentState();
     }
-
+    public void InSurvivalMode()
+    {
+        modoDeJuego = ModosDeJuego.Supervivencia;
+        countEnemysDead = 0;
+    }
+    public void InStoryMode()
+    {
+        modoDeJuego = ModosDeJuego.Historia;
+        countEnemysDead = 0;
+    }
 }
     
 

@@ -17,7 +17,7 @@ public class Shild : MonoBehaviour
 
             if (InEnemy)
             {
-                if (enemy.typeEnemy == Enemy.Categoria.Defensivo)
+                if (enemy.typeEnemy == Enemy.TiposDeEnemigo.Defensivo)
                 {
                     Debug.Log("CONTRA ATAQUE");
                     enemy.CounterAttack();
