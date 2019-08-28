@@ -48,9 +48,10 @@ public class Enemy : MonoBehaviour
         muerto,
         Count,
     }
+    private float alturaPredeterminada = -3.15f;
+    private float auxLife;
     private Animator animator;
     public bool InPool;
-    public Pool EnemyPool;
     private PoolObject poolObjectEnemy;
     public bool DefensaVariada;
     private Objetivo _objetivo;
@@ -118,6 +119,7 @@ public class Enemy : MonoBehaviour
     public TiposDeJefe typeBoss;
     void Start()
     {
+        auxLife = life;
         poolObjectEnemy = GetComponent<PoolObject>();
         animator = GetComponent<Animator>();
         timeOut = false;
@@ -129,6 +131,68 @@ public class Enemy : MonoBehaviour
             gm = GameManager.instanceGameManager;
         }
         rg2D = GetComponent<Rigidbody2D>();
+        SetPorcentageMovements();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        CheckDead();
+        CheckLifeBar();
+        if (gm.GetGameState() == GameManager.GameState.EnComienzo)
+        {
+            IA();
+            gm.SetMovimientoEnemigo(_movimiento);
+
+        }
+        else
+        {
+            // SI EL SALTO NO FUNCIONA ESTA LINEA ES EL CAUSANTE DEL BUG
+            transform.position = new Vector3(transform.position.x, alturaPredeterminada, transform.position.z);
+        }
+    }
+    public void OnEnemySurvival()
+    {
+        
+        _estadoEnemigo = EstadoEnemigo.vivo;
+        poolObjectEnemy = GetComponent<PoolObject>();
+        float opcion = Random.Range(MinRangeRandom, TypeRandom);
+        if (gm == null)
+        {
+            gm = GameManager.instanceGameManager;
+        }
+        if ((gm.countEnemysDead % gm.RondasPorJefe) != 0 || gm.countEnemysDead == 0)
+        {
+            switch ((int)opcion)
+            {
+                case 0:
+                    //Debug.Log("ENTRE BALANCEADO");
+                    //Cambiar el sprite del enemigo Balanceado.
+                    typeEnemy = TiposDeEnemigo.Balanceado;
+                    break;
+                case 1:
+                    //Debug.Log("ENTRE AGRESIVO");
+                    //Cambiar el sprite del enemigo Agresivo.
+                    typeEnemy = TiposDeEnemigo.Agresivo;
+                    break;
+                case 2:
+                    //Debug.Log("ENTRE DEFENSIVO");
+                    //Cambiar el sprite del enemigo Defensivo.
+                    typeEnemy = TiposDeEnemigo.Defensivo;
+                    break;
+            }
+        }
+        else if ((gm.countEnemysDead % gm.RondasPorJefe) == 0 && gm.countEnemysDead > 0)
+        {
+            //Cambiar el sprite del jefe correspondiente
+            typeEnemy = TiposDeEnemigo.Jefe;
+            typeBoss = TiposDeJefe.ProfeAnatomia;
+        }
+
+        SetPorcentageMovements();
+    }
+    public void SetPorcentageMovements()
+    {
         switch (typeEnemy)
         {
             //PANEL DE CONFIGURACION DE PORCENTAJES
@@ -185,47 +249,6 @@ public class Enemy : MonoBehaviour
                 break;
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        CheckDead();
-        CheckLifeBar();
-        if (gm.GetGameState() == GameManager.GameState.EnComienzo)
-        {
-            IA();
-            gm.SetMovimientoEnemigo(_movimiento);
-        }
-    }
-    public void OnEnemySurvival()
-    {
-        poolObjectEnemy = GetComponent<PoolObject>();
-        float opcion = Random.Range(MinRangeRandom, TypeRandom);
-        if ((gm.countEnemysDead % gm.RondasPorJefe) != 0)
-        {
-            switch ((int)opcion)
-            {
-                case 0:
-                    //Cambiar el sprite del enemigo Balanceado.
-                    typeEnemy = TiposDeEnemigo.Balanceado;
-                    break;
-                case 1:
-                    //Cambiar el sprite del enemigo Agresivo.
-                    typeEnemy = TiposDeEnemigo.Agresivo;
-                    break;
-                case 2:
-                    //Cambiar el sprite del enemigo Defensivo.
-                    typeEnemy = TiposDeEnemigo.Defensivo;
-                    break;
-            }
-        }
-        else if ((gm.countEnemysDead % gm.RondasPorJefe) == 0)
-        {
-            //Cambiar el sprite del jefe correspondiente
-            typeEnemy = TiposDeEnemigo.Jefe;
-            typeBoss = TiposDeJefe.ProfeAnatomia;
-        }
-    }
     public void IA()
     {
         CheckMovement();
@@ -260,12 +283,38 @@ public class Enemy : MonoBehaviour
             if (life <= 0)
             {
                 // SI SU VIDA ES IGUAL A 0 POS MUERE DESACTIVADO
+                _estadoEnemigo = EstadoEnemigo.muerto;
                 gameObject.SetActive(false);
             }
         }
         else if (InPool)
         {
-            poolObjectEnemy.Recycle();
+            switch (gm.GetGameMode())
+            {
+                case GameManager.ModosDeJuego.Supervivencia:
+                    if (life <= 0)
+                    {
+                        life = auxLife;
+                        gm.generateEnemy = true;
+                        poolObjectEnemy.Recycle();
+                        _estadoEnemigo = EstadoEnemigo.muerto;
+                    }
+                    break;
+                case GameManager.ModosDeJuego.Historia:
+                    if (life <= 0)
+                    {
+                        life = auxLife;
+                        gm.generateEnemy = true;
+                        poolObjectEnemy.Recycle();
+                        _estadoEnemigo = EstadoEnemigo.muerto;
+                    }
+                    break;
+                case GameManager.ModosDeJuego.Nulo:
+                    _estadoEnemigo = EstadoEnemigo.muerto;
+                    gameObject.SetActive(false);
+                    break;
+            }
+            
         }
     }
     public void CounterAttack()
@@ -510,5 +559,8 @@ public class Enemy : MonoBehaviour
         BoxColliderChest.enabled = true;
         BoxColliderLegs.enabled = true;
     }
-    
+    public EstadoEnemigo GetStateEnemy()
+    {
+        return _estadoEnemigo;
+    }
 }

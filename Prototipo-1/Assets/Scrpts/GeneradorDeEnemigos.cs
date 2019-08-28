@@ -7,7 +7,8 @@ public class GeneradorDeEnemigos : MonoBehaviour
     //FIJARSE COMO PROGRAME EL GENERADOR DE ENEMIGOS EN TheDudgeBall Y LUEGO REPLICARLO ACA.
     public Pool poolEnemy;
     public GameObject Generador;
-    public GameManager gm;
+
+    private GameManager gm;
     private PoolObject poolObject;
     private Enemy.TiposDeEnemigo TypeEmemy;
     private Enemy.TiposDeJefe TypeBoss;
@@ -21,10 +22,24 @@ public class GeneradorDeEnemigos : MonoBehaviour
     }
     public void GenerateEnemy()
     {
-
-    }
-    public void CheckGenerate()
-    {
+        GameObject go = poolEnemy.GetObject();
+        Enemy enemy = go.GetComponent<Enemy>();
+        switch (gm.GetGameMode())
+        {
+            case GameManager.ModosDeJuego.Supervivencia:      
+                enemy.OnEnemySurvival();
+                Debug.Log("ENTRE");
+                break;
+            case GameManager.ModosDeJuego.Historia:
+                enemy.OnEnemySurvival();
+                break;
+        }
+        if (poolEnemy.count <= 0)
+        {
+            return;
+        }
+        
+        //go.transform.rotation = transform.rotation;
 
     }
 }

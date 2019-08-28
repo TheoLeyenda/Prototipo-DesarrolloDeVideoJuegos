@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public enum ModosDeJuego
     {
+        Nulo,
         Supervivencia,
         Historia,
         Count
@@ -37,20 +38,18 @@ public class GameManager : MonoBehaviour
         Perdiste,
         Count,
     }
+    public GeneradorDeEnemigos EnemyGenerator;
+    [HideInInspector]
+    public bool generateEnemy;
+    [HideInInspector]
+    public List<Enemy> enemiesActivate;
+    [HideInInspector]
+    public float auxTimeOFF;
+    public bool SiglePlayer;
+    public bool MultiPlayer;//(EN CASO DE TENER MULTYPLAYER EL JUEGO SE TRANFORMA EN UN JUEGO POR TURNOS)
     [HideInInspector]
     public int countEnemysDead;
     public int RondasPorJefe;
-    public ModosDeJuego modoDeJuego;
-    private FSM fsm;
-    private Player.Movimiento movimientoJugador1;
-    private Player.EstadoJugador estadoJugador1;
-
-    private Enemy.EstadoEnemigo estadoEnemigo;
-    private Enemy.Movimiento movimientoEnemigo;
-    // HACER LO MISMO PERO PARA EL ENEMIGO 
-
-    private bool EventoEspecial;
-    private EstadoResultado estadoResultado;
     public Text TextTimeOfAttack;
     public Text TextTitulo;
     public Text START;
@@ -59,24 +58,34 @@ public class GameManager : MonoBehaviour
     public float timeSelectionAttack;
     public float timerNextRond;
     public float timerStart;
+    public ModosDeJuego modoDeJuego;
 
+    private bool initialGeneration;
+    private FSM fsm;
+    private Player.Movimiento movimientoJugador1;
+    private Player.EstadoJugador estadoJugador1;
+    private Enemy.EstadoEnemigo estadoEnemigo;
+    private Enemy.Movimiento movimientoEnemigo;
+    // HACER LO MISMO PERO PARA EL ENEMIGO 
+    private bool EventoEspecial;
+    private EstadoResultado estadoResultado;
     private float auxTimeSelectionAttack;
     private float auxTimerNextRond;
     private float auxTimerStart;
-    public List<Enemy> enemiesActivate;
+
     private Player player1;
     private Player player2;
     private Player player3;
     private Player player4;
-    [HideInInspector]
-    public float auxTimeOFF;
-    public bool SiglePlayer;
-    public bool MultiPlayer;//(EN CASO DE TENER MULTYPLAYER EL JUEGO SE TRANFORMA EN UN JUEGO POR TURNOS)
+    
 
 
 
     private void Awake()
     {
+        initialGeneration = true;
+        countEnemysDead = 0;
+        generateEnemy = false;
         estadoResultado = EstadoResultado.Nulo;
         fsm = new FSM((int)GameState.Count, (int)GameEvents.Count, (int)GameState.Idle);
         fsm.SetRelations((int)GameState.Idle, (int)GameState.EnComienzo, (int)GameEvents.Comenzar);
@@ -97,6 +106,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        initialGeneration = true;
         countEnemysDead = 0;
         EventoEspecial = false;
         auxTimerNextRond = timerNextRond;
@@ -165,19 +175,22 @@ public class GameManager : MonoBehaviour
                 Resultado();
                 break;
         }
-        switch (modoDeJuego)
-        {
-            case ModosDeJuego.Historia:
-                break;
-            case ModosDeJuego.Supervivencia:
-                break;
-        }
+        
     }
     public void Idle()
     {
         //NO OCURRE NADA
         if (estadoResultado == EstadoResultado.Nulo)
         {
+            if (SceneManager.GetActiveScene().name == "Supervivencia")
+            {
+                if (initialGeneration)
+                {
+                    initialGeneration = false;
+                    generateEnemy = false;
+                    EnemyGenerator.GenerateEnemy();
+                }
+            }
             if (timerStart > 0)
             {
 
@@ -207,6 +220,12 @@ public class GameManager : MonoBehaviour
     }
     public void EnComienzo()
     {
+        
+        if (generateEnemy)
+        {
+            generateEnemy = false;
+            EnemyGenerator.GenerateEnemy();
+        }
         if (TextTimeOfAttack != null)
         {
             CheckTimeAttackCharacters();
@@ -441,7 +460,14 @@ public class GameManager : MonoBehaviour
             }
 
             //EL SWITCH DEL ENEMIGO
-
+            switch (modoDeJuego)
+            {
+                case ModosDeJuego.Historia:
+                    break;
+                case ModosDeJuego.Supervivencia:
+                    
+                    break;
+            }
         }
         if (MultiPlayer)
         {
@@ -482,6 +508,10 @@ public class GameManager : MonoBehaviour
     {
         modoDeJuego = ModosDeJuego.Historia;
         countEnemysDead = 0;
+    }
+    public ModosDeJuego GetGameMode()
+    {
+        return modoDeJuego;
     }
 }
     

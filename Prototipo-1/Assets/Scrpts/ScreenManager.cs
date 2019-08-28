@@ -5,8 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class ScreenManager : MonoBehaviour
 {
-    public void Jugar()
+    public void Prueba()
     {
         SceneManager.LoadScene("SampleScene");
+    }
+    public void Supervivencia()
+    {
+        SceneManager.LoadScene("Supervivencia");
+    }
+    public void Historia()
+    {
+
     }
 }
