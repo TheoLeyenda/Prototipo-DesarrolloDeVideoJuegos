@@ -5,12 +5,26 @@ using UnityEngine;
 public class GeneradorDeEnemigos : MonoBehaviour
 {
     //FIJARSE COMO PROGRAME EL GENERADOR DE ENEMIGOS EN TheDudgeBall Y LUEGO REPLICARLO ACA.
-    void Start()
+    public Pool poolEnemy;
+    public GameObject Generador;
+    public GameManager gm;
+    private PoolObject poolObject;
+    private Enemy.TiposDeEnemigo TypeEmemy;
+    private Enemy.TiposDeJefe TypeBoss;
+
+    private void Start()
     {
-        
+        if (GameManager.instanceGameManager != null)
+        {
+            gm = GameManager.instanceGameManager;
+        }
     }
-    void Update()
+    public void GenerateEnemy()
     {
-        
+
+    }
+    public void CheckGenerate()
+    {
+
     }
 }

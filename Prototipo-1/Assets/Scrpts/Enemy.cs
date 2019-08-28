@@ -18,7 +18,8 @@ public class Enemy : MonoBehaviour
     public enum TiposDeJefe
     {
         ProfeAnatomia,
-        Count,
+        Nulo,
+        Count
     }
     public enum Objetivo
     {
@@ -65,6 +66,12 @@ public class Enemy : MonoBehaviour
     public Sprite SpriteBlanco;
     public Image imagenAccion;
     public Image imagenMovimiento;
+    
+
+    // CAMBIAR TODOS LOS SPRITES POR EL DICIONARIO Y SE ACCEDE POR EL NOMBRE.
+    public Dictionary<string, Sprite> SpritesGO; 
+
+
     public Sprite SpriteMovimientoAtaque;
     public Sprite SpriteMovimientoDefensa;
     public Sprite SpriteMovimientoEsquive;
@@ -108,7 +115,7 @@ public class Enemy : MonoBehaviour
     private Vector3 PosicionGeneracionBalaRelativa = new Vector3(2f, -3.2f, 0); 
     // Start is called before the first frame update
     public TiposDeEnemigo typeEnemy;
-    private TiposDeJefe typeBoss;
+    public TiposDeJefe typeBoss;
     void Start()
     {
         poolObjectEnemy = GetComponent<PoolObject>();
