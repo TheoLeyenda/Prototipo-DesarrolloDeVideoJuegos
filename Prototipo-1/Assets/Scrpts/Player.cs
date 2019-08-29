@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
     private Animator animator;
     public float life;
     public float maxLife;
-    public Scrollbar ImageHP;
+    public Image ImageHP;
     public SpriteRenderer mySelfSprite;
     public Pool poolObjectAttack;
     public Sprite SpriteBlanco;
@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
     private bool IaModeActivate;
     private const float MaxRangeRandomMovementOption1 = 40;
     private const float MaxRangeRandomMovementOption2 = 40;
-    private Vector3 PosicionGeneracionBalaRelativa = new Vector3(-3.5f, -3.2f, 0);
+    private Vector3 PosicionGeneracionBalaRelativa = new Vector3(-3f, -3.2f, 0);
     void Start()
     {
         IaModeActivate = false;
@@ -201,7 +201,7 @@ public class Player : MonoBehaviour
     {
         if (life <= maxLife)
         {
-            ImageHP.size = life / maxLife;
+            ImageHP.fillAmount = life / maxLife;
         }
         else if (life > maxLife)
         {

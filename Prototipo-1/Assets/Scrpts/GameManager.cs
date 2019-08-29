@@ -174,7 +174,7 @@ public class GameManager : MonoBehaviour
             GeneradorEnemigos.SetActive(true);
             canvasLevel.SetActive(true);
             canvasGameOver.SetActive(false);
-            Debug.Log((GameState)fsm.GetCurrentState());
+            //Debug.Log((GameState)fsm.GetCurrentState());
             switch (fsm.GetCurrentState())
             {
                 case (int)GameState.Idle:
