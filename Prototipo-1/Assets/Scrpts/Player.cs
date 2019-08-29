@@ -216,6 +216,8 @@ public class Player : MonoBehaviour
             _estado = EstadoJugador.muerto;
             gm.SetEstadoJugador1(_estado);
             mySelfSprite.enabled = false;
+            gm.ResetGameManager();
+            gm.GameOver();
         }
     }
     public void AttackButton() {

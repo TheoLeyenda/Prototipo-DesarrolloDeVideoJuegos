@@ -9,11 +9,23 @@ public class Pool : MonoBehaviour {
     public int count;
     private int id;
     private bool substractValuesBalls;
+    public bool GeneratePoolOnEnable;
     // Use this for initialization
     void Awake()
     {
+        GeneratePool();
+    }
+    private void OnEnable()
+    {
+        if (GeneratePoolOnEnable)
+        {
+            GeneratePool();
+        }
+    }
+    public void GeneratePool()
+    {
         CommonBalls = new List<GameObject>();
-        for(int i = 0; i< count; i++)
+        for (int i = 0; i < count; i++)
         {
             GameObject go = Instantiate(Ball);
             PoolObject po;
@@ -24,7 +36,6 @@ public class Pool : MonoBehaviour {
         }
         id = 0;
     }
-
     // Update is called once per frame
     void Update () {
     }

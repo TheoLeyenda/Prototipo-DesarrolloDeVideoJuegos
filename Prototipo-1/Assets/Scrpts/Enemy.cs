@@ -161,7 +161,7 @@ public class Enemy : MonoBehaviour
         {
             gm = GameManager.instanceGameManager;
         }
-        Debug.Log(gm.countEnemysDead);
+        Debug.Log("Enemigos Abatidos:" + gm.countEnemysDead);
         if ((gm.countEnemysDead % gm.RondasPorJefe) != 0 || gm.countEnemysDead == 0)
         {
             switch ((int)opcion)

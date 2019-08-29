@@ -17,4 +17,8 @@ public class ScreenManager : MonoBehaviour
     {
 
     }
+    public void Menu()
+    {
+        SceneManager.LoadScene("MENU");
+    }
 }

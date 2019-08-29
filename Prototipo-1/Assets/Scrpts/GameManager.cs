@@ -38,6 +38,10 @@ public class GameManager : MonoBehaviour
         Perdiste,
         Count,
     }
+    public GameObject canvasGameOver;
+    public GameObject canvasLevel;
+    public GameObject GeneradorEnemigos;
+    public bool InGameOverScene;
     public GeneradorDeEnemigos EnemyGenerator;
     [HideInInspector]
     public bool generateEnemy;
@@ -93,6 +97,8 @@ public class GameManager : MonoBehaviour
         fsm.SetRelations((int)GameState.RespuestaJugadores, (int)GameState.Resultado, (int)GameEvents.TiempoFuera);
         fsm.SetRelations((int)GameState.Resultado, (int)GameState.EnComienzo, (int)GameEvents.Comenzar);
         fsm.SetRelations((int)GameState.Resultado, (int)GameState.Idle, (int)GameEvents.Quieto);
+        fsm.SetRelations((int)GameState.RespuestaJugadores, (int)GameState.Idle, (int)GameEvents.Quieto);
+        fsm.SetRelations((int)GameState.EnComienzo, (int)GameState.Idle, (int)GameEvents.Quieto);
 
         if (instanceGameManager == null)
         {
@@ -106,6 +112,8 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        canvasGameOver.SetActive(false);
+        canvasLevel.SetActive(true);
         initialGeneration = true;
         countEnemysDead = 0;
         EventoEspecial = false;
@@ -160,20 +168,36 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (fsm.GetCurrentState())
+        CheckInGameOverScene();
+        if (!InGameOverScene)
         {
-            case (int)GameState.Idle:
-                Idle();
-                break;
-            case (int)GameState.EnComienzo:
-                EnComienzo();
-                break;
-            case (int)GameState.RespuestaJugadores:
-                RespuestaJugadores();
-                break;
-            case (int)GameState.Resultado:
-                Resultado();
-                break;
+            GeneradorEnemigos.SetActive(true);
+            canvasLevel.SetActive(true);
+            canvasGameOver.SetActive(false);
+            Debug.Log((GameState)fsm.GetCurrentState());
+            switch (fsm.GetCurrentState())
+            {
+                case (int)GameState.Idle:
+                    Idle();
+                    break;
+                case (int)GameState.EnComienzo:
+                    EnComienzo();
+                    break;
+                case (int)GameState.RespuestaJugadores:
+                    RespuestaJugadores();
+                    break;
+                case (int)GameState.Resultado:
+                    Resultado();
+                    break;
+            }
+        }
+        else
+        {
+            GeneradorEnemigos.SetActive(false);
+            canvasLevel.SetActive(false);
+            canvasGameOver.SetActive(true);
+            //ACA DEBERIA MOSTRAR PUNTAJE Y ESTADISTICAS DEL JUGADOR
+
         }
         
     }
@@ -201,6 +225,7 @@ public class GameManager : MonoBehaviour
             }
             else if (timerStart <= 0)
             {
+                //generateEnemy = true;
                 timerStart = auxTimerStart;
                 fsm.SendEvent((int)GameEvents.Comenzar);
                 TextTimeStart.gameObject.SetActive(false);
@@ -223,6 +248,7 @@ public class GameManager : MonoBehaviour
         
         if (generateEnemy)
         {
+            Debug.Log("ENTRE AL GENERADOR");
             generateEnemy = false;
             EnemyGenerator.GenerateEnemy();
         }
@@ -290,6 +316,7 @@ public class GameManager : MonoBehaviour
 
 
     }
+   
     private void CheckTimerNextRound()
     {
         if (timerNextRond > 0)
@@ -329,6 +356,7 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
+
             if (movimientoEnemigo == Enemy.Movimiento.AtacarCabeza && movimientoJugador1 == Player.Movimiento.AtacarCabeza)
             {
                 //EVENTO CUANDO EL ENEMIGO Y EL JUGADOR ATACAN AL MISMO OBJETIVO
@@ -458,7 +486,7 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
-
+            
             //EL SWITCH DEL ENEMIGO
             switch (modoDeJuego)
             {
@@ -479,6 +507,23 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Event Push Button");
     }
+    public void CheckInGameOverScene()
+    {
+        if (SceneManager.GetActiveScene().name == "GameOver" || SceneManager.GetActiveScene().name == "MENU")
+        {
+            InGameOverScene = true;
+        }
+        else
+        {
+            InGameOverScene = false;
+        }
+    }
+    public void GameOver()
+    {
+        
+        SceneManager.LoadScene("GameOver");
+
+    }
     public void SetRespuestaJugador1(Player.Movimiento movimiento)
     {
         movimientoJugador1 = movimiento;
@@ -498,6 +543,18 @@ public class GameManager : MonoBehaviour
     public GameState GetGameState()
     {
         return (GameState)fsm.GetCurrentState();
+    }
+    public void ResetGameManager()
+    {
+        countEnemysDead = 0;
+        initialGeneration = true;
+        timerNextRond = auxTimerNextRond;
+        timerStart = auxTimerStart;
+        timeSelectionAttack = auxTimeSelectionAttack;
+        TextTimeOfAttack.text = " ";
+        TextTimeStart.text = " ";
+        
+        fsm.SendEvent((int)GameEvents.Quieto);
     }
     public void InSurvivalMode()
     {
