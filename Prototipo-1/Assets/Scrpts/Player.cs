@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     public float life;
     public float maxLife;
     public Scrollbar ImageHP;
-    private SpriteRenderer mySelfSprite;
+    public SpriteRenderer mySelfSprite;
     public Pool poolObjectAttack;
     public Sprite SpriteBlanco;
     public Image imagenAccion;
@@ -97,7 +97,6 @@ public class Player : MonoBehaviour
         IaModeActivate = false;
         _movimiento = Movimiento.Nulo;
         _estado = EstadoJugador.vivo;
-        mySelfSprite = GetComponent<SpriteRenderer>();
         DisableShild();
         ContraAtaque = false;
         if (GameManager.instanceGameManager != null) {
@@ -374,10 +373,8 @@ public class Player : MonoBehaviour
     }
     public void CounterAttack()
     {
-        ShildHead.enabled = false;
-        //ShildChest.enabled = false;
-        //ShildLegs.enabled = false;
-        ShildBoody.enabled = false;
+        ShildHead.gameObject.SetActive(false);
+        ShildBoody.gameObject.SetActive(false);
         imagenMovimiento.sprite = SpriteMovimientoAtaque;
         if (poolObjectAttack.count > 0)
         {

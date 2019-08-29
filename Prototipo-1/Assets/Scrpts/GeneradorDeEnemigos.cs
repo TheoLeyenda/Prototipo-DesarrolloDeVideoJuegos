@@ -28,7 +28,7 @@ public class GeneradorDeEnemigos : MonoBehaviour
         {
             case GameManager.ModosDeJuego.Supervivencia:      
                 enemy.OnEnemySurvival();
-                Debug.Log("ENTRE");
+                //Debug.Log("ENTRE");
                 break;
             case GameManager.ModosDeJuego.Historia:
                 enemy.OnEnemySurvival();

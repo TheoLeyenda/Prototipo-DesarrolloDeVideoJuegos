@@ -161,6 +161,7 @@ public class Enemy : MonoBehaviour
         {
             gm = GameManager.instanceGameManager;
         }
+        Debug.Log(gm.countEnemysDead);
         if ((gm.countEnemysDead % gm.RondasPorJefe) != 0 || gm.countEnemysDead == 0)
         {
             switch ((int)opcion)
@@ -182,9 +183,10 @@ public class Enemy : MonoBehaviour
                     break;
             }
         }
-        else if ((gm.countEnemysDead % gm.RondasPorJefe) == 0 && gm.countEnemysDead > 0)
+        else if ((gm.countEnemysDead % gm.RondasPorJefe) == 0 && gm.countEnemysDead > 1)
         {
             //Cambiar el sprite del jefe correspondiente
+            Debug.Log("Soy tremendo jefe");
             typeEnemy = TiposDeEnemigo.Jefe;
             typeBoss = TiposDeJefe.ProfeAnatomia;
         }
@@ -277,7 +279,6 @@ public class Enemy : MonoBehaviour
     }
     public void CheckDead()
     {
-        gm.countEnemysDead++;
         if (!InPool)
         {
             if (life <= 0)
@@ -285,6 +286,7 @@ public class Enemy : MonoBehaviour
                 // SI SU VIDA ES IGUAL A 0 POS MUERE DESACTIVADO
                 _estadoEnemigo = EstadoEnemigo.muerto;
                 gameObject.SetActive(false);
+                gm.countEnemysDead++;
             }
         }
         else if (InPool)
@@ -298,6 +300,7 @@ public class Enemy : MonoBehaviour
                         gm.generateEnemy = true;
                         poolObjectEnemy.Recycle();
                         _estadoEnemigo = EstadoEnemigo.muerto;
+                        gm.countEnemysDead++;
                     }
                     break;
                 case GameManager.ModosDeJuego.Historia:
@@ -307,11 +310,16 @@ public class Enemy : MonoBehaviour
                         gm.generateEnemy = true;
                         poolObjectEnemy.Recycle();
                         _estadoEnemigo = EstadoEnemigo.muerto;
+                        gm.countEnemysDead++;
                     }
                     break;
                 case GameManager.ModosDeJuego.Nulo:
-                    _estadoEnemigo = EstadoEnemigo.muerto;
-                    gameObject.SetActive(false);
+                    if (life <= 0)
+                    {
+                        _estadoEnemigo = EstadoEnemigo.muerto;
+                        gameObject.SetActive(false);
+                        gm.countEnemysDead++;
+                    }
                     break;
             }
             
