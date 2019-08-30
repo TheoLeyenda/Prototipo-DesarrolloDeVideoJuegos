@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
     public Sprite SpriteDefensaCuerpo;
     public Sprite SpriteSalto;
     public Sprite SpriteAgacharse;
-    public Button Button_Attack;
+    /*public Button Button_Attack;
     public Button Button_Deffense;
     public Button Button_Dodge;//Boton De esquivar.
     public Button Button_Jump;
@@ -69,9 +69,13 @@ public class Player : MonoBehaviour
     public Button Button_AttackHead; //Atacar a la cabeza
     public Button Button_AttackChest; // Atacar al pecho
     public Button Button_AttackLegs; // Atacar a las piernas
-    public Button Button_DefenseHead;
     public Button Button_DefenseBoody;
-    public Button Button_Back;
+    public Button Button_Back;*/
+    public Button Button_DefenseHead;
+    public GameObject PanelMovement;
+    public GameObject PanelAttack;
+    public GameObject PanelDeffense;
+    public GameObject PanelDodge;
     public BoxCollider2D ShildHead;
     public BoxCollider2D ShildBoody;
     public BoxCollider2D BoxColliderHead;
@@ -178,6 +182,7 @@ public class Player : MonoBehaviour
     public void Back() {
         if (gm.timeSelectionAttack > 0)
         {
+            /*
             Button_Jump.gameObject.SetActive(false);
             Button_Duck.gameObject.SetActive(false);
             Button_AttackHead.gameObject.SetActive(false);
@@ -189,6 +194,11 @@ public class Player : MonoBehaviour
             Button_Attack.gameObject.SetActive(true);
             Button_Deffense.gameObject.SetActive(true);
             Button_Dodge.gameObject.SetActive(true);
+            */
+            PanelMovement.SetActive(true);
+            PanelDodge.SetActive(false);
+            PanelDeffense.SetActive(false);
+            PanelAttack.SetActive(false);
             ShildHead.gameObject.SetActive(false);
             ShildBoody.gameObject.SetActive(false);
             imagenAccion.sprite = SpriteBlanco;
@@ -224,14 +234,18 @@ public class Player : MonoBehaviour
         if (gm.GetGameState() == GameManager.GameState.EnComienzo)
         {
             imagenMovimiento.sprite = SpriteMovimientoAtaque;
-            Button_Deffense.gameObject.SetActive(false);
+            /*Button_Deffense.gameObject.SetActive(false);
             Button_Dodge.gameObject.SetActive(false);
 
             Button_Attack.gameObject.SetActive(false);
             Button_AttackChest.gameObject.SetActive(true);
             Button_AttackHead.gameObject.SetActive(true);
             Button_AttackLegs.gameObject.SetActive(true);
-            Button_Back.gameObject.SetActive(true);
+            Button_Back.gameObject.SetActive(true);*/
+
+            PanelDeffense.SetActive(false);
+            PanelDodge.SetActive(false);
+            PanelAttack.SetActive(true);
         }
 
     }
@@ -276,7 +290,7 @@ public class Player : MonoBehaviour
         if (gm.GetGameState() == GameManager.GameState.EnComienzo)
         {
             imagenMovimiento.sprite = SpriteMovimientoDefensa;
-            Button_Deffense.gameObject.SetActive(false);
+            /*Button_Deffense.gameObject.SetActive(false);
             Button_Dodge.gameObject.SetActive(false);
 
             Button_Attack.gameObject.SetActive(false);
@@ -284,13 +298,17 @@ public class Player : MonoBehaviour
             Button_AttackHead.gameObject.SetActive(false);
             Button_AttackLegs.gameObject.SetActive(false);
             Button_Back.gameObject.SetActive(true);
-
+            */
+            PanelDeffense.SetActive(true);
+            PanelAttack.SetActive(false);
+            PanelDodge.SetActive(false);
             if (AviableDefenseHead)
             {
                 Button_DefenseHead.gameObject.SetActive(true);
             }
+            /*
             Button_DefenseBoody.gameObject.SetActive(true);
-
+            */
         }
         
     }
@@ -328,17 +346,21 @@ public class Player : MonoBehaviour
         
         imagenAccion.sprite = SpriteBlanco;
         imagenMovimiento.sprite = SpriteBlanco;
-        Button_Jump.gameObject.SetActive(false);
+        /*Button_Jump.gameObject.SetActive(false);
         Button_Duck.gameObject.SetActive(false);
         Button_AttackHead.gameObject.SetActive(false);
         Button_AttackChest.gameObject.SetActive(false);
-        Button_AttackLegs.gameObject.SetActive(false);
+        Button_AttackLegs.gameObject.SetActive(false);*/
         Button_DefenseHead.gameObject.SetActive(false);
-        Button_DefenseBoody.gameObject.SetActive(false);
+        /*Button_DefenseBoody.gameObject.SetActive(false);
         Button_Back.gameObject.SetActive(false);
         Button_Attack.gameObject.SetActive(true);
         Button_Deffense.gameObject.SetActive(true);
-        Button_Dodge.gameObject.SetActive(true);
+        Button_Dodge.gameObject.SetActive(true);*/
+        PanelAttack.SetActive(false);
+        PanelDeffense.SetActive(false);
+        PanelDodge.SetActive(false);
+        PanelMovement.SetActive(true);
         ShildHead.gameObject.SetActive(false);
         ShildBoody.gameObject.SetActive(false);
         BoxColliderHead.enabled = true;
@@ -352,13 +374,17 @@ public class Player : MonoBehaviour
         if (gm.GetGameState() == GameManager.GameState.EnComienzo)
         {
             imagenMovimiento.sprite = SpriteMovimientoEsquive;
-            Button_Attack.gameObject.SetActive(false);
+            /*Button_Attack.gameObject.SetActive(false);
             Button_Deffense.gameObject.SetActive(false);
 
             Button_Dodge.gameObject.SetActive(false);
             Button_Jump.gameObject.SetActive(true);
             Button_Duck.gameObject.SetActive(true);
             Button_Back.gameObject.SetActive(true);
+            */
+            PanelAttack.SetActive(false);
+            PanelDeffense.SetActive(false);
+            PanelDodge.SetActive(true);
         }
     }
     public void Jump()
