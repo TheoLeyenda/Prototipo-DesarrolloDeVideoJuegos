@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     public GameObject canvasGameOver;
     public GameObject canvasLevel;
     public GameObject GeneradorEnemigos;
+    [HideInInspector]
     public bool InGameOverScene;
     public GeneradorDeEnemigos EnemyGenerator;
     [HideInInspector]
@@ -54,7 +55,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public int countEnemysDead;
     public int RondasPorJefe;
-    public Text TextTimeOfAttack;
+    //public Text TextTimeOfAttack;
+    public Image TimeClockOfAttack; 
     public Text TextTitulo;
     public Text START;
     public Text TextTimeStart;
@@ -81,12 +83,16 @@ public class GameManager : MonoBehaviour
     private Player player2;
     private Player player3;
     private Player player4;
-    
+
+    private int roundCombat;
+
+
 
 
 
     private void Awake()
     {
+        roundCombat = 1;
         initialGeneration = true;
         countEnemysDead = 0;
         generateEnemy = false;
@@ -112,6 +118,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        roundCombat = 1;
         canvasGameOver.SetActive(false);
         canvasLevel.SetActive(true);
         initialGeneration = true;
@@ -203,6 +210,10 @@ public class GameManager : MonoBehaviour
     }
     public void Idle()
     {
+        TextTitulo.text = "RONDA 1";
+        TimeClockOfAttack.gameObject.SetActive(false);
+        //TextTitulo.gameObject.SetActive(false);
+        TextTimeStart.gameObject.SetActive(true);
         //NO OCURRE NADA
         if (estadoResultado == EstadoResultado.Nulo)
         {
@@ -226,6 +237,7 @@ public class GameManager : MonoBehaviour
             else if (timerStart <= 0)
             {
                 //generateEnemy = true;
+                TextTitulo.text = "ELIJAN MOVIMIENTO";
                 timerStart = auxTimerStart;
                 fsm.SendEvent((int)GameEvents.Comenzar);
                 TextTimeStart.gameObject.SetActive(false);
@@ -245,26 +257,34 @@ public class GameManager : MonoBehaviour
     }
     public void EnComienzo()
     {
-        
+        TimeClockOfAttack.gameObject.SetActive(true);
+        TextTitulo.gameObject.SetActive(true);
+        TextTimeStart.gameObject.SetActive(false);
         if (generateEnemy)
         {
             Debug.Log("ENTRE AL GENERADOR");
             generateEnemy = false;
             EnemyGenerator.GenerateEnemy();
         }
-        if (TextTimeOfAttack != null)
+        if (TimeClockOfAttack != null)
         {
             CheckTimeAttackCharacters();
         }
     }
     public void RespuestaJugadores()
     {
+        TimeClockOfAttack.gameObject.SetActive(false);
+        //TextTitulo.gameObject.SetActive(false);
+        TextTimeStart.gameObject.SetActive(false);
         CheckCharcaters();
         fsm.SendEvent((int)GameEvents.TiempoFuera);
 
     }
     public void Resultado()
     {
+        TimeClockOfAttack.gameObject.SetActive(false);
+        //TextTitulo.gameObject.SetActive(false);
+        TextTimeStart.gameObject.SetActive(false);
         // POR AHORA SOLAMENTE VOLVEMOS AL COMIENZO
 
         CheckTimerNextRound();
@@ -274,7 +294,7 @@ public class GameManager : MonoBehaviour
     {
         timerNextRond = auxTimerNextRond;
         timeSelectionAttack = auxTimeSelectionAttack;
-        TextTitulo.text = "TIEMPO RESTANTE";
+        TextTitulo.text = "ELIJAN MOVIMIENTO";
         if (player1 != null)
         {
             player1.RestartPlayer();
@@ -303,11 +323,13 @@ public class GameManager : MonoBehaviour
         if (timeSelectionAttack > 0)
         {
             timeSelectionAttack = timeSelectionAttack - Time.deltaTime;
-            TextTimeOfAttack.text = "" + ((int)timeSelectionAttack - 1);
-            if (((int)timeSelectionAttack - 1) < 0)
+            //TextTimeOfAttack.text = "" + ((int)timeSelectionAttack - 1);
+            TimeClockOfAttack.fillAmount = timeSelectionAttack / auxTimeSelectionAttack;
+            /*if (((int)timeSelectionAttack - 1) < 0)
             {
-                TextTimeOfAttack.text = "0";
-            }
+                //TextTimeOfAttack.text = "0";
+                TimeClockOfAttack.fillAmount = 0;
+            }*/
         }
         else if (timeSelectionAttack <= 0)
         {
@@ -322,13 +344,14 @@ public class GameManager : MonoBehaviour
         if (timerNextRond > 0)
         {
             timerNextRond = timerNextRond - Time.deltaTime;
-            TextTitulo.text = "LA SIGUIENTE RONDA COMIENZA EN";
-            TextTimeOfAttack.text = "" + (int)timerNextRond;
+            TextTitulo.text = "RONDA "+roundCombat;
+            //TextTimeOfAttack.text = "" + (int)timerNextRond;
 
         }
         if (timerNextRond <= 0)
         {
             fsm.SendEvent((int)GameEvents.Comenzar);
+            roundCombat++;
             ResetAll();
         }
     }
@@ -551,7 +574,8 @@ public class GameManager : MonoBehaviour
         timerNextRond = auxTimerNextRond;
         timerStart = auxTimerStart;
         timeSelectionAttack = auxTimeSelectionAttack;
-        TextTimeOfAttack.text = " ";
+        //TextTimeOfAttack.text = " ";
+        TimeClockOfAttack.fillAmount = 1;
         TextTimeStart.text = " ";
         
         fsm.SendEvent((int)GameEvents.Quieto);
@@ -569,6 +593,10 @@ public class GameManager : MonoBehaviour
     public ModosDeJuego GetGameMode()
     {
         return modoDeJuego;
+    }
+    public void ResetRoundCombat()
+    {
+        roundCombat = 1;
     }
 }
     

@@ -95,6 +95,7 @@ public class Player : MonoBehaviour
     private bool IaModeActivate;
     private const float MaxRangeRandomMovementOption1 = 40;
     private const float MaxRangeRandomMovementOption2 = 40;
+    private float TiempoDisparoAutomatico = 0.01f;
     private Vector3 PosicionGeneracionBalaRelativa = new Vector3(-3f, -3.2f, 0);
     void Start()
     {
@@ -117,13 +118,13 @@ public class Player : MonoBehaviour
         CheckLifeBar();
         if (gm.GetGameState() == GameManager.GameState.EnComienzo)
         {
-            if (_movimiento == Movimiento.Nulo && gm.timeSelectionAttack < 1)
+            if (_movimiento == Movimiento.Nulo && gm.timeSelectionAttack < TiempoDisparoAutomatico)
             {
                 IaMode();
                 gm.SetRespuestaJugador1(_movimiento);
                 gm.timeSelectionAttack = 0;
             }
-            else if (_movimiento != Movimiento.Nulo && gm.timeSelectionAttack < 1)
+            else if (_movimiento != Movimiento.Nulo && gm.timeSelectionAttack < TiempoDisparoAutomatico)
             {
                 gm.timeSelectionAttack = -1;
             }
@@ -228,6 +229,7 @@ public class Player : MonoBehaviour
             mySelfSprite.enabled = false;
             gm.ResetGameManager();
             gm.GameOver();
+            gm.ResetRoundCombat();
         }
     }
     public void AttackButton() {
@@ -337,7 +339,7 @@ public class Player : MonoBehaviour
     {
         if (gm.GetGameState() == GameManager.GameState.EnComienzo)
         {
-            gm.timeSelectionAttack = 1;
+            gm.timeSelectionAttack = TiempoDisparoAutomatico;
             //gm.TextTimeOfAttack.text = "0";
         }
     }

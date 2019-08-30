@@ -15,7 +15,14 @@ public class Proyectil : MonoBehaviour
     public Transform vectorForwardDown;
     public Pool pool;
     private PoolObject poolObject;
-
+    private GameManager gm;
+    private void Start()
+    {
+        if (GameManager.instanceGameManager != null)
+        {
+            gm = GameManager.instanceGameManager;
+        }
+    }
     private void OnEnable()
     {
         timeLife = auxTimeLife;
