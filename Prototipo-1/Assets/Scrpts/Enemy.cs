@@ -287,7 +287,7 @@ public class Enemy : MonoBehaviour
                 _estadoEnemigo = EstadoEnemigo.muerto;
                 gameObject.SetActive(false);
                 gm.countEnemysDead++;
-                gm.ResetRoundCombat();
+                gm.ResetRoundCombat(false);
             }
         }
         else if (InPool)
@@ -302,7 +302,7 @@ public class Enemy : MonoBehaviour
                         poolObjectEnemy.Recycle();
                         _estadoEnemigo = EstadoEnemigo.muerto;
                         gm.countEnemysDead++;
-                        gm.ResetRoundCombat();
+                        gm.ResetRoundCombat(false);
                     }
                     break;
                 case GameManager.ModosDeJuego.Historia:
@@ -313,7 +313,7 @@ public class Enemy : MonoBehaviour
                         poolObjectEnemy.Recycle();
                         _estadoEnemigo = EstadoEnemigo.muerto;
                         gm.countEnemysDead++;
-                        gm.ResetRoundCombat();
+                        gm.ResetRoundCombat(false);
                     }
                     break;
                 case GameManager.ModosDeJuego.Nulo:
@@ -322,7 +322,7 @@ public class Enemy : MonoBehaviour
                         _estadoEnemigo = EstadoEnemigo.muerto;
                         gameObject.SetActive(false);
                         gm.countEnemysDead++;
-                        gm.ResetRoundCombat();
+                        gm.ResetRoundCombat(false);
                     }
                     break;
             }

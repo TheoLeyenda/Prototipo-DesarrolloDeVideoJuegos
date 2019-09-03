@@ -229,7 +229,7 @@ public class Player : MonoBehaviour
             mySelfSprite.enabled = false;
             gm.ResetGameManager();
             gm.GameOver();
-            gm.ResetRoundCombat();
+            gm.ResetRoundCombat(true);
         }
     }
     public void AttackButton() {
@@ -339,8 +339,14 @@ public class Player : MonoBehaviour
     {
         if (gm.GetGameState() == GameManager.GameState.EnComienzo)
         {
-            gm.timeSelectionAttack = TiempoDisparoAutomatico;
-            //gm.TextTimeOfAttack.text = "0";
+            if (gm.ActiveTime)
+            {
+                gm.timeSelectionAttack = TiempoDisparoAutomatico;
+            }
+            else if (!gm.ActiveTime)
+            {
+                gm.timeSelectionAttack = 0;
+            }
         }
     }
     public void RestartPlayer()

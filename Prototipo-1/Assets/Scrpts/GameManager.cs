@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
         Perdiste,
         Count,
     }
+    public bool ActiveTime;
+    public GameObject ImageClock;
     public GameObject canvasGameOver;
     public GameObject canvasLevel;
     public GameObject GeneradorEnemigos;
@@ -211,6 +213,7 @@ public class GameManager : MonoBehaviour
     public void Idle()
     {
         TextTitulo.text = "RONDA 1";
+        TextTitulo.gameObject.SetActive(false);
         TimeClockOfAttack.gameObject.SetActive(false);
         //TextTitulo.gameObject.SetActive(false);
         TextTimeStart.gameObject.SetActive(true);
@@ -237,6 +240,7 @@ public class GameManager : MonoBehaviour
             else if (timerStart <= 0)
             {
                 //generateEnemy = true;
+                TextTitulo.gameObject.SetActive(true);
                 TextTitulo.text = "ELIJAN MOVIMIENTO";
                 timerStart = auxTimerStart;
                 fsm.SendEvent((int)GameEvents.Comenzar);
@@ -257,18 +261,31 @@ public class GameManager : MonoBehaviour
     }
     public void EnComienzo()
     {
+        
+        TextTimeStart.gameObject.SetActive(false);
         TimeClockOfAttack.gameObject.SetActive(true);
         TextTitulo.gameObject.SetActive(true);
-        TextTimeStart.gameObject.SetActive(false);
         if (generateEnemy)
         {
             Debug.Log("ENTRE AL GENERADOR");
             generateEnemy = false;
             EnemyGenerator.GenerateEnemy();
         }
-        if (TimeClockOfAttack != null)
+        if (ActiveTime)
         {
-            CheckTimeAttackCharacters();
+            ImageClock.SetActive(true);
+            if (TimeClockOfAttack != null)
+            {
+                CheckTimeAttackCharacters();
+            }
+        }
+        else if (!ActiveTime)
+        {
+            ImageClock.SetActive(false);
+            if (timeSelectionAttack <= 0)
+            {
+                fsm.SendEvent((int)GameEvents.JugadasElejidas);
+            }
         }
     }
     public void RespuestaJugadores()
@@ -344,7 +361,14 @@ public class GameManager : MonoBehaviour
         if (timerNextRond > 0)
         {
             timerNextRond = timerNextRond - Time.deltaTime;
-            TextTitulo.text = "RONDA "+roundCombat;
+            if (roundCombat > 0)
+            {
+                TextTitulo.text = "RONDA " + roundCombat;
+            }
+            else
+            {
+                TextTitulo.text = " ";
+            }
             //TextTimeOfAttack.text = "" + (int)timerNextRond;
 
         }
@@ -594,9 +618,16 @@ public class GameManager : MonoBehaviour
     {
         return modoDeJuego;
     }
-    public void ResetRoundCombat()
+    public void ResetRoundCombat(bool PlayerDeath)
     {
-        roundCombat = 1;
+        if (!PlayerDeath)
+        {
+            roundCombat = 0;
+        }
+        else if (PlayerDeath)
+        {
+            roundCombat = 1;
+        }
     }
 }
     
