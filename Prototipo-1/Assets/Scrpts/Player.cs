@@ -345,6 +345,7 @@ public class Player : MonoBehaviour
             }
             else if (!gm.ActiveTime)
             {
+                Debug.Log("ENTRE");
                 gm.timeSelectionAttack = 0;
             }
         }
@@ -440,6 +441,11 @@ public class Player : MonoBehaviour
         {
             imagenAccion.sprite = SpriteAtaqueCabeza;
             _movimiento = Movimiento.AtacarCabeza;
+            if (!gm.ActiveTime)
+            {
+                gm.SetRespuestaJugador1(_movimiento);
+                Listo();
+            }
         }
     }
     public void EstadoMovimiento_AtacarTorso()
@@ -448,6 +454,11 @@ public class Player : MonoBehaviour
         {
             imagenAccion.sprite = SpriteAtaqueTorso;
             _movimiento = Movimiento.AtacarTorso;
+            if (!gm.ActiveTime)
+            {
+                gm.SetRespuestaJugador1(_movimiento);
+                Listo();
+            }
         }
     }
     public void EstadoMovimiento_AtacarPies()
@@ -456,6 +467,11 @@ public class Player : MonoBehaviour
         {
             imagenAccion.sprite = SpriteAtaquePies;
             _movimiento = Movimiento.AtacarPies;
+            if (!gm.ActiveTime)
+            {
+                gm.SetRespuestaJugador1(_movimiento);
+                Listo();
+            }
         }
     }
     public void EstadoMovimiento_DefenderCabeza()
@@ -464,6 +480,11 @@ public class Player : MonoBehaviour
         {
             imagenAccion.sprite = SpriteDefensaCabeza;
             _movimiento = Movimiento.DefenderCabeza;
+            if (!gm.ActiveTime)
+            {
+                gm.SetRespuestaJugador1(_movimiento);
+                Listo();
+            }
         }
     }
     public void EstadoMovimiento_DefenderTorsoPies()
@@ -472,6 +493,11 @@ public class Player : MonoBehaviour
         {
             imagenAccion.sprite = SpriteDefensaCuerpo;
             _movimiento = Movimiento.DefenderTorsoPies;
+            if (!gm.ActiveTime)
+            {
+                gm.SetRespuestaJugador1(_movimiento);
+                Listo();
+            }
         }
     }
     public void EstadoMovimiento_Saltar()
@@ -480,6 +506,11 @@ public class Player : MonoBehaviour
         {
             imagenAccion.sprite = SpriteSalto;
             _movimiento = Movimiento.Saltar;
+            if (!gm.ActiveTime)
+            {
+                gm.SetRespuestaJugador1(_movimiento);
+                Listo();
+            }
         }
     }
     public void EstadoMovimiento_Agacharse()
@@ -488,6 +519,11 @@ public class Player : MonoBehaviour
         {
             imagenAccion.sprite = SpriteAgacharse;
             _movimiento = Movimiento.Agacharse;
+            if (!gm.ActiveTime)
+            {
+                gm.SetRespuestaJugador1(_movimiento);
+                Listo();
+            }
         }
     }
     public void EstadoJugador_vivo()
