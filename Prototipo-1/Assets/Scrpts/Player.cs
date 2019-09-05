@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
     //que pueda elejir donde disparar(arriba, medio, abajo);
     // Start is called before the first frame update
     //Cada enemigo se especializa en alguna accion (Esquivar,Ataque o Defensa)
+    public GameObject PanelDeLogos;
     public GameObject BARRA_DE_VIDA;
     public GameObject generadorProyectiles;
     private Objetivo _objetivo;
@@ -184,19 +185,6 @@ public class Player : MonoBehaviour
     public void Back() {
         if (gm.timeSelectionAttack > 0)
         {
-            /*
-            Button_Jump.gameObject.SetActive(false);
-            Button_Duck.gameObject.SetActive(false);
-            Button_AttackHead.gameObject.SetActive(false);
-            Button_AttackChest.gameObject.SetActive(false);
-            Button_AttackLegs.gameObject.SetActive(false);
-            Button_DefenseHead.gameObject.SetActive(false);
-            Button_DefenseBoody.gameObject.SetActive(false);
-            Button_Back.gameObject.SetActive(false);
-            Button_Attack.gameObject.SetActive(true);
-            Button_Deffense.gameObject.SetActive(true);
-            Button_Dodge.gameObject.SetActive(true);
-            */
             PanelMovement.SetActive(true);
             PanelDodge.SetActive(false);
             PanelDeffense.SetActive(false);

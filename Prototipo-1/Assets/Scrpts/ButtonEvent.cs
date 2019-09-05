@@ -8,15 +8,24 @@ public class ButtonEvent : MonoBehaviour
     // Start is called before the first frame update
     public Image imagenButton;
     public Text textoButton;
+    public Image panelAparicion;
+    public ButtonEvent nextButton;
+    [Header("Tiempo Boton Habilitado")]
     public float timeEnable;
-    public float timeDisable;
     public float auxTimeEnable;
+    [Header("Tiempo Boton Deshabilitado")]
+    public float timeDisable;
     public float auxTimeDisable;
+    [Header("Velocidad de Aparicion y Desaparicion")]
     public float speedAviable;
     public float speedDisable;
     private bool preseed;
     private float alpha;
     private float auxAlpha;
+    [HideInInspector]
+    public bool disappear;
+    private float border = 200;
+
     void Start()
     {
         preseed = false;
@@ -28,9 +37,11 @@ public class ButtonEvent : MonoBehaviour
     }
     private void OnEnable()
     {
+        disappear = false;
         preseed = false;
         imagenButton.canvasRenderer.SetAlpha(0);
         textoButton.canvasRenderer.SetAlpha(0);
+        SetRandomPosition(panelAparicion.rectTransform.rect.xMin, panelAparicion.rectTransform.rect.xMax, panelAparicion.rectTransform.rect.yMin, panelAparicion.rectTransform.rect.yMax);
         timeDisable = 0;
         alpha = 0;
         timeEnable = auxTimeEnable;
@@ -52,6 +63,7 @@ public class ButtonEvent : MonoBehaviour
         if (timeEnable > 0)
         {
             Aparecer();
+            
             timeEnable = timeEnable - Time.deltaTime;
             
         }
@@ -67,6 +79,13 @@ public class ButtonEvent : MonoBehaviour
     }
     public void Desaparecer()
     {
+        if (nextButton != null)
+        {
+            if (nextButton.gameObject.activeSelf == false)
+            {
+                nextButton.gameObject.SetActive(true);
+            }
+        }
         if (alpha > 0)
         {
             alpha = alpha - Time.deltaTime*speedDisable;
@@ -76,6 +95,7 @@ public class ButtonEvent : MonoBehaviour
         if (alpha <= 0)
         {
             alpha = auxAlpha;
+            disappear = true;
             gameObject.SetActive(false);
         }
     }
@@ -88,6 +108,10 @@ public class ButtonEvent : MonoBehaviour
 
         imagenButton.canvasRenderer.SetAlpha(alpha);
         textoButton.canvasRenderer.SetAlpha(alpha);
+    }
+    public void SetRandomPosition(float min_X, float max_X, float max_Y, float min_Y)
+    {
+        transform.position = new Vector2(Random.Range(min_X, max_X), Random.Range(min_Y, max_Y));
     }
     public bool GetPressed()
     {

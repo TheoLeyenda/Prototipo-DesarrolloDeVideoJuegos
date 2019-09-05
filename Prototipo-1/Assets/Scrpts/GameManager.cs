@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     [Header("PushEvent")]
     public Text textClashEvent;
     public List<ButtonEvent> buttonsEvents;
-    public GameObject panelClash;
+    public Image panelClash;
     private float textScaleX;
     private float textScaleY;
     private float auxTextScaleX;
@@ -61,8 +61,9 @@ public class GameManager : MonoBehaviour
     private int countTypePushEvent = 3;
     private int id_button = 0;
     private int cantButtonUse;
-    private int minCantButtonUse = 5;
-    private int maxCantButtonUse;
+    private float minCantButtonUse = 5;
+    private float maxCantButtonUse;
+    private Vector2 positionButton;
     [Header("-----------")]
     public bool ActiveTime;
     public GameObject ImageClock;
@@ -120,12 +121,16 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        for (int i = 0; i < buttonsEvents.Count; i++)
+        {
+            buttonsEvents[i].gameObject.SetActive(false);
+        }
         maxCantButtonUse = buttonsEvents.Count - 1;
         id_button = 0;
         auxTextScaleX = textClashEvent.rectTransform.rect.width;
         auxTextScaleY = textClashEvent.rectTransform.rect.height;
         textClashEvent.gameObject.SetActive(false);
-        panelClash.SetActive(false);
+        panelClash.gameObject.SetActive(false);
         specialEvent = EventoEspecial.Nulo;
         roundCombat = 1;
         initialGeneration = true;
@@ -153,6 +158,10 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        for (int i = 0; i < buttonsEvents.Count; i++)
+        {
+            buttonsEvents[i].gameObject.SetActive(false);
+        }
         maxCantButtonUse = buttonsEvents.Count - 1;
         id_button = 0;
         auxTextScaleX = textClashEvent.rectTransform.rect.width;
@@ -170,45 +179,6 @@ public class GameManager : MonoBehaviour
         auxTimeSelectionAttack = timeSelectionAttack;
         auxTimerStart = timerStart;
         enemiesActivate = new List<Enemy>();
-
-        /*for (int i = 0; i < SceneManager.GetActiveScene().GetRootGameObjects().Length; i++) {
-            if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Enemy")
-            {
-                if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Enemy>().gameObject.activeSelf)
-                {
-                    enemiesActivate.Add(SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Enemy>());
-                }
-            }
-            if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player")
-            {
-                if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>() != null)
-                {
-                    player1 = SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>();
-                }
-            }
-            if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player2")
-            {
-                if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>() != null)
-                {
-                    player2 = SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>();
-                }
-
-            }
-            if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player3")
-            {
-                if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>() != null)
-                {
-                    player3 = SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>();
-                }
-            }
-            if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Player4")
-            {
-                if (SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>() != null)
-                {
-                    player4 = SceneManager.GetActiveScene().GetRootGameObjects()[i].GetComponent<Player>();
-                }
-            }
-        }*/
 
         DontDestroyOnLoad(gameObject);
     }
@@ -446,6 +416,8 @@ public class GameManager : MonoBehaviour
                 {
                     specialEvent = EventoEspecial.CartelClash;
                     TypePushEvent = Random.Range(0,countTypePushEvent);
+                    maxCantButtonUse = buttonsEvents.Count - 1;
+                    cantButtonUse = (int)Random.Range(minCantButtonUse, maxCantButtonUse);
                 }
             }
             else if (movimientoEnemigo == Enemy.Movimiento.AtacarTorso && movimientoJugador1 == Player.Movimiento.AtacarTorso)
@@ -455,6 +427,8 @@ public class GameManager : MonoBehaviour
                 {
                     specialEvent = EventoEspecial.CartelClash;
                     TypePushEvent = Random.Range(0, countTypePushEvent);
+                    maxCantButtonUse = buttonsEvents.Count - 1;
+                    cantButtonUse = (int)Random.Range(minCantButtonUse, maxCantButtonUse);
                 }
             }
             else if (movimientoEnemigo == Enemy.Movimiento.AtacarPies && movimientoJugador1 == Player.Movimiento.AtacarPies)
@@ -464,6 +438,8 @@ public class GameManager : MonoBehaviour
                 {
                     specialEvent = EventoEspecial.CartelClash;
                     TypePushEvent = Random.Range(0, countTypePushEvent);
+                    maxCantButtonUse = buttonsEvents.Count - 1;
+                    cantButtonUse = (int)Random.Range(minCantButtonUse, maxCantButtonUse);
                 }
             }
             else if (movimientoEnemigo == Enemy.Movimiento.Saltar && movimientoJugador1 == Player.Movimiento.AtacarPies)
@@ -585,7 +561,6 @@ public class GameManager : MonoBehaviour
                     break;
                 case EventoEspecial.PushButtonEvent:
                     EventPushButton(TypePushEvent);
-                    Debug.Log(TypePushEvent);
                     break;
                 case EventoEspecial.ContraAtaque:
                     specialEvent = EventoEspecial.Nulo;
@@ -611,17 +586,50 @@ public class GameManager : MonoBehaviour
             textScaleX = auxTextScaleX;
             textScaleY = auxTextScaleY;
             textClashEvent.gameObject.SetActive(false);
+            panelClash.gameObject.SetActive(true);
             specialEvent = EventoEspecial.PushButtonEvent;
         }
     }
     public void EventPushButton(int _typeEvent)
     {
+        _typeEvent = 0;
+        DisableUICharacters();
         switch (_typeEvent)
         {
             case 0:
+                Debug.Log("ENTRE");
+                Debug.Log(cantButtonUse);
                 if (id_button < cantButtonUse)
                 {
-                    //buttonsEvents[id_button].transform.position
+                    if (id_button == 0)
+                    {
+                        Debug.Log("APARECIO EL BOTON");
+                        buttonsEvents[id_button].gameObject.SetActive(true);
+                        id_button++;
+                        for (int i = 0; i < buttonsEvents.Count; i++)
+                        {
+                            buttonsEvents[i].disappear = false;
+                        }
+                    }
+                    Debug.Log(buttonsEvents[id_button].disappear);
+                    if (buttonsEvents[id_button].disappear)
+                    {
+                        if (buttonsEvents[id_button].GetPressed())
+                        {
+                            id_button++;
+                        }
+                        else
+                        {
+                            id_button = 0;
+                            specialEvent = EventoEspecial.Nulo;
+                            panelClash.gameObject.SetActive(false);
+                            ActivateUICharacters();
+                        }
+                    }
+                }
+                else
+                {
+                    //CHECKEO QUE TODOS LOS BOTONES HAYAN SIDO PRECIONADOS.
                 }
                 break;
             case 1:
@@ -630,6 +638,31 @@ public class GameManager : MonoBehaviour
                 break;
         }
         Debug.Log("Event Push Button");
+    }
+    public void DisableUICharacters()
+    {
+        player1.BARRA_DE_VIDA.SetActive(false);
+        player1.PanelMovement.SetActive(false);
+        player1.PanelAttack.SetActive(false);
+        player1.PanelDeffense.SetActive(false);
+        player1.PanelDodge.SetActive(false);
+        player1.PanelDeLogos.SetActive(false);
+        for (int i = 0; i < enemiesActivate.Count; i++)
+        {
+            enemiesActivate[i].PanelDeLogos.SetActive(false);
+            enemiesActivate[i].BARRA_DE_VIDA.SetActive(false);
+        }
+    }
+    public void ActivateUICharacters()
+    {
+        player1.BARRA_DE_VIDA.SetActive(true);
+        player1.PanelMovement.SetActive(true);
+        player1.PanelDeLogos.SetActive(true);
+        for (int i = 0; i < enemiesActivate.Count; i++)
+        {
+            enemiesActivate[i].PanelDeLogos.SetActive(true);
+            enemiesActivate[i].BARRA_DE_VIDA.SetActive(true);
+        }
     }
     public void CheckInGameOverScene()
     {

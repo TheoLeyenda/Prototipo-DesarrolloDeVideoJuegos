@@ -48,6 +48,8 @@ public class Enemy : MonoBehaviour
         muerto,
         Count,
     }
+    public GameObject PanelDeLogos;
+    public GameObject BARRA_DE_VIDA;
     private float alturaPredeterminada = -3.15f;
     private float auxLife;
     private Animator animator;
@@ -67,12 +69,9 @@ public class Enemy : MonoBehaviour
     public Sprite SpriteBlanco;
     public Image imagenAccion;
     public Image imagenMovimiento;
-    
 
     // CAMBIAR TODOS LOS SPRITES POR EL DICIONARIO Y SE ACCEDE POR EL NOMBRE.
-    public Dictionary<string, Sprite> SpritesGO; 
-
-
+    public Dictionary<string, Sprite> SpritesGO;
     public Sprite SpriteMovimientoAtaque;
     public Sprite SpriteMovimientoDefensa;
     public Sprite SpriteMovimientoEsquive;
