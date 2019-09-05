@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
     //que pueda elejir donde disparar(arriba, medio, abajo);
     // Start is called before the first frame update
     //Cada enemigo se especializa en alguna accion (Esquivar,Ataque o Defensa)
+    public GameObject BARRA_DE_VIDA;
     public GameObject generadorProyectiles;
     private Objetivo _objetivo;
     private Movimiento _movimiento;

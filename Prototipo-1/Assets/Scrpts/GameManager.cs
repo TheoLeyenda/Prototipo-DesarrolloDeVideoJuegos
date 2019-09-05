@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     [Header("PushEvent")]
     public Text textClashEvent;
     public List<ButtonEvent> buttonsEvents;
+    public GameObject panelClash;
     private float textScaleX;
     private float textScaleY;
     private float auxTextScaleX;
@@ -56,6 +57,12 @@ public class GameManager : MonoBehaviour
     public float maxTextScaleX;
     public float maxTextScaleY;
     public float speedOfSize;
+    private int TypePushEvent;
+    private int countTypePushEvent = 3;
+    private int id_button = 0;
+    private int cantButtonUse;
+    private int minCantButtonUse = 5;
+    private int maxCantButtonUse;
     [Header("-----------")]
     public bool ActiveTime;
     public GameObject ImageClock;
@@ -113,9 +120,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        maxCantButtonUse = buttonsEvents.Count - 1;
+        id_button = 0;
         auxTextScaleX = textClashEvent.rectTransform.rect.width;
         auxTextScaleY = textClashEvent.rectTransform.rect.height;
         textClashEvent.gameObject.SetActive(false);
+        panelClash.SetActive(false);
         specialEvent = EventoEspecial.Nulo;
         roundCombat = 1;
         initialGeneration = true;
@@ -143,9 +153,12 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        maxCantButtonUse = buttonsEvents.Count - 1;
+        id_button = 0;
         auxTextScaleX = textClashEvent.rectTransform.rect.width;
         auxTextScaleY = textClashEvent.rectTransform.rect.height;
         textClashEvent.gameObject.SetActive(false);
+        panelClash.gameObject.SetActive(false);
         specialEvent = EventoEspecial.Nulo;
         roundCombat = 1;
         canvasGameOver.SetActive(false);
@@ -432,6 +445,7 @@ public class GameManager : MonoBehaviour
                 if (specialEvent == EventoEspecial.Nulo)
                 {
                     specialEvent = EventoEspecial.CartelClash;
+                    TypePushEvent = Random.Range(0,countTypePushEvent);
                 }
             }
             else if (movimientoEnemigo == Enemy.Movimiento.AtacarTorso && movimientoJugador1 == Player.Movimiento.AtacarTorso)
@@ -440,6 +454,7 @@ public class GameManager : MonoBehaviour
                 if (specialEvent == EventoEspecial.Nulo)
                 {
                     specialEvent = EventoEspecial.CartelClash;
+                    TypePushEvent = Random.Range(0, countTypePushEvent);
                 }
             }
             else if (movimientoEnemigo == Enemy.Movimiento.AtacarPies && movimientoJugador1 == Player.Movimiento.AtacarPies)
@@ -448,6 +463,7 @@ public class GameManager : MonoBehaviour
                 if (specialEvent == EventoEspecial.Nulo)
                 {
                     specialEvent = EventoEspecial.CartelClash;
+                    TypePushEvent = Random.Range(0, countTypePushEvent);
                 }
             }
             else if (movimientoEnemigo == Enemy.Movimiento.Saltar && movimientoJugador1 == Player.Movimiento.AtacarPies)
@@ -561,16 +577,6 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
-            
-            //EL SWITCH DEL ENEMIGO
-            switch (modoDeJuego)
-            {
-                case ModosDeJuego.Historia:
-                    break;
-                case ModosDeJuego.Supervivencia:
-                    
-                    break;
-            }
             switch (specialEvent)
             {
                 case EventoEspecial.CartelClash:
@@ -578,8 +584,8 @@ public class GameManager : MonoBehaviour
                     ActivateCartelClash();
                     break;
                 case EventoEspecial.PushButtonEvent:
-                    specialEvent = EventoEspecial.Nulo;
-                    fsm.SendEvent((int)GameEvents.TiempoFuera);
+                    EventPushButton(TypePushEvent);
+                    Debug.Log(TypePushEvent);
                     break;
                 case EventoEspecial.ContraAtaque:
                     specialEvent = EventoEspecial.Nulo;
@@ -590,8 +596,6 @@ public class GameManager : MonoBehaviour
         {
 
         }
-       
-        
     }
     public void ActivateCartelClash()
     {
@@ -604,16 +608,27 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("ENTRE");
             textScaleX = auxTextScaleX;
             textScaleY = auxTextScaleY;
             textClashEvent.gameObject.SetActive(false);
             specialEvent = EventoEspecial.PushButtonEvent;
         }
     }
-    public void EventPushButton()
+    public void EventPushButton(int _typeEvent)
     {
-
+        switch (_typeEvent)
+        {
+            case 0:
+                if (id_button < cantButtonUse)
+                {
+                    //buttonsEvents[id_button].transform.position
+                }
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+        }
         Debug.Log("Event Push Button");
     }
     public void CheckInGameOverScene()
