@@ -359,6 +359,22 @@ public class Enemy : MonoBehaviour
         }
         else if (typeEnemy == TiposDeEnemigo.Defensivo)
         {
+            //float option = Random.Range(MinRangeRandom, opcionesContraAtaque);
+            //switch ((int)option)
+            //{
+                //case 0:
+                    Attack(Objetivo.Cabeza);
+                    //break;
+                //case 1:
+                    //Attack(Objetivo.Torso);
+                    //break;
+                //case 2:
+                    //Attack(Objetivo.Piernas);
+                    //break;
+            //}
+        }
+        else if (typeEnemy == TiposDeEnemigo.Agresivo)
+        {
             float option = Random.Range(MinRangeRandom, opcionesContraAtaque);
             switch ((int)option)
             {

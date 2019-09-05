@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
     private int countTypePushEvent = 3;
     private int id_button = 0;
     private int cantButtonUse;
+    private int ObjectivePushs;
     private float minCantButtonUse = 5;
     private float maxCantButtonUse;
     private Vector2 positionButton;
@@ -277,7 +278,6 @@ public class GameManager : MonoBehaviour
         TextTitulo.gameObject.SetActive(true);
         if (generateEnemy)
         {
-            Debug.Log("ENTRE AL GENERADOR");
             generateEnemy = false;
             EnemyGenerator.GenerateEnemy();
         }
@@ -418,6 +418,7 @@ public class GameManager : MonoBehaviour
                     TypePushEvent = Random.Range(0,countTypePushEvent);
                     maxCantButtonUse = buttonsEvents.Count - 1;
                     cantButtonUse = (int)Random.Range(minCantButtonUse, maxCantButtonUse);
+                    ObjectivePushs = cantButtonUse;
                 }
             }
             else if (movimientoEnemigo == Enemy.Movimiento.AtacarTorso && movimientoJugador1 == Player.Movimiento.AtacarTorso)
@@ -429,6 +430,7 @@ public class GameManager : MonoBehaviour
                     TypePushEvent = Random.Range(0, countTypePushEvent);
                     maxCantButtonUse = buttonsEvents.Count - 1;
                     cantButtonUse = (int)Random.Range(minCantButtonUse, maxCantButtonUse);
+                    ObjectivePushs = cantButtonUse;
                 }
             }
             else if (movimientoEnemigo == Enemy.Movimiento.AtacarPies && movimientoJugador1 == Player.Movimiento.AtacarPies)
@@ -440,6 +442,7 @@ public class GameManager : MonoBehaviour
                     TypePushEvent = Random.Range(0, countTypePushEvent);
                     maxCantButtonUse = buttonsEvents.Count - 1;
                     cantButtonUse = (int)Random.Range(minCantButtonUse, maxCantButtonUse);
+                    ObjectivePushs = cantButtonUse;
                 }
             }
             else if (movimientoEnemigo == Enemy.Movimiento.Saltar && movimientoJugador1 == Player.Movimiento.AtacarPies)
@@ -597,13 +600,11 @@ public class GameManager : MonoBehaviour
         switch (_typeEvent)
         {
             case 0:
-                Debug.Log("ENTRE");
                 Debug.Log(cantButtonUse);
                 if (id_button < cantButtonUse)
                 {
                     if (id_button == 0)
                     {
-                        Debug.Log("APARECIO EL BOTON");
                         buttonsEvents[id_button].gameObject.SetActive(true);
                         id_button++;
                         for (int i = 0; i < buttonsEvents.Count; i++)
@@ -611,26 +612,37 @@ public class GameManager : MonoBehaviour
                             buttonsEvents[i].disappear = false;
                         }
                     }
-                    Debug.Log(buttonsEvents[id_button].disappear);
                     if (buttonsEvents[id_button].disappear)
                     {
                         if (buttonsEvents[id_button].GetPressed())
                         {
                             id_button++;
+                            ObjectivePushs++;
                         }
                         else
                         {
+                            //PERDES
                             id_button = 0;
                             specialEvent = EventoEspecial.Nulo;
                             panelClash.gameObject.SetActive(false);
                             ActivateUICharacters();
+                            for (int i = 0; i < enemiesActivate.Count; i++)
+                            {
+                                enemiesActivate[i].CounterAttack();
+                            }
                         }
                     }
+                    if (ObjectivePushs >= cantButtonUse)
+                    {
+                        //GANAS
+                        id_button = 0;
+                        specialEvent = EventoEspecial.Nulo;
+                        panelClash.gameObject.SetActive(false);
+                        ActivateUICharacters();
+                        player1.IaMode();
+                    }
                 }
-                else
-                {
-                    //CHECKEO QUE TODOS LOS BOTONES HAYAN SIDO PRECIONADOS.
-                }
+                
                 break;
             case 1:
                 break;

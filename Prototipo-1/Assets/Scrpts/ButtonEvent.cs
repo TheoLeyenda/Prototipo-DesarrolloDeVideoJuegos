@@ -24,7 +24,7 @@ public class ButtonEvent : MonoBehaviour
     private float auxAlpha;
     [HideInInspector]
     public bool disappear;
-    private float border = 200;
+    private float border = 5f;
 
     void Start()
     {
@@ -37,11 +37,16 @@ public class ButtonEvent : MonoBehaviour
     }
     private void OnEnable()
     {
+        imagenButton.color = Color.white;
         disappear = false;
         preseed = false;
         imagenButton.canvasRenderer.SetAlpha(0);
         textoButton.canvasRenderer.SetAlpha(0);
-        SetRandomPosition(panelAparicion.rectTransform.rect.xMin, panelAparicion.rectTransform.rect.xMax, panelAparicion.rectTransform.rect.yMin, panelAparicion.rectTransform.rect.yMax);
+        //Debug.Log("Menor x:" + (-panelAparicion.rectTransform.sizeDelta.x/ border));
+        //Debug.Log("Mayor x:" + panelAparicion.rectTransform.sizeDelta.x/ border);
+        //Debug.Log("Menor y:" + (-panelAparicion.rectTransform.sizeDelta.y/ border));
+        //Debug.Log("Menor y:" + panelAparicion.rectTransform.sizeDelta.y/ border);
+        SetRandomPosition(-panelAparicion.rectTransform.sizeDelta.x/ border, panelAparicion.rectTransform.sizeDelta.x/ border, -panelAparicion.rectTransform.sizeDelta.y/ border, panelAparicion.rectTransform.sizeDelta.y/ border);
         timeDisable = 0;
         alpha = 0;
         timeEnable = auxTimeEnable;
@@ -49,14 +54,14 @@ public class ButtonEvent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!preseed)
-        {
+        //if (!preseed)
+        //{
             CheckLife();
-        }
-        else
-        {
+        //}
+        //else
+        //{
             
-        }
+        //}
     }
     public void CheckLife()
     {
@@ -71,7 +76,6 @@ public class ButtonEvent : MonoBehaviour
         {
             timeDisable = auxTimeDisable;
         }
-        Debug.Log(timeDisable);
         if (timeDisable > 0)
         {
             Desaparecer();
@@ -111,7 +115,7 @@ public class ButtonEvent : MonoBehaviour
     }
     public void SetRandomPosition(float min_X, float max_X, float max_Y, float min_Y)
     {
-        transform.position = new Vector2(Random.Range(min_X, max_X), Random.Range(min_Y, max_Y));
+        transform.localPosition = new Vector2(Random.Range(min_X, max_X), Random.Range(min_Y, max_Y));
     }
     public bool GetPressed()
     {
@@ -119,6 +123,7 @@ public class ButtonEvent : MonoBehaviour
     }
     public void ActivePressed()
     {
+        imagenButton.color = Color.green;
         preseed = true;
     }
 }
