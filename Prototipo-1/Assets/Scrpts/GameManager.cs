@@ -581,6 +581,9 @@ public class GameManager : MonoBehaviour
                     specialEvent = EventoEspecial.Nulo;
                     fsm.SendEvent((int)GameEvents.TiempoFuera);
                     break;
+                case EventoEspecial.ContraAtaque:
+                    specialEvent = EventoEspecial.Nulo;
+                    break;
             }
         }
         if (MultiPlayer)
