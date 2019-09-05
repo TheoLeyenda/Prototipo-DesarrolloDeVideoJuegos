@@ -345,7 +345,6 @@ public class Player : MonoBehaviour
             }
             else if (!gm.ActiveTime)
             {
-                Debug.Log("ENTRE");
                 gm.timeSelectionAttack = 0;
             }
         }

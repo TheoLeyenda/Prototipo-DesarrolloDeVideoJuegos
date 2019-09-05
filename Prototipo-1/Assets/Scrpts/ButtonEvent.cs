@@ -14,10 +14,12 @@ public class ButtonEvent : MonoBehaviour
     public float auxTimeDisable;
     public float speedAviable;
     public float speedDisable;
+    private bool preseed;
     private float alpha;
     private float auxAlpha;
     void Start()
     {
+        preseed = false;
         imagenButton.canvasRenderer.SetAlpha(0);
         textoButton.canvasRenderer.SetAlpha(0);
         alpha = 1;
@@ -26,6 +28,7 @@ public class ButtonEvent : MonoBehaviour
     }
     private void OnEnable()
     {
+        preseed = false;
         imagenButton.canvasRenderer.SetAlpha(0);
         textoButton.canvasRenderer.SetAlpha(0);
         timeDisable = 0;
@@ -35,7 +38,14 @@ public class ButtonEvent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckLife();
+        if (!preseed)
+        {
+            CheckLife();
+        }
+        else
+        {
+            
+        }
     }
     public void CheckLife()
     {
@@ -78,5 +88,13 @@ public class ButtonEvent : MonoBehaviour
 
         imagenButton.canvasRenderer.SetAlpha(alpha);
         textoButton.canvasRenderer.SetAlpha(alpha);
+    }
+    public bool GetPressed()
+    {
+        return preseed;
+    }
+    public void ActivePressed()
+    {
+        preseed = true;
     }
 }

@@ -7,6 +7,14 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public enum EventoEspecial
+    {
+        Nulo,
+        CartelClash,
+        PushButtonEvent,
+        ContraAtaque,
+        Count,
+    }
     public enum ModosDeJuego
     {
         Nulo,
@@ -38,6 +46,17 @@ public class GameManager : MonoBehaviour
         Perdiste,
         Count,
     }
+    [Header("PushEvent")]
+    public Text textClashEvent;
+    public List<ButtonEvent> buttonsEvents;
+    private float textScaleX;
+    private float textScaleY;
+    private float auxTextScaleX;
+    private float auxTextScaleY;
+    public float maxTextScaleX;
+    public float maxTextScaleY;
+    public float speedOfSize;
+    [Header("-----------")]
     public bool ActiveTime;
     public GameObject ImageClock;
     public GameObject canvasGameOver;
@@ -75,7 +94,7 @@ public class GameManager : MonoBehaviour
     private Enemy.EstadoEnemigo estadoEnemigo;
     private Enemy.Movimiento movimientoEnemigo;
     // HACER LO MISMO PERO PARA EL ENEMIGO 
-    private bool EventoEspecial;
+    private EventoEspecial specialEvent;
     private EstadoResultado estadoResultado;
     private float auxTimeSelectionAttack;
     private float auxTimerNextRond;
@@ -94,6 +113,10 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        auxTextScaleX = textClashEvent.rectTransform.rect.width;
+        auxTextScaleY = textClashEvent.rectTransform.rect.height;
+        textClashEvent.gameObject.SetActive(false);
+        specialEvent = EventoEspecial.Nulo;
         roundCombat = 1;
         initialGeneration = true;
         countEnemysDead = 0;
@@ -120,12 +143,16 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        auxTextScaleX = textClashEvent.rectTransform.rect.width;
+        auxTextScaleY = textClashEvent.rectTransform.rect.height;
+        textClashEvent.gameObject.SetActive(false);
+        specialEvent = EventoEspecial.Nulo;
         roundCombat = 1;
         canvasGameOver.SetActive(false);
         canvasLevel.SetActive(true);
         initialGeneration = true;
         countEnemysDead = 0;
-        EventoEspecial = false;
+        specialEvent = EventoEspecial.Nulo;
         auxTimerNextRond = timerNextRond;
         auxTimeSelectionAttack = timeSelectionAttack;
         auxTimerStart = timerStart;
@@ -261,7 +288,7 @@ public class GameManager : MonoBehaviour
     }
     public void EnComienzo()
     {
-        
+        specialEvent = EventoEspecial.Nulo;
         TextTimeStart.gameObject.SetActive(false);
         TimeClockOfAttack.gameObject.SetActive(true);
         TextTitulo.gameObject.SetActive(true);
@@ -294,7 +321,10 @@ public class GameManager : MonoBehaviour
         //TextTitulo.gameObject.SetActive(false);
         TextTimeStart.gameObject.SetActive(false);
         CheckCharcaters();
-        fsm.SendEvent((int)GameEvents.TiempoFuera);
+        if (specialEvent == EventoEspecial.Nulo)
+        {
+            fsm.SendEvent((int)GameEvents.TiempoFuera);
+        }
 
     }
     public void Resultado()
@@ -340,13 +370,7 @@ public class GameManager : MonoBehaviour
         if (timeSelectionAttack > 0)
         {
             timeSelectionAttack = timeSelectionAttack - Time.deltaTime;
-            //TextTimeOfAttack.text = "" + ((int)timeSelectionAttack - 1);
             TimeClockOfAttack.fillAmount = timeSelectionAttack / auxTimeSelectionAttack;
-            /*if (((int)timeSelectionAttack - 1) < 0)
-            {
-                //TextTimeOfAttack.text = "0";
-                TimeClockOfAttack.fillAmount = 0;
-            }*/
         }
         else if (timeSelectionAttack <= 0)
         {
@@ -369,7 +393,6 @@ public class GameManager : MonoBehaviour
             {
                 TextTitulo.text = " ";
             }
-            //TextTimeOfAttack.text = "" + (int)timerNextRond;
 
         }
         if (timerNextRond <= 0)
@@ -383,9 +406,8 @@ public class GameManager : MonoBehaviour
     {
         if (SiglePlayer)
         {
-            //Debug.Log("ENTRE");
+            
             enemiesActivate.Clear();
-            //Debug.Log("Estado:" + estadoJugador1);
             for (int i = 0; i < SceneManager.GetActiveScene().GetRootGameObjects().Length; i++)
             {
                 if (SceneManager.GetActiveScene().GetRootGameObjects()[i].tag == "Enemy")
@@ -407,20 +429,26 @@ public class GameManager : MonoBehaviour
             if (movimientoEnemigo == Enemy.Movimiento.AtacarCabeza && movimientoJugador1 == Player.Movimiento.AtacarCabeza)
             {
                 //EVENTO CUANDO EL ENEMIGO Y EL JUGADOR ATACAN AL MISMO OBJETIVO
-                EventPushButton();
-                EventoEspecial = true;
+                if (specialEvent == EventoEspecial.Nulo)
+                {
+                    specialEvent = EventoEspecial.CartelClash;
+                }
             }
             else if (movimientoEnemigo == Enemy.Movimiento.AtacarTorso && movimientoJugador1 == Player.Movimiento.AtacarTorso)
             {
                 //EVENTO CUANDO EL ENEMIGO Y EL JUGADOR ATACAN AL MISMO OBJETIVO
-                EventPushButton();
-                EventoEspecial = true;
+                if (specialEvent == EventoEspecial.Nulo)
+                {
+                    specialEvent = EventoEspecial.CartelClash;
+                }
             }
             else if (movimientoEnemigo == Enemy.Movimiento.AtacarPies && movimientoJugador1 == Player.Movimiento.AtacarPies)
             {
                 //EVENTO CUANDO EL ENEMIGO Y EL JUGADOR ATACAN AL MISMO OBJETIVO
-                EventPushButton();
-                EventoEspecial = true;
+                if (specialEvent == EventoEspecial.Nulo)
+                {
+                    specialEvent = EventoEspecial.CartelClash;
+                }
             }
             else if (movimientoEnemigo == Enemy.Movimiento.Saltar && movimientoJugador1 == Player.Movimiento.AtacarPies)
             {
@@ -431,7 +459,7 @@ public class GameManager : MonoBehaviour
                     {
                         enemiesActivate[i].Jump();
                         enemiesActivate[i].CounterAttack();
-                        EventoEspecial = true;
+                        specialEvent = EventoEspecial.ContraAtaque;
                     }
                 }
 
@@ -445,7 +473,7 @@ public class GameManager : MonoBehaviour
                     {
                         enemiesActivate[i].Duck();
                         enemiesActivate[i].CounterAttack();
-                        EventoEspecial = true;
+                        specialEvent = EventoEspecial.ContraAtaque;
                     }
                 }
 
@@ -458,7 +486,7 @@ public class GameManager : MonoBehaviour
                 }
                 player1.Duck();
                 player1.CounterAttack();
-                EventoEspecial = true;
+                specialEvent = EventoEspecial.ContraAtaque;
             }
             else if (movimientoJugador1 == Player.Movimiento.Saltar && movimientoEnemigo == Enemy.Movimiento.AtacarPies)
             {
@@ -468,9 +496,9 @@ public class GameManager : MonoBehaviour
                 }
                 player1.Jump();
                 player1.CounterAttack();
-                EventoEspecial = true;
+                specialEvent = EventoEspecial.ContraAtaque;
             }
-            else if (!EventoEspecial)
+            else if (specialEvent == EventoEspecial.Nulo)
             {
                 switch (movimientoJugador1)
                 {
@@ -543,15 +571,46 @@ public class GameManager : MonoBehaviour
                     
                     break;
             }
+            switch (specialEvent)
+            {
+                case EventoEspecial.CartelClash:
+                    textClashEvent.gameObject.SetActive(true);
+                    ActivateCartelClash();
+                    break;
+                case EventoEspecial.PushButtonEvent:
+                    specialEvent = EventoEspecial.Nulo;
+                    fsm.SendEvent((int)GameEvents.TiempoFuera);
+                    break;
+            }
         }
         if (MultiPlayer)
         {
 
         }
-        EventoEspecial = false;
+       
+        
+    }
+    public void ActivateCartelClash()
+    {
+        if (textScaleX < maxTextScaleX && textScaleY < maxTextScaleY && specialEvent == EventoEspecial.CartelClash)
+        {
+            textScaleX = textScaleX + Time.deltaTime * speedOfSize;
+            textScaleY = textScaleX;
+            textClashEvent.rectTransform.sizeDelta = new Vector2(textScaleX, textScaleY);
+            
+        }
+        else
+        {
+            Debug.Log("ENTRE");
+            textScaleX = auxTextScaleX;
+            textScaleY = auxTextScaleY;
+            textClashEvent.gameObject.SetActive(false);
+            specialEvent = EventoEspecial.PushButtonEvent;
+        }
     }
     public void EventPushButton()
     {
+
         Debug.Log("Event Push Button");
     }
     public void CheckInGameOverScene()
