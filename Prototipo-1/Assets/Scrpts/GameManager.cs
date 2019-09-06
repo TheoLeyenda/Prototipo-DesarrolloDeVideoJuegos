@@ -625,7 +625,38 @@ public class GameManager : MonoBehaviour
         switch (_typeEvent)
         {
             case 0:
-                if (id_button < cantButtonUse)
+                if (id_button < cantButtonUse && (id_button + 1) < cantButtonUse)
+                {
+                    if (buttonsEvents[id_button].disappear)
+                    {
+
+                        if (buttonsEvents[id_button].GetPressed())
+                        {
+                            buttonsEvents[id_button].gameObject.SetActive(false);
+                            id_button++;
+                            ObjectivePushs++;
+                            TextBotonesPrecionados.text = "" + ObjectivePushs + "/" + cantButtonUse;
+                        }
+                        else
+                        {
+                            //Debug.Log("PERDI");
+                            //PERDES
+                            DefaultPushEvent();
+                        }
+                    }
+                    else if (buttonsEvents[id_button + 1].GetPressed() && buttonsEvents[id_button + 1].gameObject.activeSelf && !buttonsEvents[id_button].GetPressed())
+                    {
+                        DefaultPushEvent();
+                    }
+                    //ESTO SIEMPRE DEBE ESTAR ABAJO
+                    if (ObjectivePushs >= cantButtonUse)
+                    {
+                        //GANAS
+                        VictoryPushEvent();
+                    }
+                    //------------------------------------------------//
+                }
+                else
                 {
                     if (buttonsEvents[id_button].disappear)
                     {
@@ -638,39 +669,55 @@ public class GameManager : MonoBehaviour
                         }
                         else
                         {
+
                             //PERDES
-                            id_button = 0;
-                            ObjectivePushs = 0;
-                            specialEvent = EventoEspecial.Nulo;
-                            panelClash.gameObject.SetActive(false);
-                            ActivateUICharacters();
-                            for (int i = 0; i < enemiesActivate.Count; i++)
-                            {
-                                enemiesActivate[i].CounterAttack(true);
-                            }
+                            DefaultPushEvent();
                         }
                     }
-                    //ESTO SIEMPRE DEBE ESTAR ABAJO
                     if (ObjectivePushs >= cantButtonUse)
                     {
                         //GANAS
-                        id_button = 0;
-                        ObjectivePushs = 0;
-                        specialEvent = EventoEspecial.Nulo;
-                        panelClash.gameObject.SetActive(false);
-                        ActivateUICharacters();
-                        player1.EstadoMovimiento_ContraAtaque();
-                        player1.CounterAttack(true);
+                        VictoryPushEvent();
                     }
-                    //------------------------------------------------//
                 }
-                
                 break;
             case 1:
+
                 break;
             case 2:
+
                 break;
         }
+    }
+    public void DefaultPushEvent()
+    {
+        id_button = 0;
+        ObjectivePushs = 0;
+        specialEvent = EventoEspecial.Nulo;
+        for (int i = 0; i < buttonsEvents.Count; i++)
+        {
+            buttonsEvents[i].gameObject.SetActive(false);
+        }
+        panelClash.gameObject.SetActive(false);
+        ActivateUICharacters();
+        for (int i = 0; i < enemiesActivate.Count; i++)
+        {
+            enemiesActivate[i].CounterAttack(true);
+        }
+    }
+    public void VictoryPushEvent()
+    {
+        id_button = 0;
+        ObjectivePushs = 0;
+        specialEvent = EventoEspecial.Nulo;
+        for (int i = 0; i < buttonsEvents.Count; i++)
+        {
+            buttonsEvents[i].gameObject.SetActive(false);
+        }
+        panelClash.gameObject.SetActive(false);
+        ActivateUICharacters();
+        player1.EstadoMovimiento_ContraAtaque();
+        player1.CounterAttack(true);
     }
     public void DisableUICharacters()
     {
