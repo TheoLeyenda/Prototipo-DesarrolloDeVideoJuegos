@@ -352,7 +352,24 @@ public class Enemy : MonoBehaviour
                         //Attack(Objetivo.Piernas);
                         imagenAccion.sprite = SpriteAtaquePies;
                         Attack(Objetivo.Piernas,dobleDamage);
-
+                        break;
+                    default:
+                        float option = Random.Range(MinRangeRandom, opcionesContraAtaque);
+                        switch ((int)option)
+                        {
+                            case 0:
+                                imagenAccion.sprite = SpriteAtaqueCabeza;
+                                Attack(Objetivo.Cabeza, dobleDamage);
+                                break;
+                            case 1:
+                                imagenAccion.sprite = SpriteAtaqueTorso;
+                                Attack(Objetivo.Torso, dobleDamage);
+                                break;
+                            case 2:
+                                imagenAccion.sprite = SpriteAtaquePies;
+                                Attack(Objetivo.Piernas, dobleDamage);
+                                break;
+                        }
                         break;
                 }
             }
@@ -379,13 +396,16 @@ public class Enemy : MonoBehaviour
             switch ((int)option)
             {
                 case 0:
-                    Attack(Objetivo.Cabeza,dobleDamage);
+                    imagenAccion.sprite = SpriteAtaqueCabeza;
+                    Attack(Objetivo.Cabeza, dobleDamage);
                     break;
                 case 1:
-                    Attack(Objetivo.Torso,dobleDamage);
+                    imagenAccion.sprite = SpriteAtaqueTorso;
+                    Attack(Objetivo.Torso, dobleDamage);
                     break;
                 case 2:
-                    Attack(Objetivo.Piernas,dobleDamage);
+                    imagenAccion.sprite = SpriteAtaquePies;
+                    Attack(Objetivo.Piernas, dobleDamage);
                     break;
             }
         }

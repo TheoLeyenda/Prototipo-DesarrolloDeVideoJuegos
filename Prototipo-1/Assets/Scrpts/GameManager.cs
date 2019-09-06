@@ -425,9 +425,12 @@ public class GameManager : MonoBehaviour
                     {
                         buttonsEvents[i].disappear = false;
                         buttonsEvents[i].gameObject.SetActive(false);
+                        buttonsEvents[i].SetTypePattern(TypePushEvent);
+                        //buttonsEvents[i].SetTypePattern(1);
                     }
                     buttonsEvents[id_button].gameObject.SetActive(true);
                     TextBotonesPrecionados.text = ""+ObjectivePushs+"/" + cantButtonUse;
+                    
                 }
             }
             else if (movimientoEnemigo == Enemy.Movimiento.AtacarTorso && movimientoJugador1 == Player.Movimiento.AtacarTorso)
@@ -445,6 +448,8 @@ public class GameManager : MonoBehaviour
                     {
                         buttonsEvents[i].disappear = false;
                         buttonsEvents[i].gameObject.SetActive(false);
+                        buttonsEvents[i].SetTypePattern(TypePushEvent);
+                        //buttonsEvents[i].SetTypePattern(1);
                     }
                     buttonsEvents[id_button].gameObject.SetActive(true);
                     TextBotonesPrecionados.text = "" + ObjectivePushs + "/" + cantButtonUse;
@@ -465,6 +470,8 @@ public class GameManager : MonoBehaviour
                     {
                         buttonsEvents[i].disappear = false;
                         buttonsEvents[i].gameObject.SetActive(false);
+                        buttonsEvents[i].SetTypePattern(TypePushEvent);
+                        //buttonsEvents[i].SetTypePattern(1);
                     }
                     buttonsEvents[id_button].gameObject.SetActive(true);
                     TextBotonesPrecionados.text = "" + ObjectivePushs + "/" + cantButtonUse;
@@ -620,73 +627,61 @@ public class GameManager : MonoBehaviour
     }
     public void EventPushButton(int _typeEvent)
     {
-        _typeEvent = 0;
         DisableUICharacters();
-        switch (_typeEvent)
+        if (id_button < cantButtonUse && (id_button + 1) < cantButtonUse)
         {
-            case 0:
-                if (id_button < cantButtonUse && (id_button + 1) < cantButtonUse)
-                {
-                    if (buttonsEvents[id_button].disappear)
-                    {
+            if (buttonsEvents[id_button].disappear)
+            {
 
-                        if (buttonsEvents[id_button].GetPressed())
-                        {
-                            buttonsEvents[id_button].gameObject.SetActive(false);
-                            id_button++;
-                            ObjectivePushs++;
-                            TextBotonesPrecionados.text = "" + ObjectivePushs + "/" + cantButtonUse;
-                        }
-                        else
-                        {
-                            //Debug.Log("PERDI");
-                            //PERDES
-                            DefaultPushEvent();
-                        }
-                    }
-                    else if (buttonsEvents[id_button + 1].GetPressed() && buttonsEvents[id_button + 1].gameObject.activeSelf && !buttonsEvents[id_button].GetPressed())
-                    {
-                        DefaultPushEvent();
-                    }
-                    //ESTO SIEMPRE DEBE ESTAR ABAJO
-                    if (ObjectivePushs >= cantButtonUse)
-                    {
-                        //GANAS
-                        VictoryPushEvent();
-                    }
-                    //------------------------------------------------//
+                if (buttonsEvents[id_button].GetPressed())
+                {
+                    buttonsEvents[id_button].gameObject.SetActive(false);
+                    id_button++;
+                    ObjectivePushs++;
+                    TextBotonesPrecionados.text = "" + ObjectivePushs + "/" + cantButtonUse;
                 }
                 else
                 {
-                    if (buttonsEvents[id_button].disappear)
-                    {
-                        if (buttonsEvents[id_button].GetPressed())
-                        {
-                            buttonsEvents[id_button].gameObject.SetActive(false);
-                            id_button++;
-                            ObjectivePushs++;
-                            TextBotonesPrecionados.text = "" + ObjectivePushs + "/" + cantButtonUse;
-                        }
-                        else
-                        {
-
-                            //PERDES
-                            DefaultPushEvent();
-                        }
-                    }
-                    if (ObjectivePushs >= cantButtonUse)
-                    {
-                        //GANAS
-                        VictoryPushEvent();
-                    }
+                    Debug.Log("PERDI");
+                    //PERDES
+                    DefaultPushEvent();
                 }
-                break;
-            case 1:
+            }
+            else if (buttonsEvents[id_button + 1].GetPressed() && buttonsEvents[id_button + 1].gameObject.activeSelf && !buttonsEvents[id_button].GetPressed())
+            {
+                DefaultPushEvent();
+            }
+            //ESTO SIEMPRE DEBE ESTAR ABAJO
+            if (ObjectivePushs >= cantButtonUse)
+            {
+                //GANAS
+                VictoryPushEvent();
+            }
+            //------------------------------------------------//
+        }
+        else
+        {
+            if (buttonsEvents[id_button].disappear)
+            {
+                if (buttonsEvents[id_button].GetPressed())
+                {
+                    buttonsEvents[id_button].gameObject.SetActive(false);
+                    id_button++;
+                    ObjectivePushs++;
+                    TextBotonesPrecionados.text = "" + ObjectivePushs + "/" + cantButtonUse;
+                }
+                else
+                {
 
-                break;
-            case 2:
-
-                break;
+                    //PERDES
+                    DefaultPushEvent();
+                }
+            }
+            if (ObjectivePushs >= cantButtonUse)
+            {
+                //GANAS
+                VictoryPushEvent();
+            }
         }
     }
     public void DefaultPushEvent()

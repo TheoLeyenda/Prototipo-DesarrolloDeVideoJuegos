@@ -226,14 +226,6 @@ public class Player : MonoBehaviour
         if (gm.GetGameState() == GameManager.GameState.EnComienzo)
         {
             imagenMovimiento.sprite = SpriteMovimientoAtaque;
-            /*Button_Deffense.gameObject.SetActive(false);
-            Button_Dodge.gameObject.SetActive(false);
-
-            Button_Attack.gameObject.SetActive(false);
-            Button_AttackChest.gameObject.SetActive(true);
-            Button_AttackHead.gameObject.SetActive(true);
-            Button_AttackLegs.gameObject.SetActive(true);
-            Button_Back.gameObject.SetActive(true);*/
 
             PanelDeffense.SetActive(false);
             PanelDodge.SetActive(false);
