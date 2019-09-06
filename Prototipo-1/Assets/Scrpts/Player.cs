@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
         DefenderTorsoPies,
         Saltar,
         Agacharse,
+        ContraAtaque,
         Count,
     }
     public enum EstadoJugador
@@ -248,7 +249,7 @@ public class Player : MonoBehaviour
         ShildBoody.gameObject.SetActive(true);
         ShildHead.gameObject.SetActive(true);
     }
-    public void Attack(Objetivo ob)
+    public void Attack(Objetivo ob,bool doubleDamage)
     {
         if(Time.timeScale > 0)
         {
@@ -258,6 +259,11 @@ public class Player : MonoBehaviour
                 DisableShild();
                 GameObject go = poolObjectAttack.GetObject();
                 Proyectil proyectil = go.GetComponent<Proyectil>();
+                proyectil.SetDobleDamage(doubleDamage);
+                if (doubleDamage)
+                {
+                    proyectil.damage = proyectil.damage * 2;
+                }
                 go.transform.position = generadorProyectiles.transform.localPosition;
                 go.transform.position = go.transform.position + PosicionGeneracionBalaRelativa;
                 proyectil.On();
@@ -396,7 +402,7 @@ public class Player : MonoBehaviour
         BoxColliderChest.enabled = true;
         BoxColliderLegs.enabled = true;
     }
-    public void CounterAttack()
+    public void CounterAttack(bool DoubleDamage)
     {
         ShildHead.gameObject.SetActive(false);
         ShildBoody.gameObject.SetActive(false);
@@ -411,15 +417,34 @@ public class Player : MonoBehaviour
                     //ATACAR A LA CABEZA
                     //Attack(Objetivo.Cabeza);
                     imagenAccion.sprite = SpriteAtaqueCabeza;
-                    Attack(Objetivo.Cabeza);
+                    Attack(Objetivo.Cabeza,DoubleDamage);
                     break;
                 case Movimiento.Saltar:
                     //ATACAR A LOS PIES
                     //Attack(Objetivo.Piernas);
                     imagenAccion.sprite = SpriteAtaquePies;
-                    Attack(Objetivo.Piernas);
-
+                    Attack(Objetivo.Piernas,DoubleDamage);
                     break;
+                case Movimiento.ContraAtaque:
+                    imagenMovimiento.sprite = SpriteMovimientoAtaque;
+                    float option = Random.Range(MinRangeRandom, MaxRangeRandomTargertAttack);
+                    switch ((int)option)
+                    {
+                        case 0:
+                            imagenAccion.sprite = SpriteAtaqueCabeza;
+                            Attack(Objetivo.Cabeza,DoubleDamage);
+                            break;
+                        case 1:
+                            imagenAccion.sprite = SpriteAtaqueTorso;
+                            Attack(Objetivo.Torso, DoubleDamage);
+                            break;
+                        case 2:
+                            imagenAccion.sprite = SpriteAtaquePies;
+                            Attack(Objetivo.Piernas, DoubleDamage);
+                            break;
+                    }
+                    break;
+
             }
         }
     }
@@ -513,6 +538,10 @@ public class Player : MonoBehaviour
                 Listo();
             }
         }
+    }
+    public void EstadoMovimiento_ContraAtaque()
+    {
+        _movimiento = Movimiento.ContraAtaque;
     }
     public void EstadoJugador_vivo()
     {

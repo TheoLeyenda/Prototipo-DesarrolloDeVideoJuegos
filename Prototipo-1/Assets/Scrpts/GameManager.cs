@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     private float minCantButtonUse = 5;
     private float maxCantButtonUse;
     private Vector2 positionButton;
+    public Text TextBotonesPrecionados;
     [Header("-----------")]
     public bool ActiveTime;
     public GameObject ImageClock;
@@ -126,7 +127,7 @@ public class GameManager : MonoBehaviour
         {
             buttonsEvents[i].gameObject.SetActive(false);
         }
-        maxCantButtonUse = buttonsEvents.Count - 1;
+        maxCantButtonUse = buttonsEvents.Count;
         id_button = 0;
         auxTextScaleX = textClashEvent.rectTransform.rect.width;
         auxTextScaleY = textClashEvent.rectTransform.rect.height;
@@ -418,7 +419,15 @@ public class GameManager : MonoBehaviour
                     TypePushEvent = Random.Range(0,countTypePushEvent);
                     maxCantButtonUse = buttonsEvents.Count - 1;
                     cantButtonUse = (int)Random.Range(minCantButtonUse, maxCantButtonUse);
-                    ObjectivePushs = cantButtonUse;
+                    cantButtonUse = cantButtonUse - 1;
+                    ObjectivePushs = 0;
+                    for (int i = 0; i < buttonsEvents.Count; i++)
+                    {
+                        buttonsEvents[i].disappear = false;
+                        buttonsEvents[i].gameObject.SetActive(false);
+                    }
+                    buttonsEvents[id_button].gameObject.SetActive(true);
+                    TextBotonesPrecionados.text = ""+ObjectivePushs+"/" + cantButtonUse;
                 }
             }
             else if (movimientoEnemigo == Enemy.Movimiento.AtacarTorso && movimientoJugador1 == Player.Movimiento.AtacarTorso)
@@ -430,7 +439,15 @@ public class GameManager : MonoBehaviour
                     TypePushEvent = Random.Range(0, countTypePushEvent);
                     maxCantButtonUse = buttonsEvents.Count - 1;
                     cantButtonUse = (int)Random.Range(minCantButtonUse, maxCantButtonUse);
-                    ObjectivePushs = cantButtonUse;
+                    cantButtonUse = cantButtonUse - 1;
+                    ObjectivePushs = 0;
+                    for (int i = 0; i < buttonsEvents.Count; i++)
+                    {
+                        buttonsEvents[i].disappear = false;
+                        buttonsEvents[i].gameObject.SetActive(false);
+                    }
+                    buttonsEvents[id_button].gameObject.SetActive(true);
+                    TextBotonesPrecionados.text = "" + ObjectivePushs + "/" + cantButtonUse;
                 }
             }
             else if (movimientoEnemigo == Enemy.Movimiento.AtacarPies && movimientoJugador1 == Player.Movimiento.AtacarPies)
@@ -442,18 +459,26 @@ public class GameManager : MonoBehaviour
                     TypePushEvent = Random.Range(0, countTypePushEvent);
                     maxCantButtonUse = buttonsEvents.Count - 1;
                     cantButtonUse = (int)Random.Range(minCantButtonUse, maxCantButtonUse);
-                    ObjectivePushs = cantButtonUse;
+                    cantButtonUse = cantButtonUse - 1;
+                    ObjectivePushs = 0;
+                    for (int i = 0; i < buttonsEvents.Count; i++)
+                    {
+                        buttonsEvents[i].disappear = false;
+                        buttonsEvents[i].gameObject.SetActive(false);
+                    }
+                    buttonsEvents[id_button].gameObject.SetActive(true);
+                    TextBotonesPrecionados.text = "" + ObjectivePushs + "/" + cantButtonUse;
                 }
             }
             else if (movimientoEnemigo == Enemy.Movimiento.Saltar && movimientoJugador1 == Player.Movimiento.AtacarPies)
             {
-                player1.Attack(Player.Objetivo.Piernas);
+                player1.Attack(Player.Objetivo.Piernas,false);
                 for (int i = 0; i < enemiesActivate.Count; i++)
                 {
                     if (enemiesActivate[i].typeEnemy == Enemy.TiposDeEnemigo.Balanceado)
                     {
                         enemiesActivate[i].Jump();
-                        enemiesActivate[i].CounterAttack();
+                        enemiesActivate[i].CounterAttack(false);
                         specialEvent = EventoEspecial.ContraAtaque;
                     }
                 }
@@ -461,13 +486,13 @@ public class GameManager : MonoBehaviour
             }
             else if (movimientoEnemigo == Enemy.Movimiento.Agacharse && movimientoJugador1 == Player.Movimiento.AtacarCabeza)
             {
-                player1.Attack(Player.Objetivo.Cabeza);
+                player1.Attack(Player.Objetivo.Cabeza,false);
                 for (int i = 0; i < enemiesActivate.Count; i++)
                 {
                     if (enemiesActivate[i].typeEnemy == Enemy.TiposDeEnemigo.Balanceado)
                     {
                         enemiesActivate[i].Duck();
-                        enemiesActivate[i].CounterAttack();
+                        enemiesActivate[i].CounterAttack(false);
                         specialEvent = EventoEspecial.ContraAtaque;
                     }
                 }
@@ -477,20 +502,20 @@ public class GameManager : MonoBehaviour
             {
                 for (int i = 0; i < enemiesActivate.Count; i++)
                 {
-                    enemiesActivate[i].Attack(Enemy.Objetivo.Cabeza);
+                    enemiesActivate[i].Attack(Enemy.Objetivo.Cabeza,false);
                 }
                 player1.Duck();
-                player1.CounterAttack();
+                player1.CounterAttack(false);
                 specialEvent = EventoEspecial.ContraAtaque;
             }
             else if (movimientoJugador1 == Player.Movimiento.Saltar && movimientoEnemigo == Enemy.Movimiento.AtacarPies)
             {
                 for (int i = 0; i < enemiesActivate.Count; i++)
                 {
-                    enemiesActivate[i].Attack(Enemy.Objetivo.Piernas);
+                    enemiesActivate[i].Attack(Enemy.Objetivo.Piernas,false);
                 }
                 player1.Jump();
-                player1.CounterAttack();
+                player1.CounterAttack(false);
                 specialEvent = EventoEspecial.ContraAtaque;
             }
             else if (specialEvent == EventoEspecial.Nulo)
@@ -498,13 +523,13 @@ public class GameManager : MonoBehaviour
                 switch (movimientoJugador1)
                 {
                     case Player.Movimiento.AtacarCabeza:
-                        player1.Attack(Player.Objetivo.Cabeza);
+                        player1.Attack(Player.Objetivo.Cabeza,false);
                         break;
                     case Player.Movimiento.AtacarTorso:
-                        player1.Attack(Player.Objetivo.Torso);
+                        player1.Attack(Player.Objetivo.Torso,false);
                         break;
                     case Player.Movimiento.AtacarPies:
-                        player1.Attack(Player.Objetivo.Piernas);
+                        player1.Attack(Player.Objetivo.Piernas,false);
                         break;
                     case Player.Movimiento.DefenderCabeza:
                         player1.Deffense(Player.Objetivo.Cabeza);
@@ -526,13 +551,13 @@ public class GameManager : MonoBehaviour
                         switch (movimientoEnemigo)
                         {
                             case Enemy.Movimiento.AtacarCabeza:
-                                enemiesActivate[i].Attack(Enemy.Objetivo.Cabeza);
+                                enemiesActivate[i].Attack(Enemy.Objetivo.Cabeza,false);
                                 break;
                             case Enemy.Movimiento.AtacarTorso:
-                                enemiesActivate[i].Attack(Enemy.Objetivo.Torso);
+                                enemiesActivate[i].Attack(Enemy.Objetivo.Torso,false);
                                 break;
                             case Enemy.Movimiento.AtacarPies:
-                                enemiesActivate[i].Attack(Enemy.Objetivo.Piernas);
+                                enemiesActivate[i].Attack(Enemy.Objetivo.Piernas,false);
                                 break;
                             case Enemy.Movimiento.DefenderCabeza:
                                 enemiesActivate[i].Deffense(Enemy.Objetivo.Cabeza);
@@ -600,47 +625,44 @@ public class GameManager : MonoBehaviour
         switch (_typeEvent)
         {
             case 0:
-                Debug.Log(cantButtonUse);
                 if (id_button < cantButtonUse)
                 {
-                    if (id_button == 0)
-                    {
-                        buttonsEvents[id_button].gameObject.SetActive(true);
-                        id_button++;
-                        for (int i = 0; i < buttonsEvents.Count; i++)
-                        {
-                            buttonsEvents[i].disappear = false;
-                        }
-                    }
                     if (buttonsEvents[id_button].disappear)
                     {
                         if (buttonsEvents[id_button].GetPressed())
                         {
+                            buttonsEvents[id_button].gameObject.SetActive(false);
                             id_button++;
                             ObjectivePushs++;
+                            TextBotonesPrecionados.text = "" + ObjectivePushs + "/" + cantButtonUse;
                         }
                         else
                         {
                             //PERDES
                             id_button = 0;
+                            ObjectivePushs = 0;
                             specialEvent = EventoEspecial.Nulo;
                             panelClash.gameObject.SetActive(false);
                             ActivateUICharacters();
                             for (int i = 0; i < enemiesActivate.Count; i++)
                             {
-                                enemiesActivate[i].CounterAttack();
+                                enemiesActivate[i].CounterAttack(true);
                             }
                         }
                     }
+                    //ESTO SIEMPRE DEBE ESTAR ABAJO
                     if (ObjectivePushs >= cantButtonUse)
                     {
                         //GANAS
                         id_button = 0;
+                        ObjectivePushs = 0;
                         specialEvent = EventoEspecial.Nulo;
                         panelClash.gameObject.SetActive(false);
                         ActivateUICharacters();
-                        player1.IaMode();
+                        player1.EstadoMovimiento_ContraAtaque();
+                        player1.CounterAttack(true);
                     }
+                    //------------------------------------------------//
                 }
                 
                 break;
@@ -649,7 +671,6 @@ public class GameManager : MonoBehaviour
             case 2:
                 break;
         }
-        Debug.Log("Event Push Button");
     }
     public void DisableUICharacters()
     {

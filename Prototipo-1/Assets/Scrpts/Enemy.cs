@@ -328,7 +328,7 @@ public class Enemy : MonoBehaviour
             
         }
     }
-    public void CounterAttack()
+    public void CounterAttack(bool dobleDamage)
     {
 
         DisableShild();
@@ -345,13 +345,13 @@ public class Enemy : MonoBehaviour
                         //ATACAR A LA CABEZA
                         //Attack(Objetivo.Cabeza);
                         imagenAccion.sprite = SpriteAtaqueCabeza;
-                        Attack(Objetivo.Cabeza);
+                        Attack(Objetivo.Cabeza,dobleDamage);
                         break;
                     case Movimiento.Saltar:
                         //ATACAR A LOS PIES
                         //Attack(Objetivo.Piernas);
                         imagenAccion.sprite = SpriteAtaquePies;
-                        Attack(Objetivo.Piernas);
+                        Attack(Objetivo.Piernas,dobleDamage);
 
                         break;
                 }
@@ -363,7 +363,7 @@ public class Enemy : MonoBehaviour
             //switch ((int)option)
             //{
                 //case 0:
-                    Attack(Objetivo.Cabeza);
+                    Attack(Objetivo.Cabeza,dobleDamage);
                     //break;
                 //case 1:
                     //Attack(Objetivo.Torso);
@@ -379,13 +379,13 @@ public class Enemy : MonoBehaviour
             switch ((int)option)
             {
                 case 0:
-                    Attack(Objetivo.Cabeza);
+                    Attack(Objetivo.Cabeza,dobleDamage);
                     break;
                 case 1:
-                    Attack(Objetivo.Torso);
+                    Attack(Objetivo.Torso,dobleDamage);
                     break;
                 case 2:
-                    Attack(Objetivo.Piernas);
+                    Attack(Objetivo.Piernas,dobleDamage);
                     break;
             }
         }
@@ -506,13 +506,18 @@ public class Enemy : MonoBehaviour
         ShildLegs.gameObject.SetActive(false);
         ShildBoody.gameObject.SetActive(false);
     }
-    public void Attack(Objetivo ob) {
+    public void Attack(Objetivo ob,bool doubleDamage) {
         
         if (poolObjectAttack.count > 0)
         {
             DisableShild();
             GameObject go = poolObjectAttack.GetObject();
             Proyectil proyectil = go.GetComponent<Proyectil>();
+            proyectil.SetDobleDamage(doubleDamage);
+            if (doubleDamage)
+            {
+                proyectil.damage = proyectil.damage * 2;
+            }
             go.transform.position = tranformAtaque.localPosition;
             go.transform.position = go.transform.position + PosicionGeneracionBalaRelativa;
             go.transform.rotation = new Quaternion(go.transform.rotation.x, go.transform.rotation.y + 180, go.transform.rotation.z, go.transform.rotation.w);

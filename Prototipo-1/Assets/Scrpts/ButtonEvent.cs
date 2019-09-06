@@ -25,9 +25,14 @@ public class ButtonEvent : MonoBehaviour
     [HideInInspector]
     public bool disappear;
     private float border = 5f;
+    private GameManager gm;
 
     void Start()
     {
+        if (GameManager.instanceGameManager != null)
+        {
+            gm = GameManager.instanceGameManager;
+        }
         preseed = false;
         imagenButton.canvasRenderer.SetAlpha(0);
         textoButton.canvasRenderer.SetAlpha(0);
@@ -42,10 +47,6 @@ public class ButtonEvent : MonoBehaviour
         preseed = false;
         imagenButton.canvasRenderer.SetAlpha(0);
         textoButton.canvasRenderer.SetAlpha(0);
-        //Debug.Log("Menor x:" + (-panelAparicion.rectTransform.sizeDelta.x/ border));
-        //Debug.Log("Mayor x:" + panelAparicion.rectTransform.sizeDelta.x/ border);
-        //Debug.Log("Menor y:" + (-panelAparicion.rectTransform.sizeDelta.y/ border));
-        //Debug.Log("Menor y:" + panelAparicion.rectTransform.sizeDelta.y/ border);
         SetRandomPosition(-panelAparicion.rectTransform.sizeDelta.x/ border, panelAparicion.rectTransform.sizeDelta.x/ border, -panelAparicion.rectTransform.sizeDelta.y/ border, panelAparicion.rectTransform.sizeDelta.y/ border);
         timeDisable = 0;
         alpha = 0;
@@ -100,7 +101,7 @@ public class ButtonEvent : MonoBehaviour
         {
             alpha = auxAlpha;
             disappear = true;
-            gameObject.SetActive(false);
+           //gameObject.SetActive(false);
         }
     }
     public void Aparecer()
