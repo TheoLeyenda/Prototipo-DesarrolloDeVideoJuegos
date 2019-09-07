@@ -64,8 +64,8 @@ public class ButtonEvent : MonoBehaviour
                 int spawnPoints = 8;
                 esquinaElejida = Random.Range(0, spawnPoints);
                 //esquinaElejida = 7;
-                float restarPosicion = 80;
-                float sumarPosicion = 80;
+                float restarPosicion = 130;
+                float sumarPosicion = 100;
                 float fragmentArea = 2.5f;
                 float altura = Random.Range(-panelAparicion.rectTransform.sizeDelta.y / 2, panelAparicion.rectTransform.sizeDelta.y / 2);
                 float ancho = Random.Range(-panelAparicion.rectTransform.sizeDelta.x / 2, panelAparicion.rectTransform.sizeDelta.x / 2);
@@ -127,6 +127,9 @@ public class ButtonEvent : MonoBehaviour
                         transform.localPosition = new Vector2(panelAparicion.rectTransform.sizeDelta.x / 2, -panelAparicion.rectTransform.sizeDelta.y / 2);
                         break;
                 }
+                break;
+            case 3:
+                SetRandomPosition(-panelAparicion.rectTransform.sizeDelta.x / border, panelAparicion.rectTransform.sizeDelta.x / border, -panelAparicion.rectTransform.sizeDelta.y / border, panelAparicion.rectTransform.sizeDelta.y / border);
                 break;
         }
         timeDisable = 0;
@@ -256,6 +259,10 @@ public class ButtonEvent : MonoBehaviour
                         break;
                 }
                 break;
+            case 3:
+                //Debug.Log("ENTRE 0");
+                CheckLife();
+                break;
         }
     }
     public void CheckLife()
@@ -315,7 +322,10 @@ public class ButtonEvent : MonoBehaviour
     }
     public void ActivePressed()
     {
-        gm.pushEventManager.ObjectivePushs++;
+        if (!preseed)
+        {
+            gm.pushEventManager.ObjectivePushs++;
+        }
         if (typePattern == 1)
         {
             gm.pushEventManager.TextBotonesPrecionados.text = gm.pushEventManager.ObjectivePushs + "/" + gm.pushEventManager.buttonsEvents.Count;
@@ -330,9 +340,5 @@ public class ButtonEvent : MonoBehaviour
     public void SetTypePattern(int _pattern)
     {
         typePattern = _pattern;
-    }
-    public void Move()
-    {
-        
     }
 }

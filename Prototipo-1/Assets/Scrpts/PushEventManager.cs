@@ -24,7 +24,7 @@ public class PushEventManager : MonoBehaviour
     public float speedOfSize;
     [HideInInspector]
     public int TypePushEvent;
-    private int countTypeCheckPushEvent = 3;
+    private int countTypeCheckPushEvent = 4;
     private int id_button = 0;
     private int cantButtonUse;
     [HideInInspector]
@@ -76,7 +76,7 @@ public class PushEventManager : MonoBehaviour
     {
         //Debug.Log("ENTRE");
         TypePushEvent = Random.Range(0, countTypeCheckPushEvent);
-        //TypePushEvent = 2;
+        Debug.Log(TypePushEvent);
         if (TypePushEvent == 1)
         {
             imageClockOfEvent.gameObject.SetActive(true);
@@ -97,7 +97,7 @@ public class PushEventManager : MonoBehaviour
                 buttonsEvents[i].SetTypePattern(TypePushEvent);
                 buttonsEvents[i].gameObject.SetActive(true);
             }
-            TextBotonesPrecionados.text = "" + ObjectivePushs + "/" + (buttonsEvents.Count-1);
+            TextBotonesPrecionados.text = "" + ObjectivePushs + "/" + (buttonsEvents.Count);
         }
         else
         {
@@ -204,6 +204,9 @@ public class PushEventManager : MonoBehaviour
                 }
                 break;
             case 2:
+                CheckButtonPressed();
+                break;
+            case 3:
                 CheckButtonPressed();
                 break;
 
