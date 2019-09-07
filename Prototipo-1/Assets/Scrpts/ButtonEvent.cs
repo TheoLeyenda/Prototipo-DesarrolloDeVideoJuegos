@@ -64,8 +64,8 @@ public class ButtonEvent : MonoBehaviour
                 int spawnPoints = 8;
                 esquinaElejida = Random.Range(0, spawnPoints);
                 //esquinaElejida = 7;
-                float restarPosicion = 130;
-                float sumarPosicion = 100;
+                float restarPosicion = 80;
+                float sumarPosicion = 80;
                 float fragmentArea = 2.5f;
                 float altura = Random.Range(-panelAparicion.rectTransform.sizeDelta.y / 2, panelAparicion.rectTransform.sizeDelta.y / 2);
                 float ancho = Random.Range(-panelAparicion.rectTransform.sizeDelta.x / 2, panelAparicion.rectTransform.sizeDelta.x / 2);
@@ -86,7 +86,6 @@ public class ButtonEvent : MonoBehaviour
                     case 1:
                         if (altura > panelAparicion.rectTransform.sizeDelta.y / fragmentArea)
                         {
-                            Debug.Log("TE VAS MUY PARA ARRIBA");
                             transform.localPosition = new Vector2(-panelAparicion.rectTransform.sizeDelta.x / 2, altura - restarPosicion);
                         }
                         else
@@ -95,23 +94,31 @@ public class ButtonEvent : MonoBehaviour
                         }
                         break;
                     case 2:
-                        if (ancho > panelAparicion.rectTransform.sizeDelta.x / fragmentArea)
+                        if (ancho > panelAparicion.rectTransform.sizeDelta.x / fragmentArea || altura > panelAparicion.rectTransform.sizeDelta.y / fragmentArea)
                         {
-                            transform.localPosition = new Vector2(ancho - restarPosicion, panelAparicion.rectTransform.sizeDelta.y/2);
+                            transform.localPosition = new Vector2(ancho - restarPosicion, (panelAparicion.rectTransform.sizeDelta.y / 2) - restarPosicion);
+                        }
+                        else if (altura < panelAparicion.rectTransform.sizeDelta.y / fragmentArea)
+                        {
+                            transform.localPosition = new Vector2(ancho + sumarPosicion, (panelAparicion.rectTransform.sizeDelta.y / 2) + sumarPosicion);
                         }
                         else
                         {
-                            transform.localPosition = new Vector2(ancho + sumarPosicion, panelAparicion.rectTransform.sizeDelta.y/2);
+                            transform.localPosition = new Vector2(ancho + sumarPosicion, panelAparicion.rectTransform.sizeDelta.y / 2);
                         }
                         break;
                     case 3:
-                        if (ancho > panelAparicion.rectTransform.sizeDelta.x / fragmentArea)
+                        if (ancho > panelAparicion.rectTransform.sizeDelta.x / fragmentArea || altura > panelAparicion.rectTransform.sizeDelta.y / fragmentArea)
                         {
-                            transform.localPosition = new Vector2(ancho - restarPosicion, -panelAparicion.rectTransform.sizeDelta.y / 2);
+                            transform.localPosition = new Vector2(ancho - restarPosicion, (-panelAparicion.rectTransform.sizeDelta.y / 2) - restarPosicion);
+                        }
+                        else if (altura < panelAparicion.rectTransform.sizeDelta.y / fragmentArea)
+                        {
+                            transform.localPosition = new Vector2(ancho + sumarPosicion, (-panelAparicion.rectTransform.sizeDelta.y / 2) + sumarPosicion);
                         }
                         else
                         {
-                            transform.localPosition = new Vector2(ancho + sumarPosicion, -panelAparicion.rectTransform.sizeDelta.y / 2);
+                            transform.localPosition = new Vector2(ancho + sumarPosicion, (-panelAparicion.rectTransform.sizeDelta.y / 2));
                         }
                         break;
                     case 4:
