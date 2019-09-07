@@ -46,27 +46,9 @@ public class GameManager : MonoBehaviour
         Perdiste,
         Count,
     }
-    [Header("PushEvent")]
-    public Text textClashEvent;
-    public List<ButtonEvent> buttonsEvents;
-    public Image panelClash;
-    private float textScaleX;
-    private float textScaleY;
-    private float auxTextScaleX;
-    private float auxTextScaleY;
-    public float maxTextScaleX;
-    public float maxTextScaleY;
-    public float speedOfSize;
-    private int TypePushEvent;
-    private int countTypePushEvent = 3;
-    private int id_button = 0;
-    private int cantButtonUse;
-    private int ObjectivePushs;
-    private float minCantButtonUse = 5;
-    private float maxCantButtonUse;
-    private Vector2 positionButton;
-    public Text TextBotonesPrecionados;
-    [Header("-----------")]
+    [HideInInspector]
+    public EventoEspecial specialEvent;
+    public PushEventManager pushEventManager;
     public bool ActiveTime;
     public GameObject ImageClock;
     public GameObject canvasGameOver;
@@ -87,7 +69,7 @@ public class GameManager : MonoBehaviour
     public int countEnemysDead;
     public int RondasPorJefe;
     //public Text TextTimeOfAttack;
-    public Image TimeClockOfAttack; 
+    public Image TimeClockOfAttack;
     public Text TextTitulo;
     public Text START;
     public Text TextTimeStart;
@@ -104,16 +86,19 @@ public class GameManager : MonoBehaviour
     private Enemy.EstadoEnemigo estadoEnemigo;
     private Enemy.Movimiento movimientoEnemigo;
     // HACER LO MISMO PERO PARA EL ENEMIGO 
-    private EventoEspecial specialEvent;
     private EstadoResultado estadoResultado;
     private float auxTimeSelectionAttack;
     private float auxTimerNextRond;
     private float auxTimerStart;
 
-    private Player player1;
-    private Player player2;
-    private Player player3;
-    private Player player4;
+    [HideInInspector]
+    public Player player1;
+    [HideInInspector]
+    public Player player2;
+    [HideInInspector]
+    public Player player3;
+    [HideInInspector]
+    public Player player4;
 
     private int roundCombat;
 
@@ -123,16 +108,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        for (int i = 0; i < buttonsEvents.Count; i++)
-        {
-            buttonsEvents[i].gameObject.SetActive(false);
-        }
-        maxCantButtonUse = buttonsEvents.Count;
-        id_button = 0;
-        auxTextScaleX = textClashEvent.rectTransform.rect.width;
-        auxTextScaleY = textClashEvent.rectTransform.rect.height;
-        textClashEvent.gameObject.SetActive(false);
-        panelClash.gameObject.SetActive(false);
+        
         specialEvent = EventoEspecial.Nulo;
         roundCombat = 1;
         initialGeneration = true;
@@ -160,16 +136,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        for (int i = 0; i < buttonsEvents.Count; i++)
-        {
-            buttonsEvents[i].gameObject.SetActive(false);
-        }
-        maxCantButtonUse = buttonsEvents.Count - 1;
-        id_button = 0;
-        auxTextScaleX = textClashEvent.rectTransform.rect.width;
-        auxTextScaleY = textClashEvent.rectTransform.rect.height;
-        textClashEvent.gameObject.SetActive(false);
-        panelClash.gameObject.SetActive(false);
+        
         specialEvent = EventoEspecial.Nulo;
         roundCombat = 1;
         canvasGameOver.SetActive(false);
@@ -415,21 +382,9 @@ public class GameManager : MonoBehaviour
                 //EVENTO CUANDO EL ENEMIGO Y EL JUGADOR ATACAN AL MISMO OBJETIVO
                 if (specialEvent == EventoEspecial.Nulo)
                 {
+                    //InitPushEvent();
                     specialEvent = EventoEspecial.CartelClash;
-                    TypePushEvent = Random.Range(0,countTypePushEvent);
-                    maxCantButtonUse = buttonsEvents.Count - 1;
-                    cantButtonUse = (int)Random.Range(minCantButtonUse, maxCantButtonUse);
-                    cantButtonUse = cantButtonUse - 1;
-                    ObjectivePushs = 0;
-                    for (int i = 0; i < buttonsEvents.Count; i++)
-                    {
-                        buttonsEvents[i].disappear = false;
-                        buttonsEvents[i].gameObject.SetActive(false);
-                        buttonsEvents[i].SetTypePattern(TypePushEvent);
-                        //buttonsEvents[i].SetTypePattern(1);
-                    }
-                    buttonsEvents[id_button].gameObject.SetActive(true);
-                    TextBotonesPrecionados.text = ""+ObjectivePushs+"/" + cantButtonUse;
+                    pushEventManager.InitPushEvent();
                     
                 }
             }
@@ -439,20 +394,7 @@ public class GameManager : MonoBehaviour
                 if (specialEvent == EventoEspecial.Nulo)
                 {
                     specialEvent = EventoEspecial.CartelClash;
-                    TypePushEvent = Random.Range(0, countTypePushEvent);
-                    maxCantButtonUse = buttonsEvents.Count - 1;
-                    cantButtonUse = (int)Random.Range(minCantButtonUse, maxCantButtonUse);
-                    cantButtonUse = cantButtonUse - 1;
-                    ObjectivePushs = 0;
-                    for (int i = 0; i < buttonsEvents.Count; i++)
-                    {
-                        buttonsEvents[i].disappear = false;
-                        buttonsEvents[i].gameObject.SetActive(false);
-                        buttonsEvents[i].SetTypePattern(TypePushEvent);
-                        //buttonsEvents[i].SetTypePattern(1);
-                    }
-                    buttonsEvents[id_button].gameObject.SetActive(true);
-                    TextBotonesPrecionados.text = "" + ObjectivePushs + "/" + cantButtonUse;
+                    pushEventManager.InitPushEvent();
                 }
             }
             else if (movimientoEnemigo == Enemy.Movimiento.AtacarPies && movimientoJugador1 == Player.Movimiento.AtacarPies)
@@ -461,20 +403,7 @@ public class GameManager : MonoBehaviour
                 if (specialEvent == EventoEspecial.Nulo)
                 {
                     specialEvent = EventoEspecial.CartelClash;
-                    TypePushEvent = Random.Range(0, countTypePushEvent);
-                    maxCantButtonUse = buttonsEvents.Count - 1;
-                    cantButtonUse = (int)Random.Range(minCantButtonUse, maxCantButtonUse);
-                    cantButtonUse = cantButtonUse - 1;
-                    ObjectivePushs = 0;
-                    for (int i = 0; i < buttonsEvents.Count; i++)
-                    {
-                        buttonsEvents[i].disappear = false;
-                        buttonsEvents[i].gameObject.SetActive(false);
-                        buttonsEvents[i].SetTypePattern(TypePushEvent);
-                        //buttonsEvents[i].SetTypePattern(1);
-                    }
-                    buttonsEvents[id_button].gameObject.SetActive(true);
-                    TextBotonesPrecionados.text = "" + ObjectivePushs + "/" + cantButtonUse;
+                    pushEventManager.InitPushEvent();
                 }
             }
             else if (movimientoEnemigo == Enemy.Movimiento.Saltar && movimientoJugador1 == Player.Movimiento.AtacarPies)
@@ -591,11 +520,11 @@ public class GameManager : MonoBehaviour
             switch (specialEvent)
             {
                 case EventoEspecial.CartelClash:
-                    textClashEvent.gameObject.SetActive(true);
-                    ActivateCartelClash();
+                    pushEventManager.textClashEvent.gameObject.SetActive(true);
+                    pushEventManager.ActivateCartelClash();
                     break;
                 case EventoEspecial.PushButtonEvent:
-                    EventPushButton(TypePushEvent);
+                    pushEventManager.CheckEventPushButton(pushEventManager.TypePushEvent);
                     break;
                 case EventoEspecial.ContraAtaque:
                     specialEvent = EventoEspecial.Nulo;
@@ -607,113 +536,8 @@ public class GameManager : MonoBehaviour
 
         }
     }
-    public void ActivateCartelClash()
-    {
-        if (textScaleX < maxTextScaleX && textScaleY < maxTextScaleY && specialEvent == EventoEspecial.CartelClash)
-        {
-            textScaleX = textScaleX + Time.deltaTime * speedOfSize;
-            textScaleY = textScaleX;
-            textClashEvent.rectTransform.sizeDelta = new Vector2(textScaleX, textScaleY);
-            
-        }
-        else
-        {
-            textScaleX = auxTextScaleX;
-            textScaleY = auxTextScaleY;
-            textClashEvent.gameObject.SetActive(false);
-            panelClash.gameObject.SetActive(true);
-            specialEvent = EventoEspecial.PushButtonEvent;
-        }
-    }
-    public void EventPushButton(int _typeEvent)
-    {
-        DisableUICharacters();
-        if (id_button < cantButtonUse && (id_button + 1) < cantButtonUse)
-        {
-            if (buttonsEvents[id_button].disappear)
-            {
-
-                if (buttonsEvents[id_button].GetPressed())
-                {
-                    buttonsEvents[id_button].gameObject.SetActive(false);
-                    id_button++;
-                    ObjectivePushs++;
-                    TextBotonesPrecionados.text = "" + ObjectivePushs + "/" + cantButtonUse;
-                }
-                else
-                {
-                    Debug.Log("PERDI");
-                    //PERDES
-                    DefaultPushEvent();
-                }
-            }
-            else if (buttonsEvents[id_button + 1].GetPressed() && buttonsEvents[id_button + 1].gameObject.activeSelf && !buttonsEvents[id_button].GetPressed())
-            {
-                DefaultPushEvent();
-            }
-            //ESTO SIEMPRE DEBE ESTAR ABAJO
-            if (ObjectivePushs >= cantButtonUse)
-            {
-                //GANAS
-                VictoryPushEvent();
-            }
-            //------------------------------------------------//
-        }
-        else
-        {
-            if (buttonsEvents[id_button].disappear)
-            {
-                if (buttonsEvents[id_button].GetPressed())
-                {
-                    buttonsEvents[id_button].gameObject.SetActive(false);
-                    id_button++;
-                    ObjectivePushs++;
-                    TextBotonesPrecionados.text = "" + ObjectivePushs + "/" + cantButtonUse;
-                }
-                else
-                {
-
-                    //PERDES
-                    DefaultPushEvent();
-                }
-            }
-            if (ObjectivePushs >= cantButtonUse)
-            {
-                //GANAS
-                VictoryPushEvent();
-            }
-        }
-    }
-    public void DefaultPushEvent()
-    {
-        id_button = 0;
-        ObjectivePushs = 0;
-        specialEvent = EventoEspecial.Nulo;
-        for (int i = 0; i < buttonsEvents.Count; i++)
-        {
-            buttonsEvents[i].gameObject.SetActive(false);
-        }
-        panelClash.gameObject.SetActive(false);
-        ActivateUICharacters();
-        for (int i = 0; i < enemiesActivate.Count; i++)
-        {
-            enemiesActivate[i].CounterAttack(true);
-        }
-    }
-    public void VictoryPushEvent()
-    {
-        id_button = 0;
-        ObjectivePushs = 0;
-        specialEvent = EventoEspecial.Nulo;
-        for (int i = 0; i < buttonsEvents.Count; i++)
-        {
-            buttonsEvents[i].gameObject.SetActive(false);
-        }
-        panelClash.gameObject.SetActive(false);
-        ActivateUICharacters();
-        player1.EstadoMovimiento_ContraAtaque();
-        player1.CounterAttack(true);
-    }
+    
+    
     public void DisableUICharacters()
     {
         player1.BARRA_DE_VIDA.SetActive(false);

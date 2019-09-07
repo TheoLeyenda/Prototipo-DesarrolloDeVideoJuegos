@@ -58,6 +58,9 @@ public class ButtonEvent : MonoBehaviour
                 SetRandomPosition(-panelAparicion.rectTransform.sizeDelta.x / border, panelAparicion.rectTransform.sizeDelta.x / border, -panelAparicion.rectTransform.sizeDelta.y / border, panelAparicion.rectTransform.sizeDelta.y / border);
                 break;
             case 1:
+                SetRandomPosition(-panelAparicion.rectTransform.sizeDelta.x / border, panelAparicion.rectTransform.sizeDelta.x / border, -panelAparicion.rectTransform.sizeDelta.y / border, panelAparicion.rectTransform.sizeDelta.y / border);
+                break;
+            case 2:
                 int spawnPoints = 8;
                 esquinaElejida = Random.Range(0, spawnPoints);
                 //esquinaElejida = 7;
@@ -125,8 +128,6 @@ public class ButtonEvent : MonoBehaviour
                         break;
                 }
                 break;
-            case 2:
-                break;
         }
         timeDisable = 0;
         timeEnable = auxTimeEnable;
@@ -136,13 +137,29 @@ public class ButtonEvent : MonoBehaviour
     {
         switch (typePattern) {
             case 0:
+                //Debug.Log("ENTRE 0");
                 CheckLife();
                 break;
             case 1:
+                //Debug.Log("ENTRE 1");
+                if (!preseed)
+                {
+                    Aparecer();
+                }
+                else
+                {
+                    Desaparecer();
+                    if (alpha <= 0)
+                    {
+                        gameObject.SetActive(false);
+                    }
+                }
+                break;
+            case 2:
+                //Debug.Log("ENTRE 2");
                 switch (esquinaElejida)
                 {
                     case 0:
-                        
                         transform.Translate(Vector3.left * SpeedMovement);
                         //Debug.Log(-panelAparicion.rectTransform.sizeDelta.x / 2);
                         if (transform.localPosition.x < -panelAparicion.rectTransform.sizeDelta.x / 2)
@@ -239,14 +256,7 @@ public class ButtonEvent : MonoBehaviour
                         break;
                 }
                 break;
-            case 2:
-                break;
         }
-        //}
-        //else
-        //{
-            
-        //}
     }
     public void CheckLife()
     {
@@ -268,7 +278,7 @@ public class ButtonEvent : MonoBehaviour
     }
     public void Desaparecer()
     {
-        if (nextButton != null)
+        if (nextButton != null && typePattern != 1)
         {
             if (nextButton.gameObject.activeSelf == false)
             {
@@ -283,9 +293,7 @@ public class ButtonEvent : MonoBehaviour
         textoButton.canvasRenderer.SetAlpha(alpha);
         if (alpha <= 0)
         {
-            alpha = auxAlpha;
             disappear = true;
-           //gameObject.SetActive(false);
         }
     }
     public void Aparecer()
@@ -294,7 +302,6 @@ public class ButtonEvent : MonoBehaviour
         {
             alpha = alpha + Time.deltaTime*speedAviable;
         }
-
         imageButton.canvasRenderer.SetAlpha(alpha);
         textoButton.canvasRenderer.SetAlpha(alpha);
     }
@@ -308,6 +315,15 @@ public class ButtonEvent : MonoBehaviour
     }
     public void ActivePressed()
     {
+        gm.pushEventManager.ObjectivePushs++;
+        if (typePattern == 1)
+        {
+            gm.pushEventManager.TextBotonesPrecionados.text = gm.pushEventManager.ObjectivePushs + "/" + gm.pushEventManager.buttonsEvents.Count;
+        }
+        else
+        {
+            gm.pushEventManager.TextBotonesPrecionados.text = gm.pushEventManager.ObjectivePushs + "/" + gm.pushEventManager.GetCantButtonUse();
+        }
         imageButton.color = Color.green;
         preseed = true;
     }

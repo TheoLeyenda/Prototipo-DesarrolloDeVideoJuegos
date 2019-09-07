@@ -136,6 +136,7 @@ MonoBehaviour:
   textoButton: {fileID: 316879536}
   panelAparicion: {fileID: 1474369007}
   nextButton: {fileID: 777535671}
+  inclination: 2.2
   timeEnable: 5
   auxTimeEnable: 5
   timeDisable: 5
@@ -531,6 +532,7 @@ MonoBehaviour:
   textoButton: {fileID: 1831655189}
   panelAparicion: {fileID: 1474369007}
   nextButton: {fileID: 1626664991}
+  inclination: 2.2
   timeEnable: 5
   auxTimeEnable: 5
   timeDisable: 5
@@ -1059,6 +1061,7 @@ MonoBehaviour:
   textoButton: {fileID: 998606659}
   panelAparicion: {fileID: 1474369007}
   nextButton: {fileID: 2005714346}
+  inclination: 2.2
   timeEnable: 5
   auxTimeEnable: 5
   timeDisable: 5
@@ -1296,6 +1299,7 @@ MonoBehaviour:
   textoButton: {fileID: 574397708}
   panelAparicion: {fileID: 1474369007}
   nextButton: {fileID: 934778171}
+  inclination: 2.2
   timeEnable: 5
   auxTimeEnable: 5
   timeDisable: 5
@@ -1530,6 +1534,7 @@ MonoBehaviour:
   textoButton: {fileID: 116976898}
   panelAparicion: {fileID: 1474369007}
   nextButton: {fileID: 1944965814}
+  inclination: 2.2
   timeEnable: 5
   auxTimeEnable: 5
   timeDisable: 5
@@ -1688,6 +1693,7 @@ MonoBehaviour:
   textoButton: {fileID: 1465949152}
   panelAparicion: {fileID: 1474369007}
   nextButton: {fileID: 27079558}
+  inclination: 2.2
   timeEnable: 5
   auxTimeEnable: 5
   timeDisable: 5
@@ -1925,6 +1931,7 @@ MonoBehaviour:
   textoButton: {fileID: 1358021806}
   panelAparicion: {fileID: 1474369007}
   nextButton: {fileID: 0}
+  inclination: 2.2
   timeEnable: 5
   auxTimeEnable: 5
   timeDisable: 5
@@ -2258,7 +2265,82 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CLASH
+  m_Text: "\xA1CLASH!"
+--- !u!1 &1464176958
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1464176959}
+  - component: {fileID: 1464176961}
+  - component: {fileID: 1464176960}
+  m_Layer: 5
+  m_Name: Reloj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1464176959
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464176958}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1474369006}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -3, y: 123.1}
+  m_SizeDelta: {x: 50, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1464176961
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464176958}
+  m_CullTransparentMesh: 0
+--- !u!114 &1464176960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464176958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 3950c20e61c1b70478cc8792299f4d62, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 2
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1465949150
 GameObject:
   m_ObjectHideFlags: 0
@@ -2380,6 +2462,7 @@ RectTransform:
   - {fileID: 1032868060}
   - {fileID: 1618530216}
   - {fileID: 1856779850}
+  - {fileID: 1464176959}
   m_Father: {fileID: 1881827440}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2616,7 +2699,7 @@ GameObject:
   - component: {fileID: 1618530218}
   - component: {fileID: 1618530217}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextBotonesPrecionados
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2741,6 +2824,7 @@ MonoBehaviour:
   textoButton: {fileID: 20977912}
   panelAparicion: {fileID: 1474369007}
   nextButton: {fileID: 1032868064}
+  inclination: 2.2
   timeEnable: 5
   auxTimeEnable: 5
   timeDisable: 5
@@ -2899,6 +2983,7 @@ MonoBehaviour:
   textoButton: {fileID: 1568989462}
   panelAparicion: {fileID: 1474369007}
   nextButton: {fileID: 866167622}
+  inclination: 2.2
   timeEnable: 5
   auxTimeEnable: 5
   timeDisable: 5
@@ -3167,6 +3252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1881827440}
+  - component: {fileID: 1453243973}
   m_Layer: 5
   m_Name: PushButtonEvent
   m_TagString: Untagged
@@ -3195,6 +3281,30 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1453243973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881827439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bcd1a57e1767554486c8a8f34e9c4d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textClashEvent: {fileID: 0}
+  buttonsEvents: []
+  panelClash: {fileID: 0}
+  maxTextScaleX: 0
+  maxTextScaleY: 0
+  speedOfSize: 0
+  TypePushEvent: 0
+  ObjectivePushs: 0
+  TextBotonesPrecionados: {fileID: 0}
+  timeOfEventForTime: 0
+  imageClockOfEvent: {fileID: 0}
+  stateButtonEventManager: 0
 --- !u!1 &1944965809
 GameObject:
   m_ObjectHideFlags: 0
@@ -3252,6 +3362,7 @@ MonoBehaviour:
   textoButton: {fileID: 779845042}
   panelAparicion: {fileID: 1474369007}
   nextButton: {fileID: 509284475}
+  inclination: 2.2
   timeEnable: 5
   auxTimeEnable: 5
   timeDisable: 5
@@ -3410,6 +3521,7 @@ MonoBehaviour:
   textoButton: {fileID: 587493488}
   panelAparicion: {fileID: 1474369007}
   nextButton: {fileID: 1777074897}
+  inclination: 2.2
   timeEnable: 5
   auxTimeEnable: 5
   timeDisable: 5
@@ -3990,6 +4102,7 @@ GameObject:
   - component: {fileID: 357484561034113015}
   - component: {fileID: 357484561034113014}
   - component: {fileID: 1771057737109482351}
+  - component: {fileID: 109656201}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4027,24 +4140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad0fb5e31d4fd341b792bc6f126bf3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textClashEvent: {fileID: 1378321190}
-  buttonsEvents:
-  - {fileID: 855274378}
-  - {fileID: 934778171}
-  - {fileID: 27079558}
-  - {fileID: 777535671}
-  - {fileID: 2005714346}
-  - {fileID: 1777074897}
-  - {fileID: 866167622}
-  - {fileID: 1944965814}
-  - {fileID: 509284475}
-  - {fileID: 1626664991}
-  - {fileID: 1032868064}
-  panelClash: {fileID: 1474369007}
-  maxTextScaleX: 500
-  maxTextScaleY: 500
-  speedOfSize: 300
-  TextBotonesPrecionados: {fileID: 1618530217}
+  specialEvent: 0
+  pushEventManager: {fileID: 109656201}
   ActiveTime: 0
   ImageClock: {fileID: 1195898808}
   canvasGameOver: {fileID: 1520543759}
@@ -4067,6 +4164,10 @@ MonoBehaviour:
   timerNextRond: 2
   timerStart: 3
   modoDeJuego: 1
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  player3: {fileID: 0}
+  player4: {fileID: 0}
 --- !u!114 &1771057737109482351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4079,6 +4180,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d84aa2b07bbb62b4fac9537dd3edffb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &109656201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357484561034113013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bcd1a57e1767554486c8a8f34e9c4d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textClashEvent: {fileID: 1378321190}
+  buttonsEvents:
+  - {fileID: 855274378}
+  - {fileID: 934778171}
+  - {fileID: 27079558}
+  - {fileID: 777535671}
+  - {fileID: 2005714346}
+  - {fileID: 1777074897}
+  - {fileID: 866167622}
+  - {fileID: 1944965814}
+  - {fileID: 509284475}
+  - {fileID: 1626664991}
+  - {fileID: 1032868064}
+  panelClash: {fileID: 1474369007}
+  maxTextScaleX: 500
+  maxTextScaleY: 500
+  speedOfSize: 300
+  TypePushEvent: 0
+  ObjectivePushs: 0
+  TextBotonesPrecionados: {fileID: 1618530217}
+  timeOfEventForTime: 10
+  imageClockOfEvent: {fileID: 1464176960}
+  stateButtonEventManager: 0
 --- !u!1 &357484561108844481
 GameObject:
   m_ObjectHideFlags: 0
