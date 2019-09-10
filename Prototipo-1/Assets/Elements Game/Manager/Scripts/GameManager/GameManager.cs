@@ -38,17 +38,14 @@ public class GameManager : MonoBehaviour
     public float timerStart;
     private bool initialGeneration;
     private FSM fsm;
-
     [HideInInspector]
     public float auxTimeSelectionAttack;
     private float auxTimerNextRond;
     private float auxTimerStart;
-
     private int roundCombat;
 
     private void Awake()
     {
-        
         enumsGameManager.specialEvent = EnumsGameManager.EventoEspecial.Nulo;
         roundCombat = 1;
         initialGeneration = true;
@@ -63,7 +60,6 @@ public class GameManager : MonoBehaviour
         fsm.SetRelations((int)EnumsGameManager.GameState.Resultado, (int)EnumsGameManager.GameState.Idle, (int)EnumsGameManager.GameEvents.Quieto);
         fsm.SetRelations((int)EnumsGameManager.GameState.RespuestaJugadores, (int)EnumsGameManager.GameState.Idle, (int)EnumsGameManager.GameEvents.Quieto);
         fsm.SetRelations((int)EnumsGameManager.GameState.EnComienzo, (int)EnumsGameManager.GameState.Idle, (int)EnumsGameManager.GameEvents.Quieto);
-
         if (instanceGameManager == null)
         {
             instanceGameManager = this;
@@ -117,7 +113,6 @@ public class GameManager : MonoBehaviour
             canvasGameOver.SetActive(true);
             //ACA DEBERIA MOSTRAR PUNTAJE Y ESTADISTICAS DEL JUGADOR
         }
-        
     }
     public void Idle()
     {
@@ -152,7 +147,6 @@ public class GameManager : MonoBehaviour
                 TextTimeStart.gameObject.SetActive(false);
                 START.gameObject.SetActive(false);
             }
-
         }
         else if (enumsGameManager.estadoResultado == EnumsGameManager.EstadoResultado.GanasteNivel)
         {
@@ -161,7 +155,6 @@ public class GameManager : MonoBehaviour
             enumsGameManager.estadoResultado = EnumsGameManager.EstadoResultado.Nulo;
             fsm.SendEvent((int)EnumsGameManager.GameEvents.Quieto);
         }
-
     }
     public void EnComienzo()
     {
@@ -242,9 +235,7 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
-        
         SceneManager.LoadScene("GameOver");
-
     }
     public void SetRespuestaJugador1(Player.Movimiento movimiento)
     {
