@@ -138,7 +138,7 @@ public class Enemy : MonoBehaviour
     {
         CheckDead();
         CheckLifeBar();
-        if (gm.GetGameState() == GameManager.GameState.EnComienzo)
+        if (gm.GetGameState() == EnumsGameManager.GameState.EnComienzo)
         {
             IA();
             gm.SetMovimientoEnemigo(_movimiento);
@@ -293,7 +293,7 @@ public class Enemy : MonoBehaviour
         {
             switch (gm.GetGameMode())
             {
-                case GameManager.ModosDeJuego.Supervivencia:
+                case EnumsGameManager.ModosDeJuego.Supervivencia:
                     if (life <= 0)
                     {
                         life = auxLife;
@@ -304,7 +304,7 @@ public class Enemy : MonoBehaviour
                         gm.ResetRoundCombat(false);
                     }
                     break;
-                case GameManager.ModosDeJuego.Historia:
+                case EnumsGameManager.ModosDeJuego.Historia:
                     if (life <= 0)
                     {
                         life = auxLife;
@@ -315,7 +315,7 @@ public class Enemy : MonoBehaviour
                         gm.ResetRoundCombat(false);
                     }
                     break;
-                case GameManager.ModosDeJuego.Nulo:
+                case EnumsGameManager.ModosDeJuego.Nulo:
                     if (life <= 0)
                     {
                         _estadoEnemigo = EstadoEnemigo.muerto;

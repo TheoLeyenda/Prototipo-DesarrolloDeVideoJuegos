@@ -173,7 +173,7 @@ public class PushEventManager : MonoBehaviour
     }
     public void CheckEventPushButton(int _typeEvent)
     {
-        gm.DisableUICharacters();
+        gm.gameManagerCharacterController.DisableUICharacters();
         switch (_typeEvent) {
             case 0:
                 CheckButtonPressed();
@@ -216,35 +216,35 @@ public class PushEventManager : MonoBehaviour
     {
         id_button = 0;
         ObjectivePushs = 0;
-        gm.specialEvent = GameManager.EventoEspecial.Nulo;
+        gm.enumsGameManager.specialEvent = EnumsGameManager.EventoEspecial.Nulo;
         for (int i = 0; i < buttonsEvents.Count; i++)
         {
             buttonsEvents[i].gameObject.SetActive(false);
         }
         panelClash.gameObject.SetActive(false);
-        gm.ActivateUICharacters();
-        for (int i = 0; i < gm.enemiesActivate.Count; i++)
+        gm.gameManagerCharacterController.ActivateUICharacters();
+        for (int i = 0; i < gm.gameManagerCharacterController.enemiesActivate.Count; i++)
         {
-            gm.enemiesActivate[i].CounterAttack(true);
+            gm.gameManagerCharacterController.enemiesActivate[i].CounterAttack(true);
         }
     }
     public void VictoryPushEvent()
     {
         id_button = 0;
         ObjectivePushs = 0;
-        gm.specialEvent = GameManager.EventoEspecial.Nulo;
+        gm.enumsGameManager.specialEvent = EnumsGameManager.EventoEspecial.Nulo;
         for (int i = 0; i < buttonsEvents.Count; i++)
         {
             buttonsEvents[i].gameObject.SetActive(false);
         }
         panelClash.gameObject.SetActive(false);
-        gm.ActivateUICharacters();
-        gm.player1.EstadoMovimiento_ContraAtaque();
-        gm.player1.CounterAttack(true);
+        gm.gameManagerCharacterController.ActivateUICharacters();
+        gm.gameManagerCharacterController.player1.EstadoMovimiento_ContraAtaque();
+        gm.gameManagerCharacterController.player1.CounterAttack(true);
     }
     public void ActivateCartelClash()
     {
-        if (textScaleX < maxTextScaleX && textScaleY < maxTextScaleY && gm.specialEvent == GameManager.EventoEspecial.CartelClash)
+        if (textScaleX < maxTextScaleX && textScaleY < maxTextScaleY && gm.enumsGameManager.specialEvent == EnumsGameManager.EventoEspecial.CartelClash)
         {
             textScaleX = textScaleX + Time.deltaTime * speedOfSize;
             textScaleY = textScaleX;
@@ -257,7 +257,7 @@ public class PushEventManager : MonoBehaviour
             textScaleY = auxTextScaleY;
             textClashEvent.gameObject.SetActive(false);
             panelClash.gameObject.SetActive(true);
-            gm.specialEvent = GameManager.EventoEspecial.PushButtonEvent;
+            gm.enumsGameManager.specialEvent = EnumsGameManager.EventoEspecial.PushButtonEvent;
         }
     }
     public int GetCantButtonUse()

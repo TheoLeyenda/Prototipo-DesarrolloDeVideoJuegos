@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
     {
         CheckDead();
         CheckLifeBar();
-        if (gm.GetGameState() == GameManager.GameState.EnComienzo)
+        if (gm.GetGameState() == EnumsGameManager.GameState.EnComienzo)
         {
             if (_movimiento == Movimiento.Nulo && gm.timeSelectionAttack < TiempoDisparoAutomatico)
             {
@@ -212,7 +212,7 @@ public class Player : MonoBehaviour
         }
     }
     public void AttackButton() {
-        if (gm.GetGameState() == GameManager.GameState.EnComienzo)
+        if (gm.GetGameState() == EnumsGameManager.GameState.EnComienzo)
         {
             imagenMovimiento.sprite = SpriteMovimientoAtaque;
 
@@ -265,7 +265,7 @@ public class Player : MonoBehaviour
         }
     }
     public void DefenseButton() {
-        if (gm.GetGameState() == GameManager.GameState.EnComienzo)
+        if (gm.GetGameState() == EnumsGameManager.GameState.EnComienzo)
         {
             imagenMovimiento.sprite = SpriteMovimientoDefensa;
             /*Button_Deffense.gameObject.SetActive(false);
@@ -313,7 +313,7 @@ public class Player : MonoBehaviour
     }
     public void Listo()
     {
-        if (gm.GetGameState() == GameManager.GameState.EnComienzo)
+        if (gm.GetGameState() == EnumsGameManager.GameState.EnComienzo)
         {
             if (gm.ActiveTime)
             {
@@ -355,7 +355,7 @@ public class Player : MonoBehaviour
 
     }
     public void DodgeButton() {
-        if (gm.GetGameState() == GameManager.GameState.EnComienzo)
+        if (gm.GetGameState() == EnumsGameManager.GameState.EnComienzo)
         {
             imagenMovimiento.sprite = SpriteMovimientoEsquive;
             /*Button_Attack.gameObject.SetActive(false);
@@ -431,7 +431,7 @@ public class Player : MonoBehaviour
     }
     public void EstadoMovimiento_AtacarCabeza()
     {
-        if (gm.GetGameState() == GameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
+        if (gm.GetGameState() == EnumsGameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
         {
             imagenAccion.sprite = SpriteAtaqueCabeza;
             _movimiento = Movimiento.AtacarCabeza;
@@ -444,7 +444,7 @@ public class Player : MonoBehaviour
     }
     public void EstadoMovimiento_AtacarTorso()
     {
-        if (gm.GetGameState() == GameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
+        if (gm.GetGameState() == EnumsGameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
         {
             imagenAccion.sprite = SpriteAtaqueTorso;
             _movimiento = Movimiento.AtacarTorso;
@@ -457,7 +457,7 @@ public class Player : MonoBehaviour
     }
     public void EstadoMovimiento_AtacarPies()
     {
-        if (gm.GetGameState() == GameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
+        if (gm.GetGameState() == EnumsGameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
         {
             imagenAccion.sprite = SpriteAtaquePies;
             _movimiento = Movimiento.AtacarPies;
@@ -470,7 +470,7 @@ public class Player : MonoBehaviour
     }
     public void EstadoMovimiento_DefenderCabeza()
     {
-        if (gm.GetGameState() == GameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
+        if (gm.GetGameState() == EnumsGameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
         {
             imagenAccion.sprite = SpriteDefensaCabeza;
             _movimiento = Movimiento.DefenderCabeza;
@@ -483,7 +483,7 @@ public class Player : MonoBehaviour
     }
     public void EstadoMovimiento_DefenderTorsoPies()
     {
-        if (gm.GetGameState() == GameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
+        if (gm.GetGameState() == EnumsGameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
         {
             imagenAccion.sprite = SpriteDefensaCuerpo;
             _movimiento = Movimiento.DefenderTorsoPies;
@@ -496,7 +496,7 @@ public class Player : MonoBehaviour
     }
     public void EstadoMovimiento_Saltar()
     {
-        if (gm.GetGameState() == GameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
+        if (gm.GetGameState() == EnumsGameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
         {
             imagenAccion.sprite = SpriteSalto;
             _movimiento = Movimiento.Saltar;
@@ -509,7 +509,7 @@ public class Player : MonoBehaviour
     }
     public void EstadoMovimiento_Agacharse()
     {
-        if (gm.GetGameState() == GameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
+        if (gm.GetGameState() == EnumsGameManager.GameState.EnComienzo && gm.timeSelectionAttack > 1)
         {
             imagenAccion.sprite = SpriteAgacharse;
             _movimiento = Movimiento.Agacharse;

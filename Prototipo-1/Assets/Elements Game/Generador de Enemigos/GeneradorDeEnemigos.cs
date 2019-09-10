@@ -26,11 +26,11 @@ public class GeneradorDeEnemigos : MonoBehaviour
         Enemy enemy = go.GetComponent<Enemy>();
         switch (gm.GetGameMode())
         {
-            case GameManager.ModosDeJuego.Supervivencia:      
+            case EnumsGameManager.ModosDeJuego.Supervivencia:      
                 enemy.OnEnemySurvival();
-                //Debug.Log("ENTRE");
+                Debug.Log("ENTRE");
                 break;
-            case GameManager.ModosDeJuego.Historia:
+            case EnumsGameManager.ModosDeJuego.Historia:
                 enemy.OnEnemySurvival();
                 break;
         }
