@@ -64,16 +64,6 @@ public class Player : MonoBehaviour
     public Sprite SpriteDefensaCuerpo;
     public Sprite SpriteSalto;
     public Sprite SpriteAgacharse;
-    /*public Button Button_Attack;
-    public Button Button_Deffense;
-    public Button Button_Dodge;//Boton De esquivar.
-    public Button Button_Jump;
-    public Button Button_Duck; //Agacharse;
-    public Button Button_AttackHead; //Atacar a la cabeza
-    public Button Button_AttackChest; // Atacar al pecho
-    public Button Button_AttackLegs; // Atacar a las piernas
-    public Button Button_DefenseBoody;
-    public Button Button_Back;*/
     public Button Button_DefenseHead;
     public GameObject PanelMovement;
     public GameObject PanelAttack;
@@ -87,7 +77,6 @@ public class Player : MonoBehaviour
     private bool ContraAtaque;
     public float timeButtonActivate;
     public float SpeedJump;
-    //public Transform tranformAtaque;
     private GameManager gm;
     private Rigidbody2D rg2D;
     public bool AviableDefenseHead;
