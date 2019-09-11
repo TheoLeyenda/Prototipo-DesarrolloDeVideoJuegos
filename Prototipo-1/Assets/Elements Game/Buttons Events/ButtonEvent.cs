@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ButtonEvent : MonoBehaviour
 {
+
     // Start is called before the first frame update
     [HideInInspector]
     public bool disappear;
     public Image imageButton;
-    public Text textoButton;
+    public TextMeshProUGUI textoButton;
     public Image panelAparicion;
     public ButtonEvent nextButton;
     public float inclination;

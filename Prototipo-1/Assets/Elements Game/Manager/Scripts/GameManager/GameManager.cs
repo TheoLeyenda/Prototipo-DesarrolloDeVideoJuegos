@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 //TRADUCIDO(FALTA TRADUCIR EL NOMBRE DE LA CLASE)
 
 public class GameManager : MonoBehaviour
@@ -29,9 +30,9 @@ public class GameManager : MonoBehaviour
     public int countEnemysDead;
     public int RondasPorJefe;
     public Image TimeClockOfAttack;
-    public Text TextTitulo;
-    public Text START;
-    public Text TextTimeStart;
+    public TextMeshProUGUI TextTitulo;
+    public TextMeshProUGUI START;
+    public TextMeshProUGUI TextTimeStart;
     public static GameManager instanceGameManager;
     public float timeSelectionAttack;
     public float timerNextRond;

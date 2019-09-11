@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class PushEventManager : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -32,7 +33,7 @@ public class PushEventManager : MonoBehaviour
     private float minCantButtonUse = 5;
     private float maxCantButtonUse;
     private Vector2 positionButton;
-    public Text TextBotonesPrecionados;
+    public TextMeshProUGUI TextBotonesPrecionados;
     [Header("-----------")]
     public float timeOfEventForTime;
     public Image imageClockOfEvent;
