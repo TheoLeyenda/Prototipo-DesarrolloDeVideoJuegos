@@ -77,13 +77,21 @@ public class PushEventManager : MonoBehaviour
     {
         //Debug.Log("ENTRE");
         TypePushEvent = Random.Range(0, countTypeCheckPushEvent);
-        Debug.Log(TypePushEvent);
+        //Debug.Log(TypePushEvent);
         if (TypePushEvent == 1)
         {
+            for (int i = 0; i < buttonsEvents.Count; i++)
+            {
+                buttonsEvents[i].textoButton.text = "Press Me";
+            }
             imageClockOfEvent.gameObject.SetActive(true);
         }
         else
         {
+            for (int i = 0; i < buttonsEvents.Count; i++)
+            {
+                buttonsEvents[i].textoButton.text = ""+(i+1);
+            }
             imageClockOfEvent.gameObject.SetActive(false);
         }
         maxCantButtonUse = buttonsEvents.Count - 1;

@@ -50,7 +50,8 @@ public class Enemy : MonoBehaviour
     }
     public GameObject PanelDeLogos;
     public GameObject BARRA_DE_VIDA;
-    private float alturaPredeterminada = -3.15f;
+    [HideInInspector]
+    public float alturaPredeterminada;
     private float auxLife;
     private Animator animator;
     public bool InPool;
