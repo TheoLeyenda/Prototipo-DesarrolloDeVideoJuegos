@@ -89,8 +89,10 @@ public class Player : MonoBehaviour
     private const float MaxRangeRandomMovementOption2 = 40;
     private float TiempoDisparoAutomatico = 0.01f;
     private Vector3 PosicionGeneracionBalaRelativa = new Vector3(-3f, -3.2f, 0);
+    private int countClickButtonDefence;
     void Start()
     {
+        countClickButtonDefence = 0;
         IaModeActivate = false;
         _movimiento = Movimiento.Nulo;
         _estado = EstadoJugador.vivo;
@@ -212,6 +214,7 @@ public class Player : MonoBehaviour
         }
     }
     public void AttackButton() {
+        countClickButtonDefence = 0;
         if (gm.GetGameState() == EnumsGameManager.GameState.EnComienzo)
         {
             imagenMovimiento.sprite = SpriteMovimientoAtaque;
@@ -265,34 +268,32 @@ public class Player : MonoBehaviour
         }
     }
     public void DefenseButton() {
-        if (gm.GetGameState() == EnumsGameManager.GameState.EnComienzo)
+        countClickButtonDefence++;
+        PanelAttack.SetActive(false);
+        PanelDodge.SetActive(false);
+        switch (countClickButtonDefence)
         {
-            imagenMovimiento.sprite = SpriteMovimientoDefensa;
-            /*Button_Deffense.gameObject.SetActive(false);
-            Button_Dodge.gameObject.SetActive(false);
-
-            Button_Attack.gameObject.SetActive(false);
-            Button_AttackChest.gameObject.SetActive(false);
-            Button_AttackHead.gameObject.SetActive(false);
-            Button_AttackLegs.gameObject.SetActive(false);
-            Button_Back.gameObject.SetActive(true);
-            */
-            PanelDeffense.SetActive(true);
-            PanelAttack.SetActive(false);
-            PanelDodge.SetActive(false);
+            case 1:
+                imagenMovimiento.sprite = SpriteMovimientoDefensa;
+                break;
+            case 2:
+                imagenAccion.sprite = SpriteDefensaCuerpo;
+                break;
+        }
+        if (gm.GetGameState() == EnumsGameManager.GameState.EnComienzo && countClickButtonDefence >= 2)
+        {
             if (AviableDefenseHead)
             {
                 Button_DefenseHead.gameObject.SetActive(true);
             }
-            /*
-            Button_DefenseBoody.gameObject.SetActive(true);
-            */
+            EstadoMovimiento_DefenderTorsoPies();
         }
         
     }
     
     public void Deffense(Objetivo ob)
     {
+        countClickButtonDefence = 0;
         if (Time.timeScale > 0)
         {
             if (AviableDefenseHead)
@@ -354,6 +355,7 @@ public class Player : MonoBehaviour
         _movimiento = Movimiento.Nulo;
     }
     public void DodgeButton() {
+        countClickButtonDefence = 0;
         if (gm.GetGameState() == EnumsGameManager.GameState.EnComienzo)
         {
             imagenMovimiento.sprite = SpriteMovimientoEsquive;
