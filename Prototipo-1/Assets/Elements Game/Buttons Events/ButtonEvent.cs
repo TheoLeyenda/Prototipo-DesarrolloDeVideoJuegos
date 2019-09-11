@@ -26,6 +26,7 @@ public class ButtonEvent : MonoBehaviour
     public float speedDisable;
     [Header("Velocidad de Movimiento")]
     public float SpeedMovement;
+    public float SpeedMovementDiagonal;
     private bool preseed;
     private float alpha;
     private float auxAlpha;
@@ -48,6 +49,8 @@ public class ButtonEvent : MonoBehaviour
     }
     private void OnEnable()
     {
+        imageButton.enabled = true;
+        textoButton.enabled = true;
         imageButton.color = Color.white;
         disappear = false;
         preseed = false;
@@ -147,6 +150,7 @@ public class ButtonEvent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckPressed();
         switch (typePattern) {
             case 0:
                 //Debug.Log("ENTRE 0");
@@ -220,7 +224,7 @@ public class ButtonEvent : MonoBehaviour
                         break;
                     case 4:
                         Vector3 direction = Vector3.down + Vector3.right*inclination;
-                        transform.Translate(direction * SpeedMovement);
+                        transform.Translate(direction * SpeedMovementDiagonal);
                         if (transform.localPosition.y < -panelAparicion.rectTransform.sizeDelta.y / 2 || transform.localPosition.x > panelAparicion.rectTransform.sizeDelta.x / 2)
                         {
                             Desaparecer();
@@ -232,7 +236,7 @@ public class ButtonEvent : MonoBehaviour
                         break;
                     case 5:
                         direction = Vector3.up + Vector3.right * inclination;
-                        transform.Translate(direction * SpeedMovement);
+                        transform.Translate(direction * SpeedMovementDiagonal);
                         if (transform.localPosition.y > panelAparicion.rectTransform.sizeDelta.y / 2 || transform.localPosition.x > panelAparicion.rectTransform.sizeDelta.x / 2)
                         {
                             Desaparecer();
@@ -244,7 +248,7 @@ public class ButtonEvent : MonoBehaviour
                         break;
                     case 6:
                         direction = Vector3.down + Vector3.left * inclination;
-                        transform.Translate(direction * SpeedMovement);
+                        transform.Translate(direction * SpeedMovementDiagonal);
                         if (transform.localPosition.y < -panelAparicion.rectTransform.sizeDelta.y / 2 || transform.localPosition.x < -panelAparicion.rectTransform.sizeDelta.x / 2)
                         {
                             Desaparecer();
@@ -256,7 +260,7 @@ public class ButtonEvent : MonoBehaviour
                         break;
                     case 7:
                         direction = Vector3.up + Vector3.left * inclination;
-                        transform.Translate(direction * SpeedMovement);
+                        transform.Translate(direction * SpeedMovementDiagonal);
                         if (transform.localPosition.y > panelAparicion.rectTransform.sizeDelta.y / 2 || transform.localPosition.x < -panelAparicion.rectTransform.sizeDelta.x / 2)
                         {
                             Desaparecer();
@@ -272,6 +276,21 @@ public class ButtonEvent : MonoBehaviour
                 //Debug.Log("ENTRE 0");
                 CheckLife();
                 break;
+        }
+    }
+    public void CheckPressed()
+    {
+        if (preseed)
+        {
+            imageButton.enabled = false;
+            textoButton.enabled = false;
+            if (nextButton != null && typePattern != 1)
+            {
+                if (nextButton.gameObject.activeSelf == false)
+                {
+                    nextButton.gameObject.SetActive(true);
+                }
+            }
         }
     }
     public void CheckLife()

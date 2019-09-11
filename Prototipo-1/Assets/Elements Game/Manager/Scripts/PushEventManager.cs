@@ -164,11 +164,9 @@ public class PushEventManager : MonoBehaviour
                 {
                     buttonsEvents[id_button].gameObject.SetActive(false);
                     id_button++;
-                    
                 }
                 else
                 {
-
                     //PERDES
                     DefaultPushEvent();
                 }

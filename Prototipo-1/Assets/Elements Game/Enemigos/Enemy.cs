@@ -269,9 +269,9 @@ public class Enemy : MonoBehaviour
                 DeffensePorcentage = 20;
                 DodgePorcentage = 0;
                 //----Objetivo Atacar----//
-                AttackLegsPorcentage = 60;
-                AttackChestPorcentage = 30;
-                AttackHeadPorcentage = 10;
+                AttackLegsPorcentage = 80;
+                AttackChestPorcentage = 20;
+                AttackHeadPorcentage = 0;
                 //----Objetivo Defender----//
                 DeffenseHeadPorcentage = 33.3f;
                 DeffenseChestPorcentage = 33.4f;
