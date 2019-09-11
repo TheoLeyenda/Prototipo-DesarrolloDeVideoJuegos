@@ -325,22 +325,22 @@ public class Player : MonoBehaviour
             }
         }
     }
+    public void DisableButtonsUI()
+    {
+        PanelAttack.SetActive(false);
+        PanelDeffense.SetActive(false);
+        PanelDodge.SetActive(false);
+        PanelMovement.SetActive(false);
+    }
+    public void ActivateButtonsUI()
+    {
+        PanelMovement.SetActive(true);
+    }
     public void RestartPlayer()
     {
-        
         imagenAccion.sprite = SpriteBlanco;
         imagenMovimiento.sprite = SpriteBlanco;
-        /*Button_Jump.gameObject.SetActive(false);
-        Button_Duck.gameObject.SetActive(false);
-        Button_AttackHead.gameObject.SetActive(false);
-        Button_AttackChest.gameObject.SetActive(false);
-        Button_AttackLegs.gameObject.SetActive(false);*/
         Button_DefenseHead.gameObject.SetActive(false);
-        /*Button_DefenseBoody.gameObject.SetActive(false);
-        Button_Back.gameObject.SetActive(false);
-        Button_Attack.gameObject.SetActive(true);
-        Button_Deffense.gameObject.SetActive(true);
-        Button_Dodge.gameObject.SetActive(true);*/
         PanelAttack.SetActive(false);
         PanelDeffense.SetActive(false);
         PanelDodge.SetActive(false);
@@ -352,20 +352,11 @@ public class Player : MonoBehaviour
         BoxColliderLegs.enabled =true;
         ContraAtaque = false;
         _movimiento = Movimiento.Nulo;
-
     }
     public void DodgeButton() {
         if (gm.GetGameState() == EnumsGameManager.GameState.EnComienzo)
         {
             imagenMovimiento.sprite = SpriteMovimientoEsquive;
-            /*Button_Attack.gameObject.SetActive(false);
-            Button_Deffense.gameObject.SetActive(false);
-
-            Button_Dodge.gameObject.SetActive(false);
-            Button_Jump.gameObject.SetActive(true);
-            Button_Duck.gameObject.SetActive(true);
-            Button_Back.gameObject.SetActive(true);
-            */
             PanelAttack.SetActive(false);
             PanelDeffense.SetActive(false);
             PanelDodge.SetActive(true);

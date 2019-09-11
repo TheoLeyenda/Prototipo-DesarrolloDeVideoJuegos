@@ -20,6 +20,7 @@ public class GameManagerCharactersController : MonoBehaviour
     public Enemy.EstadoEnemigo estadoEnemigo;
     [HideInInspector]
     public Enemy.Movimiento movimientoEnemigo;
+    private GameObject[] arrayGameObjectsScenes;
     void Start()
     {
         enemiesActivate = new List<Enemy>();
@@ -48,34 +49,39 @@ public class GameManagerCharactersController : MonoBehaviour
             }
         }
     }
+    public void CheckCharactersInScene()
+    {
+        arrayGameObjectsScenes = SceneManager.GetActiveScene().GetRootGameObjects();
+        enemiesActivate.Clear();
+        for (int i = 0; i < arrayGameObjectsScenes.Length; i++)
+        {
+            if (arrayGameObjectsScenes[i].tag == "Enemy")
+            {
+                if (arrayGameObjectsScenes[i].activeSelf)
+                {
+                    enemiesActivate.Add(arrayGameObjectsScenes[i].GetComponent<Enemy>());
+                }
+            }
+            if (arrayGameObjectsScenes[i].tag == "Player")
+            {
+                if (arrayGameObjectsScenes[i].activeSelf)
+                {
+                    player1 = arrayGameObjectsScenes[i].GetComponent<Player>();
+                }
+            }
+        }
+    }
     public void CheckCharcaters()
     {
-        GameObject[] arrayGameObjectsScenes = SceneManager.GetActiveScene().GetRootGameObjects();
+        
         if (gm.MultiPlayer)
         {
             return;
         }
         if (gm.SiglePlayer)
         {
-            enemiesActivate.Clear();
-            for (int i = 0; i < arrayGameObjectsScenes.Length; i++)
-            {
-                if (arrayGameObjectsScenes[i].tag == "Enemy")
-                {
-                    if (arrayGameObjectsScenes[i].activeSelf)
-                    {
-                        enemiesActivate.Add(arrayGameObjectsScenes[i].GetComponent<Enemy>());
-                    }
-                }
-                if (arrayGameObjectsScenes[i].tag == "Player")
-                {
-                    if (arrayGameObjectsScenes[i].activeSelf)
-                    {
-                        player1 = arrayGameObjectsScenes[i].GetComponent<Player>();
-                    }
-                }
-            }
 
+            CheckCharactersInScene();
             if (movimientoEnemigo == Enemy.Movimiento.AtacarCabeza && movimientoJugador1 == Player.Movimiento.AtacarCabeza)
             {
                 //EVENTO CUANDO EL ENEMIGO Y EL JUGADOR ATACAN AL MISMO OBJETIVO
@@ -247,10 +253,23 @@ public class GameManagerCharactersController : MonoBehaviour
             enemiesActivate[i].BARRA_DE_VIDA.SetActive(false);
         }
     }
+    public void ActivateButtonPlayer1()
+    {
+        if (player1 != null)
+        {
+            player1.ActivateButtonsUI();
+        }
+    }
+    public void DisableButtonPlayer1()
+    {
+        if (player1 != null)
+        {
+            player1.DisableButtonsUI();
+        }
+    }
     public void ActivateUICharacters()
     {
         player1.BARRA_DE_VIDA.SetActive(true);
-        player1.PanelMovement.SetActive(true);
         player1.PanelDeLogos.SetActive(true);
         for (int i = 0; i < enemiesActivate.Count; i++)
         {

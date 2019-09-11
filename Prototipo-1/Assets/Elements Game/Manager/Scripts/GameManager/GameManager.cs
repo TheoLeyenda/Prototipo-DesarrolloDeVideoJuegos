@@ -117,6 +117,7 @@ public class GameManager : MonoBehaviour
     }
     public void Idle()
     {
+        gameManagerCharacterController.CheckCharactersInScene();
         TextTitulo.text = "RONDA 1";
         TextTitulo.gameObject.SetActive(false);
         TimeClockOfAttack.gameObject.SetActive(false);
@@ -160,6 +161,7 @@ public class GameManager : MonoBehaviour
     public void EnComienzo()
     {
         enumsGameManager.specialEvent = EnumsGameManager.EventoEspecial.Nulo;
+        gameManagerCharacterController.ActivateButtonPlayer1();
         TextTimeStart.gameObject.SetActive(false);
         TimeClockOfAttack.gameObject.SetActive(true);
         TextTitulo.gameObject.SetActive(true);
@@ -187,6 +189,7 @@ public class GameManager : MonoBehaviour
     }
     public void RespuestaJugadores()
     {
+        gameManagerCharacterController.DisableButtonPlayer1();
         gameManagerCharacterController.AnswerPlayers();
     }
     public void Resultado()
