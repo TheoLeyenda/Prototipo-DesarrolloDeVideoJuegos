@@ -48,6 +48,10 @@ public class Enemy : MonoBehaviour
         muerto,
         Count,
     }
+    public SpriteRenderer SpriteRendererEnemigoBalanceado;
+    public SpriteRenderer SpriteRendererEnemigoAgresivo;
+    public SpriteRenderer SpriteRendererEnemigoDefensivo;
+    public SpriteRenderer SpriteRendererJefeProfeAnatomia;
     public GameObject PanelDeLogos;
     public GameObject BARRA_DE_VIDA;
     [HideInInspector]
@@ -132,6 +136,7 @@ public class Enemy : MonoBehaviour
         }
         rg2D = GetComponent<Rigidbody2D>();
         SetPorcentageMovements();
+        CheckInitialSprite();
     }
 
     // Update is called once per frame
@@ -150,6 +155,49 @@ public class Enemy : MonoBehaviour
             // SI EL SALTO NO FUNCIONA ESTA LINEA ES EL CAUSANTE DEL BUG
             transform.position = new Vector3(transform.position.x, alturaPredeterminada, transform.position.z);
         }
+    }
+    public void CheckInitialSprite()
+    {
+        if (typeEnemy != TiposDeEnemigo.Jefe)
+        {
+            switch (typeEnemy)
+            {
+                case TiposDeEnemigo.Agresivo:
+                    SpriteRendererEnemigoAgresivo.gameObject.SetActive(true);
+                    SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
+                    SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
+                    SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
+                    break;
+                case TiposDeEnemigo.Balanceado:
+                    SpriteRendererEnemigoBalanceado.gameObject.SetActive(true);
+                    SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
+                    SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
+                    SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
+                    break;
+                case TiposDeEnemigo.Defensivo:
+                    SpriteRendererEnemigoDefensivo.gameObject.SetActive(true);
+                    SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
+                    SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
+                    SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
+                    break;
+            }
+        }
+        else
+        {
+            switch (typeBoss)
+            {
+                case TiposDeJefe.ProfeAnatomia:
+                    SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
+                    SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
+                    SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
+                    SpriteRendererJefeProfeAnatomia.gameObject.SetActive(true);
+                    break;
+            }
+        }
+    }
+    public void OnEnemyHistory()
+    {
+        CheckInitialSprite();
     }
     public void OnEnemySurvival()
     {
@@ -190,7 +238,7 @@ public class Enemy : MonoBehaviour
             typeEnemy = TiposDeEnemigo.Jefe;
             typeBoss = TiposDeJefe.ProfeAnatomia;
         }
-
+        CheckInitialSprite();
         SetPorcentageMovements();
     }
     public void SetPorcentageMovements()
@@ -377,19 +425,7 @@ public class Enemy : MonoBehaviour
         }
         else if (typeEnemy == TiposDeEnemigo.Defensivo)
         {
-            //float option = Random.Range(MinRangeRandom, opcionesContraAtaque);
-            //switch ((int)option)
-            //{
-                //case 0:
-                    Attack(Objetivo.Cabeza,dobleDamage);
-                    //break;
-                //case 1:
-                    //Attack(Objetivo.Torso);
-                    //break;
-                //case 2:
-                    //Attack(Objetivo.Piernas);
-                    //break;
-            //}
+            Attack(Objetivo.Cabeza,dobleDamage);
         }
         else if (typeEnemy == TiposDeEnemigo.Agresivo)
         {
@@ -597,7 +633,6 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-
     public void Jump()
     {
         Debug.Log("Enemigo: Animacion De Salto");
