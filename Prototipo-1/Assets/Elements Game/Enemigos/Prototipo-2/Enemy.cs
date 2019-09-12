@@ -8,6 +8,7 @@ namespace Prototipo_2
     public class Enemy : MonoBehaviour
     {
         public Grid gridEnemy;
+        private Cuadrilla cuadrillaActual;
         public int rangeCuadrillas_x;
         public int rangeCuadrillas_y;
         public EnumsEnemy enumsEnemy;
