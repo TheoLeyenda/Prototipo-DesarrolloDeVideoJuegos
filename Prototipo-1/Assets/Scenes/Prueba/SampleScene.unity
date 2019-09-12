@@ -127,10 +127,65 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1888493605}
     m_Modifications:
-    - target: {fileID: 7194419974994112979, guid: 61245c1a77e7ad847b3751885e027da7,
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
-      propertyPath: m_Name
-      value: Enemigo
+      propertyPath: gridEnemy
+      value: 
+      objectReference: {fileID: 2107844349}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: enumsEnemy
+      value: 
+      objectReference: {fileID: 650712826}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: SpriteRendererEnemigoBalanceado
+      value: 
+      objectReference: {fileID: 650712833}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: SpriteRendererEnemigoDefensivo
+      value: 
+      objectReference: {fileID: 650712831}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: SpriteRendererEnemigoAgresivo
+      value: 
+      objectReference: {fileID: 650712832}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: SpriteRendererJefeProfeAnatomia
+      value: 
+      objectReference: {fileID: 650712830}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: BARRA_DE_VIDA
+      value: 
+      objectReference: {fileID: 650712829}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: life
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: maxLife
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: ImageHP
+      value: 
+      objectReference: {fileID: 650712828}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: poolObjectAttack
+      value: 
+      objectReference: {fileID: 650712827}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: SpeedJump
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7194419974994112977, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
@@ -197,65 +252,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+    - target: {fileID: 7194419974994112979, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
-      propertyPath: gridEnemy
-      value: 
-      objectReference: {fileID: 2107844349}
-    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: enumsEnemy
-      value: 
-      objectReference: {fileID: 650712826}
-    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: SpriteRendererEnemigoBalanceado
-      value: 
-      objectReference: {fileID: 650712833}
-    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: SpriteRendererEnemigoDefensivo
-      value: 
-      objectReference: {fileID: 650712831}
-    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: SpriteRendererEnemigoAgresivo
-      value: 
-      objectReference: {fileID: 650712832}
-    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: SpriteRendererJefeProfeAnatomia
-      value: 
-      objectReference: {fileID: 650712830}
-    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: BARRA_DE_VIDA
-      value: 
-      objectReference: {fileID: 650712829}
-    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: life
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: maxLife
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: ImageHP
-      value: 
-      objectReference: {fileID: 650712828}
-    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: poolObjectAttack
-      value: 
-      objectReference: {fileID: 650712827}
-    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: SpeedJump
-      value: 10
+      propertyPath: m_Name
+      value: Enemigo
       objectReference: {fileID: 0}
     - target: {fileID: 8134504010569212459, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
@@ -589,11 +589,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1888493605}
     m_Modifications:
-    - target: {fileID: 2688081505215426912, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_Name
-      value: Grid
-      objectReference: {fileID: 0}
     - target: {fileID: 7296128619017103692, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -648,6 +643,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2688081505215426912, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_Name
+      value: Grid
       objectReference: {fileID: 0}
     - target: {fileID: 2107844368, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
       propertyPath: enemy
