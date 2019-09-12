@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Prototipo_1;
 public class PushEventManager : MonoBehaviour
 {
     // Start is called before the first frame update

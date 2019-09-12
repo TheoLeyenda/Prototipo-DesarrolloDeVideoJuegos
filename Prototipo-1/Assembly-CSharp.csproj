@@ -63,14 +63,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Elements Game\Buttons Events\ButtonEvent.cs" />
-    <Compile Include="Assets\Elements Game\Enemigos\Enemy.cs" />
-    <Compile Include="Assets\Elements Game\Enemigos\ShildEnemy.cs" />
+    <Compile Include="Assets\Elements Game\Enemigos\Prototipo-1\Enemy.cs" />
+    <Compile Include="Assets\Elements Game\Enemigos\Prototipo-1\ShildEnemy.cs" />
+    <Compile Include="Assets\Elements Game\Enemigos\Prototipo-2\Enemy.cs" />
+    <Compile Include="Assets\Elements Game\Enemigos\Prototipo-2\EnumsEnemy.cs" />
+    <Compile Include="Assets\Elements Game\Enemigos\Prototipo-2\GridEnemy.cs" />
     <Compile Include="Assets\Elements Game\Generador de Enemigos\GeneradorDeEnemigos.cs" />
-    <Compile Include="Assets\Elements Game\Jugador\Player.cs" />
+    <Compile Include="Assets\Elements Game\Jugador\Prototipo-1\Player.cs" />
+    <Compile Include="Assets\Elements Game\Jugador\Prototipo-2\GridPlayer.cs" />
+    <Compile Include="Assets\Elements Game\Jugador\Prototipo-2\Player.cs" />
+    <Compile Include="Assets\Elements Game\Manager\Prototipo-1\EnumsGameManager.cs" />
+    <Compile Include="Assets\Elements Game\Manager\Prototipo-1\GameManager.cs" />
+    <Compile Include="Assets\Elements Game\Manager\Prototipo-1\GameManagerCharactersController.cs" />
+    <Compile Include="Assets\Elements Game\Manager\Prototipo-2\EnumsGameManager.cs" />
+    <Compile Include="Assets\Elements Game\Manager\Prototipo-2\GameManager.cs" />
     <Compile Include="Assets\Elements Game\Manager\Scripts\GameData.cs" />
-    <Compile Include="Assets\Elements Game\Manager\Scripts\GameManager\EnumsGameManager.cs" />
-    <Compile Include="Assets\Elements Game\Manager\Scripts\GameManager\GameManager.cs" />
-    <Compile Include="Assets\Elements Game\Manager\Scripts\GameManager\GameManagerCharactersController.cs" />
     <Compile Include="Assets\Elements Game\Manager\Scripts\PushEventManager.cs" />
     <Compile Include="Assets\Elements Game\Manager\Scripts\ScreenManager.cs" />
     <Compile Include="Assets\Elements Game\Pools\Pool.cs" />
@@ -96,37 +103,37 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Users/Theo Leyenda/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/Theo/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>C:/Users/Theo Leyenda/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/Users/Theo/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/Theo Leyenda/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/Theo/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Users/Theo Leyenda/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/Theo/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>C:/Users/Theo Leyenda/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/Theo/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/Theo Leyenda/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/Theo/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:/Users/Theo Leyenda/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:/Users/Theo/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>C:/Users/Theo Leyenda/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>C:/Users/Theo/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>C:/Users/Theo Leyenda/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+      <HintPath>C:/Users/Theo/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/Theo Leyenda/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/Theo/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Users/Theo Leyenda/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/Theo/Desktop/Prototipo-DesarrolloDeVideoJuegos/Prototipo-1/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

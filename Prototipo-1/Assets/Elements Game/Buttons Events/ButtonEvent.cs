@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using Prototipo_1;
 public class ButtonEvent : MonoBehaviour
 {
 

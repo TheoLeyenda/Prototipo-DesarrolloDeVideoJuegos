@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Prototipo_1;
 public class Proyectil : MonoBehaviour
 {
     // Start is called before the first frame update
