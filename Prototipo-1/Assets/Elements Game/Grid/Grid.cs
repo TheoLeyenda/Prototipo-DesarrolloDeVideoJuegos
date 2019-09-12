@@ -1,18 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Prototipo_2;
 public class Grid : MonoBehaviour
 {
     // Start is called before the first frame update
-    public List<List<GameObject>> cuadrilla;
-    void Start()
-    { 
-    }
-
-    // Update is called once per frame
-    void Update()
+    public List<Cuadrilla> cuadrilla;
+    public void RestartCuadrillas()
     {
-        
+        for (int i = 0; i < cuadrilla.Count; i++)
+        {
+            cuadrilla[i].ResetCuadrilla();
+        }
     }
 }

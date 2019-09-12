@@ -1,18 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Cuadrilla : MonoBehaviour
+namespace Prototipo_2
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Cuadrilla : MonoBehaviour
     {
-        
-    }
+        public enum StateCuadrilla
+        {
+            Ocupado,
+            Libre,
+            Count,
+        }
+        public Enemy enemy;
+        public Player player;
+        private StateCuadrilla stateCuadrilla;
+        private void Start()
+        {
+            ResetCuadrilla();
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void SetStateCuadrilla(StateCuadrilla state)
+        {
+            stateCuadrilla = state;
+        }
+        public StateCuadrilla GetStateCuadrilla()
+        {
+            return stateCuadrilla;
+        }
+        public void ResetCuadrilla()
+        {
+            stateCuadrilla = StateCuadrilla.Libre;
+        }
+
     }
 }

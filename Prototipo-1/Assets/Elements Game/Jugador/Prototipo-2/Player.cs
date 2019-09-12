@@ -7,6 +7,9 @@ namespace Prototipo_2
     public class Player : MonoBehaviour
     {
         // Start is called before the first frame update
+        public float life;
+        public float maxLife;
+        private float auxLife;
         void Start()
         {
 
