@@ -8,6 +8,8 @@ namespace Prototipo_2
     public class Enemy : MonoBehaviour
     {
         public Grid gridEnemy;
+        public int rangeCuadrillas_x;
+        public int rangeCuadrillas_y;
         public EnumsEnemy enumsEnemy;
         public SpriteRenderer SpriteRendererEnemigoBalanceado;
         public SpriteRenderer SpriteRendererEnemigoAgresivo;
@@ -224,7 +226,10 @@ namespace Prototipo_2
                 life = 0;
             }
         }
+        public void CheckCasillaOcupada()
+        {
 
+        }
         //INTERACTUA CON GAME MANAGER
         public void CheckDead()
         {

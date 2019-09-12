@@ -11,9 +11,24 @@ namespace Prototipo_2
             Libre,
             Count,
         }
+        public enum PosicionCuadrilla
+        {
+            CuadrillaAltaIzquierda,
+            CuadrillaAltaCentral,
+            CuadrillaAltaDerecha,
+            CuadrillaMediaIzquierda,
+            CuadrillaMediaCentral,
+            CuadrillaMediaDerecha,
+            CuadrillaBajaIzquierda,
+            CuadrillaBajaCentral,
+            CuadrillaBajaDerecha,
+            Count,
+        }
+        
         public Enemy enemy;
         public Player player;
         private StateCuadrilla stateCuadrilla;
+        public PosicionCuadrilla posicionCuadrilla;
         private void Start()
         {
             ResetCuadrilla();
