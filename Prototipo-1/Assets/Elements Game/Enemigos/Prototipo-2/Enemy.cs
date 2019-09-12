@@ -7,7 +7,7 @@ namespace Prototipo_2
 {
     public class Enemy : MonoBehaviour
     {
-        public GridEnemy gridEnemy;
+        public Grid gridEnemy;
         public EnumsEnemy enumsEnemy;
         public SpriteRenderer SpriteRendererEnemigoBalanceado;
         public SpriteRenderer SpriteRendererEnemigoAgresivo;
