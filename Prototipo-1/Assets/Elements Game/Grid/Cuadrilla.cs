@@ -29,10 +29,6 @@ namespace Prototipo_2
         public Player player;
         public StateCuadrilla stateCuadrilla;
         public PosicionCuadrilla posicionCuadrilla;
-        private void Start()
-        {
-            ResetCuadrilla();
-        }
 
         public void SetStateCuadrilla(StateCuadrilla state)
         {
