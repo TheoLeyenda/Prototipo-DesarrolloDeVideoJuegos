@@ -25,6 +25,16 @@ public class Grid : MonoBehaviour
             }
         }
     }
+    public void CheckCuadrillaOrden()
+    {
+        for (int i = 0; i < cuadrilla_filas; i++)
+        {
+            for (int j = 0; j < cuadrilla_columnas; j++)
+            {
+                Debug.Log(matrizCuadrilla[i][j].name);
+            }
+        }
+    }
     public void RestartCuadrillas()
     {
         for (int i = 0; i < matrizCuadrilla.Count; i++)
@@ -37,11 +47,13 @@ public class Grid : MonoBehaviour
     }
     public void InitMatrizCuadrilla()
     {
+        int aux = 0;
         for (int i = 0; i < cuadrilla_filas; i++)
         {
             for (int j = 0; j < cuadrilla_columnas; j++)
             {
-                matrizCuadrilla[i][j] = cuadrilla[i];
+                matrizCuadrilla[i][j] = cuadrilla[aux];
+                aux++;
             }
         }
     }

@@ -109,6 +109,7 @@ namespace Prototipo_2
                         break;
                 }
             }
+            gridEnemy.CheckCuadrillaOrden();
         }
         public void SetPorcentageMovements()
         {
