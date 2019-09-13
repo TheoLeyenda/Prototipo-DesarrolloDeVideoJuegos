@@ -27,7 +27,7 @@ namespace Prototipo_2
         
         public Enemy enemy;
         public Player player;
-        private StateCuadrilla stateCuadrilla;
+        public StateCuadrilla stateCuadrilla;
         public PosicionCuadrilla posicionCuadrilla;
         private void Start()
         {

@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4908308640305772651}
   - component: {fileID: 301498923488935498}
-  - component: {fileID: 5051542363413936505}
+  - component: {fileID: 3947009062007527906}
   - component: {fileID: 2704542344242506306}
   - component: {fileID: 8037629832574115538}
   - component: {fileID: 3546365984257640956}
@@ -117,7 +117,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5051542363413936505
+--- !u!114 &3947009062007527906
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,18 +126,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2914594783176540619}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 026e4e934fc9b454ca444e87c4986dea, type: 3}
+  m_Script: {fileID: 11500000, guid: f1045993e7f37f94d8ba3d797974e2d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  timeLife: 0
-  auxTimeLife: 0
-  damage: 0
-  rg2D: {fileID: 0}
-  vectorForward: {fileID: 0}
-  vectorForwardUp: {fileID: 0}
-  vectorForwardDown: {fileID: 0}
-  pool: {fileID: 0}
+  speed: 550
+  timeLife: 4
+  auxTimeLife: 4
+  damage: 25
+  rg2D: {fileID: 2704542344242506306}
+  vectorForward: {fileID: 2671488340166370668}
+  vectorForwardUp: {fileID: 2250032862565743879}
+  vectorForwardDown: {fileID: 6892189650773070292}
+  pool: {fileID: 8744921956802162880, guid: 124cdede344a9344a98c2efa26021301, type: 3}
 --- !u!50 &2704542344242506306
 Rigidbody2D:
   serializedVersion: 4
