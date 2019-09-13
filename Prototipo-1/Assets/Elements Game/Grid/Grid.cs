@@ -108,10 +108,26 @@ public class Grid : MonoBehaviour
                     }
                     break;
                 case 3:
+                    matrizCuadrilla[columnaActual + 1][casillaBase].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                    matrizCuadrilla[columnaActual + 2][casillaBase].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                    switch (CasillasAltasOcupadas)
+                    {
+                        case 2:
+                            matrizCuadrilla[columnaActual][casillaBase + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            matrizCuadrilla[columnaActual + 1][casillaBase+1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            matrizCuadrilla[columnaActual + 2][casillaBase+1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            break;
+                        case 3:
+                            matrizCuadrilla[columnaActual][casillaBase + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            matrizCuadrilla[columnaActual + 1][casillaBase + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            matrizCuadrilla[columnaActual + 2][casillaBase + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            matrizCuadrilla[columnaActual][casillaBase + 2].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            matrizCuadrilla[columnaActual + 1][casillaBase + 2].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            matrizCuadrilla[columnaActual + 2][casillaBase + 2].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            break;
+                    }
                     break;
             }
         }
     }
-
-    
 }
