@@ -66,22 +66,34 @@ namespace Prototipo_2
                 switch (enumsEnemy.typeEnemy)
                 {
                     case EnumsEnemy.TiposDeEnemigo.Agresivo:
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 1;
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 2;
+                        structsEnemys.dataEnemy.columnaActual = 1;
                         SpriteRendererEnemigoAgresivo.gameObject.SetActive(true);
                         SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
                         SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
                         SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
+                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                         break;
                     case EnumsEnemy.TiposDeEnemigo.Balanceado:
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 1;
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 2;
+                        structsEnemys.dataEnemy.columnaActual = 1;
                         SpriteRendererEnemigoBalanceado.gameObject.SetActive(true);
                         SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
                         SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
                         SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
+                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                         break;
                     case EnumsEnemy.TiposDeEnemigo.Defensivo:
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 1;
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 2;
+                        structsEnemys.dataEnemy.columnaActual = 1;
                         SpriteRendererEnemigoDefensivo.gameObject.SetActive(true);
                         SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
                         SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
                         SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
+                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                         break;
                 }
             }

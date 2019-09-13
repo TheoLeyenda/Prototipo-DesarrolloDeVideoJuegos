@@ -8,7 +8,7 @@ public class Grid : MonoBehaviour
     public List<List<Cuadrilla>> matrizCuadrilla;
     private int cuadrilla_columnas = 3;
     private int cuadrilla_filas = 3;
-    private void Start()
+    private void Awake()
     {
         matrizCuadrilla = new List<List<Cuadrilla>>();
         InitGrid();
@@ -16,10 +16,10 @@ public class Grid : MonoBehaviour
     }
     public void InitGrid()
     {
-        for (int i = 0; i < matrizCuadrilla.Count; i++)
+        for (int i = 0; i < cuadrilla_filas; i++)
         {
             matrizCuadrilla.Add(new List<Cuadrilla>());
-            for (int j = 0; j < matrizCuadrilla[i].Count; j++)
+            for (int j = 0; j < cuadrilla_columnas; j++)
             {
                 matrizCuadrilla[i].Add(null);
             }

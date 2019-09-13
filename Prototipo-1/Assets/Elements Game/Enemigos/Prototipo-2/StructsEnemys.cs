@@ -8,7 +8,7 @@ namespace Prototipo_2 {
         {
             public int CantCasillasOcupadas_X;
             public int CantCasillasOcupadas_Y;
-            public Cuadrilla cuadrillaActual;
+            public int columnaActual;
         }
         public DataEnemy dataEnemy;
     }
