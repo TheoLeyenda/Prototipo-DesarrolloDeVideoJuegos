@@ -73,6 +73,7 @@ namespace Prototipo_2
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            Debug.Log("Colicion");
             switch (collision.tag)
             {
                 case "Escudo":
