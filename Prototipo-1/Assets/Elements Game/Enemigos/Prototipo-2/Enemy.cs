@@ -7,6 +7,7 @@ namespace Prototipo_2
 {
     public class Enemy : MonoBehaviour
     {
+        public GameObject enemyPrefab;
         public Grid gridEnemy;
         public EnumsEnemy enumsEnemy;
         public StructsEnemys structsEnemys;
@@ -59,6 +60,11 @@ namespace Prototipo_2
             SetPorcentageMovements();
             CheckInitialSprite();
         }
+        private void Update()
+        {
+            CheckLifeBar();
+            CheckDead();
+        }
         public void CheckInitialSprite()
         {
             if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
@@ -109,7 +115,6 @@ namespace Prototipo_2
                         break;
                 }
             }
-            gridEnemy.CheckCuadrillaOrden();
         }
         public void SetPorcentageMovements()
         {
@@ -182,7 +187,7 @@ namespace Prototipo_2
             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
             poolObjectEnemy = GetComponent<PoolObject>();
             float opcion = Random.Range(MinRangeRandom, TypeRandom);
-            if (gm == null)
+            if (GameManager.instanceGameManager != null)
             {
                 gm = GameManager.instanceGameManager;
             }
@@ -248,7 +253,7 @@ namespace Prototipo_2
                 {
                     // SI SU VIDA ES IGUAL A 0 POS MUERE DESACTIVADO
                     enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
-                    gameObject.SetActive(false);
+                    enemyPrefab.gameObject.SetActive(false);
                     gm.countEnemysDead++;
                     gm.ResetRoundCombat(false);
                 }

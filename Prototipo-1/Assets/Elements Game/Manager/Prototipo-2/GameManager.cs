@@ -21,9 +21,20 @@ namespace Prototipo_2
 
         private int roundCombat;
         // Start is called before the first frame update
+        private void Awake()
+        {
+            if (instanceGameManager == null)
+            {
+                instanceGameManager = this;
+            }
+            else if (instanceGameManager != null)
+            {
+                gameObject.SetActive(false);
+            }
+        }
         void Start()
         {
-
+            countEnemysDead = 0;
         }
 
         // Update is called once per frame

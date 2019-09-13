@@ -356,7 +356,7 @@ GameObject:
   m_Layer: 0
   m_Name: GeneradorPelotas
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -368,7 +368,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9121592577794639369}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.073, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0632, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9121592579315266116}
@@ -617,6 +617,7 @@ GameObject:
   - component: {fileID: 9121592579315266113}
   - component: {fileID: 9121592579315266118}
   - component: {fileID: 7097743373262305301}
+  - component: {fileID: 1420592905}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -633,7 +634,7 @@ Transform:
   m_GameObject: {fileID: 9121592579315266122}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.58, y: -2.85, z: 0}
-  m_LocalScale: {x: 31.699219, y: 31.699219, z: 1.0566406}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9121592577794639368}
   - {fileID: 9121592577935181138}
@@ -697,19 +698,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e80ed6d8b9751468846020f2df5d7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridPlayer: {fileID: 0}
+  gridPlayer: {fileID: 5927136447712956401}
   life: 250
   maxLife: 250
-  enumsPlayers: {fileID: 0}
-  BARRA_DE_VIDA: {fileID: 0}
-  generadorProyectiles: {fileID: 0}
-  ImageHP: {fileID: 0}
+  enumsPlayers: {fileID: 1420592905}
+  BARRA_DE_VIDA: {fileID: 9121592577714499394}
+  generadorProyectiles: {fileID: 9121592577794639369}
+  ImageHP: {fileID: 5503501260017885045}
   PadArrowUp: {fileID: 0}
   PadArrowDown: {fileID: 0}
   PadArrowLeft: {fileID: 0}
   PadArrowRigth: {fileID: 0}
-  SpeedJump: 0
-  poolObjectAttack: {fileID: 0}
+  SpeedJump: 10
+  poolObjectAttack: {fileID: 9121592579528980573}
+--- !u!114 &1420592905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9121592579315266122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a15df1adbb58a46ac4d138dace65cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movimiento: 0
+  estadoJugador: 0
 --- !u!1001 &878881380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -785,6 +800,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 878881380}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5927136447712956401 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5927136447379350933, guid: b929ac675e510d440a80e8c74d8c4990,
+    type: 3}
+  m_PrefabInstance: {fileID: 878881380}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6174d52913e16f42a2a8cdfa2ba4130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4164644636569699438
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -852,6 +879,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5142444625613618227, guid: c6d6ac12b9b9cf44092344d820274e7e,
+        type: 3}
+      propertyPath: Ball
+      value: 
+      objectReference: {fileID: 2914594783176540619, guid: 0534ba56a355eb048a94948753d4bbdd,
+        type: 3}
+    - target: {fileID: 5142444625613618227, guid: c6d6ac12b9b9cf44092344d820274e7e,
+        type: 3}
+      propertyPath: count
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6d6ac12b9b9cf44092344d820274e7e, type: 3}
 --- !u!4 &9121592579528980572 stripped
@@ -860,3 +898,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4164644636569699438}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9121592579528980573 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5142444625613618227, guid: c6d6ac12b9b9cf44092344d820274e7e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4164644636569699438}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75438edaff39ea94592a8d0f5a22a436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

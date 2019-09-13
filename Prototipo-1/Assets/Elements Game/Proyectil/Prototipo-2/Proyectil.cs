@@ -73,7 +73,6 @@ namespace Prototipo_2
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            Debug.Log("Colicion");
             switch (collision.tag)
             {
                 case "Escudo":
@@ -88,7 +87,6 @@ namespace Prototipo_2
                     Cuadrilla cuadrilla = collision.GetComponent<Cuadrilla>();
                     if (cuadrilla.GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Ocupado)
                     {
-                        timeLife = 0;
                         if (dobleDamage)
                         {
                             damage = damage / 2;
@@ -102,6 +100,7 @@ namespace Prototipo_2
                         {
                             cuadrilla.player.life = cuadrilla.player.life - damage;
                         }
+                        timeLife = 0;
                     }
                     break;
             }
