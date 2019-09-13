@@ -8,6 +8,8 @@ public class Grid : MonoBehaviour
     public List<List<Cuadrilla>> matrizCuadrilla;
     private int cuadrilla_columnas = 3;
     private int cuadrilla_filas = 3;
+    public Cuadrilla leftCuadrilla;
+    public Cuadrilla rightCuadrilla;
     private void Awake()
     {
         matrizCuadrilla = new List<List<Cuadrilla>>();
