@@ -8,10 +8,8 @@ namespace Prototipo_2
     public class Enemy : MonoBehaviour
     {
         public Grid gridEnemy;
-        private Cuadrilla cuadrillaActual;
-        public int rangeCuadrillas_x;
-        public int rangeCuadrillas_y;
         public EnumsEnemy enumsEnemy;
+        public StructsEnemys structsEnemys;
         public SpriteRenderer SpriteRendererEnemigoBalanceado;
         public SpriteRenderer SpriteRendererEnemigoAgresivo;
         public SpriteRenderer SpriteRendererEnemigoDefensivo;
@@ -48,6 +46,7 @@ namespace Prototipo_2
         private float TypeRandom = 3;
         void Start()
         {
+            
             auxLife = life;
             poolObjectEnemy = GetComponent<PoolObject>();
             animator = GetComponent<Animator>();
@@ -226,10 +225,6 @@ namespace Prototipo_2
             {
                 life = 0;
             }
-        }
-        public void CheckCasillaOcupada()
-        {
-
         }
         //INTERACTUA CON GAME MANAGER
         public void CheckDead()
