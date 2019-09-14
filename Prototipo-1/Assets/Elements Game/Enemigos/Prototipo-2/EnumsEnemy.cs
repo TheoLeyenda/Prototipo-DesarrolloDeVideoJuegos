@@ -31,10 +31,10 @@ namespace Prototipo_2
         public enum Movimiento
         {
             Nulo,
+            AtacarEnElLugar,
+            AgacharseAtaque,
             AtacarEnParabola,
             SaltoAtaque,
-            AgacharseAtaque,
-            AtacarEnElLugar,
             SaltoDefensa,
             AgacheDefensa,
             DefensaEnElLugar,

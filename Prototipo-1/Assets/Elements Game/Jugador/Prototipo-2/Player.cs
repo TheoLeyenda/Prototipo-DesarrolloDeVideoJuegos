@@ -246,13 +246,13 @@ namespace Prototipo_2
                 }
             }
         }
-        public void Duck(int rangoAbajo)
+        public void Duck(int rangoAgachado)
         {
             isDuck = true;
             colliderSprite.enabled = false;
             for (int i = 0; i < structsPlayer.dataPlayer.CantCasillasOcupadas_X; i++)
             {
-                gridPlayer.matrizCuadrilla[structsPlayer.dataPlayer.columnaActual + i][gridPlayer.GetCuadrilla_columnas() - structsPlayer.dataPlayer.CantCasillasOcupadas_Y + rangoAbajo].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
+                gridPlayer.matrizCuadrilla[structsPlayer.dataPlayer.columnaActual + i][gridPlayer.GetCuadrilla_columnas() - structsPlayer.dataPlayer.CantCasillasOcupadas_Y + rangoAgachado].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
             }
             
         }

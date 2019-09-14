@@ -54,6 +54,7 @@ namespace Prototipo_2
         private float auxDelayAttack;
         private bool doubleDamage;
         private bool isDuck;
+        public List<Collider2D> collidersSprites;
         void Start()
         {
             auxDelayAttack = delayAttack;
@@ -119,10 +120,14 @@ namespace Prototipo_2
                 switch (enumsEnemy.typeBoss)
                 {
                     case EnumsEnemy.TiposDeJefe.ProfeAnatomia:
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
+                        structsEnemys.dataEnemy.columnaActual = 1;
                         SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
                         SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
                         SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
                         SpriteRendererJefeProfeAnatomia.gameObject.SetActive(true);
+                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                         break;
                 }
             }
@@ -149,6 +154,7 @@ namespace Prototipo_2
                     //----Esquivar Arriba/Abajo----//
                     JumpPorcentage = 50;
                     DuckPorcentage = 50;
+                    enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.Nulo;
                     break;
                 case EnumsEnemy.TiposDeEnemigo.Agresivo:
                     //----Movimiento----//
@@ -167,6 +173,7 @@ namespace Prototipo_2
                     //----Esquivar Arriba/Abajo----//
                     JumpPorcentage = 0;
                     DuckPorcentage = 0;
+                    enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.Nulo;
                     break;
                 case EnumsEnemy.TiposDeEnemigo.Defensivo:
                     //---Movimiento---//
@@ -185,6 +192,7 @@ namespace Prototipo_2
                     //----Esquivar Arriba/Abajo----//
                     JumpPorcentage = 0;
                     DuckPorcentage = 0;
+                    enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.Nulo;
                     break;
             }
         }
@@ -240,7 +248,12 @@ namespace Prototipo_2
         {
             if (delaySelectMovement <= 0)
             {
-                delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);    
+                int min = (int)EnumsEnemy.Movimiento.Nulo + 1;
+                int max = 3;//(int)EnumsEnemy.Movimiento.Count;
+                EnumsEnemy.Movimiento movimiento = (EnumsEnemy.Movimiento)Random.Range(min, max);
+                delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
+                enumsEnemy.SetMovement(movimiento);
+                Debug.Log(movimiento.ToString());
             }
             if (delaySelectMovement > 0)
             {
@@ -321,26 +334,37 @@ namespace Prototipo_2
 
         public void CheckMovement()
         {
-            EnumsEnemy.Movimiento movimiento = EnumsEnemy.Movimiento.AtacarEnElLugar;
-
-            enumsEnemy.SetMovement(movimiento);
-
             switch (enumsEnemy.GetMovement())
             {
                 case EnumsEnemy.Movimiento.AtacarEnElLugar:
-                    if (delayAttack > 0)
-                    {
-                        delayAttack = delayAttack - Time.deltaTime;
-                    }
-                    else if(delayAttack <= 0)
-                    {
-                        Attack();
-                        Debug.Log(auxDelayAttack);
-                        delayAttack = auxDelayAttack;
-                    }
+                    CheckDelayAttack();
+                    break;
+                case EnumsEnemy.Movimiento.AgacharseAtaque:
+                    Duck(structsEnemys.dataEnemy.CantCasillasOcupadas_X);
+                    CheckDelayAttack();
                     break;
             }
+            if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque)
+            {
+                for (int i = 0; i < collidersSprites.Count; i++)
+                {
+                    collidersSprites[i].enabled = true;
+                }
+                isDuck = false;
+            }
             //CHEKEA EL MOVIMIENTO DEL ENEMIGO
+        }
+        public void CheckDelayAttack()
+        {
+            if (delayAttack > 0)
+            {
+                delayAttack = delayAttack - Time.deltaTime;
+            }
+            else if (delayAttack <= 0)
+            {
+                Attack();
+                delayAttack = auxDelayAttack;
+            }
         }
         public void ResetEnemy()
         {
@@ -424,13 +448,65 @@ namespace Prototipo_2
             }
             else
             {
-                switch (enumsEnemy.typeEnemy)
+                if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
                 {
-
+                    switch (enumsEnemy.typeEnemy)
+                    {
+                        case EnumsEnemy.TiposDeEnemigo.Balanceado:
+                            nombreGenerador = "GeneradorPelotasAgachadoBalanceado";
+                            break;
+                        case EnumsEnemy.TiposDeEnemigo.Defensivo:
+                            nombreGenerador = "GeneradorPelotasAgachadoDefensivo";
+                            break;
+                        case EnumsEnemy.TiposDeEnemigo.Agresivo:
+                            nombreGenerador = "GeneradorPelotasAgachadoAgresivo";
+                            break;
+                    }
                 }
-                switch (enumsEnemy.typeBoss)
+                else
                 {
-                    //UNA VEZ INCORPORADA LA PARTE DE LOS BOSESS INCORPORAR ESTA PARTE EN BASE A LA PARTE DE ARRIBA.
+                    switch (enumsEnemy.typeBoss)
+                    {
+                        case EnumsEnemy.TiposDeJefe.ProfeAnatomia:
+                            nombreGenerador = "GeneradorPelotasAgachadoProfeAnatomia";
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeHistoria:
+                            nombreGenerador = "GeneradorPelotasAgachadoProfeHistoria";
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeEducacionFisica:
+                            nombreGenerador = "GeneradorPelotasAgachadoProfeEducacionFisica";
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeArte:
+                            nombreGenerador = "GeneradorPelotasAgachadoProfeArte";
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeMatematica:
+                            nombreGenerador = "GeneradorPelotasAgachadoProfeMatematica";
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeQuimica:
+                            nombreGenerador = "GeneradorPelotasAgachadoProfeQuimica";
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeProgramacion:
+                            nombreGenerador = "GeneradorPelotasAgachadoProfeProgramacion";
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeBaretto:
+                            nombreGenerador = "GeneradorPelotasAgachadoProfeBaretto";
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeLautarito:
+                            nombreGenerador = "GeneradorPelotasAgachadoProfeLautaro";
+                            break;
+                    }
+                }
+                for (int i = 0; i < generadorProyectilesAgachado.Count; i++)
+                {
+                    if (generadorProyectilesAgachado[i].name == nombreGenerador)
+                    {
+                        generador = generadorProyectilesAgachado[i];
+                    }
+                }
+                if (generador != null)
+                {
+                    go.transform.rotation = generador.transform.rotation;
+                    go.transform.position = generador.transform.position;
                 }
             }
             proyectil.On();
@@ -454,9 +530,17 @@ namespace Prototipo_2
            
 
         }
-        public void Duck()
+        public void Duck(int rangoAgachado)
         {
-            
+            isDuck = true;
+            for (int i = 0; i < collidersSprites.Count; i++)
+            {
+                collidersSprites[i].enabled = false;
+            }
+            for (int i = 0; i < structsEnemys.dataEnemy.CantCasillasOcupadas_X; i++)
+            {
+                gridEnemy.matrizCuadrilla[structsEnemys.dataEnemy.columnaActual + i][gridEnemy.GetCuadrilla_columnas() - structsEnemys.dataEnemy.CantCasillasOcupadas_Y + rangoAgachado].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
+            }
         }
     }
 }

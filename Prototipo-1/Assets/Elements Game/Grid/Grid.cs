@@ -48,11 +48,14 @@ public class Grid : MonoBehaviour
     }
     public void RestartCuadrillas()
     {
-        for (int i = 0; i < matrizCuadrilla.Count; i++)
+        if (matrizCuadrilla != null)
         {
-            for (int j = 0; j < matrizCuadrilla[i].Count; j++)
+            for (int i = 0; i < matrizCuadrilla.Count; i++)
             {
-                matrizCuadrilla[i][j].ResetCuadrilla();
+                for (int j = 0; j < matrizCuadrilla[i].Count; j++)
+                {
+                    matrizCuadrilla[i][j].ResetCuadrilla();
+                }
             }
         }
     }
@@ -70,84 +73,87 @@ public class Grid : MonoBehaviour
     }
     public void CheckCuadrillaOcupada(int columnaActual, int CasillasBaseOcupadas,int CasillasAltasOcupadas)
     {
-        int casillaBase = 2;
-        RestartCuadrillas();
-        matrizCuadrilla[casillaBase][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-        switch (CasillasBaseOcupadas)
+        if (matrizCuadrilla != null)
         {
-            case 1:
+            int casillaBase = 2;
+            RestartCuadrillas();
+            matrizCuadrilla[casillaBase][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+            switch (CasillasBaseOcupadas)
+            {
+                case 1:
 
-                switch (CasillasAltasOcupadas)
-                {
-                    case 2:
-                        matrizCuadrilla[casillaBase - 1][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                        break;
-                    case 3:
-                        matrizCuadrilla[casillaBase - 1][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                        matrizCuadrilla[casillaBase - 2][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                        break;
-                }
-                break;
+                    switch (CasillasAltasOcupadas)
+                    {
+                        case 2:
+                            matrizCuadrilla[casillaBase - 1][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            break;
+                        case 3:
+                            matrizCuadrilla[casillaBase - 1][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            matrizCuadrilla[casillaBase - 2][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            break;
+                    }
+                    break;
 
-            case 2:
-                switch (columnaActual)
-                {
-                    case 0:
+                case 2:
+                    switch (columnaActual)
+                    {
+                        case 0:
 
-                        matrizCuadrilla[casillaBase][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                        switch (CasillasAltasOcupadas)
-                        {
-                            case 2:
-                                matrizCuadrilla[casillaBase - 1][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                                matrizCuadrilla[casillaBase - 1][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                                break;
-                            case 3:
-                                matrizCuadrilla[casillaBase - 1][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                                matrizCuadrilla[casillaBase - 1][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                                matrizCuadrilla[casillaBase - 2][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                                matrizCuadrilla[casillaBase - 2][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                                break;
-                        }
+                            matrizCuadrilla[casillaBase][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            switch (CasillasAltasOcupadas)
+                            {
+                                case 2:
+                                    matrizCuadrilla[casillaBase - 1][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                                    matrizCuadrilla[casillaBase - 1][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                                    break;
+                                case 3:
+                                    matrizCuadrilla[casillaBase - 1][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                                    matrizCuadrilla[casillaBase - 1][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                                    matrizCuadrilla[casillaBase - 2][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                                    matrizCuadrilla[casillaBase - 2][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                                    break;
+                            }
 
-                        break;
-                    case 1:
-                        matrizCuadrilla[casillaBase][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                        switch (CasillasAltasOcupadas)
-                        {
-                            case 2:
-                                matrizCuadrilla[casillaBase - 1][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                                matrizCuadrilla[casillaBase - 1][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                                break;
-                            case 3:
-                                matrizCuadrilla[casillaBase - 1][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                                matrizCuadrilla[casillaBase - 1][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                                matrizCuadrilla[casillaBase - 2][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                                matrizCuadrilla[casillaBase - 2][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                                break;
-                        }
-                        break;
-                }
-                break;
-            case 3:
-                matrizCuadrilla[casillaBase][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                matrizCuadrilla[casillaBase][columnaActual + 2].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                switch (CasillasAltasOcupadas)
-                {
-                    case 2:
-                        matrizCuadrilla[casillaBase + 1][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                        matrizCuadrilla[casillaBase + 1][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                        matrizCuadrilla[casillaBase + 1][columnaActual + 2].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                        break;
-                    case 3:
-                        matrizCuadrilla[casillaBase + 1][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                        matrizCuadrilla[casillaBase + 1][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                        matrizCuadrilla[casillaBase + 1][columnaActual + 2].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                        matrizCuadrilla[casillaBase + 2][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                        matrizCuadrilla[casillaBase + 2][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                        matrizCuadrilla[casillaBase + 2][columnaActual + 2].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                        break;
-                }
-                break;
+                            break;
+                        case 1:
+                            matrizCuadrilla[casillaBase][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            switch (CasillasAltasOcupadas)
+                            {
+                                case 2:
+                                    matrizCuadrilla[casillaBase - 1][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                                    matrizCuadrilla[casillaBase - 1][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                                    break;
+                                case 3:
+                                    matrizCuadrilla[casillaBase - 1][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                                    matrizCuadrilla[casillaBase - 1][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                                    matrizCuadrilla[casillaBase - 2][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                                    matrizCuadrilla[casillaBase - 2][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                                    break;
+                            }
+                            break;
+                    }
+                    break;
+                case 3:
+                    matrizCuadrilla[casillaBase][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                    matrizCuadrilla[casillaBase][columnaActual + 2].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                    switch (CasillasAltasOcupadas)
+                    {
+                        case 2:
+                            matrizCuadrilla[casillaBase + 1][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            matrizCuadrilla[casillaBase + 1][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            matrizCuadrilla[casillaBase + 1][columnaActual + 2].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            break;
+                        case 3:
+                            matrizCuadrilla[casillaBase + 1][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            matrizCuadrilla[casillaBase + 1][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            matrizCuadrilla[casillaBase + 1][columnaActual + 2].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            matrizCuadrilla[casillaBase + 2][columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            matrizCuadrilla[casillaBase + 2][columnaActual + 1].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            matrizCuadrilla[casillaBase + 2][columnaActual + 2].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                            break;
+                    }
+                    break;
+            }
         }
     }
 }
