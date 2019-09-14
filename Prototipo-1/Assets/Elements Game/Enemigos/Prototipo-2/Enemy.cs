@@ -16,8 +16,6 @@ namespace Prototipo_2
         public SpriteRenderer SpriteRendererEnemigoDefensivo;
         public SpriteRenderer SpriteRendererJefeProfeAnatomia;
         public GameObject BARRA_DE_VIDA;
-        [HideInInspector]
-        public float alturaPredeterminada;// LA ALTURA PREDETERMINADA SERA IGUAL A LA POSICION y DE PLATAFORMA + 0.5;
         private float auxLife;
         private Animator animator;
         public bool InPool;
@@ -29,7 +27,8 @@ namespace Prototipo_2
         public float SpeedJump;
         private Rigidbody2D rg2D;
         private GameManager gm;
-        public Transform tranformAtaque;
+        public List<GameObject> generadoresProyectiles;
+        public List<GameObject> generadorProyectilesAgachado;
         private float DeffensePorcentage;
         private float AttackPorcentage;
         private float DodgePorcentage;
@@ -40,14 +39,20 @@ namespace Prototipo_2
         private float DefenceJumpPorcentage;
         private float DefenceDuckPorcentage;
         private float DefenceIdlePorcentage;
+        private float MovePorcentage;
+        private float MoveForwardPorcentage;
+        private float MoveBackPorcentage;
         private float JumpPorcentage;
         private float DuckPorcentage;
         private float MinRangeRandom = 0;
         private float MaxRangeRandom = 100;
         private float TypeRandom = 3;
+        private float delaySelectMovement;
+        private bool doubleDamage;
+        private bool isDuck;
         void Start()
         {
-            
+            delaySelectMovement = 0;
             auxLife = life;
             poolObjectEnemy = GetComponent<PoolObject>();
             animator = GetComponent<Animator>();
@@ -310,11 +315,38 @@ namespace Prototipo_2
         }
         public void Attack()
         {
-
-            if (poolObjectAttack.count > 0)
+            string nombreGenerador = "NADA XD";
+            GameObject go = poolObjectAttack.GetObject();
+            Proyectil proyectil = go.GetComponent<Proyectil>();
+            proyectil.SetDobleDamage(doubleDamage);
+            if (doubleDamage)
             {
-                //ELIJE EL ATAQUE EN BASE AL MOVIMIENTO QUE RESIVE
+                proyectil.damage = proyectil.damage * 2;
             }
+            if (!isDuck)
+            {
+                switch (enumsEnemy.typeEnemy)
+                {
+
+                }
+                switch (enumsEnemy.typeBoss)
+                {
+                    //UNA VEZ INCORPORADA LA PARTE DE LOS BOSESS INCORPORAR ESTA PARTE EN BASE A LA PARTE DE ARRIBA.
+                }
+            }
+            else
+            {
+                switch (enumsEnemy.typeEnemy)
+                {
+
+                }
+                switch (enumsEnemy.typeBoss)
+                {
+                    //UNA VEZ INCORPORADA LA PARTE DE LOS BOSESS INCORPORAR ESTA PARTE EN BASE A LA PARTE DE ARRIBA.
+                }
+            }
+            proyectil.On();
+            proyectil.ShootForward();
         }
         public void AttackParabola()
         {

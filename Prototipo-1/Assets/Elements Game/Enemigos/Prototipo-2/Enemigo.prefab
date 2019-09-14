@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 0.025, y: 0.025, z: 1}
   m_Children: []
   m_Father: {fileID: 7194419974994112977}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2333162916430196275
 SpriteRenderer:
@@ -607,8 +607,8 @@ Transform:
   - {fileID: 2632940009463256809}
   - {fileID: 429673727702504780}
   - {fileID: 7060251715271303292}
-  - {fileID: 5368987696242746144}
   - {fileID: 2562620806002055027}
+  - {fileID: 5368987696242746144}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -664,23 +664,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c69c4e25e05cb64aa50bddf96037227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 0}
   gridEnemy: {fileID: 0}
-  rangeCuadrillas_x: 0
-  rangeCuadrillas_y: 0
   enumsEnemy: {fileID: 0}
+  structsEnemys: {fileID: 0}
   SpriteRendererEnemigoBalanceado: {fileID: 0}
   SpriteRendererEnemigoAgresivo: {fileID: 0}
   SpriteRendererEnemigoDefensivo: {fileID: 0}
   SpriteRendererJefeProfeAnatomia: {fileID: 0}
   BARRA_DE_VIDA: {fileID: 0}
-  alturaPredeterminada: 0
   InPool: 0
   life: 0
   maxLife: 0
   ImageHP: {fileID: 0}
   poolObjectAttack: {fileID: 0}
   SpeedJump: 0
-  tranformAtaque: {fileID: 0}
+  generadoresProyectiles: []
+  generadorProyectilesAgachado: []
 --- !u!1 &7634778971475588847
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,7 +969,7 @@ Transform:
   m_LocalScale: {x: 0.02, y: 0.021736803, z: 1}
   m_Children: []
   m_Father: {fileID: 7194419974994112977}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6222847778254103979
 SpriteRenderer:
