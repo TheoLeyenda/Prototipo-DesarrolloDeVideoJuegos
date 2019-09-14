@@ -16,6 +16,7 @@ namespace Prototipo_2
         public EnumsPlayers enumsPlayers;
         public GameObject BARRA_DE_VIDA;
         public GameObject generadorProyectiles;
+        public GameObject generadorProyectilesAgachado;
         private Animator animator;
         public Image ImageHP;
         public Button PadArrowUp;
@@ -30,10 +31,14 @@ namespace Prototipo_2
         private GameManager gm;
         private bool doubleDamage;
         private bool isJamping;
+        private bool isDuck;
         public Pool poolObjectAttack;
         private Vector3 InitialPosition;
+        public BoxCollider2D colliderSprite;
         void Start()
         {
+            colliderSprite.enabled = true;
+            isDuck = false;
             auxSpeedJump = SpeedJump;
             InitialPosition = transform.position;
             isJamping = false;
@@ -56,6 +61,7 @@ namespace Prototipo_2
         void Update()
         {
             InputKeyBoard();
+            CheckOutLimit();
         }
         public void CheckDead()
         {
@@ -75,11 +81,24 @@ namespace Prototipo_2
             {
                 proyectil.damage = proyectil.damage * 2;
             }
-            go.transform.position = generadorProyectiles.transform.position;
+            if (!isDuck)
+            {
+                go.transform.position = generadorProyectiles.transform.position;
+            }
+            else
+            {
+                go.transform.position = generadorProyectilesAgachado.transform.position;
+            }
             proyectil.On();
             proyectil.ShootForward();
         }
-        
+        public void CheckOutLimit()
+        {
+            if (transform.position.y < gridPlayer.matrizCuadrilla[gridPlayer.GetCuadrilla_filas() - 1][gridPlayer.GetCuadrilla_columnas() - 1].transform.position.y)
+            {
+                transform.position = InitialPosition;
+            }
+        }
         //HIDE HECHO MIERDA / HECHO PIJA BUSCALO BOLUDO
         public void InputKeyBoard()
         {
@@ -111,8 +130,20 @@ namespace Prototipo_2
                 if (enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
                 {
                     isJamping = true;
+                    SpeedJump = auxSpeedJump;
                 }
                 Jump(gridPlayer.matrizCuadrilla[0][structsPlayer.dataPlayer.columnaActual].transform.position);
+            }
+
+            if (Input.GetKey(KeyCode.DownArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
+            {
+                Duck();
+            }
+            else
+            {
+                Debug.Log("ENTRE");
+                isDuck = false;
+                colliderSprite.enabled = true;
             }
         }
         public bool CheckMove(Vector3 PosicionDestino)
@@ -184,7 +215,6 @@ namespace Prototipo_2
             }
             else
             {
-                Debug.Log("ENTRE");
                 isJamping = false;
                 if (CheckMove(new Vector3(transform.position.x, InitialPosition.y, transform.position.z)))
                 {
@@ -199,7 +229,7 @@ namespace Prototipo_2
         }
         public void Duck()
         {
-            
+            isDuck = true;
         }
     }
 }
