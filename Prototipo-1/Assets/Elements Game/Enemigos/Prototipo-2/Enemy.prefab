@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8567879002680722324}
   m_Layer: 0
-  m_Name: GeneradorPelotas (4)
+  m_Name: GeneradorPelotasProfeHistoria
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -311,7 +311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8317000476830314125}
   m_Layer: 0
-  m_Name: GeneradorPelotas (1)
+  m_Name: GeneradorPelotasDefensivo
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -464,7 +464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8405359369298131830}
   m_Layer: 0
-  m_Name: GeneradorPelotas (11)
+  m_Name: GeneradorPelotasProfeLautaro
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -919,7 +919,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3103061632267815949}
   m_Layer: 0
-  m_Name: GeneradorPelotas (7)
+  m_Name: GeneradorPelotasProfeMatematica
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1162,7 +1162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1673839970451854792}
   m_Layer: 0
-  m_Name: GeneradorPelotas (3)
+  m_Name: GeneradorPelotasProfeAnatomia
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1192,7 +1192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1318928660936160992}
   m_Layer: 0
-  m_Name: GeneradorPelotas (5)
+  m_Name: GeneradorPelotasProfeEducacionFisica
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1222,7 +1222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5494477498890667340}
   m_Layer: 0
-  m_Name: GeneradorPelotas
+  m_Name: GeneradorPelotasBalanceado
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1405,7 +1405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4639023485251624639}
   m_Layer: 0
-  m_Name: GeneradorPelotas (6)
+  m_Name: GeneradorPelotasProfeArte
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1435,7 +1435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1640825671709451437}
   m_Layer: 0
-  m_Name: GeneradorPelotas (9)
+  m_Name: GeneradorPelotasProfeProgramacion
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1730,7 +1730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2228908452121218090}
   m_Layer: 0
-  m_Name: GeneradorPelotas (8)
+  m_Name: GeneradorPelotasProfeQuimica
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1760,7 +1760,7 @@ GameObject:
   m_Component:
   - component: {fileID: 908773149046069760}
   m_Layer: 0
-  m_Name: GeneradorPelotas (10)
+  m_Name: GeneradorPelotasProfeBaretto
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1816,7 +1816,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6897054611778113190}
   m_Layer: 0
-  m_Name: GeneradorPelotas (2)
+  m_Name: GeneradorPelotasAgresivo
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1846,7 +1846,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5767452096028913611}
   m_Layer: 0
-  m_Name: GeneradorPelotasAgachado
+  m_Name: GeneradorPelotasAgachadoBalanceado
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1950,6 +1950,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
+      propertyPath: generadoresProyectiles.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
       propertyPath: enemyPrefab
       value: 
       objectReference: {fileID: 739513073498843073}
@@ -2017,6 +2022,71 @@ PrefabInstance:
         type: 3}
       propertyPath: SpeedJump
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: generadoresProyectiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 5494477498890667341}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: generadoresProyectiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 2355794920509015616}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: generadoresProyectiles.Array.data[2]
+      value: 
+      objectReference: {fileID: 8841111961942677939}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: generadoresProyectiles.Array.data[3]
+      value: 
+      objectReference: {fileID: 5442566187379641002}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: generadoresProyectiles.Array.data[4]
+      value: 
+      objectReference: {fileID: 20987806913003114}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: generadoresProyectiles.Array.data[5]
+      value: 
+      objectReference: {fileID: 5482315727388562192}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: generadoresProyectiles.Array.data[6]
+      value: 
+      objectReference: {fileID: 6188737031052199816}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: generadoresProyectiles.Array.data[7]
+      value: 
+      objectReference: {fileID: 4261999882460104607}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: generadoresProyectiles.Array.data[8]
+      value: 
+      objectReference: {fileID: 8340894420746427701}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: generadoresProyectiles.Array.data[9]
+      value: 
+      objectReference: {fileID: 6458002919436396392}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: generadoresProyectiles.Array.data[10]
+      value: 
+      objectReference: {fileID: 8727502502092989424}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: generadoresProyectiles.Array.data[11]
+      value: 
+      objectReference: {fileID: 2625632900352271824}
+    - target: {fileID: 7194419974994112971, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7746700542677218688, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}

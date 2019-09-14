@@ -221,6 +221,8 @@ namespace Prototipo_2
             else if ((gm.countEnemysDead % gm.RondasPorJefe) == 0 && gm.countEnemysDead > 1)
             {
                 //Cambiar el sprite del jefe correspondiente
+
+                //PROGRAMAR UN RANDOM ENTRE LOS DISTINTOS JEFES
                 Debug.Log("Soy tremendo jefe");
                 enumsEnemy.typeEnemy = EnumsEnemy.TiposDeEnemigo.Jefe;
                 enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeAnatomia;
@@ -316,6 +318,7 @@ namespace Prototipo_2
         public void Attack()
         {
             string nombreGenerador = "NADA XD";
+            GameObject generador = null;
             GameObject go = poolObjectAttack.GetObject();
             Proyectil proyectil = go.GetComponent<Proyectil>();
             proyectil.SetDobleDamage(doubleDamage);
@@ -325,13 +328,66 @@ namespace Prototipo_2
             }
             if (!isDuck)
             {
-                switch (enumsEnemy.typeEnemy)
+                if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
                 {
-
+                    switch (enumsEnemy.typeEnemy)
+                    {
+                        case EnumsEnemy.TiposDeEnemigo.Balanceado:
+                            nombreGenerador = "GeneradorPelotasBalanceado";
+                            break;
+                        case EnumsEnemy.TiposDeEnemigo.Defensivo:
+                            nombreGenerador = "GeneradorPelotasDefensivo";
+                            break;
+                        case EnumsEnemy.TiposDeEnemigo.Agresivo:
+                            nombreGenerador = "GeneradorPelotasAgresivo";
+                            break;
+                    }
                 }
-                switch (enumsEnemy.typeBoss)
+                else
                 {
-                    //UNA VEZ INCORPORADA LA PARTE DE LOS BOSESS INCORPORAR ESTA PARTE EN BASE A LA PARTE DE ARRIBA.
+                    switch (enumsEnemy.typeBoss)
+                    {
+                        case EnumsEnemy.TiposDeJefe.ProfeAnatomia:
+                            nombreGenerador = "GeneradorPelotasProfeAnatomia";
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeHistoria:
+                            nombreGenerador = "GeneradorPelotasProfeHistoria";
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeEducacionFisica:
+                            nombreGenerador = "GeneradorPelotasProfeEducacionFisica";
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeArte:
+                            nombreGenerador = "GeneradorPelotasProfeArte";
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeMatematica:
+                            nombreGenerador = "GeneradorPelotasProfeMatematica";
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeQuimica:
+                            nombreGenerador = "GeneradorPelotasProfeQuimica";
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeProgramacion:
+                            nombreGenerador = "GeneradorPelotasProfeProgramacion";
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeBaretto:
+                            nombreGenerador = "GeneradorPelotasProfeBaretto";
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeLautarito:
+                            nombreGenerador = "GeneradorPelotasProfeLautaro";
+                            break;
+
+                            //UNA VEZ INCORPORADA LA PARTE DE LOS BOSESS INCORPORAR ESTA PARTE EN BASE A LA PARTE DE ARRIBA.
+                    }
+                }
+                for (int i = 0; i < generadoresProyectiles.Count; i++)
+                {
+                    if (generadoresProyectiles[i].name == nombreGenerador)
+                    {
+                        generador = generadoresProyectiles[i];
+                    }
+                }
+                if (generador != null)
+                {
+                    go.transform.position = generador.transform.position;
                 }
             }
             else
