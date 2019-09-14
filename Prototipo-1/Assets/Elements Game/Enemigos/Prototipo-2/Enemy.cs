@@ -48,10 +48,15 @@ namespace Prototipo_2
         private float MaxRangeRandom = 100;
         private float TypeRandom = 3;
         private float delaySelectMovement;
+        public float maxRandomDelayMovement;
+        public float minRandomDelayMovement;
+        public float delayAttack;
+        private float auxDelayAttack;
         private bool doubleDamage;
         private bool isDuck;
         void Start()
         {
+            auxDelayAttack = delayAttack;
             delaySelectMovement = 0;
             auxLife = life;
             poolObjectEnemy = GetComponent<PoolObject>();
@@ -69,6 +74,7 @@ namespace Prototipo_2
         {
             CheckLifeBar();
             CheckDead();
+            IA();
         }
         public void CheckInitialSprite()
         {
@@ -232,7 +238,15 @@ namespace Prototipo_2
         }
         public void IA()
         {
-            CheckMovement();
+            if (delaySelectMovement <= 0)
+            {
+                delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);    
+            }
+            if (delaySelectMovement > 0)
+            {
+                CheckMovement();
+                delaySelectMovement = delaySelectMovement - Time.deltaTime;
+            }
         }
         
         
@@ -307,9 +321,26 @@ namespace Prototipo_2
 
         public void CheckMovement()
         {
+            EnumsEnemy.Movimiento movimiento = EnumsEnemy.Movimiento.AtacarEnElLugar;
 
+            enumsEnemy.SetMovement(movimiento);
+
+            switch (enumsEnemy.GetMovement())
+            {
+                case EnumsEnemy.Movimiento.AtacarEnElLugar:
+                    if (delayAttack > 0)
+                    {
+                        delayAttack = delayAttack - Time.deltaTime;
+                    }
+                    else if(delayAttack <= 0)
+                    {
+                        Attack();
+                        Debug.Log(auxDelayAttack);
+                        delayAttack = auxDelayAttack;
+                    }
+                    break;
+            }
             //CHEKEA EL MOVIMIENTO DEL ENEMIGO
-
         }
         public void ResetEnemy()
         {
@@ -387,6 +418,7 @@ namespace Prototipo_2
                 }
                 if (generador != null)
                 {
+                    go.transform.rotation = generador.transform.rotation;
                     go.transform.position = generador.transform.position;
                 }
             }

@@ -87,6 +87,10 @@ namespace Prototipo_2
                     Cuadrilla cuadrilla = collision.GetComponent<Cuadrilla>();
                     if (cuadrilla.GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Ocupado)
                     {
+                        if (cuadrilla.enemy == null && cuadrilla.player == null || cuadrilla.enemy != null && cuadrilla.player != null)
+                        {
+                            return;
+                        }
                         if (dobleDamage)
                         {
                             damage = damage / 2;
@@ -96,7 +100,7 @@ namespace Prototipo_2
                         {
                             cuadrilla.enemy.life = cuadrilla.enemy.life - damage;
                         }
-                        else if (cuadrilla.player != null)
+                        if (cuadrilla.player != null)
                         {
                             cuadrilla.player.life = cuadrilla.player.life - damage;
                         }

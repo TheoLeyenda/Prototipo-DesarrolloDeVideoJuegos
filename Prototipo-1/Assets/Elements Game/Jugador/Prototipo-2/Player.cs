@@ -49,10 +49,10 @@ namespace Prototipo_2
             doubleDamage = false;
             enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
             enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.vivo;
-            /*if (GameManager.instanceGameManager != null)
+            if (GameManager.instanceGameManager != null)
             {
                 gm = GameManager.instanceGameManager;
-            }*/
+            }
             animator = GetComponent<Animator>();
             gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
         }
@@ -62,6 +62,23 @@ namespace Prototipo_2
         {
             InputKeyBoard();
             CheckOutLimit();
+            CheckDead();
+            CheckLifeBar();
+        }
+        public void CheckLifeBar()
+        {
+            if (life <= maxLife)
+            {
+                ImageHP.fillAmount = life / maxLife;
+            }
+            else if (life > maxLife)
+            {
+                life = maxLife;
+            }
+            else if (life < 0)
+            {
+                life = 0;
+            }
         }
         public void CheckDead()
         {
@@ -139,7 +156,7 @@ namespace Prototipo_2
             {
                 Duck(structsPlayer.dataPlayer.CantCasillasOcupadas_X);
             }
-            else
+            else if(enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
             {
                 isDuck = false;
                 colliderSprite.enabled = true;
@@ -212,6 +229,8 @@ namespace Prototipo_2
                 {
                     isJamping = false;
                 }
+                gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
+                Debug.Log(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual].name);
             }
             else
             {
