@@ -137,13 +137,13 @@ namespace Prototipo_2
 
             if (Input.GetKey(KeyCode.DownArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
             {
-                Duck();
+                Duck(structsPlayer.dataPlayer.CantCasillasOcupadas_X);
             }
             else
             {
-                Debug.Log("ENTRE");
                 isDuck = false;
                 colliderSprite.enabled = true;
+                gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
             }
         }
         public bool CheckMove(Vector3 PosicionDestino)
@@ -227,9 +227,15 @@ namespace Prototipo_2
                 }
             }
         }
-        public void Duck()
+        public void Duck(int rangoAbajo)
         {
             isDuck = true;
+            colliderSprite.enabled = false;
+            for (int i = 0; i < structsPlayer.dataPlayer.CantCasillasOcupadas_X; i++)
+            {
+                gridPlayer.matrizCuadrilla[structsPlayer.dataPlayer.columnaActual + i][gridPlayer.GetCuadrilla_columnas() - structsPlayer.dataPlayer.CantCasillasOcupadas_Y + rangoAbajo].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
+            }
+            
         }
     }
 }
