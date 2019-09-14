@@ -24,17 +24,23 @@ namespace Prototipo_2
         public Button PadArrowRigth;
         public float SpeedJump;
         public float Speed;
+        public float Resistace;
+        public float Gravity;
+        private float auxSpeedJump;
         private GameManager gm;
         private bool doubleDamage;
-        private bool isMoving;
+        private bool isJamping;
         public Pool poolObjectAttack;
-
+        private Vector3 InitialPosition;
         void Start()
         {
+            auxSpeedJump = SpeedJump;
+            InitialPosition = transform.position;
+            isJamping = false;
             enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-            structsPlayer.dataEnemy.CantCasillasOcupadas_X = 1;
-            structsPlayer.dataEnemy.CantCasillasOcupadas_Y = 2;
-            structsPlayer.dataEnemy.columnaActual = 1;
+            structsPlayer.dataPlayer.CantCasillasOcupadas_X = 1;
+            structsPlayer.dataPlayer.CantCasillasOcupadas_Y = 2;
+            structsPlayer.dataPlayer.columnaActual = 1;
             doubleDamage = false;
             enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
             enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.vivo;
@@ -43,7 +49,7 @@ namespace Prototipo_2
                 gm = GameManager.instanceGameManager;
             }*/
             animator = GetComponent<Animator>();
-            gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataEnemy.columnaActual, structsPlayer.dataEnemy.CantCasillasOcupadas_X, structsPlayer.dataEnemy.CantCasillasOcupadas_Y);
+            gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
         }
 
         // Update is called once per frame
@@ -86,18 +92,27 @@ namespace Prototipo_2
             if (Input.GetKeyDown(KeyCode.LeftArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo 
                 || enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
             {
-                if (structsPlayer.dataEnemy.columnaActual > 0)
+                if (structsPlayer.dataPlayer.columnaActual > 0)
                 {
-                    MoveLeft(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataEnemy.columnaActual-1].transform.position);
+                    MoveLeft(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual-1].transform.position);
                 }
             }
             if (Input.GetKeyDown(KeyCode.RightArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo ||
                 enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
             {
-                if (structsPlayer.dataEnemy.columnaActual < gridPlayer.GetCuadrilla_columnas()-1)
+                if (structsPlayer.dataPlayer.columnaActual < gridPlayer.GetCuadrilla_columnas()-1)
                 {
-                    MoveRight(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataEnemy.columnaActual + 1].transform.position);
+                    MoveRight(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual + 1].transform.position);
                 }
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
+                || enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
+            {
+                if (enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
+                {
+                    isJamping = true;
+                }
+                Jump(gridPlayer.matrizCuadrilla[0][structsPlayer.dataPlayer.columnaActual].transform.position);
             }
         }
         public bool CheckMove(Vector3 PosicionDestino)
@@ -114,6 +129,19 @@ namespace Prototipo_2
         {
             transform.Translate(direccion * Speed * Time.deltaTime);
         }
+        public void MoveJamp(Vector3 direccion)
+        {
+            if (direccion == Vector3.up)
+            {
+                transform.Translate(direccion * SpeedJump * Time.deltaTime);
+                SpeedJump = SpeedJump - Time.deltaTime *Resistace;
+            }
+            else if (direccion == Vector3.down)
+            {
+                transform.Translate(direccion * SpeedJump * Time.deltaTime);
+                SpeedJump = SpeedJump + Time.deltaTime * Gravity;
+            }
+        }
 
         public void MoveLeft(Vector3 cuadrillaDestino)
         {   
@@ -124,9 +152,9 @@ namespace Prototipo_2
             }
             else if(enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
             {
-                structsPlayer.dataEnemy.columnaActual--;
+                structsPlayer.dataPlayer.columnaActual--;
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-                gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataEnemy.columnaActual, structsPlayer.dataEnemy.CantCasillasOcupadas_X, structsPlayer.dataEnemy.CantCasillasOcupadas_Y);
+                gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
             }
         }
         public void MoveRight(Vector3 cuadrillaDestino)
@@ -138,21 +166,40 @@ namespace Prototipo_2
             }
             else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
             {
-                structsPlayer.dataEnemy.columnaActual++;
+                structsPlayer.dataPlayer.columnaActual++;
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-                gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataEnemy.columnaActual, structsPlayer.dataEnemy.CantCasillasOcupadas_X, structsPlayer.dataEnemy.CantCasillasOcupadas_Y);
+                gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
             }
         }
         public void Jump(Vector3 alturaMaxima)
         {
-            if (CheckMove(alturaMaxima))
+            if (CheckMove(new Vector3(transform.position.x,alturaMaxima.y, transform.position.z)) && isJamping)
             {
-                
+                enumsPlayers.movimiento = EnumsPlayers.Movimiento.Saltar;
+                MoveJamp(Vector3.up);
+                if (SpeedJump <= 0)
+                {
+                    isJamping = false;
+                }
+            }
+            else
+            {
+                Debug.Log("ENTRE");
+                isJamping = false;
+                if (CheckMove(new Vector3(transform.position.x, InitialPosition.y, transform.position.z)))
+                {
+                    MoveJamp(Vector3.down);
+                }
+                else
+                {
+                    enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+                    SpeedJump = auxSpeedJump;
+                }
             }
         }
         public void Duck()
         {
-
+            
         }
     }
 }

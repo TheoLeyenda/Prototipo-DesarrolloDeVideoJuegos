@@ -7,12 +7,12 @@ namespace Prototipo_2
     public class StructsPlayer : MonoBehaviour
     {
         // Start is called before the first frame update
-        public struct DataEnemy
+        public struct DataPlayer
         {
             public int CantCasillasOcupadas_X;
             public int CantCasillasOcupadas_Y;
             public int columnaActual;
         }
-        public DataEnemy dataEnemy;
+        public DataPlayer dataPlayer;
     }
 }
