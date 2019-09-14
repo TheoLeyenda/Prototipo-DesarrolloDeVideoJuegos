@@ -43,6 +43,7 @@ namespace Prototipo_2
                 gm = GameManager.instanceGameManager;
             }*/
             animator = GetComponent<Animator>();
+            gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataEnemy.columnaActual, structsPlayer.dataEnemy.CantCasillasOcupadas_X, structsPlayer.dataEnemy.CantCasillasOcupadas_Y);
         }
 
         // Update is called once per frame
@@ -76,8 +77,8 @@ namespace Prototipo_2
         //HIDE HECHO MIERDA / HECHO PIJA BUSCALO BOLUDO
         public void InputKeyBoard()
         {
-            Debug.Log("Columna Actual:" + structsPlayer.dataEnemy.columnaActual);
-            Debug.Log("Movimiento actual:" + enumsPlayers.movimiento);
+            //Debug.Log("Columna Actual:" + structsPlayer.dataEnemy.columnaActual);
+            //Debug.Log("Movimiento actual:" + enumsPlayers.movimiento);
             if (Input.GetKeyDown(KeyCode.F))
             {
                 Attack();
@@ -93,10 +94,8 @@ namespace Prototipo_2
             if (Input.GetKeyDown(KeyCode.RightArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo ||
                 enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
             {
-                Debug.Log("DERECHA");
                 if (structsPlayer.dataEnemy.columnaActual < gridPlayer.GetCuadrilla_columnas()-1)
                 {
-                    Debug.Log("MOVIENDOME");
                     MoveRight(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataEnemy.columnaActual + 1].transform.position);
                 }
             }
@@ -143,6 +142,17 @@ namespace Prototipo_2
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
                 gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataEnemy.columnaActual, structsPlayer.dataEnemy.CantCasillasOcupadas_X, structsPlayer.dataEnemy.CantCasillasOcupadas_Y);
             }
+        }
+        public void Jump(Vector3 alturaMaxima)
+        {
+            if (CheckMove(alturaMaxima))
+            {
+                
+            }
+        }
+        public void Duck()
+        {
+
         }
     }
 }
