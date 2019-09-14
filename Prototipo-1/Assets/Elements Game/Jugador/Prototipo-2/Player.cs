@@ -72,41 +72,12 @@ namespace Prototipo_2
             proyectil.On();
             proyectil.ShootForward();
         }
-        public void MoveLeft()
-        {
-            if (structsPlayer.dataEnemy.columnaActual > 0 && structsPlayer.dataEnemy.columnaActual <= 2)
-            {
-                if (CheckMove(new Vector3(gridPlayer.leftCuadrilla.transform.position.x, transform.position.y, transform.position.z)) && transform.position.x>= gridPlayer.leftCuadrilla.transform.position.x)
-                {
-                    Move(Vector3.left);
-                }
-                else
-                {
-                    structsPlayer.dataEnemy.columnaActual--;
-                    enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-                    gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataEnemy.columnaActual, structsPlayer.dataEnemy.CantCasillasOcupadas_X, structsPlayer.dataEnemy.CantCasillasOcupadas_Y);
-                }
-            }
-        }
-        public void MoveRight()
-        {
-            if (structsPlayer.dataEnemy.columnaActual >=0 && structsPlayer.dataEnemy.columnaActual < 2)
-            {
-                if (CheckMove(new Vector3(gridPlayer.leftCuadrilla.transform.position.x, transform.position.y, transform.position.z)) && transform.position.x <= gridPlayer.rightCuadrilla.transform.position.x)
-                {
-                    Move(Vector3.right);
-                }
-                else
-                {
-                    structsPlayer.dataEnemy.columnaActual++;
-                    enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-                    gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataEnemy.columnaActual, structsPlayer.dataEnemy.CantCasillasOcupadas_X, structsPlayer.dataEnemy.CantCasillasOcupadas_Y);
-                }
-            }
-        }
+        
         //HIDE HECHO MIERDA / HECHO PIJA BUSCALO BOLUDO
         public void InputKeyBoard()
         {
+            Debug.Log("Columna Actual:" + structsPlayer.dataEnemy.columnaActual);
+            Debug.Log("Movimiento actual:" + enumsPlayers.movimiento);
             if (Input.GetKeyDown(KeyCode.F))
             {
                 Attack();
@@ -114,14 +85,20 @@ namespace Prototipo_2
             if (Input.GetKeyDown(KeyCode.LeftArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo 
                 || enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
             {
-                enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAtras;
-                MoveLeft();
+                if (structsPlayer.dataEnemy.columnaActual > 0)
+                {
+                    MoveLeft(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataEnemy.columnaActual-1].transform.position);
+                }
             }
             if (Input.GetKeyDown(KeyCode.RightArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo ||
                 enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
             {
-                enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
-                MoveRight();
+                Debug.Log("DERECHA");
+                if (structsPlayer.dataEnemy.columnaActual < gridPlayer.GetCuadrilla_columnas()-1)
+                {
+                    Debug.Log("MOVIENDOME");
+                    MoveRight(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataEnemy.columnaActual + 1].transform.position);
+                }
             }
         }
         public bool CheckMove(Vector3 PosicionDestino)
@@ -137,6 +114,35 @@ namespace Prototipo_2
         public void Move(Vector3 direccion)
         {
             transform.Translate(direccion * Speed * Time.deltaTime);
+        }
+
+        public void MoveLeft(Vector3 cuadrillaDestino)
+        {   
+            if (CheckMove(new Vector3(gridPlayer.leftCuadrilla.transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
+            {
+                Move(Vector3.left);
+                enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAtras;
+            }
+            else if(enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
+            {
+                structsPlayer.dataEnemy.columnaActual--;
+                enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+                gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataEnemy.columnaActual, structsPlayer.dataEnemy.CantCasillasOcupadas_X, structsPlayer.dataEnemy.CantCasillasOcupadas_Y);
+            }
+        }
+        public void MoveRight(Vector3 cuadrillaDestino)
+        {
+            if (CheckMove(new Vector3(gridPlayer.rightCuadrilla.transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
+            {
+                Move(Vector3.right);
+                enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
+            }
+            else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
+            {
+                structsPlayer.dataEnemy.columnaActual++;
+                enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+                gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataEnemy.columnaActual, structsPlayer.dataEnemy.CantCasillasOcupadas_X, structsPlayer.dataEnemy.CantCasillasOcupadas_Y);
+            }
         }
     }
 }

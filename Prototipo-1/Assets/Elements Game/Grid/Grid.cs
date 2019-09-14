@@ -10,6 +10,7 @@ public class Grid : MonoBehaviour
     private int cuadrilla_filas = 3;
     public Cuadrilla leftCuadrilla;
     public Cuadrilla rightCuadrilla;
+    public int baseGrild = 2;
     private void Awake()
     {
         matrizCuadrilla = new List<List<Cuadrilla>>();
@@ -26,6 +27,14 @@ public class Grid : MonoBehaviour
                 matrizCuadrilla[i].Add(null);
             }
         }
+    }
+    public int GetCuadrilla_columnas()
+    {
+        return cuadrilla_columnas;
+    }
+    public int GetCuadrilla_filas()
+    {
+        return cuadrilla_filas;
     }
     public void CheckCuadrillaOrden()
     {
