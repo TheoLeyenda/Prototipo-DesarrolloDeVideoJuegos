@@ -99,12 +99,42 @@ namespace Prototipo_2
                         if (cuadrilla.enemy != null)
                         {
                             cuadrilla.enemy.life = cuadrilla.enemy.life - damage;
+                            timeLife = 0;
                         }
                         if (cuadrilla.player != null)
                         {
-                            cuadrilla.player.life = cuadrilla.player.life - damage;
+                            cuadrilla.player.SetEnableCounterAttack(true);
+                            if (cuadrilla.player.delayCounterAttack > 0 && cuadrilla.player.GetEnableCounterAttack())
+                            {
+                                if (Input.GetKeyDown(cuadrilla.player.ButtonDeffence))
+                                {
+                                    cuadrilla.player.Attack();
+                                }
+                                timeLife = 0;
+                            }
+                            if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0 && cuadrilla.player.GetEnableCounterAttack())
+                            {
+                                cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                cuadrilla.player.SetEnableCounterAttack(false);
+                                cuadrilla.player.life = cuadrilla.player.life - damage;
+                                timeLife = 0;
+                            }
+                            else
+                            {
+                                cuadrilla.player.life = cuadrilla.player.life - damage;
+                            }
+                            
                         }
-                        timeLife = 0;
+                    }
+                    if (cuadrilla.GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Defendido)
+                    {
+                        Debug.Log("ENTRE");
+                        if (cuadrilla.player != null)
+                        {
+                            float realDamage = damage - cuadrilla.player.pointsDeffence;
+                            cuadrilla.player.life = cuadrilla.player.life - realDamage;
+                            timeLife = 0;
+                        }
                     }
                     break;
             }

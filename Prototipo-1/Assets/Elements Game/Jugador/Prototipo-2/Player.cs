@@ -25,6 +25,7 @@ namespace Prototipo_2
         public Button PadArrowRigth;
         public float SpeedJump;
         public float Speed;
+        public float pointsDeffence;
         public float Resistace;
         public float Gravity;
         private float auxSpeedJump;
@@ -32,11 +33,18 @@ namespace Prototipo_2
         private bool doubleDamage;
         private bool isJamping;
         private bool isDuck;
+        private bool EnableCounterAttack;
         public Pool poolObjectAttack;
         private Vector3 InitialPosition;
         public BoxCollider2D colliderSprite;
+        public string ButtonDeffence;
+        public string ButtonAttack;
+        //public BoxCollider2D colliderCounterAttack;
+        public float delayCounterAttack;
+        private float auxDelayCounterAttack;
         void Start()
         {
+            auxDelayCounterAttack = delayCounterAttack;
             colliderSprite.enabled = true;
             isDuck = false;
             auxSpeedJump = SpeedJump;
@@ -141,13 +149,21 @@ namespace Prototipo_2
         {
             //Debug.Log("Columna Actual:" + structsPlayer.dataEnemy.columnaActual);
             //Debug.Log("Movimiento actual:" + enumsPlayers.movimiento);
-            if (Input.GetKeyDown(KeyCode.F) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(KeyCode.DownArrow))
+            if (Input.GetKeyDown(ButtonAttack) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(KeyCode.DownArrow))
             {
                 AttackDown();
             }
-            else if (Input.GetKeyDown(KeyCode.F))
+            else if (Input.GetKeyDown(ButtonAttack))
             {
                 Attack();
+            }
+            if (Input.GetKey(ButtonDeffence))
+            {
+                Deffence();
+            }
+            if (Input.GetKeyUp(ButtonDeffence))
+            {
+                gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo 
                 || enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
@@ -180,7 +196,7 @@ namespace Prototipo_2
             {
                 Duck(structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
             }
-            else if(enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
+            else if(enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && isDuck)
             {
                 isDuck = false;
                 colliderSprite.enabled = true;
@@ -279,6 +295,31 @@ namespace Prototipo_2
                 gridPlayer.matrizCuadrilla[gridPlayer.GetCuadrilla_columnas() - rangoAgachado][structsPlayer.dataPlayer.columnaActual + i].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
             }
             
+        }
+        public void Deffence()
+        {
+            for (int i = 0; i < gridPlayer.matrizCuadrilla.Count; i++)
+            {
+                for (int j = 0; j < gridPlayer.matrizCuadrilla[i].Count; j++) {
+                    if (gridPlayer.matrizCuadrilla[i][j].GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Ocupado)
+                    {
+                        Debug.Log("DEFENDIENDO");
+                        gridPlayer.matrizCuadrilla[i][j].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Defendido);
+                    }
+                }
+            }
+        }
+        public bool GetEnableCounterAttack()
+        {
+            return EnableCounterAttack;
+        }
+        public void SetEnableCounterAttack(bool _enableCounterAttack)
+        {
+            EnableCounterAttack = _enableCounterAttack;
+        }
+        public float GetAuxDelayCounterAttack()
+        {
+            return auxDelayCounterAttack;
         }
     }
 }

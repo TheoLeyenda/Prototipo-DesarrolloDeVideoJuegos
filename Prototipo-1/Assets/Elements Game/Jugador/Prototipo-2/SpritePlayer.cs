@@ -11,21 +11,13 @@ namespace Prototipo_2 {
             {
                 case "Cuadrilla":
                     Cuadrilla cuadrilla = collision.GetComponent<Cuadrilla>();
-                    cuadrilla.stateCuadrilla = Cuadrilla.StateCuadrilla.Ocupado;
+                    if (cuadrilla.stateCuadrilla != Cuadrilla.StateCuadrilla.Defendido)
+                    {
+                        cuadrilla.stateCuadrilla = Cuadrilla.StateCuadrilla.Ocupado;
+                    }
                     //Debug.Log("ENTRE");
                     break;
             }
         }
-        /*private void OnTriggerExit2D(Collider2D collision)
-        {
-            switch (collision.gameObject.tag)
-            {
-                case "Cuadrilla":
-                    Cuadrilla cuadrilla = collision.GetComponent<Cuadrilla>();
-                    cuadrilla.stateCuadrilla = Cuadrilla.StateCuadrilla.Libre;
-                    //Debug.Log("SALI");
-                    break;
-            }
-        }*/
     }
 }

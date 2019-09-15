@@ -8,6 +8,7 @@ namespace Prototipo_2
         public enum StateCuadrilla
         {
             Ocupado,
+            Defendido,
             Libre,
             Count,
         }
