@@ -18,16 +18,5 @@ namespace Prototipo_2
                     break;
             }
         }
-        private void OnTriggerExit2D(Collider2D collision)
-        {
-            switch (collision.gameObject.tag)
-            {
-                case "Cuadrilla":
-                    Cuadrilla cuadrilla = collision.GetComponent<Cuadrilla>();
-                    cuadrilla.stateCuadrilla = Cuadrilla.StateCuadrilla.Libre;
-                    //Debug.Log("SALI");
-                    break;
-            }
-        }
     }
 }

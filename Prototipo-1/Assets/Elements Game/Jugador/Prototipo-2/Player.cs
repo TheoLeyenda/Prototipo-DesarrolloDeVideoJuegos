@@ -156,7 +156,7 @@ namespace Prototipo_2
 
             if (Input.GetKey(KeyCode.DownArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
             {
-                Duck(structsPlayer.dataPlayer.CantCasillasOcupadas_X);
+                Duck(structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
             }
             else if(enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
             {
@@ -232,7 +232,7 @@ namespace Prototipo_2
                     isJamping = false;
                 }
                 gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
-                Debug.Log(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual].name);
+                //Debug.Log(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual].name);
             }
             else
             {
@@ -254,7 +254,7 @@ namespace Prototipo_2
             colliderSprite.enabled = false;
             for (int i = 0; i < structsPlayer.dataPlayer.CantCasillasOcupadas_X; i++)
             {
-                gridPlayer.matrizCuadrilla[gridPlayer.GetCuadrilla_columnas() - structsPlayer.dataPlayer.CantCasillasOcupadas_Y][structsPlayer.dataPlayer.columnaActual + i].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
+                gridPlayer.matrizCuadrilla[gridPlayer.GetCuadrilla_columnas() - rangoAgachado][structsPlayer.dataPlayer.columnaActual + i].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
             }
             
         }
