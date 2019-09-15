@@ -274,7 +274,7 @@ namespace Prototipo_2
             if (delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque))
             {
                 int min = (int)EnumsEnemy.Movimiento.Nulo + 1;
-                int max = 6;//(int)EnumsEnemy.Movimiento.Count;
+                int max = 7;//(int)EnumsEnemy.Movimiento.Count;
                 EnumsEnemy.Movimiento movimiento = (EnumsEnemy.Movimiento)Random.Range(min, max);
                 delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
                 enumsEnemy.SetMovement(movimiento);
@@ -392,6 +392,10 @@ namespace Prototipo_2
                     {
                         delaySelectMovement = 0;
                     }
+                    break;
+                case EnumsEnemy.Movimiento.Saltar:
+                    isJamping = true;
+                    Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
                     break;
             }
             if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque)

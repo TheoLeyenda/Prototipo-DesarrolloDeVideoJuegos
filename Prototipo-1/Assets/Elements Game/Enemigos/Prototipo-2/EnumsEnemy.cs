@@ -36,11 +36,11 @@ namespace Prototipo_2
             SaltoAtaque,
             MoverAtras,
             MoverAdelante,
-            AtacarEnParabola,
+            Saltar,
             SaltoDefensa,
             AgacheDefensa,
             DefensaEnElLugar,
-            Saltar,
+            AtacarEnParabola,
             Agacharse,
             Count,
         }
