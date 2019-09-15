@@ -539,7 +539,7 @@ namespace Prototipo_2
             }
             for (int i = 0; i < structsEnemys.dataEnemy.CantCasillasOcupadas_X; i++)
             {
-                gridEnemy.matrizCuadrilla[structsEnemys.dataEnemy.columnaActual + i][gridEnemy.GetCuadrilla_columnas() - structsEnemys.dataEnemy.CantCasillasOcupadas_Y + rangoAgachado].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
+                gridEnemy.matrizCuadrilla[structsEnemys.dataEnemy.columnaActual + i][gridEnemy.GetCuadrilla_columnas() - structsEnemys.dataEnemy.CantCasillasOcupadas_Y /*+ rangoAgachado*/].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
             }
         }
     }

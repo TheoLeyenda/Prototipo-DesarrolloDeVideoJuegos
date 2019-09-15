@@ -16,7 +16,7 @@ namespace Prototipo_2 {
                     break;
             }
         }
-        private void OnTriggerExit2D(Collider2D collision)
+        /*private void OnTriggerExit2D(Collider2D collision)
         {
             switch (collision.gameObject.tag)
             {
@@ -26,6 +26,6 @@ namespace Prototipo_2 {
                     //Debug.Log("SALI");
                     break;
             }
-        }
+        }*/
     }
 }

@@ -114,6 +114,7 @@ namespace Prototipo_2
             if (transform.position.y < gridPlayer.matrizCuadrilla[gridPlayer.GetCuadrilla_filas() - 1][gridPlayer.GetCuadrilla_columnas() - 1].transform.position.y)
             {
                 transform.position = InitialPosition;
+                Debug.Log("ENTRE");
             }
         }
         //HIDE HECHO MIERDA / HECHO PIJA BUSCALO BOLUDO
@@ -252,7 +253,7 @@ namespace Prototipo_2
             colliderSprite.enabled = false;
             for (int i = 0; i < structsPlayer.dataPlayer.CantCasillasOcupadas_X; i++)
             {
-                gridPlayer.matrizCuadrilla[structsPlayer.dataPlayer.columnaActual + i][gridPlayer.GetCuadrilla_columnas() - structsPlayer.dataPlayer.CantCasillasOcupadas_Y + rangoAgachado].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
+                gridPlayer.matrizCuadrilla[gridPlayer.GetCuadrilla_columnas() - structsPlayer.dataPlayer.CantCasillasOcupadas_Y][structsPlayer.dataPlayer.columnaActual + i].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
             }
             
         }
