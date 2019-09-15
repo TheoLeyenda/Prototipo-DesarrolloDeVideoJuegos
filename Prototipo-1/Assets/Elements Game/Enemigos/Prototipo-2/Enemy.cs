@@ -24,7 +24,6 @@ namespace Prototipo_2
         public float maxLife;
         public Image ImageHP;
         public Pool poolObjectAttack;
-        public float SpeedJump;
         private Rigidbody2D rg2D;
         private GameManager gm;
         public List<GameObject> generadoresProyectiles;
@@ -56,7 +55,7 @@ namespace Prototipo_2
         private bool isDuck;
         public float anguloAtaqueSalto;
         public float Speed;
-        public float SpeedJamp;
+        public float SpeedJump;
         private float auxSpeedJump;
         public float Resistace;
         public float Gravity;
@@ -64,8 +63,10 @@ namespace Prototipo_2
         private bool isJamping;
         public List<Collider2D> collidersSprites;
         private Vector3 InitialPosition;
+        //private float sumarAlturaInicial = 0.2f;
         void Start()
         {
+            auxSpeedJump = SpeedJump;
             InitialPosition = transform.position;
             auxDelayAttack = delayAttack;
             delaySelectMovement = 0;
@@ -86,7 +87,6 @@ namespace Prototipo_2
             CheckLifeBar();
             CheckDead();
             IA();
-            CheckOutLimit();
         }
         public void CheckInitialSprite()
         {
@@ -213,12 +213,16 @@ namespace Prototipo_2
         }
         public void CheckOutLimit()
         {
-            if (transform.position.y < InitialPosition.y)
+            //Debug.Log("INITIAL POSITION:" + InitialPosition.y);
+            //Debug.Log("posicion actual: "+transform.position.y);
+            if (transform.position.y < InitialPosition.y && !isJamping)
             {
-                transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);
+                //Debug.Log("ENTRE A LA INICIAL POSICION");
+                transform.position = new Vector3(transform.position.x, InitialPosition.y , transform.position.z);
                 delaySelectMovement = 0;
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
                 gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual,structsEnemys.dataEnemy.CantCasillasOcupadas_X,structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+                SpeedJump = auxSpeedJump;
             }
         }
         public void OnEnemySurvival()
@@ -613,19 +617,8 @@ namespace Prototipo_2
                 gridEnemy.matrizCuadrilla[gridEnemy.baseGrild][structsEnemys.dataEnemy.columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
                 //Debug.Log(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual].name);
             }
-            else
-            {
-                isJamping = false;
-                if (CheckMove(new Vector3(transform.position.x, InitialPosition.y, transform.position.z)))
-                {
-                    MoveJamp(Vector3.down);
-                }
-                else
-                {
-                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
-                    SpeedJump = auxSpeedJump;
-                }
-            }
+            
+            CheckOutLimit();
         }
         public bool CheckMove(Vector3 PosicionDestino)
         {
@@ -645,7 +638,6 @@ namespace Prototipo_2
         {
             if (direccion == Vector3.up)
             {
-                Debug.Log("SALTANDO");
                 transform.Translate(direccion * SpeedJump * Time.deltaTime);
                 SpeedJump = SpeedJump - Time.deltaTime * Resistace;
             }

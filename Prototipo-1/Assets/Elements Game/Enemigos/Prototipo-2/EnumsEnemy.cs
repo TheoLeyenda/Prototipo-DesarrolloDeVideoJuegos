@@ -34,14 +34,14 @@ namespace Prototipo_2
             AtacarEnElLugar,
             AgacharseAtaque,
             SaltoAtaque,
+            MoverAtras,
+            MoverAdelante,
             AtacarEnParabola,
             SaltoDefensa,
             AgacheDefensa,
             DefensaEnElLugar,
             Saltar,
             Agacharse,
-            MoverAdelante,
-            MoverAtras,
             Count,
         }
         public enum EstadoEnemigo
