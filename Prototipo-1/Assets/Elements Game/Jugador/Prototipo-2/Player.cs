@@ -114,6 +114,7 @@ namespace Prototipo_2
             if (transform.position.y < gridPlayer.matrizCuadrilla[gridPlayer.GetCuadrilla_filas() - 1][gridPlayer.GetCuadrilla_columnas() - 1].transform.position.y)
             {
                 transform.position = InitialPosition;
+                structsPlayer.dataPlayer.columnaActual = 1;
                 Debug.Log("ENTRE");
             }
         }
