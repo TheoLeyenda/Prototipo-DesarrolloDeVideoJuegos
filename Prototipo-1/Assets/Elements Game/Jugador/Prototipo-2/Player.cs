@@ -111,11 +111,9 @@ namespace Prototipo_2
         }
         public void CheckOutLimit()
         {
-            if (transform.position.y < gridPlayer.matrizCuadrilla[gridPlayer.GetCuadrilla_filas() - 1][gridPlayer.GetCuadrilla_columnas() - 1].transform.position.y)
+            if (transform.position.y <= InitialPosition.y)
             {
-                transform.position = InitialPosition;
-                structsPlayer.dataPlayer.columnaActual = 1;
-                Debug.Log("ENTRE");
+                transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);
             }
         }
         //HIDE HECHO MIERDA / HECHO PIJA BUSCALO BOLUDO
