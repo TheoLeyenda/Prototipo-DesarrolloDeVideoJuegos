@@ -279,6 +279,7 @@ namespace Prototipo_2
                 {
                     delayAttack = delayAttackJumping;
                 }
+                
             }
             if (delaySelectMovement > 0)
             {
@@ -370,8 +371,14 @@ namespace Prototipo_2
                     break;
                 case EnumsEnemy.Movimiento.SaltoAtaque:
                     CheckDelayAttack();
-                    isJamping = true;   
+                    isJamping = true;
                     Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
+                    break;
+                case EnumsEnemy.Movimiento.MoverAtras:
+                    if (structsEnemys.dataEnemy.columnaActual > 0)
+                    {
+                        MoveLeft(gridEnemy.matrizCuadrilla[gridEnemy.baseGrild][structsEnemys.dataEnemy.columnaActual - 1].transform.position);
+                    }
                     break;
             }
             if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque)
@@ -392,23 +399,40 @@ namespace Prototipo_2
             }
             else if (delayAttack <= 0)
             {
-                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
+                delayAttack = auxDelayAttack;
+                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
                 {
+                    delayAttack = delayAttackJumping;
                     Attack(true);
                 }
                 else
                 {
                     Attack(false);
                 }
-                delayAttack = auxDelayAttack;
+                
             }
         }
         public void ResetEnemy()
         {
             //RESETEA TODO EL ENEMIGO
         }
+        public void MoveLeft(Vector3 cuadrillaDestino)
+        {
+            if (CheckMove(new Vector3(gridEnemy.leftCuadrilla.transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
+            {
+                Move(Vector3.left);
+                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoverAtras);
+            }
+            else if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Nulo)
+            {
+                structsEnemys.dataEnemy.columnaActual--;
+                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+                gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+            }
+        }
         public void Attack(bool jampAttack)
         {
+            bool shootDown = false;
             string nombreGenerador = "NADA XD";
             GameObject generador = null;
             GameObject go = poolObjectAttack.GetObject();
@@ -479,14 +503,11 @@ namespace Prototipo_2
                 }
                 if (generador != null)
                 {
-                    if (!jampAttack)
+                    if (jampAttack)
                     {
-                        go.transform.rotation = generador.transform.rotation;
+                        shootDown = true;
                     }
-                    else
-                    {
-                        go.transform.Rotate(0,anguloAtaqueSalto,0);
-                    }
+                    go.transform.rotation = generador.transform.rotation;
                     go.transform.position = generador.transform.position;
                 }
             }
@@ -549,19 +570,19 @@ namespace Prototipo_2
                 }
                 if (generador != null)
                 {
-                    if (!jampAttack)
-                    {
-                        go.transform.rotation = generador.transform.rotation;
-                    }
-                    else
-                    {
-                        go.transform.Rotate(0, -anguloAtaqueSalto, 0);
-                    }
+                    go.transform.rotation = generador.transform.rotation;
                     go.transform.position = generador.transform.position;
                 }
             }
             proyectil.On();
-            proyectil.ShootForward();
+            if (!shootDown)
+            {
+                proyectil.ShootForward();
+            }
+            else
+            {
+                proyectil.ShootForwardDown();
+            }
         }
         public void AttackParabola()
         {
