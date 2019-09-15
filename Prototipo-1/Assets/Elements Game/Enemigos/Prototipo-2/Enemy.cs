@@ -278,7 +278,7 @@ namespace Prototipo_2
                 EnumsEnemy.Movimiento movimiento = (EnumsEnemy.Movimiento)Random.Range(min, max);
                 delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
                 enumsEnemy.SetMovement(movimiento);
-                Debug.Log(movimiento.ToString());
+                //Debug.Log(movimiento.ToString());
                 if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
                 {
                     delayAttack = delayAttackJumping;

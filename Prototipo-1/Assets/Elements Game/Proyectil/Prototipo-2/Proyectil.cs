@@ -71,7 +71,7 @@ namespace Prototipo_2
         {
             dobleDamage = _dobleDamage;
         }
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerStay2D(Collider2D collision)
         {
             switch (collision.tag)
             {
@@ -104,22 +104,24 @@ namespace Prototipo_2
                         if (cuadrilla.player != null)
                         {
                             cuadrilla.player.SetEnableCounterAttack(true);
-                            if (cuadrilla.player.delayCounterAttack > 0 && cuadrilla.player.GetEnableCounterAttack())
+                            if (cuadrilla.player.delayCounterAttack > 0)
                             {
-                                if (Input.GetKeyDown(cuadrilla.player.ButtonDeffence))
+                                cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
+                                if (Input.GetKey(cuadrilla.player.ButtonDeffence))
                                 {
                                     cuadrilla.player.Attack();
+                                    timeLife = 0;
+                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
                                 }
-                                timeLife = 0;
                             }
-                            if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0 && cuadrilla.player.GetEnableCounterAttack())
+                            if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0)
                             {
                                 cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
                                 cuadrilla.player.SetEnableCounterAttack(false);
                                 cuadrilla.player.life = cuadrilla.player.life - damage;
                                 timeLife = 0;
                             }
-                            else
+                            else if(cuadrilla.player.delayCounterAttack <= 0)
                             {
                                 cuadrilla.player.life = cuadrilla.player.life - damage;
                             }
