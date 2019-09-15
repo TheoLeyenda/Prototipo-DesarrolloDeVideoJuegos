@@ -274,7 +274,7 @@ namespace Prototipo_2
             if (delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque))
             {
                 int min = (int)EnumsEnemy.Movimiento.Nulo + 1;
-                int max = 4;//(int)EnumsEnemy.Movimiento.Count;
+                int max = 5;//(int)EnumsEnemy.Movimiento.Count;
                 EnumsEnemy.Movimiento movimiento = (EnumsEnemy.Movimiento)Random.Range(min, max);
                 delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
                 enumsEnemy.SetMovement(movimiento);
@@ -283,7 +283,6 @@ namespace Prototipo_2
                 {
                     delayAttack = delayAttackJumping;
                 }
-                
             }
             if (delaySelectMovement > 0)
             {
@@ -291,8 +290,6 @@ namespace Prototipo_2
                 delaySelectMovement = delaySelectMovement - Time.deltaTime;
             }
         }
-        
-        
         public void CheckLifeBar()
         {
             if (life <= maxLife)
@@ -360,8 +357,6 @@ namespace Prototipo_2
                 }
             }
         }
-
-
         public void CheckMovement()
         {
             switch (enumsEnemy.GetMovement())
@@ -432,6 +427,7 @@ namespace Prototipo_2
                 structsEnemys.dataEnemy.columnaActual--;
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
                 gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+                delaySelectMovement = 0;
             }
         }
         public void Attack(bool jampAttack)
