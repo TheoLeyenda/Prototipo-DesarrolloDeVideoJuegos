@@ -89,6 +89,26 @@ namespace Prototipo_2
                 gm.ResetRoundCombat(true);
             }
         }
+        public void AttackDown()
+        {
+            GameObject go = poolObjectAttack.GetObject();
+            Proyectil proyectil = go.GetComponent<Proyectil>();
+            proyectil.SetDobleDamage(doubleDamage);
+            if (doubleDamage)
+            {
+                proyectil.damage = proyectil.damage * 2;
+            }
+            if (!isDuck)
+            {
+                go.transform.position = generadorProyectiles.transform.position;
+            }
+            else
+            {
+                go.transform.position = generadorProyectilesAgachado.transform.position;
+            }
+            proyectil.On();
+            proyectil.ShootForwardDown();
+        }
         public void Attack()
         {
             GameObject go = poolObjectAttack.GetObject();
@@ -121,7 +141,11 @@ namespace Prototipo_2
         {
             //Debug.Log("Columna Actual:" + structsPlayer.dataEnemy.columnaActual);
             //Debug.Log("Movimiento actual:" + enumsPlayers.movimiento);
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(KeyCode.DownArrow))
+            {
+                AttackDown();
+            }
+            else if (Input.GetKeyDown(KeyCode.F))
             {
                 Attack();
             }
