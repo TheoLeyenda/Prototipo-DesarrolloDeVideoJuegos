@@ -91,12 +91,19 @@ namespace Prototipo_2
                     break;
                 case "Cuadrilla":
                     Cuadrilla cuadrilla = collision.GetComponent<Cuadrilla>();
+                    if (cuadrilla.enemy == null && cuadrilla.player == null || cuadrilla.enemy != null && cuadrilla.player != null)
+                    {
+                        return;
+                    }
+                    if (cuadrilla.enemy != null)
+                    {
+                        if (cuadrilla.GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Ocupado && cuadrilla.enemy.GetIsDeffended())
+                        {
+                            cuadrilla.SetStateCuadrilla(Cuadrilla.StateCuadrilla.Defendido);
+                        }
+                    }
                     if (cuadrilla.GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Ocupado)
                     {
-                        if (cuadrilla.enemy == null && cuadrilla.player == null || cuadrilla.enemy != null && cuadrilla.player != null)
-                        {
-                            return;
-                        }
                         if (dobleDamage)
                         {
                             damage = damage / 2;
@@ -142,11 +149,6 @@ namespace Prototipo_2
                     }
                     if (cuadrilla.GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Defendido)
                     {
-                        Debug.Log("ENTRE");
-                        if (cuadrilla.enemy == null && cuadrilla.player == null || cuadrilla.enemy != null && cuadrilla.player != null)
-                        {
-                            return;
-                        }
                         if (cuadrilla.player != null)
                         {
                             if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
