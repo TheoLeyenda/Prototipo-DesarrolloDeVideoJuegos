@@ -156,13 +156,24 @@ namespace Prototipo_2
             }
             if (!isDuck)
             {
+                proyectil.TypeRoot = 1;
                 go.transform.position = generadorProyectilesParabola.transform.position;
             }
             else
             {
+                proyectil.TypeRoot = 2;
                 go.transform.position = generadorProyectilesParabolaAgachado.transform.position;
             }
             proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Jugador;
+            switch (proyectil.TypeRoot)
+            {
+                case 1:
+                    proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
+                    break;
+                case 2:
+                    proyectil.rutaParabolaAgachado_AtaqueJugador = structsPlayer.rutaAgachado;
+                    break;
+            }
             proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
             proyectil.OnParabola();
         }

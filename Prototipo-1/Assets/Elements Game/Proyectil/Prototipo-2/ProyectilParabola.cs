@@ -7,10 +7,14 @@ namespace Prototipo_2 {
     {
         // Start is called before the first frame update
         public GameObject rutaParabola_AtaqueJugador;
+        public GameObject rutaParabolaAgachado_AtaqueJugador;
         public GameObject rutaParabola_AtaqueEnemigo;
+        public GameObject rutaParabolaAgachado_AtaqueEnemigo;
         [SerializeField]
         private ParabolaController parabolaController;
         private PoolObject poolObject;
+        [HideInInspector]
+        public int TypeRoot;
         void Start()
         {
             timeLife = auxTimeLife;
@@ -64,13 +68,30 @@ namespace Prototipo_2 {
             if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
             {
                 rutaParabola_AtaqueJugador.SetActive(true);
-                parabolaController.ParabolaRoot = rutaParabola_AtaqueJugador;
+                switch (TypeRoot) {
+
+                    case 1:
+                        parabolaController.ParabolaRoot = rutaParabola_AtaqueJugador;
+                        break;
+                    case 2:
+                        parabolaController.ParabolaRoot = rutaParabolaAgachado_AtaqueJugador;
+                        break;
+                }
                 parabolaController.OnParabola();
             }
             else if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
             {
                 rutaParabola_AtaqueEnemigo.SetActive(true);
-                parabolaController.ParabolaRoot = rutaParabola_AtaqueEnemigo;
+                switch (TypeRoot)
+                {
+
+                    case 1:
+                        parabolaController.ParabolaRoot = rutaParabola_AtaqueEnemigo;
+                        break;
+                    case 2:
+                        parabolaController.ParabolaRoot = rutaParabolaAgachado_AtaqueEnemigo;
+                        break;
+                }
                 parabolaController.OnParabola();
             }       
             if (parabolaController != null)

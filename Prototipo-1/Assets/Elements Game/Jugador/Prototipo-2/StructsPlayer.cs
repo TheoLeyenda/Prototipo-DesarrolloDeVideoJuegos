@@ -15,6 +15,7 @@ namespace Prototipo_2
         }
 
         public GameObject ruta;
+        public GameObject rutaAgachado;
         public DataPlayer dataPlayer;
     }
 }
