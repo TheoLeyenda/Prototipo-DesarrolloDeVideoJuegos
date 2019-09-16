@@ -45,6 +45,7 @@ namespace Prototipo_2
         public string ButtonSpecialAttack;
         //public BoxCollider2D colliderCounterAttack;
         public float delayCounterAttack;
+        public bool SpecialAttackEnabelEveryMoment;
         private float auxDelayCounterAttack;
         void Start()
         {
@@ -203,7 +204,10 @@ namespace Prototipo_2
             }
             if (Input.GetKeyDown(ButtonSpecialAttack))
             {
-                SpecialAttack();
+                if (!isDuck && !isJamping && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo || SpecialAttackEnabelEveryMoment)
+                {
+                    SpecialAttack();
+                }
             }
             if (Input.GetKeyUp(ButtonDeffence))
             {

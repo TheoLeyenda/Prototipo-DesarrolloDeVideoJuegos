@@ -277,7 +277,7 @@ namespace Prototipo_2
             {
                 gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                 int min = (int)EnumsEnemy.Movimiento.Nulo + 1;
-                int max = 11;//(int)EnumsEnemy.Movimiento.Count-1;
+                int max = (int)EnumsEnemy.Movimiento.Count-1;
                 EnumsEnemy.Movimiento movimiento = (EnumsEnemy.Movimiento)Random.Range(min, max);
                 delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
                 enumsEnemy.SetMovement(movimiento);
@@ -418,6 +418,8 @@ namespace Prototipo_2
                     break;
                 case EnumsEnemy.Movimiento.Agacharse:
                     Duck(structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+                    break;
+                case EnumsEnemy.Movimiento.AtacarEnParabola:
                     break;
             }
             if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque)
