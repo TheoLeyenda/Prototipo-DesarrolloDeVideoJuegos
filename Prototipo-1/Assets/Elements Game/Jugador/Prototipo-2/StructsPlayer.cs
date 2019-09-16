@@ -13,6 +13,10 @@ namespace Prototipo_2
             public int CantCasillasOcupadas_Y;
             public int columnaActual;
         }
+
+        public GameObject ruta1;
+        public GameObject ruta2;
+        public GameObject ruta3;
         public DataPlayer dataPlayer;
     }
 }

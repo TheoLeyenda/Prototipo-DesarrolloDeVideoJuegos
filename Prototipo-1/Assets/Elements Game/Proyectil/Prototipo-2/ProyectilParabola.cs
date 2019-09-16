@@ -1,37 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Prototipo_2
-{
-    public class Proyectil : MonoBehaviour
+
+namespace Prototipo_2 { 
+    public class ProyectilParabola : Proyectil
     {
-        public enum DisparadorDelProyectil
-        {
-            Nulo,
-            Enemigo,
-            Jugador,
-        }
-        public enum TypeShoot
-        {
-            Recto,
-            EnParabola,
-            Nulo,
-        }
-        public float speed;
-        public float timeLife;
-        public float auxTimeLife;
-        public float damage;
-        public Rigidbody2D rg2D;
-        public Transform vectorForward;
-        public Transform vectorForwardUp;
-        public Transform vectorForwardDown;
-        public Pool pool;
-        protected bool dobleDamage;
+        // Start is called before the first frame update
+        public GameObject rutaParabola1_AtaqueJugador;
+        public GameObject rutaParabola2_AtaqueJugador;
+        public GameObject rutaParabola3_AtaqueJugador;
+        public GameObject rutaParabola1_AtaqueEnemigo;
+        public GameObject rutaParabola2_AtaqueEnemigo;
+        public GameObject rutaParabola3_AtaqueEnemigo;
+        [SerializeField]
+        private ParabolaController parabolaController;
         private PoolObject poolObject;
-        protected GameManager gm;
-        public DisparadorDelProyectil disparadorDelProyectil;
-        private void Start()
+        private int typeRoot;
+        void Start()
         {
+            timeLife = auxTimeLife;
             if (GameManager.instanceGameManager != null)
             {
                 gm = GameManager.instanceGameManager;
@@ -40,20 +27,16 @@ namespace Prototipo_2
         private void OnEnable()
         {
             timeLife = auxTimeLife;
-            
         }
-        private void Update()
+        // Update is called once per frame
+        void Update()
         {
-            CheckTimeLife();
+            if (parabolaController != null)
+            {
+                CheckTimeLifeParabola();
+            }
         }
-        public void On()
-        {
-            poolObject = GetComponent<PoolObject>();
-            rg2D.velocity = Vector2.zero;
-            rg2D.angularVelocity = 0;
-            timeLife = auxTimeLife;
-        }
-        public void CheckTimeLife()
+        public void CheckTimeLifeParabola()
         {
             if (timeLife > 0)
             {
@@ -61,31 +44,76 @@ namespace Prototipo_2
             }
             else if (timeLife <= 0)
             {
-                if (poolObject != null)
-                {
-                    poolObject.Recycle();
-                }
+                //CAMBIARLO POR EL ATAQUE ESPECIAL QUE REALICE Y LUEGO LLAMAR A LA FUNCION CheckTimeLife();
+                CheckTimeLife();
             }
         }
-        public void ShootForward()
+        public void OnParabola()
         {
-            rg2D.AddForce(transform.right * speed, ForceMode2D.Force);
+            // SE SELECIONA LA PARABOLA CORRESPONDIENTE DEPENDIENDO A DONDE APUNTO EL JUGADOR / ENEMIGO.
+            // FALTARIA CREAR LAS PARABOLAS Y HACER EL GENERADOR DE PELOTAS CON PARABOLA Y PROBARLO.
+            On();
+            switch (typeRoot)
+            {
+                case 1:
+                    if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
+                    {
+                        rutaParabola1_AtaqueJugador.SetActive(true);
+                        rutaParabola2_AtaqueJugador.SetActive(false);
+                        rutaParabola3_AtaqueJugador.SetActive(false);
+                        parabolaController.ParabolaRoot = rutaParabola1_AtaqueJugador;
+                        Debug.Log("ENTRE");
+                    }
+                    else if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
+                    {
+                        rutaParabola1_AtaqueEnemigo.SetActive(true);
+                        rutaParabola2_AtaqueEnemigo.SetActive(false);
+                        rutaParabola3_AtaqueEnemigo.SetActive(false);
+                        parabolaController.ParabolaRoot = rutaParabola1_AtaqueEnemigo;
+                    }
+                    break;
+                case 2:
+                    if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
+                    {
+                        rutaParabola1_AtaqueJugador.SetActive(false);
+                        rutaParabola2_AtaqueJugador.SetActive(true);
+                        rutaParabola3_AtaqueJugador.SetActive(false);
+                        parabolaController.ParabolaRoot = rutaParabola2_AtaqueJugador;
+                    }
+                    else if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
+                    {
+                        rutaParabola1_AtaqueEnemigo.SetActive(false);
+                        rutaParabola2_AtaqueEnemigo.SetActive(true);
+                        rutaParabola3_AtaqueEnemigo.SetActive(false);
+                        parabolaController.ParabolaRoot = rutaParabola2_AtaqueEnemigo;
+                    }
+                    break;
+                case 3:
+                    if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
+                    {
+                        rutaParabola1_AtaqueJugador.SetActive(false);
+                        rutaParabola2_AtaqueJugador.SetActive(false);
+                        rutaParabola3_AtaqueJugador.SetActive(true);
+                        parabolaController.ParabolaRoot = rutaParabola3_AtaqueJugador;
+                    }
+                    else if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
+                    {
+                        rutaParabola1_AtaqueEnemigo.SetActive(false);
+                        rutaParabola2_AtaqueEnemigo.SetActive(false);
+                        rutaParabola3_AtaqueEnemigo.SetActive(true);
+                        parabolaController.ParabolaRoot = rutaParabola3_AtaqueEnemigo;
+                    }
+                    break;
+            }
+            if (parabolaController != null)
+            {
+                parabolaController.Speed = speed;
+                //parabolaController.OnParabola();
+            }
         }
-        public void ShootForwardUp()
+        public void SetTypeRoot(int _typeRoot)
         {
-            rg2D.AddRelativeForce(vectorForwardUp.right * speed);
-        }
-        public void ShootForwardDown()
-        {
-            rg2D.AddRelativeForce(vectorForwardDown.right * speed, ForceMode2D.Force);
-        }
-        public PoolObject GetPoolObject()
-        {
-            return poolObject;
-        }
-        public void SetDobleDamage(bool _dobleDamage)
-        {
-            dobleDamage = _dobleDamage;
+            typeRoot = _typeRoot;
         }
         private void OnTriggerStay2D(Collider2D collision)
         {
@@ -154,7 +182,7 @@ namespace Prototipo_2
                                     cuadrilla.player.life = cuadrilla.player.life - damage;
                                 }
                             }
-                            
+
                         }
                     }
                     if (cuadrilla.GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Defendido)

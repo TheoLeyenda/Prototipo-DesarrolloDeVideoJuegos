@@ -17,6 +17,8 @@ namespace Prototipo_2
         public GameObject BARRA_DE_VIDA;
         public GameObject generadorProyectiles;
         public GameObject generadorProyectilesAgachado;
+        public GameObject generadorProyectilesParabola;
+        public GameObject generadorProyectilesParabolaAgachado;
         private Animator animator;
         public Image ImageHP;
         public Button PadArrowUp;
@@ -35,10 +37,12 @@ namespace Prototipo_2
         private bool isDuck;
         private bool EnableCounterAttack;
         public Pool poolObjectAttack;
+        public Pool poolObjectSpecialAttack;
         private Vector3 InitialPosition;
         public BoxCollider2D colliderSprite;
         public string ButtonDeffence;
         public string ButtonAttack;
+        public string ButtonSpecialAttack;
         //public BoxCollider2D colliderCounterAttack;
         public float delayCounterAttack;
         private float auxDelayCounterAttack;
@@ -139,6 +143,43 @@ namespace Prototipo_2
             proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Jugador;
             proyectil.ShootForward();
         }
+
+        //ATAQUE EN PARABOLA.
+        public void SpecialAttack()
+        {
+            GameObject go = poolObjectSpecialAttack.GetObject();
+            ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
+            proyectil.SetDobleDamage(doubleDamage);
+            if (doubleDamage)
+            {
+                proyectil.damage = proyectil.damage * 2;
+            }
+            if (!isDuck)
+            {
+                go.transform.position = generadorProyectilesParabola.transform.position;
+            }
+            else
+            {
+                go.transform.position = generadorProyectilesParabolaAgachado.transform.position;
+            }
+            proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Jugador;
+            proyectil.rutaParabola1_AtaqueJugador = structsPlayer.ruta1;
+            proyectil.rutaParabola2_AtaqueJugador = structsPlayer.ruta2;
+            proyectil.rutaParabola3_AtaqueJugador = structsPlayer.ruta3;
+            switch (structsPlayer.dataPlayer.columnaActual)
+            {
+                case 0:
+                    proyectil.SetTypeRoot(1);
+                    break;
+                case 1:
+                    proyectil.SetTypeRoot(2);
+                    break;
+                case 2:
+                    proyectil.SetTypeRoot(3);
+                    break;
+            }
+            proyectil.OnParabola();
+        }
         public void CheckOutLimit()
         {
             if (transform.position.y <= InitialPosition.y)
@@ -162,6 +203,10 @@ namespace Prototipo_2
             if (Input.GetKey(ButtonDeffence))
             {
                 Deffence();
+            }
+            if (Input.GetKeyDown(ButtonSpecialAttack))
+            {
+                SpecialAttack();
             }
             if (Input.GetKeyUp(ButtonDeffence))
             {
