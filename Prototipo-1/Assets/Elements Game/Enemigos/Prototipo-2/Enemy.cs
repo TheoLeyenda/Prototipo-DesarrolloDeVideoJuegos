@@ -50,6 +50,7 @@ namespace Prototipo_2
         public float maxRandomDelayMovement;
         public float minRandomDelayMovement;
         public float delayAttack;
+        public float pointsDeffence;
         private float auxDelayAttack;
         private bool doubleDamage;
         private bool isDuck;
@@ -273,12 +274,13 @@ namespace Prototipo_2
         {
             if (delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque))
             {
+                gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                 int min = (int)EnumsEnemy.Movimiento.Nulo + 1;
-                int max = 7;//(int)EnumsEnemy.Movimiento.Count;
+                int max = 8;//(int)EnumsEnemy.Movimiento.Count;
                 EnumsEnemy.Movimiento movimiento = (EnumsEnemy.Movimiento)Random.Range(min, max);
                 delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
                 enumsEnemy.SetMovement(movimiento);
-                //Debug.Log(movimiento.ToString());
+                Debug.Log(movimiento.ToString());
                 if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
                 {
                     delayAttack = delayAttackJumping;
@@ -397,6 +399,14 @@ namespace Prototipo_2
                     isJamping = true;
                     Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
                     break;
+                case EnumsEnemy.Movimiento.DefensaEnElLugar:
+                    Deffence();
+                    break;
+                case EnumsEnemy.Movimiento.SaltoDefensa:
+                    isJamping = true;
+                    Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
+                    Deffence();
+                    break;
             }
             if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque)
             {
@@ -407,6 +417,19 @@ namespace Prototipo_2
                 isDuck = false;
             }
             //CHEKEA EL MOVIMIENTO DEL ENEMIGO
+        }
+        public void Deffence()
+        {
+            for (int i = 0; i < gridEnemy.matrizCuadrilla.Count; i++)
+            {
+                for (int j = 0; j < gridEnemy.matrizCuadrilla[i].Count; j++)
+                {
+                    if (gridEnemy.matrizCuadrilla[i][j].GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Ocupado)
+                    {
+                        gridEnemy.matrizCuadrilla[i][j].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Defendido);
+                    }
+                }
+            }
         }
         public void CheckDelayAttack()
         {
@@ -625,10 +648,6 @@ namespace Prototipo_2
         {
 
             //DisableShild();
-        }
-        public void Deffense()
-        {
-            
         }
         public void Jump(Vector3 alturaMaxima)
         {

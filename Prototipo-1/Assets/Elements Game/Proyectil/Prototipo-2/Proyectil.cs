@@ -143,12 +143,25 @@ namespace Prototipo_2
                     if (cuadrilla.GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Defendido)
                     {
                         Debug.Log("ENTRE");
+                        if (cuadrilla.enemy == null && cuadrilla.player == null || cuadrilla.enemy != null && cuadrilla.player != null)
+                        {
+                            return;
+                        }
                         if (cuadrilla.player != null)
                         {
                             if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
                             {
                                 float realDamage = damage - cuadrilla.player.pointsDeffence;
                                 cuadrilla.player.life = cuadrilla.player.life - realDamage;
+                                timeLife = 0;
+                            }
+                        }
+                        if (cuadrilla.enemy != null)
+                        {
+                            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
+                            {
+                                float realDamage = damage - cuadrilla.enemy.pointsDeffence;
+                                cuadrilla.enemy.life = cuadrilla.enemy.life - realDamage;
                                 timeLife = 0;
                             }
                         }

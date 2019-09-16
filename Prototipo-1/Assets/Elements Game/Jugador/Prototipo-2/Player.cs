@@ -305,7 +305,6 @@ namespace Prototipo_2
                 for (int j = 0; j < gridPlayer.matrizCuadrilla[i].Count; j++) {
                     if (gridPlayer.matrizCuadrilla[i][j].GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Ocupado)
                     {
-                        Debug.Log("DEFENDIENDO");
                         gridPlayer.matrizCuadrilla[i][j].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Defendido);
                     }
                 }
