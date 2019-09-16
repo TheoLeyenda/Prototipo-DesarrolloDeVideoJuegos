@@ -37,6 +37,7 @@ public class ParabolaController : MonoBehaviour
 
     private Rigidbody2D rig;
 
+    //public static bool inParabola;
     void OnDrawGizmos()
     {
         if (gizmo == null)
@@ -66,15 +67,20 @@ public class ParabolaController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //inParabola = true;
+        //OnParabola();
+    }
+    public void OnParabola()
+    {
         parabolaFly = new ParabolaFly(ParabolaRoot.transform);
 
         if (Autostart)
         {
+            //inParabola = true;
             RefreshTransforms(Speed);
             FollowParabola();
         }
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -255,8 +261,10 @@ public class ParabolaController : MonoBehaviour
                     partDuration[i] = parabolas[i].Length / speed;
                     completeDuration += partDuration[i];
                 }
-
-
+            }
+            else
+            {
+                //inParabola = false;
             }
 
         }

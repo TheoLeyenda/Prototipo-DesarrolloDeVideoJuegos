@@ -22,6 +22,7 @@ namespace Prototipo_2 {
         private void OnEnable()
         {
             timeLife = auxTimeLife;
+            OnParabola();
         }
         // Update is called once per frame
         void Update()
@@ -30,6 +31,7 @@ namespace Prototipo_2 {
             {
                 CheckTimeLifeParabola();
             }
+            CheckMovement();
         }
         public void CheckTimeLifeParabola()
         {
@@ -43,6 +45,17 @@ namespace Prototipo_2 {
                 CheckTimeLife();
             }
         }
+        public void CheckMovement()
+        {
+            if(rg2D.velocity.x <= 0 && rg2D.velocity.y <= 0)
+            {
+                Move(Vector3.down);
+            }
+        }
+        public void Move(Vector3 direccion)
+        {
+            transform.Translate(direccion * speed * Time.deltaTime);
+        }
         public void OnParabola()
         {
             // SE SELECIONA LA PARABOLA CORRESPONDIENTE DEPENDIENDO A DONDE APUNTO EL JUGADOR / ENEMIGO.
@@ -52,11 +65,13 @@ namespace Prototipo_2 {
             {
                 rutaParabola_AtaqueJugador.SetActive(true);
                 parabolaController.ParabolaRoot = rutaParabola_AtaqueJugador;
+                parabolaController.OnParabola();
             }
             else if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
             {
                 rutaParabola_AtaqueEnemigo.SetActive(true);
                 parabolaController.ParabolaRoot = rutaParabola_AtaqueEnemigo;
+                parabolaController.OnParabola();
             }       
             if (parabolaController != null)
             {
@@ -100,6 +115,7 @@ namespace Prototipo_2 {
                         {
                             if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
                             {
+                                Debug.Log("ENTRE VIEJA");
                                 cuadrilla.enemy.life = cuadrilla.enemy.life - damage;
                                 timeLife = 0;
                             }
