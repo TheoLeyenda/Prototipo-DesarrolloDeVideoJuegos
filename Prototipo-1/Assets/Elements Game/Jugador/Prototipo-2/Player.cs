@@ -115,6 +115,7 @@ namespace Prototipo_2
                 go.transform.position = generadorProyectilesAgachado.transform.position;
             }
             proyectil.On();
+            proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Jugador;
             proyectil.ShootForwardDown();
         }
         public void Attack()
@@ -135,6 +136,7 @@ namespace Prototipo_2
                 go.transform.position = generadorProyectilesAgachado.transform.position;
             }
             proyectil.On();
+            proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Jugador;
             proyectil.ShootForward();
         }
         public void CheckOutLimit()

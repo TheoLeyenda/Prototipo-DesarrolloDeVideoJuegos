@@ -5,6 +5,12 @@ namespace Prototipo_2
 {
     public class Proyectil : MonoBehaviour
     {
+        public enum DisparadorDelProyectil
+        {
+            Nulo,
+            Enemigo,
+            Jugador,
+        }
         public float speed;
         public float timeLife;
         public float auxTimeLife;
@@ -17,6 +23,7 @@ namespace Prototipo_2
         private bool dobleDamage;
         private PoolObject poolObject;
         private GameManager gm;
+        public DisparadorDelProyectil disparadorDelProyectil;
         private void Start()
         {
             if (GameManager.instanceGameManager != null)
@@ -52,7 +59,6 @@ namespace Prototipo_2
         }
         public void ShootForward()
         {
-
             rg2D.AddForce(transform.right * speed, ForceMode2D.Force);
         }
         public void ShootForwardUp()
@@ -98,32 +104,38 @@ namespace Prototipo_2
                         }
                         if (cuadrilla.enemy != null)
                         {
-                            cuadrilla.enemy.life = cuadrilla.enemy.life - damage;
-                            timeLife = 0;
+                            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
+                            {
+                                cuadrilla.enemy.life = cuadrilla.enemy.life - damage;
+                                timeLife = 0;
+                            }
                         }
                         if (cuadrilla.player != null)
                         {
-                            cuadrilla.player.SetEnableCounterAttack(true);
-                            if (cuadrilla.player.delayCounterAttack > 0)
+                            if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
                             {
-                                cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
-                                if (Input.GetKey(cuadrilla.player.ButtonDeffence))
+                                cuadrilla.player.SetEnableCounterAttack(true);
+                                if (cuadrilla.player.delayCounterAttack > 0)
                                 {
-                                    cuadrilla.player.Attack();
-                                    timeLife = 0;
-                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
+                                    if (Input.GetKey(cuadrilla.player.ButtonDeffence))
+                                    {
+                                        cuadrilla.player.Attack();
+                                        timeLife = 0;
+                                        cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                    }
                                 }
-                            }
-                            if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0)
-                            {
-                                cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
-                                cuadrilla.player.SetEnableCounterAttack(false);
-                                cuadrilla.player.life = cuadrilla.player.life - damage;
-                                timeLife = 0;
-                            }
-                            else if(cuadrilla.player.delayCounterAttack <= 0)
-                            {
-                                cuadrilla.player.life = cuadrilla.player.life - damage;
+                                if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0)
+                                {
+                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                    cuadrilla.player.SetEnableCounterAttack(false);
+                                    cuadrilla.player.life = cuadrilla.player.life - damage;
+                                    timeLife = 0;
+                                }
+                                else if (cuadrilla.player.delayCounterAttack <= 0)
+                                {
+                                    cuadrilla.player.life = cuadrilla.player.life - damage;
+                                }
                             }
                             
                         }
@@ -133,9 +145,12 @@ namespace Prototipo_2
                         Debug.Log("ENTRE");
                         if (cuadrilla.player != null)
                         {
-                            float realDamage = damage - cuadrilla.player.pointsDeffence;
-                            cuadrilla.player.life = cuadrilla.player.life - realDamage;
-                            timeLife = 0;
+                            if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
+                            {
+                                float realDamage = damage - cuadrilla.player.pointsDeffence;
+                                cuadrilla.player.life = cuadrilla.player.life - realDamage;
+                                timeLife = 0;
+                            }
                         }
                     }
                     break;

@@ -470,6 +470,7 @@ namespace Prototipo_2
             GameObject go = poolObjectAttack.GetObject();
             Proyectil proyectil = go.GetComponent<Proyectil>();
             proyectil.SetDobleDamage(doubleDamage);
+            proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
             if (doubleDamage)
             {
                 proyectil.damage = proyectil.damage * 2;
