@@ -40,8 +40,8 @@ namespace Prototipo_2
             DefensaEnElLugar,
             SaltoDefensa,
             AgacheDefensa,
-            AtacarEnParabola,
             Agacharse,
+            AtacarEnParabola,
             Count,
         }
         public enum EstadoEnemigo
