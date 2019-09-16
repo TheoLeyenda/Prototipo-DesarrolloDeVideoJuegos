@@ -163,21 +163,7 @@ namespace Prototipo_2
                 go.transform.position = generadorProyectilesParabolaAgachado.transform.position;
             }
             proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Jugador;
-            proyectil.rutaParabola1_AtaqueJugador = structsPlayer.ruta1;
-            proyectil.rutaParabola2_AtaqueJugador = structsPlayer.ruta2;
-            proyectil.rutaParabola3_AtaqueJugador = structsPlayer.ruta3;
-            switch (structsPlayer.dataPlayer.columnaActual)
-            {
-                case 0:
-                    proyectil.SetTypeRoot(1);
-                    break;
-                case 1:
-                    proyectil.SetTypeRoot(2);
-                    break;
-                case 2:
-                    proyectil.SetTypeRoot(3);
-                    break;
-            }
+            proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
             proyectil.OnParabola();
         }
         public void CheckOutLimit()

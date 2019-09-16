@@ -6,16 +6,11 @@ namespace Prototipo_2 {
     public class ProyectilParabola : Proyectil
     {
         // Start is called before the first frame update
-        public GameObject rutaParabola1_AtaqueJugador;
-        public GameObject rutaParabola2_AtaqueJugador;
-        public GameObject rutaParabola3_AtaqueJugador;
-        public GameObject rutaParabola1_AtaqueEnemigo;
-        public GameObject rutaParabola2_AtaqueEnemigo;
-        public GameObject rutaParabola3_AtaqueEnemigo;
+        public GameObject rutaParabola_AtaqueJugador;
+        public GameObject rutaParabola_AtaqueEnemigo;
         [SerializeField]
         private ParabolaController parabolaController;
         private PoolObject poolObject;
-        private int typeRoot;
         void Start()
         {
             timeLife = auxTimeLife;
@@ -53,67 +48,21 @@ namespace Prototipo_2 {
             // SE SELECIONA LA PARABOLA CORRESPONDIENTE DEPENDIENDO A DONDE APUNTO EL JUGADOR / ENEMIGO.
             // FALTARIA CREAR LAS PARABOLAS Y HACER EL GENERADOR DE PELOTAS CON PARABOLA Y PROBARLO.
             On();
-            switch (typeRoot)
+            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
             {
-                case 1:
-                    if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
-                    {
-                        rutaParabola1_AtaqueJugador.SetActive(true);
-                        rutaParabola2_AtaqueJugador.SetActive(false);
-                        rutaParabola3_AtaqueJugador.SetActive(false);
-                        parabolaController.ParabolaRoot = rutaParabola1_AtaqueJugador;
-                        Debug.Log("ENTRE");
-                    }
-                    else if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
-                    {
-                        rutaParabola1_AtaqueEnemigo.SetActive(true);
-                        rutaParabola2_AtaqueEnemigo.SetActive(false);
-                        rutaParabola3_AtaqueEnemigo.SetActive(false);
-                        parabolaController.ParabolaRoot = rutaParabola1_AtaqueEnemigo;
-                    }
-                    break;
-                case 2:
-                    if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
-                    {
-                        rutaParabola1_AtaqueJugador.SetActive(false);
-                        rutaParabola2_AtaqueJugador.SetActive(true);
-                        rutaParabola3_AtaqueJugador.SetActive(false);
-                        parabolaController.ParabolaRoot = rutaParabola2_AtaqueJugador;
-                    }
-                    else if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
-                    {
-                        rutaParabola1_AtaqueEnemigo.SetActive(false);
-                        rutaParabola2_AtaqueEnemigo.SetActive(true);
-                        rutaParabola3_AtaqueEnemigo.SetActive(false);
-                        parabolaController.ParabolaRoot = rutaParabola2_AtaqueEnemigo;
-                    }
-                    break;
-                case 3:
-                    if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
-                    {
-                        rutaParabola1_AtaqueJugador.SetActive(false);
-                        rutaParabola2_AtaqueJugador.SetActive(false);
-                        rutaParabola3_AtaqueJugador.SetActive(true);
-                        parabolaController.ParabolaRoot = rutaParabola3_AtaqueJugador;
-                    }
-                    else if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
-                    {
-                        rutaParabola1_AtaqueEnemigo.SetActive(false);
-                        rutaParabola2_AtaqueEnemigo.SetActive(false);
-                        rutaParabola3_AtaqueEnemigo.SetActive(true);
-                        parabolaController.ParabolaRoot = rutaParabola3_AtaqueEnemigo;
-                    }
-                    break;
+                rutaParabola_AtaqueJugador.SetActive(true);
+                parabolaController.ParabolaRoot = rutaParabola_AtaqueJugador;
             }
+            else if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
+            {
+                rutaParabola_AtaqueEnemigo.SetActive(true);
+                parabolaController.ParabolaRoot = rutaParabola_AtaqueEnemigo;
+            }       
             if (parabolaController != null)
             {
                 parabolaController.Speed = speed;
                 //parabolaController.OnParabola();
             }
-        }
-        public void SetTypeRoot(int _typeRoot)
-        {
-            typeRoot = _typeRoot;
         }
         private void OnTriggerStay2D(Collider2D collision)
         {

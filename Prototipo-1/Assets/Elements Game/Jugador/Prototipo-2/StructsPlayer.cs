@@ -14,9 +14,7 @@ namespace Prototipo_2
             public int columnaActual;
         }
 
-        public GameObject ruta1;
-        public GameObject ruta2;
-        public GameObject ruta3;
+        public GameObject ruta;
         public DataPlayer dataPlayer;
     }
 }
