@@ -13,5 +13,7 @@ namespace Prototipo_2 {
         public DataEnemy dataEnemy;
         public GameObject ruta;
         public GameObject rutaAgachado;
+        public int countRoot;
+        public int initialRoot;
     }
 }

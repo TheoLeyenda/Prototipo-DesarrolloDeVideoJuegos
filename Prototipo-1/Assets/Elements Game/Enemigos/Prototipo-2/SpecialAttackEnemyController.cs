@@ -35,10 +35,14 @@ namespace Prototipo_2
                 switch (proyectil.TypeRoot)
                 {
                     case 1:
-                        proyectil.rutaParabola_AtaqueEnemigo = structsEnemys.ruta;
+                        proyectil.rutaParabola_AtaqueEnemigo = generadorProyectilesParabola.GetComponent<StructGenerateProyectilParabolaJefe>().Ruta_1;
+                        if (proyectil.rutaParabola_AtaqueEnemigo == null)
+                        {
+                            Debug.Log("NULO");
+                        }
                         break;
                     case 2:
-                        proyectil.rutaParabolaAgachado_AtaqueEnemigo = structsEnemys.rutaAgachado;
+                        proyectil.rutaParabolaAgachado_AtaqueEnemigo = generadorProyectilesParabolaAgachado.GetComponent<StructGenerateProyectilParabolaJefe>().Ruta_1;
                         break;
                 }
                 proyectil.OnParabola();
@@ -50,7 +54,6 @@ namespace Prototipo_2
                 switch (proyectil.TypeRoot)
                 {
                     case 1:
-                        
                         switch (random)
                         {
                             case 0:

@@ -42,8 +42,8 @@ namespace Prototipo_2
             AgacheDefensa,
             Agacharse,
             AtacarEnParabola,
-            AtacarEnParabolaSaltando,
             AtacarEnParabolaAgachado,
+            AtacarEnParabolaSaltando,
             Count,
         }
         public enum EstadoEnemigo

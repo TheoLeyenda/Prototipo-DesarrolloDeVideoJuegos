@@ -30,6 +30,7 @@ namespace Prototipo_2
         public List<GameObject> generadoresProyectiles;
         public List<GameObject> generadorProyectilesAgachado;
         public List<GameObject> generadorProyectilParabola;
+        public List<GameObject> generadorProyectilParabolaAgachado;
         private float DeffensePorcentage;
         private float AttackPorcentage;
         private float DodgePorcentage;
@@ -282,10 +283,9 @@ namespace Prototipo_2
                 int max = (int)EnumsEnemy.Movimiento.Count-1;
                 EnumsEnemy.Movimiento movimiento = (EnumsEnemy.Movimiento)Random.Range(min, max);
                 delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
-                movimiento = EnumsEnemy.Movimiento.AtacarEnParabola;
                 enumsEnemy.SetMovement(movimiento);
                 Debug.Log(movimiento.ToString());
-                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
+                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando)
                 {
                     delayAttack = delayAttackJumping;
                 }
@@ -425,6 +425,15 @@ namespace Prototipo_2
                 case EnumsEnemy.Movimiento.AtacarEnParabola:
                     CheckDelayAttack(true);
                     break;
+                case EnumsEnemy.Movimiento.AtacarEnParabolaAgachado:
+                    Duck(structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+                    CheckDelayAttack(true);
+                    break;
+                case EnumsEnemy.Movimiento.AtacarEnParabolaSaltando:
+                    CheckDelayAttack(true);
+                    isJamping = true;
+                    Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
+                    break;
             }
             if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque)
             {
@@ -459,9 +468,10 @@ namespace Prototipo_2
             else if (delayAttack <= 0)
             {
                 delayAttack = auxDelayAttack;
-                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando)
                 {
                     delayAttack = delayAttackJumping;
+                    Debug.Log("ENTRE");
                     Attack(true, specialAttack);
                 }
                 else
@@ -655,26 +665,59 @@ namespace Prototipo_2
                     go.transform.position = generador.transform.position;
                 }
             }
-            if (specialAttack && !isDuck)
+            if (specialAttack)
             {
                 if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
                 {
                     switch (enumsEnemy.typeEnemy)
                     {
                         case EnumsEnemy.TiposDeEnemigo.Balanceado:
+                            if (!isDuck)
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaBalanceado";
+                            }
+                            else
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaAgachadoBalanceado";
+                            }
+                            
                             break;
                         case EnumsEnemy.TiposDeEnemigo.Defensivo:
+                            if (!isDuck)
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaDefencivo";
+                            }
+                            else
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaAgachadoDefensivo";
+                            }
                             break;
                         case EnumsEnemy.TiposDeEnemigo.Agresivo:
+                            if (!isDuck)
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaAgresivo";
+                            }
+                            else
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaAgachadoAgresivo";
+                            }
                             break;
                     }
+                    CheckSpecialAttackEnemyController(0, 0, nombreGenerador, generador);
                 }
                 else
                 {
                     switch (enumsEnemy.typeBoss)
                     {
                         case EnumsEnemy.TiposDeJefe.ProfeAnatomia:
-                            nombreGenerador = "GeneradorPelotasParabolaProfeAnatomia";
+                            if (!isDuck)
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaProfeAnatomia";
+                            }
+                            else
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeAnatomia";
+                            }
                             CheckSpecialAttackEnemyController(1,3, nombreGenerador, generador);
                             break;
                         case EnumsEnemy.TiposDeJefe.ProfeHistoria:
@@ -697,7 +740,6 @@ namespace Prototipo_2
                             //UNA VEZ INCORPORADA LA PARTE DE LOS BOSESS INCORPORAR ESTA PARTE EN BASE A LA PARTE DE ARRIBA.
                     }
                 }
-                
             }
             if (!specialAttack)
             {
@@ -713,23 +755,37 @@ namespace Prototipo_2
                 }
             }
         }
-        public void CheckSpecialAttackEnemyController(int minRandomRoot, int maxRandomRoot, string nombreGenerador, GameObject generador)
+        public void CheckSpecialAttackEnemyController(int minRandomRootShoot, int maxRandomRootShoot, string nombreGenerador, GameObject generador)
         {
-            for (int i = 0; i < generadorProyectilParabola.Count; i++)
+            if (!isDuck)
             {
-                if (generadorProyectilParabola[i].name == nombreGenerador)
+                for (int i = 0; i < generadorProyectilParabola.Count; i++)
                 {
-                    generador = generadorProyectilParabola[i];
+                    if (generadorProyectilParabola[i].name == nombreGenerador)
+                    {
+                        generador = generadorProyectilParabola[i];
+                    }
+                }
+                if (generador != null)
+                {
+                    specialAttackEnemyController.SpecialAttack(doubleDamage, isDuck, generador, null, enumsEnemy, structsEnemys, maxRandomRootShoot, minRandomRootShoot);
                 }
             }
-            if (generador != null)
+            else
             {
-                specialAttackEnemyController.SpecialAttack(doubleDamage, isDuck, generador, null, enumsEnemy, structsEnemys, maxRandomRoot,minRandomRoot);
+                for (int i = 0; i < generadorProyectilParabolaAgachado.Count; i++)
+                {
+                    if (generadorProyectilParabolaAgachado[i].name == nombreGenerador)
+                    {
+                        generador = generadorProyectilParabolaAgachado[i];
+                    }
+                }
+                if (generador != null)
+                {
+                    specialAttackEnemyController.SpecialAttack(doubleDamage, isDuck, null, generador, enumsEnemy, structsEnemys, maxRandomRootShoot, minRandomRootShoot);
+                }
             }
-        }
-        public void AttackParabola()
-        {
-            //ATACA A UN PUNTO DE ARRIBA DE LA CUADRILLA
+            
         }
         public void CounterAttack(bool dobleDamage)
         {
@@ -740,7 +796,7 @@ namespace Prototipo_2
         {
             if (CheckMove(new Vector3(transform.position.x, alturaMaxima.y, transform.position.z)) && isJamping)
             {
-                if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa)
+                if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtacarEnParabolaSaltando)
                 {
                     enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
                 }

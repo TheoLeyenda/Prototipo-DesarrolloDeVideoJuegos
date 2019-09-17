@@ -81,13 +81,14 @@ namespace Prototipo_2 {
             }
             else if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
             {
-                rutaParabola_AtaqueEnemigo.SetActive(true);
                 switch (TypeRoot)
                 {
                     case 1:
+                        rutaParabola_AtaqueEnemigo.SetActive(true);
                         parabolaController.ParabolaRoot = rutaParabola_AtaqueEnemigo;
                         break;
                     case 2:
+                        rutaParabolaAgachado_AtaqueEnemigo.SetActive(true);
                         parabolaController.ParabolaRoot = rutaParabolaAgachado_AtaqueEnemigo;
                         break;
                 }
