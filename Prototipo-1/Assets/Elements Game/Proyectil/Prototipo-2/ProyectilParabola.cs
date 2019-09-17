@@ -84,7 +84,6 @@ namespace Prototipo_2 {
                 rutaParabola_AtaqueEnemigo.SetActive(true);
                 switch (TypeRoot)
                 {
-
                     case 1:
                         parabolaController.ParabolaRoot = rutaParabola_AtaqueEnemigo;
                         break;

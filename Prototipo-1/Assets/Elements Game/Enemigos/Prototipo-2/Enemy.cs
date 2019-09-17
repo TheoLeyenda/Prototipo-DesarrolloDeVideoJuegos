@@ -675,6 +675,7 @@ namespace Prototipo_2
                     {
                         case EnumsEnemy.TiposDeJefe.ProfeAnatomia:
                             nombreGenerador = "GeneradorPelotasParabolaProfeAnatomia";
+                            CheckSpecialAttackEnemyController(1,3, nombreGenerador, generador);
                             break;
                         case EnumsEnemy.TiposDeJefe.ProfeHistoria:
                             break;
@@ -696,17 +697,6 @@ namespace Prototipo_2
                             //UNA VEZ INCORPORADA LA PARTE DE LOS BOSESS INCORPORAR ESTA PARTE EN BASE A LA PARTE DE ARRIBA.
                     }
                 }
-                for (int i = 0; i < generadorProyectilParabola.Count; i++)
-                {
-                    if (generadorProyectilParabola[i].name == nombreGenerador)
-                    {
-                        generador = generadorProyectilParabola[i];
-                    }
-                }
-                if (generador != null)
-                {
-                    specialAttackEnemyController.SpecialAttack(doubleDamage, isDuck, generador, null, enumsEnemy, structsEnemys);
-                }
                 
             }
             if (!specialAttack)
@@ -721,6 +711,20 @@ namespace Prototipo_2
                 {
                     proyectil.ShootForwardDown();
                 }
+            }
+        }
+        public void CheckSpecialAttackEnemyController(int minRandomRoot, int maxRandomRoot, string nombreGenerador, GameObject generador)
+        {
+            for (int i = 0; i < generadorProyectilParabola.Count; i++)
+            {
+                if (generadorProyectilParabola[i].name == nombreGenerador)
+                {
+                    generador = generadorProyectilParabola[i];
+                }
+            }
+            if (generador != null)
+            {
+                specialAttackEnemyController.SpecialAttack(doubleDamage, isDuck, generador, null, enumsEnemy, structsEnemys, maxRandomRoot,minRandomRoot);
             }
         }
         public void AttackParabola()

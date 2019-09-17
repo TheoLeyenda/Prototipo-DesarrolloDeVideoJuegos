@@ -9,7 +9,7 @@ namespace Prototipo_2
         // Start is called before the first frame update
         public Pool poolObjectSpecialAttack;
 
-        public void SpecialAttack(bool doubleDamage, bool isDuck, GameObject generadorProyectilesParabola, GameObject generadorProyectilesParabolaAgachado, EnumsEnemy enumsEnemy, StructsEnemys structsEnemys)
+        public void SpecialAttack(bool doubleDamage, bool isDuck, GameObject generadorProyectilesParabola, GameObject generadorProyectilesParabolaAgachado, EnumsEnemy enumsEnemy, StructsEnemys structsEnemys, int randomMax, int randomMin)
         {
             GameObject go = poolObjectSpecialAttack.GetObject();
             ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
@@ -46,10 +46,12 @@ namespace Prototipo_2
             else if(enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Jefe)
             {
                 proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
+                int random = Random.Range(randomMin, randomMax);
                 switch (proyectil.TypeRoot)
                 {
                     case 1:
-                        switch (structsEnemys.dataEnemy.columnaActual)
+                        
+                        switch (random)
                         {
                             case 0:
                                 proyectil.rutaParabola_AtaqueEnemigo = generadorProyectilesParabola.GetComponent<StructGenerateProyectilParabolaJefe>().Ruta_1;
@@ -63,7 +65,7 @@ namespace Prototipo_2
                         }
                         break;
                     case 2:
-                        switch (structsEnemys.dataEnemy.columnaActual)
+                        switch (random)
                         {
                             case 0:
                                 proyectil.rutaParabolaAgachado_AtaqueEnemigo = generadorProyectilesParabolaAgachado.GetComponent<StructGenerateProyectilParabolaJefe>().Ruta_1;
