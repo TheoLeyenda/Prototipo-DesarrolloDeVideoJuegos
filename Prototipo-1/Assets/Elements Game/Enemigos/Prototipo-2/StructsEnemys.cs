@@ -11,5 +11,7 @@ namespace Prototipo_2 {
             public int columnaActual;
         }
         public DataEnemy dataEnemy;
+        public GameObject ruta;
+        public GameObject rutaAgachado;
     }
 }

@@ -15,6 +15,7 @@ namespace Prototipo_2
         public SpriteRenderer SpriteRendererEnemigoAgresivo;
         public SpriteRenderer SpriteRendererEnemigoDefensivo;
         public SpriteRenderer SpriteRendererJefeProfeAnatomia;
+        public SpecialAttackEnemyController specialAttackEnemyController;
         public GameObject BARRA_DE_VIDA;
         private float auxLife;
         private Animator animator;
@@ -28,6 +29,7 @@ namespace Prototipo_2
         private GameManager gm;
         public List<GameObject> generadoresProyectiles;
         public List<GameObject> generadorProyectilesAgachado;
+        public List<GameObject> generadorProyectilParabola;
         private float DeffensePorcentage;
         private float AttackPorcentage;
         private float DodgePorcentage;
@@ -280,6 +282,7 @@ namespace Prototipo_2
                 int max = (int)EnumsEnemy.Movimiento.Count-1;
                 EnumsEnemy.Movimiento movimiento = (EnumsEnemy.Movimiento)Random.Range(min, max);
                 delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
+                movimiento = EnumsEnemy.Movimiento.AtacarEnParabola;
                 enumsEnemy.SetMovement(movimiento);
                 Debug.Log(movimiento.ToString());
                 if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
@@ -369,14 +372,14 @@ namespace Prototipo_2
             switch (enumsEnemy.GetMovement())
             {
                 case EnumsEnemy.Movimiento.AtacarEnElLugar:
-                    CheckDelayAttack();
+                    CheckDelayAttack(false);
                     break;
                 case EnumsEnemy.Movimiento.AgacharseAtaque:
                     Duck(structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
-                    CheckDelayAttack();
+                    CheckDelayAttack(false);
                     break;
                 case EnumsEnemy.Movimiento.SaltoAtaque:
-                    CheckDelayAttack();
+                    CheckDelayAttack(false);
                     isJamping = true;
                     Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
                     break;
@@ -420,6 +423,7 @@ namespace Prototipo_2
                     Duck(structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                     break;
                 case EnumsEnemy.Movimiento.AtacarEnParabola:
+                    CheckDelayAttack(true);
                     break;
             }
             if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque)
@@ -446,7 +450,7 @@ namespace Prototipo_2
                 }
             }
         }
-        public void CheckDelayAttack()
+        public void CheckDelayAttack(bool specialAttack)
         {
             if (delayAttack > 0)
             {
@@ -458,11 +462,11 @@ namespace Prototipo_2
                 if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
                 {
                     delayAttack = delayAttackJumping;
-                    Attack(true);
+                    Attack(true, specialAttack);
                 }
                 else
                 {
-                    Attack(false);
+                    Attack(false, specialAttack);
                 }
             }
         }
@@ -500,20 +504,26 @@ namespace Prototipo_2
                 delaySelectMovement = 0;
             }
         }
-        public void Attack(bool jampAttack)
+        public void Attack(bool jampAttack, bool specialAttack)
         {
             bool shootDown = false;
             string nombreGenerador = "NADA XD";
             GameObject generador = null;
-            GameObject go = poolObjectAttack.GetObject();
-            Proyectil proyectil = go.GetComponent<Proyectil>();
-            proyectil.SetDobleDamage(doubleDamage);
-            proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
-            if (doubleDamage)
+            GameObject go = null;
+            Proyectil proyectil = null;
+            if (!specialAttack)
             {
-                proyectil.damage = proyectil.damage * 2;
+                go = poolObjectAttack.GetObject();
+                proyectil = go.GetComponent<Proyectil>();
+                proyectil.SetDobleDamage(doubleDamage);
+                proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
+
+                if (doubleDamage)
+                {
+                    proyectil.damage = proyectil.damage * 2;
+                }
             }
-            if (!isDuck)
+            if (!isDuck && !specialAttack)
             {
                 if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
                 {
@@ -582,7 +592,7 @@ namespace Prototipo_2
                     go.transform.position = generador.transform.position;
                 }
             }
-            else
+            else if(!specialAttack && isDuck)
             {
                 if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
                 {
@@ -645,14 +655,72 @@ namespace Prototipo_2
                     go.transform.position = generador.transform.position;
                 }
             }
-            proyectil.On();
-            if (!shootDown)
+            if (specialAttack && !isDuck)
             {
-                proyectil.ShootForward();
+                if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
+                {
+                    switch (enumsEnemy.typeEnemy)
+                    {
+                        case EnumsEnemy.TiposDeEnemigo.Balanceado:
+                            break;
+                        case EnumsEnemy.TiposDeEnemigo.Defensivo:
+                            break;
+                        case EnumsEnemy.TiposDeEnemigo.Agresivo:
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (enumsEnemy.typeBoss)
+                    {
+                        case EnumsEnemy.TiposDeJefe.ProfeAnatomia:
+                            nombreGenerador = "GeneradorPelotasParabolaProfeAnatomia";
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeHistoria:
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeEducacionFisica:
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeArte:
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeMatematica:
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeQuimica:
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeProgramacion:
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeBaretto:
+                            break;
+                        case EnumsEnemy.TiposDeJefe.ProfeLautarito:
+                            break;
+
+                            //UNA VEZ INCORPORADA LA PARTE DE LOS BOSESS INCORPORAR ESTA PARTE EN BASE A LA PARTE DE ARRIBA.
+                    }
+                }
+                for (int i = 0; i < generadorProyectilParabola.Count; i++)
+                {
+                    if (generadorProyectilParabola[i].name == nombreGenerador)
+                    {
+                        generador = generadorProyectilParabola[i];
+                    }
+                }
+                if (generador != null)
+                {
+                    specialAttackEnemyController.SpecialAttack(doubleDamage, isDuck, generador, null, enumsEnemy, structsEnemys);
+                }
+                
             }
-            else
+            if (!specialAttack)
             {
-                proyectil.ShootForwardDown();
+                //Debug.Log("ENTRE");
+                proyectil.On();
+                if (!shootDown)
+                {
+                    proyectil.ShootForward();
+                }
+                else
+                {
+                    proyectil.ShootForwardDown();
+                }
             }
         }
         public void AttackParabola()
