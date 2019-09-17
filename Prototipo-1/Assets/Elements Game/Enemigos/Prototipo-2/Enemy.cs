@@ -710,6 +710,8 @@ namespace Prototipo_2
                     switch (enumsEnemy.typeBoss)
                     {
                         case EnumsEnemy.TiposDeJefe.ProfeAnatomia:
+                            int maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
+                            int minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
                             if (!isDuck)
                             {
                                 nombreGenerador = "GeneradorPelotasParabolaProfeAnatomia";
@@ -718,23 +720,112 @@ namespace Prototipo_2
                             {
                                 nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeAnatomia";
                             }
-                            CheckSpecialAttackEnemyController(1,3, nombreGenerador, generador);
+                            CheckSpecialAttackEnemyController(minRutas, maxRutas, nombreGenerador, generador);
                             break;
+                            //PARA IMPLEMENTAR LOS DEMAS ENEMIGOS PONER LAS CONFIGURACIONES FALTANTES Y IR PROBANDOLOS TODOS.
                         case EnumsEnemy.TiposDeJefe.ProfeHistoria:
+                            maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
+                            minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
+                            if (!isDuck)
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaProfeHistoria";
+                            }
+                            else
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeHistoria";
+                            }
+                            CheckSpecialAttackEnemyController(minRutas, maxRutas, nombreGenerador, generador);
                             break;
                         case EnumsEnemy.TiposDeJefe.ProfeEducacionFisica:
+                            maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
+                            minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
+                            if (!isDuck)
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaProfeEducacionFisica";
+                            }
+                            else
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeEducacionFisica";
+                            }
+                            CheckSpecialAttackEnemyController(minRutas, maxRutas, nombreGenerador, generador);
                             break;
                         case EnumsEnemy.TiposDeJefe.ProfeArte:
+                            maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
+                            minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
+                            if (!isDuck)
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaProfeArte";
+                            }
+                            else
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeArte";
+                            }
+                            CheckSpecialAttackEnemyController(minRutas, maxRutas, nombreGenerador, generador);
                             break;
                         case EnumsEnemy.TiposDeJefe.ProfeMatematica:
+                            maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
+                            minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
+                            if (!isDuck)
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaProfeMatematica";
+                            }
+                            else
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeMatematica";
+                            }
+                            CheckSpecialAttackEnemyController(minRutas, maxRutas, nombreGenerador, generador);
                             break;
                         case EnumsEnemy.TiposDeJefe.ProfeQuimica:
+                            maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
+                            minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
+                            if (!isDuck)
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaProfeQuimica";
+                            }
+                            else
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeQuimica";
+                            }
+                            CheckSpecialAttackEnemyController(minRutas, maxRutas, nombreGenerador, generador);
                             break;
                         case EnumsEnemy.TiposDeJefe.ProfeProgramacion:
+                            maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
+                            minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
+                            if (!isDuck)
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaProfeProgramacion";
+                            }
+                            else
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeProgramacion";
+                            }
+                            CheckSpecialAttackEnemyController(minRutas, maxRutas, nombreGenerador, generador);
                             break;
                         case EnumsEnemy.TiposDeJefe.ProfeBaretto:
+                            maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
+                            minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
+                            if (!isDuck)
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaProfeBaretto";
+                            }
+                            else
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeBaretto";
+                            }
+                            CheckSpecialAttackEnemyController(minRutas, maxRutas, nombreGenerador, generador);
                             break;
                         case EnumsEnemy.TiposDeJefe.ProfeLautarito:
+                            maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
+                            minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
+                            if (!isDuck)
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaProfeLautaro";
+                            }
+                            else
+                            {
+                                nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeLautaro";
+                            }
+                            CheckSpecialAttackEnemyController(minRutas, maxRutas, nombreGenerador, generador);
                             break;
 
                             //UNA VEZ INCORPORADA LA PARTE DE LOS BOSESS INCORPORAR ESTA PARTE EN BASE A LA PARTE DE ARRIBA.

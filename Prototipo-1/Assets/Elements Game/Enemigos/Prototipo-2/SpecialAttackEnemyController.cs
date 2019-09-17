@@ -36,10 +36,6 @@ namespace Prototipo_2
                 {
                     case 1:
                         proyectil.rutaParabola_AtaqueEnemigo = generadorProyectilesParabola.GetComponent<StructGenerateProyectilParabolaJefe>().Ruta_1;
-                        if (proyectil.rutaParabola_AtaqueEnemigo == null)
-                        {
-                            Debug.Log("NULO");
-                        }
                         break;
                     case 2:
                         proyectil.rutaParabolaAgachado_AtaqueEnemigo = generadorProyectilesParabolaAgachado.GetComponent<StructGenerateProyectilParabolaJefe>().Ruta_1;
