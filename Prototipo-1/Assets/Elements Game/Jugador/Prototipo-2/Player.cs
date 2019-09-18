@@ -368,5 +368,9 @@ namespace Prototipo_2
         {
             return auxDelayCounterAttack;
         }
+        public bool GetIsJamping()
+        {
+            return isJamping;
+        }
     }
 }

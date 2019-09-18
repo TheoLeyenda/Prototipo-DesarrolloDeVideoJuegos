@@ -101,8 +101,9 @@ namespace Prototipo_2
         }
         public void CheckInitialSprite()
         {
+            ENEMY.transform.position = new Vector3(ENEMY.transform.position.x, ENEMY.transform.position.y, ENEMY.transform.position.z);
             if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
-            {
+            { 
                 switch (enumsEnemy.typeEnemy)
                 {
                     case EnumsEnemy.TiposDeEnemigo.Agresivo:
