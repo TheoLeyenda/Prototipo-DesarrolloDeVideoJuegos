@@ -123,7 +123,10 @@ namespace Prototipo_2
                         {
                             if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
                             {
-                                cuadrilla.enemy.life = cuadrilla.enemy.life - damage;
+                                if (cuadrilla.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && cuadrilla.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
+                                {
+                                    cuadrilla.enemy.life = cuadrilla.enemy.life - damage;
+                                }
                                 timeLife = 0;
                             }
                         }

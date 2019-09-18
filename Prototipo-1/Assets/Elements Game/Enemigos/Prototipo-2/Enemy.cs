@@ -224,8 +224,6 @@ namespace Prototipo_2
         }
         public void CheckOutLimit()
         {
-            //Debug.Log("INITIAL POSITION:" + InitialPosition.y);
-            //Debug.Log("posicion actual: "+transform.position.y);
             if (transform.position.y < InitialPosition.y && !isJamping)
             {
                 //Debug.Log("ENTRE A LA INICIAL POSICION");
