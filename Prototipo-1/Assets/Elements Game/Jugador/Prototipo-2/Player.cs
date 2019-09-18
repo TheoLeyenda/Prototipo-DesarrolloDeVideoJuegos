@@ -13,6 +13,9 @@ namespace Prototipo_2
         public float maxLife;
         private float auxLife;
         public StructsPlayer structsPlayer;
+        public List<SpritePlayer> spritePlayers;
+        [HideInInspector]
+        public SpritePlayer spritePlayerActual;
         public EnumsPlayers enumsPlayers;
         public GameObject BARRA_DE_VIDA;
         public GameObject generadorProyectiles;
@@ -49,6 +52,7 @@ namespace Prototipo_2
         private float auxDelayCounterAttack;
         void Start()
         {
+            CheckSpritePlayerActual();
             auxDelayCounterAttack = delayCounterAttack;
             colliderSprite.enabled = true;
             isDuck = false;
@@ -77,6 +81,16 @@ namespace Prototipo_2
             CheckOutLimit();
             CheckDead();
             CheckLifeBar();
+        }
+        public void CheckSpritePlayerActual()
+        {
+            for (int i = 0; i < spritePlayers.Count; i++)
+            {
+                if (spritePlayers[i].gameObject.activeSelf)
+                {
+                    spritePlayerActual = spritePlayers[i];
+                }
+            }
         }
         public void CheckLifeBar()
         {

@@ -187,6 +187,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8760982568194768852, guid: e3690bba5bddbaf43a4ecf02bccf1fd9,
+        type: 3}
+      propertyPath: spritePlayers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8760982568194768852, guid: e3690bba5bddbaf43a4ecf02bccf1fd9,
+        type: 3}
+      propertyPath: spritePlayers.Array.data[0]
+      value: 
+      objectReference: {fileID: 1112682547}
     - target: {fileID: 1032297212663210187, guid: e3690bba5bddbaf43a4ecf02bccf1fd9,
         type: 3}
       propertyPath: puto.Array.size
@@ -329,6 +339,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: bbcfdd4d62abf8446b2d70c849fcea3f,
         type: 3}
+    - target: {fileID: 1032297212663210187, guid: e3690bba5bddbaf43a4ecf02bccf1fd9,
+        type: 3}
+      propertyPath: delaySpriteRecibirDanio
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3690bba5bddbaf43a4ecf02bccf1fd9, type: 3}
 --- !u!1001 &319563425
@@ -854,6 +869,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3ca365c1fb4ed349bf1d31e807a8e84, type: 3}
+--- !u!114 &1112682547 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1032297212663210187, guid: e3690bba5bddbaf43a4ecf02bccf1fd9,
+    type: 3}
+  m_PrefabInstance: {fileID: 302856317}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0317e505aadc9441bcb0c6fbaf18243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1168044310 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8207542742457629989, guid: b94bd2a02b9d55b4e93722cf94a37b27,

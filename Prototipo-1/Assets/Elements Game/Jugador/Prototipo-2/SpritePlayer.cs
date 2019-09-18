@@ -34,6 +34,12 @@ namespace Prototipo_2 {
         }
         public List<ElementsSprites> Sprites;
         public SpriteActual ActualSprite;
+        public float delaySpriteRecibirDanio;
+        private float auxDelaySpriteRecibirDanio;
+        private void Start()
+        {
+            auxDelaySpriteRecibirDanio = delaySpriteRecibirDanio;
+        }
         private void OnTriggerStay2D(Collider2D collision)
         {
             switch (collision.gameObject.tag)
@@ -54,30 +60,60 @@ namespace Prototipo_2 {
         }
         public void CheckEnumSprite()
         {
-
-            if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
+            if (ActualSprite == SpriteActual.RecibirDanio)
             {
-                ActualSprite = SpriteActual.Salto;
+                CheckDeleyRecibirDanio();
             }
-            if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonAttack))
+            else
             {
-                ActualSprite = SpriteActual.SaltoAtaque;
+                if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
+                {
+                    ActualSprite = SpriteActual.Salto;
+                }
+                if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonAttack))
+                {
+                    ActualSprite = SpriteActual.SaltoAtaque;
+                }
+                if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonDeffence))
+                {
+                    ActualSprite = SpriteActual.SaltoDefensa;
+                }
+                if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
+                {
+                    ActualSprite = SpriteActual.MoverAdelante;
+                }
+                if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
+                {
+                    ActualSprite = SpriteActual.MoverAtras;
+                }
+                if (player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonDeffence))
+                {
+                    ActualSprite = SpriteActual.ParadoDefensa;
+                }
+                if (player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonAttack))
+                {
+                    ActualSprite = SpriteActual.ParadoAtaque;
+                }
+                if ((ActualSprite != SpriteActual.RecibirDanio && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && !Input.GetKey(player.ButtonDeffence) && !Input.GetKey(player.ButtonAttack)
+                    && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras))
+                {
+                    ActualSprite = SpriteActual.Parado;
+                    delaySpriteRecibirDanio = auxDelaySpriteRecibirDanio;
+                }
             }
-            if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonDeffence))
+            CheckActualSprite();
+            
+        }
+        public void CheckDeleyRecibirDanio()
+        {
+            if (delaySpriteRecibirDanio > 0)
             {
-                ActualSprite = SpriteActual.SaltoDefensa;
+                delaySpriteRecibirDanio = delaySpriteRecibirDanio - Time.deltaTime;
             }
-            if (player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonDeffence))
-            {
-                ActualSprite = SpriteActual.ParadoDefensa;
-                Debug.Log("CAMBIE EL SPRITE");
-            }
-            if(player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && !Input.GetKey(player.ButtonDeffence))
+            else if(delaySpriteRecibirDanio <= 0)
             {
                 ActualSprite = SpriteActual.Parado;
             }
-            CheckActualSprite();
-            //if(Input.GetKey())
         }
         public void CheckActualSprite()
         {
@@ -88,7 +124,9 @@ namespace Prototipo_2 {
                     break;
                 case SpriteActual.ParadoDefensa:
                     spriteRenderer.sprite = CheckListSprite("ParadoDefensa");
-                    Debug.Log("CAMBIE EL SPRITE");
+                    break;
+                case SpriteActual.ParadoAtaque:
+                    spriteRenderer.sprite = CheckListSprite("ParadoAtaque");
                     break;
                 case SpriteActual.Salto:
                     spriteRenderer.sprite = CheckListSprite("Salto");
@@ -98,6 +136,16 @@ namespace Prototipo_2 {
                     break;
                 case SpriteActual.SaltoDefensa:
                     spriteRenderer.sprite = CheckListSprite("SaltoDefensa");
+                    break;
+                case SpriteActual.MoverAdelante:
+                    spriteRenderer.sprite = CheckListSprite("MoverAdelante");
+                    break;
+                case SpriteActual.MoverAtras:
+                    spriteRenderer.sprite = CheckListSprite("MoverAtras");
+                    break;
+                case SpriteActual.RecibirDanio:
+                    Debug.Log("ENTRE");
+                    spriteRenderer.sprite = CheckListSprite("RecibirDanio");
                     break;
             }
         }
