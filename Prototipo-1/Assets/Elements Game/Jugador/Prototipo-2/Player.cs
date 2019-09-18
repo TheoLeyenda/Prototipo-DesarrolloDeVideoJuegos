@@ -210,7 +210,10 @@ namespace Prototipo_2
             }
             else if (Input.GetKeyDown(ButtonAttack))
             {
-                Attack();
+                if (!Input.GetKey(ButtonDeffence))
+                {
+                    Attack();
+                }
             }
             if (Input.GetKey(ButtonDeffence))
             {
@@ -385,6 +388,10 @@ namespace Prototipo_2
         public bool GetIsJamping()
         {
             return isJamping;
+        }
+        public bool GetIsDuck()
+        {
+            return isDuck;
         }
     }
 }

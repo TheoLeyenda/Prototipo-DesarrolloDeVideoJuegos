@@ -94,8 +94,24 @@ namespace Prototipo_2 {
                 {
                     ActualSprite = SpriteActual.ParadoAtaque;
                 }
-                if ((ActualSprite != SpriteActual.RecibirDanio && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && !Input.GetKey(player.ButtonDeffence) && !Input.GetKey(player.ButtonAttack)
-                    && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras))
+                if (player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && Input.GetKey(KeyCode.DownArrow))
+                {
+                    if (Input.GetKey(player.ButtonDeffence))
+                    {
+                        ActualSprite = SpriteActual.AgachadoDefensa;
+                    }
+                    else if (Input.GetKey(player.ButtonAttack))
+                    {
+                        ActualSprite = SpriteActual.AgachadoAtaque;
+                    }
+                    else if(!Input.GetKey(player.ButtonDeffence) && !Input.GetKey(player.ButtonAttack))
+                    {
+                        ActualSprite = SpriteActual.Agachado;
+                    }
+                }
+                if (ActualSprite != SpriteActual.RecibirDanio && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && !Input.GetKey(player.ButtonDeffence) && !Input.GetKey(player.ButtonAttack)
+                    && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
+                    && !player.GetIsDuck())
                 {
                     ActualSprite = SpriteActual.Parado;
                     delaySpriteRecibirDanio = auxDelaySpriteRecibirDanio;
@@ -144,8 +160,16 @@ namespace Prototipo_2 {
                     spriteRenderer.sprite = CheckListSprite("MoverAtras");
                     break;
                 case SpriteActual.RecibirDanio:
-                    Debug.Log("ENTRE");
                     spriteRenderer.sprite = CheckListSprite("RecibirDanio");
+                    break;
+                case SpriteActual.Agachado:
+                    spriteRenderer.sprite = CheckListSprite("Agachado");
+                    break;
+                case SpriteActual.AgachadoAtaque:
+                    spriteRenderer.sprite = CheckListSprite("AgachadoAtaque");
+                    break;
+                case SpriteActual.AgachadoDefensa:
+                    spriteRenderer.sprite = CheckListSprite("AgachadoDefensa");
                     break;
             }
         }

@@ -79,7 +79,6 @@ namespace Prototipo_2
         {
             auxSpeedJump = SpeedJump;
             InitialPosition = transform.position;
-            Debug.Log(InitialPosition);
             auxDelayAttack = delayAttack;
             delaySelectMovement = 0;
             auxLife = life;
