@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5368987696242746144}
   - component: {fileID: 2333162916430196275}
-  - component: {fileID: 184848801640076313}
   m_Layer: 0
   m_Name: SpriteProfeAnatomia
   m_TagString: Untagged
@@ -81,19 +80,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &184848801640076313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1897703844612532207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 453a1ada3bb05e0408b8b1d559978cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 6486436780931659209}
 --- !u!1 &3553308929127741685
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,7 +90,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7060251715271303292}
   - component: {fileID: 8613765546232661620}
-  - component: {fileID: 5772746043074885327}
   m_Layer: 0
   m_Name: SpriteEnemigoDefensivo
   m_TagString: Untagged
@@ -175,19 +160,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5772746043074885327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3553308929127741685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 453a1ada3bb05e0408b8b1d559978cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 6486436780931659209}
 --- !u!1 &7194419972904208300
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,6 +637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c69c4e25e05cb64aa50bddf96037227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ENEMY: {fileID: 0}
   enemyPrefab: {fileID: 0}
   gridEnemy: {fileID: 0}
   enumsEnemy: {fileID: 0}
@@ -695,6 +668,8 @@ MonoBehaviour:
   Gravity: 0
   delayAttackJumping: 0
   collidersSprites: []
+  pointOfDeath: {x: 0, y: 0, z: 0}
+  pointOfCombat: {x: 0, y: 0, z: 0}
 --- !u!1 &7634778971475588847
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,7 +938,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2562620806002055027}
   - component: {fileID: 6222847778254103979}
-  - component: {fileID: 3678224834509953122}
   m_Layer: 0
   m_Name: SpriteEnemigoAgresivo
   m_TagString: Untagged
@@ -1034,19 +1008,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3678224834509953122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7746700542677218688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 453a1ada3bb05e0408b8b1d559978cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 6486436780931659209}
 --- !u!1 &8134504010569212459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,7 +1018,6 @@ GameObject:
   m_Component:
   - component: {fileID: 429673727702504780}
   - component: {fileID: 8722089639739348448}
-  - component: {fileID: 7066120547721192139}
   m_Layer: 0
   m_Name: SpriteEnemigoBalanceado
   m_TagString: Untagged
@@ -1128,19 +1088,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7066120547721192139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8134504010569212459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 453a1ada3bb05e0408b8b1d559978cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 6486436780931659209}
 --- !u!1001 &2488100436038367619
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1148,17 +1095,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7194419974994112977}
     m_Modifications:
-    - target: {fileID: 5142444625613618227, guid: c6d6ac12b9b9cf44092344d820274e7e,
-        type: 3}
-      propertyPath: count
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 5142444625613618227, guid: c6d6ac12b9b9cf44092344d820274e7e,
-        type: 3}
-      propertyPath: Ball
-      value: 
-      objectReference: {fileID: 8856363428750593837, guid: 1e7373740dd59c144a510e1be0b7eb91,
-        type: 3}
     - target: {fileID: 5142444625613618220, guid: c6d6ac12b9b9cf44092344d820274e7e,
         type: 3}
       propertyPath: m_Name
@@ -1219,6 +1155,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5142444625613618227, guid: c6d6ac12b9b9cf44092344d820274e7e,
+        type: 3}
+      propertyPath: count
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5142444625613618227, guid: c6d6ac12b9b9cf44092344d820274e7e,
+        type: 3}
+      propertyPath: Ball
+      value: 
+      objectReference: {fileID: 8856363428750593837, guid: 1e7373740dd59c144a510e1be0b7eb91,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6d6ac12b9b9cf44092344d820274e7e, type: 3}
 --- !u!4 &7339213786674316721 stripped

@@ -15,7 +15,10 @@ namespace Prototipo_2
         public bool generateEnemy;
         public int RondasPorJefe;
         public bool SiglePlayer;
-        public bool MultiPlayer;//(EN CASO DE TENER MULTYPLAYER EL JUEGO SE TRANFORMA EN UN JUEGO POR TURNOS)
+        public bool MultiPlayer;
+        public GameObject TituloPushButton;
+        public GameObject FondoPushButton;
+        public GameObject buttonGameOver;
         [HideInInspector]
         public int countEnemysDead;
 
@@ -34,6 +37,9 @@ namespace Prototipo_2
         }
         void Start()
         {
+            FondoPushButton.SetActive(false);
+            TituloPushButton.SetActive(false);
+            buttonGameOver.SetActive(false);
             countEnemysDead = 0;
         }
 

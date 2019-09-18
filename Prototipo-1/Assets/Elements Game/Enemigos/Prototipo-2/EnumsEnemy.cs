@@ -44,6 +44,8 @@ namespace Prototipo_2
             AtacarEnParabola,
             AtacarEnParabolaAgachado,
             AtacarEnParabolaSaltando,
+            MoveToPointCombat,
+            MoveToPointDeath,
             Count,
         }
         public enum EstadoEnemigo

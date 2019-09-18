@@ -93,6 +93,7 @@ namespace Prototipo_2 {
                         break;
                 }
                 parabolaController.OnParabola();
+                //Debug.Log("DISPARE");
             }       
             if (parabolaController != null)
             {
@@ -151,8 +152,8 @@ namespace Prototipo_2 {
                                     if (Input.GetKey(cuadrilla.player.ButtonDeffence))
                                     {
                                         cuadrilla.player.Attack();
-                                        timeLife = 0;
                                         cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                        timeLife = 0;
                                     }
                                 }
                                 if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0)

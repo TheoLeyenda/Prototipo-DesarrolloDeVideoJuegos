@@ -7,6 +7,7 @@ namespace Prototipo_2
 {
     public class Enemy : MonoBehaviour
     {
+        public GameObject ENEMY;
         public GameObject enemyPrefab;
         public Grid gridEnemy;
         public EnumsEnemy enumsEnemy;
@@ -68,6 +69,10 @@ namespace Prototipo_2
         private bool isJamping;
         public List<Collider2D> collidersSprites;
         private Vector3 InitialPosition;
+        [HideInInspector]
+        public Vector3 pointOfDeath;
+        [HideInInspector]
+        public Vector3 pointOfCombat;
         //private float sumarAlturaInicial = 0.2f;
         void Start()
         {
@@ -92,6 +97,7 @@ namespace Prototipo_2
             CheckLifeBar();
             CheckDead();
             IA();
+            //Debug.Log(delaySelectMovement);
         }
         public void CheckInitialSprite()
         {
@@ -232,7 +238,6 @@ namespace Prototipo_2
         }
         public void OnEnemySurvival()
         {
-
             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
             poolObjectEnemy = GetComponent<PoolObject>();
             float opcion = Random.Range(MinRangeRandom, TypeRandom);
@@ -240,24 +245,21 @@ namespace Prototipo_2
             {
                 gm = GameManager.instanceGameManager;
             }
-            Debug.Log("Enemigos Abatidos:" + gm.countEnemysDead);
+            //Debug.Log("Enemigos Abatidos:" + gm.countEnemysDead);
             if ((gm.countEnemysDead % gm.RondasPorJefe) != 0 || gm.countEnemysDead == 0)
             {
                 switch ((int)opcion)
                 {
                     case 0:
                         //Debug.Log("ENTRE BALANCEADO");
-                        //Cambiar el sprite del enemigo Balanceado.
                         enumsEnemy.typeEnemy = EnumsEnemy.TiposDeEnemigo.Balanceado;
                         break;
                     case 1:
                         //Debug.Log("ENTRE AGRESIVO");
-                        //Cambiar el sprite del enemigo Agresivo.
                         enumsEnemy.typeEnemy = EnumsEnemy.TiposDeEnemigo.Agresivo;
                         break;
                     case 2:
                         //Debug.Log("ENTRE DEFENSIVO");
-                        //Cambiar el sprite del enemigo Defensivo.
                         enumsEnemy.typeEnemy = EnumsEnemy.TiposDeEnemigo.Defensivo;
                         break;
                 }
@@ -276,28 +278,39 @@ namespace Prototipo_2
         }
         public void IA()
         {
-            if (delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque))
+            if (life > 0)
             {
-                gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
-                int min = (int)EnumsEnemy.Movimiento.Nulo + 1;
-                int max = (int)EnumsEnemy.Movimiento.Count-1;
-                EnumsEnemy.Movimiento movimiento = (EnumsEnemy.Movimiento)Random.Range(min, max);
-                delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
-                enumsEnemy.SetMovement(movimiento);
-                Debug.Log(movimiento.ToString());
-                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando)
+                if (delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque))
                 {
-                    delayAttack = delayAttackJumping;
+                    EnumsEnemy.Movimiento movimiento;
+                    gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+                    int min = (int)EnumsEnemy.Movimiento.Nulo + 1;
+                    int max = (int)EnumsEnemy.Movimiento.Count - 3;
+                    if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
+                    {
+                        movimiento = (EnumsEnemy.Movimiento)Random.Range(min, max);
+                    }
+                    else
+                    {
+                        movimiento = enumsEnemy.GetMovement();
+                    }
+                    delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
+                    enumsEnemy.SetMovement(movimiento);
+                    //Debug.Log(movimiento.ToString());
+                    if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando)
+                    {
+                        delayAttack = delayAttackJumping;
+                    }
+                    if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar)
+                    {
+                        isDeffended = false;
+                    }
                 }
-                if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar)
+                if (delaySelectMovement > 0)
                 {
-                    isDeffended = false;
+                    CheckMovement();
+                    delaySelectMovement = delaySelectMovement - Time.deltaTime;
                 }
-            }
-            if (delaySelectMovement > 0)
-            {
-                CheckMovement();
-                delaySelectMovement = delaySelectMovement - Time.deltaTime;
             }
         }
         public void CheckLifeBar()
@@ -313,6 +326,26 @@ namespace Prototipo_2
             else if (life < 0)
             {
                 life = 0;
+            }
+        }
+        public void MoveToPoint(Vector3 pointCombat)
+        {
+            if (CheckMove(pointCombat))
+            {
+                delaySelectMovement = 999;
+                if (pointCombat.x < transform.position.x)
+                {
+                    ENEMY.transform.Translate(Vector3.left * Speed * Time.deltaTime);
+                }
+                else if (pointCombat.x > transform.position.x)
+                {
+                    ENEMY.transform.Translate(Vector3.right * Speed * Time.deltaTime);
+                }
+            }
+            else
+            {
+                delaySelectMovement = 0.2f;
+                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
             }
         }
         //INTERACTUA CON GAME MANAGER
@@ -434,6 +467,12 @@ namespace Prototipo_2
                     isJamping = true;
                     Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
                     break;
+                case EnumsEnemy.Movimiento.MoveToPointCombat:
+                    MoveToPoint(pointOfCombat);
+                    break;
+                case EnumsEnemy.Movimiento.MoveToPointDeath:
+                    MoveToPoint(pointOfDeath);
+                    break;
             }
             if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque)
             {
@@ -471,7 +510,6 @@ namespace Prototipo_2
                 if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando)
                 {
                     delayAttack = delayAttackJumping;
-                    Debug.Log("ENTRE");
                     Attack(true, specialAttack);
                 }
                 else
@@ -880,7 +918,6 @@ namespace Prototipo_2
         }
         public void CounterAttack(bool dobleDamage)
         {
-
             //DisableShild();
         }
         public void Jump(Vector3 alturaMaxima)

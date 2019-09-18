@@ -11,9 +11,11 @@ namespace Prototipo_2
 
         public void SpecialAttack(bool doubleDamage, bool isDuck, GameObject generadorProyectilesParabola, GameObject generadorProyectilesParabolaAgachado, EnumsEnemy enumsEnemy, StructsEnemys structsEnemys, int randomMax, int randomMin)
         {
+            Debug.Log("ENTRE");
             GameObject go = poolObjectSpecialAttack.GetObject();
             ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
             proyectil.SetDobleDamage(doubleDamage);
+            proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
             if (doubleDamage)
             {
                 proyectil.damage = proyectil.damage * 2;
@@ -31,13 +33,14 @@ namespace Prototipo_2
 
             if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
             {
-                proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
                 switch (proyectil.TypeRoot)
                 {
                     case 1:
+                        Debug.Log("ASIGNE RUTA");
                         proyectil.rutaParabola_AtaqueEnemigo = generadorProyectilesParabola.GetComponent<StructGenerateProyectilParabolaJefe>().Ruta_1;
                         break;
                     case 2:
+                        Debug.Log("ASIGNE RUTA");
                         proyectil.rutaParabolaAgachado_AtaqueEnemigo = generadorProyectilesParabolaAgachado.GetComponent<StructGenerateProyectilParabolaJefe>().Ruta_1;
                         break;
                 }
@@ -45,7 +48,6 @@ namespace Prototipo_2
             }
             else if(enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Jefe)
             {
-                proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
                 int random = Random.Range(randomMin, randomMax);
                 switch (proyectil.TypeRoot)
                 {
