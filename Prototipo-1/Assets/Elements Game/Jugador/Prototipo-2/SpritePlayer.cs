@@ -7,14 +7,33 @@ namespace Prototipo_2 {
     {
         public Player player;
         public SpriteRenderer spriteRenderer;
-        public Sprite SpriteAttackIdle;
-        public Sprite SpriteDeffenceIdle;
-        public Sprite SpriteAttackJumping;
-        public Sprite SpriteIdle;
-        public Sprite SpriteJump;
-        public Sprite SpriteDuck;
-        public Sprite SpriteMoveBack;
-        public Sprite SpriteMoveForward;
+
+        [System.Serializable]
+        public class ElementsSprites
+        {
+            public Sprite sprite;
+            public string name;
+            
+        }
+        public enum SpriteActual
+        {
+            SaltoAtaque,
+            SaltoDefensa,
+            Salto,
+            ParadoAtaque,
+            ParadoDefensa,
+            Parado,
+            RecibirDanio,
+            MoverAtras,
+            MoverAdelante,
+            AgachadoAtaque,
+            AgachadoDefensa,
+            Agachado,
+            AnimacionAtaque,
+            Count,
+        }
+        public List<ElementsSprites> Sprites;
+        public SpriteActual ActualSprite;
         private void OnTriggerStay2D(Collider2D collision)
         {
             switch (collision.gameObject.tag)
@@ -31,47 +50,67 @@ namespace Prototipo_2 {
         }
         public void Update()
         {
-            CheckSprite();
+            CheckEnumSprite();
         }
-        public void CheckSprite()
+        public void CheckEnumSprite()
         {
-            if (!Input.anyKeyDown)
+
+            if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
             {
-                spriteRenderer.sprite = SpriteIdle;
+                ActualSprite = SpriteActual.Salto;
             }
-            if (Input.GetKeyDown(player.ButtonAttack) && player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(KeyCode.UpArrow))
+            if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonAttack))
             {
-                Debug.Log("ENTRE");
-                spriteRenderer.sprite = SpriteAttackJumping;
+                ActualSprite = SpriteActual.SaltoAtaque;
             }
-            else if (Input.GetKey(player.ButtonAttack))
+            if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonDeffence))
             {
-                spriteRenderer.sprite = SpriteAttackIdle;
+                ActualSprite = SpriteActual.SaltoDefensa;
             }
-            else if (Input.GetKey(player.ButtonDeffence))
+            if (player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonDeffence))
             {
-                spriteRenderer.sprite = SpriteDeffenceIdle;
+                ActualSprite = SpriteActual.ParadoDefensa;
+                Debug.Log("CAMBIE EL SPRITE");
             }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow) && player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
-                || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
+            if(player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && !Input.GetKey(player.ButtonDeffence))
             {
-                spriteRenderer.sprite = SpriteMoveBack;
+                ActualSprite = SpriteActual.Parado;
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow) && player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo ||
-                player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
-            {
-                spriteRenderer.sprite = SpriteMoveForward;
-            }
-            else if (Input.GetKeyDown(KeyCode.UpArrow) && player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
-                || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
-            {
-                spriteRenderer.sprite = SpriteJump;
-            }
-            else if (Input.GetKey(KeyCode.DownArrow) && player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
-            {
-                spriteRenderer.sprite = SpriteDuck;
-            }
+            CheckActualSprite();
             //if(Input.GetKey())
+        }
+        public void CheckActualSprite()
+        {
+            switch (ActualSprite)
+            {
+                case SpriteActual.Parado:
+                    spriteRenderer.sprite = CheckListSprite("Parado");
+                    break;
+                case SpriteActual.ParadoDefensa:
+                    spriteRenderer.sprite = CheckListSprite("ParadoDefensa");
+                    Debug.Log("CAMBIE EL SPRITE");
+                    break;
+                case SpriteActual.Salto:
+                    spriteRenderer.sprite = CheckListSprite("Salto");
+                    break;
+                case SpriteActual.SaltoAtaque:
+                    spriteRenderer.sprite = CheckListSprite("SaltoAtaque");
+                    break;
+                case SpriteActual.SaltoDefensa:
+                    spriteRenderer.sprite = CheckListSprite("SaltoDefensa");
+                    break;
+            }
+        }
+        public Sprite CheckListSprite(string nameSprite)
+        {
+            for (int i = 0; i < Sprites.Count; i++)
+            {
+                if (nameSprite == Sprites[i].name)
+                {
+                    return Sprites[i].sprite;
+                }
+            }
+            return null;
         }
     }
 }

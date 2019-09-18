@@ -68,7 +68,8 @@ namespace Prototipo_2
         public float delayAttackJumping;
         private bool isJamping;
         public List<Collider2D> collidersSprites;
-        private Vector3 InitialPosition;
+        [HideInInspector]
+        public Vector3 InitialPosition;
         [HideInInspector]
         public Vector3 pointOfDeath;
         [HideInInspector]
@@ -78,6 +79,7 @@ namespace Prototipo_2
         {
             auxSpeedJump = SpeedJump;
             InitialPosition = transform.position;
+            Debug.Log(InitialPosition);
             auxDelayAttack = delayAttack;
             delaySelectMovement = 0;
             auxLife = life;
@@ -101,7 +103,7 @@ namespace Prototipo_2
         }
         public void CheckInitialSprite()
         {
-            ENEMY.transform.position = new Vector3(ENEMY.transform.position.x, ENEMY.transform.position.y, ENEMY.transform.position.z);
+            //transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);
             if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
             { 
                 switch (enumsEnemy.typeEnemy)
@@ -343,7 +345,7 @@ namespace Prototipo_2
             }
             else
             {
-                delaySelectMovement = 0.2f;
+                delaySelectMovement = 0;
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
             }
         }
@@ -356,9 +358,11 @@ namespace Prototipo_2
                 {
                     // SI SU VIDA ES IGUAL A 0 POS MUERE DESACTIVADO
                     enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
-                    enemyPrefab.gameObject.SetActive(false);
                     gm.countEnemysDead++;
                     gm.ResetRoundCombat(false);
+                    ResetEnemy();
+                    enemyPrefab.gameObject.SetActive(false);
+
                 }
             }
             else if (InPool)
@@ -370,10 +374,11 @@ namespace Prototipo_2
                         {
                             life = auxLife;
                             gm.generateEnemy = true;
-                            poolObjectEnemy.Recycle();
                             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
                             gm.countEnemysDead++;
                             gm.ResetRoundCombat(false);
+                            ResetEnemy();
+                            poolObjectEnemy.Recycle();
                         }
                         break;
                     case EnumsGameManager.ModosDeJuego.Historia:
@@ -381,19 +386,21 @@ namespace Prototipo_2
                         {
                             life = auxLife;
                             gm.generateEnemy = true;
-                            poolObjectEnemy.Recycle();
                             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
                             gm.countEnemysDead++;
                             gm.ResetRoundCombat(false);
+                            ResetEnemy();
+                            poolObjectEnemy.Recycle();
                         }
                         break;
                     case EnumsGameManager.ModosDeJuego.Nulo:
                         if (life <= 0)
                         {
-                            enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
-                            gameObject.SetActive(false);
                             gm.countEnemysDead++;
                             gm.ResetRoundCombat(false);
+                            ResetEnemy();
+                            enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
+                            gameObject.SetActive(false);
                         }
                         break;
                 }
@@ -519,7 +526,9 @@ namespace Prototipo_2
         }
         public void ResetEnemy()
         {
-            //RESETEA TODO EL ENEMIGO
+            life = maxLife;
+            transform.position = InitialPosition;
+            ENEMY.transform.position = InitialPosition;
         }
         public void MoveLeft(Vector3 cuadrillaDestino)
         {

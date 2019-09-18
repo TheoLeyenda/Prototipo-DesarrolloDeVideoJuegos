@@ -72,13 +72,15 @@ namespace Prototipo_2
         {
             GameObject go = poolEnemy.GetObject();
             Enemy enemy = go.GetComponentInChildren<Enemy>();
+            go.transform.position = Generador.transform.position;
+            go.transform.rotation = Generador.transform.rotation;
             if (enemy != null)
             {
                 enemigoActual = enemy;
-                enemigoActual.life = enemigoActual.maxLife;
+                enemigoActual.InitialPosition = go.transform.position = Generador.transform.position;
+                enemigoActual.ResetEnemy();
             }
-            go.transform.position = Generador.transform.position;
-            go.transform.rotation = Generador.transform.rotation;
+            
             switch (gm.enumsGameManager.modoDeJuego)
             {
                 case EnumsGameManager.ModosDeJuego.Supervivencia:
@@ -92,7 +94,6 @@ namespace Prototipo_2
             {
                 return;
             }
-            //go.transform.rotation = transform.rotation;
         }
     }
 }
