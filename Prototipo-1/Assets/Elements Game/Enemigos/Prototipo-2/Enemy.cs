@@ -945,7 +945,10 @@ namespace Prototipo_2
             }
             for (int i = 0; i < structsEnemys.dataEnemy.CantCasillasOcupadas_X; i++)
             {
-                gridEnemy.matrizCuadrilla[gridEnemy.GetCuadrilla_columnas() - rangoAgachado][structsEnemys.dataEnemy.columnaActual + i].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
+                if (structsEnemys.dataEnemy.columnaActual + i < gridEnemy.GetCuadrilla_columnas())
+                {
+                    gridEnemy.matrizCuadrilla[gridEnemy.GetCuadrilla_columnas() - rangoAgachado][structsEnemys.dataEnemy.columnaActual + i].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
+                }
             }
         }
         public bool GetIsDeffended()

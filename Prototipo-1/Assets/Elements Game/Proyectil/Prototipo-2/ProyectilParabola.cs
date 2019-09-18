@@ -136,7 +136,6 @@ namespace Prototipo_2 {
                         {
                             if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
                             {
-                                Debug.Log("ENTRE VIEJA");
                                 cuadrilla.enemy.life = cuadrilla.enemy.life - damage;
                                 timeLife = 0;
                             }
