@@ -666,6 +666,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7097743373262305301, guid: f8c03c23c66899e4197e2fbc415ec43b,
         type: 3}
+      propertyPath: spritePlayers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097743373262305301, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
       propertyPath: gridPlayer
       value: 
       objectReference: {fileID: 8934206643332636804}
@@ -684,6 +689,11 @@ PrefabInstance:
       propertyPath: structsPlayer
       value: 
       objectReference: {fileID: 1271265491}
+    - target: {fileID: 7097743373262305301, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: spritePlayers.Array.data[0]
+      value: 
+      objectReference: {fileID: 1032297212663210187}
     - target: {fileID: 7097743373262305301, guid: f8c03c23c66899e4197e2fbc415ec43b,
         type: 3}
       propertyPath: generadorProyectilesAgachado
@@ -756,6 +766,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
         type: 3}
+      propertyPath: Sprites.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 8760982568194768852}
@@ -766,52 +781,141 @@ PrefabInstance:
       objectReference: {fileID: 4202972245496725104}
     - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
         type: 3}
-      propertyPath: SpriteAttackIdle
-      value: 
-      objectReference: {fileID: 21300000, guid: 1c9ab268c94da084e876e108bb607d26,
-        type: 3}
-    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
-        type: 3}
-      propertyPath: SpriteDeffenceIdle
-      value: 
-      objectReference: {fileID: 21300000, guid: 78e25644c7862fe499d169648bd11de8,
-        type: 3}
-    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
-        type: 3}
-      propertyPath: SpriteAttackJumping
+      propertyPath: Sprites.Array.data[0].sprite
       value: 
       objectReference: {fileID: 21300000, guid: 4af91b5a754ea6f43a6d462dbbd2d349,
         type: 3}
     - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
         type: 3}
-      propertyPath: SpriteIdle
+      propertyPath: Sprites.Array.data[0].name
+      value: SaltoAtaque
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: Sprites.Array.data[1].sprite
       value: 
-      objectReference: {fileID: 21300000, guid: ef9effb358dca7e40995b17e650499e7,
+      objectReference: {fileID: 21300000, guid: e274f650425337343995d4d032d61bb2,
         type: 3}
     - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
         type: 3}
-      propertyPath: SpriteJump
+      propertyPath: Sprites.Array.data[1].name
+      value: SaltoDefensa
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: Sprites.Array.data[2].sprite
       value: 
       objectReference: {fileID: 21300000, guid: e6d60e2b46be5894cb45d0ac69a23b40,
         type: 3}
     - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
         type: 3}
-      propertyPath: SpriteDuck
+      propertyPath: Sprites.Array.data[2].name
+      value: Salto
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: Sprites.Array.data[3].sprite
       value: 
-      objectReference: {fileID: 21300000, guid: bbcfdd4d62abf8446b2d70c849fcea3f,
+      objectReference: {fileID: 21300000, guid: 1c9ab268c94da084e876e108bb607d26,
         type: 3}
     - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
         type: 3}
-      propertyPath: SpriteMoveBack
+      propertyPath: Sprites.Array.data[3].name
+      value: ParadoAtaque
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: Sprites.Array.data[4].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 78e25644c7862fe499d169648bd11de8,
+        type: 3}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: Sprites.Array.data[4].name
+      value: ParadoDefensa
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: Sprites.Array.data[5].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ef9effb358dca7e40995b17e650499e7,
+        type: 3}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: Sprites.Array.data[5].name
+      value: Parado
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: Sprites.Array.data[6].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 590a574097d7f424aba888bc4e7408c7,
+        type: 3}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: Sprites.Array.data[6].name
+      value: RecibirDanio
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: Sprites.Array.data[7].sprite
       value: 
       objectReference: {fileID: 21300000, guid: 996494473f2c09e4892928c8e10842cd,
         type: 3}
     - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
         type: 3}
-      propertyPath: SpriteMoveForward
+      propertyPath: Sprites.Array.data[7].name
+      value: MoverAtras
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: Sprites.Array.data[8].sprite
       value: 
       objectReference: {fileID: 21300000, guid: 9490788c3fdce0e4a8e33434e7b5fcfb,
         type: 3}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: Sprites.Array.data[8].name
+      value: MoverAdelante
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: Sprites.Array.data[9].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6dd6ac6181aeb3544bbbe8e880dab38b,
+        type: 3}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: Sprites.Array.data[9].name
+      value: AgachadoAtaque
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: Sprites.Array.data[10].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 467a1d079614ec64db626c166cdd2cbd,
+        type: 3}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: Sprites.Array.data[10].name
+      value: AgachadoDefensa
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: Sprites.Array.data[11].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bbcfdd4d62abf8446b2d70c849fcea3f,
+        type: 3}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: Sprites.Array.data[11].name
+      value: Agachado
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: delaySpriteRecibirDanio
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2397753631612189105, guid: f8c03c23c66899e4197e2fbc415ec43b,
         type: 3}
       propertyPath: m_Sprite
@@ -820,6 +924,18 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8c03c23c66899e4197e2fbc415ec43b, type: 3}
+--- !u!114 &1032297212663210187 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1951603196712306625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4202972245496725106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0317e505aadc9441bcb0c6fbaf18243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &4202972245496725104 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 2397753631612189105, guid: f8c03c23c66899e4197e2fbc415ec43b,
@@ -1068,16 +1184,16 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3007778556858582289}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3007778555862245913 stripped
+--- !u!114 &8934206643332636804 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2107844360, guid: b929ac675e510d440a80e8c74d8c4990,
+  m_CorrespondingSourceObject: {fileID: 5927136447379350933, guid: b929ac675e510d440a80e8c74d8c4990,
     type: 3}
   m_PrefabInstance: {fileID: 3007778556858582289}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55c4ac822bd4c044096dac006b025199, type: 3}
+  m_Script: {fileID: 11500000, guid: c6174d52913e16f42a2a8cdfa2ba4130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &3007778555862245915 stripped
@@ -1092,15 +1208,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c4ac822bd4c044096dac006b025199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8934206643332636804 stripped
+--- !u!114 &3007778555862245913 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5927136447379350933, guid: b929ac675e510d440a80e8c74d8c4990,
+  m_CorrespondingSourceObject: {fileID: 2107844360, guid: b929ac675e510d440a80e8c74d8c4990,
     type: 3}
   m_PrefabInstance: {fileID: 3007778556858582289}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6174d52913e16f42a2a8cdfa2ba4130, type: 3}
+  m_Script: {fileID: 11500000, guid: 55c4ac822bd4c044096dac006b025199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
