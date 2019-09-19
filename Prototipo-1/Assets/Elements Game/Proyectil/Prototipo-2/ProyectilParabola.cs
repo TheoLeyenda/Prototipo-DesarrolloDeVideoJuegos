@@ -93,12 +93,10 @@ namespace Prototipo_2 {
                         break;
                 }
                 parabolaController.OnParabola();
-                //Debug.Log("DISPARE");
             }       
             if (parabolaController != null)
             {
                 parabolaController.Speed = speed;
-                //parabolaController.OnParabola();
             }
         }
         private void OnTriggerStay2D(Collider2D collision)
@@ -107,7 +105,7 @@ namespace Prototipo_2 {
             {
                 case "Escudo":
                     timeLife = 0;
-                    if (dobleDamage)
+                    if (dobleDamage && timeLife == 0)
                     {
                         damage = damage / 2;
                         dobleDamage = false;
@@ -128,17 +126,13 @@ namespace Prototipo_2 {
                     }
                     if (cuadrilla.GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Ocupado)
                     {
-                        if (dobleDamage)
-                        {
-                            damage = damage / 2;
-                            dobleDamage = false;
-                        }
                         if (cuadrilla.enemy != null)
                         {
                             if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
                             {
                                 if (cuadrilla.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && cuadrilla.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
                                 {
+                                    cuadrilla.enemy.spriteEnemyActual.ActualSprite = SpriteEnemy.SpriteActual.RecibirDanio;
                                     cuadrilla.enemy.life = cuadrilla.enemy.life - damage;
                                 }
                                 timeLife = 0;
@@ -191,11 +185,25 @@ namespace Prototipo_2 {
                         {
                             if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
                             {
-                                float realDamage = damage - cuadrilla.enemy.pointsDeffence;
-                                cuadrilla.enemy.life = cuadrilla.enemy.life - realDamage;
+                                if (cuadrilla.enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
+                                {
+                                    float realDamage = damage - cuadrilla.enemy.pointsDeffence;
+                                    cuadrilla.enemy.life = cuadrilla.enemy.life - realDamage;
+                                }
+                                else
+                                {
+                                    cuadrilla.enemy.CounterAttack(true);
+                                    cuadrilla.enemy.spriteEnemyActual.ActualSprite = SpriteEnemy.SpriteActual.ContraAtaque;
+                                }
                                 timeLife = 0;
+
                             }
                         }
+                    }
+                    if (dobleDamage && timeLife == 0)
+                    {
+                        damage = damage / 2;
+                        dobleDamage = false;
                     }
                     break;
             }

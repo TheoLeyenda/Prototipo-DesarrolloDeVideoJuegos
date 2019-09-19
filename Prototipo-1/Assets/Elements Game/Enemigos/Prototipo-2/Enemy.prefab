@@ -7126,6 +7126,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7279d92b7308dc84cbd9e2b639ca42fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprites: []
+  ActualSprite: 0
+  delaySpriteRecibirDanio: 0
+  delaySpriteContraAtaque: 0
 --- !u!1 &1214942812040088762
 GameObject:
   m_ObjectHideFlags: 0
@@ -7340,6 +7346,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7279d92b7308dc84cbd9e2b639ca42fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprites: []
+  ActualSprite: 0
+  delaySpriteRecibirDanio: 0
+  delaySpriteContraAtaque: 0
 --- !u!1 &2355794920509015616
 GameObject:
   m_ObjectHideFlags: 0
@@ -7494,6 +7506,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7279d92b7308dc84cbd9e2b639ca42fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprites: []
+  ActualSprite: 0
+  delaySpriteRecibirDanio: 0
+  delaySpriteContraAtaque: 0
 --- !u!1 &2625632900352271824
 GameObject:
   m_ObjectHideFlags: 0
@@ -7648,6 +7666,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7279d92b7308dc84cbd9e2b639ca42fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprites: []
+  ActualSprite: 0
+  delaySpriteRecibirDanio: 0
+  delaySpriteContraAtaque: 0
 --- !u!1 &3104891487139543415
 GameObject:
   m_ObjectHideFlags: 0
@@ -7772,6 +7796,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7279d92b7308dc84cbd9e2b639ca42fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprites: []
+  ActualSprite: 0
+  delaySpriteRecibirDanio: 0
+  delaySpriteContraAtaque: 0
 --- !u!1 &3476075452499244377
 GameObject:
   m_ObjectHideFlags: 0
@@ -7926,6 +7956,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7279d92b7308dc84cbd9e2b639ca42fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprites: []
+  ActualSprite: 0
+  delaySpriteRecibirDanio: 0
+  delaySpriteContraAtaque: 0
 --- !u!61 &5494477499050424885
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7943,7 +7979,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.35, y: 6.31}
+    oldSize: {x: 4.54, y: 6.96}
     newSize: {x: 7.38, y: 9.84}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -7964,6 +8000,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7279d92b7308dc84cbd9e2b639ca42fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 5784650357481891035}
+  spriteRenderer: {fileID: 9063908872725239654}
+  Sprites:
+  - sprite: {fileID: 21300000, guid: e4d01486ef7c70441b86d57b2ad6c76f, type: 3}
+    name: MoverAdelante-Defensivo
+  - sprite: {fileID: 21300000, guid: a3d414946a106074eb10451ac519f21f, type: 3}
+    name: MoverAtras-Defensivo
+  - sprite: {fileID: 21300000, guid: 862de973b8fb0ea46b210e708785ab10, type: 3}
+    name: RecibirDanio-Defensivo
+  - sprite: {fileID: 21300000, guid: 59fd6ec00dfc386428a7fcde03532b52, type: 3}
+    name: Parado-Defensivo
+  - sprite: {fileID: 21300000, guid: 1dc3f695fed9162448c2e5492a57b5d9, type: 3}
+    name: ParadoDefensa-Defensivo
+  - sprite: {fileID: 21300000, guid: fb22a737388ee184c819805325dd1f7b, type: 3}
+    name: ContraAtaque-Defensivo
+  - sprite: {fileID: 0}
+    name: 
+  ActualSprite: 0
+  delaySpriteRecibirDanio: 0.15
+  delaySpriteContraAtaque: 0.15
 --- !u!1 &4261999882460104607
 GameObject:
   m_ObjectHideFlags: 0
@@ -8208,6 +8264,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7279d92b7308dc84cbd9e2b639ca42fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprites: []
+  ActualSprite: 0
+  delaySpriteRecibirDanio: 0
+  delaySpriteContraAtaque: 0
 --- !u!1 &5442566187379641002
 GameObject:
   m_ObjectHideFlags: 0
@@ -8452,6 +8514,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7279d92b7308dc84cbd9e2b639ca42fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprites: []
+  ActualSprite: 0
+  delaySpriteRecibirDanio: 0
+  delaySpriteContraAtaque: 0
 --- !u!1 &6188737031052199816
 GameObject:
   m_ObjectHideFlags: 0
@@ -8550,6 +8618,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7279d92b7308dc84cbd9e2b639ca42fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprites: []
+  ActualSprite: 0
+  delaySpriteRecibirDanio: 0
+  delaySpriteContraAtaque: 0
 --- !u!1 &7155189239322664023
 GameObject:
   m_ObjectHideFlags: 0
@@ -8674,6 +8748,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7279d92b7308dc84cbd9e2b639ca42fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Sprites: []
+  ActualSprite: 0
+  delaySpriteRecibirDanio: 0
+  delaySpriteContraAtaque: 0
 --- !u!1 &7320307249521398304
 GameObject:
   m_ObjectHideFlags: 0
@@ -8730,7 +8810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeBoss: 0
-  typeEnemy: 1
+  typeEnemy: 3
 --- !u!114 &1429868411264717354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8905,6 +8985,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7279d92b7308dc84cbd9e2b639ca42fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 5784650357481891035}
+  spriteRenderer: {fileID: 8306979021434488050}
+  Sprites: []
+  ActualSprite: 0
+  delaySpriteRecibirDanio: 0.3
+  delaySpriteContraAtaque: 0
 --- !u!1 &8841111961942677939
 GameObject:
   m_ObjectHideFlags: 0
@@ -9067,10 +9153,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: SpriteEnemigoDefensivo
       objectReference: {fileID: 0}
-    - target: {fileID: 3553308929127741685, guid: 61245c1a77e7ad847b3751885e027da7,
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: spriteEnemys.Array.size
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
@@ -9097,6 +9183,66 @@ PrefabInstance:
       propertyPath: collidersSprites.Array.size
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: spriteEnemys.Array.data[0]
+      value: 
+      objectReference: {fileID: 1394479541}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: spriteEnemys.Array.data[1]
+      value: 
+      objectReference: {fileID: 826117503}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: spriteEnemys.Array.data[2]
+      value: 
+      objectReference: {fileID: 1297681750}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: spriteEnemys.Array.data[3]
+      value: 
+      objectReference: {fileID: 529018374}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: spriteEnemys.Array.data[4]
+      value: 
+      objectReference: {fileID: 1743955805}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: spriteEnemys.Array.data[5]
+      value: 
+      objectReference: {fileID: 381418683}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: spriteEnemys.Array.data[6]
+      value: 
+      objectReference: {fileID: 303089172}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: spriteEnemys.Array.data[7]
+      value: 
+      objectReference: {fileID: 996529079}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: spriteEnemys.Array.data[8]
+      value: 
+      objectReference: {fileID: 332794849}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: spriteEnemys.Array.data[9]
+      value: 
+      objectReference: {fileID: 345411061}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: spriteEnemys.Array.data[10]
+      value: 
+      objectReference: {fileID: 1916724732}
+    - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: spriteEnemys.Array.data[11]
+      value: 
+      objectReference: {fileID: 1701358243}
     - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
       propertyPath: ENEMY
@@ -9527,6 +9673,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: SpriteEnemigoAgresivo
       objectReference: {fileID: 0}
+    - target: {fileID: 7746700542677218688, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7194419974994112971, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
       propertyPath: m_Controller
@@ -9558,6 +9709,17 @@ PrefabInstance:
       propertyPath: count
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 7060251715271303292, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.023
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613765546232661620, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 59fd6ec00dfc386428a7fcde03532b52,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61245c1a77e7ad847b3751885e027da7, type: 3}
 --- !u!4 &7607971622636576963 stripped

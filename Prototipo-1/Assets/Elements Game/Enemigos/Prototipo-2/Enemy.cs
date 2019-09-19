@@ -7,6 +7,9 @@ namespace Prototipo_2
 {
     public class Enemy : MonoBehaviour
     {
+        public List<SpriteEnemy> spriteEnemys;
+        [HideInInspector]
+        public SpriteEnemy spriteEnemyActual;
         public GameObject ENEMY;
         public GameObject enemyPrefab;
         public Grid gridEnemy;
@@ -155,6 +158,17 @@ namespace Prototipo_2
                         break;
                 }
             }
+            CheckSpriteEnemyActual();
+        }
+        public void CheckSpriteEnemyActual()
+        {
+            for (int i = 0; i < spriteEnemys.Count; i++)
+            {
+                if (spriteEnemys[i].gameObject.activeSelf)
+                {
+                    spriteEnemyActual = spriteEnemys[i];
+                }
+            }
         }
         public void SetPorcentageMovements()
         {
@@ -223,6 +237,7 @@ namespace Prototipo_2
         public void OnEnemyHistory()
         {
             CheckInitialSprite();
+            CheckSpriteEnemyActual();
         }
         public void CheckOutLimit()
         {
@@ -238,6 +253,7 @@ namespace Prototipo_2
         }
         public void OnEnemySurvival()
         {
+            CheckSpriteEnemyActual();
             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
             poolObjectEnemy = GetComponent<PoolObject>();
             float opcion = Random.Range(MinRangeRandom, TypeRandom);
@@ -515,11 +531,11 @@ namespace Prototipo_2
                 if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando)
                 {
                     delayAttack = delayAttackJumping;
-                    Attack(true, specialAttack);
+                    Attack(true, specialAttack,false);
                 }
                 else
                 {
-                    Attack(false, specialAttack);
+                    Attack(false, specialAttack,false);
                 }
             }
         }
@@ -559,7 +575,7 @@ namespace Prototipo_2
                 delaySelectMovement = 0;
             }
         }
-        public void Attack(bool jampAttack, bool specialAttack)
+        public void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage)
         {
             bool shootDown = false;
             string nombreGenerador = "NADA XD";
@@ -570,11 +586,12 @@ namespace Prototipo_2
             {
                 go = poolObjectAttack.GetObject();
                 proyectil = go.GetComponent<Proyectil>();
-                proyectil.SetDobleDamage(doubleDamage);
+                proyectil.SetDobleDamage(_doubleDamage);
                 proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
 
-                if (doubleDamage)
+                if (_doubleDamage)
                 {
+                    Debug.Log("ENTRE");
                     proyectil.damage = proyectil.damage * 2;
                 }
             }
@@ -925,7 +942,7 @@ namespace Prototipo_2
         }
         public void CounterAttack(bool dobleDamage)
         {
-            //DisableShild();
+            Attack(false,false,true);
         }
         public void Jump(Vector3 alturaMaxima)
         {
