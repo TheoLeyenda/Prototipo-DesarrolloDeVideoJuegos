@@ -200,11 +200,6 @@ namespace Prototipo_2 {
                             }
                         }
                     }
-                    if (dobleDamage && timeLife == 0)
-                    {
-                        damage = damage / 2;
-                        dobleDamage = false;
-                    }
                     break;
             }
         }

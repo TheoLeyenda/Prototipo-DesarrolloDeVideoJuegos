@@ -63,6 +63,11 @@ namespace Prototipo_2
             {
                 if (poolObject != null)
                 {
+                    if (dobleDamage && timeLife == 0)
+                    {
+                        damage = damage / 2;
+                        dobleDamage = false;
+                    }
                     poolObject.Recycle();
                 }
             }
@@ -157,11 +162,6 @@ namespace Prototipo_2
                             }
                             
                         }
-                        if (dobleDamage && timeLife == 0)
-                        {
-                            damage = damage / 2;
-                            dobleDamage = false;
-                        }
                     }
                     if (cuadrilla.GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Defendido)
                     {
@@ -191,11 +191,7 @@ namespace Prototipo_2
                                 timeLife = 0;
                             }
                         }
-                        if (dobleDamage && timeLife == 0)
-                        {
-                            damage = damage / 2;
-                            dobleDamage = false;
-                        }
+                        
                     }
                     break;
             }
