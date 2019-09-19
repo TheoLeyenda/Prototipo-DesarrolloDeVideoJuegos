@@ -183,6 +183,38 @@ namespace Prototipo_2
                                 break;
                         }
                         break;
+                    case EnumsEnemy.TiposDeEnemigo.Balanceado:
+                        switch (ActualSprite)
+                        {
+                            case SpriteActual.Agachado:
+                                spriteRenderer.sprite = CheckListSprite("Agachado-Balanceado");
+                                break;
+                            case SpriteActual.AgachadoDefensa:
+                                spriteRenderer.sprite = CheckListSprite("AgachadoDefensa-Balanceado");
+                                break;
+                            case SpriteActual.MoverAdelante:
+                                spriteRenderer.sprite = CheckListSprite("MoverseAdelante-Balanceado");
+                                break;
+                            case SpriteActual.MoverAtras:
+                                spriteRenderer.sprite = CheckListSprite("MoverseAtras-Balanceado");
+                                break;
+                            case SpriteActual.RecibirDanio:
+                                spriteRenderer.sprite = CheckListSprite("RecibirDanio-Balanceado");
+                                break;
+                            case SpriteActual.Parado:
+                                spriteRenderer.sprite = CheckListSprite("Parado-Balanceado");
+                                break;
+                            case SpriteActual.ParadoDefensa:
+                                spriteRenderer.sprite = CheckListSprite("ParadoDefensa-Balanceado");
+                                break;
+                            case SpriteActual.Salto:
+                                spriteRenderer.sprite = CheckListSprite("Salto-Balanceado");
+                                break;
+                            case SpriteActual.SaltoDefensa:
+                                spriteRenderer.sprite = CheckListSprite("SaltoDefensa-Balanceado");
+                                break;
+                        }
+                        break;
                 }
             }
         }
