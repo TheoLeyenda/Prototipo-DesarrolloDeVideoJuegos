@@ -591,7 +591,6 @@ namespace Prototipo_2
 
                 if (_doubleDamage)
                 {
-                    Debug.Log("ENTRE");
                     proyectil.damage = proyectil.damage * 2;
                 }
             }

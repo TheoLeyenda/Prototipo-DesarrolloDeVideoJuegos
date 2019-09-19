@@ -44,11 +44,13 @@ namespace Prototipo_2
         {
             auxDelaySpriteRecibirDanio = delaySpriteRecibirDanio;
             auxDelaySpriteContraAtaque = delaySpriteContraAtaque;
+            ActualSprite = SpriteActual.Parado;
         }
         private void OnEnable()
         {
             auxDelaySpriteRecibirDanio = delaySpriteRecibirDanio;
             auxDelaySpriteContraAtaque = delaySpriteContraAtaque;
+            ActualSprite = SpriteActual.Parado;
         }
         public void Update()
         {
@@ -56,12 +58,19 @@ namespace Prototipo_2
         }
         public void CheckEnumSprite()
         {
+            Debug.Log(ActualSprite);
             if (ActualSprite == SpriteActual.RecibirDanio || ActualSprite == SpriteActual.ContraAtaque)
             {
-                CheckDeleyRecibirDanio();
-                CheckDeleyContraAtaque();
+                if (ActualSprite == SpriteActual.RecibirDanio)
+                {
+                    CheckDeleyRecibirDanio();
+                }
+                if (ActualSprite == SpriteActual.ContraAtaque)
+                {
+                    CheckDeleyContraAtaque();
+                }
             }
-            else
+            else if(ActualSprite != SpriteActual.RecibirDanio && ActualSprite != SpriteActual.ContraAtaque)
             {
                 if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
                 {
@@ -106,8 +115,6 @@ namespace Prototipo_2
                 else if (ActualSprite != SpriteActual.RecibirDanio && ActualSprite != SpriteActual.ContraAtaque)
                 {
                     ActualSprite = SpriteActual.Parado;
-                    delaySpriteRecibirDanio = auxDelaySpriteRecibirDanio;
-                    delaySpriteContraAtaque = auxDelaySpriteContraAtaque;
                 }
             }
             CheckActualSprite();
@@ -121,6 +128,7 @@ namespace Prototipo_2
             }
             else if (delaySpriteRecibirDanio <= 0)
             {
+                delaySpriteRecibirDanio = auxDelaySpriteRecibirDanio;
                 ActualSprite = SpriteActual.Parado;
             }
         }
@@ -132,6 +140,7 @@ namespace Prototipo_2
             }
             else if (delaySpriteContraAtaque <= 0)
             {
+                delaySpriteContraAtaque = auxDelaySpriteContraAtaque;
                 ActualSprite = SpriteActual.Parado;
             }
         }
@@ -150,11 +159,11 @@ namespace Prototipo_2
                                 spriteRenderer.sprite = CheckListSprite("ParadoDefensa-Defensivo");
                                 break;
                             case SpriteActual.ParadoAtaque:
-                                spriteRenderer.sprite = CheckListSprite("ParadoAtaque-Defensivo");
-                                if (spriteRenderer.sprite == null)
-                                {
+                                //spriteRenderer.sprite = CheckListSprite("ParadoAtaque-Defensivo");
+                                //if (spriteRenderer.sprite == null)
+                                //{
                                     spriteRenderer.sprite = CheckListSprite("Parado-Defensivo");
-                                }
+                                //}
                                 break;
                             case SpriteActual.MoverAdelante:
                                 spriteRenderer.sprite = CheckListSprite("MoverAdelante-Defensivo");
@@ -169,8 +178,8 @@ namespace Prototipo_2
                                 spriteRenderer.sprite = CheckListSprite("ContraAtaque-Defensivo");
                                 break;
                             default:
-                                ActualSprite = SpriteActual.Parado;
-                                spriteRenderer.sprite = CheckListSprite("Parado-Defensivo");
+                                //ActualSprite = SpriteActual.Parado;
+                                //spriteRenderer.sprite = CheckListSprite("Parado-Defensivo");
                                 break;
                         }
                         break;
