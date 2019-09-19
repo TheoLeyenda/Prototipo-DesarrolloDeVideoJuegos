@@ -64,9 +64,12 @@ public class Pool : MonoBehaviour {
     }
     public void Recycle(GameObject go)
     {
-        id--;
-        go.SetActive(false);
-        CommonBalls[id] = go;
+        if (id > 0)
+        {
+            id--;
+            go.SetActive(false);
+            CommonBalls[id] = go;
+        }
     }
     public void SetId(int _id)
     {

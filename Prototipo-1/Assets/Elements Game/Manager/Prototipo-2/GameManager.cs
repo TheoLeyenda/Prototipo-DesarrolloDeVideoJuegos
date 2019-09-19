@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 namespace Prototipo_2
 {
     public class GameManager : MonoBehaviour
     {
+        public GameObject CanvasGameOver;
+        public TextMeshProUGUI textCountEnemigosAbatidos;
         public static GameManager instanceGameManager;
         public EnumsGameManager enumsGameManager;
         [HideInInspector]
@@ -29,6 +31,7 @@ namespace Prototipo_2
             if (instanceGameManager == null)
             {
                 instanceGameManager = this;
+                DontDestroyOnLoad(gameObject);
             }
             else if (instanceGameManager != null)
             {
@@ -46,7 +49,20 @@ namespace Prototipo_2
         // Update is called once per frame
         void Update()
         {
-
+            if (SceneManager.GetActiveScene().name == "MENU")
+            {
+                CanvasGameOver.SetActive(false);
+                ResetGameManager();
+            }
+            if (SceneManager.GetActiveScene().name == "GameOver")
+            {
+                CanvasGameOver.SetActive(true);
+            }
+        }
+        public void ResetGameManager()
+        {
+            countEnemysDead = 0;
+            roundCombat = 0;
         }
         public void ResetRoundCombat(bool PlayerDeath)
         {
@@ -61,6 +77,7 @@ namespace Prototipo_2
         }
         public void GameOver()
         {
+            textCountEnemigosAbatidos.text = "Enemigos Abatidos: "+countEnemysDead;
             SceneManager.LoadScene("GameOver");
         }
         
