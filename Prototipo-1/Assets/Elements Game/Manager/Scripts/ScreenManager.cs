@@ -15,6 +15,10 @@ namespace Prototipo_2 {
         {
             idListaNiveles = 0;
         }
+        public void LoadLevel(int numerLevel)
+        {
+            SceneManager.LoadScene("Nivel " + numerLevel);
+        }
         public void Prueba()
         {
             SceneManager.LoadScene("SampleScene");
@@ -29,18 +33,25 @@ namespace Prototipo_2 {
         }
         public void CheckMainCameraInScreen()
         {
-            if (gm != null && SceneManager.GetActiveScene().name != "MENU" && SceneManager.GetActiveScene().name != "Supervivencia" 
-                && SceneManager.GetActiveScene().name != "SampleScene" && SceneManager.GetActiveScene().name != "GameOver")
+            if (idListaNiveles < ListaNiveles.Count)
             {
-                if (fondo == null)
+                if (gm != null && SceneManager.GetActiveScene().name != "MENU" && SceneManager.GetActiveScene().name != "Supervivencia"
+                    && SceneManager.GetActiveScene().name != "SampleScene" && SceneManager.GetActiveScene().name != "GameOver")
                 {
-                    fondo = GameObject.Find("Fondo");
-                    Debug.Log(fondo);
-                    spriteRendererFondo = fondo.GetComponent<SpriteRenderer>();
-                    Debug.Log(spriteRendererFondo);
-                    spriteRendererFondo.sprite = ListaNiveles[idListaNiveles];
-                    idListaNiveles++;
+                    if (fondo == null)
+                    {
+                        fondo = GameObject.Find("Fondo");
+                        Debug.Log(fondo);
+                        spriteRendererFondo = fondo.GetComponent<SpriteRenderer>();
+                        Debug.Log(spriteRendererFondo);
+                        spriteRendererFondo.sprite = ListaNiveles[idListaNiveles];
+                        idListaNiveles++;
+                    }
                 }
+            }
+            else
+            {
+                idListaNiveles = 0;
             }
         }
         public void Menu()

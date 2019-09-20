@@ -57,8 +57,7 @@ namespace Prototipo_2
             if (SceneManager.GetActiveScene().name == "GameOver")
             {
                 CanvasGameOver.SetActive(true);
-            }
-        }
+            }        }
         public void ResetGameManager()
         {
             countEnemysDead = 0;
