@@ -21,9 +21,10 @@ namespace Prototipo_2
         public GameObject TituloPushButton;
         public GameObject FondoPushButton;
         public GameObject buttonGameOver;
+        public LevelManager levelManager;
         [HideInInspector]
         public int countEnemysDead;
-
+        public ScreenManager screenManager;
         private int roundCombat;
         // Start is called before the first frame update
         private void Awake()
@@ -57,7 +58,9 @@ namespace Prototipo_2
             if (SceneManager.GetActiveScene().name == "GameOver")
             {
                 CanvasGameOver.SetActive(true);
-            }        }
+            }
+
+        }
         public void ResetGameManager()
         {
             countEnemysDead = 0;

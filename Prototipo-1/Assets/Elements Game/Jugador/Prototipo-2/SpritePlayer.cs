@@ -48,7 +48,12 @@ namespace Prototipo_2 {
                     Cuadrilla cuadrilla = collision.GetComponent<Cuadrilla>();
                     if (cuadrilla.stateCuadrilla != Cuadrilla.StateCuadrilla.Defendido)
                     {
-                        cuadrilla.stateCuadrilla = Cuadrilla.StateCuadrilla.Ocupado;
+                        if (cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaCentral
+                            && cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaDerecha
+                            && cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaIzquierda || !cuadrilla.player.GetIsJamping())
+                        {
+                            cuadrilla.stateCuadrilla = Cuadrilla.StateCuadrilla.Ocupado;
+                        }
                     }
                     //Debug.Log("ENTRE");
                     break;

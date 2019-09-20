@@ -38,15 +38,24 @@ namespace Prototipo_2 {
                 if (gm != null && SceneManager.GetActiveScene().name != "MENU" && SceneManager.GetActiveScene().name != "Supervivencia"
                     && SceneManager.GetActiveScene().name != "SampleScene" && SceneManager.GetActiveScene().name != "GameOver")
                 {
+
                     if (fondo == null)
                     {
+                        
                         fondo = GameObject.Find("Fondo");
-                        Debug.Log(fondo);
-                        spriteRendererFondo = fondo.GetComponent<SpriteRenderer>();
-                        Debug.Log(spriteRendererFondo);
-                        spriteRendererFondo.sprite = ListaNiveles[idListaNiveles];
-                        idListaNiveles++;
+                        SpriteRenderer sr = fondo.GetComponent<SpriteRenderer>();
+                        if (sr != null)
+                        {
+                            spriteRendererFondo = sr;
+                            spriteRendererFondo.sprite = ListaNiveles[idListaNiveles];
+                            idListaNiveles++;
+                        }
+                        else
+                        {
+                            SceneManager.LoadScene("GameOver");
+                        }
                     }
+                    
                 }
             }
             else
@@ -67,6 +76,10 @@ namespace Prototipo_2 {
                     Historia();
                 }
             }
+        }
+        public int GetIdListLevel()
+        {
+            return idListaNiveles;
         }
     }
 }

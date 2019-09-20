@@ -12,8 +12,11 @@ namespace Prototipo_2
         public GameObject imageEnemigoHablando;
         public TextMeshProUGUI textDialog;
         public List<Dialogos> dialogos;
+        private GameManager gm;
         public bool InitDialog;
         public string ButtonPassText;
+        public int ObjectiveOfPassLevel;
+        private int Level;
         private bool inDialog;
         private int idDialogo;
 
@@ -29,13 +32,27 @@ namespace Prototipo_2
             {
                 inDialog = true;
             }
+            if (GameManager.instanceGameManager != null)
+            {
+                gm = GameManager.instanceGameManager;
+            }
+            Level = 1;
         }
         void Update()
         {
             CheckDiagolos();
+            CheckPassLevel();
             if (Input.GetKeyDown(ButtonPassText))
             {
                 NextId();
+            }
+        }
+        public void CheckPassLevel()
+        {
+            if (ObjectiveOfPassLevel <= 0)
+            {
+                NextLevel();
+                ObjectiveOfPassLevel = 1;
             }
         }
         public void CheckDiagolos()
@@ -76,9 +93,17 @@ namespace Prototipo_2
             imageJugadorHablando.SetActive(false);
             textDialog.gameObject.SetActive(false);
         }
+        public void NextLevel()
+        {
+            gm.screenManager.LoadLevel(gm.screenManager.GetIdListLevel()+1);
+        }
         public bool GetInDialog()
         {
             return inDialog;
+        }
+        public void SetInDialog(bool _inDialog)
+        {
+            inDialog = _inDialog;
         }
     }
 }

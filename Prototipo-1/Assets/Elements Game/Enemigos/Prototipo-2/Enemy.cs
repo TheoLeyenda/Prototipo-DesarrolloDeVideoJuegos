@@ -87,7 +87,6 @@ namespace Prototipo_2
             auxLife = life;
             poolObjectEnemy = GetComponent<PoolObject>();
             animator = GetComponent<Animator>();
-            //DisableShild();
             if (GameManager.instanceGameManager != null)
             {
                 gm = GameManager.instanceGameManager;
@@ -234,10 +233,19 @@ namespace Prototipo_2
                     break;
             }
         }
-        public void OnEnemyHistory()
+        public void OnEnemyHistory(EnumsEnemy.TiposDeEnemigo typeEnemy, EnumsEnemy.TiposDeJefe typeBoss)
         {
-            CheckInitialSprite();
             CheckSpriteEnemyActual();
+            enumsEnemy.typeEnemy = typeEnemy;
+            enumsEnemy.typeBoss = typeBoss;
+            CheckInitialSprite();
+            poolObjectEnemy = GetComponent<PoolObject>();
+            if (GameManager.instanceGameManager != null)
+            {
+                gm = GameManager.instanceGameManager;
+            }
+            SetPorcentageMovements();
+
         }
         public void CheckOutLimit()
         {
@@ -283,7 +291,6 @@ namespace Prototipo_2
             else if ((gm.countEnemysDead % gm.RondasPorJefe) == 0 && gm.countEnemysDead > 1)
             {
                 //Cambiar el sprite del jefe correspondiente
-
                 //PROGRAMAR UN RANDOM ENTRE LOS DISTINTOS JEFES
                 Debug.Log("Soy tremendo jefe");
                 enumsEnemy.typeEnemy = EnumsEnemy.TiposDeEnemigo.Jefe;
@@ -1014,6 +1021,10 @@ namespace Prototipo_2
         public bool GetIsDeffended()
         {
             return isDeffended;
+        }
+        public bool GetIsJamping()
+        {
+            return isJamping;
         }
     }
 }

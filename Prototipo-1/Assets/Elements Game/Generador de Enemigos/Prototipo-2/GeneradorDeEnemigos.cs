@@ -19,6 +19,9 @@ namespace Prototipo_2
         private GameManager gm;
         private PoolObject poolObject;
         private Enemy enemigoActual;
+        public List<EnumsEnemy.TiposDeEnemigo> TypeEnemiesLevel;
+        public List<EnumsEnemy.TiposDeJefe> TypeBossLevel;
+        private int idListEnemy;
         public bool InitGenerate;
         public TypeGeneration typeGeneration;
         private void Awake()
@@ -30,6 +33,7 @@ namespace Prototipo_2
         }
         private void Start()
         {
+            idListEnemy = 0;
             if (GameManager.instanceGameManager != null)
             {
                 gm = GameManager.instanceGameManager;
@@ -40,6 +44,7 @@ namespace Prototipo_2
                 {
                     Generate();
                 }
+                gm.levelManager.ObjectiveOfPassLevel = TypeBossLevel.Count+1;
             }
         }
         private void Update()
@@ -64,9 +69,18 @@ namespace Prototipo_2
         public void Generate()
         {
             GenerateEnemy();
-            enemigoActual.pointOfCombat = pointOfCombat.transform.position;
-            enemigoActual.pointOfDeath = pointOfInit.transform.position;
-            enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+            if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Supervivencia)
+            {
+                enemigoActual.pointOfCombat = pointOfCombat.transform.position;
+                enemigoActual.pointOfDeath = pointOfInit.transform.position;
+                enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+            }
+            else if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
+            {
+                Debug.Log("ENTRE");
+                enemigoActual.ENEMY.transform.position = pointOfCombat.transform.position;
+                enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+            }
         }
         public void GenerateEnemy()
         {
@@ -87,7 +101,19 @@ namespace Prototipo_2
                     enemy.OnEnemySurvival();
                     break;
                 case EnumsGameManager.ModosDeJuego.Historia:
-                    enemy.OnEnemyHistory();
+                    if (idListEnemy < TypeEnemiesLevel.Count)
+                    {
+                        enemy.OnEnemyHistory(TypeEnemiesLevel[idListEnemy], TypeBossLevel[idListEnemy]);
+                        if (idListEnemy == 0)
+                        {
+                            gm.levelManager.SetInDialog(true);
+                        }
+                        idListEnemy++;
+                    }
+                    else
+                    {
+                        gm.levelManager.ObjectiveOfPassLevel = 0;
+                    }
                     break;
             }
             if (poolEnemy.count <= 0)

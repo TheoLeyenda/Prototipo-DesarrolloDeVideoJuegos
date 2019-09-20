@@ -235,7 +235,12 @@ namespace Prototipo_2
             {
                 case "Cuadrilla":
                     Cuadrilla cuadrilla = collision.GetComponent<Cuadrilla>();
-                    cuadrilla.stateCuadrilla = Cuadrilla.StateCuadrilla.Ocupado;
+                    if (cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaCentral
+                            && cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaDerecha
+                            && cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaIzquierda || !cuadrilla.enemy.GetIsJamping())
+                    {
+                        cuadrilla.stateCuadrilla = Cuadrilla.StateCuadrilla.Ocupado;
+                    }
                     //Debug.Log("ENTRE");
                     break;
             }
