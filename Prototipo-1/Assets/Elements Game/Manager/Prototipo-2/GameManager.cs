@@ -21,7 +21,6 @@ namespace Prototipo_2
         public GameObject TituloPushButton;
         public GameObject FondoPushButton;
         public GameObject buttonGameOver;
-        public LevelManager levelManager;
         [HideInInspector]
         public int countEnemysDead;
         public ScreenManager screenManager;

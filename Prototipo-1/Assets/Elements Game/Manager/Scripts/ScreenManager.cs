@@ -14,9 +14,18 @@ namespace Prototipo_2 {
         private void Start()
         {
             idListaNiveles = 0;
+            if (gm == null)
+            {
+                GameObject go = GameObject.Find("GameManager");
+                if (go != null)
+                {
+                    gm = go.GetComponent<GameManager>();
+                }
+            }
         }
         public void LoadLevel(int numerLevel)
         {
+            gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Historia;
             SceneManager.LoadScene("Nivel " + numerLevel);
         }
         public void Prueba()
@@ -25,6 +34,7 @@ namespace Prototipo_2 {
         }
         public void Supervivencia()
         {
+            gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Supervivencia;
             SceneManager.LoadScene("Supervivencia");
         }
         public void Historia()

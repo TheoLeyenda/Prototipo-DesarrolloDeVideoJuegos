@@ -58,7 +58,7 @@ namespace Prototipo_2
         }
         public void CheckEnumSprite()
         {
-            Debug.Log(ActualSprite);
+            //Debug.Log(ActualSprite);
             if (ActualSprite == SpriteActual.RecibirDanio || ActualSprite == SpriteActual.ContraAtaque)
             {
                 if (ActualSprite == SpriteActual.RecibirDanio)

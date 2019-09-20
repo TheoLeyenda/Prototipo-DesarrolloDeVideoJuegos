@@ -37,6 +37,7 @@ namespace Prototipo_2
                 gm = GameManager.instanceGameManager;
             }
             Level = 1;
+            ObjectiveOfPassLevel = 1;
         }
         void Update()
         {
@@ -57,7 +58,6 @@ namespace Prototipo_2
         }
         public void CheckDiagolos()
         {
-            Debug.Log(Time.timeScale);
             if (idDialogo < dialogos.Count && inDialog)
             {
                 Time.timeScale = 0;

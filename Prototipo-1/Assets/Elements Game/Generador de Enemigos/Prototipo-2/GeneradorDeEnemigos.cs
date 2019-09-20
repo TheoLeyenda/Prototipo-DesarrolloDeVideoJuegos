@@ -12,6 +12,7 @@ namespace Prototipo_2
         {
             DeadthEnemy,
         }
+        public LevelManager levelManager;
         public Pool poolEnemy;
         public GameObject Generador;
         public GameObject pointOfCombat;
@@ -44,7 +45,10 @@ namespace Prototipo_2
                 {
                     Generate();
                 }
-                gm.levelManager.ObjectiveOfPassLevel = TypeBossLevel.Count+1;
+                if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
+                {
+                    levelManager.ObjectiveOfPassLevel = TypeBossLevel.Count + 1;
+                }
             }
         }
         private void Update()
@@ -106,13 +110,13 @@ namespace Prototipo_2
                         enemy.OnEnemyHistory(TypeEnemiesLevel[idListEnemy], TypeBossLevel[idListEnemy]);
                         if (idListEnemy == 0)
                         {
-                            gm.levelManager.SetInDialog(true);
+                            levelManager.SetInDialog(true);
                         }
                         idListEnemy++;
                     }
                     else
                     {
-                        gm.levelManager.ObjectiveOfPassLevel = 0;
+                        levelManager.ObjectiveOfPassLevel = 0;
                     }
                     break;
             }
