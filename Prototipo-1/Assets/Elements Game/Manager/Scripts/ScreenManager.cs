@@ -75,6 +75,7 @@ namespace Prototipo_2 {
         }
         public void Menu()
         {
+            idListaNiveles = 0;
             SceneManager.LoadScene("MENU");
         }
         private void Update()
