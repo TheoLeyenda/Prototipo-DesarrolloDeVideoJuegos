@@ -105,7 +105,7 @@ namespace Prototipo_2
             }
             else
             {
-                SceneManager.LoadScene(NameFinishSceneStoryMode);
+                gm.GameOver(NameFinishSceneStoryMode);
             }
         }
         public bool GetInDialog()

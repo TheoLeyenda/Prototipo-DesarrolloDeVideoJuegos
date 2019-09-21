@@ -76,11 +76,10 @@ namespace Prototipo_2
                 roundCombat = 1;
             }
         }
-        public void GameOver()
+        public void GameOver(string finishScene)
         {
-            textCountEnemigosAbatidos.text = "Enemigos Abatidos: "+countEnemysDead;
-            SceneManager.LoadScene("GameOver");
+            textCountEnemigosAbatidos.text = "Enemigos Abatidos: " + countEnemysDead;
+            SceneManager.LoadScene(finishScene);
         }
-        
     }
 }

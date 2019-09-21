@@ -112,7 +112,7 @@ namespace Prototipo_2
             if (life <= 0)
             {
                 enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.muerto;
-                gm.GameOver();
+                gm.GameOver("GameOver");
                 gm.ResetRoundCombat(true);
             }
         }
