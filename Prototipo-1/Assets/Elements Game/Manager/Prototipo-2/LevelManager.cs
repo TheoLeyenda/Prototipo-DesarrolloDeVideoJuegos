@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 namespace Prototipo_2
 {
     public class LevelManager : MonoBehaviour
     {
+        public bool NivelFinal;
+        public string NameFinishSceneStoryMode;
         public GameObject marcoTexto;
         public GameObject imageJugadorHablando;
         public GameObject imageEnemigoHablando;
@@ -28,6 +31,7 @@ namespace Prototipo_2
         }
         private void Start()
         {
+            
             if (InitDialog)
             {
                 inDialog = true;
@@ -95,7 +99,14 @@ namespace Prototipo_2
         }
         public void NextLevel()
         {
-            gm.screenManager.LoadLevel(gm.screenManager.GetIdListLevel()+1);
+            if (!NivelFinal)
+            {
+                gm.screenManager.LoadLevel(gm.screenManager.GetIdListLevel() + 1);
+            }
+            else
+            {
+                SceneManager.LoadScene(NameFinishSceneStoryMode);
+            }
         }
         public bool GetInDialog()
         {

@@ -25,8 +25,8 @@ namespace Prototipo_2 {
         }
         public void LoadLevel(int numerLevel)
         {
-            gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Historia;
-            SceneManager.LoadScene("Nivel " + numerLevel);
+           gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Historia;
+           SceneManager.LoadScene("Nivel " + numerLevel); 
         }
         public void Prueba()
         {
@@ -60,15 +60,11 @@ namespace Prototipo_2 {
                             spriteRendererFondo.sprite = ListaNiveles[idListaNiveles];
                             idListaNiveles++;
                         }
-                        else
-                        {
-                            SceneManager.LoadScene("GameOver");
-                        }
                     }
                     
                 }
             }
-            else
+            else if(SceneManager.GetActiveScene().name != "MENU")
             {
                 idListaNiveles = 0;
             }
