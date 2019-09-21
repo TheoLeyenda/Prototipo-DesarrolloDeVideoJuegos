@@ -19,6 +19,14 @@ namespace Prototipo_2
         public SpriteRenderer SpriteRendererEnemigoAgresivo;
         public SpriteRenderer SpriteRendererEnemigoDefensivo;
         public SpriteRenderer SpriteRendererJefeProfeAnatomia;
+        public SpriteRenderer SpriteRendererJefeProfeHistoria;
+        public SpriteRenderer SpriteRendererJefeProfeEducacionFisica;
+        public SpriteRenderer SpriteRendererJefeProfeArte;
+        public SpriteRenderer SpriteRendererJefeProfeMatematica;
+        public SpriteRenderer SpriteRendererJefeProfeQuimica;
+        public SpriteRenderer SpriteRendererJefeProfeProfeProgramacion;
+        public SpriteRenderer SpriteRendererJefeProfeBaretto;
+        public SpriteRenderer SpriteRendererJefeProfeLautarito;
         public SpecialAttackEnemyController specialAttackEnemyController;
         public GameObject BARRA_DE_VIDA;
         private float auxLife;
@@ -117,26 +125,53 @@ namespace Prototipo_2
                         SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
                         SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
                         SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
+
                         gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                         break;
                     case EnumsEnemy.TiposDeEnemigo.Balanceado:
                         structsEnemys.dataEnemy.CantCasillasOcupadas_X = 1;
                         structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 2;
                         structsEnemys.dataEnemy.columnaActual = 1;
-                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(true);
                         SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
+                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(true);
                         SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
                         SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
+
                         gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                         break;
                     case EnumsEnemy.TiposDeEnemigo.Defensivo:
                         structsEnemys.dataEnemy.CantCasillasOcupadas_X = 1;
                         structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 2;
                         structsEnemys.dataEnemy.columnaActual = 1;
-                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(true);
-                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
                         SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
+                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
+                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(true);
                         SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
+
                         gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                         break;
                 }
@@ -149,10 +184,171 @@ namespace Prototipo_2
                         structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
                         structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
                         structsEnemys.dataEnemy.columnaActual = 1;
-                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
-                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
+
                         SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
+                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
+                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
                         SpriteRendererJefeProfeAnatomia.gameObject.SetActive(true);
+                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
+                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+                        break;
+                    case EnumsEnemy.TiposDeJefe.ProfeHistoria:
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
+                        structsEnemys.dataEnemy.columnaActual = 1;
+
+                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
+                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
+                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(true);
+                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
+                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+                        break;
+                    case EnumsEnemy.TiposDeJefe.ProfeEducacionFisica:
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
+                        structsEnemys.dataEnemy.columnaActual = 1;
+
+                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
+                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
+                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(true);
+                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
+                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+                        break;
+                    case EnumsEnemy.TiposDeJefe.ProfeArte:
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
+                        structsEnemys.dataEnemy.columnaActual = 1;
+
+                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
+                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
+                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeArte.gameObject.SetActive(true);
+                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
+                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+                        break;
+                    case EnumsEnemy.TiposDeJefe.ProfeMatematica:
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
+                        structsEnemys.dataEnemy.columnaActual = 1;
+
+                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
+                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
+                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(true);
+                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
+                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+                        break;
+                    case EnumsEnemy.TiposDeJefe.ProfeQuimica:
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
+                        structsEnemys.dataEnemy.columnaActual = 1;
+
+                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
+                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
+                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(true);
+                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
+                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+                        break;
+                    case EnumsEnemy.TiposDeJefe.ProfeProgramacion:
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
+                        structsEnemys.dataEnemy.columnaActual = 1;
+
+                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
+                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
+                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(true);
+                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
+                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+                        break;
+                    case EnumsEnemy.TiposDeJefe.ProfeBaretto:
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
+                        structsEnemys.dataEnemy.columnaActual = 1;
+
+                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
+                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
+                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(true);
+                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
+                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+                        break;
+                    case EnumsEnemy.TiposDeJefe.ProfeLautarito:
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
+                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
+                        structsEnemys.dataEnemy.columnaActual = 1;
+
+                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
+                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
+                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
+                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(true);
                         gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                         break;
                 }
@@ -292,9 +488,39 @@ namespace Prototipo_2
             {
                 //Cambiar el sprite del jefe correspondiente
                 //PROGRAMAR UN RANDOM ENTRE LOS DISTINTOS JEFES
-                Debug.Log("Soy tremendo jefe");
                 enumsEnemy.typeEnemy = EnumsEnemy.TiposDeEnemigo.Jefe;
-                enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeAnatomia;
+                opcion = (int)Random.Range(0, (int)EnumsEnemy.TiposDeJefe.Count - 1);
+                switch ((EnumsEnemy.TiposDeJefe)opcion)
+                {
+                    case EnumsEnemy.TiposDeJefe.ProfeAnatomia:
+                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeAnatomia;
+                        break;
+                    case EnumsEnemy.TiposDeJefe.ProfeHistoria:
+                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeHistoria;
+                        break;
+                    case EnumsEnemy.TiposDeJefe.ProfeEducacionFisica:
+                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeEducacionFisica;
+                        break;
+                    case EnumsEnemy.TiposDeJefe.ProfeArte:
+                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeArte;
+                        break;
+                    case EnumsEnemy.TiposDeJefe.ProfeMatematica:
+                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeMatematica;
+                        break;
+                    case EnumsEnemy.TiposDeJefe.ProfeQuimica:
+                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeQuimica;
+                        break;
+                    case EnumsEnemy.TiposDeJefe.ProfeProgramacion:
+                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeProgramacion;
+                        break;
+                    case EnumsEnemy.TiposDeJefe.ProfeBaretto:
+                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeBaretto;
+                        break;
+                    case EnumsEnemy.TiposDeJefe.ProfeLautarito:
+                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeLautarito;
+                        break;
+                }
+                Debug.Log("Soy tremendo jefe");
             }
             CheckInitialSprite();
             SetPorcentageMovements();
