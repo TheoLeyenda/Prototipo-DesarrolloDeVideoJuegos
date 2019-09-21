@@ -157,13 +157,13 @@ namespace Prototipo_2 {
                                 {
                                     cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
                                     cuadrilla.player.SetEnableCounterAttack(false);
-                                    cuadrilla.player.life = cuadrilla.player.life - damage;
+                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
                                     cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                     timeLife = 0;
                                 }
                                 else if (cuadrilla.player.delayCounterAttack <= 0)
                                 {
-                                    cuadrilla.player.life = cuadrilla.player.life - damage;
+                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
                                     cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                 }
                             }
@@ -177,7 +177,7 @@ namespace Prototipo_2 {
                             if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
                             {
                                 float realDamage = damage - cuadrilla.player.pointsDeffence;
-                                cuadrilla.player.life = cuadrilla.player.life - realDamage;
+                                cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - realDamage;
                                 timeLife = 0;
                             }
                         }

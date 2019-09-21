@@ -8,9 +8,9 @@ namespace Prototipo_2
     public class Player : MonoBehaviour
     {
         // Start is called before the first frame update
+        public bool resetPlayer;
+        public PlayerData PD;
         public Grid gridPlayer;
-        public float life;
-        public float maxLife;
         private float auxLife;
         public StructsPlayer structsPlayer;
         public List<SpritePlayer> spritePlayers;
@@ -52,6 +52,10 @@ namespace Prototipo_2
         private float auxDelayCounterAttack;
         void Start()
         {
+            if (resetPlayer)
+            {
+                ResetPlayer();
+            }
             CheckSpritePlayerActual();
             auxDelayCounterAttack = delayCounterAttack;
             colliderSprite.enabled = true;
@@ -82,6 +86,10 @@ namespace Prototipo_2
             CheckDead();
             CheckLifeBar();
         }
+        public void ResetPlayer()
+        {
+            PD.lifePlayer = PD.maxLifePlayer;
+        }
         public void CheckSpritePlayerActual()
         {
             for (int i = 0; i < spritePlayers.Count; i++)
@@ -94,23 +102,24 @@ namespace Prototipo_2
         }
         public void CheckLifeBar()
         {
-            if (life <= maxLife)
+            if (PD.lifePlayer <= PD.maxLifePlayer)
             {
-                ImageHP.fillAmount = life / maxLife;
+                ImageHP.fillAmount = PD.lifePlayer / PD.maxLifePlayer;
             }
-            else if (life > maxLife)
+            else if (PD.lifePlayer > PD.maxLifePlayer)
             {
-                life = maxLife;
+                PD.lifePlayer = PD.maxLifePlayer;
             }
-            else if (life < 0)
+            else if (PD.lifePlayer < 0)
             {
-                life = 0;
+                PD.lifePlayer = 0;
             }
         }
         public void CheckDead()
         {
-            if (life <= 0)
+            if (PD.lifePlayer <= 0)
             {
+                PD.lifePlayer = PD.maxLifePlayer;
                 enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.muerto;
                 gm.GameOver("GameOver");
                 gm.ResetRoundCombat(true);
