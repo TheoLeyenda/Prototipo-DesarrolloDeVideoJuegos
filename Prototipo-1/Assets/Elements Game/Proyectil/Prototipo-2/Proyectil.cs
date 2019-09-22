@@ -125,9 +125,13 @@ namespace Prototipo_2
                             {
                                 if (cuadrilla.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && cuadrilla.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
                                 {
-                                    Debug.Log("ENTRE");
                                     cuadrilla.enemy.spriteEnemyActual.ActualSprite = SpriteEnemy.SpriteActual.RecibirDanio;
                                     cuadrilla.enemy.life = cuadrilla.enemy.life - damage;
+                                }
+                                if (dobleDamage)
+                                {
+                                    damage = damage / 2;
+                                    dobleDamage = false;
                                 }
                                 timeLife = 0;
                             }
@@ -188,6 +192,11 @@ namespace Prototipo_2
                                 {
                                     cuadrilla.enemy.CounterAttack(true);
                                     cuadrilla.enemy.spriteEnemyActual.ActualSprite = SpriteEnemy.SpriteActual.ContraAtaque;
+                                }
+                                if (dobleDamage)
+                                {
+                                    damage = damage / 2;
+                                    dobleDamage = false;
                                 }
                                 timeLife = 0;
                             }

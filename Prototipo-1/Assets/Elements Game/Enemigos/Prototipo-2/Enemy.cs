@@ -46,18 +46,23 @@ namespace Prototipo_2
         private float DeffensePorcentage;
         private float AttackPorcentage;
         private float DodgePorcentage;
+        private float SimpleJumpPorcentage;
+        private float SimpleDuckPorcentage;
         private float AttackJumpPorcentage;
         private float AttackDuckPorcentage;
         private float AttackIdlePorcentage;
+        private float IdlePorcentage;
         private float AttackParabolaPorcentage;
         private float DefenceJumpPorcentage;
         private float DefenceDuckPorcentage;
         private float DefenceIdlePorcentage;
         private float MovePorcentage;
+        private float AccionPorcentage;
         private float MoveForwardPorcentage;
         private float MoveBackPorcentage;
         private float JumpPorcentage;
         private float DuckPorcentage;
+        private float AttackSpecialPorcentage;
         private float MinRangeRandom = 0;
         private float MaxRangeRandom = 100;
         private float TypeRandom = 3;
@@ -367,66 +372,110 @@ namespace Prototipo_2
         }
         public void SetPorcentageMovements()
         {
-            switch (enumsEnemy.typeEnemy)
+            if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
             {
-                //PANEL DE CONFIGURACION DE PORCENTAJES
-                case EnumsEnemy.TiposDeEnemigo.Balanceado:
-                    //----Movimiento----//
-                    AttackPorcentage = 45;
-                    DeffensePorcentage = 45;
-                    DodgePorcentage = 10;
-                    //----Objetivo Atacar----//
-                    AttackJumpPorcentage = 25f;
-                    AttackIdlePorcentage = 25f;
-                    AttackDuckPorcentage = 25f;
-                    AttackParabolaPorcentage = 25f;
-                    //----Objetivo Defender----//
-                    DefenceJumpPorcentage = 33.3f;
-                    DefenceIdlePorcentage = 33.4f;
-                    DefenceDuckPorcentage = 33.3f;
-                    //----Esquivar Arriba/Abajo----//
-                    JumpPorcentage = 50;
-                    DuckPorcentage = 50;
-                    enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.Nulo;
-                    break;
-                case EnumsEnemy.TiposDeEnemigo.Agresivo:
-                    //----Movimiento----//
-                    AttackPorcentage = 80;
-                    DeffensePorcentage = 20;
-                    DodgePorcentage = 0;
-                    //----Objetivo Atacar----//
-                    AttackJumpPorcentage = 0;
-                    AttackIdlePorcentage = 20;
-                    AttackDuckPorcentage = 70;
-                    AttackParabolaPorcentage = 10;
-                    //----Objetivo Defender----//
-                    DefenceJumpPorcentage = 33.3f;
-                    DefenceIdlePorcentage = 33.4f;
-                    DefenceDuckPorcentage = 33.3f;
-                    //----Esquivar Arriba/Abajo----//
-                    JumpPorcentage = 0;
-                    DuckPorcentage = 0;
-                    enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.Nulo;
-                    break;
-                case EnumsEnemy.TiposDeEnemigo.Defensivo:
-                    //---Movimiento---//
-                    AttackPorcentage = 40;
-                    DeffensePorcentage = 60;
-                    DodgePorcentage = 0;
-                    //----Objetivo Atacar----//
-                    AttackJumpPorcentage = 100;
-                    AttackIdlePorcentage = 0;
-                    AttackDuckPorcentage = 0;
-                    AttackParabolaPorcentage = 0;
-                    //----Objetivo Defender----//
-                    DefenceJumpPorcentage = 33.3f;
-                    DefenceIdlePorcentage = 33.4f;
-                    DefenceDuckPorcentage = 33.3f;
-                    //----Esquivar Arriba/Abajo----//
-                    JumpPorcentage = 0;
-                    DuckPorcentage = 0;
-                    enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.Nulo;
-                    break;
+                switch (enumsEnemy.typeEnemy)
+                {
+                    //PANEL DE CONFIGURACION DE PORCENTAJES
+                    case EnumsEnemy.TiposDeEnemigo.Balanceado:
+
+                        //----Movimiento----//
+                        MovePorcentage = 25;
+                        JumpPorcentage = 25;
+                        DuckPorcentage = 25;
+                        IdlePorcentage = 25;
+
+                        //---Direccion de Movimiento---//
+                        MoveForwardPorcentage = 50;
+                        MoveForwardPorcentage = 50;
+
+                        //----Accion Salto----//
+                        AttackJumpPorcentage = 40;
+                        DefenceJumpPorcentage = 40;
+                        SimpleJumpPorcentage = 20;
+
+
+                        //---Accion Agacharse---//
+                        AttackDuckPorcentage = 40;
+                        DefenceDuckPorcentage = 40;
+                        SimpleDuckPorcentage = 20;
+
+                        //---Accion Quieto---//
+                        AttackPorcentage = 50;
+                        DeffensePorcentage = 50;
+
+                        //---Ataque Especial---//
+                        AttackSpecialPorcentage = 100;
+
+                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.Nulo;
+                        break;
+                    case EnumsEnemy.TiposDeEnemigo.Agresivo:
+
+                        //----Movimiento----//
+                        MovePorcentage = 25;
+                        JumpPorcentage = 25;
+                        DuckPorcentage = 25;
+                        IdlePorcentage = 25;
+
+                        //---Direccion de Movimiento---//
+                        MoveForwardPorcentage = 50;
+                        MoveForwardPorcentage = 50;
+
+                        //----Accion Salto----//
+                        AttackJumpPorcentage = 40;
+                        DefenceJumpPorcentage = 40;
+                        SimpleJumpPorcentage = 20;
+
+                        //---Accion Agacharse---//
+                        AttackDuckPorcentage = 40;
+                        DefenceDuckPorcentage = 40;
+                        SimpleDuckPorcentage = 20;
+
+                        //---Accion Quieto---//
+                        AttackPorcentage = 50;
+                        DeffensePorcentage = 50;
+
+                        //---Ataque Especial---//
+                        AttackSpecialPorcentage = 100;
+
+                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.Nulo;
+                        break;
+                    case EnumsEnemy.TiposDeEnemigo.Defensivo:
+
+                        //----Movimiento----//
+                        MovePorcentage = 25;
+                        JumpPorcentage = 25;
+                        DuckPorcentage = 25;
+                        IdlePorcentage = 25;
+
+                        //---Direccion de Movimiento---//
+                        MoveForwardPorcentage = 50;
+                        MoveForwardPorcentage = 50;
+
+                        //----Accion Salto----//
+                        AttackJumpPorcentage = 40;
+                        DefenceJumpPorcentage = 40;
+                        SimpleJumpPorcentage = 20;
+
+                        //---Accion Agacharse---//
+                        AttackDuckPorcentage = 40;
+                        DefenceDuckPorcentage = 40;
+                        SimpleDuckPorcentage = 20;
+
+                        //---Accion Quieto---//
+                        AttackPorcentage = 50;
+                        DeffensePorcentage = 50;
+
+                        //---Ataque Especial---//
+                        AttackSpecialPorcentage = 100;
+
+                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.Nulo;
+                        break;
+                }
+            }
+            else if (enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Jefe)
+            {
+
             }
         }
         public void OnEnemyHistory(EnumsEnemy.TiposDeEnemigo typeEnemy, EnumsEnemy.TiposDeJefe typeBoss)
@@ -531,35 +580,157 @@ namespace Prototipo_2
             {
                 if (delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque))
                 {
-                    EnumsEnemy.Movimiento movimiento;
-                    gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
-                    int min = (int)EnumsEnemy.Movimiento.Nulo + 1;
-                    int max = (int)EnumsEnemy.Movimiento.Count - 3;
-                    if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
-                    {
-                        movimiento = (EnumsEnemy.Movimiento)Random.Range(min, max);
-                    }
-                    else
-                    {
-                        movimiento = enumsEnemy.GetMovement();
-                    }
-                    delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
-                    enumsEnemy.SetMovement(movimiento);
-                    Debug.Log(movimiento.ToString());
-                    if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando)
-                    {
-                        delayAttack = delayAttackJumping;
-                    }
-                    if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar)
-                    {
-                        isDeffended = false;
-                    }
+                    CheckComportamiento();
                 }
                 if (delaySelectMovement > 0)
                 {
                     CheckMovement();
                     delaySelectMovement = delaySelectMovement - Time.deltaTime;
                 }
+            }
+        }
+        // VA A FALTAR CREAR UNA BARRA DE ATAQUE ESPECIAL Y QUE CUANDO LA BARRA ESTE LLENA LLAME A LA FUNCION DE CHECK ATAQUE ESPECIAL
+        public void CheckComportamiento()
+        {
+            EnumsEnemy.Movimiento movimiento = EnumsEnemy.Movimiento.Nulo;
+            if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
+            {
+                float opcionMovement = Random.Range(MinRangeRandom, MaxRangeRandom);
+
+                if (opcionMovement < MovePorcentage)
+                {
+                    //MOVIMIENTO 
+                    
+                    if (structsEnemys.dataEnemy.columnaActual >= gridEnemy.GetCuadrilla_columnas() - 1)
+                    {
+                        movimiento = EnumsEnemy.Movimiento.MoverAdelante;
+                    }
+                    else if (structsEnemys.dataEnemy.columnaActual <= 0)
+                    {
+                        movimiento = EnumsEnemy.Movimiento.MoverAtras;
+                    }
+                    else
+                    {
+                        opcionMovement = Random.Range(MinRangeRandom, MaxRangeRandom);
+                        if (opcionMovement < MoveBackPorcentage)
+                        {
+                            movimiento = EnumsEnemy.Movimiento.MoverAtras;
+                        }
+                        else
+                        {
+                            movimiento = EnumsEnemy.Movimiento.MoverAdelante;
+                        }
+                    }
+                }
+                else if (opcionMovement >= MovePorcentage && opcionMovement < (MovePorcentage + JumpPorcentage))
+                {
+                    //SALTO
+                    opcionMovement = Random.Range(MinRangeRandom, MaxRangeRandom);
+                    if (opcionMovement < AttackJumpPorcentage)
+                    {
+                        movimiento = EnumsEnemy.Movimiento.SaltoAtaque;
+                    }
+                    else if (opcionMovement >= AttackJumpPorcentage && opcionMovement < (AttackJumpPorcentage + DefenceJumpPorcentage))
+                    {
+                        movimiento = EnumsEnemy.Movimiento.SaltoDefensa;
+                    }
+                    else if (opcionMovement >= (AttackJumpPorcentage + DefenceJumpPorcentage))
+                    {
+                        movimiento = EnumsEnemy.Movimiento.Saltar;
+                    }
+                }
+                else if (opcionMovement >= (MovePorcentage + JumpPorcentage) && opcionMovement < (MovePorcentage + JumpPorcentage + DuckPorcentage))
+                {
+                    //AGACHARSE
+                    opcionMovement = Random.Range(MinRangeRandom, MaxRangeRandom);
+                    if (opcionMovement < AttackDuckPorcentage)
+                    {
+                        movimiento = EnumsEnemy.Movimiento.AgacharseAtaque;
+                    }
+                    else if (opcionMovement >= AttackDuckPorcentage && opcionMovement < (AttackDuckPorcentage + DefenceDuckPorcentage))
+                    {
+                        movimiento = EnumsEnemy.Movimiento.AgacheDefensa;
+                    }
+                    else if (opcionMovement >= (AttackDuckPorcentage + DefenceDuckPorcentage))
+                    {
+                        movimiento = EnumsEnemy.Movimiento.Agacharse;
+                    }
+                }
+                else if (opcionMovement >= (MovePorcentage + JumpPorcentage + DuckPorcentage))
+                {
+                    //QUIETO EN EL LUGAR
+                    opcionMovement = Random.Range(MinRangeRandom, MaxRangeRandom);
+                    if (opcionMovement < AttackPorcentage)
+                    {
+                        movimiento = EnumsEnemy.Movimiento.AtacarEnElLugar;
+                    }
+                    else if (opcionMovement >= AttackPorcentage && opcionMovement < (AttackPorcentage + DeffensePorcentage))
+                    {
+                        movimiento = EnumsEnemy.Movimiento.DefensaEnElLugar;
+                    }
+                }
+            }
+            else
+            {
+                movimiento = enumsEnemy.GetMovement();
+            }
+            delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
+            enumsEnemy.SetMovement(movimiento);
+            Debug.Log(movimiento.ToString());
+            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando)
+            {
+                delayAttack = delayAttackJumping;
+            }
+            if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar)
+            {
+                isDeffended = false;
+            }
+        }
+        public EnumsEnemy.Movimiento CheckSpecialAttack(EnumsEnemy.Movimiento _movimiento)
+        {
+            float specialMovement = Random.Range(MinRangeRandom, MaxRangeRandom);
+            EnumsEnemy.Movimiento movimiento = _movimiento;
+            if (specialMovement < AttackSpecialPorcentage)
+            {
+                if (_movimiento == EnumsEnemy.Movimiento.Agacharse || _movimiento == EnumsEnemy.Movimiento.AgacharseAtaque || _movimiento == EnumsEnemy.Movimiento.AgacheDefensa)
+                {
+                    movimiento = EnumsEnemy.Movimiento.AtacarEnParabolaAgachado;
+                }
+                else if (_movimiento == EnumsEnemy.Movimiento.Saltar || _movimiento == EnumsEnemy.Movimiento.SaltoAtaque || _movimiento == EnumsEnemy.Movimiento.SaltoDefensa)
+                {
+                    movimiento = EnumsEnemy.Movimiento.AtacarEnParabolaSaltando;
+                }
+                else if (_movimiento == EnumsEnemy.Movimiento.AtacarEnElLugar || _movimiento == EnumsEnemy.Movimiento.DefensaEnElLugar)
+                {
+                    movimiento = EnumsEnemy.Movimiento.AtacarEnParabola;
+                }
+            }
+            return movimiento;
+        }
+        public void DefaultBehavior()
+        {
+            EnumsEnemy.Movimiento movimiento;
+            gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+            int min = (int)EnumsEnemy.Movimiento.Nulo + 1;
+            int max = (int)EnumsEnemy.Movimiento.Count - 3;
+            if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
+            {
+                movimiento = (EnumsEnemy.Movimiento)Random.Range(min, max);
+            }
+            else
+            {
+                movimiento = enumsEnemy.GetMovement();
+            }
+            delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
+            enumsEnemy.SetMovement(movimiento);
+            Debug.Log(movimiento.ToString());
+            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando)
+            {
+                delayAttack = delayAttackJumping;
+            }
+            if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar)
+            {
+                isDeffended = false;
             }
         }
         public void CheckLifeBar()
@@ -1206,7 +1377,7 @@ namespace Prototipo_2
         {
             Vector3 distaciaObjetivo = transform.position - PosicionDestino;
             bool mover = false;
-            if (distaciaObjetivo.magnitude > 0.1f)
+            if (distaciaObjetivo.magnitude > 0.2f)
             {
                 mover = true;
             }

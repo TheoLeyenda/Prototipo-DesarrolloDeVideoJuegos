@@ -200,8 +200,14 @@ namespace Prototipo_2 {
                             }
                         }
                     }
+                    if (dobleDamage)
+                    {
+                        damage = damage / 2;
+                        dobleDamage = false;
+                    }
                     break;
             }
+            
         }
     }
 }
