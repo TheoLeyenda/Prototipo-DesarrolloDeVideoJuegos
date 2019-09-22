@@ -91,7 +91,7 @@ namespace Prototipo_2
         [HideInInspector]
         public Vector3 pointOfCombat;
         public bool damageCounterAttack;
-        //private float sumarAlturaInicial = 0.2f;
+        public bool activateComportamiento;
         void Start()
         {
             auxSpeedJump = SpeedJump;
@@ -118,7 +118,6 @@ namespace Prototipo_2
         }
         public void CheckInitialSprite()
         {
-            //transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);
             if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
             { 
                 switch (enumsEnemy.typeEnemy)
@@ -596,78 +595,81 @@ namespace Prototipo_2
             EnumsEnemy.Movimiento movimiento = EnumsEnemy.Movimiento.Nulo;
             if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
             {
-                float opcionMovement = Random.Range(MinRangeRandom, MaxRangeRandom);
-
-                if (opcionMovement < MovePorcentage)
+                if (activateComportamiento)
                 {
-                    //MOVIMIENTO 
-                    
-                    if (structsEnemys.dataEnemy.columnaActual >= gridEnemy.GetCuadrilla_columnas() - 1)
+                    float opcionMovement = Random.Range(MinRangeRandom, MaxRangeRandom);
+
+                    if (opcionMovement < MovePorcentage)
                     {
-                        movimiento = EnumsEnemy.Movimiento.MoverAdelante;
-                    }
-                    else if (structsEnemys.dataEnemy.columnaActual <= 0)
-                    {
-                        movimiento = EnumsEnemy.Movimiento.MoverAtras;
-                    }
-                    else
-                    {
-                        opcionMovement = Random.Range(MinRangeRandom, MaxRangeRandom);
-                        if (opcionMovement < MoveBackPorcentage)
+                        //MOVIMIENTO 
+
+                        if (structsEnemys.dataEnemy.columnaActual >= gridEnemy.GetCuadrilla_columnas() - 1)
+                        {
+                            movimiento = EnumsEnemy.Movimiento.MoverAdelante;
+                        }
+                        else if (structsEnemys.dataEnemy.columnaActual <= 0)
                         {
                             movimiento = EnumsEnemy.Movimiento.MoverAtras;
                         }
                         else
                         {
-                            movimiento = EnumsEnemy.Movimiento.MoverAdelante;
+                            opcionMovement = Random.Range(MinRangeRandom, MaxRangeRandom);
+                            if (opcionMovement < MoveBackPorcentage)
+                            {
+                                movimiento = EnumsEnemy.Movimiento.MoverAtras;
+                            }
+                            else
+                            {
+                                movimiento = EnumsEnemy.Movimiento.MoverAdelante;
+                            }
                         }
                     }
-                }
-                else if (opcionMovement >= MovePorcentage && opcionMovement < (MovePorcentage + JumpPorcentage))
-                {
-                    //SALTO
-                    opcionMovement = Random.Range(MinRangeRandom, MaxRangeRandom);
-                    if (opcionMovement < AttackJumpPorcentage)
+                    else if (opcionMovement >= MovePorcentage && opcionMovement < (MovePorcentage + JumpPorcentage))
                     {
-                        movimiento = EnumsEnemy.Movimiento.SaltoAtaque;
+                        //SALTO
+                        opcionMovement = Random.Range(MinRangeRandom, MaxRangeRandom);
+                        if (opcionMovement < AttackJumpPorcentage)
+                        {
+                            movimiento = EnumsEnemy.Movimiento.SaltoAtaque;
+                        }
+                        else if (opcionMovement >= AttackJumpPorcentage && opcionMovement < (AttackJumpPorcentage + DefenceJumpPorcentage))
+                        {
+                            movimiento = EnumsEnemy.Movimiento.SaltoDefensa;
+                        }
+                        else if (opcionMovement >= (AttackJumpPorcentage + DefenceJumpPorcentage))
+                        {
+                            movimiento = EnumsEnemy.Movimiento.Saltar;
+                        }
                     }
-                    else if (opcionMovement >= AttackJumpPorcentage && opcionMovement < (AttackJumpPorcentage + DefenceJumpPorcentage))
+                    else if (opcionMovement >= (MovePorcentage + JumpPorcentage) && opcionMovement < (MovePorcentage + JumpPorcentage + DuckPorcentage))
                     {
-                        movimiento = EnumsEnemy.Movimiento.SaltoDefensa;
+                        //AGACHARSE
+                        opcionMovement = Random.Range(MinRangeRandom, MaxRangeRandom);
+                        if (opcionMovement < AttackDuckPorcentage)
+                        {
+                            movimiento = EnumsEnemy.Movimiento.AgacharseAtaque;
+                        }
+                        else if (opcionMovement >= AttackDuckPorcentage && opcionMovement < (AttackDuckPorcentage + DefenceDuckPorcentage))
+                        {
+                            movimiento = EnumsEnemy.Movimiento.AgacheDefensa;
+                        }
+                        else if (opcionMovement >= (AttackDuckPorcentage + DefenceDuckPorcentage))
+                        {
+                            movimiento = EnumsEnemy.Movimiento.Agacharse;
+                        }
                     }
-                    else if (opcionMovement >= (AttackJumpPorcentage + DefenceJumpPorcentage))
+                    else if (opcionMovement >= (MovePorcentage + JumpPorcentage + DuckPorcentage))
                     {
-                        movimiento = EnumsEnemy.Movimiento.Saltar;
-                    }
-                }
-                else if (opcionMovement >= (MovePorcentage + JumpPorcentage) && opcionMovement < (MovePorcentage + JumpPorcentage + DuckPorcentage))
-                {
-                    //AGACHARSE
-                    opcionMovement = Random.Range(MinRangeRandom, MaxRangeRandom);
-                    if (opcionMovement < AttackDuckPorcentage)
-                    {
-                        movimiento = EnumsEnemy.Movimiento.AgacharseAtaque;
-                    }
-                    else if (opcionMovement >= AttackDuckPorcentage && opcionMovement < (AttackDuckPorcentage + DefenceDuckPorcentage))
-                    {
-                        movimiento = EnumsEnemy.Movimiento.AgacheDefensa;
-                    }
-                    else if (opcionMovement >= (AttackDuckPorcentage + DefenceDuckPorcentage))
-                    {
-                        movimiento = EnumsEnemy.Movimiento.Agacharse;
-                    }
-                }
-                else if (opcionMovement >= (MovePorcentage + JumpPorcentage + DuckPorcentage))
-                {
-                    //QUIETO EN EL LUGAR
-                    opcionMovement = Random.Range(MinRangeRandom, MaxRangeRandom);
-                    if (opcionMovement < AttackPorcentage)
-                    {
-                        movimiento = EnumsEnemy.Movimiento.AtacarEnElLugar;
-                    }
-                    else if (opcionMovement >= AttackPorcentage && opcionMovement < (AttackPorcentage + DeffensePorcentage))
-                    {
-                        movimiento = EnumsEnemy.Movimiento.DefensaEnElLugar;
+                        //QUIETO EN EL LUGAR
+                        opcionMovement = Random.Range(MinRangeRandom, MaxRangeRandom);
+                        if (opcionMovement < AttackPorcentage)
+                        {
+                            movimiento = EnumsEnemy.Movimiento.AtacarEnElLugar;
+                        }
+                        else if (opcionMovement >= AttackPorcentage && opcionMovement < (AttackPorcentage + DeffensePorcentage))
+                        {
+                            movimiento = EnumsEnemy.Movimiento.DefensaEnElLugar;
+                        }
                     }
                 }
             }
@@ -686,8 +688,10 @@ namespace Prototipo_2
             {
                 isDeffended = false;
             }
-            //SACAR ESTO CUANDO CONFIGURE EL COMPORTAMIENTO DEL ENEMIGO
-            if (enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Jefe)
+
+
+            //SACAR LA CONDICION QUE SEA IGUAL AL JEFE CUANDO ESTE TENGA UN COMPORTAMIENTO
+            if (enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Jefe || !activateComportamiento)
             {
                 DefaultBehavior();
             }
