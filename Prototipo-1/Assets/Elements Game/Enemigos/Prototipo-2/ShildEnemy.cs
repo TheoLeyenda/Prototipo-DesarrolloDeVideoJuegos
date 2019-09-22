@@ -8,6 +8,7 @@ namespace Prototipo_2
     {
         // Start is called before the first frame update
         public Enemy enemy;
+        public bool damageCounterAttack;
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.tag == "Proyectil")
@@ -18,7 +19,12 @@ namespace Prototipo_2
                     if (enemy.enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Defensivo)
                     {
                         Debug.Log("CONTRA ATAQUE");
-                        enemy.CounterAttack(false);
+                        if (damageCounterAttack)
+                        {
+                            float realDamage = proyect.damage - enemy.pointsDeffence;
+                            enemy.life = enemy.life - realDamage;
+                        }
+                        enemy.CounterAttack(true);
                     }
                     if (proyect != null)
                     {

@@ -81,7 +81,6 @@ namespace Prototipo_2
             }
             else if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
             {
-                Debug.Log("ENTRE");
                 enemigoActual.ENEMY.transform.position = pointOfCombat.transform.position;
                 enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
             }

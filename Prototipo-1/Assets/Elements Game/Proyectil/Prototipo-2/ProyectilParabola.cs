@@ -153,18 +153,20 @@ namespace Prototipo_2 {
                                         timeLife = 0;
                                     }
                                 }
-                                if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0)
+                                if (cuadrilla.player.delayCounterAttack <= 0 && timeLife <= 0)
+                                {
+                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
+                                    cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                                    
+                                }
+                                else if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0)
                                 {
                                     cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
                                     cuadrilla.player.SetEnableCounterAttack(false);
                                     cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
                                     cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                                    
                                     timeLife = 0;
-                                }
-                                else if (cuadrilla.player.delayCounterAttack <= 0)
-                                {
-                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
-                                    cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                 }
                             }
 
@@ -199,11 +201,6 @@ namespace Prototipo_2 {
 
                             }
                         }
-                    }
-                    if (dobleDamage)
-                    {
-                        damage = damage / 2;
-                        dobleDamage = false;
                     }
                     break;
             }

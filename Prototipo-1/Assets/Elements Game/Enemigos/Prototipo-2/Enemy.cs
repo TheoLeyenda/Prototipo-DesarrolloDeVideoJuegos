@@ -412,28 +412,28 @@ namespace Prototipo_2
                     case EnumsEnemy.TiposDeEnemigo.Agresivo:
 
                         //----Movimiento----//
-                        MovePorcentage = 25;
-                        JumpPorcentage = 25;
-                        DuckPorcentage = 25;
-                        IdlePorcentage = 25;
+                        MovePorcentage = 33;
+                        JumpPorcentage = 34;
+                        DuckPorcentage = 0;
+                        IdlePorcentage = 33;
 
                         //---Direccion de Movimiento---//
                         MoveForwardPorcentage = 50;
                         MoveForwardPorcentage = 50;
 
                         //----Accion Salto----//
-                        AttackJumpPorcentage = 40;
-                        DefenceJumpPorcentage = 40;
-                        SimpleJumpPorcentage = 20;
+                        AttackJumpPorcentage = 70;
+                        DefenceJumpPorcentage = 20;
+                        SimpleJumpPorcentage = 10;
 
                         //---Accion Agacharse---//
-                        AttackDuckPorcentage = 40;
-                        DefenceDuckPorcentage = 40;
-                        SimpleDuckPorcentage = 20;
+                        AttackDuckPorcentage = 0;
+                        DefenceDuckPorcentage = 0;
+                        SimpleDuckPorcentage = 0;
 
                         //---Accion Quieto---//
-                        AttackPorcentage = 50;
-                        DeffensePorcentage = 50;
+                        AttackPorcentage = 80;
+                        DeffensePorcentage = 20;
 
                         //---Ataque Especial---//
                         AttackSpecialPorcentage = 100;
@@ -443,28 +443,28 @@ namespace Prototipo_2
                     case EnumsEnemy.TiposDeEnemigo.Defensivo:
 
                         //----Movimiento----//
-                        MovePorcentage = 25;
-                        JumpPorcentage = 25;
-                        DuckPorcentage = 25;
-                        IdlePorcentage = 25;
+                        MovePorcentage = 30;
+                        JumpPorcentage = 0;
+                        DuckPorcentage = 0;
+                        IdlePorcentage = 70;
 
                         //---Direccion de Movimiento---//
                         MoveForwardPorcentage = 50;
                         MoveForwardPorcentage = 50;
 
                         //----Accion Salto----//
-                        AttackJumpPorcentage = 40;
-                        DefenceJumpPorcentage = 40;
-                        SimpleJumpPorcentage = 20;
+                        AttackJumpPorcentage = 0;
+                        DefenceJumpPorcentage = 0;
+                        SimpleJumpPorcentage = 0;
 
                         //---Accion Agacharse---//
-                        AttackDuckPorcentage = 40;
-                        DefenceDuckPorcentage = 40;
-                        SimpleDuckPorcentage = 20;
+                        AttackDuckPorcentage = 0;
+                        DefenceDuckPorcentage = 0;
+                        SimpleDuckPorcentage = 0;
 
                         //---Accion Quieto---//
-                        AttackPorcentage = 50;
-                        DeffensePorcentage = 50;
+                        AttackPorcentage = 35;
+                        DeffensePorcentage = 65;
 
                         //---Ataque Especial---//
                         AttackSpecialPorcentage = 100;
@@ -676,7 +676,7 @@ namespace Prototipo_2
             }
             delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
             enumsEnemy.SetMovement(movimiento);
-            Debug.Log(movimiento.ToString());
+            //Debug.Log(movimiento.ToString());
             if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando)
             {
                 delayAttack = delayAttackJumping;
@@ -995,7 +995,7 @@ namespace Prototipo_2
 
                 if (_doubleDamage)
                 {
-                    proyectil.damage = proyectil.damage * 2;
+                    proyectil.damage = proyectil.damageCounterAttack;
                 }
             }
             if (!isDuck && !specialAttack)
@@ -1345,7 +1345,7 @@ namespace Prototipo_2
         }
         public void CounterAttack(bool dobleDamage)
         {
-            Attack(false,false,true);
+            Attack(false,false, dobleDamage);
         }
         public void Jump(Vector3 alturaMaxima)
         {

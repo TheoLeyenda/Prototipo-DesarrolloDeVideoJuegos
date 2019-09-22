@@ -20,7 +20,10 @@ namespace Prototipo_2
         public float speed;
         public float timeLife;
         public float auxTimeLife;
+        public float damageCounterAttack;
         public float damage;
+        [SerializeField]
+        private float auxDamage;
         public Rigidbody2D rg2D;
         public Transform vectorForward;
         public Transform vectorForwardUp;
@@ -40,7 +43,6 @@ namespace Prototipo_2
         private void OnEnable()
         {
             timeLife = auxTimeLife;
-            
         }
         private void Update()
         {
@@ -48,6 +50,10 @@ namespace Prototipo_2
         }
         public void On()
         {
+            if (!dobleDamage)
+            {
+                damage = auxDamage;
+            }
             poolObject = GetComponent<PoolObject>();
             rg2D.velocity = Vector2.zero;
             rg2D.angularVelocity = 0;
@@ -61,15 +67,9 @@ namespace Prototipo_2
             }
             else if (timeLife <= 0)
             {
-                if (poolObject != null)
-                {
-                    if (dobleDamage && timeLife == 0)
-                    {
-                        damage = damage / 2;
-                        dobleDamage = false;
-                    }
-                    poolObject.Recycle();
-                }
+                damage = auxDamage;
+                dobleDamage = false;
+                poolObject.Recycle();
             }
         }
         public void ShootForward()
@@ -98,11 +98,6 @@ namespace Prototipo_2
             {
                 case "Escudo":
                     timeLife = 0;
-                    if (dobleDamage)
-                    {
-                        damage = damage / 2;
-                        dobleDamage = false;
-                    }
                     break;
                 case "Cuadrilla":
                     Cuadrilla cuadrilla = collision.GetComponent<Cuadrilla>();
@@ -128,12 +123,8 @@ namespace Prototipo_2
                                     cuadrilla.enemy.spriteEnemyActual.ActualSprite = SpriteEnemy.SpriteActual.RecibirDanio;
                                     cuadrilla.enemy.life = cuadrilla.enemy.life - damage;
                                 }
-                                if (dobleDamage)
-                                {
-                                    damage = damage / 2;
-                                    dobleDamage = false;
-                                }
                                 timeLife = 0;
+                                gameObject.SetActive(false);
                             }
                         }
                         if (cuadrilla.player != null)
@@ -147,22 +138,25 @@ namespace Prototipo_2
                                     if (Input.GetKey(cuadrilla.player.ButtonDeffence))
                                     {
                                         cuadrilla.player.Attack();
-                                        timeLife = 0;
                                         cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                        timeLife = 0;
                                     }
                                 }
-                                if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0)
+                                if (cuadrilla.player.delayCounterAttack <= 0 && timeLife <= 0)
+                                {
+                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
+                                    cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                                    //Debug.Log("ENTRE AL DESTRUCTOR POR CONTRA ATAQUE");
+                                }
+                                else if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0)
                                 {
                                     cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
                                     cuadrilla.player.SetEnableCounterAttack(false);
                                     cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
                                     cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                     timeLife = 0;
-                                }
-                                else if (cuadrilla.player.delayCounterAttack <= 0)
-                                {
-                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
-                                    cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                                    gameObject.SetActive(false);
+                                    //Debug.Log("ENTRE AL DESTRUCTOR POR CONTRA ATAQUE");
                                 }
                             }
                             
@@ -170,13 +164,18 @@ namespace Prototipo_2
                     }
                     if (cuadrilla.GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Defendido)
                     {
+
                         if (cuadrilla.player != null)
                         {
                             if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
                             {
                                 float realDamage = damage - cuadrilla.player.pointsDeffence;
                                 cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - realDamage;
+                                cuadrilla.player.delayCounterAttack = 0;
                                 timeLife = 0;
+                                damage = auxDamage;
+                                poolObject.Recycle();
+                                gameObject.SetActive(false);
                             }
                         }
                         if (cuadrilla.enemy != null)
@@ -193,12 +192,8 @@ namespace Prototipo_2
                                     cuadrilla.enemy.CounterAttack(true);
                                     cuadrilla.enemy.spriteEnemyActual.ActualSprite = SpriteEnemy.SpriteActual.ContraAtaque;
                                 }
-                                if (dobleDamage)
-                                {
-                                    damage = damage / 2;
-                                    dobleDamage = false;
-                                }
                                 timeLife = 0;
+                                gameObject.SetActive(false);
                             }
                         }
                         
