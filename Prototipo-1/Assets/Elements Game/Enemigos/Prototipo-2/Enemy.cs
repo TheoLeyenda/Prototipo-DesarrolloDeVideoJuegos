@@ -90,6 +90,7 @@ namespace Prototipo_2
         public Vector3 pointOfDeath;
         [HideInInspector]
         public Vector3 pointOfCombat;
+        public bool damageCounterAttack;
         //private float sumarAlturaInicial = 0.2f;
         void Start()
         {
