@@ -686,6 +686,11 @@ namespace Prototipo_2
             {
                 isDeffended = false;
             }
+            //SACAR ESTO CUANDO CONFIGURE EL COMPORTAMIENTO DEL ENEMIGO
+            if (enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Jefe)
+            {
+                DefaultBehavior();
+            }
         }
         public EnumsEnemy.Movimiento CheckSpecialAttack(EnumsEnemy.Movimiento _movimiento)
         {
@@ -724,7 +729,7 @@ namespace Prototipo_2
             }
             delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
             enumsEnemy.SetMovement(movimiento);
-            Debug.Log(movimiento.ToString());
+            //Debug.Log(movimiento.ToString());
             if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando)
             {
                 delayAttack = delayAttackJumping;

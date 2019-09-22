@@ -187,18 +187,9 @@ namespace Prototipo_2 {
                         {
                             if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
                             {
-                                if (cuadrilla.enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
-                                {
-                                    float realDamage = damage - cuadrilla.enemy.pointsDeffence;
-                                    cuadrilla.enemy.life = cuadrilla.enemy.life - realDamage;
-                                }
-                                else
-                                {
-                                    cuadrilla.enemy.CounterAttack(true);
-                                    cuadrilla.enemy.spriteEnemyActual.ActualSprite = SpriteEnemy.SpriteActual.ContraAtaque;
-                                }
+                                float realDamage = damage - cuadrilla.enemy.pointsDeffence;
+                                cuadrilla.enemy.life = cuadrilla.enemy.life - realDamage;
                                 timeLife = 0;
-
                             }
                         }
                     }
