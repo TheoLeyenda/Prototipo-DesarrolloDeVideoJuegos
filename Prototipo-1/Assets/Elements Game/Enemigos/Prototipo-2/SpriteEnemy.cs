@@ -6,6 +6,8 @@ namespace Prototipo_2
 {
     public class SpriteEnemy : MonoBehaviour
     {
+        [HideInInspector]
+        public Animator animator;
         public Enemy enemy;
         public SpriteRenderer spriteRenderer;
 
@@ -45,6 +47,7 @@ namespace Prototipo_2
             auxDelaySpriteRecibirDanio = delaySpriteRecibirDanio;
             auxDelaySpriteContraAtaque = delaySpriteContraAtaque;
             ActualSprite = SpriteActual.Parado;
+            animator = GetComponent<Animator>();
         }
         private void OnEnable()
         {
@@ -153,28 +156,31 @@ namespace Prototipo_2
                         switch (ActualSprite)
                         {
                             case SpriteActual.Parado:
+                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("Parado-Defensivo");
                                 break;
                             case SpriteActual.ParadoDefensa:
+                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("ParadoDefensa-Defensivo");
                                 break;
                             case SpriteActual.ParadoAtaque:
-                                //spriteRenderer.sprite = CheckListSprite("ParadoAtaque-Defensivo");
-                                //if (spriteRenderer.sprite == null)
-                                //{
-                                    spriteRenderer.sprite = CheckListSprite("Parado-Defensivo");
-                                //}
+                                animator.enabled = true;
+                                //animator.Play("nombre animacion");
                                 break;
                             case SpriteActual.MoverAdelante:
+                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("MoverAdelante-Defensivo");
                                 break;
                             case SpriteActual.MoverAtras:
+                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("MoverAtras-Defensivo");
                                 break;
                             case SpriteActual.RecibirDanio:
+                                //animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("RecibirDanio-Defensivo");
                                 break;
                             case SpriteActual.ContraAtaque:
+                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("ContraAtaque-Defensivo");
                                 break;
                             default:
@@ -187,31 +193,49 @@ namespace Prototipo_2
                         switch (ActualSprite)
                         {
                             case SpriteActual.Agachado:
+                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("Agachado-Balanceado");
                                 break;
                             case SpriteActual.AgachadoDefensa:
+                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("AgachadoDefensa-Balanceado");
                                 break;
                             case SpriteActual.MoverAdelante:
+                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("MoverseAdelante-Balanceado");
                                 break;
                             case SpriteActual.MoverAtras:
+                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("MoverseAtras-Balanceado");
                                 break;
                             case SpriteActual.RecibirDanio:
+                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("RecibirDanio-Balanceado");
                                 break;
                             case SpriteActual.Parado:
+                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("Parado-Balanceado");
                                 break;
                             case SpriteActual.ParadoDefensa:
+                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("ParadoDefensa-Balanceado");
                                 break;
                             case SpriteActual.Salto:
+                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("Salto-Balanceado");
                                 break;
                             case SpriteActual.SaltoDefensa:
+                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("SaltoDefensa-Balanceado");
+                                break;
+                            case SpriteActual.AgachadoAtaque:
+                                animator.enabled = true;
+                                break;
+                            case SpriteActual.ParadoAtaque:
+                                animator.enabled = true;
+                                break;
+                            case SpriteActual.SaltoAtaque:
+                                animator.enabled = true;
                                 break;
                         }
                         break;

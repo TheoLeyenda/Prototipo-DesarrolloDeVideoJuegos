@@ -989,6 +989,40 @@ namespace Prototipo_2
                 delaySelectMovement = 0;
             }
         }
+        public void CheckAnimationAttack(Proyectil proyectil)
+        {
+            if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
+            {
+                switch (enumsEnemy.typeEnemy)
+                {
+                    case EnumsEnemy.TiposDeEnemigo.Balanceado:
+                        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
+                        {
+                            proyectil.On();
+                            spriteEnemyActual.animator.Play("Atque enemigo balanceado");
+                        }
+                        else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
+                        {
+                            proyectil.On();
+                            spriteEnemyActual.animator.Play("Atque enemigo balanceado");
+                        }
+                        else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
+                        {
+                            proyectil.On();
+                            spriteEnemyActual.animator.Play("Atque enemigo balanceado");
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                switch (enumsEnemy.typeBoss)
+                {
+                    case EnumsEnemy.TiposDeJefe.ProfeAnatomia:
+                        break;
+                }
+            }
+        }
         public void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage)
         {
             bool shootDown = false;
@@ -996,13 +1030,13 @@ namespace Prototipo_2
             GameObject generador = null;
             GameObject go = null;
             Proyectil proyectil = null;
+  
             if (!specialAttack)
             {
                 go = poolObjectAttack.GetObject();
                 proyectil = go.GetComponent<Proyectil>();
                 proyectil.SetDobleDamage(_doubleDamage);
                 proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
-
                 if (_doubleDamage)
                 {
                     proyectil.damage = proyectil.damageCounterAttack;
@@ -1310,7 +1344,8 @@ namespace Prototipo_2
             if (!specialAttack)
             {
                 //Debug.Log("ENTRE");
-                proyectil.On();
+                CheckAnimationAttack(proyectil);
+                
                 if (!shootDown)
                 {
                     proyectil.ShootForward();
