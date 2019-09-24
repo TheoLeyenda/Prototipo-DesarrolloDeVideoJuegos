@@ -39,6 +39,7 @@ namespace Prototipo_2
             {
                 gm = GameManager.instanceGameManager;
             }
+            poolObject = GetComponent<PoolObject>();
         }
         private void OnEnable()
         {
@@ -69,7 +70,10 @@ namespace Prototipo_2
             {
                 damage = auxDamage;
                 dobleDamage = false;
-                poolObject.Recycle();
+                if (poolObject != null)
+                {
+                    poolObject.Recycle();
+                }
             }
         }
         public void ShootForward()

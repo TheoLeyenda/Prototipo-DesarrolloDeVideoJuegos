@@ -114,7 +114,6 @@ namespace Prototipo_2
             CheckLifeBar();
             CheckDead();
             IA();
-            //Debug.Log(delaySelectMovement);
         }
         public void CheckInitialSprite()
         {
@@ -999,17 +998,34 @@ namespace Prototipo_2
                         if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
                         {
                             proyectil.On();
-                            spriteEnemyActual.animator.Play("Atque enemigo balanceado");
+                            spriteEnemyActual.animator.Play("Ataque enemigo balanceado");
                         }
                         else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
                         {
                             proyectil.On();
-                            spriteEnemyActual.animator.Play("Atque enemigo balanceado");
+                            spriteEnemyActual.animator.Play("Ataque enemigo balanceado");
                         }
                         else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
                         {
                             proyectil.On();
-                            spriteEnemyActual.animator.Play("Atque enemigo balanceado");
+                            spriteEnemyActual.animator.Play("Ataque enemigo balanceado");
+                        }
+                        break;
+                    case EnumsEnemy.TiposDeEnemigo.Defensivo:
+                        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
+                        {
+                            proyectil.On();
+                            spriteEnemyActual.animator.Play("Ataque enemigo defensivo");
+                        }
+                        else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
+                        {
+                            proyectil.On();
+                            spriteEnemyActual.animator.Play("Ataque enemigo defensivo");
+                        }
+                        else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
+                        {
+                            proyectil.On();
+                            spriteEnemyActual.animator.Play("Ataque enemigo defensivo");
                         }
                         break;
                 }

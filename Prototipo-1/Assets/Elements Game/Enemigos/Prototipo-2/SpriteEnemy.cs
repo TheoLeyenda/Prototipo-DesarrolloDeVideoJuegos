@@ -165,7 +165,6 @@ namespace Prototipo_2
                                 break;
                             case SpriteActual.ParadoAtaque:
                                 animator.enabled = true;
-                                //animator.Play("nombre animacion");
                                 break;
                             case SpriteActual.MoverAdelante:
                                 animator.enabled = false;
@@ -176,7 +175,7 @@ namespace Prototipo_2
                                 spriteRenderer.sprite = CheckListSprite("MoverAtras-Defensivo");
                                 break;
                             case SpriteActual.RecibirDanio:
-                                //animator.enabled = false;
+                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("RecibirDanio-Defensivo");
                                 break;
                             case SpriteActual.ContraAtaque:
