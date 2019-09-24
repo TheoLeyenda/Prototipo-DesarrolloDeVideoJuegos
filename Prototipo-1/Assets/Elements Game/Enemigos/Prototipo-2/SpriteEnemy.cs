@@ -238,6 +238,45 @@ namespace Prototipo_2
                                 break;
                         }
                         break;
+                    case EnumsEnemy.TiposDeEnemigo.Agresivo:
+                        switch (ActualSprite)
+                        {
+                            case SpriteActual.MoverAdelante:
+                                animator.enabled = false;
+                                spriteRenderer.sprite = CheckListSprite("MoverAdelante-Agresivo");
+                                break;
+                            case SpriteActual.MoverAtras:
+                                animator.enabled = false;
+                                spriteRenderer.sprite = CheckListSprite("MoverAtras-Agresivo");
+                                break;
+                            case SpriteActual.RecibirDanio:
+                                animator.enabled = false;
+                                spriteRenderer.sprite = CheckListSprite("RecibirDanio-Agresivo");
+                                break;
+                            case SpriteActual.Parado:
+                                animator.enabled = false;
+                                spriteRenderer.sprite = CheckListSprite("Parado-Agresivo");
+                                break;
+                            case SpriteActual.SaltoDefensa:
+                                animator.enabled = false;
+                                spriteRenderer.sprite = CheckListSprite("ParadoDefensa-Agresivo");
+                                break;
+                            case SpriteActual.ParadoDefensa:
+                                animator.enabled = false;
+                                spriteRenderer.sprite = CheckListSprite("ParadoDefensa-Agresivo");
+                                break;
+                            case SpriteActual.Salto:
+                                animator.enabled = false;
+                                spriteRenderer.sprite = CheckListSprite("Salto-Agresivo");
+                                break;
+                            case SpriteActual.ParadoAtaque:
+                                animator.enabled = true;
+                                break;
+                            case SpriteActual.SaltoAtaque:
+                                animator.enabled = true;
+                                break;
+                        }
+                        break;
                 }
             }
         }
@@ -264,7 +303,6 @@ namespace Prototipo_2
                     {
                         cuadrilla.stateCuadrilla = Cuadrilla.StateCuadrilla.Ocupado;
                     }
-                    //Debug.Log("ENTRE");
                     break;
             }
         }

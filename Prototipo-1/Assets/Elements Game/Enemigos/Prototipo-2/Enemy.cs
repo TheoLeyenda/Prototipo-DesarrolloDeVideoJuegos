@@ -1028,6 +1028,23 @@ namespace Prototipo_2
                             spriteEnemyActual.animator.Play("Ataque enemigo defensivo");
                         }
                         break;
+                    case EnumsEnemy.TiposDeEnemigo.Agresivo:
+                        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
+                        {
+                            proyectil.On();
+                            spriteEnemyActual.animator.Play("Ataque enemigo agresivo");
+                        }
+                        else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
+                        {
+                            proyectil.On();
+                            spriteEnemyActual.animator.Play("Ataque enemigo agresivo");
+                        }
+                        else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
+                        {
+                            proyectil.On();
+                            spriteEnemyActual.animator.Play("Ataque enemigo agresivo");
+                        }
+                        break;
                 }
             }
             else

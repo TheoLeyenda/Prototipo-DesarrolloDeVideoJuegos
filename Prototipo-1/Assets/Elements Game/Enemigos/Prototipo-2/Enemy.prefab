@@ -315,7 +315,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63551584}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.12900035, y: 1.882216, z: 0}
+  m_LocalPosition: {x: -0.12900035, y: 2.22, z: 0}
   m_LocalScale: {x: 52.832035, y: 48.610676, z: 1.0566406}
   m_Children:
   - {fileID: 2111717397}
@@ -5622,7 +5622,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642194618}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.12900035, y: -2.7102501, z: 0}
+  m_LocalPosition: {x: -0.12900035, y: -2.32, z: 0}
   m_LocalScale: {x: 52.832035, y: 48.610676, z: 1.0566406}
   m_Children:
   - {fileID: 476308831}
@@ -7176,7 +7176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214942812040088762}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -3.9299996, y: -2.324849, z: 0}
+  m_LocalPosition: {x: -3.9299996, y: -1.98, z: 0}
   m_LocalScale: {x: 52.832035, y: 48.610676, z: 1.0566406}
   m_Children: []
   m_Father: {fileID: 3013758292263028321}
@@ -8778,20 +8778,20 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04139304, y: -0.11444616}
+  m_Offset: {x: -0.04139304, y: 0.012984991}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.07, y: 7.4}
+    oldSize: {x: 5.42, y: 7.79}
     newSize: {x: 7.38, y: 9.84}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.991346, y: 7.0566607}
+  m_Size: {x: 2.991346, y: 6.8017983}
   m_EdgeRadius: 0
 --- !u!95 &1849668346
 Animator:
@@ -8803,7 +8803,7 @@ Animator:
   m_GameObject: {fileID: 7044342443439236242}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 24779a6f9510eab4f8efb2957ac2a480, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -8827,10 +8827,22 @@ MonoBehaviour:
   animator: {fileID: 0}
   enemy: {fileID: 5784650357481891035}
   spriteRenderer: {fileID: 6636256554894292153}
-  Sprites: []
+  Sprites:
+  - sprite: {fileID: 21300000, guid: cd2b25e852a979c40ab465b636ca8948, type: 3}
+    name: MoverAdelante-Agresivo
+  - sprite: {fileID: 21300000, guid: 673599fc8d20151419024ca94cdf11d7, type: 3}
+    name: MoverAtras-Agresivo
+  - sprite: {fileID: 21300000, guid: df9317ea7f137d54c8ae6ee2e4f2bc5c, type: 3}
+    name: RecibirDanio-Agresivo
+  - sprite: {fileID: 21300000, guid: 504796f60222d7d4d8f396c188fae699, type: 3}
+    name: Parado-Agresivo
+  - sprite: {fileID: 21300000, guid: 50bd83508334d184d9503a21e4a89371, type: 3}
+    name: ParadoDefensa-Agresivo
+  - sprite: {fileID: 21300000, guid: 62722066c77c2f748baa72ece3c9a061, type: 3}
+    name: Salto-Agresivo
   ActualSprite: 0
-  delaySpriteRecibirDanio: 0
-  delaySpriteContraAtaque: 0
+  delaySpriteRecibirDanio: 0.15
+  delaySpriteContraAtaque: 0.15
 --- !u!1 &7155189239322664023
 GameObject:
   m_ObjectHideFlags: 0
@@ -9038,7 +9050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeBoss: 9
-  typeEnemy: 3
+  typeEnemy: 2
 --- !u!114 &1429868411264717354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9281,7 +9293,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8841111961942677939}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -3.93, y: 0.43, z: 0}
+  m_LocalPosition: {x: -3.93, y: 0.8, z: 0}
   m_LocalScale: {x: 52.832035, y: 48.610676, z: 1.0566406}
   m_Children: []
   m_Father: {fileID: 3013758292263028321}
@@ -9409,6 +9421,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.026
       objectReference: {fileID: 0}
+    - target: {fileID: 2562620806002055027, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0154
+      objectReference: {fileID: 0}
     - target: {fileID: 5368987696242746144, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9438,6 +9455,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: SpriteEnemigoDefensivo
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553308929127741685, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
@@ -10009,11 +10031,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: SpriteEnemigoAgresivo
       objectReference: {fileID: 0}
-    - target: {fileID: 7746700542677218688, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7194419974994112971, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
       propertyPath: m_Controller
@@ -10039,6 +10056,12 @@ PrefabInstance:
       propertyPath: Ball
       value: 
       objectReference: {fileID: 2914594783176540619, guid: 0534ba56a355eb048a94948753d4bbdd,
+        type: 3}
+    - target: {fileID: 6222847778254103979, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 504796f60222d7d4d8f396c188fae699,
         type: 3}
     - target: {fileID: 7339213786674316720, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
