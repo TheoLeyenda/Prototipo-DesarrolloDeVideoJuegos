@@ -85,7 +85,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5282363892035419082}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13.96, y: -3.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -106,10 +106,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37841e313fc67e24c9f396f404745d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 0}
   poolEnemy: {fileID: 5282363892035419076}
   Generador: {fileID: 5282363892035419082}
   pointOfCombat: {fileID: 5282363890676874194}
   pointOfInit: {fileID: 5282363891245105909}
+  TypeEnemiesLevel: 
+  TypeBossLevel: 
   InitGenerate: 1
   typeGeneration: 0
 --- !u!114 &5282363892035419076
@@ -125,5 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ball: {fileID: 739513073498843073, guid: c7bcfdce4b874ad4c99bc4a29d6536e6, type: 3}
+  parentName: Enemigos Generados
   count: 20
   GeneratePoolOnEnable: 0

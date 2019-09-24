@@ -5,6 +5,8 @@ using UnityEngine;
 public class Pool : MonoBehaviour {
 
     public GameObject Ball;
+    private GameObject parent;
+    public string parentName;
     private List<GameObject> CommonBalls;
     public int count;
     private int id;
@@ -13,7 +15,7 @@ public class Pool : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
-        GeneratePool();
+        
     }
     private void OnEnable()
     {
@@ -22,12 +24,29 @@ public class Pool : MonoBehaviour {
             GeneratePool();
         }
     }
+    private void Start()
+    {
+        FindParent(parentName);
+        GeneratePool();
+    }
+    public void CheckParent(GameObject go)
+    {
+        if (parent != null)
+        {
+            go.transform.parent = parent.transform;
+        }
+    }
+    public void FindParent(string parentName)
+    {
+        parent = GameObject.Find(parentName);
+    }
     public void GeneratePool()
     {
         CommonBalls = new List<GameObject>();
         for (int i = 0; i < count; i++)
         {
             GameObject go = Instantiate(Ball);
+            CheckParent(go);
             PoolObject po;
             go.SetActive(false);
             CommonBalls.Add(go);
