@@ -81,8 +81,17 @@ namespace Prototipo_2
             }
             else if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
             {
-                enemigoActual.ENEMY.transform.position = pointOfCombat.transform.position;
-                enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+                if (idListEnemy == 1)
+                {
+                    enemigoActual.ENEMY.transform.position = pointOfCombat.transform.position;
+                    enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+                }
+                else
+                {
+                    enemigoActual.pointOfCombat = pointOfCombat.transform.position;
+                    enemigoActual.pointOfDeath = pointOfInit.transform.position;
+                    enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+                }
             }
         }
         public void GenerateEnemy()
