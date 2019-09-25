@@ -121,6 +121,14 @@ namespace Prototipo_2 {
                     ActualSprite = SpriteActual.Parado;
                     delaySpriteRecibirDanio = auxDelaySpriteRecibirDanio;
                 }
+                if (InputPlayerController.CheckPressAttackButton_P1() && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar)
+                {
+                    ActualSprite = SpriteActual.ParadoAtaque;
+                }
+                if (InputPlayerController.CheckPressAttackButton_P1() && player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
+                {
+                    ActualSprite = SpriteActual.SaltoAtaque;
+                }
             }
             CheckActualSprite();
             

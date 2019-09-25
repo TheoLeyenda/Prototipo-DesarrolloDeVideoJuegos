@@ -7,7 +7,14 @@ namespace Prototipo_2 {
     {
         public Player player1;
         public Player player2;
+        private bool movePlayer1;
+        private bool movePlayer2;
         // Update is called once per frame
+        private void Start()
+        {
+            movePlayer1 = true;
+            movePlayer2 = true;
+        }
         void Update()
         {
             CheckInputPlayer1();
@@ -17,7 +24,10 @@ namespace Prototipo_2 {
         {
             if (InputPlayerController.Vertical_Button_P1() > 0)
             {
-                player1.MovementJump();
+                if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
+                {
+                    player1.MovementJump();
+                }
             }
             else if (InputPlayerController.Vertical_Button_P1() < 0)
             {
@@ -36,19 +46,30 @@ namespace Prototipo_2 {
                 player1.enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
             }
 
-            if (InputPlayerController.Horizontal_Button_P1() < 0)
+            if (InputPlayerController.Horizontal_Button_P1() < 0 && movePlayer1)
             {
                 if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
                 {
+                    movePlayer1 = false;
                     player1.MovementLeft();
                 }
             }
-            else if (InputPlayerController.Horizontal_Button_P1() > 0)
+            else if (InputPlayerController.Horizontal_Button_P1() > 0 && movePlayer1)
             {
                 if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
                 {
+                    movePlayer1 = false;
                     player1.MovementRight();
                 }
+            }
+            else if (InputPlayerController.Horizontal_Button_P1() == 0)
+            {
+                movePlayer1 = true;
+            }
+
+            if (InputPlayerController.AttackButton_P1())
+            {
+                player1.Attack();
             }
         }
         public void CheckInputPlayer2()
