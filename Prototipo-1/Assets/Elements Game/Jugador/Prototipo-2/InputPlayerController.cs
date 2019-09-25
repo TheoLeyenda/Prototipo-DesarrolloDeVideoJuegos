@@ -29,4 +29,16 @@ public static class InputPlayerController
     {
         return Input.GetButton("AttackButton_P1");
     }
+    public static bool DeffenseButton_P1()
+    {
+        return Input.GetButtonDown("DeffenseButton_P1");
+    }
+    public static bool CheckPressDeffenseButton_P1()
+    {
+        return Input.GetButton("DeffenseButton_P1");
+    }
+    public static bool UpDeffenseButton_P1()
+    {
+        return Input.GetButtonUp("DeffenseButton_P1");
+    }
 }

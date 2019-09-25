@@ -50,7 +50,7 @@ namespace Prototipo_2 {
                     {
                         if (cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaCentral
                             && cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaDerecha
-                            && cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaIzquierda || !cuadrilla.player.GetIsJamping())
+                            && cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaIzquierda || !cuadrilla.player.GetIsJumping())
                         {
                             cuadrilla.stateCuadrilla = Cuadrilla.StateCuadrilla.Ocupado;
                         }
@@ -128,6 +128,29 @@ namespace Prototipo_2 {
                 if (InputPlayerController.CheckPressAttackButton_P1() && player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
                 {
                     ActualSprite = SpriteActual.SaltoAtaque;
+                }
+                if (InputPlayerController.CheckPressDeffenseButton_P1() && player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
+                {
+                    ActualSprite = SpriteActual.SaltoDefensa;
+                }
+                if (InputPlayerController.CheckPressDeffenseButton_P1() && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar)
+                {
+                    ActualSprite = SpriteActual.ParadoDefensa;
+                }
+                if (InputPlayerController.Vertical_Button_P1() < 0 && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar)
+                {
+                    if (InputPlayerController.CheckPressAttackButton_P1())
+                    {
+                        ActualSprite = SpriteActual.AgachadoAtaque;
+                    }
+                    else if (InputPlayerController.CheckPressDeffenseButton_P1())
+                    {
+                        ActualSprite = SpriteActual.AgachadoDefensa;
+                    }
+                    else
+                    {
+                        ActualSprite = SpriteActual.Agachado;
+                    }
                 }
             }
             CheckActualSprite();

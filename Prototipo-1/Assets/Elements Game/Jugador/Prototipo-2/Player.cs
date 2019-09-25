@@ -36,7 +36,7 @@ namespace Prototipo_2
         private float auxSpeedJump;
         private GameManager gm;
         private bool doubleDamage;
-        private bool isJamping;
+        private bool isJumping;
         private bool isDuck;
         private bool EnableCounterAttack;
         public Pool poolObjectAttack;
@@ -62,7 +62,7 @@ namespace Prototipo_2
             isDuck = false;
             auxSpeedJump = SpeedJump;
             InitialPosition = transform.position;
-            isJamping = false;
+            isJumping = false;
             enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
             structsPlayer.dataPlayer.CantCasillasOcupadas_X = 1;
             structsPlayer.dataPlayer.CantCasillasOcupadas_Y = 2;
@@ -230,7 +230,7 @@ namespace Prototipo_2
             }
             if (Input.GetKeyDown(ButtonSpecialAttack))
             {
-                if (!isDuck && !isJamping && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo || SpecialAttackEnabelEveryMoment)
+                if (!isDuck && !isJumping && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo || SpecialAttackEnabelEveryMoment)
                 {
                     SpecialAttack();
                 }
@@ -284,7 +284,7 @@ namespace Prototipo_2
         {
             if (enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
             {
-                isJamping = true;
+                isJumping = true;
                 SpeedJump = auxSpeedJump;
             }
             Jump(gridPlayer.matrizCuadrilla[0][structsPlayer.dataPlayer.columnaActual].transform.position);
@@ -351,20 +351,20 @@ namespace Prototipo_2
         }
         public void Jump(Vector3 alturaMaxima)
         {
-            if (CheckMove(new Vector3(transform.position.x,alturaMaxima.y, transform.position.z)) && isJamping)
+            if (CheckMove(new Vector3(transform.position.x,alturaMaxima.y, transform.position.z)) && isJumping)
             {
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.Saltar;
                 MoveJamp(Vector3.up);
                 if (SpeedJump <= 0)
                 {
-                    isJamping = false;
+                    isJumping = false;
                 }
                 gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
                 //Debug.Log(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual].name);
             }
             else
             {
-                isJamping = false;
+                isJumping = false;
                 if (CheckMove(new Vector3(transform.position.x, InitialPosition.y, transform.position.z)))
                 {
                     MoveJamp(Vector3.down);
@@ -410,21 +410,18 @@ namespace Prototipo_2
         {
             return auxDelayCounterAttack;
         }
-        public bool GetIsJamping()
-        {
-            return isJamping;
-        }
+
         public bool GetIsDuck()
         {
             return isDuck;
         }
         public bool GetIsJumping()
         {
-            return isJamping;
+            return isJumping;
         }
         public void SetIsJumping(bool _isJumping)
         {
-            isJamping = _isJumping;
+            isJumping = _isJumping;
         }
         public float GetAuxSpeedJump()
         {
