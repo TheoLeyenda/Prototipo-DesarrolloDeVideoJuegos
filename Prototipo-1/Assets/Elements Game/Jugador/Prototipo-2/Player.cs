@@ -242,33 +242,22 @@ namespace Prototipo_2
             if (Input.GetKeyDown(KeyCode.LeftArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo 
                 || enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
             {
-                if (structsPlayer.dataPlayer.columnaActual > 0)
-                {
-                    MoveLeft(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual-1].transform.position);
-                }
+                MovementLeft();
             }
             if (Input.GetKeyDown(KeyCode.RightArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo ||
                 enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
             {
-                if (structsPlayer.dataPlayer.columnaActual < gridPlayer.GetCuadrilla_columnas()-1)
-                {
-                    MoveRight(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual + 1].transform.position);
-                }
+                MovementRight();
             }
             if (Input.GetKeyDown(KeyCode.UpArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
                 || enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
             {
-                if (enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
-                {
-                    isJamping = true;
-                    SpeedJump = auxSpeedJump;
-                }
-                Jump(gridPlayer.matrizCuadrilla[0][structsPlayer.dataPlayer.columnaActual].transform.position);
+                MovementJump();
             }
 
             if (Input.GetKey(KeyCode.DownArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
             {
-                Duck(structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
+                MovementDuck();
             }
             else if(enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && isDuck)
             {
@@ -276,6 +265,33 @@ namespace Prototipo_2
                 colliderSprite.enabled = true;
                 gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
             }
+        }
+        public void MovementLeft()
+        {
+            if (structsPlayer.dataPlayer.columnaActual > 0)
+            {
+                MoveLeft(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual - 1].transform.position);
+            }
+        }
+        public void MovementRight()
+        {
+            if (structsPlayer.dataPlayer.columnaActual < gridPlayer.GetCuadrilla_columnas() - 1)
+            {
+                MoveRight(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual + 1].transform.position);
+            }
+        }
+        public void MovementJump()
+        {
+            if (enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
+            {
+                isJamping = true;
+                SpeedJump = auxSpeedJump;
+            }
+            Jump(gridPlayer.matrizCuadrilla[0][structsPlayer.dataPlayer.columnaActual].transform.position);
+        }
+        public void MovementDuck()
+        {
+            Duck(structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
         }
         public bool CheckMove(Vector3 PosicionDestino)
         {
@@ -401,6 +417,22 @@ namespace Prototipo_2
         public bool GetIsDuck()
         {
             return isDuck;
+        }
+        public bool GetIsJumping()
+        {
+            return isJamping;
+        }
+        public void SetIsJumping(bool _isJumping)
+        {
+            isJamping = _isJumping;
+        }
+        public float GetAuxSpeedJump()
+        {
+            return auxSpeedJump;
+        }
+        public void SetAuxSpeedJump(float _auxSpeedJump)
+        {
+            auxSpeedJump = _auxSpeedJump;
         }
     }
 }
