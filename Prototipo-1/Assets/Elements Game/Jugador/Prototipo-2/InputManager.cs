@@ -22,12 +22,15 @@ namespace Prototipo_2 {
         void Update()
         {
             CheckInputPlayer1();
+            CheckSpritePlayer1();
             CheckInputPlayer2();
+            CheckSpritePlayer2();
         }
         public void CheckInputPlayer1()
         {
             if (InputPlayerController.Vertical_Button_P1() > 0 && moveVerticalPlayer1)
             {
+                player1.SetControllerJoystick(true);
                 if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
                 {
                     player1.MovementJump();
@@ -36,6 +39,7 @@ namespace Prototipo_2 {
             }
             else if (InputPlayerController.Vertical_Button_P1() < 0)
             {
+                player1.SetControllerJoystick(true);
                 if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
                 {
                     player1.MovementDuck();
@@ -57,6 +61,7 @@ namespace Prototipo_2 {
 
             if (InputPlayerController.Horizontal_Button_P1() < 0 && moveHorizontalPlayer1)
             {
+                player1.SetControllerJoystick(true);
                 if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
                 {
                     moveHorizontalPlayer1 = false;
@@ -65,6 +70,7 @@ namespace Prototipo_2 {
             }
             else if (InputPlayerController.Horizontal_Button_P1() > 0 && moveHorizontalPlayer1)
             {
+                player1.SetControllerJoystick(true);
                 if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
                 {
                     moveHorizontalPlayer1 = false;
@@ -78,6 +84,7 @@ namespace Prototipo_2 {
 
             if (InputPlayerController.AttackButton_P1())
             {
+                player1.SetControllerJoystick(true);
                 if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P1() < 0)
                 {
                     player1.AttackDown();
@@ -90,10 +97,50 @@ namespace Prototipo_2 {
 
             if (InputPlayerController.CheckPressDeffenseButton_P1())
             {
+                player1.SetControllerJoystick(true);
                 player1.Deffence();
             }
         }
         public void CheckInputPlayer2()
+        {
+
+        }
+
+        public void CheckSpritePlayer1()
+        {
+            if (InputPlayerController.CheckPressAttackButton_P1() && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar)
+            {
+                player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoAtaque;
+            }
+            if (InputPlayerController.CheckPressAttackButton_P1() && player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
+            {
+                player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.SaltoAtaque;
+            }
+            if (InputPlayerController.CheckPressDeffenseButton_P1() && player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
+            {
+                player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.SaltoDefensa;
+            }
+            if (InputPlayerController.CheckPressDeffenseButton_P1() && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar)
+            {
+                player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoDefensa;
+            }
+            if (InputPlayerController.Vertical_Button_P1() < 0 && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar)
+            {
+                if (InputPlayerController.CheckPressAttackButton_P1())
+                {
+                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.AgachadoAtaque;
+                }
+                else if (InputPlayerController.CheckPressDeffenseButton_P1())
+                {
+                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.AgachadoDefensa;
+                }
+                else
+                {
+                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Agachado;
+                }
+            }
+        }
+        public void CheckSpritePlayer2()
         {
 
         }

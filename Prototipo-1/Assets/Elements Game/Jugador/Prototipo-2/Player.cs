@@ -50,8 +50,10 @@ namespace Prototipo_2
         public float delayCounterAttack;
         public bool SpecialAttackEnabelEveryMoment;
         private float auxDelayCounterAttack;
+        private bool controllerJoystick;
         void Start()
         {
+            controllerJoystick = false;
             if (resetPlayer)
             {
                 ResetPlayer();
@@ -215,10 +217,12 @@ namespace Prototipo_2
             //Debug.Log("Movimiento actual:" + enumsPlayers.movimiento);
             if (Input.GetKeyDown(ButtonAttack) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(KeyCode.DownArrow))
             {
+                controllerJoystick = false;
                 AttackDown();
             }
             else if (Input.GetKeyDown(ButtonAttack))
             {
+                controllerJoystick = false;
                 if (!Input.GetKey(ButtonDeffence))
                 {
                     Attack();
@@ -226,10 +230,12 @@ namespace Prototipo_2
             }
             if (Input.GetKey(ButtonDeffence))
             {
+                controllerJoystick = false;
                 Deffence();
             }
             if (Input.GetKeyDown(ButtonSpecialAttack))
             {
+                controllerJoystick = false;
                 if (!isDuck && !isJumping && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo || SpecialAttackEnabelEveryMoment)
                 {
                     SpecialAttack();
@@ -237,30 +243,36 @@ namespace Prototipo_2
             }
             if (Input.GetKeyUp(ButtonDeffence))
             {
+                controllerJoystick = false;
                 gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo 
                 || enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
             {
+                controllerJoystick = false;
                 MovementLeft();
             }
             if (Input.GetKeyDown(KeyCode.RightArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo ||
                 enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
             {
+                controllerJoystick = false;
                 MovementRight();
             }
             if (Input.GetKeyDown(KeyCode.UpArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
                 || enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
             {
+                controllerJoystick = false;
                 MovementJump();
             }
 
             if (Input.GetKey(KeyCode.DownArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
             {
+                controllerJoystick = false;
                 MovementDuck();
             }
             else if(enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && isDuck)
             {
+                controllerJoystick = false;
                 isDuck = false;
                 colliderSprite.enabled = true;
                 gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
@@ -430,6 +442,14 @@ namespace Prototipo_2
         public void SetAuxSpeedJump(float _auxSpeedJump)
         {
             auxSpeedJump = _auxSpeedJump;
+        }
+        public void SetControllerJoystick(bool _controllerJoystick)
+        {
+            controllerJoystick = _controllerJoystick;
+        }
+        public bool GetControllerJoystick()
+        {
+            return controllerJoystick;
         }
     }
 }
