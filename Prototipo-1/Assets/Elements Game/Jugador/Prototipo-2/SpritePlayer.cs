@@ -62,20 +62,11 @@ namespace Prototipo_2 {
         }
         public void Update()
         {
-            CheckEnumSprite();
+            CheckActualSprite();
         }
         public float GetAuxDelaySpriteRecibirDanio()
         {
             return auxDelaySpriteRecibirDanio;
-        }
-        public void CheckEnumSprite()
-        {
-            if (ActualSprite == SpriteActual.RecibirDanio)
-            {
-                CheckDeleyRecibirDanio();
-            }
-            CheckActualSprite();
-            
         }
         public void CheckDeleyRecibirDanio()
         {
