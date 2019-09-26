@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class InputPlayerController
 {
+    // -------CONTROLES JUGADOR 1--------- //
     public static float Vertical_Button_P1()
     {
         float r = 0.0f;
@@ -47,5 +48,9 @@ public static class InputPlayerController
     public static bool UpDeffenseButton_P1()
     {
         return Input.GetButtonUp("DeffenseButton_P1");
+    }
+    public static bool SelectButton_P1()
+    {
+        return Input.GetButtonDown("SelectButton_P1");
     }
 }

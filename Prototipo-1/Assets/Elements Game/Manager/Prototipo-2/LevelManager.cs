@@ -17,7 +17,6 @@ namespace Prototipo_2
         public List<Dialogos> dialogos;
         private GameManager gm;
         public bool InitDialog;
-        public string ButtonPassText;
         public int ObjectiveOfPassLevel;
         private int Level;
         private bool inDialog;
@@ -47,7 +46,7 @@ namespace Prototipo_2
         {
             CheckDiagolos();
             CheckPassLevel();
-            if (Input.GetKeyDown(ButtonPassText))
+            if (InputPlayerController.SelectButton_P1())
             {
                 NextId();
             }
