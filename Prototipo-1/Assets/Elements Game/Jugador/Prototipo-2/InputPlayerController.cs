@@ -16,7 +16,14 @@ public static class InputPlayerController
         r += Input.GetAxis("Horizontal_Button_P1");
         return Mathf.Clamp(r, -1.0f, 1.0f);
     }
-
+    public static bool SpecialAttackButton_P1()
+    {
+        return Input.GetButtonDown("SpecialAttackButton_P1");
+    }
+    public static bool CheckSpecialAttackButton_P1()
+    {
+        return Input.GetButton("SpecialAttackButton_P1");
+    }
     public static Vector3 MainJostick_P1()
     {
         return new Vector3(Horizontal_Button_P1(), 0, Vertical_Button_P1());

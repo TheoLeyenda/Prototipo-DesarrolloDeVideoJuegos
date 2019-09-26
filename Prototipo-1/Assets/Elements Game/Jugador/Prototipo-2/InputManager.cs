@@ -100,6 +100,10 @@ namespace Prototipo_2 {
                 player1.SetControllerJoystick(true);
                 player1.Deffence();
             }
+            if (InputPlayerController.SpecialAttackButton_P1())
+            {
+                player1.SpecialAttack();
+            }
         }
         public void CheckInputPlayer2()
         {
