@@ -113,7 +113,7 @@ namespace Prototipo_2 {
         public void CheckSpritePlayer1()
         {
 
-            if (InputPlayerController.Vertical_Button_P1() > 0 || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
+            if (InputPlayerController.Vertical_Button_P1() > 0 && InputPlayerController.Horizontal_Button_P1() == 0 && player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
             {
                 if (InputPlayerController.CheckPressAttackButton_P1())
                 {
@@ -130,6 +130,23 @@ namespace Prototipo_2 {
                 else
                 {
                     player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Salto;
+                }
+                if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
+                {
+                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
+                }
+            }
+            if (InputPlayerController.Vertical_Button_P1() == 0 && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Agacharse && InputPlayerController.Horizontal_Button_P1() == 0)
+            {
+                if (InputPlayerController.CheckPressAttackButton_P1())
+                {
+                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoAtaque;
+                }
+                else
+                {
+                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
+                    player1.spritePlayerActual.delaySpriteRecibirDanio = player1.spritePlayerActual.GetAuxDelaySpriteRecibirDanio();
                 }
             }
             /*if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonAttack))
@@ -172,13 +189,7 @@ namespace Prototipo_2 {
                 }
             }
             */
-            /*if (player1.spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.RecibirDanio && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && !InputPlayerController.CheckPressDeffenseButton_P1() && !InputPlayerController.CheckSpecialAttackButton_P1()
-               && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
-               && !player1.GetIsDuck())
-            {
-                player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
-                player1.spritePlayerActual.delaySpriteRecibirDanio = player1.spritePlayerActual.GetAuxDelaySpriteRecibirDanio();
-            }*/
+            
         }
         public void CheckSpritePlayer2()
         {
