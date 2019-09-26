@@ -112,6 +112,30 @@ namespace Prototipo_2 {
 
         public void CheckSpritePlayer1()
         {
+            if (InputPlayerController.Horizontal_Button_P1() > 0 && InputPlayerController.Vertical_Button_P1() == 0
+                || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
+            {
+                if (player1.structsPlayer.dataPlayer.columnaActual < player1.gridPlayer.GetCuadrilla_columnas() - 1)
+                {
+                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAdelante;
+                }
+                else
+                {
+                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
+                }
+            }
+            else if (InputPlayerController.Horizontal_Button_P1() < 0 && InputPlayerController.Vertical_Button_P1() == 0
+                || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
+            {
+                if (player1.structsPlayer.dataPlayer.columnaActual > 0)
+                {
+                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAtras;
+                }
+                else
+                {
+                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
+                }
+            }
 
             if (InputPlayerController.Vertical_Button_P1() > 0 && InputPlayerController.Horizontal_Button_P1() == 0 && player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
             {
@@ -149,6 +173,8 @@ namespace Prototipo_2 {
                     player1.spritePlayerActual.delaySpriteRecibirDanio = player1.spritePlayerActual.GetAuxDelaySpriteRecibirDanio();
                 }
             }
+
+            
             /*if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonAttack))
             {
                 ActualSprite = SpriteActual.SaltoAtaque;
