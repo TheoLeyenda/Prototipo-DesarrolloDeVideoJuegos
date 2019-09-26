@@ -7,13 +7,13 @@ public static class InputPlayerController
     public static float Vertical_Button_P1()
     {
         float r = 0.0f;
-        r += Input.GetAxis("Vertical_Button_P1");
+        r += Input.GetAxis("Vertical");
         return Mathf.Clamp(r, -1.0f, 1.0f);
     }
     public static float Horizontal_Button_P1()
     {
         float r = 0.0f;
-        r += Input.GetAxis("Horizontal_Button_P1");
+        r += Input.GetAxis("Horizontal");
         return Mathf.Clamp(r, -1.0f, 1.0f);
     }
     public static bool SpecialAttackButton_P1()

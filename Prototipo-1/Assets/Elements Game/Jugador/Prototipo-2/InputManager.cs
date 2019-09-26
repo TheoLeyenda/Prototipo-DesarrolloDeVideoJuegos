@@ -44,7 +44,7 @@ namespace Prototipo_2 {
                 {
                     player1.MovementDuck();
                     player1.enumsPlayers.movimiento = EnumsPlayers.Movimiento.Agacharse;
-                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Agachado;
+                    //player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Agachado;
                 }
             }
             else if (InputPlayerController.Vertical_Button_P1() == 0 &&
@@ -112,37 +112,73 @@ namespace Prototipo_2 {
 
         public void CheckSpritePlayer1()
         {
-            if (InputPlayerController.CheckPressAttackButton_P1() && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar)
-            {
-                player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoAtaque;
-            }
-            if (InputPlayerController.CheckPressAttackButton_P1() && player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
-            {
-                player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.SaltoAtaque;
-            }
-            if (InputPlayerController.CheckPressDeffenseButton_P1() && player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
-            {
-                player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.SaltoDefensa;
-            }
-            if (InputPlayerController.CheckPressDeffenseButton_P1() && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar)
-            {
-                player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoDefensa;
-            }
-            if (InputPlayerController.Vertical_Button_P1() < 0 && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar)
+
+            if (InputPlayerController.Vertical_Button_P1() > 0 || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
             {
                 if (InputPlayerController.CheckPressAttackButton_P1())
                 {
-                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.AgachadoAtaque;
+                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.SaltoAtaque;
                 }
                 else if (InputPlayerController.CheckPressDeffenseButton_P1())
                 {
-                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.AgachadoDefensa;
+                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.SaltoDefensa;
+                }
+                else if (InputPlayerController.CheckSpecialAttackButton_P1())
+                {
+                    //SPRITE O ANIMACION ATAQUE ESPECIAL JUGADOR.
                 }
                 else
                 {
-                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Agachado;
+                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Salto;
                 }
             }
+            /*if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonAttack))
+            {
+                ActualSprite = SpriteActual.SaltoAtaque;
+            }
+            if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonDeffence))
+            {
+                ActualSprite = SpriteActual.SaltoDefensa;
+            }
+            if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
+            {
+                ActualSprite = SpriteActual.MoverAdelante;
+            }
+            if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
+            {
+                ActualSprite = SpriteActual.MoverAtras;
+            }
+            if (player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonDeffence))
+            {
+                ActualSprite = SpriteActual.ParadoDefensa;
+            }
+            if (player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonAttack))
+            {
+                ActualSprite = SpriteActual.ParadoAtaque;
+            }
+            if (player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && Input.GetKey(KeyCode.DownArrow))
+            {
+                if (Input.GetKey(player.ButtonDeffence))
+                {
+                    ActualSprite = SpriteActual.AgachadoDefensa;
+                }
+                else if (Input.GetKey(player.ButtonAttack))
+                {
+                    ActualSprite = SpriteActual.AgachadoAtaque;
+                }
+                else if (!Input.GetKey(player.ButtonDeffence) && !Input.GetKey(player.ButtonAttack))
+                {
+                    ActualSprite = SpriteActual.Agachado;
+                }
+            }
+            */
+            /*if (player1.spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.RecibirDanio && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && !InputPlayerController.CheckPressDeffenseButton_P1() && !InputPlayerController.CheckSpecialAttackButton_P1()
+               && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
+               && !player1.GetIsDuck())
+            {
+                player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
+                player1.spritePlayerActual.delaySpriteRecibirDanio = player1.spritePlayerActual.GetAuxDelaySpriteRecibirDanio();
+            }*/
         }
         public void CheckSpritePlayer2()
         {

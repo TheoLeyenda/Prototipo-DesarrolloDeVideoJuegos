@@ -13,7 +13,7 @@ namespace Prototipo_2 {
         {
             public Sprite sprite;
             public string name;
-            
+
         }
         public enum SpriteActual
         {
@@ -38,6 +38,7 @@ namespace Prototipo_2 {
         private float auxDelaySpriteRecibirDanio;
         private void Start()
         {
+            ActualSprite = SpriteActual.Parado;
             auxDelaySpriteRecibirDanio = delaySpriteRecibirDanio;
         }
         private void OnTriggerStay2D(Collider2D collision)
@@ -63,70 +64,15 @@ namespace Prototipo_2 {
         {
             CheckEnumSprite();
         }
+        public float GetAuxDelaySpriteRecibirDanio()
+        {
+            return auxDelaySpriteRecibirDanio;
+        }
         public void CheckEnumSprite()
         {
             if (ActualSprite == SpriteActual.RecibirDanio)
             {
                 CheckDeleyRecibirDanio();
-            }
-            else
-            {
-                
-                if (!player.GetControllerJoystick())
-                {
-                    if (ActualSprite != SpriteActual.RecibirDanio && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && !Input.GetKey(player.ButtonDeffence) && !Input.GetKey(player.ButtonAttack)
-                        && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
-                        && !player.GetIsDuck())
-                    {
-                        ActualSprite = SpriteActual.Parado;
-                        delaySpriteRecibirDanio = auxDelaySpriteRecibirDanio;
-                    }
-                    if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
-                    {
-                        ActualSprite = SpriteActual.Salto;
-                    }
-                    if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonAttack))
-                    {
-                        ActualSprite = SpriteActual.SaltoAtaque;
-                    }
-                    if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonDeffence))
-                    {
-                        ActualSprite = SpriteActual.SaltoDefensa;
-                    }
-                    if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
-                    {
-                        ActualSprite = SpriteActual.MoverAdelante;
-                    }
-                    if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
-                    {
-                        ActualSprite = SpriteActual.MoverAtras;
-                    }
-                    if (player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonDeffence))
-                    {
-                        ActualSprite = SpriteActual.ParadoDefensa;
-                    }
-                    if (player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && Input.GetKey(player.ButtonAttack))
-                    {
-                        ActualSprite = SpriteActual.ParadoAtaque;
-                    }
-                    if (player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar && Input.GetKey(KeyCode.DownArrow))
-                    {
-                        if (Input.GetKey(player.ButtonDeffence))
-                        {
-                            ActualSprite = SpriteActual.AgachadoDefensa;
-                        }
-                        else if (Input.GetKey(player.ButtonAttack))
-                        {
-                            ActualSprite = SpriteActual.AgachadoAtaque;
-                        }
-                        else if (!Input.GetKey(player.ButtonDeffence) && !Input.GetKey(player.ButtonAttack))
-                        {
-                            ActualSprite = SpriteActual.Agachado;
-                        }
-                    }
-                }
-
-                
             }
             CheckActualSprite();
             
