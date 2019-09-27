@@ -91,7 +91,7 @@ namespace Prototipo_2
             }
             if (cursorPlayer1.y >= 0 && cursorPlayer1.y < columnas)
             {
-                if (InputPlayerController.Vertical_Button_P1() > 0 && cursorPlayer1.x > 0)
+                if (InputPlayerController.Vertical_Button_P1() > 0 && cursorPlayer1.y > 0)
                 {
                     if (aviableMoveVertical)
                     {
