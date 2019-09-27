@@ -15,8 +15,8 @@ namespace Prototipo_2
         }
         public string nameNextScene;
         public List<string> namePlayersOptions;
-        public GameObject CursorSelectorPlayer1;
-        public GameObject CursorSelectorPlayer2;
+        public Cursor CursorSelectorPlayer1;
+        public Cursor CursorSelectorPlayer2;
         private string[,] grillaDeSeleccion;
         public int filas;
         public int columnas;
@@ -31,8 +31,11 @@ namespace Prototipo_2
                 gm = GameManager.instanceGameManager;
             }
             idOption = 0;
-            cursorPlayer1.x = 0;
+            cursorPlayer1.x = 1;
             cursorPlayer1.y = 0;
+
+            cursorPlayer2.x = 2;
+            cursorPlayer2.y = 0;
             if (filas > 0 && columnas > 0)
             {
                 grillaDeSeleccion = new string[filas, columnas];
@@ -62,24 +65,28 @@ namespace Prototipo_2
         {
             if (cursorPlayer1.x >= 0 && cursorPlayer1.x < filas)
             {
-                if (InputPlayerController.Vertical_Button_P1() > 0 && cursorPlayer1.x < filas-1)
+                if (InputPlayerController.Horizontal_Button_P1() > 0 && cursorPlayer1.x < filas-1)
                 {
                     cursorPlayer1.x++;
+                    CursorSelectorPlayer1.MoveRight();
                 }
-                else if (InputPlayerController.Vertical_Button_P1() < 0 && cursorPlayer1.x > 0)
+                else if (InputPlayerController.Horizontal_Button_P1() < 0 && cursorPlayer1.x > 0)
                 {
                     cursorPlayer1.x--;
+                    CursorSelectorPlayer1.MoveLeft();
                 }
             }
             if (cursorPlayer1.y >= 0 && cursorPlayer1.y < columnas)
             {
-                if (InputPlayerController.Horizontal_Button_P1() > 0 && cursorPlayer1.x > 0)
+                if (InputPlayerController.Vertical_Button_P1() > 0 && cursorPlayer1.x > 0)
                 {
                     cursorPlayer1.y--;
+                    CursorSelectorPlayer1.MoveUp();
                 }
-                else if (InputPlayerController.Horizontal_Button_P1() < 0 && cursorPlayer1.y < columnas-1)
+                else if (InputPlayerController.Vertical_Button_P1() < 0 && cursorPlayer1.y < columnas-1)
                 {
                     cursorPlayer1.y++;
+                    CursorSelectorPlayer1.MoveDown();
                 }
             }
         }
