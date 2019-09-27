@@ -16,14 +16,13 @@ namespace Prototipo_2
         [HideInInspector]
         public bool generateEnemy;
         public int RondasPorJefe;
-        public bool SiglePlayer;
-        public bool MultiPlayer;
         public GameObject TituloPushButton;
         public GameObject FondoPushButton;
         public GameObject buttonGameOver;
         [HideInInspector]
         public int countEnemysDead;
         public ScreenManager screenManager;
+        public StructGameManager structGameManager;
         private int roundCombat;
         // Start is called before the first frame update
         private void Awake()
@@ -58,7 +57,6 @@ namespace Prototipo_2
             {
                 CanvasGameOver.SetActive(true);
             }
-
         }
         public void ResetGameManager()
         {
