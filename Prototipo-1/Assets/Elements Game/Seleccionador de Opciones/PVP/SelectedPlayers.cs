@@ -117,7 +117,6 @@ namespace Prototipo_2
             {
                 aviableMoveHorizontal = true;
             }
-            
         }
         public void CheckSelectCursor()
         {
