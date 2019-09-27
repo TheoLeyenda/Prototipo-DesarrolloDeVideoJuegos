@@ -14,7 +14,7 @@ namespace Prototipo_2
             public bool condirmed;
         }
         public string nameNextScene;
-        public List<string> nameOptions;
+        public List<string> namePlayersOptions;
         public Sprite spriteCursorSelectorPlayer1;
         public Sprite spriteCursorSelectorPlayer2;
         private string[,] grillaDeSeleccion;
@@ -42,9 +42,9 @@ namespace Prototipo_2
                     {
                         for (int j = 0; j < columnas; j++)
                         {
-                            if (idOption < nameOptions.Count)
+                            if (idOption < namePlayersOptions.Count)
                             {
-                                grillaDeSeleccion[i, j] = nameOptions[idOption];
+                                grillaDeSeleccion[i, j] = namePlayersOptions[idOption];
                             }
                             idOption++;
                         }
@@ -62,22 +62,22 @@ namespace Prototipo_2
         {
             if (cursorPlayer1.x >= 0 && cursorPlayer1.x < filas)
             {
-                if (InputPlayerController.Vertical_Button_P1() > 0)
+                if (InputPlayerController.Vertical_Button_P1() > 0 && cursorPlayer1.x < filas-1)
                 {
                     cursorPlayer1.x++;
                 }
-                else if (InputPlayerController.Vertical_Button_P1() < 0)
+                else if (InputPlayerController.Vertical_Button_P1() < 0 && cursorPlayer1.x > 0)
                 {
                     cursorPlayer1.x--;
                 }
             }
             if (cursorPlayer1.y >= 0 && cursorPlayer1.y < columnas)
             {
-                if (InputPlayerController.Horizontal_Button_P1() > 0)
+                if (InputPlayerController.Horizontal_Button_P1() > 0 && cursorPlayer1.x > 0)
                 {
                     cursorPlayer1.y--;
                 }
-                else if (InputPlayerController.Horizontal_Button_P1() < 0)
+                else if (InputPlayerController.Horizontal_Button_P1() < 0 && cursorPlayer1.y < columnas-1)
                 {
                     cursorPlayer1.y++;
                 }
