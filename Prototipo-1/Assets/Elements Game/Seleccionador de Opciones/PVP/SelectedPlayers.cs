@@ -24,8 +24,12 @@ namespace Prototipo_2
         private CursorMatriz cursorPlayer1;
         private CursorMatriz cursorPlayer2;
         private GameManager gm;
+        private bool aviableMoveHorizontal;
+        private bool aviableMoveVertical;
         private void Start()
         {
+            aviableMoveHorizontal = true;
+            aviableMoveVertical = true;
             if (GameManager.instanceGameManager != null)
             {
                 gm = GameManager.instanceGameManager;
@@ -67,28 +71,53 @@ namespace Prototipo_2
             {
                 if (InputPlayerController.Horizontal_Button_P1() > 0 && cursorPlayer1.x < filas-1)
                 {
-                    cursorPlayer1.x++;
-                    CursorSelectorPlayer1.MoveRight();
+                    if (aviableMoveHorizontal)
+                    {
+                        cursorPlayer1.x++;
+                        CursorSelectorPlayer1.MoveRight();
+                        aviableMoveHorizontal = false;
+                    }
                 }
                 else if (InputPlayerController.Horizontal_Button_P1() < 0 && cursorPlayer1.x > 0)
                 {
-                    cursorPlayer1.x--;
-                    CursorSelectorPlayer1.MoveLeft();
+                    if (aviableMoveHorizontal)
+                    {
+                        cursorPlayer1.x--;
+                        CursorSelectorPlayer1.MoveLeft();
+                        aviableMoveHorizontal = false;
+                    }
                 }
             }
             if (cursorPlayer1.y >= 0 && cursorPlayer1.y < columnas)
             {
                 if (InputPlayerController.Vertical_Button_P1() > 0 && cursorPlayer1.x > 0)
                 {
-                    cursorPlayer1.y--;
-                    CursorSelectorPlayer1.MoveUp();
+                    if (aviableMoveVertical)
+                    {
+                        cursorPlayer1.y--;
+                        CursorSelectorPlayer1.MoveUp();
+                        aviableMoveVertical = false;
+                    }
                 }
                 else if (InputPlayerController.Vertical_Button_P1() < 0 && cursorPlayer1.y < columnas-1)
                 {
-                    cursorPlayer1.y++;
-                    CursorSelectorPlayer1.MoveDown();
+                    if (aviableMoveVertical)
+                    {
+                        cursorPlayer1.y++;
+                        CursorSelectorPlayer1.MoveDown();
+                        aviableMoveVertical = false;
+                    }
                 }
             }
+            if (InputPlayerController.Vertical_Button_P1() == 0)
+            {
+                aviableMoveVertical = true;
+            }
+            if (InputPlayerController.Horizontal_Button_P1() == 0)
+            {
+                aviableMoveHorizontal = true;
+            }
+            
         }
         public void CheckSelectCursor()
         {
