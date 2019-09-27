@@ -15,8 +15,8 @@ namespace Prototipo_2
         }
         public string nameNextScene;
         public List<string> namePlayersOptions;
-        public Sprite spriteCursorSelectorPlayer1;
-        public Sprite spriteCursorSelectorPlayer2;
+        public GameObject CursorSelectorPlayer1;
+        public GameObject CursorSelectorPlayer2;
         private string[,] grillaDeSeleccion;
         public int filas;
         public int columnas;
