@@ -35,6 +35,7 @@ namespace Prototipo_2
                 gm = GameManager.instanceGameManager;
             }
             idOption = 0;
+
             cursorPlayer1.x = 1;
             cursorPlayer1.y = 0;
 
@@ -122,23 +123,28 @@ namespace Prototipo_2
         {
             if (InputPlayerController.SelectButton_P1())
             {
+                Debug.Log(cursorPlayer1.x+", "+cursorPlayer1.y);
                 switch (grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y])
                 {
                     case "Balanceado":
                         gm.structGameManager.gm_dataCombatPvP.player1_selected = DataCombatPvP.Player_Selected.Balanceado;
                         cursorPlayer1.condirmed = true;
+                        Debug.Log("Elegi balanceado");
                         break;
                     case "Agresivo":
                         gm.structGameManager.gm_dataCombatPvP.player1_selected = DataCombatPvP.Player_Selected.Agresivo;
                         cursorPlayer1.condirmed = true;
+                        Debug.Log("Elegi agresivo");
                         break;
                     case "Defensivo":
                         gm.structGameManager.gm_dataCombatPvP.player1_selected = DataCombatPvP.Player_Selected.Defensivo;
                         cursorPlayer1.condirmed = true;
+                        Debug.Log("Elegi Defensivo");
                         break;
                     case "Protagonista":
                         gm.structGameManager.gm_dataCombatPvP.player1_selected = DataCombatPvP.Player_Selected.Protagonista;
                         cursorPlayer1.condirmed = true;
+                        Debug.Log("Elegi Protagonista");
                         break;
                     default:
                         cursorPlayer1.condirmed = false;
