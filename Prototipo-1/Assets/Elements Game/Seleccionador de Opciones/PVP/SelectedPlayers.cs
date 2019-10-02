@@ -129,22 +129,18 @@ namespace Prototipo_2
                     case "Balanceado":
                         gm.structGameManager.gm_dataCombatPvP.player1_selected = DataCombatPvP.Player_Selected.Balanceado;
                         cursorPlayer1.condirmed = true;
-                        Debug.Log("Elegi balanceado");
                         break;
                     case "Agresivo":
                         gm.structGameManager.gm_dataCombatPvP.player1_selected = DataCombatPvP.Player_Selected.Agresivo;
                         cursorPlayer1.condirmed = true;
-                        Debug.Log("Elegi agresivo");
                         break;
                     case "Defensivo":
                         gm.structGameManager.gm_dataCombatPvP.player1_selected = DataCombatPvP.Player_Selected.Defensivo;
                         cursorPlayer1.condirmed = true;
-                        Debug.Log("Elegi Defensivo");
                         break;
                     case "Protagonista":
                         gm.structGameManager.gm_dataCombatPvP.player1_selected = DataCombatPvP.Player_Selected.Protagonista;
                         cursorPlayer1.condirmed = true;
-                        Debug.Log("Elegi Protagonista");
                         break;
                     default:
                         cursorPlayer1.condirmed = false;

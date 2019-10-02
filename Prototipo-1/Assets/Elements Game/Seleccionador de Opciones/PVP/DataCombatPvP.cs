@@ -48,7 +48,18 @@ namespace Prototipo_2 {
             level_selected = gm.structGameManager.gm_dataCombatPvP.level_selected;
             switch (player1_selected)
             {
-
+                case Player_Selected.Agresivo:
+                    Debug.Log("Elegi Agresivo");
+                    break;
+                case Player_Selected.Balanceado:
+                    Debug.Log("Elegi Balanceado");
+                    break;
+                case Player_Selected.Defensivo:
+                    Debug.Log("Elegi Defensivo");
+                    break;
+                case Player_Selected.Protagonista:
+                    Debug.Log("Elegi Protagonista");
+                    break;
             }
             switch (player2_selected)
             {
