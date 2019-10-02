@@ -118,6 +118,10 @@ namespace Prototipo_2 {
             }
             else
             {
+                if (InputPlayerController.Vertical_Button_P1() == 0)
+                {
+                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
+                }
                 if (InputPlayerController.Horizontal_Button_P1() > 0 && InputPlayerController.Vertical_Button_P1() == 0
                     || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
                 {
