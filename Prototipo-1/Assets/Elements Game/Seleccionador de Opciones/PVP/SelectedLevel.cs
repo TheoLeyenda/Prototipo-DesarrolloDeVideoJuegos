@@ -61,16 +61,18 @@ namespace Prototipo_2
                 grillaDeSeleccion = new string[filas, columnas];
                 if (grillaDeSeleccion != null)
                 {
-                    for (int i = 0; i < filas; i++)
+                    int i = columnas-1;
+                    while (i > 0)
                     {
-                        for (int j = 0; j < columnas; j++)
+                        for (int j = 0; j < filas; j++)
                         {
                             if (idOption < nameLevelsOptions.Count)
                             {
-                                grillaDeSeleccion[i, j] = nameLevelsOptions[idOption];
+                                grillaDeSeleccion[j, i] = nameLevelsOptions[idOption];
                             }
                             idOption++;
                         }
+                        i--;
                     }
                 }
             }
@@ -195,6 +197,11 @@ namespace Prototipo_2
         }
         public void CheckFondo()
         {
+            /*
+             * BackgroundLevels currentLevel = BackgroundLevels.Cafeteria;
+
+            background.sprite = fondos[(int)currentLevel];
+            */
             switch (grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y])
             {
                 case "Aula_Anatomia":

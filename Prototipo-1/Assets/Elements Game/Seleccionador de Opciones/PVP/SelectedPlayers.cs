@@ -46,16 +46,18 @@ namespace Prototipo_2
                 grillaDeSeleccion = new string[filas, columnas];
                 if (grillaDeSeleccion != null)
                 {
-                    for (int i = 0; i < filas; i++)
+                    int i = columnas - 1;
+                    while (i > 0)
                     {
-                        for (int j = 0; j < columnas; j++)
+                        for (int j = 0; j < filas; j++)
                         {
                             if (idOption < namePlayersOptions.Count)
                             {
-                                grillaDeSeleccion[i, j] = namePlayersOptions[idOption];
+                                grillaDeSeleccion[j, i] = namePlayersOptions[idOption];
                             }
                             idOption++;
                         }
+                        i--;
                     }
                 }
             }
