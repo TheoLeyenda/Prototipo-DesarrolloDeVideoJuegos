@@ -30,6 +30,7 @@ namespace Prototipo_2 {
             Cafeteria,
             Count
         }
+        public SpriteRenderer fondoNivel;
         public Player_Selected player1_selected;
         public Player_Selected player2_selected;
         public Level_Selected level_selected;
@@ -64,7 +65,18 @@ namespace Prototipo_2 {
             }
             switch (player2_selected)
             {
-
+                case Player_Selected.Agresivo:
+                    
+                    break;
+                case Player_Selected.Balanceado:
+                    
+                    break;
+                case Player_Selected.Defensivo:
+                   
+                    break;
+                case Player_Selected.Protagonista:
+                    
+                    break;
             }
             switch (level_selected)
             {

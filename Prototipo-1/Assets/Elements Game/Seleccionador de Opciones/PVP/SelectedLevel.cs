@@ -13,11 +13,24 @@ namespace Prototipo_2
             public int y;
             public bool condirmed;
         }
+        public enum BackgroundLevels
+        {
+            Anatomia,
+            Historia,
+            EducacionFisica,
+            Arte,
+            Matematica,
+            Quimica,
+            Programacion,
+            TESIS,
+            Cafeteria,
+            Count
+        }
         private GameManager gm;
         public string nameNextScene;
         public List<string> nameLevelsOptions;
         public Cursor CursorSelectorPlayer1;
-        public Cursor CursorSelectorPlayer2;
+        //public Cursor CursorSelectorPlayer2;
         private string[,] grillaDeSeleccion;
         public int filas;
         public int columnas;
@@ -26,6 +39,8 @@ namespace Prototipo_2
         private CursorMatriz cursorPlayer2;
         private bool aviableMoveHorizontal;
         private bool aviableMoveVertical;
+        public SpriteRenderer background;
+        public List<Sprite> fondos;
         void Start()
         {
             aviableMoveHorizontal = true;
@@ -66,6 +81,7 @@ namespace Prototipo_2
         {
             MoveCursor();
             CheckSelectCursor();
+            CheckFondo();
         }
         public void MoveCursor()
         {
@@ -174,6 +190,39 @@ namespace Prototipo_2
             {
                 Debug.Log("ENTRE");
                 SceneManager.LoadScene(nameNextScene);
+            }
+        }
+        public void CheckFondo()
+        {
+            switch (grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y])
+            {
+                case "Aula_Anatomia":
+                    background.sprite = fondos[(int)BackgroundLevels.Anatomia];
+                    break;
+                case "Aula_Historia":
+                    background.sprite = fondos[(int)BackgroundLevels.Historia];
+                    break;
+                case "Aula_EducacionFisica":
+                    background.sprite = fondos[(int)BackgroundLevels.EducacionFisica];
+                    break;
+                case "Aula_Arte":
+                    background.sprite = fondos[(int)BackgroundLevels.Arte];
+                    break;
+                case "Aula_Matematica":
+                    background.sprite = fondos[(int)BackgroundLevels.Matematica];
+                    break;
+                case "Aula_Quimica":
+                    background.sprite = fondos[(int)BackgroundLevels.Quimica];
+                    break;
+                case "Aula_Programacion":
+                    background.sprite = fondos[(int)BackgroundLevels.Programacion];
+                    break;
+                case "Aula_TESIS":
+                    background.sprite = fondos[(int)BackgroundLevels.TESIS];
+                    break;
+                case "Aula_Cafeteria":
+                    background.sprite = fondos[(int)BackgroundLevels.Cafeteria];
+                    break;
             }
         }
         // ESTE SCRIPT DEBE COMUNICAR AL STRUCT DEL GAME MANAGER LAS SELECCIONES DE LOS NIVELES
