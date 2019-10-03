@@ -52,7 +52,7 @@ namespace Prototipo_2
             idOption = 0;
 
             cursorPlayer1.x = 1;
-            cursorPlayer1.y = 0;
+            cursorPlayer1.y = columnas-1;
 
             cursorPlayer2.x = 2;
             cursorPlayer2.y = 0;
@@ -112,6 +112,7 @@ namespace Prototipo_2
                 {
                     if (aviableMoveVertical)
                     {
+                        Debug.Log("ENTRE");
                         cursorPlayer1.y--;
                         CursorSelectorPlayer1.MoveUp();
                         aviableMoveVertical = false;
