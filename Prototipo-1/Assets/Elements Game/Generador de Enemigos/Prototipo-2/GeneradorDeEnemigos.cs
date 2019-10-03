@@ -12,6 +12,12 @@ namespace Prototipo_2
         {
             DeadthEnemy,
         }
+        public enum GeneratorForGameMode
+        {
+            Supervivencia,
+            Historia,
+            Nulo,
+        }
         public LevelManager levelManager;
         public Pool poolEnemy;
         public GameObject Generador;
@@ -25,12 +31,9 @@ namespace Prototipo_2
         private int idListEnemy;
         public bool InitGenerate;
         public TypeGeneration typeGeneration;
+        public GeneratorForGameMode GeneradorDelModoDeJuego;
         private void Awake()
         {
-            if (GameManager.instanceGameManager != null)
-            {
-                gm = GameManager.instanceGameManager;
-            }
         }
         private void Start()
         {
@@ -41,6 +44,15 @@ namespace Prototipo_2
             }
             if (gm != null)
             {
+                switch (GeneradorDelModoDeJuego)
+                {
+                    case GeneratorForGameMode.Supervivencia:
+                        gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Supervivencia;
+                        break;
+                    case GeneratorForGameMode.Historia:
+                        gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Historia;
+                        break;
+                }
                 if (InitGenerate)
                 {
                     Generate();

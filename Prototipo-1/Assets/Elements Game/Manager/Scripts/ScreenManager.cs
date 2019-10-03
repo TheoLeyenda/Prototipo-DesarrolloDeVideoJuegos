@@ -71,6 +71,7 @@ namespace Prototipo_2 {
         }
         public void Menu()
         {
+            gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Nulo;
             idListaNiveles = 0;
             SceneManager.LoadScene("MENU");
         }
