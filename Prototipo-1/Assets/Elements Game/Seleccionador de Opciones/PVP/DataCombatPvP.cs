@@ -27,6 +27,7 @@ namespace Prototipo_2 {
             Quimica,
             Programacion,
             TESIS,
+            Cafeteria,
             Count
         }
         public Player_Selected player1_selected;
