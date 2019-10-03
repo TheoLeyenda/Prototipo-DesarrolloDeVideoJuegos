@@ -28,14 +28,38 @@ namespace Prototipo_2
         private bool aviableMoveVertical;
         void Start()
         {
+            aviableMoveHorizontal = true;
+            aviableMoveVertical = true;
             if (GameManager.instanceGameManager != null)
             {
                 gm = GameManager.instanceGameManager;
             }
-            // SACAR ESTO LUEGO
-            gm.structGameManager.gm_dataCombatPvP.level_selected = DataCombatPvP.Level_Selected.Programacion;
-            SceneManager.LoadScene(nameNextScene);
+            idOption = 0;
 
+            cursorPlayer1.x = 1;
+            cursorPlayer1.y = 0;
+
+            cursorPlayer2.x = 2;
+            cursorPlayer2.y = 0;
+            if (filas > 0 && columnas > 0)
+            {
+                grillaDeSeleccion = new string[filas, columnas];
+                if (grillaDeSeleccion != null)
+                {
+                    for (int i = 0; i < filas; i++)
+                    {
+                        for (int j = 0; j < columnas; j++)
+                        {
+                            if (idOption < nameLevelsOptions.Count)
+                            {
+                                grillaDeSeleccion[i, j] = nameLevelsOptions[idOption];
+                            }
+                            idOption++;
+                        }
+                    }
+                }
+            }
+            idOption = 0;
         }
 
         void Update()
@@ -101,6 +125,7 @@ namespace Prototipo_2
             if (InputPlayerController.SelectButton_P1())
             {
                 Debug.Log(cursorPlayer1.x + ", " + cursorPlayer1.y);
+                Debug.Log(grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y]);
                 switch (grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y])
                 {
                     case "Aula_Anatomia":
@@ -147,6 +172,7 @@ namespace Prototipo_2
             cursorPlayer2.condirmed = true; // SACAR ESTO Y REMPLAZARLO POR LO MISMO QUE HICE CON cursorPlayer1 PERO UTILIZANDO cursorPlayer2
             if (cursorPlayer1.condirmed && cursorPlayer2.condirmed)
             {
+                Debug.Log("ENTRE");
                 SceneManager.LoadScene(nameNextScene);
             }
         }

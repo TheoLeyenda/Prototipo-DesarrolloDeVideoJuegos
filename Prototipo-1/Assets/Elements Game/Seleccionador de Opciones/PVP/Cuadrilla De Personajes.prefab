@@ -426,7 +426,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327300523580330264}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.3672, y: -3.64, z: 0.35449}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
@@ -528,6 +528,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 327300523969131304}
+  - component: {fileID: 1808636425}
   m_Layer: 0
   m_Name: CursorPlayer2
   m_TagString: Untagged
@@ -550,6 +551,19 @@ Transform:
   m_Father: {fileID: 327300523580330265}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1808636425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327300523969131303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c4658b0ec62c9341a8b3ffe138e54d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceOfMove: 2.4
 --- !u!1 &327300524200771922
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,6 +814,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 327300525173267275}
+  - component: {fileID: 871854700}
   m_Layer: 0
   m_Name: CursorPlayer1
   m_TagString: Untagged
@@ -822,6 +837,19 @@ Transform:
   m_Father: {fileID: 327300523580330265}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &871854700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327300525173267274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c4658b0ec62c9341a8b3ffe138e54d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceOfMove: 2.4
 --- !u!1 &327300525262225775
 GameObject:
   m_ObjectHideFlags: 0

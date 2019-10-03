@@ -68,7 +68,33 @@ namespace Prototipo_2 {
             }
             switch (level_selected)
             {
-
+                case Level_Selected.Anatomia:
+                    Debug.Log("Elegi aula anatomia");
+                    break;
+                case Level_Selected.Historia:
+                    Debug.Log("Elegi aula Historia");
+                    break;
+                case Level_Selected.EducacionFisica:
+                    Debug.Log("Elegi aula Educacion Fisica");
+                    break;
+                case Level_Selected.Arte:
+                    Debug.Log("Elegi aula Arte");
+                    break;
+                case Level_Selected.Matematica:
+                    Debug.Log("Elegi aula Matematica");
+                    break;
+                case Level_Selected.Quimica:
+                    Debug.Log("Elegi aula Quimica");
+                    break;
+                case Level_Selected.Programacion:
+                    Debug.Log("Elegi aula Programacion");
+                    break;
+                case Level_Selected.TESIS:
+                    Debug.Log("Elegi aula TESIS");
+                    break;
+                case Level_Selected.Cafeteria:
+                    Debug.Log("Elegi aula Cafeteria");
+                    break;
             }
         }
         // ESTE SCRIPT DEBE TOMAR LA DEDICION CORRESPONDIENTE EN CUANTO AL NIVEL ELEJIDO Y PERSONAJE ELEJIDO DEPENDIENDO DE LA INFO QUE LE PASE EL
