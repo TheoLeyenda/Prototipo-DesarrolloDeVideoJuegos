@@ -51,6 +51,7 @@ namespace Prototipo_2
         public bool SpecialAttackEnabelEveryMoment;
         private float auxDelayCounterAttack;
         private bool controllerJoystick;
+        public bool InPvP;
         void Start()
         {
             controllerJoystick = false;
@@ -83,7 +84,10 @@ namespace Prototipo_2
         // Update is called once per frame
         void Update()
         {
-            InputKeyBoard();
+            if (!InPvP)
+            {
+                InputKeyBoard();
+            }
             CheckOutLimit();
             CheckDead();
             CheckLifeBar();
@@ -215,7 +219,7 @@ namespace Prototipo_2
         {
             //Debug.Log("Columna Actual:" + structsPlayer.dataEnemy.columnaActual);
             //Debug.Log("Movimiento actual:" + enumsPlayers.movimiento);
-            if (Input.GetKeyDown(ButtonAttack) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(KeyCode.DownArrow))
+            /*if (Input.GetKeyDown(ButtonAttack) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(KeyCode.DownArrow))
             {
                 controllerJoystick = false;
                 AttackDown();
@@ -225,28 +229,28 @@ namespace Prototipo_2
                 controllerJoystick = false;
                 if (!Input.GetKey(ButtonDeffence))
                 {
-                    Attack( Proyectil.DisparadorDelProyectil.Jugador);
+                    Attack(Proyectil.DisparadorDelProyectil.Jugador);
                 }
-            }
+            }*/
             if (Input.GetKey(ButtonDeffence))
             {
                 controllerJoystick = false;
                 Deffence();
             }
-            if (Input.GetKeyDown(ButtonSpecialAttack))
+            /*if (Input.GetKeyDown(ButtonSpecialAttack))
             {
                 controllerJoystick = false;
                 if (!isDuck && !isJumping && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo || SpecialAttackEnabelEveryMoment)
                 {
                     SpecialAttack();
                 }
-            }
+            }*/
             if (Input.GetKeyUp(ButtonDeffence))
             {
                 controllerJoystick = false;
                 gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
             }
-            if (Input.GetKeyDown(KeyCode.LeftArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo 
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
                 || enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
             {
                 controllerJoystick = false;
@@ -270,7 +274,7 @@ namespace Prototipo_2
                 controllerJoystick = false;
                 MovementDuck();
             }
-            else if(enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && isDuck)
+            else if (enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && isDuck)
             {
                 controllerJoystick = false;
                 isDuck = false;
@@ -324,7 +328,7 @@ namespace Prototipo_2
             if (direccion == Vector3.up)
             {
                 transform.Translate(direccion * SpeedJump * Time.deltaTime);
-                SpeedJump = SpeedJump - Time.deltaTime *Resistace;
+                SpeedJump = SpeedJump - Time.deltaTime * Resistace;
             }
             else if (direccion == Vector3.down)
             {
@@ -334,13 +338,13 @@ namespace Prototipo_2
         }
 
         public void MoveLeft(Vector3 cuadrillaDestino)
-        {   
+        {
             if (CheckMove(new Vector3(gridPlayer.leftCuadrilla.transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
             {
                 Move(Vector3.left);
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAtras;
             }
-            else if(enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
+            else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
             {
                 structsPlayer.dataPlayer.columnaActual--;
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
@@ -363,7 +367,7 @@ namespace Prototipo_2
         }
         public void Jump(Vector3 alturaMaxima)
         {
-            if (CheckMove(new Vector3(transform.position.x,alturaMaxima.y, transform.position.z)) && isJumping)
+            if (CheckMove(new Vector3(transform.position.x, alturaMaxima.y, transform.position.z)) && isJumping)
             {
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.Saltar;
                 MoveJamp(Vector3.up);
@@ -396,7 +400,7 @@ namespace Prototipo_2
             {
                 gridPlayer.matrizCuadrilla[gridPlayer.GetCuadrilla_columnas() - rangoAgachado][structsPlayer.dataPlayer.columnaActual + i].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
             }
-            
+
         }
         public void Deffence()
         {

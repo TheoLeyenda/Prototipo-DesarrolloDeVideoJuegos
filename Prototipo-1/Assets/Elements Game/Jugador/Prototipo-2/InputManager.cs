@@ -26,6 +26,10 @@ namespace Prototipo_2 {
             CheckInputPlayer2();
             CheckSpritePlayer2();
         }
+        public void CheckVerticalUp()
+        {
+
+        }
         public void CheckInputPlayer1()
         {
             if (InputPlayerController.Vertical_Button_P1() > 0 && moveVerticalPlayer1)
