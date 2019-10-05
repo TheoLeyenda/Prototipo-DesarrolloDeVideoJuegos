@@ -219,32 +219,11 @@ namespace Prototipo_2
         {
             //Debug.Log("Columna Actual:" + structsPlayer.dataEnemy.columnaActual);
             //Debug.Log("Movimiento actual:" + enumsPlayers.movimiento);
-            /*if (Input.GetKeyDown(ButtonAttack) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && Input.GetKey(KeyCode.DownArrow))
-            {
-                controllerJoystick = false;
-                AttackDown();
-            }
-            else if (Input.GetKeyDown(ButtonAttack))
-            {
-                controllerJoystick = false;
-                if (!Input.GetKey(ButtonDeffence))
-                {
-                    Attack(Proyectil.DisparadorDelProyectil.Jugador);
-                }
-            }*/
             if (Input.GetKey(ButtonDeffence))
             {
                 controllerJoystick = false;
                 Deffence();
             }
-            /*if (Input.GetKeyDown(ButtonSpecialAttack))
-            {
-                controllerJoystick = false;
-                if (!isDuck && !isJumping && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo || SpecialAttackEnabelEveryMoment)
-                {
-                    SpecialAttack();
-                }
-            }*/
             if (Input.GetKeyUp(ButtonDeffence))
             {
                 controllerJoystick = false;

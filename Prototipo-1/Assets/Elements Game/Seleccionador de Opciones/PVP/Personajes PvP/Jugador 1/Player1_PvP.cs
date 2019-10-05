@@ -15,7 +15,6 @@ namespace Prototipo_2
             Defensivo,
         }
         public PlayerSelected playerSelected;
-        public InputPlayer1_PvP inputControllerPlayer1;
         public enum State
         {
             Defendido,
@@ -26,24 +25,5 @@ namespace Prototipo_2
             
         }
         // Update is called once per frame
-        void Update()
-        {
-            switch (playerSelected)
-            {
-                case PlayerSelected.Protagonista:
-                    inputControllerPlayer1.InputProtagonista();
-                    break;
-                case PlayerSelected.Agresivo:
-                    inputControllerPlayer1.InputAgresivo();
-                    break;
-                case PlayerSelected.Defensivo:
-                    inputControllerPlayer1.InputDefensivo();
-                    break;
-                case PlayerSelected.Balanceado:
-                    inputControllerPlayer1.InputBalanceado();
-                    break;
-            }
-        }
-        
     }
 }

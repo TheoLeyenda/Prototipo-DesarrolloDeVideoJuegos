@@ -207,19 +207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e80ed6d8b9751468846020f2df5d7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1153075312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1153075307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58939e032af7cd14189b9a21e22dd2f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1153075309}
 --- !u!114 &1153075313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,8 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c26b061a42e5449b630a8363e45192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSelected: 4
-  inputControllerPlayer1: {fileID: 1153075312}
+  playerSelected: 3
 --- !u!1001 &1539732292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -300,6 +286,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7314713150901794187, guid: e3690bba5bddbaf43a4ecf02bccf1fd9,
+        type: 3}
+      propertyPath: m_Name
+      value: Player1
       objectReference: {fileID: 0}
     - target: {fileID: 8760982568194768852, guid: e3690bba5bddbaf43a4ecf02bccf1fd9,
         type: 3}
@@ -510,6 +501,11 @@ PrefabInstance:
       propertyPath: player1
       value: 
       objectReference: {fileID: 1153075309}
+    - target: {fileID: 4424253392766209077, guid: df20cb900f6f16e4c91495850a29ac79,
+        type: 3}
+      propertyPath: player1_PvP
+      value: 
+      objectReference: {fileID: 1153075313}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df20cb900f6f16e4c91495850a29ac79, type: 3}
 --- !u!1001 &2052705988
