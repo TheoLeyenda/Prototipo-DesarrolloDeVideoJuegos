@@ -291,38 +291,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58939e032af7cd14189b9a21e22dd2f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetPlayer: 0
-  PD: {fileID: 0}
-  gridPlayer: {fileID: 0}
-  structsPlayer: {fileID: 0}
-  spritePlayers: []
+  resetPlayer: 1
+  PD: {fileID: 11400000, guid: 753dcda979ab4a94c90bdb2076db2913, type: 2}
+  gridPlayer: {fileID: 741475356}
+  structsPlayer: {fileID: 1153075311}
+  spritePlayers:
+  - {fileID: 770429901}
   spritePlayerActual: {fileID: 0}
-  enumsPlayers: {fileID: 0}
-  BARRA_DE_VIDA: {fileID: 0}
-  generadorProyectiles: {fileID: 0}
-  generadorProyectilesAgachado: {fileID: 0}
-  generadorProyectilesParabola: {fileID: 0}
-  generadorProyectilesParabolaAgachado: {fileID: 0}
-  ImageHP: {fileID: 0}
+  enumsPlayers: {fileID: 1153075310}
+  BARRA_DE_VIDA: {fileID: 844093049}
+  generadorProyectiles: {fileID: 1139379783}
+  generadorProyectilesAgachado: {fileID: 267963670}
+  generadorProyectilesParabola: {fileID: 618716859}
+  generadorProyectilesParabolaAgachado: {fileID: 783883648}
+  ImageHP: {fileID: 395305610}
   PadArrowUp: {fileID: 0}
   PadArrowDown: {fileID: 0}
   PadArrowLeft: {fileID: 0}
   PadArrowRigth: {fileID: 0}
-  SpeedJump: 0
-  Speed: 0
-  pointsDeffence: 0
-  Resistace: 0
-  Gravity: 0
-  poolObjectAttack: {fileID: 0}
-  poolObjectSpecialAttack: {fileID: 0}
-  colliderSprite: {fileID: 0}
-  ButtonDeffence: 
-  ButtonAttack: 
-  ButtonSpecialAttack: 
-  delayCounterAttack: 0
-  SpecialAttackEnabelEveryMoment: 0
-  playerSelected: 0
-  inputControllerPlayer1: {fileID: 0}
+  SpeedJump: 12
+  Speed: 20
+  pointsDeffence: 20
+  Resistace: 22
+  Gravity: 35
+  poolObjectAttack: {fileID: 291447640}
+  poolObjectSpecialAttack: {fileID: 1337524538}
+  colliderSprite: {fileID: 770429899}
+  ButtonDeffence: d
+  ButtonAttack: f
+  ButtonSpecialAttack: s
+  delayCounterAttack: 0.03
+  SpecialAttackEnabelEveryMoment: 1
+  playerSelected: 1
+  inputControllerPlayer1: {fileID: 1153075308}
 --- !u!114 &1153075309 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8760982568194768852, guid: e3690bba5bddbaf43a4ecf02bccf1fd9,
