@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Prototipo_2
 {
-    public class Player1_PvP : Player
+    public class Player1_PvP : MonoBehaviour
     {
         public enum PlayerSelected
         {

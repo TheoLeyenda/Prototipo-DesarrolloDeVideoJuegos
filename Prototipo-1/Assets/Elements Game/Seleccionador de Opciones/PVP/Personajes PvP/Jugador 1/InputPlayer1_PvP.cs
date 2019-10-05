@@ -4,12 +4,13 @@ using UnityEngine;
 
 namespace Prototipo_2
 {
-    public class InputPlayer1_PvP : Player1_PvP
+    public class InputPlayer1_PvP : MonoBehaviour
     {
         // Start is called before the first frame update
+        public Player player;
         public void InputBalanceado()
         {
-            InputKeyBoard();
+            player.InputKeyBoard();
         }
         public void InputDefensivo()
         {
@@ -18,43 +19,43 @@ namespace Prototipo_2
                 SetControllerJoystick(false);
                 AttackDown();
             }*/
-            if (Input.GetKeyDown(ButtonAttack))
+            if (Input.GetKeyDown(player.ButtonAttack))
             {
-                SetControllerJoystick(false);
-                if (!Input.GetKey(ButtonDeffence))
+                player.SetControllerJoystick(false);
+                if (!Input.GetKey(player.ButtonDeffence))
                 {
-                    Attack( Proyectil.DisparadorDelProyectil.Jugador);
+                    player.Attack( Proyectil.DisparadorDelProyectil.Jugador);
                 }
             }
-            if (Input.GetKey(ButtonDeffence))
+            if (Input.GetKey(player.ButtonDeffence))
             {
-                SetControllerJoystick(false);
-                Deffence();
+                player.SetControllerJoystick(false);
+                player.Deffence();
             }
-            if (Input.GetKeyDown(ButtonSpecialAttack))
+            if (Input.GetKeyDown(player.ButtonSpecialAttack))
             {
-                SetControllerJoystick(false);
-                if (!GetIsDuck() && !GetIsJumping() && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo || SpecialAttackEnabelEveryMoment)
+                player.SetControllerJoystick(false);
+                if (!player.GetIsDuck() && !player.GetIsJumping() && player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo || player.SpecialAttackEnabelEveryMoment)
                 {
-                    SpecialAttack();
+                    player.SpecialAttack();
                 }
             }
-            if (Input.GetKeyUp(ButtonDeffence))
+            if (Input.GetKeyUp(player.ButtonDeffence))
             {
-                SetControllerJoystick(false);
-                gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
+                player.SetControllerJoystick(false);
+                player.gridPlayer.CheckCuadrillaOcupada(player.structsPlayer.dataPlayer.columnaActual, player.structsPlayer.dataPlayer.CantCasillasOcupadas_X, player.structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
             }
-            if (Input.GetKeyDown(KeyCode.LeftArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
-                || enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
+                || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
             {
-                SetControllerJoystick(false);
-                MovementLeft();
+                player.SetControllerJoystick(false);
+                player.MovementLeft();
             }
-            if (Input.GetKeyDown(KeyCode.RightArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo ||
-                enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
+            if (Input.GetKeyDown(KeyCode.RightArrow) && player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo ||
+                player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
             {
-                SetControllerJoystick(false);
-                MovementRight();
+                player.SetControllerJoystick(false);
+                player.MovementRight();
             }
             /*if (Input.GetKeyDown(KeyCode.UpArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
                 || enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
@@ -82,7 +83,7 @@ namespace Prototipo_2
         }
         public void InputProtagonista()
         {
-            InputKeyBoard();
+            player.InputKeyBoard();
         }
     }
 }
