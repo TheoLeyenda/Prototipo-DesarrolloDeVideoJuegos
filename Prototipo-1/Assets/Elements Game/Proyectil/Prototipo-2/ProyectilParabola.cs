@@ -148,7 +148,7 @@ namespace Prototipo_2 {
                                     cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
                                     if (Input.GetKey(cuadrilla.player.ButtonDeffence))
                                     {
-                                        cuadrilla.player.Attack();
+                                        cuadrilla.player.Attack(disparadorDelProyectil);
                                         cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
                                         timeLife = 0;
                                     }

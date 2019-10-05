@@ -148,7 +148,7 @@ namespace Prototipo_2
             proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Jugador;
             proyectil.ShootForwardDown();
         }
-        public void Attack()
+        public void Attack(Proyectil.DisparadorDelProyectil disparador)
         {
             GameObject go = poolObjectAttack.GetObject();
             Proyectil proyectil = go.GetComponent<Proyectil>();
@@ -166,7 +166,7 @@ namespace Prototipo_2
                 go.transform.position = generadorProyectilesAgachado.transform.position;
             }
             proyectil.On();
-            proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Jugador;
+            proyectil.disparadorDelProyectil = disparador;
             proyectil.ShootForward();
         }
 
@@ -225,7 +225,7 @@ namespace Prototipo_2
                 controllerJoystick = false;
                 if (!Input.GetKey(ButtonDeffence))
                 {
-                    Attack();
+                    Attack( Proyectil.DisparadorDelProyectil.Jugador);
                 }
             }
             if (Input.GetKey(ButtonDeffence))

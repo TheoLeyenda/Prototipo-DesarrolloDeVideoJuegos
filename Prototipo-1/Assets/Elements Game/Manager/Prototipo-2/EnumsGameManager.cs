@@ -20,6 +20,7 @@ namespace Prototipo_2
             Nulo,
             Supervivencia,
             Historia,
+            PvP,
             Count
         }
         [HideInInspector]

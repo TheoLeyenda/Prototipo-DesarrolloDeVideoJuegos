@@ -91,7 +91,7 @@ namespace Prototipo_2 {
                 }
                 else
                 {
-                    player1.Attack();
+                    player1.Attack( Proyectil.DisparadorDelProyectil.Jugador);
                 }
             }
 

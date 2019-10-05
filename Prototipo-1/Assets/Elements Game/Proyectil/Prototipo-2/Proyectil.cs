@@ -104,6 +104,8 @@ namespace Prototipo_2
                     timeLife = 0;
                     break;
                 case "Cuadrilla":
+                    // SI NO FUNCIONA SACARLE EL BOLEANO enableDamageMe.
+                    bool enableDamagePlayer = true;
                     Cuadrilla cuadrilla = collision.GetComponent<Cuadrilla>();
                     if (cuadrilla.enemy == null && cuadrilla.player == null || cuadrilla.enemy != null && cuadrilla.player != null)
                     {
@@ -139,19 +141,20 @@ namespace Prototipo_2
                                 if (cuadrilla.player.delayCounterAttack > 0)
                                 {
                                     cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
-                                    if (Input.GetKey(cuadrilla.player.ButtonDeffence))
+                                    if (InputPlayerController.DeffenseButton_P1())
                                     {
-                                        cuadrilla.player.Attack();
+                                        cuadrilla.player.Attack( DisparadorDelProyectil.Jugador);
                                         cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
                                         timeLife = 0;
+                                        enableDamagePlayer = false;
                                     }
                                 }
-                                if (cuadrilla.player.delayCounterAttack <= 0 && timeLife <= 0)
+                                if (cuadrilla.player.delayCounterAttack <= 0 && timeLife <= 0 && enableDamagePlayer)
                                 {
                                     cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
                                     cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                 }
-                                else if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0)
+                                else if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0 && enableDamagePlayer)
                                 {
                                     cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
                                     cuadrilla.player.SetEnableCounterAttack(false);
@@ -170,7 +173,7 @@ namespace Prototipo_2
 
                         if (cuadrilla.player != null)
                         {
-                            if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
+                            if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo || disparadorDelProyectil == DisparadorDelProyectil.Jugador && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.PvP)
                             {
                                 if (cuadrilla.player.delayCounterAttack <= 0)
                                 {
@@ -210,6 +213,7 @@ namespace Prototipo_2
                                 timeLife = 0;
                                 gameObject.SetActive(false);
                             }
+                            
                         }
                         
                     }
