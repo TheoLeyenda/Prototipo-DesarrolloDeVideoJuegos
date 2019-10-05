@@ -175,28 +175,48 @@ namespace Prototipo_2
                         {
                             Player1_PvP player1_PvP = cuadrilla.player.gameObject.GetComponent<Player1_PvP>();
                             Debug.Log(player1_PvP);
+                            float realDamage;
                             if (player1_PvP != null)
                             {
-                                switch (player1_PvP.playerState)
+                                if (player1_PvP.playerSelected == Player1_PvP.PlayerSelected.Defensivo)
                                 {
-                                    case Player1_PvP.State.Defendido:
-                                        Debug.Log("ENTRE");
-                                        cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaque;
-                                        if (player1_PvP.playerActual == Player1_PvP.Player.player1)
-                                        {
-                                            cuadrilla.player.Attack(DisparadorDelProyectil.Jugador);
-                                        }
-                                        else if (player1_PvP.playerActual == Player1_PvP.Player.player2)
-                                        {
-                                            cuadrilla.player.Attack(DisparadorDelProyectil.Enemigo);
-                                        }
-                                        float realDamage = damage - cuadrilla.player.pointsDeffence;
-                                        cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - realDamage;
-                                        timeLife = 0;
-                                        damage = auxDamage;
-                                        poolObject.Recycle();
-                                        gameObject.SetActive(false);
-                                        break;
+                                    switch (player1_PvP.playerState)
+                                    {
+                                        case Player1_PvP.State.Defendido:
+                                            cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaque;
+                                            if (player1_PvP.playerActual == Player1_PvP.Player.player1)
+                                            {
+                                                cuadrilla.player.Attack(DisparadorDelProyectil.Jugador);
+                                            }
+                                            else if (player1_PvP.playerActual == Player1_PvP.Player.player2)
+                                            {
+                                                cuadrilla.player.Attack(DisparadorDelProyectil.Enemigo);
+                                            }
+                                            realDamage = damage - cuadrilla.player.pointsDeffence;
+                                            cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - realDamage;
+                                            timeLife = 0;
+                                            damage = auxDamage;
+                                            poolObject.Recycle();
+                                            gameObject.SetActive(false);
+                                            break;
+                                        default:
+                                            realDamage = damage - cuadrilla.player.pointsDeffence;
+                                            cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - realDamage;
+                                            timeLife = 0;
+                                            damage = auxDamage;
+                                            poolObject.Recycle();
+                                            gameObject.SetActive(false);
+                                            break;
+                                    }
+                                }
+                                else
+                                {
+                                    realDamage = damage - cuadrilla.player.pointsDeffence;
+                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - realDamage;
+                                    timeLife = 0;
+                                    damage = auxDamage;
+                                    poolObject.Recycle();
+                                    gameObject.SetActive(false);
                                 }
                             }
                             else
@@ -206,7 +226,7 @@ namespace Prototipo_2
                                     if (cuadrilla.player.delayCounterAttack <= 0)
                                     {
                                         Debug.Log("ENTRE");
-                                        float realDamage = damage - cuadrilla.player.pointsDeffence;
+                                        realDamage = damage - cuadrilla.player.pointsDeffence;
                                         cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - realDamage;
                                         cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
                                         timeLife = 0;
