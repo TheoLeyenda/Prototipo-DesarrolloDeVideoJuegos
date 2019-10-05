@@ -173,23 +173,54 @@ namespace Prototipo_2
 
                         if (cuadrilla.player != null)
                         {
-                            if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo || disparadorDelProyectil == DisparadorDelProyectil.Jugador && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.PvP)
+                            Player1_PvP player1_PvP = cuadrilla.player.gameObject.GetComponent<Player1_PvP>();
+                            Debug.Log(player1_PvP);
+                            if (player1_PvP != null)
                             {
-                                if (cuadrilla.player.delayCounterAttack <= 0)
+                                switch (player1_PvP.playerState)
                                 {
-                                    float realDamage = damage - cuadrilla.player.pointsDeffence;
-                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - realDamage;
-                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
-                                    timeLife = 0;
-                                    damage = auxDamage;
-                                    poolObject.Recycle();
-                                    gameObject.SetActive(false);
-                                }
-                                else
-                                {
-                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
+                                    case Player1_PvP.State.Defendido:
+                                        Debug.Log("ENTRE");
+                                        cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaque;
+                                        if (player1_PvP.playerActual == Player1_PvP.Player.player1)
+                                        {
+                                            cuadrilla.player.Attack(DisparadorDelProyectil.Jugador);
+                                        }
+                                        else if (player1_PvP.playerActual == Player1_PvP.Player.player2)
+                                        {
+                                            cuadrilla.player.Attack(DisparadorDelProyectil.Enemigo);
+                                        }
+                                        float realDamage = damage - cuadrilla.player.pointsDeffence;
+                                        cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - realDamage;
+                                        timeLife = 0;
+                                        damage = auxDamage;
+                                        poolObject.Recycle();
+                                        gameObject.SetActive(false);
+                                        break;
                                 }
                             }
+                            else
+                            {
+                                if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo || disparadorDelProyectil == DisparadorDelProyectil.Jugador && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.PvP)
+                                {
+                                    if (cuadrilla.player.delayCounterAttack <= 0)
+                                    {
+                                        Debug.Log("ENTRE");
+                                        float realDamage = damage - cuadrilla.player.pointsDeffence;
+                                        cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - realDamage;
+                                        cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                        timeLife = 0;
+                                        damage = auxDamage;
+                                        poolObject.Recycle();
+                                        gameObject.SetActive(false);
+                                    }
+                                    else
+                                    {
+                                        cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
+                                    }
+                                }
+                            }
+                            
                         }
                         if (cuadrilla.enemy != null)
                         {

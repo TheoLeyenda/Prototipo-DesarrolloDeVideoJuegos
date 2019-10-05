@@ -30,6 +30,7 @@ namespace Prototipo_2 {
             AgachadoDefensa,
             Agachado,
             AnimacionAtaque,
+            ContraAtaque,
             Count,
         }
         public List<ElementsSprites> Sprites;
@@ -118,6 +119,9 @@ namespace Prototipo_2 {
                     break;
                 case SpriteActual.AgachadoDefensa:
                     spriteRenderer.sprite = CheckListSprite("AgachadoDefensa");
+                    break;
+                case SpriteActual.ContraAtaque:
+                    spriteRenderer.sprite = CheckListSprite("ContraAtaque");
                     break;
             }
         }

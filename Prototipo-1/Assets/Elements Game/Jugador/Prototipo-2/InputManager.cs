@@ -166,14 +166,42 @@ namespace Prototipo_2 {
                         CheckSpecialAttackButton_P1();
                         break;
                     case Player1_PvP.PlayerSelected.Balanceado:
+                        CheckVerticalUp_P1();
+                        CheckVerticalDown_P1();
+                        CheckVerticalCero_P1();
+                        CheckHorizontalLeft_P1();
+                        CheckHorizontalRight_P1();
+                        CheckHorizontalCero_P1();
+                        CheckAttackButton_P1();
+                        CheckDeffenceButton_P1();
+                        CheckSpecialAttackButton_P1();
                         break;
                     case Player1_PvP.PlayerSelected.Defensivo:
+                        CheckVerticalCero_P1();
+                        CheckHorizontalLeft_P1();
+                        CheckHorizontalRight_P1();
+                        CheckHorizontalCero_P1();
+                        CheckAttackButton_P1();
+                        CheckDeffenceButton_P1();
+                        CheckSpecialAttackButton_P1();
                         break;
                     case Player1_PvP.PlayerSelected.Protagonista:
+                        CheckVerticalUp_P1();
+                        CheckVerticalDown_P1();
+                        CheckVerticalCero_P1();
+                        CheckHorizontalLeft_P1();
+                        CheckHorizontalRight_P1();
+                        CheckHorizontalCero_P1();
+                        CheckAttackButton_P1();
+                        CheckDeffenceButton_P1();
+                        CheckSpecialAttackButton_P1();
                         break;
                 }
             }
-            player1.gridPlayer.CheckCuadrillaOcupada(player1.structsPlayer.dataPlayer.columnaActual, player1.structsPlayer.dataPlayer.CantCasillasOcupadas_X, player1.structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
+            if (!InputPlayerController.CheckPressDeffenseButton_P1())
+            {
+                player1.gridPlayer.CheckCuadrillaOcupada(player1.structsPlayer.dataPlayer.columnaActual, player1.structsPlayer.dataPlayer.CantCasillasOcupadas_X, player1.structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
+            }
         }
         public void CheckInputPlayer2()
         {
@@ -254,6 +282,7 @@ namespace Prototipo_2 {
                 else if (InputPlayerController.CheckPressDeffenseButton_P1())
                 {
                     player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoDefensa;
+                    player1_PvP.playerState = Player1_PvP.State.Defendido;
                 }
                 else
                 {
@@ -309,10 +338,26 @@ namespace Prototipo_2 {
                             CheckSpritesParado_P1();
                             break;
                         case Player1_PvP.PlayerSelected.Balanceado:
+                            CheckSpriteParado_P1();
+                            CheckSpriteMoverAdelante_P1();
+                            CheckSpriteMoverAtras_P1();
+                            CheckSpritesSalto_P1();
+                            CheckSpritesParado_P1();
+                            CheckSpritesAgachado_P1();
                             break;
                         case Player1_PvP.PlayerSelected.Defensivo:
+                            CheckSpriteParado_P1();
+                            CheckSpriteMoverAdelante_P1();
+                            CheckSpriteMoverAtras_P1();
+                            CheckSpritesParado_P1();
                             break;
                         case Player1_PvP.PlayerSelected.Protagonista:
+                            CheckSpriteParado_P1();
+                            CheckSpriteMoverAdelante_P1();
+                            CheckSpriteMoverAtras_P1();
+                            CheckSpritesSalto_P1();
+                            CheckSpritesParado_P1();
+                            CheckSpritesAgachado_P1();
                             break;
                     }
                 }
