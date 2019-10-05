@@ -173,22 +173,22 @@ namespace Prototipo_2
 
                         if (cuadrilla.player != null)
                         {
-                            Player1_PvP player1_PvP = cuadrilla.player.gameObject.GetComponent<Player1_PvP>();
+                            Player_PvP player1_PvP = cuadrilla.player.gameObject.GetComponent<Player_PvP>();
                             Debug.Log(player1_PvP);
                             float realDamage;
                             if (player1_PvP != null)
                             {
-                                if (player1_PvP.playerSelected == Player1_PvP.PlayerSelected.Defensivo)
+                                if (player1_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
                                 {
                                     switch (player1_PvP.playerState)
                                     {
-                                        case Player1_PvP.State.Defendido:
+                                        case Player_PvP.State.Defendido:
                                             cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaque;
-                                            if (player1_PvP.playerActual == Player1_PvP.Player.player1)
+                                            if (player1_PvP.playerActual == Player_PvP.Player.player1)
                                             {
                                                 cuadrilla.player.Attack(DisparadorDelProyectil.Jugador);
                                             }
-                                            else if (player1_PvP.playerActual == Player1_PvP.Player.player2)
+                                            else if (player1_PvP.playerActual == Player_PvP.Player.player2)
                                             {
                                                 cuadrilla.player.Attack(DisparadorDelProyectil.Enemigo);
                                             }

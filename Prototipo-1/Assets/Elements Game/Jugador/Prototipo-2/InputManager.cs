@@ -6,8 +6,10 @@ namespace Prototipo_2 {
     public class InputManager : MonoBehaviour
     {
         public Player player1;
+        public Player_PvP player1_PvP;
         public Player player2;
-        public Player1_PvP player1_PvP;
+        public Player_PvP player2_PvP;
+        public bool FindPlayersAndPlayers_PvP;
 
         private bool moveHorizontalPlayer1;
         private bool moveVerticalPlayer1;
@@ -16,6 +18,18 @@ namespace Prototipo_2 {
         // Update is called once per frame
         private void Start()
         {
+            if (FindPlayersAndPlayers_PvP)
+            {
+                player1 = GameObject.Find("Player1").GetComponent<Player>();
+                if (player1 == null)
+                {
+                    Debug.Log("Eso no funciono xd");
+                }
+                else
+                {
+                    Debug.Log("Works :D");
+                }
+            }
             moveHorizontalPlayer1 = true;
             moveVerticalPlayer1 = true;
             moveHorizontalPlayer2 = true;
@@ -154,7 +168,7 @@ namespace Prototipo_2 {
             {
                 switch (player1_PvP.playerSelected)
                 {
-                    case Player1_PvP.PlayerSelected.Agresivo:
+                    case Player_PvP.PlayerSelected.Agresivo:
                         CheckVerticalUp_P1();
                         CheckVerticalCero_P1();
                         CheckHorizontalLeft_P1();
@@ -165,7 +179,7 @@ namespace Prototipo_2 {
                         CheckDeffenceButton_P1();
                         CheckSpecialAttackButton_P1();
                         break;
-                    case Player1_PvP.PlayerSelected.Balanceado:
+                    case Player_PvP.PlayerSelected.Balanceado:
                         CheckVerticalUp_P1();
                         CheckVerticalDown_P1();
                         CheckVerticalCero_P1();
@@ -176,7 +190,7 @@ namespace Prototipo_2 {
                         CheckDeffenceButton_P1();
                         CheckSpecialAttackButton_P1();
                         break;
-                    case Player1_PvP.PlayerSelected.Defensivo:
+                    case Player_PvP.PlayerSelected.Defensivo:
                         CheckVerticalCero_P1();
                         CheckHorizontalLeft_P1();
                         CheckHorizontalRight_P1();
@@ -185,7 +199,7 @@ namespace Prototipo_2 {
                         CheckDeffenceButton_P1();
                         CheckSpecialAttackButton_P1();
                         break;
-                    case Player1_PvP.PlayerSelected.Protagonista:
+                    case Player_PvP.PlayerSelected.Protagonista:
                         CheckVerticalUp_P1();
                         CheckVerticalDown_P1();
                         CheckVerticalCero_P1();
@@ -282,7 +296,7 @@ namespace Prototipo_2 {
                 else if (InputPlayerController.CheckPressDeffenseButton_P1())
                 {
                     player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoDefensa;
-                    player1_PvP.playerState = Player1_PvP.State.Defendido;
+                    player1_PvP.playerState = Player_PvP.State.Defendido;
                 }
                 else
                 {
@@ -330,14 +344,14 @@ namespace Prototipo_2 {
                 {
                     switch (player1_PvP.playerSelected)
                     {
-                        case Player1_PvP.PlayerSelected.Agresivo:
+                        case Player_PvP.PlayerSelected.Agresivo:
                             CheckSpriteParado_P1();
                             CheckSpriteMoverAdelante_P1();
                             CheckSpriteMoverAtras_P1();
                             CheckSpritesSalto_P1();
                             CheckSpritesParado_P1();
                             break;
-                        case Player1_PvP.PlayerSelected.Balanceado:
+                        case Player_PvP.PlayerSelected.Balanceado:
                             CheckSpriteParado_P1();
                             CheckSpriteMoverAdelante_P1();
                             CheckSpriteMoverAtras_P1();
@@ -345,13 +359,13 @@ namespace Prototipo_2 {
                             CheckSpritesParado_P1();
                             CheckSpritesAgachado_P1();
                             break;
-                        case Player1_PvP.PlayerSelected.Defensivo:
+                        case Player_PvP.PlayerSelected.Defensivo:
                             CheckSpriteParado_P1();
                             CheckSpriteMoverAdelante_P1();
                             CheckSpriteMoverAtras_P1();
                             CheckSpritesParado_P1();
                             break;
-                        case Player1_PvP.PlayerSelected.Protagonista:
+                        case Player_PvP.PlayerSelected.Protagonista:
                             CheckSpriteParado_P1();
                             CheckSpriteMoverAdelante_P1();
                             CheckSpriteMoverAtras_P1();

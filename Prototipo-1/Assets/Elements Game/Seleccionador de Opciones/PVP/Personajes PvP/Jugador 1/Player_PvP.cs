@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Prototipo_2
 {
-    public class Player1_PvP : MonoBehaviour
+    public class Player_PvP : MonoBehaviour
     {
         public enum PlayerSelected
         {
@@ -27,7 +27,6 @@ namespace Prototipo_2
         }
         public Player playerActual;
         public State playerState;
-        
         // Start is called before the first frame update
         private void Start()
         {
