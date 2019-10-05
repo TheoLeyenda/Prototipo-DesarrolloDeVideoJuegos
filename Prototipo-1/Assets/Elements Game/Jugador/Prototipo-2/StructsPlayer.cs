@@ -11,6 +11,8 @@ namespace Prototipo_2
         {
             public int CantCasillasOcupadas_X;
             public int CantCasillasOcupadas_Y;
+            public int CantCasillasOcupadasAgachado;
+            public int CantCasillasOcupadasParado;
             public int columnaActual;
         }
 

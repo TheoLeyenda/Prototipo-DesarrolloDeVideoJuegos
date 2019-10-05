@@ -37,19 +37,26 @@ namespace Prototipo_2 {
                 player1.SetControllerJoystick(true);
                 player1.MovementJump();
                 moveVerticalPlayer1 = false;
+                player1.SetIsDuck(false);
             }
         }
         public void CheckVerticalDown_P1()
         {
-            if (InputPlayerController.Vertical_Button_P1() < 0)
+            if (InputPlayerController.Vertical_Button_P1() < 0 && player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
+                || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Agacharse)
             {
                 player1.SetControllerJoystick(true);
-                if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
-                {
-                    player1.MovementDuck();
-                    player1.enumsPlayers.movimiento = EnumsPlayers.Movimiento.Agacharse;
-                    //player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Agachado;
-                }
+                player1.MovementDuck();
+                player1.enumsPlayers.movimiento = EnumsPlayers.Movimiento.Agacharse;
+                player1.SetIsDuck(true);
+            }
+            if (player1.GetIsDuck())
+            {
+                player1.structsPlayer.dataPlayer.CantCasillasOcupadas_Y = player1.structsPlayer.dataPlayer.CantCasillasOcupadasAgachado;
+            }
+            else
+            {
+                player1.structsPlayer.dataPlayer.CantCasillasOcupadas_Y = player1.structsPlayer.dataPlayer.CantCasillasOcupadasParado;
             }
         }
         public void CheckVerticalCero_P1()
@@ -60,10 +67,12 @@ namespace Prototipo_2 {
                 || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacheDefensa))
             {
                 player1.enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+                player1.SetIsDuck(false);
             }
             else if (InputPlayerController.Vertical_Button_P1() == 0)
             {
                 moveVerticalPlayer1 = true;
+                player1.SetIsDuck(false);
             }
         }
         public void CheckHorizontalLeft_P1()
@@ -74,6 +83,7 @@ namespace Prototipo_2 {
                 player1.SetControllerJoystick(true);
                 moveHorizontalPlayer1 = false;
                 player1.MovementLeft();
+                player1.SetIsDuck(false);
 
             }
         }
@@ -85,6 +95,7 @@ namespace Prototipo_2 {
                 player1.SetControllerJoystick(true);
                 moveHorizontalPlayer1 = false;
                 player1.MovementRight();
+                player1.SetIsDuck(false);
             }
             
         }
@@ -162,6 +173,7 @@ namespace Prototipo_2 {
                         break;
                 }
             }
+            player1.gridPlayer.CheckCuadrillaOcupada(player1.structsPlayer.dataPlayer.columnaActual, player1.structsPlayer.dataPlayer.CantCasillasOcupadas_X, player1.structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
         }
         public void CheckInputPlayer2()
         {

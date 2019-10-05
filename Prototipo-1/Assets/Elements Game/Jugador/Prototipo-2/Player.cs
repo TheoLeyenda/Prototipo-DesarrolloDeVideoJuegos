@@ -51,7 +51,7 @@ namespace Prototipo_2
         public bool SpecialAttackEnabelEveryMoment;
         private float auxDelayCounterAttack;
         private bool controllerJoystick;
-        public bool InPvP;
+        public bool DoubleSpeed;
         void Start()
         {
             controllerJoystick = false;
@@ -69,6 +69,8 @@ namespace Prototipo_2
             enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
             structsPlayer.dataPlayer.CantCasillasOcupadas_X = 1;
             structsPlayer.dataPlayer.CantCasillasOcupadas_Y = 2;
+            structsPlayer.dataPlayer.CantCasillasOcupadasAgachado = structsPlayer.dataPlayer.CantCasillasOcupadas_Y /2;
+            structsPlayer.dataPlayer.CantCasillasOcupadasParado = structsPlayer.dataPlayer.CantCasillasOcupadas_Y;
             structsPlayer.dataPlayer.columnaActual = 1;
             doubleDamage = false;
             enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
@@ -84,7 +86,7 @@ namespace Prototipo_2
         // Update is called once per frame
         void Update()
         {
-            if (!InPvP)
+            if (DoubleSpeed)
             {
                 InputKeyBoard();
             }
@@ -375,11 +377,10 @@ namespace Prototipo_2
         {
             isDuck = true;
             colliderSprite.enabled = false;
-            for (int i = 0; i < structsPlayer.dataPlayer.CantCasillasOcupadas_X; i++)
+            /*for (int i = 0; i < structsPlayer.dataPlayer.CantCasillasOcupadas_X; i++)
             {
                 gridPlayer.matrizCuadrilla[gridPlayer.GetCuadrilla_columnas() - rangoAgachado][structsPlayer.dataPlayer.columnaActual + i].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
-            }
-
+            }*/
         }
         public void Deffence()
         {
@@ -409,6 +410,10 @@ namespace Prototipo_2
         public bool GetIsDuck()
         {
             return isDuck;
+        }
+        public void SetIsDuck(bool _isDuck)
+        {
+            isDuck = _isDuck;
         }
         public bool GetIsJumping()
         {
