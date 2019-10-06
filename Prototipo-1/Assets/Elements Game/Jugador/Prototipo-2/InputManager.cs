@@ -40,6 +40,7 @@ namespace Prototipo_2 {
             CheckInputPlayer2();
             CheckSpritePlayer2();
         }
+        //----- FUNCIONES Y CONTROLES DEL JUGADOR 1 -----//
         public void CheckVerticalUp_P1()
         {
             if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && InputPlayerController.Vertical_Button_P1() > 0 && moveVerticalPlayer1
@@ -214,10 +215,7 @@ namespace Prototipo_2 {
                 player1.gridPlayer.CheckCuadrillaOcupada(player1.structsPlayer.dataPlayer.columnaActual, player1.structsPlayer.dataPlayer.CantCasillasOcupadas_X, player1.structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
             }
         }
-        public void CheckInputPlayer2()
-        {
-
-        }
+        
         public void CheckSpriteParado_P1()
         {
             if (InputPlayerController.Vertical_Button_P1() == 0)
@@ -381,9 +379,135 @@ namespace Prototipo_2 {
                 }
             }
         }
+        //-----------------------------------------------//
+
+
+        //----- FUNCIONES Y CONTROLES DEL JUGADOR 2 -----//
+
+        public void CheckVerticalUp_P2()
+        {
+            if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && InputPlayerController.Vertical_Button_P2() > 0 && moveVerticalPlayer2
+                || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
+            {
+                player2.SetControllerJoystick(true);
+                player2.MovementJump();
+                moveVerticalPlayer1 = false;
+                player2.SetIsDuck(false);
+            }
+        }
+        public void CheckVerticalDown_P2()
+        {
+            if (InputPlayerController.Vertical_Button_P2() < 0 && player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
+                || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Agacharse)
+            {
+                player2.SetControllerJoystick(true);
+                player2.MovementDuck();
+                player2.enumsPlayers.movimiento = EnumsPlayers.Movimiento.Agacharse;
+                player2.SetIsDuck(true);
+            }
+            if (player2.GetIsDuck())
+            {
+                player2.structsPlayer.dataPlayer.CantCasillasOcupadas_Y = player2.structsPlayer.dataPlayer.CantCasillasOcupadasAgachado;
+            }
+            else
+            {
+                player2.structsPlayer.dataPlayer.CantCasillasOcupadas_Y = player2.structsPlayer.dataPlayer.CantCasillasOcupadasParado;
+            }
+        }
+        public void CheckVerticalCero_P2()
+        {
+            if (InputPlayerController.Vertical_Button_P2() == 0 &&
+                (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Agacharse
+                || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacharseAtaque
+                || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacheDefensa))
+            {
+                player2.enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+                player2.SetIsDuck(false);
+            }
+            else if (InputPlayerController.Vertical_Button_P2() == 0)
+            {
+                moveVerticalPlayer2 = true;
+                player2.SetIsDuck(false);
+            }
+        }
+        public void CheckHorizontalLeft_P2()
+        {
+            if (InputPlayerController.Horizontal_Button_P1() < 0 && moveHorizontalPlayer1 && player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
+                || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
+            {
+                player1.SetControllerJoystick(true);
+                moveHorizontalPlayer1 = false;
+                player1.MovementLeft();
+                player1.SetIsDuck(false);
+
+            }
+        }
+        public void CheckHorizontalRight_P2()
+        {
+            if (InputPlayerController.Horizontal_Button_P1() > 0 && moveHorizontalPlayer1 && player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
+                || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
+            {
+                player1.SetControllerJoystick(true);
+                moveHorizontalPlayer1 = false;
+                player1.MovementRight();
+                player1.SetIsDuck(false);
+            }
+
+        }
+        public void CheckHorizontalCero_P2()
+        {
+            if (InputPlayerController.Horizontal_Button_P1() == 0)
+            {
+                moveHorizontalPlayer1 = true;
+            }
+        }
+        public void CheckAttackButton_P2()
+        {
+            if (InputPlayerController.AttackButton_P1())
+            {
+                player1.SetControllerJoystick(true);
+                if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P1() < 0)
+                {
+                    player1.AttackDown();
+                }
+                else
+                {
+                    player1.Attack(Proyectil.DisparadorDelProyectil.Jugador);
+                }
+            }
+        }
+        public void CheckDeffenceButton_P2()
+        {
+            if (InputPlayerController.CheckPressDeffenseButton_P1())
+            {
+                player1.SetControllerJoystick(true);
+                player1.Deffence();
+            }
+        }
+        public void CheckSpecialAttackButton_P2()
+        {
+            if (InputPlayerController.SpecialAttackButton_P1())
+            {
+                player1.SpecialAttack();
+            }
+        }
+        public void CheckInputPlayer2()
+        {
+            CheckVerticalUp_P2();
+            CheckVerticalDown_P2();
+            CheckVerticalCero_P2();
+            //CheckHorizontalLeft_P2();
+            //CheckHorizontalRight_P2();
+            //CheckHorizontalCero_P2();
+            //CheckAttackButton_P1();
+            //CheckDeffenceButton_P1();
+            //CheckSpecialAttackButton_P1();
+        }
+
         public void CheckSpritePlayer2()
         {
 
         }
+        //-----------------------------------------------//
     }
 }

@@ -53,4 +53,17 @@ public static class InputPlayerController
     {
         return Input.GetButtonDown("SelectButton_P1");
     }
+    // -------CONTROLES JUGADOR 2--------- //
+    public static float Vertical_Button_P2()
+    {
+        float r = 0.0f;
+        r += Input.GetAxis("Vertical_P2");
+        return Mathf.Clamp(r, -1.0f, 1.0f);
+    }
+    public static float Horizontal_Button_P2()
+    {
+        float r = 0.0f;
+        r += Input.GetAxis("Horizontal_P2");
+        return Mathf.Clamp(r, -1.0f, 1.0f);
+    }
 }
