@@ -322,9 +322,16 @@ namespace Prototipo_2 {
         }
         public void CheckSpritePlayer1()
         {
-            if (player1.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio)
+            if (player1.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio || player1.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ContraAtaque)
             {
-                player1.spritePlayerActual.CheckDeleyRecibirDanio();
+                if (player1.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio)
+                {
+                    player1.spritePlayerActual.CheckDeleyRecibirDanio();
+                }
+                else
+                {
+                    player1.spritePlayerActual.CheckDeleyContraAtaque();
+                }
             }
             else
             {

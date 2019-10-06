@@ -37,10 +37,13 @@ namespace Prototipo_2 {
         public SpriteActual ActualSprite;
         public float delaySpriteRecibirDanio;
         private float auxDelaySpriteRecibirDanio;
+        public float delaySpriteContraAtaque;
+        private float auxDelaySpriteContraAtaque;
         private void Start()
         {
             ActualSprite = SpriteActual.Parado;
             auxDelaySpriteRecibirDanio = delaySpriteRecibirDanio;
+            auxDelaySpriteContraAtaque = delaySpriteContraAtaque;
         }
         private void OnTriggerStay2D(Collider2D collision)
         {
@@ -80,8 +83,31 @@ namespace Prototipo_2 {
                 ActualSprite = SpriteActual.Parado;
             }
         }
+        public void CheckDeleyContraAtaque()
+        {
+            if (delaySpriteContraAtaque > 0)
+            {
+                delaySpriteContraAtaque = delaySpriteContraAtaque - Time.deltaTime;
+            }
+            else if (delaySpriteContraAtaque <= 0)
+            {
+                delaySpriteContraAtaque = auxDelaySpriteContraAtaque;
+                ActualSprite = SpriteActual.Parado;
+            }
+        }
         public void CheckActualSprite()
         {
+            if (ActualSprite == SpriteActual.RecibirDanio || ActualSprite == SpriteActual.ContraAtaque)
+            {
+                if (ActualSprite == SpriteActual.RecibirDanio)
+                {
+                    CheckDeleyRecibirDanio();
+                }
+                if (ActualSprite == SpriteActual.ContraAtaque)
+                {
+                    CheckDeleyContraAtaque();
+                }
+            }
             switch (ActualSprite)
             {
                 case SpriteActual.Parado:
