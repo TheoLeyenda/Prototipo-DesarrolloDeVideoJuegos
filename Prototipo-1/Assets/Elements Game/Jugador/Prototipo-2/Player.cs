@@ -95,6 +95,7 @@ namespace Prototipo_2
             CheckOutLimit();
             CheckDead();
             CheckLifeBar();
+            //Debug.Log(structsPlayer.dataPlayer.columnaActual);
         }
         
         public void ResetPlayer()
@@ -277,17 +278,31 @@ namespace Prototipo_2
             }
             else if (LookingBack)
             {
-                if (structsPlayer.dataPlayer.columnaActual < gridPlayer.GetCuadrilla_columnas() - 1)
+                Debug.Log(structsPlayer.dataPlayer.columnaActual);
+                if (structsPlayer.dataPlayer.columnaActual > 0)
                 {
+                    Debug.Log("<-");
                     MoveLeft(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual - 1].transform.position);
                 }
             }
         }
         public void MovementRight()
         {
-            if (structsPlayer.dataPlayer.columnaActual < gridPlayer.GetCuadrilla_columnas() - 1)
+            if (LookingForward)
             {
-                MoveRight(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual + 1].transform.position);
+                if (structsPlayer.dataPlayer.columnaActual < gridPlayer.GetCuadrilla_columnas() - 1)
+                {
+                    MoveRight(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual + 1].transform.position);
+                }
+            }
+            else if (LookingBack)
+            {
+                Debug.Log(structsPlayer.dataPlayer.columnaActual);
+                if (structsPlayer.dataPlayer.columnaActual < gridPlayer.GetCuadrilla_columnas() - 1)
+                {
+                    Debug.Log("->");
+                    MoveRight(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual + 1].transform.position);
+                }
             }
         }
         public void MovementJump()
@@ -333,7 +348,6 @@ namespace Prototipo_2
 
         public void MoveLeft(Vector3 cuadrillaDestino)
         {
-            Debug.Log("ESTOY EN MoveLeft");
             if (LookingForward)
             {
                 if (CheckMove(new Vector3(gridPlayer.leftCuadrilla.transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
@@ -343,6 +357,7 @@ namespace Prototipo_2
                 }
                 else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
                 {
+                    Debug.Log("ENTRE FORWARD");
                     structsPlayer.dataPlayer.columnaActual--;
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
                     gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
@@ -350,14 +365,29 @@ namespace Prototipo_2
             }
             else if (LookingBack)
             {
-                Debug.Log("ENTRE EN LookingBack");
-                Debug.Log("CheckMove = " + CheckMove(new Vector3(gridPlayer.leftCuadrilla.transform.position.x, transform.position.y, transform.position.z)));
-                Debug.Log("transform.position.x < cuadrillaDestino.x = " + (transform.position.x < cuadrillaDestino.x));
-                if (CheckMove(new Vector3(gridPlayer.leftCuadrilla.transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
+                if (CheckMove(new Vector3(gridPlayer.leftCuadrilla.transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
                 {
-                    Debug.Log("ENTRE AL MOVIMIENTO");
-                    Move(Vector3.left);
+                    Move(-Vector3.left);
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAtras;
+                }
+                else 
+                {
+                    Debug.Log("ENTRE BACK");
+                    structsPlayer.dataPlayer.columnaActual--;
+                    enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+                    gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
+                }
+            }
+            
+        }
+        public void MoveRight(Vector3 cuadrillaDestino)
+        {
+            if (LookingForward)
+            {
+                if (CheckMove(new Vector3(gridPlayer.rightCuadrilla.transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
+                {
+                    Move(Vector3.right);
+                    enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
                 }
                 else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
                 {
@@ -366,19 +396,19 @@ namespace Prototipo_2
                     gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
                 }
             }
-        }
-        public void MoveRight(Vector3 cuadrillaDestino)
-        {
-            if (CheckMove(new Vector3(gridPlayer.rightCuadrilla.transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
+            else if (LookingBack)
             {
-                Move(Vector3.right);
-                enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
-            }
-            else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
-            {
-                structsPlayer.dataPlayer.columnaActual++;
-                enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-                gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
+                if (CheckMove(new Vector3(gridPlayer.rightCuadrilla.transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
+                {
+                    Move(-Vector3.right);
+                    enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
+                }
+                else 
+                {
+                    structsPlayer.dataPlayer.columnaActual++;
+                    enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+                    gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
+                }
             }
         }
         public void Jump(Vector3 alturaMaxima)

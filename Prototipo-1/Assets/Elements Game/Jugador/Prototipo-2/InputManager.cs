@@ -437,7 +437,7 @@ namespace Prototipo_2 {
                 if (InputPlayerController.Horizontal_Button_P2() < 0 && moveHorizontalPlayer2 && player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
                     || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
                 {
-                    Debug.Log("LEFT");
+                    //Debug.Log("LEFT");
                     player2.SetControllerJoystick(true);
                     moveHorizontalPlayer2 = false;
                     player2.MovementLeft();
@@ -447,10 +447,10 @@ namespace Prototipo_2 {
             }
             else if (player2.LookingBack)
             {
-                if (InputPlayerController.Horizontal_Button_P2() > 0 && moveHorizontalPlayer2 && player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
+                if (InputPlayerController.Horizontal_Button_P2() < 0 && moveHorizontalPlayer2 && player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
                     || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
                 {
-                    Debug.Log("LEFT");
+                    //Debug.Log("LEFT");
                     player2.SetControllerJoystick(true);
                     moveHorizontalPlayer2 = false;
                     player2.MovementLeft();
@@ -461,14 +461,29 @@ namespace Prototipo_2 {
         }
         public void CheckHorizontalRight_P2()
         {
-            if (InputPlayerController.Horizontal_Button_P2() > 0 && moveHorizontalPlayer2 && player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
-                || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
+            if (player2.LookingForward)
             {
-                Debug.Log("RIGTH");
-                player2.SetControllerJoystick(true);
-                moveHorizontalPlayer2 = false;
-                player2.MovementRight();
-                player2.SetIsDuck(false);
+                if (InputPlayerController.Horizontal_Button_P2() > 0 && moveHorizontalPlayer2 && player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
+                || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
+                {
+                    //Debug.Log("RIGTH");
+                    player2.SetControllerJoystick(true);
+                    moveHorizontalPlayer2 = false;
+                    player2.MovementRight();
+                    player2.SetIsDuck(false);
+                }
+            }
+            else if (player2.LookingBack)
+            {
+                if (InputPlayerController.Horizontal_Button_P2() > 0 && moveHorizontalPlayer2 && player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
+                || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
+                {
+                    //Debug.Log("RIGTH");
+                    player2.SetControllerJoystick(true);
+                    moveHorizontalPlayer2 = false;
+                    player2.MovementRight();
+                    player2.SetIsDuck(false);
+                }
             }
 
         }
