@@ -432,33 +432,35 @@ namespace Prototipo_2 {
         }
         public void CheckHorizontalLeft_P2()
         {
-            if (InputPlayerController.Horizontal_Button_P1() < 0 && moveHorizontalPlayer1 && player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
-                || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
+            if (InputPlayerController.Horizontal_Button_P2() < 0 && moveHorizontalPlayer2 && player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
+                || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
             {
-                player1.SetControllerJoystick(true);
-                moveHorizontalPlayer1 = false;
-                player1.MovementLeft();
-                player1.SetIsDuck(false);
+                Debug.Log("LEFT");
+                player2.SetControllerJoystick(true);
+                moveHorizontalPlayer2 = false;
+                player2.MovementLeft();
+                player2.SetIsDuck(false);
 
             }
         }
         public void CheckHorizontalRight_P2()
         {
-            if (InputPlayerController.Horizontal_Button_P1() > 0 && moveHorizontalPlayer1 && player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
-                || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
+            if (InputPlayerController.Horizontal_Button_P2() > 0 && moveHorizontalPlayer2 && player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
+                || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
             {
-                player1.SetControllerJoystick(true);
-                moveHorizontalPlayer1 = false;
-                player1.MovementRight();
-                player1.SetIsDuck(false);
+                Debug.Log("RIGTH");
+                player2.SetControllerJoystick(true);
+                moveHorizontalPlayer2 = false;
+                player2.MovementRight();
+                player2.SetIsDuck(false);
             }
 
         }
         public void CheckHorizontalCero_P2()
         {
-            if (InputPlayerController.Horizontal_Button_P1() == 0)
+            if (InputPlayerController.Horizontal_Button_P2() == 0)
             {
-                moveHorizontalPlayer1 = true;
+                moveHorizontalPlayer2 = true;
             }
         }
         public void CheckAttackButton_P2()
@@ -496,9 +498,9 @@ namespace Prototipo_2 {
             CheckVerticalUp_P2();
             CheckVerticalDown_P2();
             CheckVerticalCero_P2();
-            //CheckHorizontalLeft_P2();
-            //CheckHorizontalRight_P2();
-            //CheckHorizontalCero_P2();
+            CheckHorizontalLeft_P2();
+            CheckHorizontalRight_P2();
+            CheckHorizontalCero_P2();
             //CheckAttackButton_P1();
             //CheckDeffenceButton_P1();
             //CheckSpecialAttackButton_P1();
