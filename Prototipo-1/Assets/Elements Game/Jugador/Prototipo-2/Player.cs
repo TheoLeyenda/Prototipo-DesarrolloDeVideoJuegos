@@ -94,6 +94,7 @@ namespace Prototipo_2
             CheckDead();
             CheckLifeBar();
         }
+        
         public void ResetPlayer()
         {
             PD.lifePlayer = PD.maxLifePlayer;

@@ -21,14 +21,11 @@ namespace Prototipo_2 {
             if (FindPlayersAndPlayers_PvP)
             {
                 player1 = GameObject.Find("Player1").GetComponent<Player>();
-                if (player1 == null)
-                {
-                    Debug.Log("Eso no funciono xd");
-                }
-                else
-                {
-                    Debug.Log("Works :D");
-                }
+                player1_PvP = player1.gameObject.GetComponent<Player_PvP>();
+
+                //UNA VEZ TERMINE DE INCORPORAR AL SEGUNDO JUGADOR DESCOMENTAR ESTO.
+                //player2 = GameObject.Find("Player1").GetComponent<Player>();
+                //player2_PvP = player1.gameObject.GetComponent<Player_PvP>();
             }
             moveHorizontalPlayer1 = true;
             moveVerticalPlayer1 = true;
