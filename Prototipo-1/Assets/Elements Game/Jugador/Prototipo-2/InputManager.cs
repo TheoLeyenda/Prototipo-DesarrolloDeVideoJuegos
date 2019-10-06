@@ -24,8 +24,8 @@ namespace Prototipo_2 {
                 player1_PvP = player1.gameObject.GetComponent<Player_PvP>();
 
                 //UNA VEZ TERMINE DE INCORPORAR AL SEGUNDO JUGADOR DESCOMENTAR ESTO.
-                //player2 = GameObject.Find("Player1").GetComponent<Player>();
-                //player2_PvP = player1.gameObject.GetComponent<Player_PvP>();
+                player2 = GameObject.Find("Player2").GetComponent<Player>();
+                player2_PvP = player2.gameObject.GetComponent<Player_PvP>();
             }
             moveHorizontalPlayer1 = true;
             moveVerticalPlayer1 = true;

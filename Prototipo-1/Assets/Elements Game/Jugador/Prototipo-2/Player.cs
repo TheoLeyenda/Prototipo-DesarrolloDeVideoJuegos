@@ -86,10 +86,10 @@ namespace Prototipo_2
         // Update is called once per frame
         void Update()
         {
-            if (DoubleSpeed)
+            /*if (DoubleSpeed)
             {
                 InputKeyBoard();
-            }
+            }*/
             CheckOutLimit();
             CheckDead();
             CheckLifeBar();
@@ -218,7 +218,7 @@ namespace Prototipo_2
             }
         }
         //HIDE HECHO MIERDA / HECHO PIJA BUSCALO BOLUDO
-        public void InputKeyBoard()
+        /*public void InputKeyBoard()
         {
             //Debug.Log("Columna Actual:" + structsPlayer.dataEnemy.columnaActual);
             //Debug.Log("Movimiento actual:" + enumsPlayers.movimiento);
@@ -263,7 +263,7 @@ namespace Prototipo_2
                 colliderSprite.enabled = true;
                 gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
             }
-        }
+        }*/
         public void MovementLeft()
         {
             if (structsPlayer.dataPlayer.columnaActual > 0)
