@@ -432,15 +432,31 @@ namespace Prototipo_2 {
         }
         public void CheckHorizontalLeft_P2()
         {
-            if (InputPlayerController.Horizontal_Button_P2() < 0 && moveHorizontalPlayer2 && player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
-                || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
+            if (player2.LookingForward)
             {
-                Debug.Log("LEFT");
-                player2.SetControllerJoystick(true);
-                moveHorizontalPlayer2 = false;
-                player2.MovementLeft();
-                player2.SetIsDuck(false);
+                if (InputPlayerController.Horizontal_Button_P2() < 0 && moveHorizontalPlayer2 && player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
+                    || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
+                {
+                    Debug.Log("LEFT");
+                    player2.SetControllerJoystick(true);
+                    moveHorizontalPlayer2 = false;
+                    player2.MovementLeft();
+                    player2.SetIsDuck(false);
 
+                }
+            }
+            else if (player2.LookingBack)
+            {
+                if (InputPlayerController.Horizontal_Button_P2() > 0 && moveHorizontalPlayer2 && player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
+                    || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
+                {
+                    Debug.Log("LEFT");
+                    player2.SetControllerJoystick(true);
+                    moveHorizontalPlayer2 = false;
+                    player2.MovementLeft();
+                    player2.SetIsDuck(false);
+
+                }
             }
         }
         public void CheckHorizontalRight_P2()
