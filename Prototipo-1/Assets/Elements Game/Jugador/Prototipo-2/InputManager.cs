@@ -212,7 +212,10 @@ namespace Prototipo_2 {
                         break;
                 }
             }
-            if (!InputPlayerController.CheckPressDeffenseButton_P1())
+            if (!InputPlayerController.CheckPressDeffenseButton_P1() && !player1.GetIsJumping()
+                && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+                && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
             {
                 player1.gridPlayer.CheckCuadrillaOcupada(player1.structsPlayer.dataPlayer.columnaActual, player1.structsPlayer.dataPlayer.CantCasillasOcupadas_X, player1.structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
             }
@@ -529,23 +532,77 @@ namespace Prototipo_2 {
         }
         public void CheckInputPlayer2()
         {
-            CheckVerticalUp_P2();
-            CheckVerticalDown_P2();
-            CheckVerticalCero_P2();
-            CheckHorizontalLeft_P2();
-            CheckHorizontalRight_P2();
-            CheckHorizontalCero_P2();
-            CheckAttackButton_P2();
-            CheckDeffenceButton_P2();
-            //CheckSpecialAttackButton_P1();
-
-            //PASAR ESTA FUNCION PARA EL PLAYER 2
-            if (!InputPlayerController.CheckPressDeffenseButton_P2() && !player2.GetIsJumping()
-                && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-                && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-                && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+            if (player2 != null)
             {
-                player2.gridPlayer.CheckCuadrillaOcupada(player2.structsPlayer.dataPlayer.columnaActual, player2.structsPlayer.dataPlayer.CantCasillasOcupadas_X, player2.structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
+                if (player2_PvP == null)
+                {
+                    CheckVerticalUp_P2();
+                    CheckVerticalDown_P2();
+                    CheckVerticalCero_P2();
+                    CheckHorizontalLeft_P2();
+                    CheckHorizontalRight_P2();
+                    CheckHorizontalCero_P2();
+                    CheckAttackButton_P2();
+                    CheckDeffenceButton_P2();
+                    CheckSpecialAttackButton_P2();
+                }
+                else
+                {
+                    switch (player2_PvP.playerSelected)
+                    {
+                        case Player_PvP.PlayerSelected.Agresivo:
+                            CheckVerticalUp_P2();
+                            CheckVerticalCero_P2();
+                            CheckHorizontalLeft_P2();
+                            CheckHorizontalRight_P2();
+                            CheckHorizontalCero_P2();
+                            CheckAttackButton_P2();
+                            CheckDeffenceButton_P2();
+                            CheckDeffenceButton_P2();
+                            CheckSpecialAttackButton_P2();
+                            break;
+                        case Player_PvP.PlayerSelected.Balanceado:
+                            CheckVerticalUp_P2();
+                            CheckVerticalDown_P2();
+                            CheckVerticalCero_P2();
+                            CheckHorizontalLeft_P2();
+                            CheckHorizontalRight_P2();
+                            CheckHorizontalCero_P2();
+                            CheckAttackButton_P2();
+                            CheckDeffenceButton_P2();
+                            CheckSpecialAttackButton_P2();
+                            break;
+                        case Player_PvP.PlayerSelected.Defensivo:
+                            CheckVerticalCero_P2();
+                            CheckHorizontalLeft_P2();
+                            CheckHorizontalRight_P2();
+                            CheckHorizontalCero_P2();
+                            CheckAttackButton_P2();
+                            CheckDeffenceButton_P2();
+                            CheckSpecialAttackButton_P2();
+                            break;
+                        case Player_PvP.PlayerSelected.Protagonista:
+                            CheckVerticalUp_P2();
+                            CheckVerticalDown_P2();
+                            CheckVerticalCero_P2();
+                            CheckHorizontalLeft_P2();
+                            CheckHorizontalRight_P2();
+                            CheckHorizontalCero_P2();
+                            CheckAttackButton_P2();
+                            CheckDeffenceButton_P2();
+                            CheckSpecialAttackButton_P2();
+                            break;
+                    }
+                }
+
+                //PASAR ESTA FUNCION PARA EL PLAYER 2
+                if (!InputPlayerController.CheckPressDeffenseButton_P2() && !player2.GetIsJumping()
+                    && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                    && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+                    && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+                {
+                    player2.gridPlayer.CheckCuadrillaOcupada(player2.structsPlayer.dataPlayer.columnaActual, player2.structsPlayer.dataPlayer.CantCasillasOcupadas_X, player2.structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
+                }
             }
         }
 

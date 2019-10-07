@@ -24,12 +24,14 @@ namespace Prototipo_2
         private CursorMatriz cursorPlayer1;
         private CursorMatriz cursorPlayer2;
         private GameManager gm;
-        private bool aviableMoveHorizontal;
-        private bool aviableMoveVertical;
+        private bool aviableMoveHorizontalP1;
+        private bool aviableMoveVerticalP1;
+        private bool aviableMoveHorizontalP2;
+        private bool aviableMoveVerticalP2;
         private void Start()
         {
-            aviableMoveHorizontal = true;
-            aviableMoveVertical = true;
+            aviableMoveHorizontalP1 = true;
+            aviableMoveVerticalP1 = true;
             if (GameManager.instanceGameManager != null)
             {
                 gm = GameManager.instanceGameManager;
@@ -70,24 +72,25 @@ namespace Prototipo_2
         }
         public void MoveCursor()
         {
+            //---MOVIMIENTO DEL CURSOR DEL PLAYER 1---//
             if (cursorPlayer1.x >= 0 && cursorPlayer1.x < filas)
             {
                 if (InputPlayerController.Horizontal_Button_P1() > 0 && cursorPlayer1.x < filas-1)
                 {
-                    if (aviableMoveHorizontal)
+                    if (aviableMoveHorizontalP1)
                     {
                         cursorPlayer1.x++;
                         CursorSelectorPlayer1.MoveRight();
-                        aviableMoveHorizontal = false;
+                        aviableMoveHorizontalP1 = false;
                     }
                 }
                 else if (InputPlayerController.Horizontal_Button_P1() < 0 && cursorPlayer1.x > 0)
                 {
-                    if (aviableMoveHorizontal)
+                    if (aviableMoveHorizontalP1)
                     {
                         cursorPlayer1.x--;
                         CursorSelectorPlayer1.MoveLeft();
-                        aviableMoveHorizontal = false;
+                        aviableMoveHorizontalP1 = false;
                     }
                 }
             }
@@ -95,37 +98,91 @@ namespace Prototipo_2
             {
                 if (InputPlayerController.Vertical_Button_P1() > 0 && cursorPlayer1.y > 0)
                 {
-                    if (aviableMoveVertical)
+                    if (aviableMoveVerticalP1)
                     {
                         cursorPlayer1.y--;
                         CursorSelectorPlayer1.MoveUp();
-                        aviableMoveVertical = false;
+                        aviableMoveVerticalP1 = false;
                     }
                 }
                 else if (InputPlayerController.Vertical_Button_P1() < 0 && cursorPlayer1.y < columnas-1)
                 {
-                    if (aviableMoveVertical)
+                    if (aviableMoveVerticalP1)
                     {
                         cursorPlayer1.y++;
                         CursorSelectorPlayer1.MoveDown();
-                        aviableMoveVertical = false;
+                        aviableMoveVerticalP1 = false;
                     }
                 }
             }
             if (InputPlayerController.Vertical_Button_P1() == 0)
             {
-                aviableMoveVertical = true;
+                aviableMoveVerticalP1 = true;
             }
             if (InputPlayerController.Horizontal_Button_P1() == 0)
             {
-                aviableMoveHorizontal = true;
+                aviableMoveHorizontalP1 = true;
             }
+            //----------------------------------------//
+
+            //---MOVIMIENTO DEL CURSOR DEL PLAYER 2---//
+            if (cursorPlayer2.x >= 0 && cursorPlayer2.x < filas)
+            {
+                if (InputPlayerController.Horizontal_Button_P2() > 0 && cursorPlayer2.x < filas - 1)
+                {
+                    if (aviableMoveHorizontalP2)
+                    {
+                        cursorPlayer2.x++;
+                        CursorSelectorPlayer2.MoveRight();
+                        aviableMoveHorizontalP2 = false;
+                    }
+                }
+                else if (InputPlayerController.Horizontal_Button_P2() < 0 && cursorPlayer2.x > 0)
+                {
+                    if (aviableMoveHorizontalP2)
+                    {
+                        cursorPlayer2.x--;
+                        CursorSelectorPlayer2.MoveLeft();
+                        aviableMoveHorizontalP2 = false;
+                    }
+                }
+            }
+            if (cursorPlayer2.y >= 0 && cursorPlayer2.y < columnas)
+            {
+                if (InputPlayerController.Vertical_Button_P2() > 0 && cursorPlayer2.y > 0)
+                {
+                    if (aviableMoveVerticalP2)
+                    {
+                        cursorPlayer2.y--;
+                        CursorSelectorPlayer2.MoveUp();
+                        aviableMoveVerticalP2 = false;
+                    }
+                }
+                else if (InputPlayerController.Vertical_Button_P2() < 0 && cursorPlayer2.y < columnas - 1)
+                {
+                    if (aviableMoveVerticalP2)
+                    {
+                        cursorPlayer2.y++;
+                        CursorSelectorPlayer2.MoveDown();
+                        aviableMoveVerticalP2 = false;
+                    }
+                }
+            }
+            if (InputPlayerController.Vertical_Button_P2() == 0)
+            {
+                aviableMoveVerticalP2 = true;
+            }
+            if (InputPlayerController.Horizontal_Button_P2() == 0)
+            {
+                aviableMoveHorizontalP2 = true;
+            }
+            //----------------------------------------//
         }
         public void CheckSelectCursor()
         {
             if (InputPlayerController.SelectButton_P1())
             {
-                Debug.Log(cursorPlayer1.x+", "+cursorPlayer1.y);
+                //Debug.Log(cursorPlayer1.x+", "+cursorPlayer1.y);
                 switch (grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y])
                 {
                     case "Balanceado":
@@ -149,7 +206,33 @@ namespace Prototipo_2
                         break;
                 }
             }
-            cursorPlayer2.condirmed = true; // SACAR ESTO Y REMPLAZARLO POR LO MISMO QUE HICE CON cursorPlayer1 PERO UTILIZANDO cursorPlayer2
+            if (InputPlayerController.SelectButton_P2())
+            {
+                //Debug.Log(cursorPlayer1.x + ", " + cursorPlayer1.y);
+                switch (grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y])
+                {
+                    case "Balanceado":
+                        gm.structGameManager.gm_dataCombatPvP.player2_selected = DataCombatPvP.Player_Selected.Balanceado;
+                        cursorPlayer2.condirmed = true;
+                        break;
+                    case "Agresivo":
+                        gm.structGameManager.gm_dataCombatPvP.player2_selected = DataCombatPvP.Player_Selected.Agresivo;
+                        cursorPlayer2.condirmed = true;
+                        break;
+                    case "Defensivo":
+                        gm.structGameManager.gm_dataCombatPvP.player2_selected = DataCombatPvP.Player_Selected.Defensivo;
+                        cursorPlayer2.condirmed = true;
+                        break;
+                    case "Protagonista":
+                        gm.structGameManager.gm_dataCombatPvP.player2_selected = DataCombatPvP.Player_Selected.Protagonista;
+                        cursorPlayer2.condirmed = true;
+                        break;
+                    default:
+                        cursorPlayer2.condirmed = false;
+                        break;
+                }
+            }
+
             if (cursorPlayer1.condirmed && cursorPlayer2.condirmed)
             {
                 SceneManager.LoadScene(nameNextScene);

@@ -62,7 +62,22 @@ namespace Prototipo_2
                 if (grillaDeSeleccion != null)
                 {
                     int i = columnas-1;
-                    while (i > 0)
+                    if (i > 0)
+                    {
+                        while (i > 0)
+                        {
+                            for (int j = 0; j < filas; j++)
+                            {
+                                if (idOption < nameLevelsOptions.Count)
+                                {
+                                    grillaDeSeleccion[j, i] = nameLevelsOptions[idOption];
+                                }
+                                idOption++;
+                            }
+                            i--;
+                        }
+                    }
+                    else
                     {
                         for (int j = 0; j < filas; j++)
                         {
@@ -72,7 +87,6 @@ namespace Prototipo_2
                             }
                             idOption++;
                         }
-                        i--;
                     }
                 }
             }

@@ -57,21 +57,7 @@ namespace Prototipo_2 {
             player2_selected = gm.structGameManager.gm_dataCombatPvP.player2_selected;
             level_selected = gm.structGameManager.gm_dataCombatPvP.level_selected;
             Instantiate(Players1[(int)player1_selected]);
-            switch (player2_selected)
-            {
-                case Player_Selected.Agresivo:
-                    
-                    break;
-                case Player_Selected.Balanceado:
-                    
-                    break;
-                case Player_Selected.Defensivo:
-                   
-                    break;
-                case Player_Selected.Protagonista:
-                    
-                    break;
-            }
+            Instantiate(Players2[(int)player2_selected]);
             fondoNivel.sprite = levels[(int)level_selected];
         }
         // ESTE SCRIPT DEBE TOMAR LA DEDICION CORRESPONDIENTE EN CUANTO AL NIVEL ELEJIDO Y PERSONAJE ELEJIDO DEPENDIENDO DE LA INFO QUE LE PASE EL
