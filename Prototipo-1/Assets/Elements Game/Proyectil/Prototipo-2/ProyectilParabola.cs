@@ -169,6 +169,64 @@ namespace Prototipo_2 {
                                     timeLife = 0;
                                 }
                             }
+                            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1 && cuadrilla.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                            {
+                                cuadrilla.player.SetEnableCounterAttack(true);
+                                if (cuadrilla.player.delayCounterAttack > 0)
+                                {
+                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
+                                    if (Input.GetKey(cuadrilla.player.ButtonDeffence))
+                                    {
+                                        cuadrilla.player.Attack(disparadorDelProyectil);
+                                        cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                        timeLife = 0;
+                                    }
+                                }
+                                if (cuadrilla.player.delayCounterAttack <= 0 && timeLife <= 0)
+                                {
+                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
+                                    cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+
+                                }
+                                else if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0)
+                                {
+                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                    cuadrilla.player.SetEnableCounterAttack(false);
+                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
+                                    cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+
+                                    timeLife = 0;
+                                }
+                            }
+                            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador2 && cuadrilla.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                            {
+                                cuadrilla.player.SetEnableCounterAttack(true);
+                                if (cuadrilla.player.delayCounterAttack > 0)
+                                {
+                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
+                                    if (Input.GetKey(cuadrilla.player.ButtonDeffence))
+                                    {
+                                        cuadrilla.player.Attack(disparadorDelProyectil);
+                                        cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                        timeLife = 0;
+                                    }
+                                }
+                                if (cuadrilla.player.delayCounterAttack <= 0 && timeLife <= 0)
+                                {
+                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
+                                    cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+
+                                }
+                                else if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0)
+                                {
+                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                    cuadrilla.player.SetEnableCounterAttack(false);
+                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
+                                    cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+
+                                    timeLife = 0;
+                                }
+                            }
 
                         }
                     }
