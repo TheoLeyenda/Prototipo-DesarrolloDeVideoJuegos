@@ -121,16 +121,17 @@ namespace Prototipo_2 {
         }
         public void CheckAttackButton_P1()
         {
+            Debug.Log("JUGADOR 1 ATAQUE ACTIVED");
             if (InputPlayerController.AttackButton_P1())
             {
                 player1.SetControllerJoystick(true);
                 if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P1() < 0)
                 {
-                    player1.AttackDown();
+                    player1.AttackDown(Proyectil.DisparadorDelProyectil.Jugador1);
                 }
                 else
                 {
-                    player1.Attack(Proyectil.DisparadorDelProyectil.Jugador);
+                    player1.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
                 }
             }
         }
@@ -146,7 +147,7 @@ namespace Prototipo_2 {
         {
             if (InputPlayerController.SpecialAttackButton_P1())
             {
-                player1.SpecialAttack();
+                player1.SpecialAttack(Proyectil.DisparadorDelProyectil.Jugador1);
             }
         }
         public void CheckInputPlayer1()
@@ -499,14 +500,15 @@ namespace Prototipo_2 {
         {
             if (InputPlayerController.AttackButton_P2())
             {
+                Debug.Log("JUGADOR 2 ATAQUE ACTIVED");
                 player2.SetControllerJoystick(true);
                 if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P2() < 0)
                 {
-                    player2.AttackDown();
+                    player2.AttackDown(Proyectil.DisparadorDelProyectil.Jugador2);
                 }
                 else
                 {
-                    player2.Attack(Proyectil.DisparadorDelProyectil.Enemigo);
+                    player2.Attack(Proyectil.DisparadorDelProyectil.Jugador2);
                 }
             }
         }
@@ -522,7 +524,7 @@ namespace Prototipo_2 {
         {
             if (InputPlayerController.SpecialAttackButton_P2())
             {
-                player2.SpecialAttack();
+                player2.SpecialAttack(Proyectil.DisparadorDelProyectil.Jugador2);
             }
         }
         public void CheckInputPlayer2()
@@ -534,7 +536,7 @@ namespace Prototipo_2 {
             CheckHorizontalRight_P2();
             CheckHorizontalCero_P2();
             CheckAttackButton_P2();
-            //CheckDeffenceButton_P1();
+            CheckDeffenceButton_P2();
             //CheckSpecialAttackButton_P1();
 
             //PASAR ESTA FUNCION PARA EL PLAYER 2

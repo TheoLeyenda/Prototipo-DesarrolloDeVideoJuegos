@@ -65,7 +65,7 @@ namespace Prototipo_2 {
             // SE SELECIONA LA PARABOLA CORRESPONDIENTE DEPENDIENDO A DONDE APUNTO EL JUGADOR / ENEMIGO.
             // FALTARIA CREAR LAS PARABOLAS Y HACER EL GENERADOR DE PELOTAS CON PARABOLA Y PROBARLO.
             On();
-            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
+            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
             {
                 rutaParabola_AtaqueJugador.SetActive(true);
                 switch (TypeRoot) {
@@ -128,7 +128,7 @@ namespace Prototipo_2 {
                     {
                         if (cuadrilla.enemy != null)
                         {
-                            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
+                            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
                             {
                                 if (cuadrilla.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && cuadrilla.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
                                 {
@@ -185,7 +185,7 @@ namespace Prototipo_2 {
                         }
                         if (cuadrilla.enemy != null)
                         {
-                            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
+                            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
                             {
                                 float realDamage = damage - cuadrilla.enemy.pointsDeffence;
                                 cuadrilla.enemy.life = cuadrilla.enemy.life - realDamage;

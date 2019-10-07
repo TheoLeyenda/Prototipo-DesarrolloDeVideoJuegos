@@ -9,7 +9,8 @@ namespace Prototipo_2
         {
             Nulo,
             Enemigo,
-            Jugador,
+            Jugador1,
+            Jugador2,
         }
         public enum TypeShoot
         {
@@ -122,7 +123,7 @@ namespace Prototipo_2
                     {
                         if (cuadrilla.enemy != null)
                         {
-                            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
+                            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
                             {
                                 if (cuadrilla.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && cuadrilla.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
                                 {
@@ -143,7 +144,67 @@ namespace Prototipo_2
                                     cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
                                     if (InputPlayerController.DeffenseButton_P1())
                                     {
-                                        cuadrilla.player.Attack( DisparadorDelProyectil.Jugador);
+                                        cuadrilla.player.Attack( DisparadorDelProyectil.Jugador1);
+                                        cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                        timeLife = 0;
+                                        enableDamagePlayer = false;
+                                    }
+                                }
+                                if (cuadrilla.player.delayCounterAttack <= 0 && timeLife <= 0 && enableDamagePlayer)
+                                {
+                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
+                                    cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                                }
+                                else if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0 && enableDamagePlayer)
+                                {
+                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                    cuadrilla.player.SetEnableCounterAttack(false);
+                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
+                                    cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                                    timeLife = 0;
+                                    gameObject.SetActive(false);
+                                    //Debug.Log("ENTRE AL DESTRUCTOR POR CONTRA ATAQUE");
+                                }
+                            }
+                            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
+                            {
+                                cuadrilla.player.SetEnableCounterAttack(true);
+                                if (cuadrilla.player.delayCounterAttack > 0)
+                                {
+                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
+                                    if (InputPlayerController.DeffenseButton_P1())
+                                    {
+                                        cuadrilla.player.Attack(DisparadorDelProyectil.Jugador2);
+                                        cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                        timeLife = 0;
+                                        enableDamagePlayer = false;
+                                    }
+                                }
+                                if (cuadrilla.player.delayCounterAttack <= 0 && timeLife <= 0 && enableDamagePlayer)
+                                {
+                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
+                                    cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                                }
+                                else if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0 && enableDamagePlayer)
+                                {
+                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                    cuadrilla.player.SetEnableCounterAttack(false);
+                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
+                                    cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                                    timeLife = 0;
+                                    gameObject.SetActive(false);
+                                    //Debug.Log("ENTRE AL DESTRUCTOR POR CONTRA ATAQUE");
+                                }
+                            }
+                            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador2)
+                            {
+                                cuadrilla.player.SetEnableCounterAttack(true);
+                                if (cuadrilla.player.delayCounterAttack > 0)
+                                {
+                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
+                                    if (InputPlayerController.DeffenseButton_P1())
+                                    {
+                                        cuadrilla.player.Attack(DisparadorDelProyectil.Jugador1);
                                         cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
                                         timeLife = 0;
                                         enableDamagePlayer = false;
@@ -186,7 +247,7 @@ namespace Prototipo_2
                                             cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaque;
                                             if (player1_PvP.playerActual == Player_PvP.Player.player1)
                                             {
-                                                cuadrilla.player.Attack(DisparadorDelProyectil.Jugador);
+                                                cuadrilla.player.Attack(DisparadorDelProyectil.Jugador1);
                                             }
                                             else if (player1_PvP.playerActual == Player_PvP.Player.player2)
                                             {
@@ -221,7 +282,7 @@ namespace Prototipo_2
                             }
                             else
                             {
-                                if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo || disparadorDelProyectil == DisparadorDelProyectil.Jugador && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.PvP)
+                                if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo || disparadorDelProyectil == DisparadorDelProyectil.Jugador1 && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.PvP)
                                 {
                                     if (cuadrilla.player.delayCounterAttack <= 0)
                                     {
@@ -244,7 +305,7 @@ namespace Prototipo_2
                         }
                         if (cuadrilla.enemy != null)
                         {
-                            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador)
+                            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
                             {
                                 if (cuadrilla.enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
                                 {

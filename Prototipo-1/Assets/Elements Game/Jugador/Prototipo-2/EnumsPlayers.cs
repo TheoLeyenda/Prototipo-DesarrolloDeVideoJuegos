@@ -26,7 +26,14 @@ public class EnumsPlayers : MonoBehaviour
         muerto,
         Count,
     }
+    public enum NumberPlayer
+    {
+        player1,
+        player2,
+        Count
+    }
     public Movimiento movimiento;
     public EstadoJugador estadoJugador;
+    public NumberPlayer numberPlayer;
     //CAMBIAR ESTO Y PONER SETERS Y GETTERS
 }

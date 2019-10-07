@@ -137,7 +137,7 @@ namespace Prototipo_2
                 gm.ResetRoundCombat(true);
             }
         }
-        public void AttackDown()
+        public void AttackDown(Proyectil.DisparadorDelProyectil disparador)
         {
             GameObject go = poolObjectAttack.GetObject();
             Proyectil proyectil = go.GetComponent<Proyectil>();
@@ -156,8 +156,8 @@ namespace Prototipo_2
                 go.transform.position = generadorProyectilesAgachado.transform.position;
                 go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
             }
+            proyectil.disparadorDelProyectil = disparador;
             proyectil.On();
-            proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Jugador;
             proyectil.ShootForwardDown();
         }
         public void Attack(Proyectil.DisparadorDelProyectil disparador)
@@ -185,11 +185,12 @@ namespace Prototipo_2
         }
 
         //ATAQUE EN PARABOLA.
-        public void SpecialAttack()
+        public void SpecialAttack(Proyectil.DisparadorDelProyectil disparador)
         {
             GameObject go = poolObjectSpecialAttack.GetObject();
             ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
             proyectil.SetDobleDamage(doubleDamage);
+            proyectil.disparadorDelProyectil = disparador;
             if (doubleDamage)
             {
                 proyectil.damage = proyectil.damage * 2;
@@ -204,7 +205,6 @@ namespace Prototipo_2
                 proyectil.TypeRoot = 2;
                 go.transform.position = generadorProyectilesParabolaAgachado.transform.position;
             }
-            proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Jugador;
             switch (proyectil.TypeRoot)
             {
                 case 1:
@@ -225,52 +225,7 @@ namespace Prototipo_2
             }
         }
         //HIDE HECHO MIERDA / HECHO PIJA BUSCALO BOLUDO
-        /*public void InputKeyBoard()
-        {
-            //Debug.Log("Columna Actual:" + structsPlayer.dataEnemy.columnaActual);
-            //Debug.Log("Movimiento actual:" + enumsPlayers.movimiento);
-            if (Input.GetKey(ButtonDeffence))
-            {
-                controllerJoystick = false;
-                Deffence();
-            }
-            if (Input.GetKeyUp(ButtonDeffence))
-            {
-                controllerJoystick = false;
-                gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
-            }
-            if (Input.GetKeyDown(KeyCode.LeftArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
-                || enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
-            {
-                controllerJoystick = false;
-                MovementLeft();
-            }
-            if (Input.GetKeyDown(KeyCode.RightArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo ||
-                enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
-            {
-                controllerJoystick = false;
-                MovementRight();
-            }
-            if (Input.GetKeyDown(KeyCode.UpArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
-                || enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
-            {
-                controllerJoystick = false;
-                MovementJump();
-            }
-
-            if (Input.GetKey(KeyCode.DownArrow) && enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
-            {
-                controllerJoystick = false;
-                MovementDuck();
-            }
-            else if (enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && isDuck)
-            {
-                controllerJoystick = false;
-                isDuck = false;
-                colliderSprite.enabled = true;
-                gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
-            }
-        }*/
+        
         public void MovementLeft()
         {
             if (LookingForward)
