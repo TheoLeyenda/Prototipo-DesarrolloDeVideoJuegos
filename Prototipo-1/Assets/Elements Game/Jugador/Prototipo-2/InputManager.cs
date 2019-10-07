@@ -605,10 +605,168 @@ namespace Prototipo_2 {
                 }
             }
         }
-
+        public void CheckSpriteParado_P2()
+        {
+            if (InputPlayerController.Vertical_Button_P2() == 0)
+            {
+                player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
+            }
+        }
+        public void CheckSpriteMoverAdelante_P2()
+        {
+            if (InputPlayerController.Horizontal_Button_P2() > 0 && InputPlayerController.Vertical_Button_P2() == 0
+                    || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
+            {
+                if (player2.structsPlayer.dataPlayer.columnaActual < player2.gridPlayer.GetCuadrilla_columnas() - 1)
+                {
+                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAdelante;
+                }
+                else
+                {
+                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
+                }
+            }
+        }
+        public void CheckSpriteMoverAtras_P2()
+        {
+            if (InputPlayerController.Horizontal_Button_P2() < 0 && InputPlayerController.Vertical_Button_P2() == 0
+                    || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
+            {
+                if (player2.structsPlayer.dataPlayer.columnaActual > 0)
+                {
+                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAtras;
+                }
+                else
+                {
+                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
+                }
+            }
+        }
+        public void CheckSpritesSalto_P2()
+        {
+            if (InputPlayerController.Vertical_Button_P2() > 0 && InputPlayerController.Horizontal_Button_P2() == 0 && player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoAtaque || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa)
+            {
+                if (InputPlayerController.CheckPressAttackButton_P2())
+                {
+                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.SaltoAtaque;
+                }
+                else if (InputPlayerController.CheckPressDeffenseButton_P2())
+                {
+                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.SaltoDefensa;
+                }
+                else if (InputPlayerController.CheckSpecialAttackButton_P2())
+                {
+                    //SPRITE O ANIMACION ATAQUE ESPECIAL JUGADOR.
+                }
+                else
+                {
+                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Salto;
+                }
+                if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
+                {
+                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
+                }
+            }
+        }
+        public void CheckSpritesParado_P2()
+        {
+            if (player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                    && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Agacharse && InputPlayerController.Horizontal_Button_P2() == 0)
+            {
+                if (InputPlayerController.CheckPressAttackButton_P2())
+                {
+                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoAtaque;
+                }
+                else if (InputPlayerController.CheckPressDeffenseButton_P1())
+                {
+                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoDefensa;
+                    player2_PvP.playerState = Player_PvP.State.Defendido;
+                }
+                else
+                {
+                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
+                    player2.spritePlayerActual.delaySpriteRecibirDanio = player2.spritePlayerActual.GetAuxDelaySpriteRecibirDanio();
+                }
+            }
+        }
+        public void CheckSpritesAgachado_P2()
+        {
+            if (InputPlayerController.Vertical_Button_P2() < 0 && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar)
+            {
+                if (InputPlayerController.CheckPressAttackButton_P2())
+                {
+                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.AgachadoAtaque;
+                }
+                else if (InputPlayerController.CheckPressDeffenseButton_P2())
+                {
+                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.AgachadoDefensa;
+                }
+                else
+                {
+                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Agachado;
+                }
+            }
+        }
         public void CheckSpritePlayer2()
         {
-
+            if (player2.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio || player2.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ContraAtaque)
+            {
+                if (player2.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio)
+                {
+                    player2.spritePlayerActual.CheckDeleyRecibirDanio();
+                }
+                else
+                {
+                    player2.spritePlayerActual.CheckDeleyContraAtaque();
+                }
+            }
+            else
+            {
+                if (player2_PvP == null)
+                {
+                    CheckSpriteParado_P2();
+                    CheckSpriteMoverAdelante_P2();
+                    CheckSpriteMoverAtras_P2();
+                    CheckSpritesSalto_P2();
+                    CheckSpritesParado_P2();
+                    CheckSpritesAgachado_P2();
+                }
+                else
+                {
+                    switch (player2_PvP.playerSelected)
+                    {
+                        case Player_PvP.PlayerSelected.Agresivo:
+                            CheckSpriteParado_P2();
+                            CheckSpriteMoverAdelante_P2();
+                            CheckSpriteMoverAtras_P2();
+                            CheckSpritesSalto_P2();
+                            CheckSpritesParado_P2();
+                            break;
+                        case Player_PvP.PlayerSelected.Balanceado:
+                            CheckSpriteParado_P2();
+                            CheckSpriteMoverAdelante_P2();
+                            CheckSpriteMoverAtras_P2();
+                            CheckSpritesSalto_P2();
+                            CheckSpritesParado_P2();
+                            CheckSpritesAgachado_P2();
+                            break;
+                        case Player_PvP.PlayerSelected.Defensivo:
+                            CheckSpriteParado_P2();
+                            CheckSpriteMoverAdelante_P2();
+                            CheckSpriteMoverAtras_P2();
+                            CheckSpritesParado_P2();
+                            break;
+                        case Player_PvP.PlayerSelected.Protagonista:
+                            CheckSpriteParado_P2();
+                            CheckSpriteMoverAdelante_P2();
+                            CheckSpriteMoverAtras_P2();
+                            CheckSpritesSalto_P2();
+                            CheckSpritesParado_P2();
+                            CheckSpritesAgachado_P2();
+                            break;
+                    }
+                }
+            }
         }
         //-----------------------------------------------//
     }
