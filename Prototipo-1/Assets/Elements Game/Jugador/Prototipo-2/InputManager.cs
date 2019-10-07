@@ -40,6 +40,7 @@ namespace Prototipo_2 {
             CheckInputPlayer2();
             CheckSpritePlayer2();
         }
+
         //----- FUNCIONES Y CONTROLES DEL JUGADOR 1 -----//
         public void CheckVerticalUp_P1()
         {
@@ -496,32 +497,32 @@ namespace Prototipo_2 {
         }
         public void CheckAttackButton_P2()
         {
-            if (InputPlayerController.AttackButton_P1())
+            if (InputPlayerController.AttackButton_P2())
             {
-                player1.SetControllerJoystick(true);
-                if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P1() < 0)
+                player2.SetControllerJoystick(true);
+                if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P2() < 0)
                 {
-                    player1.AttackDown();
+                    player2.AttackDown();
                 }
                 else
                 {
-                    player1.Attack(Proyectil.DisparadorDelProyectil.Jugador);
+                    player2.Attack(Proyectil.DisparadorDelProyectil.Jugador);
                 }
             }
         }
         public void CheckDeffenceButton_P2()
         {
-            if (InputPlayerController.CheckPressDeffenseButton_P1())
+            if (InputPlayerController.CheckPressDeffenseButton_P2())
             {
-                player1.SetControllerJoystick(true);
-                player1.Deffence();
+                player2.SetControllerJoystick(true);
+                player2.Deffence();
             }
         }
         public void CheckSpecialAttackButton_P2()
         {
-            if (InputPlayerController.SpecialAttackButton_P1())
+            if (InputPlayerController.SpecialAttackButton_P2())
             {
-                player1.SpecialAttack();
+                player2.SpecialAttack();
             }
         }
         public void CheckInputPlayer2()
@@ -532,9 +533,18 @@ namespace Prototipo_2 {
             CheckHorizontalLeft_P2();
             CheckHorizontalRight_P2();
             CheckHorizontalCero_P2();
-            //CheckAttackButton_P1();
+            CheckAttackButton_P2();
             //CheckDeffenceButton_P1();
             //CheckSpecialAttackButton_P1();
+
+            //PASAR ESTA FUNCION PARA EL PLAYER 2
+            if (!InputPlayerController.CheckPressDeffenseButton_P2() && !player2.GetIsJumping()
+                && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+                && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+            {
+                player2.gridPlayer.CheckCuadrillaOcupada(player2.structsPlayer.dataPlayer.columnaActual, player2.structsPlayer.dataPlayer.CantCasillasOcupadas_X, player2.structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
+            }
         }
 
         public void CheckSpritePlayer2()
