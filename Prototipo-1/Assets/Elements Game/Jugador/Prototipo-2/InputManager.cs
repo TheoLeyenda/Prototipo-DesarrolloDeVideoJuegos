@@ -506,7 +506,7 @@ namespace Prototipo_2 {
                 }
                 else
                 {
-                    player2.Attack(Proyectil.DisparadorDelProyectil.Jugador);
+                    player2.Attack(Proyectil.DisparadorDelProyectil.Enemigo);
                 }
             }
         }

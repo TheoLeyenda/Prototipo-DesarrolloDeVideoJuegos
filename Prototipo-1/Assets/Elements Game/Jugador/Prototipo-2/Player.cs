@@ -149,10 +149,12 @@ namespace Prototipo_2
             if (!isDuck)
             {
                 go.transform.position = generadorProyectiles.transform.position;
+                go.transform.rotation = generadorProyectiles.transform.rotation;
             }
             else
             {
                 go.transform.position = generadorProyectilesAgachado.transform.position;
+                go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
             }
             proyectil.On();
             proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Jugador;
@@ -170,10 +172,12 @@ namespace Prototipo_2
             if (!isDuck)
             {
                 go.transform.position = generadorProyectiles.transform.position;
+                go.transform.rotation = generadorProyectiles.transform.rotation;
             }
             else
             {
                 go.transform.position = generadorProyectilesAgachado.transform.position;
+                go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
             }
             proyectil.On();
             proyectil.disparadorDelProyectil = disparador;
