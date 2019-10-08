@@ -69,6 +69,12 @@ namespace Prototipo_2 {
                 idListaNiveles = 0;
             }
         }
+        public void PvP()
+        {
+            gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Nulo;
+            idListaNiveles = 0;
+            SceneManager.LoadScene("SelectPlayerScene");
+        }
         public void Menu()
         {
             gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Nulo;
