@@ -65,7 +65,7 @@ namespace Prototipo_2 {
             // SE SELECIONA LA PARABOLA CORRESPONDIENTE DEPENDIENDO A DONDE APUNTO EL JUGADOR / ENEMIGO.
             // FALTARIA CREAR LAS PARABOLAS Y HACER EL GENERADOR DE PELOTAS CON PARABOLA Y PROBARLO.
             On();
-            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
+            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1 || disparadorDelProyectil == DisparadorDelProyectil.Jugador2)
             {
                 rutaParabola_AtaqueJugador.SetActive(true);
                 switch (TypeRoot) {

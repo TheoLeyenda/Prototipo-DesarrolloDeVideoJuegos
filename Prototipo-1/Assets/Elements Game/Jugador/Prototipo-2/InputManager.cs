@@ -35,10 +35,16 @@ namespace Prototipo_2 {
         void Update()
         {
             //Debug.Log(player1.enumsPlayers.movimiento);
-            CheckInputPlayer1();
-            CheckSpritePlayer1();
-            CheckInputPlayer2();
-            CheckSpritePlayer2();
+            if (player1 != null && player1.gameObject.activeSelf)
+            {
+                CheckInputPlayer1();
+                CheckSpritePlayer1();
+            }
+            if (player2 != null && player2.gameObject.activeSelf)
+            {
+                CheckInputPlayer2();
+                CheckSpritePlayer2();
+            }
         }
 
         //----- FUNCIONES Y CONTROLES DEL JUGADOR 1 -----//
