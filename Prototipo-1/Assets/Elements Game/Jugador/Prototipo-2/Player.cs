@@ -237,7 +237,6 @@ namespace Prototipo_2
             }
             else if (LookingBack)
             {
-                Debug.Log(structsPlayer.dataPlayer.columnaActual);
                 if (structsPlayer.dataPlayer.columnaActual > 0)
                 {
                     Debug.Log("<-");

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 namespace Prototipo_2
 {
     public class SelectedPlayers : MonoBehaviour
@@ -13,6 +13,16 @@ namespace Prototipo_2
             public int y;
             public bool condirmed;
         }
+        //ENUM PARA EL CHIMI DECORATIVO//
+        public enum Characters
+        {
+            Balanceado,
+            Agresivo,
+            Defensivo,
+            Protagonista,
+            Count,
+        }
+        //-----------------------------//
         public string nameNextScene;
         public List<string> namePlayersOptions;
         public Cursor CursorSelectorPlayer1;
@@ -28,6 +38,15 @@ namespace Prototipo_2
         private bool aviableMoveVerticalP1;
         private bool aviableMoveHorizontalP2;
         private bool aviableMoveVerticalP2;
+
+        //VARIABLES PARA EL CHIMI DECORATIVO//
+        public Image imagePlayer1;
+        public GameObject vs;
+        public Image imagePlayer2;
+        public List<Sprite> spritesPlayers;
+        public GameObject DireccionLeft;
+        public GameObject DireccionRight;
+        //----------------------------------//
         private void Start()
         {
             aviableMoveHorizontalP1 = true;
@@ -69,6 +88,48 @@ namespace Prototipo_2
         {
             MoveCursor();
             CheckSelectCursor();
+            DecoratePlayerSelected();
+        }
+        public void DecoratePlayerSelected()
+        {
+            switch (grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y])
+            {
+                case "Balanceado":
+                    imagePlayer1.sprite = spritesPlayers[(int)Characters.Balanceado];
+                    imagePlayer1.transform.rotation = DireccionRight.transform.rotation;
+                    break;
+                case "Agresivo":
+                    imagePlayer1.sprite = spritesPlayers[(int)Characters.Agresivo];
+                    imagePlayer1.transform.rotation = DireccionRight.transform.rotation;
+                    break;
+                case "Defensivo":
+                    imagePlayer1.sprite = spritesPlayers[(int)Characters.Defensivo];
+                    imagePlayer1.transform.rotation = DireccionRight.transform.rotation;
+                    break;
+                case "Protagonista":
+                    imagePlayer1.sprite = spritesPlayers[(int)Characters.Protagonista];
+                    imagePlayer1.transform.rotation = DireccionLeft.transform.rotation;
+                    break;
+            }
+            switch (grillaDeSeleccion[cursorPlayer2.x, cursorPlayer2.y])
+            {
+                case "Balanceado":
+                    imagePlayer2.sprite = spritesPlayers[(int)Characters.Balanceado];
+                    imagePlayer2.transform.rotation = DireccionLeft.transform.rotation;
+                    break;
+                case "Agresivo":
+                    imagePlayer2.sprite = spritesPlayers[(int)Characters.Agresivo];
+                    imagePlayer2.transform.rotation = DireccionLeft.transform.rotation;
+                    break;
+                case "Defensivo":
+                    imagePlayer2.sprite = spritesPlayers[(int)Characters.Defensivo];
+                    imagePlayer2.transform.rotation = DireccionLeft.transform.rotation;
+                    break;
+                case "Protagonista":
+                    imagePlayer2.sprite = spritesPlayers[(int)Characters.Protagonista];
+                    imagePlayer2.transform.rotation = DireccionRight.transform.rotation;
+                    break;
+            }
         }
         public void MoveCursor()
         {
