@@ -31,7 +31,6 @@ public static class InputPlayerController
     }
     public static bool AttackButton_P1()
     {
-        Debug.Log("Jugador 1 ha atacado");
         return Input.GetButtonDown("AttackButton_P1");
     }
     public static bool CheckPressAttackButton_P1()
@@ -85,7 +84,6 @@ public static class InputPlayerController
     }
     public static bool AttackButton_P2()
     {
-        Debug.Log("Jugador 2 ha atacado");
         return Input.GetButtonDown("AttackButton_P2");
     }
     public static bool CheckPressAttackButton_P2()

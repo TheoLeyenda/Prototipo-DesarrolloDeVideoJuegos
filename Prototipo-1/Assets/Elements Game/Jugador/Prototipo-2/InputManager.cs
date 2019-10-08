@@ -121,9 +121,10 @@ namespace Prototipo_2 {
         }
         public void CheckAttackButton_P1()
         {
-            Debug.Log("JUGADOR 1 ATAQUE ACTIVED");
+            
             if (InputPlayerController.AttackButton_P1())
             {
+                Debug.Log("JUGADOR 1 ATAQUE ACTIVED");
                 player1.SetControllerJoystick(true);
                 if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P1() < 0)
                 {
@@ -612,14 +613,14 @@ namespace Prototipo_2 {
                 player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
             }
         }
-        public void CheckSpriteMoverAdelante_P2()
+        public void CheckSpriteMoverAtras_P2()
         {
             if (InputPlayerController.Horizontal_Button_P2() > 0 && InputPlayerController.Vertical_Button_P2() == 0
                     || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
             {
                 if (player2.structsPlayer.dataPlayer.columnaActual < player2.gridPlayer.GetCuadrilla_columnas() - 1)
                 {
-                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAdelante;
+                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAtras;
                 }
                 else
                 {
@@ -627,14 +628,14 @@ namespace Prototipo_2 {
                 }
             }
         }
-        public void CheckSpriteMoverAtras_P2()
+        public void CheckSpriteMoverAdelante_P2()
         {
             if (InputPlayerController.Horizontal_Button_P2() < 0 && InputPlayerController.Vertical_Button_P2() == 0
                     || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
             {
                 if (player2.structsPlayer.dataPlayer.columnaActual > 0)
                 {
-                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAtras;
+                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAdelante;
                 }
                 else
                 {
