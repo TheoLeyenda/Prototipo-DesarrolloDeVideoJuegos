@@ -54,8 +54,14 @@ namespace Prototipo_2
         public bool DoubleSpeed;
         public bool LookingForward;
         public bool LookingBack;
+        public float delayAttack;
+        private float auxDelayAttack;
+        private bool enableAttack;
         void Start()
         {
+            enableAttack = true;
+            auxDelayAttack = delayAttack;
+            delayAttack = 0;
             controllerJoystick = false;
             if (resetPlayer)
             {
@@ -88,14 +94,10 @@ namespace Prototipo_2
         // Update is called once per frame
         void Update()
         {
-            /*if (DoubleSpeed)
-            {
-                InputKeyBoard();
-            }*/
             CheckOutLimit();
             CheckDead();
             CheckLifeBar();
-            //Debug.Log(structsPlayer.dataPlayer.columnaActual);
+            DelayEnableAttack();
         }
         
         public void ResetPlayer()
@@ -139,49 +141,69 @@ namespace Prototipo_2
         }
         public void AttackDown(Proyectil.DisparadorDelProyectil disparador)
         {
-            GameObject go = poolObjectAttack.GetObject();
-            Proyectil proyectil = go.GetComponent<Proyectil>();
-            proyectil.SetDobleDamage(doubleDamage);
-            if (doubleDamage)
+            if (enableAttack)
             {
-                proyectil.damage = proyectil.damage * 2;
+                GameObject go = poolObjectAttack.GetObject();
+                Proyectil proyectil = go.GetComponent<Proyectil>();
+                proyectil.SetDobleDamage(doubleDamage);
+                if (doubleDamage)
+                {
+                    proyectil.damage = proyectil.damage * 2;
+                }
+                if (!isDuck)
+                {
+                    go.transform.position = generadorProyectiles.transform.position;
+                    go.transform.rotation = generadorProyectiles.transform.rotation;
+                }
+                else
+                {
+                    go.transform.position = generadorProyectilesAgachado.transform.position;
+                    go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
+                }
+                proyectil.disparadorDelProyectil = disparador;
+                proyectil.On();
+                proyectil.ShootForwardDown();
+                delayAttack = auxDelayAttack;
             }
-            if (!isDuck)
+        }
+        public void DelayEnableAttack()
+        {
+            if (delayAttack > 0)
             {
-                go.transform.position = generadorProyectiles.transform.position;
-                go.transform.rotation = generadorProyectiles.transform.rotation;
+                delayAttack = delayAttack - Time.deltaTime;
+                enableAttack = false;
             }
             else
             {
-                go.transform.position = generadorProyectilesAgachado.transform.position;
-                go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
+                enableAttack = true;
             }
-            proyectil.disparadorDelProyectil = disparador;
-            proyectil.On();
-            proyectil.ShootForwardDown();
         }
         public void Attack(Proyectil.DisparadorDelProyectil disparador)
         {
-            GameObject go = poolObjectAttack.GetObject();
-            Proyectil proyectil = go.GetComponent<Proyectil>();
-            proyectil.SetDobleDamage(doubleDamage);
-            if (doubleDamage)
+            if (enableAttack)
             {
-                proyectil.damage = proyectil.damage * 2;
+                GameObject go = poolObjectAttack.GetObject();
+                Proyectil proyectil = go.GetComponent<Proyectil>();
+                proyectil.SetDobleDamage(doubleDamage);
+                if (doubleDamage)
+                {
+                    proyectil.damage = proyectil.damage * 2;
+                }
+                if (!isDuck)
+                {
+                    go.transform.position = generadorProyectiles.transform.position;
+                    go.transform.rotation = generadorProyectiles.transform.rotation;
+                }
+                else
+                {
+                    go.transform.position = generadorProyectilesAgachado.transform.position;
+                    go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
+                }
+                proyectil.On();
+                proyectil.disparadorDelProyectil = disparador;
+                proyectil.ShootForward();
+                delayAttack = auxDelayAttack;
             }
-            if (!isDuck)
-            {
-                go.transform.position = generadorProyectiles.transform.position;
-                go.transform.rotation = generadorProyectiles.transform.rotation;
-            }
-            else
-            {
-                go.transform.position = generadorProyectilesAgachado.transform.position;
-                go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
-            }
-            proyectil.On();
-            proyectil.disparadorDelProyectil = disparador;
-            proyectil.ShootForward();
         }
 
         //ATAQUE EN PARABOLA.
@@ -400,10 +422,6 @@ namespace Prototipo_2
         {
             isDuck = true;
             colliderSprite.enabled = false;
-            /*for (int i = 0; i < structsPlayer.dataPlayer.CantCasillasOcupadas_X; i++)
-            {
-                gridPlayer.matrizCuadrilla[gridPlayer.GetCuadrilla_columnas() - rangoAgachado][structsPlayer.dataPlayer.columnaActual + i].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
-            }*/
         }
         public void Deffence()
         {
