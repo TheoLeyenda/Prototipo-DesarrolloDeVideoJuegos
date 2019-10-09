@@ -37,6 +37,13 @@ namespace Prototipo_2 {
             gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Supervivencia;
             SceneManager.LoadScene("Supervivencia");
         }
+        public void Salir()
+        {
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#endif
+                Application.Quit();
+        }
         public void Historia()
         {
             CheckMainCameraInScreen();
