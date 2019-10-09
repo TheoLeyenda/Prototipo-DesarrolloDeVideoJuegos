@@ -18,12 +18,17 @@ namespace Prototipo_2
         public SpritePlayer spritePlayerActual;
         public EnumsPlayers enumsPlayers;
         public GameObject BARRA_DE_VIDA;
+        public GameObject BARRA_DE_CARGA;
         public GameObject generadorProyectiles;
         public GameObject generadorProyectilesAgachado;
         public GameObject generadorProyectilesParabola;
         public GameObject generadorProyectilesParabolaAgachado;
         private Animator animator;
         public Image ImageHP;
+        public Image ImageCarga;
+        private float xpActual;
+        public float xpNededSpecialAttack;
+        public float xpForHit;
         public Button PadArrowUp;
         public Button PadArrowDown;
         public Button PadArrowLeft;
@@ -57,8 +62,11 @@ namespace Prototipo_2
         public float delayAttack;
         private float auxDelayAttack;
         private bool enableAttack;
+        private bool enableSpecialAttack;
         void Start()
         {
+            xpActual = 0;
+            enableSpecialAttack = false;
             enableAttack = true;
             auxDelayAttack = delayAttack;
             delayAttack = 0;
@@ -98,12 +106,14 @@ namespace Prototipo_2
             CheckDead();
             CheckLifeBar();
             DelayEnableAttack();
+            CheckLoadSpecialAttackBar();
         }
         
         public void ResetPlayer()
         {
             PD.lifePlayer = PD.maxLifePlayer;
         }
+
         public void CheckSpritePlayerActual()
         {
             for (int i = 0; i < spritePlayers.Count; i++)
@@ -112,6 +122,22 @@ namespace Prototipo_2
                 {
                     spritePlayerActual = spritePlayers[i];
                 }
+            }
+        }
+        public void CheckLoadSpecialAttackBar()
+        {
+            if (xpActual >= xpNededSpecialAttack)
+            {
+                xpActual = xpNededSpecialAttack;
+                enableSpecialAttack = true;
+            }
+            if (xpActual <= xpNededSpecialAttack)
+            {
+                ImageCarga.fillAmount = xpActual / xpNededSpecialAttack;
+            }
+            if (xpActual < 0)
+            {
+                xpActual = 0;
             }
         }
         public void CheckLifeBar()
@@ -145,6 +171,17 @@ namespace Prototipo_2
             {
                 GameObject go = poolObjectAttack.GetObject();
                 Proyectil proyectil = go.GetComponent<Proyectil>();
+                switch (enumsPlayers.numberPlayer)
+                {
+                    case EnumsPlayers.NumberPlayer.player1:
+                        proyectil.SetPlayer(gameObject.GetComponent<Player>());
+                        disparador = Proyectil.DisparadorDelProyectil.Jugador1;
+                        break;
+                    case EnumsPlayers.NumberPlayer.player2:
+                        proyectil.SetPlayer2(gameObject.GetComponent<Player>());
+                        disparador = Proyectil.DisparadorDelProyectil.Jugador2;
+                        break;
+                }
                 proyectil.SetDobleDamage(doubleDamage);
                 if (doubleDamage)
                 {
@@ -184,6 +221,17 @@ namespace Prototipo_2
             {
                 GameObject go = poolObjectAttack.GetObject();
                 Proyectil proyectil = go.GetComponent<Proyectil>();
+                switch (enumsPlayers.numberPlayer)
+                {
+                    case EnumsPlayers.NumberPlayer.player1:
+                        proyectil.SetPlayer(gameObject.GetComponent<Player>());
+                        disparador = Proyectil.DisparadorDelProyectil.Jugador1;
+                        break;
+                    case EnumsPlayers.NumberPlayer.player2:
+                        proyectil.SetPlayer2(gameObject.GetComponent<Player>());
+                        disparador = Proyectil.DisparadorDelProyectil.Jugador2;
+                        break;
+                }
                 proyectil.SetDobleDamage(doubleDamage);
                 if (doubleDamage)
                 {
@@ -209,35 +257,40 @@ namespace Prototipo_2
         //ATAQUE EN PARABOLA.
         public void SpecialAttack(Proyectil.DisparadorDelProyectil disparador)
         {
-            GameObject go = poolObjectSpecialAttack.GetObject();
-            ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
-            proyectil.SetDobleDamage(doubleDamage);
-            proyectil.disparadorDelProyectil = disparador;
-            if (doubleDamage)
+            if (enableSpecialAttack)
             {
-                proyectil.damage = proyectil.damage * 2;
+                GameObject go = poolObjectSpecialAttack.GetObject();
+                ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
+                proyectil.SetDobleDamage(doubleDamage);
+                proyectil.disparadorDelProyectil = disparador;
+                if (doubleDamage)
+                {
+                    proyectil.damage = proyectil.damage * 2;
+                }
+                if (!isDuck)
+                {
+                    proyectil.TypeRoot = 1;
+                    go.transform.position = generadorProyectilesParabola.transform.position;
+                }
+                else
+                {
+                    proyectil.TypeRoot = 2;
+                    go.transform.position = generadorProyectilesParabolaAgachado.transform.position;
+                }
+                switch (proyectil.TypeRoot)
+                {
+                    case 1:
+                        proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
+                        break;
+                    case 2:
+                        proyectil.rutaParabolaAgachado_AtaqueJugador = structsPlayer.rutaAgachado;
+                        break;
+                }
+                proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
+                proyectil.OnParabola();
+                enableSpecialAttack = false;
+                xpActual = 0;
             }
-            if (!isDuck)
-            {
-                proyectil.TypeRoot = 1;
-                go.transform.position = generadorProyectilesParabola.transform.position;
-            }
-            else
-            {
-                proyectil.TypeRoot = 2;
-                go.transform.position = generadorProyectilesParabolaAgachado.transform.position;
-            }
-            switch (proyectil.TypeRoot)
-            {
-                case 1:
-                    proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
-                    break;
-                case 2:
-                    proyectil.rutaParabolaAgachado_AtaqueJugador = structsPlayer.rutaAgachado;
-                    break;
-            }
-            proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
-            proyectil.OnParabola();
         }
         public void CheckOutLimit()
         {
@@ -261,7 +314,6 @@ namespace Prototipo_2
             {
                 if (structsPlayer.dataPlayer.columnaActual > 0)
                 {
-                    Debug.Log("<-");
                     MoveLeft(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual - 1].transform.position);
                 }
             }
@@ -280,7 +332,6 @@ namespace Prototipo_2
                 Debug.Log(structsPlayer.dataPlayer.columnaActual);
                 if (structsPlayer.dataPlayer.columnaActual < gridPlayer.GetCuadrilla_columnas() - 1)
                 {
-                    Debug.Log("->");
                     MoveRight(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual + 1].transform.position);
                 }
             }
@@ -337,7 +388,6 @@ namespace Prototipo_2
                 }
                 else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
                 {
-                    Debug.Log("ENTRE FORWARD");
                     structsPlayer.dataPlayer.columnaActual--;
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
                     gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
@@ -358,7 +408,6 @@ namespace Prototipo_2
                     gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
                 }
             }
-            
         }
         public void MoveRight(Vector3 cuadrillaDestino)
         {
@@ -479,6 +528,18 @@ namespace Prototipo_2
         public bool GetControllerJoystick()
         {
             return controllerJoystick;
+        }
+        public void SetEnableSpecialAttack(bool _enableSpecialAttack)
+        {
+            enableSpecialAttack = _enableSpecialAttack;
+        }
+        public void SetXpActual(float _xpActual)
+        {
+            xpActual = _xpActual;
+        }
+        public float GetXpActual()
+        {
+            return xpActual;
         }
     }
 }

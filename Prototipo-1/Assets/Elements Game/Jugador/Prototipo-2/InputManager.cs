@@ -130,7 +130,7 @@ namespace Prototipo_2 {
             
             if (InputPlayerController.AttackButton_P1())
             {
-                Debug.Log("JUGADOR 1 ATAQUE ACTIVED");
+                //Debug.Log("JUGADOR 1 ATAQUE ACTIVED");
                 player1.SetControllerJoystick(true);
                 if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P1() < 0)
                 {
@@ -303,7 +303,10 @@ namespace Prototipo_2 {
                 else if (InputPlayerController.CheckPressDeffenseButton_P1())
                 {
                     player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoDefensa;
-                    player1_PvP.playerState = Player_PvP.State.Defendido;
+                    if (player1_PvP != null)
+                    {
+                        player1_PvP.playerState = Player_PvP.State.Defendido;
+                    }
                 }
                 else
                 {
@@ -449,7 +452,6 @@ namespace Prototipo_2 {
                 if (InputPlayerController.Horizontal_Button_P2() < 0 && moveHorizontalPlayer2 && player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
                     || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
                 {
-                    //Debug.Log("LEFT");
                     player2.SetControllerJoystick(true);
                     moveHorizontalPlayer2 = false;
                     player2.MovementLeft();
@@ -462,7 +464,6 @@ namespace Prototipo_2 {
                 if (InputPlayerController.Horizontal_Button_P2() < 0 && moveHorizontalPlayer2 && player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
                     || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
                 {
-                    //Debug.Log("LEFT");
                     player2.SetControllerJoystick(true);
                     moveHorizontalPlayer2 = false;
                     player2.MovementLeft();
@@ -478,7 +479,6 @@ namespace Prototipo_2 {
                 if (InputPlayerController.Horizontal_Button_P2() > 0 && moveHorizontalPlayer2 && player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
                 || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
                 {
-                    //Debug.Log("RIGTH");
                     player2.SetControllerJoystick(true);
                     moveHorizontalPlayer2 = false;
                     player2.MovementRight();
@@ -490,7 +490,6 @@ namespace Prototipo_2 {
                 if (InputPlayerController.Horizontal_Button_P2() > 0 && moveHorizontalPlayer2 && player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
                 || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
                 {
-                    //Debug.Log("RIGTH");
                     player2.SetControllerJoystick(true);
                     moveHorizontalPlayer2 = false;
                     player2.MovementRight();
@@ -510,7 +509,7 @@ namespace Prototipo_2 {
         {
             if (InputPlayerController.AttackButton_P2())
             {
-                Debug.Log("JUGADOR 2 ATAQUE ACTIVED");
+                //Debug.Log("JUGADOR 2 ATAQUE ACTIVED");
                 player2.SetControllerJoystick(true);
                 if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P2() < 0)
                 {
@@ -602,7 +601,6 @@ namespace Prototipo_2 {
                     }
                 }
 
-                //PASAR ESTA FUNCION PARA EL PLAYER 2
                 if (!InputPlayerController.CheckPressDeffenseButton_P2() && !player2.GetIsJumping()
                     && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
                     && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque

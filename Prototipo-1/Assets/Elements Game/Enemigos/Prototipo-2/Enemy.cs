@@ -1068,6 +1068,7 @@ namespace Prototipo_2
             {
                 go = poolObjectAttack.GetObject();
                 proyectil = go.GetComponent<Proyectil>();
+                proyectil.SetEnemy(gameObject.GetComponent<Enemy>());
                 proyectil.SetDobleDamage(_doubleDamage);
                 proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
                 if (_doubleDamage)

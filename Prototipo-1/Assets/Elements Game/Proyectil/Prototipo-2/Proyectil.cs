@@ -32,6 +32,9 @@ namespace Prototipo_2
         public Pool pool;
         protected bool dobleDamage;
         private PoolObject poolObject;
+        private Player PLAYER1;
+        private Player PLAYER2;
+        private Enemy ENEMY;
         protected GameManager gm;
         public DisparadorDelProyectil disparadorDelProyectil;
         private void Start()
@@ -97,6 +100,18 @@ namespace Prototipo_2
         {
             dobleDamage = _dobleDamage;
         }
+        public void SetPlayer(Player player)
+        {
+            PLAYER1 = player;
+        }
+        public void SetPlayer2(Player player2)
+        {
+            PLAYER2 = player2;
+        }
+        public void SetEnemy(Enemy enemy)
+        {
+            ENEMY = enemy;
+        }
         private void OnTriggerStay2D(Collider2D collision)
         {
             switch (collision.tag)
@@ -105,7 +120,6 @@ namespace Prototipo_2
                     timeLife = 0;
                     break;
                 case "Cuadrilla":
-                    // SI NO FUNCIONA SACARLE EL BOLEANO enableDamageMe.
                     bool enableDamagePlayer = true;
                     Cuadrilla cuadrilla = collision.GetComponent<Cuadrilla>();
                     if (cuadrilla.enemy == null && cuadrilla.player == null || cuadrilla.enemy != null && cuadrilla.player != null)
@@ -129,6 +143,9 @@ namespace Prototipo_2
                                 {
                                     cuadrilla.enemy.spriteEnemyActual.ActualSprite = SpriteEnemy.SpriteActual.RecibirDanio;
                                     cuadrilla.enemy.life = cuadrilla.enemy.life - damage;
+
+                                    //AUMENTO XP PARA EL ATAQUE ESPECIAL
+                                    PLAYER1.SetXpActual(PLAYER1.GetXpActual() + PLAYER1.xpForHit);
                                 }
                                 timeLife = 0;
                                 gameObject.SetActive(false);
@@ -136,67 +153,8 @@ namespace Prototipo_2
                         }
                         if (cuadrilla.player != null)
                         {
+                            
                             if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
-                            {
-                                cuadrilla.player.SetEnableCounterAttack(true);
-                                if (cuadrilla.player.delayCounterAttack > 0)
-                                {
-                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
-                                    if (InputPlayerController.DeffenseButton_P1())
-                                    {
-                                        cuadrilla.player.Attack( DisparadorDelProyectil.Jugador1);
-                                        cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
-                                        timeLife = 0;
-                                        enableDamagePlayer = false;
-                                    }
-                                }
-                                if (cuadrilla.player.delayCounterAttack <= 0 && timeLife <= 0 && enableDamagePlayer)
-                                {
-                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
-                                    cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-                                }
-                                else if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0 && enableDamagePlayer)
-                                {
-                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
-                                    cuadrilla.player.SetEnableCounterAttack(false);
-                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
-                                    cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-                                    timeLife = 0;
-                                    gameObject.SetActive(false);
-                                    //Debug.Log("ENTRE AL DESTRUCTOR POR CONTRA ATAQUE");
-                                }
-                            }
-                            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
-                            {
-                                cuadrilla.player.SetEnableCounterAttack(true);
-                                if (cuadrilla.player.delayCounterAttack > 0)
-                                {
-                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
-                                    if (InputPlayerController.DeffenseButton_P1())
-                                    {
-                                        cuadrilla.player.Attack(DisparadorDelProyectil.Jugador2);
-                                        cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
-                                        timeLife = 0;
-                                        enableDamagePlayer = false;
-                                    }
-                                }
-                                if (cuadrilla.player.delayCounterAttack <= 0 && timeLife <= 0 && enableDamagePlayer)
-                                {
-                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
-                                    cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-                                }
-                                else if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0 && enableDamagePlayer)
-                                {
-                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
-                                    cuadrilla.player.SetEnableCounterAttack(false);
-                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
-                                    cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-                                    timeLife = 0;
-                                    gameObject.SetActive(false);
-                                    //Debug.Log("ENTRE AL DESTRUCTOR POR CONTRA ATAQUE");
-                                }
-                            }
-                            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador2)
                             {
                                 cuadrilla.player.SetEnableCounterAttack(true);
                                 if (cuadrilla.player.delayCounterAttack > 0)
@@ -222,23 +180,111 @@ namespace Prototipo_2
                                     cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
                                     cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                     timeLife = 0;
-                                    gameObject.SetActive(false);
-                                    //Debug.Log("ENTRE AL DESTRUCTOR POR CONTRA ATAQUE");
+                                    gameObject.SetActive(false);;
                                 }
                             }
-                            
+                            if (PLAYER1 != null)
+                            {
+                                if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1
+                                    || cuadrilla.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                                {
+                                    //AUMENTO XP PARA EL ATAQUE ESPECIAL
+                                    PLAYER1.SetXpActual(PLAYER1.GetXpActual() + PLAYER1.xpForHit);
+                                    cuadrilla.player.SetEnableCounterAttack(true);
+                                    if (cuadrilla.player.delayCounterAttack > 0)
+                                    {
+                                        cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
+                                        if (InputPlayerController.DeffenseButton_P1())
+                                        {
+                                            cuadrilla.player.Attack(DisparadorDelProyectil.Jugador2);
+                                            cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                            timeLife = 0;
+                                            enableDamagePlayer = false;
+                                        }
+                                    }
+                                    if (cuadrilla.player.delayCounterAttack <= 0 && timeLife <= 0 && enableDamagePlayer)
+                                    {
+                                        cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
+                                        cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                                    }
+                                    else if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0 && enableDamagePlayer)
+                                    {
+                                        cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                        cuadrilla.player.SetEnableCounterAttack(false);
+                                        cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
+                                        cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                                        timeLife = 0;
+                                        gameObject.SetActive(false);
+                                    }
+                                }
+                            }
+                            if (PLAYER2 != null)
+                            {
+                                if (disparadorDelProyectil == DisparadorDelProyectil.Jugador2 ||
+                                cuadrilla.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1 ||
+                                PLAYER2 != null)
+                                {
+                                    //AUMENTO XP PARA EL ATAQUE ESPECIAL
+                                    PLAYER2.SetXpActual(PLAYER2.GetXpActual() + PLAYER2.xpForHit);
+                                    cuadrilla.player.SetEnableCounterAttack(true);
+                                    if (cuadrilla.player.delayCounterAttack > 0)
+                                    {
+                                        cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
+                                        if (InputPlayerController.DeffenseButton_P1())
+                                        {
+                                            cuadrilla.player.Attack(DisparadorDelProyectil.Jugador2);
+                                            cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                            timeLife = 0;
+                                            enableDamagePlayer = false;
+                                        }
+                                    }
+                                    if (cuadrilla.player.delayCounterAttack <= 0 && timeLife <= 0 && enableDamagePlayer)
+                                    {
+                                        cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
+                                        cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                                    }
+                                    else if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0 && enableDamagePlayer)
+                                    {
+                                        cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                        cuadrilla.player.SetEnableCounterAttack(false);
+                                        cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
+                                        cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                                        timeLife = 0;
+                                        gameObject.SetActive(false);
+                                    }
+                                }
+                            }
                         }
                     }
                     if (cuadrilla.GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Defendido)
                     {
-
                         if (cuadrilla.player != null)
                         {
                             Player_PvP player1_PvP = cuadrilla.player.gameObject.GetComponent<Player_PvP>();
-                            Debug.Log(player1_PvP);
                             float realDamage;
+                            if (PLAYER1 != null)
+                            {
+                                if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1
+                                    || cuadrilla.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                                {
+                                    //AUMENTO XP PARA EL ATAQUE ESPECIAL
+                                    //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
+                                    PLAYER1.SetXpActual(PLAYER1.GetXpActual() + (PLAYER1.xpForHit / 2));
+                                }
+                            }
                             if (player1_PvP != null)
                             {
+                                
+                                if (PLAYER2 != null)
+                                {
+                                    if (disparadorDelProyectil == DisparadorDelProyectil.Jugador2
+                                    || cuadrilla.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                                    {
+                                        //AUMENTO XP PARA EL ATAQUE ESPECIAL
+                                        //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
+                                        PLAYER2.SetXpActual(PLAYER2.GetXpActual() + (PLAYER2.xpForHit / 2));
+                                    }
+                                }
                                 if (player1_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
                                 {
                                     switch (player1_PvP.playerState)
@@ -261,6 +307,26 @@ namespace Prototipo_2
                                             gameObject.SetActive(false);
                                             break;
                                         default:
+                                            if (PLAYER1 != null)
+                                            {
+                                                if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1
+                                                    || cuadrilla.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                                                {
+                                                    //AUMENTO XP PARA EL ATAQUE ESPECIAL
+                                                    //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
+                                                    PLAYER1.SetXpActual(PLAYER1.GetXpActual() + (PLAYER1.xpForHit / 2));
+                                                }
+                                            }
+                                            else if (PLAYER2 != null)
+                                            {
+                                                if (disparadorDelProyectil == DisparadorDelProyectil.Jugador2
+                                                || cuadrilla.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                                                {
+                                                    //AUMENTO XP PARA EL ATAQUE ESPECIAL
+                                                    //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
+                                                    PLAYER2.SetXpActual(PLAYER2.GetXpActual() + (PLAYER2.xpForHit / 2));
+                                                }
+                                            }
                                             realDamage = damage - cuadrilla.player.pointsDeffence;
                                             cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - realDamage;
                                             timeLife = 0;
@@ -282,11 +348,11 @@ namespace Prototipo_2
                             }
                             else
                             {
-                                if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo || disparadorDelProyectil == DisparadorDelProyectil.Jugador1 && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.PvP)
+                                if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo||disparadorDelProyectil == DisparadorDelProyectil.Jugador2 || disparadorDelProyectil == DisparadorDelProyectil.Jugador1 && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.PvP)
                                 {
                                     if (cuadrilla.player.delayCounterAttack <= 0)
                                     {
-                                        Debug.Log("ENTRE");
+                                        
                                         realDamage = damage - cuadrilla.player.pointsDeffence;
                                         cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - realDamage;
                                         cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
@@ -307,6 +373,9 @@ namespace Prototipo_2
                         {
                             if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
                             {
+                                //AUMENTO XP PARA EL ATAQUE ESPECIAL
+                                //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
+                                PLAYER1.SetXpActual(PLAYER1.GetXpActual() + (PLAYER1.xpForHit/2));
                                 if (cuadrilla.enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
                                 {
                                     float realDamage = damage - cuadrilla.enemy.pointsDeffence;
@@ -324,6 +393,7 @@ namespace Prototipo_2
                                 }
                                 timeLife = 0;
                                 gameObject.SetActive(false);
+
                             }
                             
                         }
