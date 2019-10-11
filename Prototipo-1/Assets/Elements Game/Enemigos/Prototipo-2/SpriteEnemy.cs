@@ -259,7 +259,7 @@ namespace Prototipo_2
                                 break;
                             case SpriteActual.SaltoDefensa:
                                 animator.enabled = false;
-                                spriteRenderer.sprite = CheckListSprite("ParadoDefensa-Agresivo");
+                                spriteRenderer.sprite = CheckListSprite("SaltoDefensa-Agresivo");
                                 break;
                             case SpriteActual.ParadoDefensa:
                                 animator.enabled = false;

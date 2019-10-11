@@ -112,9 +112,7 @@ namespace Prototipo_2
             CheckDead();
             IA();
         }
-        public Enemy()
-        {
-        }
+        public Enemy(){}
         public void CheckInitialCharacter()
         {
             structsEnemys.dataEnemy.CantCasillasOcupadas_X = CantCasillasOcupadas_X;
@@ -122,8 +120,6 @@ namespace Prototipo_2
             structsEnemys.dataEnemy.columnaActual = ColumnaActual;
             gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
         }
-        
-        
         public void CheckOutLimit()
         {
             if (transform.position.y < InitialPosition.y && !isJamping)
