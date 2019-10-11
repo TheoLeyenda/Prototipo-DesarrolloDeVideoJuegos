@@ -329,7 +329,6 @@ namespace Prototipo_2
             }
             else if (LookingBack)
             {
-                Debug.Log(structsPlayer.dataPlayer.columnaActual);
                 if (structsPlayer.dataPlayer.columnaActual < gridPlayer.GetCuadrilla_columnas() - 1)
                 {
                     MoveRight(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual + 1].transform.position);

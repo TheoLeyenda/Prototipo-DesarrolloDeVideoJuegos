@@ -18,8 +18,24 @@ namespace Prototipo_2
             Historia,
             Nulo,
         }
+        [System.Serializable]
+        public class EnemiesDataGeneration
+        {
+            public Pool poolEnemy;
+            public EnumsEnemy.TiposDeEnemigo typeEnemy;
+            public EnumsEnemy.TiposDeJefe typeBoss;
+
+        }
+        [System.Serializable]
+        public class BossesDataGeneration
+        {
+            public Pool poolBoss;
+            public EnumsEnemy.TiposDeJefe typeBoss;
+        }
+        public List<EnemiesDataGeneration> ListEnemyGenerate;
+        public List<BossesDataGeneration> ListBossGenerate;
         public LevelManager levelManager;
-        public List<Pool> poolsEnemy;
+        public int RondasPorJefe;
         private int randomEnemyGenerate;
         public GameObject Generador;
         public GameObject pointOfCombat;
@@ -27,8 +43,6 @@ namespace Prototipo_2
         private GameManager gm;
         private PoolObject poolObject;
         private Enemy enemigoActual;
-        public List<EnumsEnemy.TiposDeEnemigo> TypeEnemiesLevel;
-        public List<EnumsEnemy.TiposDeJefe> TypeBossLevel;
         private int idListEnemy;
         public bool InitGenerate;
         public TypeGeneration typeGeneration;
@@ -60,7 +74,7 @@ namespace Prototipo_2
                 }
                 if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
                 {
-                    levelManager.ObjectiveOfPassLevel = TypeBossLevel.Count + 1;
+                    levelManager.ObjectiveOfPassLevel = ListEnemyGenerate.Count;
                 }
             }
         }
@@ -75,7 +89,7 @@ namespace Prototipo_2
                 case TypeGeneration.DeadthEnemy:
                     if (enemigoActual != null)
                     {
-                        if (enemigoActual.life <= 0)
+                        if (enemigoActual.life <= 0 || enemigoActual.enumsEnemy.GetStateEnemy() == EnumsEnemy.EstadoEnemigo.muerto)
                         {
                             Generate();
                         }
@@ -114,8 +128,16 @@ namespace Prototipo_2
             switch (gm.enumsGameManager.modoDeJuego)
             {
                 case EnumsGameManager.ModosDeJuego.Supervivencia:
-                    randomEnemyGenerate = Random.Range(0, poolsEnemy.Count);
-                    go = poolsEnemy[randomEnemyGenerate].GetObject();
+                    if (gm.countEnemysDead % RondasPorJefe == 0 && gm.countEnemysDead > 0)
+                    {
+                        randomEnemyGenerate = Random.Range(0, ListBossGenerate.Count);
+                        go = ListBossGenerate[randomEnemyGenerate].poolBoss.GetObject();
+                    }
+                    else
+                    {
+                        randomEnemyGenerate = Random.Range(0, ListEnemyGenerate.Count);
+                        go = ListEnemyGenerate[randomEnemyGenerate].poolEnemy.GetObject();
+                    }
                     enemy = go.GetComponentInChildren<Enemy>();
                     go.transform.position = Generador.transform.position;
                     go.transform.rotation = Generador.transform.rotation;
@@ -128,24 +150,28 @@ namespace Prototipo_2
                     enemy.OnEnemy();
                     break;
                 case EnumsGameManager.ModosDeJuego.Historia:
-                    go = poolsEnemy[idListEnemy].GetObject();
-                    enemy = go.GetComponentInChildren<Enemy>();
-                    go.transform.position = Generador.transform.position;
-                    go.transform.rotation = Generador.transform.rotation;
-                    if (enemy != null)
+                    Debug.Log(idListEnemy);
+                    if (idListEnemy < ListEnemyGenerate.Count)
                     {
-                        enemigoActual = enemy;
-                        enemigoActual.InitialPosition = Generador.transform.position;
-                        enemigoActual.ResetEnemy();
-                    }
-                    if (idListEnemy < TypeEnemiesLevel.Count)
-                    {
-                        enemy.OnEnemy();
-                        if (idListEnemy == 0)
+                        go = ListEnemyGenerate[idListEnemy].poolEnemy.GetObject();
+                        if (go != null)
                         {
-                            levelManager.SetInDialog(true);
+                            enemy = go.GetComponentInChildren<Enemy>();
+                            go.transform.position = Generador.transform.position;
+                            go.transform.rotation = Generador.transform.rotation;
+                            if (enemy != null)
+                            {
+                                enemigoActual = enemy;
+                                enemigoActual.InitialPosition = Generador.transform.position;
+                                enemigoActual.ResetEnemy();
+                            }
+                            enemy.OnEnemy();
+                            if (idListEnemy == 0)
+                            {
+                                levelManager.SetInDialog(true);
+                            }
+                            idListEnemy++;
                         }
-                        idListEnemy++;
                     }
                     else
                     {

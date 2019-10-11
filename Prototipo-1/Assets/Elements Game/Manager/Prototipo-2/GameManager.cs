@@ -15,7 +15,6 @@ namespace Prototipo_2
         public bool InGameOverScene;
         [HideInInspector]
         public bool generateEnemy;
-        public int RondasPorJefe;
         public GameObject TituloPushButton;
         public GameObject FondoPushButton;
         public GameObject buttonGameOver;
