@@ -53,7 +53,9 @@ namespace Prototipo_2 {
             if (idListaNiveles < ListaNiveles.Count)
             {
                 if (gm != null && SceneManager.GetActiveScene().name != "MENU" && SceneManager.GetActiveScene().name != "Supervivencia"
-                    && SceneManager.GetActiveScene().name != "SampleScene" && SceneManager.GetActiveScene().name != "GameOver")
+                    && SceneManager.GetActiveScene().name != "SampleScene" && SceneManager.GetActiveScene().name != "GameOver"
+                    && SceneManager.GetActiveScene().name != "SelectLevel" && SceneManager.GetActiveScene().name != "SelectPlayerScene"
+                    && SceneManager.GetActiveScene().name != "PvP")
                 {
 
                     if (fondo == null)
