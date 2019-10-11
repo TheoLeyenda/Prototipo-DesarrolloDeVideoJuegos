@@ -183,8 +183,6 @@ namespace Prototipo_2
                                 spriteRenderer.sprite = CheckListSprite("ContraAtaque-Defensivo");
                                 break;
                             default:
-                                //ActualSprite = SpriteActual.Parado;
-                                //spriteRenderer.sprite = CheckListSprite("Parado-Defensivo");
                                 break;
                         }
                         break;
