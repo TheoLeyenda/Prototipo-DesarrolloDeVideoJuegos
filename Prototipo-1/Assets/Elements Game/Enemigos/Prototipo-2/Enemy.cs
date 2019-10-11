@@ -7,26 +7,12 @@ namespace Prototipo_2
 {
     public class Enemy : MonoBehaviour
     {
-        public List<SpriteEnemy> spriteEnemys;
-        [HideInInspector]
-        public SpriteEnemy spriteEnemyActual;
-        public GameObject ENEMY;
+        public SpriteEnemy spriteEnemy;
         public GameObject enemyPrefab;
         public Grid gridEnemy;
         public EnumsEnemy enumsEnemy;
         public StructsEnemys structsEnemys;
-        public SpriteRenderer SpriteRendererEnemigoBalanceado;
-        public SpriteRenderer SpriteRendererEnemigoAgresivo;
-        public SpriteRenderer SpriteRendererEnemigoDefensivo;
-        public SpriteRenderer SpriteRendererJefeProfeAnatomia;
-        public SpriteRenderer SpriteRendererJefeProfeHistoria;
-        public SpriteRenderer SpriteRendererJefeProfeEducacionFisica;
-        public SpriteRenderer SpriteRendererJefeProfeArte;
-        public SpriteRenderer SpriteRendererJefeProfeMatematica;
-        public SpriteRenderer SpriteRendererJefeProfeQuimica;
-        public SpriteRenderer SpriteRendererJefeProfeProfeProgramacion;
-        public SpriteRenderer SpriteRendererJefeProfeBaretto;
-        public SpriteRenderer SpriteRendererJefeProfeLautarito;
+        public SpriteRenderer SpriteRendererEnemigo;
         public SpecialAttackEnemyController specialAttackEnemyController;
         public GameObject BARRA_DE_VIDA;
         private float auxLife;
@@ -39,30 +25,10 @@ namespace Prototipo_2
         public Pool poolObjectAttack;
         private Rigidbody2D rg2D;
         private GameManager gm;
-        public List<GameObject> generadoresProyectiles;
-        public List<GameObject> generadorProyectilesAgachado;
-        public List<GameObject> generadorProyectilParabola;
-        public List<GameObject> generadorProyectilParabolaAgachado;
-        private float DeffensePorcentage;
-        private float AttackPorcentage;
-        private float DodgePorcentage;
-        private float SimpleJumpPorcentage;
-        private float SimpleDuckPorcentage;
-        private float AttackJumpPorcentage;
-        private float AttackDuckPorcentage;
-        private float AttackIdlePorcentage;
-        private float IdlePorcentage;
-        private float AttackParabolaPorcentage;
-        private float DefenceJumpPorcentage;
-        private float DefenceDuckPorcentage;
-        private float DefenceIdlePorcentage;
-        private float MovePorcentage;
-        private float AccionPorcentage;
-        private float MoveForwardPorcentage;
-        private float MoveBackPorcentage;
-        private float JumpPorcentage;
-        private float DuckPorcentage;
-        private float AttackSpecialPorcentage;
+        public GameObject generadoresProyectiles;
+        public GameObject generadorProyectilesAgachado;
+        public GameObject generadorProyectilParabola;
+        public GameObject generadorProyectilParabolaAgachado;
         private float MinRangeRandom = 0;
         private float MaxRangeRandom = 100;
         private float TypeRandom = 3;
@@ -83,7 +49,7 @@ namespace Prototipo_2
         public float Gravity;
         public float delayAttackJumping;
         private bool isJamping;
-        public List<Collider2D> collidersSprites;
+        public Collider2D colliderSprites;
         [HideInInspector]
         public Vector3 InitialPosition;
         [HideInInspector]
@@ -92,7 +58,39 @@ namespace Prototipo_2
         public Vector3 pointOfCombat;
         public bool damageCounterAttack;
         public bool activateComportamiento;
-        void Start()
+
+        [Header("Porcentage: Movimiento")]
+        public float MovePorcentage;
+        public float JumpPorcentage;
+        public float DuckPorcentage;
+        public float IdlePorcentage;
+
+        [Header("Porcentaje: Direccion de Movimiento")]
+        public float MoveForwardPorcentage;
+        public float MoveBackPorcentage;
+
+        [Header("Porcentaje: Accion De Salto")]
+        public float AttackJumpPorcentage;
+        public float DefenceJumpPorcentage;
+        public float SimpleJumpPorcentage;
+
+        [Header("Porcentaje: Accion Agacharse")]
+        public float AttackDuckPorcentage;
+        public float DefenceDuckPorcentage;
+        public float SimpleDuckPorcentage;
+
+        [Header("Porcentaje: Accion Quieto")]
+        public float AttackPorcentage;
+        public float DeffensePorcentage;
+
+        [Header("Porcentaje: Ataque Especial")]
+        public float AttackSpecialPorcentage;
+        
+        [Header("Datos del personaje para la grilla")]
+        public int CantCasillasOcupadas_X;
+        public int CantCasillasOcupadas_Y;
+        public int ColumnaActual;
+        public virtual void Start()
         {
             auxSpeedJump = SpeedJump;
             InitialPosition = transform.position;
@@ -106,391 +104,26 @@ namespace Prototipo_2
                 gm = GameManager.instanceGameManager;
             }
             rg2D = GetComponent<Rigidbody2D>();
-            SetPorcentageMovements();
-            CheckInitialSprite();
+            CheckInitialCharacter();
         }
-        private void Update()
+        public virtual void Update()
         {
             CheckLifeBar();
             CheckDead();
             IA();
         }
-        public void CheckInitialSprite()
+        public Enemy()
         {
-            if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
-            { 
-                switch (enumsEnemy.typeEnemy)
-                {
-                    case EnumsEnemy.TiposDeEnemigo.Agresivo:
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 1;
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 2;
-                        structsEnemys.dataEnemy.columnaActual = 1;
-                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(true);
-                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
-                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
-
-                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
-                        break;
-                    case EnumsEnemy.TiposDeEnemigo.Balanceado:
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 1;
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 2;
-                        structsEnemys.dataEnemy.columnaActual = 1;
-                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
-                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(true);
-                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
-
-                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
-                        break;
-                    case EnumsEnemy.TiposDeEnemigo.Defensivo:
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 1;
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 2;
-                        structsEnemys.dataEnemy.columnaActual = 1;
-                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
-                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
-                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(true);
-                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
-
-                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
-                        break;
-                }
-            }
-            else
-            {
-                switch (enumsEnemy.typeBoss)
-                {
-                    case EnumsEnemy.TiposDeJefe.ProfeAnatomia:
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
-                        structsEnemys.dataEnemy.columnaActual = 1;
-
-                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
-                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
-                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(true);
-                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
-                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
-                        break;
-                    case EnumsEnemy.TiposDeJefe.ProfeHistoria:
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
-                        structsEnemys.dataEnemy.columnaActual = 1;
-
-                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
-                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
-                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(true);
-                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
-                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
-                        break;
-                    case EnumsEnemy.TiposDeJefe.ProfeEducacionFisica:
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
-                        structsEnemys.dataEnemy.columnaActual = 1;
-
-                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
-                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
-                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(true);
-                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
-                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
-                        break;
-                    case EnumsEnemy.TiposDeJefe.ProfeArte:
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
-                        structsEnemys.dataEnemy.columnaActual = 1;
-
-                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
-                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
-                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeArte.gameObject.SetActive(true);
-                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
-                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
-                        break;
-                    case EnumsEnemy.TiposDeJefe.ProfeMatematica:
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
-                        structsEnemys.dataEnemy.columnaActual = 1;
-
-                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
-                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
-                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(true);
-                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
-                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
-                        break;
-                    case EnumsEnemy.TiposDeJefe.ProfeQuimica:
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
-                        structsEnemys.dataEnemy.columnaActual = 1;
-
-                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
-                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
-                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(true);
-                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
-                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
-                        break;
-                    case EnumsEnemy.TiposDeJefe.ProfeProgramacion:
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
-                        structsEnemys.dataEnemy.columnaActual = 1;
-
-                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
-                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
-                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(true);
-                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
-                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
-                        break;
-                    case EnumsEnemy.TiposDeJefe.ProfeBaretto:
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
-                        structsEnemys.dataEnemy.columnaActual = 1;
-
-                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
-                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
-                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(true);
-                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(false);
-                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
-                        break;
-                    case EnumsEnemy.TiposDeJefe.ProfeLautarito:
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_X = 2;
-                        structsEnemys.dataEnemy.CantCasillasOcupadas_Y = 3;
-                        structsEnemys.dataEnemy.columnaActual = 1;
-
-                        SpriteRendererEnemigoAgresivo.gameObject.SetActive(false);
-                        SpriteRendererEnemigoBalanceado.gameObject.SetActive(false);
-                        SpriteRendererEnemigoDefensivo.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeAnatomia.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeHistoria.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeEducacionFisica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeArte.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeMatematica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeQuimica.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeProfeProgramacion.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeBaretto.gameObject.SetActive(false);
-                        SpriteRendererJefeProfeLautarito.gameObject.SetActive(true);
-                        gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
-                        break;
-                }
-            }
-            CheckSpriteEnemyActual();
         }
-        public void CheckSpriteEnemyActual()
+        public void CheckInitialCharacter()
         {
-            for (int i = 0; i < spriteEnemys.Count; i++)
-            {
-                if (spriteEnemys[i].gameObject.activeSelf)
-                {
-                    spriteEnemyActual = spriteEnemys[i];
-                }
-            }
+            structsEnemys.dataEnemy.CantCasillasOcupadas_X = CantCasillasOcupadas_X;
+            structsEnemys.dataEnemy.CantCasillasOcupadas_Y = CantCasillasOcupadas_Y;
+            structsEnemys.dataEnemy.columnaActual = ColumnaActual;
+            gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
         }
-        public void SetPorcentageMovements()
-        {
-            if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
-            {
-                switch (enumsEnemy.typeEnemy)
-                {
-                    //PANEL DE CONFIGURACION DE PORCENTAJES
-                    case EnumsEnemy.TiposDeEnemigo.Balanceado:
-
-                        //----Movimiento----//
-                        MovePorcentage = 25;
-                        JumpPorcentage = 25;
-                        DuckPorcentage = 25;
-                        IdlePorcentage = 25;
-
-                        //---Direccion de Movimiento---//
-                        MoveForwardPorcentage = 50;
-                        MoveForwardPorcentage = 50;
-
-                        //----Accion Salto----//
-                        AttackJumpPorcentage = 40;
-                        DefenceJumpPorcentage = 40;
-                        SimpleJumpPorcentage = 20;
-
-
-                        //---Accion Agacharse---//
-                        AttackDuckPorcentage = 40;
-                        DefenceDuckPorcentage = 40;
-                        SimpleDuckPorcentage = 20;
-
-                        //---Accion Quieto---//
-                        AttackPorcentage = 50;
-                        DeffensePorcentage = 50;
-
-                        //---Ataque Especial---//
-                        AttackSpecialPorcentage = 100;
-
-                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.Nulo;
-                        break;
-                    case EnumsEnemy.TiposDeEnemigo.Agresivo:
-
-                        //----Movimiento----//
-                        MovePorcentage = 33;
-                        JumpPorcentage = 34;
-                        DuckPorcentage = 0;
-                        IdlePorcentage = 33;
-
-                        //---Direccion de Movimiento---//
-                        MoveForwardPorcentage = 50;
-                        MoveForwardPorcentage = 50;
-
-                        //----Accion Salto----//
-                        AttackJumpPorcentage = 70;
-                        DefenceJumpPorcentage = 20;
-                        SimpleJumpPorcentage = 10;
-
-                        //---Accion Agacharse---//
-                        AttackDuckPorcentage = 0;
-                        DefenceDuckPorcentage = 0;
-                        SimpleDuckPorcentage = 0;
-
-                        //---Accion Quieto---//
-                        AttackPorcentage = 80;
-                        DeffensePorcentage = 20;
-
-                        //---Ataque Especial---//
-                        AttackSpecialPorcentage = 100;
-
-                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.Nulo;
-                        break;
-                    case EnumsEnemy.TiposDeEnemigo.Defensivo:
-
-                        //----Movimiento----//
-                        MovePorcentage = 30;
-                        JumpPorcentage = 0;
-                        DuckPorcentage = 0;
-                        IdlePorcentage = 70;
-
-                        //---Direccion de Movimiento---//
-                        MoveForwardPorcentage = 50;
-                        MoveForwardPorcentage = 50;
-
-                        //----Accion Salto----//
-                        AttackJumpPorcentage = 0;
-                        DefenceJumpPorcentage = 0;
-                        SimpleJumpPorcentage = 0;
-
-                        //---Accion Agacharse---//
-                        AttackDuckPorcentage = 0;
-                        DefenceDuckPorcentage = 0;
-                        SimpleDuckPorcentage = 0;
-
-                        //---Accion Quieto---//
-                        AttackPorcentage = 35;
-                        DeffensePorcentage = 65;
-
-                        //---Ataque Especial---//
-                        AttackSpecialPorcentage = 100;
-
-                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.Nulo;
-                        break;
-                }
-            }
-            else if (enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Jefe)
-            {
-
-            }
-        }
-        public void OnEnemyHistory(EnumsEnemy.TiposDeEnemigo typeEnemy, EnumsEnemy.TiposDeJefe typeBoss)
-        {
-            CheckSpriteEnemyActual();
-            enumsEnemy.typeEnemy = typeEnemy;
-            enumsEnemy.typeBoss = typeBoss;
-            CheckInitialSprite();
-            poolObjectEnemy = GetComponent<PoolObject>();
-            if (GameManager.instanceGameManager != null)
-            {
-                gm = GameManager.instanceGameManager;
-            }
-            SetPorcentageMovements();
-
-        }
+        
+        
         public void CheckOutLimit()
         {
             if (transform.position.y < InitialPosition.y && !isJamping)
@@ -503,75 +136,16 @@ namespace Prototipo_2
                 SpeedJump = auxSpeedJump;
             }
         }
-        public void OnEnemySurvival()
+        public void OnEnemy()
         {
-            CheckSpriteEnemyActual();
             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
             poolObjectEnemy = GetComponent<PoolObject>();
-            float opcion = Random.Range(MinRangeRandom, TypeRandom);
             if (GameManager.instanceGameManager != null)
             {
                 gm = GameManager.instanceGameManager;
             }
-            //Debug.Log("Enemigos Abatidos:" + gm.countEnemysDead);
-            if ((gm.countEnemysDead % gm.RondasPorJefe) != 0 || gm.countEnemysDead == 0)
-            {
-                switch ((int)opcion)
-                {
-                    case 0:
-                        //Debug.Log("ENTRE BALANCEADO");
-                        enumsEnemy.typeEnemy = EnumsEnemy.TiposDeEnemigo.Balanceado;
-                        break;
-                    case 1:
-                        //Debug.Log("ENTRE AGRESIVO");
-                        enumsEnemy.typeEnemy = EnumsEnemy.TiposDeEnemigo.Agresivo;
-                        break;
-                    case 2:
-                        //Debug.Log("ENTRE DEFENSIVO");
-                        enumsEnemy.typeEnemy = EnumsEnemy.TiposDeEnemigo.Defensivo;
-                        break;
-                }
-            }
-            else if ((gm.countEnemysDead % gm.RondasPorJefe) == 0 && gm.countEnemysDead > 1)
-            {
-                //Cambiar el sprite del jefe correspondiente
-                //PROGRAMAR UN RANDOM ENTRE LOS DISTINTOS JEFES
-                enumsEnemy.typeEnemy = EnumsEnemy.TiposDeEnemigo.Jefe;
-                opcion = (int)Random.Range(0, (int)EnumsEnemy.TiposDeJefe.Count - 1);
-                switch ((EnumsEnemy.TiposDeJefe)opcion)
-                {
-                    case EnumsEnemy.TiposDeJefe.ProfeAnatomia:
-                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeAnatomia;
-                        break;
-                    case EnumsEnemy.TiposDeJefe.ProfeHistoria:
-                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeHistoria;
-                        break;
-                    case EnumsEnemy.TiposDeJefe.ProfeEducacionFisica:
-                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeEducacionFisica;
-                        break;
-                    case EnumsEnemy.TiposDeJefe.ProfeArte:
-                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeArte;
-                        break;
-                    case EnumsEnemy.TiposDeJefe.ProfeMatematica:
-                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeMatematica;
-                        break;
-                    case EnumsEnemy.TiposDeJefe.ProfeQuimica:
-                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeQuimica;
-                        break;
-                    case EnumsEnemy.TiposDeJefe.ProfeProgramacion:
-                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeProgramacion;
-                        break;
-                    case EnumsEnemy.TiposDeJefe.ProfeBaretto:
-                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeBaretto;
-                        break;
-                    case EnumsEnemy.TiposDeJefe.ProfeLautarito:
-                        enumsEnemy.typeBoss = EnumsEnemy.TiposDeJefe.ProfeLautarito;
-                        break;
-                }
-                Debug.Log("Soy tremendo jefe");
-            }
-            CheckInitialSprite();
-            SetPorcentageMovements();
+            CheckInitialCharacter();
+            delaySelectMovement = 0;
         }
         public void IA()
         {
@@ -764,11 +338,11 @@ namespace Prototipo_2
                 delaySelectMovement = 999;
                 if (pointCombat.x < transform.position.x)
                 {
-                    ENEMY.transform.Translate(Vector3.left * Speed * Time.deltaTime);
+                    enemyPrefab.transform.Translate(Vector3.left * Speed * Time.deltaTime);
                 }
                 else if (pointCombat.x > transform.position.x)
                 {
-                    ENEMY.transform.Translate(Vector3.right * Speed * Time.deltaTime);
+                    enemyPrefab.transform.Translate(Vector3.right * Speed * Time.deltaTime);
                 }
             }
             else
@@ -828,7 +402,7 @@ namespace Prototipo_2
                             gm.ResetRoundCombat(false);
                             ResetEnemy();
                             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
-                            gameObject.SetActive(false);
+                            enemyPrefab.gameObject.SetActive(false);
                         }
                         break;
                 }
@@ -910,10 +484,7 @@ namespace Prototipo_2
             }
             if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque)
             {
-                for (int i = 0; i < collidersSprites.Count; i++)
-                {
-                    collidersSprites[i].enabled = true;
-                }
+                colliderSprites.enabled = true;
                 isDuck = false;
             }
             //CHEKEA EL MOVIMIENTO DEL ENEMIGO
@@ -956,7 +527,7 @@ namespace Prototipo_2
         {
             life = maxLife;
             transform.position = InitialPosition;
-            ENEMY.transform.position = InitialPosition;
+            enemyPrefab.transform.position = InitialPosition;
         }
         public void MoveLeft(Vector3 cuadrillaDestino)
         {
@@ -988,436 +559,22 @@ namespace Prototipo_2
                 delaySelectMovement = 0;
             }
         }
-        public void CheckAnimationAttack(Proyectil proyectil)
-        {
-            if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
-            {
-                switch (enumsEnemy.typeEnemy)
-                {
-                    case EnumsEnemy.TiposDeEnemigo.Balanceado:
-                        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
-                        {
-                            proyectil.On();
-                            spriteEnemyActual.animator.Play("Ataque enemigo balanceado");
-                        }
-                        else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
-                        {
-                            proyectil.On();
-                            spriteEnemyActual.animator.Play("Ataque enemigo balanceado");
-                        }
-                        else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
-                        {
-                            proyectil.On();
-                            spriteEnemyActual.animator.Play("Ataque enemigo balanceado");
-                        }
-                        break;
-                    case EnumsEnemy.TiposDeEnemigo.Defensivo:
-                        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
-                        {
-                            proyectil.On();
-                            spriteEnemyActual.animator.Play("Ataque enemigo defensivo");
-                        }
-                        else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
-                        {
-                            proyectil.On();
-                            spriteEnemyActual.animator.Play("Ataque enemigo defensivo");
-                        }
-                        else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
-                        {
-                            proyectil.On();
-                            spriteEnemyActual.animator.Play("Ataque enemigo defensivo");
-                        }
-                        break;
-                    case EnumsEnemy.TiposDeEnemigo.Agresivo:
-                        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
-                        {
-                            proyectil.On();
-                            spriteEnemyActual.animator.Play("Ataque enemigo agresivo");
-                        }
-                        else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
-                        {
-                            proyectil.On();
-                            spriteEnemyActual.animator.Play("Ataque enemigo agresivo");
-                        }
-                        else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
-                        {
-                            proyectil.On();
-                            spriteEnemyActual.animator.Play("Ataque enemigo agresivo");
-                        }
-                        break;
-                }
-            }
-            else
-            {
-                switch (enumsEnemy.typeBoss)
-                {
-                    case EnumsEnemy.TiposDeJefe.ProfeAnatomia:
-                        break;
-                }
-            }
-        }
-        public void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage)
-        {
-            bool shootDown = false;
-            string nombreGenerador = "NADA XD";
-            GameObject generador = null;
-            GameObject go = null;
-            Proyectil proyectil = null;
-  
-            if (!specialAttack)
-            {
-                go = poolObjectAttack.GetObject();
-                proyectil = go.GetComponent<Proyectil>();
-                proyectil.SetEnemy(gameObject.GetComponent<Enemy>());
-                proyectil.SetDobleDamage(_doubleDamage);
-                proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
-                if (_doubleDamage)
-                {
-                    proyectil.damage = proyectil.damageCounterAttack;
-                }
-            }
-            if (!isDuck && !specialAttack)
-            {
-                if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
-                {
-                    switch (enumsEnemy.typeEnemy)
-                    {
-                        case EnumsEnemy.TiposDeEnemigo.Balanceado:
-                            nombreGenerador = "GeneradorPelotasBalanceado";
-                            break;
-                        case EnumsEnemy.TiposDeEnemigo.Defensivo:
-                            nombreGenerador = "GeneradorPelotasDefensivo";
-                            break;
-                        case EnumsEnemy.TiposDeEnemigo.Agresivo:
-                            nombreGenerador = "GeneradorPelotasAgresivo";
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (enumsEnemy.typeBoss)
-                    {
-                        case EnumsEnemy.TiposDeJefe.ProfeAnatomia:
-                            nombreGenerador = "GeneradorPelotasProfeAnatomia";
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeHistoria:
-                            nombreGenerador = "GeneradorPelotasProfeHistoria";
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeEducacionFisica:
-                            nombreGenerador = "GeneradorPelotasProfeEducacionFisica";
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeArte:
-                            nombreGenerador = "GeneradorPelotasProfeArte";
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeMatematica:
-                            nombreGenerador = "GeneradorPelotasProfeMatematica";
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeQuimica:
-                            nombreGenerador = "GeneradorPelotasProfeQuimica";
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeProgramacion:
-                            nombreGenerador = "GeneradorPelotasProfeProgramacion";
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeBaretto:
-                            nombreGenerador = "GeneradorPelotasProfeBaretto";
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeLautarito:
-                            nombreGenerador = "GeneradorPelotasProfeLautaro";
-                            break;
-
-                            //UNA VEZ INCORPORADA LA PARTE DE LOS BOSESS INCORPORAR ESTA PARTE EN BASE A LA PARTE DE ARRIBA.
-                    }
-                }
-                for (int i = 0; i < generadoresProyectiles.Count; i++)
-                {
-                    if (generadoresProyectiles[i].name == nombreGenerador)
-                    {
-                        generador = generadoresProyectiles[i];
-                    }
-                }
-                if (generador != null)
-                {
-                    if (jampAttack)
-                    {
-                        shootDown = true;
-                    }
-                    go.transform.rotation = generador.transform.rotation;
-                    go.transform.position = generador.transform.position;
-                }
-            }
-            else if(!specialAttack && isDuck)
-            {
-                if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
-                {
-                    switch (enumsEnemy.typeEnemy)
-                    {
-                        case EnumsEnemy.TiposDeEnemigo.Balanceado:
-                            nombreGenerador = "GeneradorPelotasAgachadoBalanceado";
-                            break;
-                        case EnumsEnemy.TiposDeEnemigo.Defensivo:
-                            nombreGenerador = "GeneradorPelotasAgachadoDefensivo";
-                            break;
-                        case EnumsEnemy.TiposDeEnemigo.Agresivo:
-                            nombreGenerador = "GeneradorPelotasAgachadoAgresivo";
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (enumsEnemy.typeBoss)
-                    {
-                        case EnumsEnemy.TiposDeJefe.ProfeAnatomia:
-                            nombreGenerador = "GeneradorPelotasAgachadoProfeAnatomia";
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeHistoria:
-                            nombreGenerador = "GeneradorPelotasAgachadoProfeHistoria";
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeEducacionFisica:
-                            nombreGenerador = "GeneradorPelotasAgachadoProfeEducacionFisica";
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeArte:
-                            nombreGenerador = "GeneradorPelotasAgachadoProfeArte";
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeMatematica:
-                            nombreGenerador = "GeneradorPelotasAgachadoProfeMatematica";
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeQuimica:
-                            nombreGenerador = "GeneradorPelotasAgachadoProfeQuimica";
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeProgramacion:
-                            nombreGenerador = "GeneradorPelotasAgachadoProfeProgramacion";
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeBaretto:
-                            nombreGenerador = "GeneradorPelotasAgachadoProfeBaretto";
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeLautarito:
-                            nombreGenerador = "GeneradorPelotasAgachadoProfeLautaro";
-                            break;
-                    }
-                }
-                for (int i = 0; i < generadorProyectilesAgachado.Count; i++)
-                {
-                    if (generadorProyectilesAgachado[i].name == nombreGenerador)
-                    {
-                        generador = generadorProyectilesAgachado[i];
-                    }
-                }
-                if (generador != null)
-                {
-                    go.transform.rotation = generador.transform.rotation;
-                    go.transform.position = generador.transform.position;
-                }
-            }
-            if (specialAttack)
-            {
-                if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
-                {
-                    switch (enumsEnemy.typeEnemy)
-                    {
-                        case EnumsEnemy.TiposDeEnemigo.Balanceado:
-                            if (!isDuck)
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaBalanceado";
-                            }
-                            else
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaAgachadoBalanceado";
-                            }
-                            
-                            break;
-                        case EnumsEnemy.TiposDeEnemigo.Defensivo:
-                            if (!isDuck)
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaDefencivo";
-                            }
-                            else
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaAgachadoDefensivo";
-                            }
-                            break;
-                        case EnumsEnemy.TiposDeEnemigo.Agresivo:
-                            if (!isDuck)
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaAgresivo";
-                            }
-                            else
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaAgachadoAgresivo";
-                            }
-                            break;
-                    }
-                    CheckSpecialAttackEnemyController(0, 0, nombreGenerador, generador);
-                }
-                else
-                {
-                    switch (enumsEnemy.typeBoss)
-                    {
-                        case EnumsEnemy.TiposDeJefe.ProfeAnatomia:
-                            int maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
-                            int minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
-                            if (!isDuck)
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaProfeAnatomia";
-                            }
-                            else
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeAnatomia";
-                            }
-                            CheckSpecialAttackEnemyController(minRutas, maxRutas, nombreGenerador, generador);
-                            break;
-                            //PARA IMPLEMENTAR LOS DEMAS ENEMIGOS PONER LAS CONFIGURACIONES FALTANTES Y IR PROBANDOLOS TODOS.
-                        case EnumsEnemy.TiposDeJefe.ProfeHistoria:
-                            maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
-                            minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
-                            if (!isDuck)
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaProfeHistoria";
-                            }
-                            else
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeHistoria";
-                            }
-                            CheckSpecialAttackEnemyController(minRutas, maxRutas, nombreGenerador, generador);
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeEducacionFisica:
-                            maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
-                            minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
-                            if (!isDuck)
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaProfeEducacionFisica";
-                            }
-                            else
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeEducacionFisica";
-                            }
-                            CheckSpecialAttackEnemyController(minRutas, maxRutas, nombreGenerador, generador);
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeArte:
-                            maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
-                            minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
-                            if (!isDuck)
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaProfeArte";
-                            }
-                            else
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeArte";
-                            }
-                            CheckSpecialAttackEnemyController(minRutas, maxRutas, nombreGenerador, generador);
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeMatematica:
-                            maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
-                            minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
-                            if (!isDuck)
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaProfeMatematica";
-                            }
-                            else
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeMatematica";
-                            }
-                            CheckSpecialAttackEnemyController(minRutas, maxRutas, nombreGenerador, generador);
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeQuimica:
-                            maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
-                            minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
-                            if (!isDuck)
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaProfeQuimica";
-                            }
-                            else
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeQuimica";
-                            }
-                            CheckSpecialAttackEnemyController(minRutas, maxRutas, nombreGenerador, generador);
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeProgramacion:
-                            maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
-                            minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
-                            if (!isDuck)
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaProfeProgramacion";
-                            }
-                            else
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeProgramacion";
-                            }
-                            CheckSpecialAttackEnemyController(minRutas, maxRutas, nombreGenerador, generador);
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeBaretto:
-                            maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
-                            minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
-                            if (!isDuck)
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaProfeBaretto";
-                            }
-                            else
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeBaretto";
-                            }
-                            CheckSpecialAttackEnemyController(minRutas, maxRutas, nombreGenerador, generador);
-                            break;
-                        case EnumsEnemy.TiposDeJefe.ProfeLautarito:
-                            maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
-                            minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
-                            if (!isDuck)
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaProfeLautaro";
-                            }
-                            else
-                            {
-                                nombreGenerador = "GeneradorPelotasParabolaAgachadoProfeLautaro";
-                            }
-                            CheckSpecialAttackEnemyController(minRutas, maxRutas, nombreGenerador, generador);
-                            break;
-
-                            //UNA VEZ INCORPORADA LA PARTE DE LOS BOSESS INCORPORAR ESTA PARTE EN BASE A LA PARTE DE ARRIBA.
-                    }
-                }
-            }
-            if (!specialAttack)
-            {
-                //Debug.Log("ENTRE");
-                CheckAnimationAttack(proyectil);
-                
-                if (!shootDown)
-                {
-                    proyectil.ShootForward();
-                }
-                else
-                {
-                    proyectil.ShootForwardDown();
-                }
-            }
-        }
-        public void CheckSpecialAttackEnemyController(int minRandomRootShoot, int maxRandomRootShoot, string nombreGenerador, GameObject generador)
+        public virtual void AnimationAttack(Proyectil proyectil){ }
+        public virtual void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage){ }
+        public void CheckSpecialAttackEnemyController(int minRandomRootShoot, int maxRandomRootShoot, GameObject generador)
         {
             if (!isDuck)
             {
-                for (int i = 0; i < generadorProyectilParabola.Count; i++)
-                {
-                    if (generadorProyectilParabola[i].name == nombreGenerador)
-                    {
-                        generador = generadorProyectilParabola[i];
-                    }
-                }
                 if (generador != null)
                 {
-                    specialAttackEnemyController.SpecialAttack(doubleDamage, isDuck, generador, null, enumsEnemy, structsEnemys, maxRandomRootShoot, minRandomRootShoot);
+                    specialAttackEnemyController.SpecialAttack(doubleDamage, isDuck, generador, generador, enumsEnemy, structsEnemys, maxRandomRootShoot, minRandomRootShoot);
                 }
             }
             else
             {
-                for (int i = 0; i < generadorProyectilParabolaAgachado.Count; i++)
-                {
-                    if (generadorProyectilParabolaAgachado[i].name == nombreGenerador)
-                    {
-                        generador = generadorProyectilParabolaAgachado[i];
-                    }
-                }
                 if (generador != null)
                 {
-                    specialAttackEnemyController.SpecialAttack(doubleDamage, isDuck, null, generador, enumsEnemy, structsEnemys, maxRandomRootShoot, minRandomRootShoot);
+                    specialAttackEnemyController.SpecialAttack(doubleDamage, isDuck, generador, generador, enumsEnemy, structsEnemys, maxRandomRootShoot, minRandomRootShoot);
                 }
             }
             
@@ -1482,10 +639,7 @@ namespace Prototipo_2
         public void Duck(int rangoAgachado)
         {
             isDuck = true;
-            for (int i = 0; i < collidersSprites.Count; i++)
-            {
-                collidersSprites[i].enabled = false;
-            }
+            colliderSprites.enabled = false;
             for (int i = 0; i < structsEnemys.dataEnemy.CantCasillasOcupadas_X; i++)
             {
                 if (structsEnemys.dataEnemy.columnaActual + i < gridEnemy.GetCuadrilla_columnas())
@@ -1501,6 +655,10 @@ namespace Prototipo_2
         public bool GetIsJamping()
         {
             return isJamping;
+        }
+        public bool GetIsDuck()
+        {
+            return isDuck;
         }
     }
 }

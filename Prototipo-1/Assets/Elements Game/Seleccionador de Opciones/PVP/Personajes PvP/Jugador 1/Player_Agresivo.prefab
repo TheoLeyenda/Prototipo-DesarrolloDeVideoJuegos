@@ -654,7 +654,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575790983220844323}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.06, y: -2.85, z: 0}
+  m_LocalPosition: {x: -4.65, y: -2.85, z: 0}
   m_LocalScale: {x: 31.699219, y: 31.699219, z: 1.0566406}
   m_Children:
   - {fileID: 4771530491275790113}
@@ -745,11 +745,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7730496465148436217}
     m_Modifications:
-    - target: {fileID: 5142444625613618220, guid: c6d6ac12b9b9cf44092344d820274e7e,
-        type: 3}
-      propertyPath: m_Name
-      value: PoolProyectilParabola
-      objectReference: {fileID: 0}
     - target: {fileID: 5142444625613618226, guid: c6d6ac12b9b9cf44092344d820274e7e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -819,6 +814,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.05664
+      objectReference: {fileID: 0}
+    - target: {fileID: 5142444625613618220, guid: c6d6ac12b9b9cf44092344d820274e7e,
+        type: 3}
+      propertyPath: m_Name
+      value: PoolProyectilParabola
       objectReference: {fileID: 0}
     - target: {fileID: 5142444625613618227, guid: c6d6ac12b9b9cf44092344d820274e7e,
         type: 3}
@@ -962,6 +962,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: SpriteJugador
       objectReference: {fileID: 0}
+    - target: {fileID: 9121592579315266113, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7097743373262305301, guid: f8c03c23c66899e4197e2fbc415ec43b,
         type: 3}
       propertyPath: spritePlayers.Array.size
@@ -1098,22 +1103,6 @@ PrefabInstance:
       propertyPath: delayAttack
       value: 0.2
       objectReference: {fileID: 0}
-    - target: {fileID: 9121592579315266113, guid: f8c03c23c66899e4197e2fbc415ec43b,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2397753631612189105, guid: f8c03c23c66899e4197e2fbc415ec43b,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2397753631612189105, guid: f8c03c23c66899e4197e2fbc415ec43b,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 504796f60222d7d4d8f396c188fae699,
-        type: 3}
     - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
         type: 3}
       propertyPath: Sprites.Array.size
@@ -1282,6 +1271,17 @@ PrefabInstance:
       propertyPath: delaySpriteContraAtaque
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 2397753631612189105, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2397753631612189105, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 504796f60222d7d4d8f396c188fae699,
+        type: 3}
     - target: {fileID: 9121592579528980573, guid: f8c03c23c66899e4197e2fbc415ec43b,
         type: 3}
       propertyPath: parentName
@@ -1350,6 +1350,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1575790983220844322}
     m_Modifications:
+    - target: {fileID: 2107844360, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 8601429379594556584}
+    - target: {fileID: 2107844360, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: stateCuadrilla
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107844362, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 8601429379594556584}
+    - target: {fileID: 2107844362, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: stateCuadrilla
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2688081505215426912, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_Name
@@ -1430,89 +1446,7 @@ PrefabInstance:
       propertyPath: rightCuadrilla
       value: 
       objectReference: {fileID: 2843723966772676965}
-    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 2107844362, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 8601429379594556584}
-    - target: {fileID: 2107844362, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: stateCuadrilla
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2107844363, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 8601429379594556584}
-    - target: {fileID: 2107844363, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: stateCuadrilla
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2107844360, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 8601429379594556584}
-    - target: {fileID: 2107844360, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: stateCuadrilla
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2107844361, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 8601429379594556584}
-    - target: {fileID: 2107844361, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: stateCuadrilla
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2107844366, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 8601429379594556584}
-    - target: {fileID: 2107844366, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: stateCuadrilla
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 8601429379594556584}
-    - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: stateCuadrilla
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2107844364, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 8601429379594556584}
-    - target: {fileID: 2107844364, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: stateCuadrilla
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2107844365, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 8601429379594556584}
-    - target: {fileID: 2107844365, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: stateCuadrilla
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2107844368, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 8601429379594556584}
-    - target: {fileID: 2107844368, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: stateCuadrilla
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 4379714924118451906, guid: b929ac675e510d440a80e8c74d8c4990,
+    - target: {fileID: 3166592495478960300, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_TagString
       value: Cuadrilla
@@ -1522,17 +1456,78 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Cuadrilla
       objectReference: {fileID: 0}
-    - target: {fileID: 3166592495478960300, guid: b929ac675e510d440a80e8c74d8c4990,
+    - target: {fileID: 4379714924118451906, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_TagString
       value: Cuadrilla
       objectReference: {fileID: 0}
-    - target: {fileID: 4830216970014270298, guid: b929ac675e510d440a80e8c74d8c4990,
+    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_TagString
       value: Cuadrilla
       objectReference: {fileID: 0}
-    - target: {fileID: 5384459324330873755, guid: b929ac675e510d440a80e8c74d8c4990,
+    - target: {fileID: 2107844368, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 8601429379594556584}
+    - target: {fileID: 2107844368, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: stateCuadrilla
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107844361, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 8601429379594556584}
+    - target: {fileID: 2107844361, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: stateCuadrilla
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107844363, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 8601429379594556584}
+    - target: {fileID: 2107844363, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: stateCuadrilla
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107844365, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 8601429379594556584}
+    - target: {fileID: 2107844365, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: stateCuadrilla
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107844364, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 8601429379594556584}
+    - target: {fileID: 2107844364, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: stateCuadrilla
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 8601429379594556584}
+    - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: stateCuadrilla
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107844366, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 8601429379594556584}
+    - target: {fileID: 2107844366, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: stateCuadrilla
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 7376963852647017583, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_TagString
       value: Cuadrilla
@@ -1542,7 +1537,12 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Cuadrilla
       objectReference: {fileID: 0}
-    - target: {fileID: 7376963852647017583, guid: b929ac675e510d440a80e8c74d8c4990,
+    - target: {fileID: 5384459324330873755, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830216970014270298, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_TagString
       value: Cuadrilla

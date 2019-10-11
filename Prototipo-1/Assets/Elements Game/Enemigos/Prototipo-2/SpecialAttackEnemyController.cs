@@ -77,6 +77,7 @@ namespace Prototipo_2
                         }
                         break;
                 }
+                //Debug.Log(proyectil.rutaParabolaAgachado_AtaqueEnemigo);
                 proyectil.OnParabola();
             }
         }

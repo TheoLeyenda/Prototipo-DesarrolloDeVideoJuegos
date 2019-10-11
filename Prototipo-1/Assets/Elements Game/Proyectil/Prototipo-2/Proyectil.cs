@@ -141,7 +141,7 @@ namespace Prototipo_2
                             {
                                 if (cuadrilla.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && cuadrilla.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
                                 {
-                                    cuadrilla.enemy.spriteEnemyActual.ActualSprite = SpriteEnemy.SpriteActual.RecibirDanio;
+                                    cuadrilla.enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.RecibirDanio;
                                     cuadrilla.enemy.life = cuadrilla.enemy.life - damage;
 
                                     //AUMENTO XP PARA EL ATAQUE ESPECIAL
@@ -383,7 +383,7 @@ namespace Prototipo_2
                                 }
                                 else
                                 {
-                                    cuadrilla.enemy.spriteEnemyActual.ActualSprite = SpriteEnemy.SpriteActual.ContraAtaque;
+                                    cuadrilla.enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.ContraAtaque;
                                     cuadrilla.enemy.CounterAttack(true);
                                     if (cuadrilla.enemy.damageCounterAttack)
                                     {

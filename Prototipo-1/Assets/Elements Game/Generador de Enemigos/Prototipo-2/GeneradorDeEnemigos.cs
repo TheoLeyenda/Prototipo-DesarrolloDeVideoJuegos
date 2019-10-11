@@ -19,7 +19,8 @@ namespace Prototipo_2
             Nulo,
         }
         public LevelManager levelManager;
-        public Pool poolEnemy;
+        public List<Pool> poolsEnemy;
+        private int randomEnemyGenerate;
         public GameObject Generador;
         public GameObject pointOfCombat;
         public GameObject pointOfInit;
@@ -95,7 +96,7 @@ namespace Prototipo_2
             {
                 if (idListEnemy == 1)
                 {
-                    enemigoActual.ENEMY.transform.position = pointOfCombat.transform.position;
+                    enemigoActual.enemyPrefab.transform.position = pointOfCombat.transform.position;
                     enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
                 }
                 else
@@ -108,26 +109,38 @@ namespace Prototipo_2
         }
         public void GenerateEnemy()
         {
-            GameObject go = poolEnemy.GetObject();
-            Enemy enemy = go.GetComponentInChildren<Enemy>();
-            go.transform.position = Generador.transform.position;
-            go.transform.rotation = Generador.transform.rotation;
-            if (enemy != null)
-            {
-                enemigoActual = enemy;
-                enemigoActual.InitialPosition = go.transform.position = Generador.transform.position;
-                enemigoActual.ResetEnemy();
-            }
-            
+            GameObject go = null;
+            Enemy enemy = null;
             switch (gm.enumsGameManager.modoDeJuego)
             {
                 case EnumsGameManager.ModosDeJuego.Supervivencia:
-                    enemy.OnEnemySurvival();
+                    randomEnemyGenerate = Random.Range(0, poolsEnemy.Count);
+                    go = poolsEnemy[randomEnemyGenerate].GetObject();
+                    enemy = go.GetComponentInChildren<Enemy>();
+                    go.transform.position = Generador.transform.position;
+                    go.transform.rotation = Generador.transform.rotation;
+                    if (enemy != null)
+                    {
+                        enemigoActual = enemy;
+                        enemigoActual.InitialPosition  = Generador.transform.position;
+                        enemigoActual.ResetEnemy();
+                    }
+                    enemy.OnEnemy();
                     break;
                 case EnumsGameManager.ModosDeJuego.Historia:
+                    go = poolsEnemy[idListEnemy].GetObject();
+                    enemy = go.GetComponentInChildren<Enemy>();
+                    go.transform.position = Generador.transform.position;
+                    go.transform.rotation = Generador.transform.rotation;
+                    if (enemy != null)
+                    {
+                        enemigoActual = enemy;
+                        enemigoActual.InitialPosition = Generador.transform.position;
+                        enemigoActual.ResetEnemy();
+                    }
                     if (idListEnemy < TypeEnemiesLevel.Count)
                     {
-                        enemy.OnEnemyHistory(TypeEnemiesLevel[idListEnemy], TypeBossLevel[idListEnemy]);
+                        enemy.OnEnemy();
                         if (idListEnemy == 0)
                         {
                             levelManager.SetInDialog(true);
@@ -139,10 +152,6 @@ namespace Prototipo_2
                         levelManager.ObjectiveOfPassLevel = 0;
                     }
                     break;
-            }
-            if (poolEnemy.count <= 0)
-            {
-                return;
             }
         }
     }
