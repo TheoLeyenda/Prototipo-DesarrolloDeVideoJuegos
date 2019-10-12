@@ -32,7 +32,7 @@ namespace Prototipo_2
         private float MinRangeRandom = 0;
         private float MaxRangeRandom = 100;
         private float TypeRandom = 3;
-        private float delaySelectMovement;
+        protected float delaySelectMovement;
         public float maxRandomDelayMovement;
         public float minRandomDelayMovement;
         public float delayAttack;
@@ -149,7 +149,10 @@ namespace Prototipo_2
             {
                 if (delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque))
                 {
-                    CheckComportamiento();
+                    if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAdelante && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAtras)
+                    {
+                        CheckComportamiento();
+                    }
                 }
                 if (delaySelectMovement > 0)
                 {

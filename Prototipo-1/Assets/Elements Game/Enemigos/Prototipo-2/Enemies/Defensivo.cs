@@ -6,16 +6,29 @@ namespace Prototipo_2
 {
     public class Defensivo : Enemy
     {
+        public enum StateDeffence
+        {
+            Nulo,
+            NormalDeffense,
+            CounterAttackDeffense,
+        }
+        public float delayStateDeffense;
+        private float auxDelayStateDeffense;
+        private StateDeffence stateDeffence;
         // Start is called before the first frame update
         public override void Start()
         {
+            
             base.Start();
+            auxDelayStateDeffense = delayStateDeffense;
+            stateDeffence = StateDeffence.CounterAttackDeffense;
         }
 
         // Update is called once per frame
         public override void Update()
         {
             base.Update();
+            CheckInDeffense();
         }
         public override void AnimationAttack(Proyectil proyectil)
         {
@@ -33,6 +46,32 @@ namespace Prototipo_2
             {
                 proyectil.On();
                 spriteEnemy.animator.Play("Ataque enemigo defensivo");
+            }
+        }
+        public void CheckInDeffense()
+        {
+            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar)
+            {
+                if (stateDeffence == StateDeffence.NormalDeffense)
+                {
+                    spriteEnemy.spriteRenderer.color = Color.white;
+                    delayStateDeffense = delayStateDeffense - Time.deltaTime;
+                    if (delayStateDeffense <= 0)
+                    {
+                        stateDeffence = StateDeffence.CounterAttackDeffense;
+                        delayStateDeffense = auxDelayStateDeffense;
+                        delaySelectMovement = 0.1f;
+                    }
+                }
+                else if (stateDeffence == StateDeffence.CounterAttackDeffense)
+                {
+                    spriteEnemy.spriteRenderer.color = Color.yellow;
+                }
+            }
+            if (delaySelectMovement <= 0 && delayStateDeffense <= 0 || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar)
+            {
+                stateDeffence = StateDeffence.CounterAttackDeffense;
+                spriteEnemy.spriteRenderer.color = Color.white;
             }
         }
         public override void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage)
@@ -91,6 +130,14 @@ namespace Prototipo_2
                     proyectil.ShootForwardDown();
                 }
             }
+        }
+        public void SetStateDeffense(StateDeffence _stateDeffence)
+        {
+            stateDeffence = _stateDeffence;
+        }
+        public StateDeffence GetStateDeffence()
+        {
+            return stateDeffence;
         }
     }
 }

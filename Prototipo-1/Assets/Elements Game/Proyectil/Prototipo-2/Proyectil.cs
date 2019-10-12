@@ -383,12 +383,38 @@ namespace Prototipo_2
                                 }
                                 else
                                 {
-                                    cuadrilla.enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.ContraAtaque;
-                                    cuadrilla.enemy.CounterAttack(true);
-                                    if (cuadrilla.enemy.damageCounterAttack)
+                                    if (cuadrilla.enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar)
                                     {
-                                        float realDamage = damage - cuadrilla.enemy.pointsDeffence;
-                                        cuadrilla.enemy.life = cuadrilla.enemy.life - realDamage;
+                                        //MECANICA DEFENSIVA DEL ENEMIGO DEFENSIVO//
+                                        if (cuadrilla.enemy.GetComponent<Defensivo>() != null)
+                                        {
+                                            Debug.Log("ENTRE");
+                                            Defensivo enemyDeffended = cuadrilla.enemy.GetComponent<Defensivo>();
+                                            if (enemyDeffended.GetStateDeffence() == Defensivo.StateDeffence.CounterAttackDeffense)
+                                            {
+                                                cuadrilla.enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.ContraAtaque;
+                                                cuadrilla.enemy.CounterAttack(true);
+                                                enemyDeffended.SetStateDeffense(Defensivo.StateDeffence.NormalDeffense);
+                                                if (cuadrilla.enemy.damageCounterAttack)
+                                                {
+                                                    float realDamage = damage - cuadrilla.enemy.pointsDeffence;
+                                                    cuadrilla.enemy.life = cuadrilla.enemy.life - realDamage;
+                                                }
+                                            }
+                                            else if(enemyDeffended.GetStateDeffence() == Defensivo.StateDeffence.NormalDeffense)
+                                            {
+                                                if (cuadrilla.enemy.damageCounterAttack)
+                                                {
+                                                    float realDamage = damage - cuadrilla.enemy.pointsDeffence;
+                                                    cuadrilla.enemy.life = cuadrilla.enemy.life - realDamage;
+                                                }
+                                            }
+                                        }
+                                        //-----------------------------------------//
+                                    }
+                                    else
+                                    {
+                                        cuadrilla.enemy.life = cuadrilla.enemy.life - damage;
                                     }
                                 }
                                 timeLife = 0;
