@@ -12,6 +12,7 @@ namespace Prototipo_2
             NormalDeffense,
             CounterAttackDeffense,
         }
+        [Header("Parametros de la defensa")]
         public float delayStateCounterAttackDeffense;
         public float delayStateDeffense;
         public float delayVulnerable;
@@ -125,12 +126,11 @@ namespace Prototipo_2
                 }
             }
         }
-        public override void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage)
+        public override void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage,Cuadrilla cuadrilla)
         {
             bool shootDown = false;
             GameObject go = null;
             Proyectil proyectil = null;
-
             if (!specialAttack)
             {
                 go = poolObjectAttack.GetObject();
@@ -143,7 +143,10 @@ namespace Prototipo_2
                     proyectil.damage = proyectil.damageCounterAttack;
                 }
             }
-            if (!GetIsDuck() && !specialAttack)
+            if (!GetIsDuck() && !specialAttack 
+                && cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaCentral
+                && cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaDerecha
+                && cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaIzquierda)
             {
                 if (jampAttack)
                 {
@@ -152,7 +155,10 @@ namespace Prototipo_2
                 go.transform.rotation = generadoresProyectiles.transform.rotation;
                 go.transform.position = generadoresProyectiles.transform.position;
             }
-            else if (!specialAttack && GetIsDuck())
+            else if (!specialAttack && GetIsDuck() 
+                || cuadrilla.posicionCuadrilla == Cuadrilla.PosicionCuadrilla.CuadrillaBajaCentral 
+                || cuadrilla.posicionCuadrilla == Cuadrilla.PosicionCuadrilla.CuadrillaBajaDerecha
+                || cuadrilla.posicionCuadrilla == Cuadrilla.PosicionCuadrilla.CuadrillaBajaIzquierda)
             {
                 go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
                 go.transform.position = generadorProyectilesAgachado.transform.position;

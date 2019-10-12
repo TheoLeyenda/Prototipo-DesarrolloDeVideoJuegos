@@ -560,6 +560,7 @@ namespace Prototipo_2
         }
         public virtual void AnimationAttack(Proyectil proyectil){ }
         public virtual void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage){ }
+        public virtual void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage, Cuadrilla cuadrilla) { }
         public void CheckSpecialAttackEnemyController(int minRandomRootShoot, int maxRandomRootShoot, GameObject generador)
         {
             if (!isDuck)

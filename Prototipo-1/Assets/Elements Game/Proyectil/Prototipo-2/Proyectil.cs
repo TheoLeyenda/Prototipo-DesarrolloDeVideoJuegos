@@ -393,7 +393,7 @@ namespace Prototipo_2
                                             if (enemyDeffended.GetStateDeffence() == Defensivo.StateDeffence.CounterAttackDeffense)
                                             {
                                                 cuadrilla.enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.ContraAtaque;
-                                                cuadrilla.enemy.CounterAttack(true);
+                                                cuadrilla.enemy.Attack(false,false,true,cuadrilla);
                                                 enemyDeffended.SetStateDeffense(Defensivo.StateDeffence.Nulo);
                                                 enemyDeffended.delayStateCounterAttackDeffense = 0;
                                                 enemyDeffended.delayStateDeffense = enemyDeffended.GetAuxDelayStateDeffense();
