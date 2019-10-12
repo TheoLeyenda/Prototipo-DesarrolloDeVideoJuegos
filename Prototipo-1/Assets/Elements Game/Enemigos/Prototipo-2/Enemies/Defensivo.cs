@@ -12,16 +12,23 @@ namespace Prototipo_2
             NormalDeffense,
             CounterAttackDeffense,
         }
+        public float delayStateCounterAttackDeffense;
         public float delayStateDeffense;
+        public float delayVulnerable;
         private float auxDelayStateDeffense;
+        private float auxDelayVulnerable;
+        private float auxDelayStateCounterAttackDeffense;
+        private bool inDeffense;
         private StateDeffence stateDeffence;
         // Start is called before the first frame update
         public override void Start()
         {
-            
             base.Start();
             auxDelayStateDeffense = delayStateDeffense;
             stateDeffence = StateDeffence.CounterAttackDeffense;
+            auxDelayVulnerable = delayVulnerable;
+            auxDelayStateCounterAttackDeffense = delayStateCounterAttackDeffense;
+            inDeffense = false;
         }
 
         // Update is called once per frame
@@ -52,26 +59,70 @@ namespace Prototipo_2
         {
             if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar)
             {
-                if (stateDeffence == StateDeffence.NormalDeffense)
+                inDeffense = true;
+                if (inDeffense)
                 {
-                    spriteEnemy.spriteRenderer.color = Color.white;
-                    delayStateDeffense = delayStateDeffense - Time.deltaTime;
-                    if (delayStateDeffense <= 0)
-                    {
-                        stateDeffence = StateDeffence.CounterAttackDeffense;
-                        delayStateDeffense = auxDelayStateDeffense;
-                        delaySelectMovement = 0.1f;
-                    }
+                    delaySelectMovement = 0.1f;
                 }
-                else if (stateDeffence == StateDeffence.CounterAttackDeffense)
+                if (delayStateCounterAttackDeffense > 0)
                 {
                     spriteEnemy.spriteRenderer.color = Color.yellow;
+                    stateDeffence = StateDeffence.CounterAttackDeffense;
+                    delayStateCounterAttackDeffense = delayStateCounterAttackDeffense - Time.deltaTime;
+                }
+                else if (delayStateDeffense > 0)
+                {
+                    delayStateDeffense = delayStateDeffense - Time.deltaTime;
+                    spriteEnemy.spriteRenderer.color = Color.white;
+                    stateDeffence = StateDeffence.NormalDeffense;
+
+                }
+                else if (delayStateDeffense <= 0)
+                {
+                    CheckVulnerable();
+                    if (delayVulnerable <= 0)
+                    {
+                        delayStateCounterAttackDeffense = auxDelayStateCounterAttackDeffense;
+                        inDeffense = false;
+                        delayStateDeffense = auxDelayStateDeffense;
+                        delayVulnerable = auxDelayVulnerable;
+                        delaySelectMovement = 0;
+                        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+                    }
+
                 }
             }
-            if (delaySelectMovement <= 0 && delayStateDeffense <= 0 || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar)
+            else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo && delayVulnerable > 0 && inDeffense)
             {
-                stateDeffence = StateDeffence.CounterAttackDeffense;
+                delaySelectMovement = 0.1f;
+                CheckVulnerable();
+            }
+            else if(enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+            {
+                delayStateCounterAttackDeffense = auxDelayStateCounterAttackDeffense;
+                inDeffense = false;
+                delayStateDeffense = auxDelayStateDeffense;
+                delayVulnerable = auxDelayVulnerable;
+                delaySelectMovement = 0;
+                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+            }
+        }
+        public void CheckVulnerable()
+        {
+            if (delayVulnerable > 0)
+            {
+                delaySelectMovement = 0.1f;
                 spriteEnemy.spriteRenderer.color = Color.white;
+                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+                delayVulnerable = delayVulnerable - Time.deltaTime;
+                if (delayVulnerable <= 0 && inDeffense)
+                {
+                    stateDeffence = StateDeffence.NormalDeffense;
+                }
+                else
+                {
+                    stateDeffence = StateDeffence.Nulo;
+                }
             }
         }
         public override void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage)
@@ -138,6 +189,18 @@ namespace Prototipo_2
         public StateDeffence GetStateDeffence()
         {
             return stateDeffence;
+        }
+        public float GetAuxDelayStateDeffense()
+        {
+            return auxDelayStateDeffense;
+        }
+        public float GetAuxDelayStateCounterAttackDeffense()
+        {
+            return auxDelayStateCounterAttackDeffense;
+        }
+        public float GetAuxDelayVulnerable()
+        {
+            return auxDelayVulnerable;
         }
     }
 }

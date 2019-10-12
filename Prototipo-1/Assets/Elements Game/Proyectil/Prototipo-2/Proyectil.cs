@@ -394,7 +394,10 @@ namespace Prototipo_2
                                             {
                                                 cuadrilla.enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.ContraAtaque;
                                                 cuadrilla.enemy.CounterAttack(true);
-                                                enemyDeffended.SetStateDeffense(Defensivo.StateDeffence.NormalDeffense);
+                                                enemyDeffended.SetStateDeffense(Defensivo.StateDeffence.Nulo);
+                                                enemyDeffended.delayStateCounterAttackDeffense = 0;
+                                                enemyDeffended.delayStateDeffense = enemyDeffended.GetAuxDelayStateDeffense();
+                                                enemyDeffended.delayVulnerable = enemyDeffended.GetAuxDelayVulnerable();
                                                 if (cuadrilla.enemy.damageCounterAttack)
                                                 {
                                                     float realDamage = damage - cuadrilla.enemy.pointsDeffence;
