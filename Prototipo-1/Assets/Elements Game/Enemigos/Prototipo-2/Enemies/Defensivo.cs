@@ -168,11 +168,7 @@ namespace Prototipo_2
                 go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
                 go.transform.position = generadorProyectilesAgachado.transform.position;
             }
-            if (specialAttack)
-            {
-                Debug.Log("ENTRE");
-                Disparo.SetActive(true);
-            }
+            
             if (!specialAttack)
             {
                 AnimationAttack(proyectil);
@@ -192,48 +188,51 @@ namespace Prototipo_2
             bool shootDown = false;
             GameObject go = null;
             Proyectil proyectil = null;
-            if (!specialAttack)
-            {
-                go = poolObjectAttack.GetObject();
-                proyectil = go.GetComponent<Proyectil>();
-                proyectil.SetEnemy(gameObject.GetComponent<Enemy>());
-                proyectil.SetDobleDamage(_doubleDamage);
-                proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
-                if (_doubleDamage)
-                {
-                    proyectil.damage = proyectil.damageCounterAttack;
-                }
-            }
+
             if (specialAttack)
             {
-                Debug.Log("ENTRE");
                 Disparo.SetActive(true);
             }
-            if (!GetIsDuck() && !specialAttack)
+            if (!Disparo.activeSelf)
             {
-                if (jampAttack)
+                if (!specialAttack)
                 {
-                    shootDown = true;
+                    go = poolObjectAttack.GetObject();
+                    proyectil = go.GetComponent<Proyectil>();
+                    proyectil.SetEnemy(gameObject.GetComponent<Enemy>());
+                    proyectil.SetDobleDamage(_doubleDamage);
+                    proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
+                    if (_doubleDamage)
+                    {
+                        proyectil.damage = proyectil.damageCounterAttack;
+                    }
                 }
-                go.transform.rotation = generadoresProyectiles.transform.rotation;
-                go.transform.position = generadoresProyectiles.transform.position;
-            }
-            else if (!specialAttack && GetIsDuck())
-            {
-                go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
-                go.transform.position = generadorProyectilesAgachado.transform.position;
-            }
-            if (!specialAttack)
-            {
-                AnimationAttack(proyectil);
+                if (!GetIsDuck() && !specialAttack)
+                {
+                    if (jampAttack)
+                    {
+                        shootDown = true;
+                    }
+                    go.transform.rotation = generadoresProyectiles.transform.rotation;
+                    go.transform.position = generadoresProyectiles.transform.position;
+                }
+                else if (!specialAttack && GetIsDuck())
+                {
+                    go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
+                    go.transform.position = generadorProyectilesAgachado.transform.position;
+                }
+                if (!specialAttack)
+                {
+                    AnimationAttack(proyectil);
 
-                if (!shootDown)
-                {
-                    proyectil.ShootForward();
-                }
-                else
-                {
-                    proyectil.ShootForwardDown();
+                    if (!shootDown)
+                    {
+                        proyectil.ShootForward();
+                    }
+                    else
+                    {
+                        proyectil.ShootForwardDown();
+                    }
                 }
             }
         }

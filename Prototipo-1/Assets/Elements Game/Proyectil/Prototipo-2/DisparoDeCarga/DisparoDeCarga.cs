@@ -10,7 +10,6 @@ namespace Prototipo_2
         public float timeLife;
         public float auxTimeLife;
         public float damage;
-        public float limitScaler;
         // Update is called once per frame
         void Update()
         {
