@@ -7,6 +7,7 @@ namespace Prototipo_2
 {
     public class Enemy : MonoBehaviour
     {
+        private bool enableSpecialAttack;
         public SpriteEnemy spriteEnemy;
         public GameObject enemyPrefab;
         public Grid gridEnemy;
@@ -22,6 +23,10 @@ namespace Prototipo_2
         public float life;
         public float maxLife;
         public Image ImageHP;
+        public Image ImageCarga;
+        private float xpActual;
+        public float xpNededSpecialAttack;
+        public float xpForHit;
         public Pool poolObjectAttack;
         private Rigidbody2D rg2D;
         private GameManager gm;
@@ -92,6 +97,7 @@ namespace Prototipo_2
         public int ColumnaActual;
         public virtual void Start()
         {
+            enableSpecialAttack = false;
             auxSpeedJump = SpeedJump;
             InitialPosition = transform.position;
             auxDelayAttack = delayAttack;
@@ -109,6 +115,7 @@ namespace Prototipo_2
         public virtual void Update()
         {
             CheckLifeBar();
+            CheckLoadSpecialAttackBar();
             CheckDead();
             IA();
         }
@@ -174,7 +181,6 @@ namespace Prototipo_2
                     if (opcionMovement < MovePorcentage)
                     {
                         //MOVIMIENTO 
-
                         if (structsEnemys.dataEnemy.columnaActual >= gridEnemy.GetCuadrilla_columnas() - 1)
                         {
                             movimiento = EnumsEnemy.Movimiento.MoverAdelante;
@@ -261,7 +267,6 @@ namespace Prototipo_2
                 isDeffended = false;
             }
 
-
             //SACAR LA CONDICION QUE SEA IGUAL AL JEFE CUANDO ESTE TENGA UN COMPORTAMIENTO
             if (enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Jefe || !activateComportamiento)
             {
@@ -328,6 +333,35 @@ namespace Prototipo_2
             else if (life < 0)
             {
                 life = 0;
+            }
+        }
+        public void CheckLoadSpecialAttackBar()
+        {
+            if (xpActual >= xpNededSpecialAttack)
+            {
+                xpActual = xpNededSpecialAttack;
+                enableSpecialAttack = true;
+            }
+            if (xpActual <= xpNededSpecialAttack)
+            {
+                ImageCarga.fillAmount = xpActual / xpNededSpecialAttack;
+            }
+            if (xpActual < 0)
+            {
+                xpActual = 0;
+            }
+            if (enableSpecialAttack)
+            {
+                delaySelectMovement = 0.1f;
+                if (!isJamping && !isDuck 
+                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar 
+                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque 
+                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa)
+                {
+                    enableSpecialAttack = false;
+                    Attack(false, true, false);
+                    xpActual = 0;
+                }
             }
         }
         public void MoveToPoint(Vector3 pointCombat)
@@ -659,6 +693,14 @@ namespace Prototipo_2
         public bool GetIsDuck()
         {
             return isDuck;
+        }
+        public void SetXpActual(float xp)
+        {
+            xpActual = xp;
+        }
+        public float GetXpActual()
+        {
+            return xpActual;
         }
     }
 }

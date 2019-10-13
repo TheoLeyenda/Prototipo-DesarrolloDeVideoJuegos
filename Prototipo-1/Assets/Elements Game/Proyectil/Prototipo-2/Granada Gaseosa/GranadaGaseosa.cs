@@ -68,10 +68,16 @@ namespace Prototipo_2
             if (collision.tag == "Cuadrilla")
             {
                 Cuadrilla cuadrilla = collision.GetComponent<Cuadrilla>();
-                
                 if (cuadrilla.enemy == null && cuadrilla.player == null || cuadrilla.enemy != null && cuadrilla.player != null)
                 {
                     return;
+                }
+                if (cuadrilla.posicionCuadrilla == Cuadrilla.PosicionCuadrilla.CuadrillaBajaCentral
+                    || cuadrilla.posicionCuadrilla == Cuadrilla.PosicionCuadrilla.CuadrillaBajaDerecha
+                    || cuadrilla.posicionCuadrilla == Cuadrilla.PosicionCuadrilla.CuadrillaBajaIzquierda)
+                {
+                    cuadrillaColision = cuadrilla;
+                    CreateGaseosas();
                 }
                 if (cuadrilla.GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Ocupado)
                 {

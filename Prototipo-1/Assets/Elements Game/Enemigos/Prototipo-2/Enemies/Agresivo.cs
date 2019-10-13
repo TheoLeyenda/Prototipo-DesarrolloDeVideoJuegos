@@ -7,6 +7,9 @@ namespace Prototipo_2
     public class Agresivo : Enemy
     {
         // Start is called before the first frame update
+        public GameObject GeneradorAtaqueEspecial;
+        public Pool poolProyectilImparable;
+        
         public override void Start()
         {
             base.Start();
@@ -40,6 +43,7 @@ namespace Prototipo_2
             bool shootDown = false;
             GameObject go = null;
             Proyectil proyectil = null;
+            ProyectilInparable proyectilInparable = null;
 
             if (!specialAttack)
             {
@@ -69,14 +73,19 @@ namespace Prototipo_2
             }
             if (specialAttack)
             {
-                if (!GetIsDuck())
+                go = poolProyectilImparable.GetObject();
+                proyectilInparable = go.GetComponent<ProyectilInparable>();
+                proyectilInparable.SetEnemy(gameObject.GetComponent<Enemy>());
+                proyectilInparable.SetDobleDamage(_doubleDamage);
+                proyectilInparable.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
+                proyectilInparable.SetEnemy(gameObject.GetComponent<Agresivo>());
+                if (_doubleDamage)
                 {
-                    CheckSpecialAttackEnemyController(0, 0, generadorProyectilParabola);
+                    proyectil.damage = proyectil.damageCounterAttack;
                 }
-                else
-                {
-                    CheckSpecialAttackEnemyController(0, 0, generadorProyectilParabolaAgachado);
-                }
+                go.transform.position = GeneradorAtaqueEspecial.transform.position;
+                go.transform.rotation = GeneradorAtaqueEspecial.transform.rotation;
+                proyectilInparable.ShootForward();
             }
             if (!specialAttack)
             {

@@ -153,34 +153,38 @@ namespace Prototipo_2
                         }
                         if (cuadrilla.player != null)
                         {
-                            
-                            if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
+                            if (ENEMY != null)
                             {
-                                cuadrilla.player.SetEnableCounterAttack(true);
-                                if (cuadrilla.player.delayCounterAttack > 0)
+                                if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
                                 {
-                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
-                                    if (InputPlayerController.DeffenseButton_P1())
+                                    cuadrilla.player.SetEnableCounterAttack(true);
+                                    if (cuadrilla.player.delayCounterAttack > 0)
                                     {
-                                        cuadrilla.player.Attack(DisparadorDelProyectil.Jugador1);
-                                        cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
-                                        timeLife = 0;
-                                        enableDamagePlayer = false;
+                                        cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
+                                        if (InputPlayerController.DeffenseButton_P1())
+                                        {
+                                            cuadrilla.player.Attack(DisparadorDelProyectil.Jugador1);
+                                            cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                            timeLife = 0;
+                                            enableDamagePlayer = false;
+                                        }
                                     }
-                                }
-                                if (cuadrilla.player.delayCounterAttack <= 0 && timeLife <= 0 && enableDamagePlayer)
-                                {
-                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
-                                    cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-                                }
-                                else if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0 && enableDamagePlayer)
-                                {
-                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
-                                    cuadrilla.player.SetEnableCounterAttack(false);
-                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
-                                    cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-                                    timeLife = 0;
-                                    gameObject.SetActive(false);;
+                                    if (cuadrilla.player.delayCounterAttack <= 0 && timeLife <= 0 && enableDamagePlayer)
+                                    {
+                                        ENEMY.SetXpActual(ENEMY.GetXpActual() + ENEMY.xpForHit);
+                                        cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
+                                        cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                                    }
+                                    else if (cuadrilla.player.delayCounterAttack <= 0 && timeLife > 0 && enableDamagePlayer)
+                                    {
+                                        ENEMY.SetXpActual(ENEMY.GetXpActual() + ENEMY.xpForHit);
+                                        cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                        cuadrilla.player.SetEnableCounterAttack(false);
+                                        cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
+                                        cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                                        timeLife = 0;
+                                        gameObject.SetActive(false); ;
+                                    }
                                 }
                             }
                             if (PLAYER1 != null)
@@ -336,8 +340,9 @@ namespace Prototipo_2
                                             break;
                                     }
                                 }
-                                else
+                                else if(ENEMY != null)
                                 {
+                                    ENEMY.SetXpActual(ENEMY.GetXpActual() + (ENEMY.xpForHit/2));
                                     realDamage = damage - cuadrilla.player.pointsDeffence;
                                     cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - realDamage;
                                     timeLife = 0;
