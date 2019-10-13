@@ -11,15 +11,8 @@ namespace Prototipo_2
         public float auxTimeLife;
         public float damage;
         public float limitScaler;
-        public bool LookingForward;
-        public bool LookingBack;
-        public Transform punta;
-        private Vector3 initialPoint;
 
-        private void Start()
-        {
-            initialPoint = transform.position;
-        }
+
         private void OnEnable()
         {
             timeLife = auxTimeLife;
@@ -28,19 +21,8 @@ namespace Prototipo_2
         void Update()
         {
             CheckTimeLife();
-            CheckLimit();
         }
-        public void CheckLimit()
-        {
-            if (LookingBack)
-            {
-
-            }
-            else if (LookingForward)
-            {
-
-            }
-        }
+        
         public void CheckTimeLife()
         {
             if (timeLife > 0)
