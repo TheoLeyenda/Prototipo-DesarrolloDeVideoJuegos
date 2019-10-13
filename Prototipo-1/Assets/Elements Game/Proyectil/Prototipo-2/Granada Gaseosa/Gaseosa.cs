@@ -11,6 +11,7 @@ namespace Prototipo_2
         public float timeLife;
         private float auxTimeLife;
         public SpriteRenderer spriteRenderer;
+        public Proyectil.DisparadorDelProyectil disparadorDelProyectil;
 
         private void OnEnable()
         {
@@ -25,12 +26,21 @@ namespace Prototipo_2
             }
             else if (timeLife <= 0)
             {
+                timeLife = auxTimeLife;
                 gameObject.SetActive(false);
             }
         }
         private void OnTriggerStay2D(Collider2D collision)
         {
-            
+            if (collision.tag == "Player")
+            {
+                Player player = collision.GetComponent<Player>();
+                if (player == null)
+                {
+                    return;
+                }
+                player.PD.lifePlayer = player.PD.lifePlayer - damage;
+            }
         }
     }
 }

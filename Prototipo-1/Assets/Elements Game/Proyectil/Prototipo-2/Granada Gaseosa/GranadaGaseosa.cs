@@ -58,6 +58,7 @@ namespace Prototipo_2
             {
                 go = poolGaseosa.GetObject();
                 gaseosa = go.GetComponent<Gaseosa>();
+                gaseosa.disparadorDelProyectil = disparadorDelProyectil;
                 gaseosa.transform.position = cuadrillasAbajo[i].transform.position;
             }
             timeLife = 0;
