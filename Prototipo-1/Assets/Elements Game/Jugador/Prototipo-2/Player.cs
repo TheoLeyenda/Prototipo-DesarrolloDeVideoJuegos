@@ -63,6 +63,8 @@ namespace Prototipo_2
         private float auxDelayAttack;
         private bool enableAttack;
         private bool enableSpecialAttack;
+        public BoxCollider2D boxColliderParado;
+        public BoxCollider2D boxColliderAgachado;
         void Start()
         {
             xpActual = 0;
@@ -107,6 +109,7 @@ namespace Prototipo_2
             CheckLifeBar();
             DelayEnableAttack();
             CheckLoadSpecialAttackBar();
+            CheckBoxColliderActivate();
         }
         
         public void ResetPlayer()
@@ -481,6 +484,19 @@ namespace Prototipo_2
                         gridPlayer.matrizCuadrilla[i][j].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Defendido);
                     }
                 }
+            }
+        }
+        public void CheckBoxColliderActivate()
+        {
+            if (isDuck)
+            {
+                boxColliderParado.enabled = false;
+                boxColliderAgachado.enabled = true;
+            }
+            else
+            {
+                boxColliderAgachado.enabled = false;
+                boxColliderParado.enabled = true;
             }
         }
         public bool GetEnableCounterAttack()
