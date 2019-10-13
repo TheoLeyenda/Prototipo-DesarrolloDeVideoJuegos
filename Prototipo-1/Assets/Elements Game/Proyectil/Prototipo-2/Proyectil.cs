@@ -393,7 +393,6 @@ namespace Prototipo_2
                                         //MECANICA DEFENSIVA DEL ENEMIGO DEFENSIVO//
                                         if (cuadrilla.enemy.GetComponent<Defensivo>() != null)
                                         {
-                                            Debug.Log("ENTRE");
                                             Defensivo enemyDeffended = cuadrilla.enemy.GetComponent<Defensivo>();
                                             if (enemyDeffended.GetStateDeffence() == Defensivo.StateDeffence.CounterAttackDeffense)
                                             {

@@ -11,12 +11,6 @@ namespace Prototipo_2
         public float auxTimeLife;
         public float damage;
         public float limitScaler;
-
-
-        private void OnEnable()
-        {
-            timeLife = auxTimeLife;
-        }
         // Update is called once per frame
         void Update()
         {
@@ -31,6 +25,7 @@ namespace Prototipo_2
             }
             else if (timeLife <= 0)
             {
+                Debug.Log("ME APAGUE");
                 timeLife = auxTimeLife;
                 gameObject.SetActive(false);
             }

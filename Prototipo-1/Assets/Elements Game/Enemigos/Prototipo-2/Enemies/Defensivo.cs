@@ -6,6 +6,7 @@ namespace Prototipo_2
 {
     public class Defensivo : Enemy
     {
+        public GameObject Disparo;
         public enum StateDeffence
         {
             Nulo,
@@ -37,6 +38,10 @@ namespace Prototipo_2
         {
             base.Update();
             CheckInDeffense();
+            if (Disparo.activeSelf)
+            {
+                delaySelectMovement = 0.1f;
+            }
         }
         public override void AnimationAttack(Proyectil proyectil)
         {
@@ -165,14 +170,58 @@ namespace Prototipo_2
             }
             if (specialAttack)
             {
-                if (!GetIsDuck())
+                Debug.Log("ENTRE");
+                Disparo.SetActive(true);
+            }
+            if (!specialAttack)
+            {
+                AnimationAttack(proyectil);
+
+                if (!shootDown)
                 {
-                    CheckSpecialAttackEnemyController(0, 0, generadorProyectilParabola);
+                    proyectil.ShootForward();
                 }
                 else
                 {
-                    CheckSpecialAttackEnemyController(0, 0, generadorProyectilParabolaAgachado);
+                    proyectil.ShootForwardDown();
                 }
+            }
+        }
+        public override void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage)
+        {
+            bool shootDown = false;
+            GameObject go = null;
+            Proyectil proyectil = null;
+            if (!specialAttack)
+            {
+                go = poolObjectAttack.GetObject();
+                proyectil = go.GetComponent<Proyectil>();
+                proyectil.SetEnemy(gameObject.GetComponent<Enemy>());
+                proyectil.SetDobleDamage(_doubleDamage);
+                proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
+                if (_doubleDamage)
+                {
+                    proyectil.damage = proyectil.damageCounterAttack;
+                }
+            }
+            if (specialAttack)
+            {
+                Debug.Log("ENTRE");
+                Disparo.SetActive(true);
+            }
+            if (!GetIsDuck() && !specialAttack)
+            {
+                if (jampAttack)
+                {
+                    shootDown = true;
+                }
+                go.transform.rotation = generadoresProyectiles.transform.rotation;
+                go.transform.position = generadoresProyectiles.transform.position;
+            }
+            else if (!specialAttack && GetIsDuck())
+            {
+                go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
+                go.transform.position = generadorProyectilesAgachado.transform.position;
             }
             if (!specialAttack)
             {

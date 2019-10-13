@@ -358,6 +358,7 @@ namespace Prototipo_2
                     && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque 
                     && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa)
                 {
+                    Debug.Log("ENTRE A LA LLAMADA A FUNCION");
                     enableSpecialAttack = false;
                     Attack(false, true, false);
                     xpActual = 0;
