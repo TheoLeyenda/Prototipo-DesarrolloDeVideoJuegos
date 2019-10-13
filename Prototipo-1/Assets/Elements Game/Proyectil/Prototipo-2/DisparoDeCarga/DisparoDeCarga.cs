@@ -8,11 +8,17 @@ namespace Prototipo_2
     {
         // Start is called before the first frame update
         public float timeLife;
-        private float auxTimeLife;
+        public float auxTimeLife;
         public float damage;
-        void Start()
+        public float limitScaler;
+        public bool LookingForward;
+        public bool LookingBack;
+        public Transform punta;
+        private Vector3 initialPoint;
+
+        private void Start()
         {
-            auxTimeLife = timeLife;
+            initialPoint = transform.position;
         }
         private void OnEnable()
         {
@@ -22,6 +28,18 @@ namespace Prototipo_2
         void Update()
         {
             CheckTimeLife();
+            CheckLimit();
+        }
+        public void CheckLimit()
+        {
+            if (LookingBack)
+            {
+
+            }
+            else if (LookingForward)
+            {
+
+            }
         }
         public void CheckTimeLife()
         {
@@ -36,16 +54,15 @@ namespace Prototipo_2
             }
         }
         private void OnTriggerStay2D(Collider2D collision)
-        {
-            if (collision.tag == "Player")
+        { 
+            
+            Player player = collision.GetComponent<Player>();
+            if (player == null)
             {
-                Player player = collision.GetComponent<Player>();
-                if (player == null)
-                {
-                    return;
-                }
-                player.PD.lifePlayer = player.PD.lifePlayer - damage;
+                return;
             }
+            player.PD.lifePlayer = player.PD.lifePlayer - damage;
+            
         }
     }
 }
