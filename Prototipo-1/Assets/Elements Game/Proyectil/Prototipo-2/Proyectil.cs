@@ -32,8 +32,8 @@ namespace Prototipo_2
         public Pool pool;
         protected bool dobleDamage;
         private PoolObject poolObject;
-        private Player PLAYER1;
-        private Player PLAYER2;
+        protected Player PLAYER1;
+        protected Player PLAYER2;
         private Enemy ENEMY;
         protected GameManager gm;
         public DisparadorDelProyectil disparadorDelProyectil;
