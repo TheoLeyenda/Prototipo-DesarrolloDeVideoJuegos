@@ -32,6 +32,15 @@ public class EnumsPlayers : MonoBehaviour
         player2,
         Count
     }
+    public enum SpecialAttackEquipped
+    {
+        Nulo,
+        DisparoDeCarga,
+        GranadaGaseosa,
+        ProyectilImparable,
+        Default
+    }
+    public SpecialAttackEquipped specialAttackEquipped;
     public Movimiento movimiento;
     public EstadoJugador estadoJugador;
     public NumberPlayer numberPlayer;

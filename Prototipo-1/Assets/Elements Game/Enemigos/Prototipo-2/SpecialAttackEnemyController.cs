@@ -8,7 +8,6 @@ namespace Prototipo_2
     {
         // Start is called before the first frame update
         public Pool poolObjectSpecialAttack;
-
         public void SpecialAttack(bool doubleDamage, bool isDuck, GameObject generadorProyectilesParabola, GameObject generadorProyectilesParabolaAgachado, EnumsEnemy enumsEnemy, StructsEnemys structsEnemys, int randomMax, int randomMin)
         {
             GameObject go = poolObjectSpecialAttack.GetObject();

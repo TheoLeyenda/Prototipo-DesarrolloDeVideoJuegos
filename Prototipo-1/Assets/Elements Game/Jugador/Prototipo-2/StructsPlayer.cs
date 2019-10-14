@@ -15,7 +15,18 @@ namespace Prototipo_2
             public int CantCasillasOcupadasParado;
             public int columnaActual;
         }
-
+        
+        [System.Serializable]
+        public struct DataSpecialAttack
+        {
+            public Pool poolProyectil;
+            public Pool poolProyectilParabola;
+            public Pool poolProyectilImparable;
+            public GameObject DisparoDeCarga;
+            public Pool poolGranadaGaseosa;
+        }
+        
+        public DataSpecialAttack dataAttack;
         public GameObject ruta;
         public GameObject rutaAgachado;
         public DataPlayer dataPlayer;

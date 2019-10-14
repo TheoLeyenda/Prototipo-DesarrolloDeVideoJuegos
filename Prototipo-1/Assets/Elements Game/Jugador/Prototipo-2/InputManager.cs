@@ -15,9 +15,14 @@ namespace Prototipo_2 {
         private bool moveVerticalPlayer1;
         private bool moveVerticalPlayer2;
         private bool moveHorizontalPlayer2;
+
+        private bool enableMovementPlayer1;
+        private bool enableMovementPlayer2;
         // Update is called once per frame
         private void Start()
         {
+            enableMovementPlayer1 = true;
+            enableMovementPlayer2 = true;
             if (FindPlayersAndPlayers_PvP)
             {
                 player1 = GameObject.Find("Player1").GetComponent<Player>();
@@ -35,12 +40,12 @@ namespace Prototipo_2 {
         void Update()
         {
             //Debug.Log(player1.enumsPlayers.movimiento);
-            if (player1 != null && player1.gameObject.activeSelf)
+            if (player1 != null && player1.gameObject.activeSelf && enableMovementPlayer1)
             {
                 CheckInputPlayer1();
                 CheckSpritePlayer1();
             }
-            if (player2 != null && player2.gameObject.activeSelf)
+            if (player2 != null && player2.gameObject.activeSelf && enableMovementPlayer2)
             {
                 CheckInputPlayer2();
                 CheckSpritePlayer2();
@@ -774,5 +779,21 @@ namespace Prototipo_2 {
             }
         }
         //-----------------------------------------------//
+        public void SetEnableMovementPlayer1(bool enableMovement)
+        {
+            enableMovementPlayer1 = enableMovement;
+        }
+        public void SetEnableMovementPlayer2(bool enableMovement)
+        {
+            enableMovementPlayer2 = enableMovement;
+        }
+        public bool GetEnableMovementPlayer1()
+        {
+            return enableMovementPlayer1;
+        }
+        public bool GetEnableMovementPlayer2()
+        {
+            return enableMovementPlayer2;
+        }
     }
 }

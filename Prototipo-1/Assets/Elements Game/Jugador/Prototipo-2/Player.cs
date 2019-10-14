@@ -44,8 +44,6 @@ namespace Prototipo_2
         private bool isJumping;
         private bool isDuck;
         private bool EnableCounterAttack;
-        public Pool poolObjectAttack;
-        public Pool poolObjectSpecialAttack;
         private Vector3 InitialPosition;
         public BoxCollider2D colliderSprite;
         public string ButtonDeffence;
@@ -65,8 +63,12 @@ namespace Prototipo_2
         private bool enableSpecialAttack;
         public BoxCollider2D boxColliderParado;
         public BoxCollider2D boxColliderAgachado;
+        public string NameInputManager;
+        private InputManager inputManager;
         void Start()
         {
+            GameObject go = GameObject.Find(NameInputManager);
+            inputManager = go.GetComponent<InputManager>();
             xpActual = 0;
             enableSpecialAttack = false;
             enableAttack = true;
@@ -110,8 +112,38 @@ namespace Prototipo_2
             DelayEnableAttack();
             CheckLoadSpecialAttackBar();
             CheckBoxColliderActivate();
+            CheckMovementInSpecialAttack();
         }
-        
+        public void CheckMovementInSpecialAttack()
+        {
+            switch (enumsPlayers.specialAttackEquipped)
+            {
+                case EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga:
+                    if (structsPlayer.dataAttack.DisparoDeCarga.activeSelf)
+                    {
+                        if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                        {
+                            inputManager.SetEnableMovementPlayer1(false);
+                        }
+                        else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                        {
+                            inputManager.SetEnableMovementPlayer2(false);
+                        }
+                    }
+                    else
+                    {
+                        if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                        {
+                            inputManager.SetEnableMovementPlayer1(true);
+                        }
+                        else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                        {
+                            inputManager.SetEnableMovementPlayer2(true);
+                        }
+                    }
+                    break;
+            }
+        }
         public void ResetPlayer()
         {
             PD.lifePlayer = PD.maxLifePlayer;
@@ -172,7 +204,7 @@ namespace Prototipo_2
         {
             if (enableAttack)
             {
-                GameObject go = poolObjectAttack.GetObject();
+                GameObject go = structsPlayer.dataAttack.poolProyectil.GetObject();
                 Proyectil proyectil = go.GetComponent<Proyectil>();
                 switch (enumsPlayers.numberPlayer)
                 {
@@ -222,7 +254,7 @@ namespace Prototipo_2
         {
             if (enableAttack)
             {
-                GameObject go = poolObjectAttack.GetObject();
+                GameObject go = structsPlayer.dataAttack.poolProyectil.GetObject();
                 Proyectil proyectil = go.GetComponent<Proyectil>();
                 switch (enumsPlayers.numberPlayer)
                 {
@@ -260,39 +292,122 @@ namespace Prototipo_2
         //ATAQUE EN PARABOLA.
         public void SpecialAttack(Proyectil.DisparadorDelProyectil disparador)
         {
-            if (enableSpecialAttack)
+            switch (enumsPlayers.specialAttackEquipped)
             {
-                GameObject go = poolObjectSpecialAttack.GetObject();
-                ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
-                proyectil.SetDobleDamage(doubleDamage);
-                proyectil.disparadorDelProyectil = disparador;
-                if (doubleDamage)
-                {
-                    proyectil.damage = proyectil.damage * 2;
-                }
-                if (!isDuck)
-                {
-                    proyectil.TypeRoot = 1;
-                    go.transform.position = generadorProyectilesParabola.transform.position;
-                }
-                else
-                {
-                    proyectil.TypeRoot = 2;
-                    go.transform.position = generadorProyectilesParabolaAgachado.transform.position;
-                }
-                switch (proyectil.TypeRoot)
-                {
-                    case 1:
+                case EnumsPlayers.SpecialAttackEquipped.Default:
+                    if (enableSpecialAttack)
+                    {
+                        GameObject go = structsPlayer.dataAttack.poolProyectilParabola.GetObject();
+                        ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
+                        proyectil.SetDobleDamage(doubleDamage);
+                        proyectil.disparadorDelProyectil = disparador;
+                        if (doubleDamage)
+                        {
+                            proyectil.damage = proyectil.damage * 2;
+                        }
+                        if (!isDuck)
+                        {
+                            proyectil.TypeRoot = 1;
+                            go.transform.position = generadorProyectilesParabola.transform.position;
+                        }
+                        else
+                        {
+                            proyectil.TypeRoot = 2;
+                            go.transform.position = generadorProyectilesParabolaAgachado.transform.position;
+                        }
+                        switch (proyectil.TypeRoot)
+                        {
+                            case 1:
+                                proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
+                                break;
+                            case 2:
+                                proyectil.rutaParabolaAgachado_AtaqueJugador = structsPlayer.rutaAgachado;
+                                break;
+                        }
                         proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
-                        break;
-                    case 2:
-                        proyectil.rutaParabolaAgachado_AtaqueJugador = structsPlayer.rutaAgachado;
-                        break;
-                }
-                proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
-                proyectil.OnParabola();
-                enableSpecialAttack = false;
-                xpActual = 0;
+                        proyectil.OnParabola();
+                        enableSpecialAttack = false;
+                        xpActual = 0;
+                    }
+                    break;
+                case EnumsPlayers.SpecialAttackEquipped.GranadaGaseosa:
+                    if (enableSpecialAttack)
+                    {
+                        GameObject go = structsPlayer.dataAttack.poolGranadaGaseosa.GetObject();
+                        ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
+                        proyectil.SetDobleDamage(doubleDamage);
+                        proyectil.disparadorDelProyectil = disparador;
+                        if (doubleDamage)
+                        {
+                            proyectil.damage = proyectil.damage * 2;
+                        }
+                        if (!isDuck)
+                        {
+                            proyectil.TypeRoot = 1;
+                            go.transform.position = generadorProyectilesParabola.transform.position;
+                        }
+                        else
+                        {
+                            proyectil.TypeRoot = 2;
+                            go.transform.position = generadorProyectilesParabolaAgachado.transform.position;
+                        }
+                        switch (proyectil.TypeRoot)
+                        {
+                            case 1:
+                                proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
+                                break;
+                            case 2:
+                                proyectil.rutaParabolaAgachado_AtaqueJugador = structsPlayer.rutaAgachado;
+                                break;
+                        }
+                        proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
+                        proyectil.OnParabola();
+                        enableSpecialAttack = false;
+                        xpActual = 0;
+                    }
+                    break;
+                case EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga:
+                    if (enableSpecialAttack)
+                    {
+                        if (!isJumping && !isDuck
+                        && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                        && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+                        && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+                        {
+                            structsPlayer.dataAttack.DisparoDeCarga.SetActive(true);
+                            enableSpecialAttack = false;
+                            xpActual = 0;
+                        }
+                    }
+                    break;
+                case EnumsPlayers.SpecialAttackEquipped.ProyectilImparable:
+                    if (enableSpecialAttack)
+                    {
+                        if (!isJumping && !isDuck
+                        && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                        && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+                        && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+                        {
+                            GameObject go = structsPlayer.dataAttack.poolProyectilImparable.GetObject();
+                            ProyectilInparable proyectilInparable = go.GetComponent<ProyectilInparable>();
+                            proyectilInparable.SetEnemy(gameObject.GetComponent<Enemy>());
+                            proyectilInparable.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
+                            if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                            {
+                                proyectilInparable.SetPlayer(gameObject.GetComponent<Player>());
+                            }
+                            else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                            {
+                                proyectilInparable.SetPlayer2(gameObject.GetComponent<Player>());
+                            }
+                            go.transform.position = generadorProyectilesAgachado.transform.position;
+                            go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
+                            proyectilInparable.ShootForward();
+                            enableSpecialAttack = false;
+                            xpActual = 0;
+                        }
+                    }
+                    break;
             }
         }
         public void CheckOutLimit()
