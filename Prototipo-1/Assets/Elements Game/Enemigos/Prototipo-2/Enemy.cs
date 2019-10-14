@@ -337,37 +337,40 @@ namespace Prototipo_2
         }
         public void CheckLoadSpecialAttackBar()
         {
-            if (xpActual >= xpNededSpecialAttack)
+            if (ImageCarga != null)
             {
-                xpActual = xpNededSpecialAttack;
-                enableSpecialAttack = true;
-            }
-            if (xpActual <= xpNededSpecialAttack)
-            {
-                ImageCarga.fillAmount = xpActual / xpNededSpecialAttack;
-            }
-            if (xpActual < 0)
-            {
-                xpActual = 0;
-            }
-            if (enableSpecialAttack)
-            {
-                if (!isJamping && !isDuck
-                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar
-                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque
-                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa)
+                if (xpActual >= xpNededSpecialAttack)
                 {
-                    delaySelectMovement = 0.1f;
-                    enableSpecialAttack = false;
-                    Attack(false, true, false);
+                    xpActual = xpNededSpecialAttack;
+                    enableSpecialAttack = true;
+                }
+                if (xpActual <= xpNededSpecialAttack)
+                {
+                    ImageCarga.fillAmount = xpActual / xpNededSpecialAttack;
+                }
+                if (xpActual < 0)
+                {
                     xpActual = 0;
                 }
-                else if (enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Balanceado)
+                if (enableSpecialAttack)
                 {
-                    enableSpecialAttack = false;
-                    Attack(false, true, false);
-                    xpActual = 0;
+                    if (!isJamping && !isDuck
+                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar
+                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque
+                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa)
+                    {
+                        delaySelectMovement = 0.1f;
+                        enableSpecialAttack = false;
+                        Attack(false, true, false);
+                        xpActual = 0;
+                    }
+                    else if (enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Balanceado)
+                    {
+                        enableSpecialAttack = false;
+                        Attack(false, true, false);
+                        xpActual = 0;
 
+                    }
                 }
             }
         }
@@ -404,7 +407,7 @@ namespace Prototipo_2
                     gm.ResetRoundCombat(false);
                     ResetEnemy();
                     enemyPrefab.gameObject.SetActive(false);
-
+                    xpActual = 0;
                 }
             }
             else if (InPool)
@@ -421,6 +424,7 @@ namespace Prototipo_2
                             gm.ResetRoundCombat(false);
                             ResetEnemy();
                             poolObjectEnemy.Recycle();
+                            xpActual = 0;
                         }
                         break;
                     case EnumsGameManager.ModosDeJuego.Historia:
@@ -433,6 +437,7 @@ namespace Prototipo_2
                             gm.ResetRoundCombat(false);
                             ResetEnemy();
                             poolObjectEnemy.Recycle();
+                            xpActual = 0;
                         }
                         break;
                     case EnumsGameManager.ModosDeJuego.Nulo:
@@ -443,6 +448,7 @@ namespace Prototipo_2
                             ResetEnemy();
                             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
                             enemyPrefab.gameObject.SetActive(false);
+                            xpActual = 0;
                         }
                         break;
                 }
