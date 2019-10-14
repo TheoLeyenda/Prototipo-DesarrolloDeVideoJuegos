@@ -34,7 +34,7 @@ namespace Prototipo_2
         private PoolObject poolObject;
         protected Player PLAYER1;
         protected Player PLAYER2;
-        private Enemy ENEMY;
+        protected Enemy ENEMY;
         protected GameManager gm;
         public DisparadorDelProyectil disparadorDelProyectil;
         private void Start()

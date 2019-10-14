@@ -13,11 +13,10 @@ namespace Prototipo_2
         public SpriteRenderer spriteRenderer;
         public Proyectil.DisparadorDelProyectil disparadorDelProyectil;
 
-        private void OnEnable()
+        private void Update()
         {
-            timeLife = auxTimeLife;
+            CheckTimeLife();
         }
-
         public void CheckTimeLife()
         {
             if (timeLife > 0)

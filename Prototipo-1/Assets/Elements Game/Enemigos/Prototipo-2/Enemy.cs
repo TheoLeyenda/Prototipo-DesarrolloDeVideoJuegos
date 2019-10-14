@@ -352,16 +352,22 @@ namespace Prototipo_2
             }
             if (enableSpecialAttack)
             {
-                delaySelectMovement = 0.1f;
-                if (!isJamping && !isDuck 
-                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar 
-                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque 
+                if (!isJamping && !isDuck
+                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar
+                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque
                     && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa)
                 {
-                    Debug.Log("ENTRE A LA LLAMADA A FUNCION");
+                    delaySelectMovement = 0.1f;
                     enableSpecialAttack = false;
                     Attack(false, true, false);
                     xpActual = 0;
+                }
+                else if (enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Balanceado)
+                {
+                    enableSpecialAttack = false;
+                    Attack(false, true, false);
+                    xpActual = 0;
+
                 }
             }
         }
