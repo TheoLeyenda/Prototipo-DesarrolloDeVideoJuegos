@@ -287,6 +287,58 @@ MonoBehaviour:
   playerSelected: 4
   playerActual: 1
   playerState: 0
+--- !u!61 &1846892655
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728670378374984231}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0032719672, y: 0.0039126724}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.051753305, y: 0.13407728}
+  m_EdgeRadius: 0
+--- !u!61 &1846892654
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728670378374984231}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0032719672, y: -0.03374301}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.0517533, y: 0.058765918}
+  m_EdgeRadius: 0
 --- !u!50 &8250150691019001530
 Rigidbody2D:
   serializedVersion: 4
@@ -745,22 +797,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7596183422208736242}
     m_Modifications:
-    - target: {fileID: 2107844360, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 858832301977876600}
-    - target: {fileID: 2107844360, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: stateCuadrilla
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2107844362, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 858832301977876600}
-    - target: {fileID: 2107844362, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: stateCuadrilla
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2688081505215426912, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_Name
@@ -877,11 +913,27 @@ PrefabInstance:
       propertyPath: stateCuadrilla
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2107844360, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 858832301977876600}
+    - target: {fileID: 2107844360, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: stateCuadrilla
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2107844363, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 858832301977876600}
     - target: {fileID: 2107844363, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: stateCuadrilla
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107844362, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 858832301977876600}
+    - target: {fileID: 2107844362, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
       propertyPath: stateCuadrilla
       value: 1
       objectReference: {fileID: 0}
@@ -944,6 +996,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+--- !u!114 &685323177385010984 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5927136447379350933, guid: b929ac675e510d440a80e8c74d8c4990,
+    type: 3}
+  m_PrefabInstance: {fileID: 6612316688244343485}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6174d52913e16f42a2a8cdfa2ba4130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &4504343636454042609 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7296128619017103692, guid: b929ac675e510d440a80e8c74d8c4990,
+    type: 3}
+  m_PrefabInstance: {fileID: 6612316688244343485}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6612316689777436085 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2107844360, guid: b929ac675e510d440a80e8c74d8c4990,
@@ -968,24 +1038,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c4ac822bd4c044096dac006b025199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &685323177385010984 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5927136447379350933, guid: b929ac675e510d440a80e8c74d8c4990,
-    type: 3}
-  m_PrefabInstance: {fileID: 6612316688244343485}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6174d52913e16f42a2a8cdfa2ba4130, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &4504343636454042609 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7296128619017103692, guid: b929ac675e510d440a80e8c74d8c4990,
-    type: 3}
-  m_PrefabInstance: {fileID: 6612316688244343485}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7596183423243976813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1268,6 +1320,16 @@ PrefabInstance:
       propertyPath: delayAttack
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 7097743373262305301, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: boxColliderParado
+      value: 
+      objectReference: {fileID: 1846892655}
+    - target: {fileID: 7097743373262305301, guid: f8c03c23c66899e4197e2fbc415ec43b,
+        type: 3}
+      propertyPath: boxColliderAgachado
+      value: 
+      objectReference: {fileID: 1846892654}
     - target: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
         type: 3}
       propertyPath: Sprites.Array.size
@@ -1490,12 +1552,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e80ed6d8b9751468846020f2df5d7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1728670378374984231 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9121592579315266122, guid: f8c03c23c66899e4197e2fbc415ec43b,
-    type: 3}
-  m_PrefabInstance: {fileID: 7596183423243976813}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8947835040248391527 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1532921639617390346, guid: f8c03c23c66899e4197e2fbc415ec43b,
@@ -1508,6 +1564,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0317e505aadc9441bcb0c6fbaf18243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1728670378374984231 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9121592579315266122, guid: f8c03c23c66899e4197e2fbc415ec43b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7596183423243976813}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7596183423743716594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1515,6 +1577,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1728670378374984233}
     m_Modifications:
+    - target: {fileID: 5142444625613618220, guid: c6d6ac12b9b9cf44092344d820274e7e,
+        type: 3}
+      propertyPath: m_Name
+      value: PoolProyectilParabola
+      objectReference: {fileID: 0}
     - target: {fileID: 5142444625613618226, guid: c6d6ac12b9b9cf44092344d820274e7e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1584,11 +1651,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.05664
-      objectReference: {fileID: 0}
-    - target: {fileID: 5142444625613618220, guid: c6d6ac12b9b9cf44092344d820274e7e,
-        type: 3}
-      propertyPath: m_Name
-      value: PoolProyectilParabola
       objectReference: {fileID: 0}
     - target: {fileID: 5142444625613618227, guid: c6d6ac12b9b9cf44092344d820274e7e,
         type: 3}
