@@ -165,7 +165,7 @@ namespace Prototipo_2
                                 break;
                             case SpriteActual.ParadoAtaque:
                                 animator.enabled = true;
-                                animator.Play("Ataque enemigo defensivo");
+                                PlayAnimation("Ataque enemigo defensivo");
                                 break;
                             case SpriteActual.MoverAdelante:
                                 animator.enabled = false;
@@ -228,15 +228,15 @@ namespace Prototipo_2
                                 break;
                             case SpriteActual.AgachadoAtaque:
                                 animator.enabled = true;
-                                animator.Play("Ataque Agachado enemigo balanceado");
+                                PlayAnimation("Ataque Agachado enemigo balanceado");
                                 break;
                             case SpriteActual.ParadoAtaque:
                                 animator.enabled = true;
-                                animator.Play("Ataque enemigo balanceado");
+                                PlayAnimation("Ataque enemigo balanceado");
                                 break;
                             case SpriteActual.SaltoAtaque:
                                 animator.enabled = true;
-                                animator.Play("Ataque Salto enemigo balanceado");
+                                PlayAnimation("Ataque Salto enemigo balanceado");
                                 break;
                         }
                         break;
@@ -273,11 +273,11 @@ namespace Prototipo_2
                                 break;
                             case SpriteActual.ParadoAtaque:
                                 animator.enabled = true;
-                                animator.Play("Ataque enemigo agresivo");
+                                PlayAnimation("Ataque enemigo agresivo");
                                 break;
                             case SpriteActual.SaltoAtaque:
                                 animator.enabled = true;
-                                animator.Play("Ataque Salto enemigo agresivo");
+                                PlayAnimation("Ataque Salto enemigo agresivo");
                                 break;
                         }
                         break;
@@ -309,6 +309,10 @@ namespace Prototipo_2
                     }
                     break;
             }
+        }
+        public void PlayAnimation(string nameAnimation)
+        {
+            animator.Play(nameAnimation);
         }
     }
 }

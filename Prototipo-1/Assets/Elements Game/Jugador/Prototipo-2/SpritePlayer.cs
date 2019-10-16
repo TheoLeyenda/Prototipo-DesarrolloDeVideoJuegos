@@ -155,17 +155,17 @@ namespace Prototipo_2 {
                 case SpriteActual.ParadoAtaque:
                     animator.enabled = true;
                     //spriteRenderer.sprite = CheckListSprite("ParadoAtaque");
-                    animator.Play("Ataque protagonista");
+                    PlayAnimation("Ataque protagonista");
                     break;
                 case SpriteActual.AgachadoAtaque:
                     animator.enabled = true;
                     //spriteRenderer.sprite = CheckListSprite("AgachadoAtaque");
-                    animator.Play("Ataque Agachado protagonista");
+                    PlayAnimation("Ataque Agachado protagonista");
                     break;
                 case SpriteActual.SaltoAtaque:
                     animator.enabled = true;
                     //spriteRenderer.sprite = CheckListSprite("SaltoAtaque");
-                    animator.Play("Ataque Salto protagonista");
+                    PlayAnimation("Ataque Salto protagonista");
                     break;
             }
         }
@@ -180,5 +180,10 @@ namespace Prototipo_2 {
             }
             return null;
         }
+        public void PlayAnimation(string nameAnimation)
+        {
+            animator.Play(nameAnimation);
+        }
     }
+    
 }
