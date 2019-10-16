@@ -314,5 +314,6 @@ namespace Prototipo_2
         {
             animator.Play(nameAnimation);
         }
+        
     }
 }

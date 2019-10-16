@@ -671,5 +671,9 @@ namespace Prototipo_2
         {
             return xpActual;
         }
+        public bool GetEnableAttack()
+        {
+            return enableAttack;
+        }
     }
 }

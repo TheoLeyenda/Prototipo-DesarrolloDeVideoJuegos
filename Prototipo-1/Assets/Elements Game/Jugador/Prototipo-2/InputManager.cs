@@ -133,17 +133,29 @@ namespace Prototipo_2 {
         public void CheckAttackButton_P1()
         {
             
-            if (InputPlayerController.AttackButton_P1())
+            if (InputPlayerController.AttackButton_P1() && player1.GetEnableAttack())
             {
                 //Debug.Log("JUGADOR 1 ATAQUE ACTIVED");
                 player1.SetControllerJoystick(true);
                 if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P1() < 0)
                 {
-                    player1.AttackDown(Proyectil.DisparadorDelProyectil.Jugador1);
+                    player1.spritePlayerActual.PlayAnimation("Ataque Abajo Salto protagonista");
+                }
+                else if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P1() >= 0)
+                {
+                    player1.spritePlayerActual.PlayAnimation("Ataque Salto protagonista");
                 }
                 else
                 {
-                    player1.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
+                    //player1.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
+                    if (!player1.GetIsDuck())
+                    {
+                        player1.spritePlayerActual.PlayAnimation("Ataque protagonista");
+                    }
+                    else if (player1.GetIsDuck())
+                    {
+                        player1.spritePlayerActual.PlayAnimation("Ataque Agachado protagonista");
+                    }
                 }
             }
         }

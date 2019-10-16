@@ -113,59 +113,50 @@ namespace Prototipo_2 {
             switch (ActualSprite)
             {
                 case SpriteActual.Parado:
-                    animator.enabled = false;
+                    //animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("Parado");
                     break;
                 case SpriteActual.ParadoDefensa:
-                    animator.enabled = false;
+                    //animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("ParadoDefensa");
                     break;
                 case SpriteActual.Salto:
-                    animator.enabled = false;
+                    //animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("Salto");
                     break;
                 case SpriteActual.SaltoDefensa:
-                    animator.enabled = false;
+                    //animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("SaltoDefensa");
                     break;
                 case SpriteActual.MoverAdelante:
-                    animator.enabled = false;
+                    //animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("MoverAdelante");
                     break;
                 case SpriteActual.MoverAtras:
-                    animator.enabled = false;
+                    //animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("MoverAtras");
                     break;
                 case SpriteActual.RecibirDanio:
-                    animator.enabled = false;
+                    //animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("RecibirDanio");
                     break;
                 case SpriteActual.Agachado:
-                    animator.enabled = false;
+                    //animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("Agachado");
                     break;
                 case SpriteActual.AgachadoDefensa:
-                    animator.enabled = false;
+                    //animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("AgachadoDefensa");
                     break;
                 case SpriteActual.ContraAtaque:
-                    animator.enabled = false;
+                    //animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("ContraAtaque");
                     break;
                 case SpriteActual.ParadoAtaque:
-                    animator.enabled = true;
-                    //spriteRenderer.sprite = CheckListSprite("ParadoAtaque");
-                    PlayAnimation("Ataque protagonista");
                     break;
                 case SpriteActual.AgachadoAtaque:
-                    animator.enabled = true;
-                    //spriteRenderer.sprite = CheckListSprite("AgachadoAtaque");
-                    PlayAnimation("Ataque Agachado protagonista");
                     break;
                 case SpriteActual.SaltoAtaque:
-                    animator.enabled = true;
-                    //spriteRenderer.sprite = CheckListSprite("SaltoAtaque");
-                    PlayAnimation("Ataque Salto protagonista");
                     break;
             }
         }
@@ -183,6 +174,28 @@ namespace Prototipo_2 {
         public void PlayAnimation(string nameAnimation)
         {
             animator.Play(nameAnimation);
+        }
+        public void PlayerAttack()
+        {
+            if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+            {
+                player.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
+            }
+            else if(player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+            {
+                player.Attack(Proyectil.DisparadorDelProyectil.Jugador2);
+            }
+        }
+        public void PlayerAttackDown()
+        {
+            if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+            {
+                player.AttackDown(Proyectil.DisparadorDelProyectil.Jugador1);
+            }
+            else if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+            {
+                player.AttackDown(Proyectil.DisparadorDelProyectil.Jugador2);
+            }
         }
     }
     
