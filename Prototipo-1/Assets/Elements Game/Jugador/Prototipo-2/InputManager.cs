@@ -147,7 +147,6 @@ namespace Prototipo_2 {
                 }
                 else
                 {
-                    //player1.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
                     if (!player1.GetIsDuck())
                     {
                         player1.spritePlayerActual.PlayAnimation("Ataque protagonista");
