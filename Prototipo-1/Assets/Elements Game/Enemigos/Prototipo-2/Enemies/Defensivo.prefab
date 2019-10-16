@@ -571,7 +571,7 @@ Transform:
   - {fileID: 136215861}
   - {fileID: 1398169882}
   m_Father: {fileID: 4688177777539405392}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1936033510
 SpriteRenderer:
@@ -912,7 +912,7 @@ MonoBehaviour:
   maxLife: 500
   ImageHP: {fileID: 5416802337210650793}
   ImageCarga: {fileID: 1339264789}
-  xpNededSpecialAttack: 20
+  xpNededSpecialAttack: 30
   xpForHit: 10
   poolObjectAttack: {fileID: 455535354953003369}
   generadoresProyectiles: {fileID: 578682440}
@@ -922,7 +922,7 @@ MonoBehaviour:
   maxRandomDelayMovement: 1.5
   minRandomDelayMovement: 1
   delayAttack: 1.3
-  pointsDeffence: 20
+  pointsDeffence: 12.5
   anguloAtaqueSalto: 180
   Speed: 20
   SpeedJump: 12
@@ -954,9 +954,9 @@ MonoBehaviour:
   CantCasillasOcupadas_Y: 2
   ColumnaActual: 1
   Disparo: {fileID: 2581388744953208281}
-  delayStateCounterAttackDeffense: 2
-  delayStateDeffense: 1
-  delayVulnerable: 0.5
+  delayStateCounterAttackDeffense: 1
+  delayStateDeffense: 0.5
+  delayVulnerable: 1
 --- !u!114 &2510886538865436556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -983,7 +983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67da4d649f6349349a55bdb2e776b3ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolObjectSpecialAttack: {fileID: 5116746741038522929}
+  poolObjectSpecialAttack: {fileID: 0}
 --- !u!114 &4273028219833214137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1055,7 +1055,7 @@ PrefabInstance:
     - target: {fileID: 8681366365358168941, guid: 0e2355465cbe2ed43b96dd07a976a4fe,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8681366365358168941, guid: 0e2355465cbe2ed43b96dd07a976a4fe,
         type: 3}
@@ -1345,6 +1345,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2510886537487143251}
     m_Modifications:
+    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: Ball
+      value: 
+      objectReference: {fileID: 2914594783176540619, guid: 0534ba56a355eb048a94948753d4bbdd,
+        type: 3}
+    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: parentName
+      value: ProyectilesEnemigo
+      objectReference: {fileID: 0}
     - target: {fileID: 7194419974994112979, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
       propertyPath: m_Name
@@ -1425,27 +1436,6 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: Ball
-      value: 
-      objectReference: {fileID: 2914594783176540619, guid: 0534ba56a355eb048a94948753d4bbdd,
-        type: 3}
-    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: parentName
-      value: ProyectilesEnemigo
-      objectReference: {fileID: 0}
-    - target: {fileID: 7339213786674316720, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: parentName
-      value: ProyectilesEnemigo
-      objectReference: {fileID: 0}
-    - target: {fileID: 7339213786674316720, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: count
-      value: 100
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 61245c1a77e7ad847b3751885e027da7, type: 3}
@@ -1485,18 +1475,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2510886538865436545}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5116746741038522929 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7339213786674316720, guid: 61245c1a77e7ad847b3751885e027da7,
-    type: 3}
-  m_PrefabInstance: {fileID: 2510886538865436545}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75438edaff39ea94592a8d0f5a22a436, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &455535354953003369 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
