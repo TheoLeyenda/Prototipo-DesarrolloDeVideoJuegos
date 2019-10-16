@@ -165,6 +165,7 @@ namespace Prototipo_2
                                 break;
                             case SpriteActual.ParadoAtaque:
                                 animator.enabled = true;
+                                animator.Play("Ataque enemigo defensivo");
                                 break;
                             case SpriteActual.MoverAdelante:
                                 animator.enabled = false;
@@ -227,12 +228,15 @@ namespace Prototipo_2
                                 break;
                             case SpriteActual.AgachadoAtaque:
                                 animator.enabled = true;
+                                animator.Play("Ataque Agachado enemigo balanceado");
                                 break;
                             case SpriteActual.ParadoAtaque:
                                 animator.enabled = true;
+                                animator.Play("Ataque enemigo balanceado");
                                 break;
                             case SpriteActual.SaltoAtaque:
                                 animator.enabled = true;
+                                animator.Play("Ataque Salto enemigo balanceado");
                                 break;
                         }
                         break;
@@ -269,9 +273,11 @@ namespace Prototipo_2
                                 break;
                             case SpriteActual.ParadoAtaque:
                                 animator.enabled = true;
+                                animator.Play("Ataque enemigo agresivo");
                                 break;
                             case SpriteActual.SaltoAtaque:
                                 animator.enabled = true;
+                                animator.Play("Ataque Salto enemigo agresivo");
                                 break;
                         }
                         break;
