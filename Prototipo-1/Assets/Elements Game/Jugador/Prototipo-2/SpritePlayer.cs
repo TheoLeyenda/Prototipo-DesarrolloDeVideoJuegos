@@ -7,7 +7,7 @@ namespace Prototipo_2 {
     {
         public Player player;
         public SpriteRenderer spriteRenderer;
-
+        private Animator animator;
         [System.Serializable]
         public class ElementsSprites
         {
@@ -30,6 +30,7 @@ namespace Prototipo_2 {
             AgachadoDefensa,
             Agachado,
             AnimacionAtaque,
+            AtaqueEspecial,
             ContraAtaque,
             Count,
         }
@@ -41,6 +42,7 @@ namespace Prototipo_2 {
         private float auxDelaySpriteContraAtaque;
         private void Start()
         {
+            animator = GetComponent<Animator>();
             ActualSprite = SpriteActual.Parado;
             auxDelaySpriteRecibirDanio = delaySpriteRecibirDanio;
             auxDelaySpriteContraAtaque = delaySpriteContraAtaque;
@@ -111,43 +113,59 @@ namespace Prototipo_2 {
             switch (ActualSprite)
             {
                 case SpriteActual.Parado:
+                    animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("Parado");
                     break;
                 case SpriteActual.ParadoDefensa:
+                    animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("ParadoDefensa");
                     break;
-                case SpriteActual.ParadoAtaque:
-                    spriteRenderer.sprite = CheckListSprite("ParadoAtaque");
-                    break;
                 case SpriteActual.Salto:
+                    animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("Salto");
                     break;
-                case SpriteActual.SaltoAtaque:
-                    spriteRenderer.sprite = CheckListSprite("SaltoAtaque");
-                    break;
                 case SpriteActual.SaltoDefensa:
+                    animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("SaltoDefensa");
                     break;
                 case SpriteActual.MoverAdelante:
+                    animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("MoverAdelante");
                     break;
                 case SpriteActual.MoverAtras:
+                    animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("MoverAtras");
                     break;
                 case SpriteActual.RecibirDanio:
+                    animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("RecibirDanio");
                     break;
                 case SpriteActual.Agachado:
+                    animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("Agachado");
                     break;
-                case SpriteActual.AgachadoAtaque:
-                    spriteRenderer.sprite = CheckListSprite("AgachadoAtaque");
-                    break;
                 case SpriteActual.AgachadoDefensa:
+                    animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("AgachadoDefensa");
                     break;
                 case SpriteActual.ContraAtaque:
+                    animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("ContraAtaque");
+                    break;
+                case SpriteActual.ParadoAtaque:
+                    animator.enabled = true;
+                    //spriteRenderer.sprite = CheckListSprite("ParadoAtaque");
+                    animator.Play("Ataque protagonista");
+                    break;
+                case SpriteActual.AgachadoAtaque:
+                    animator.enabled = true;
+                    //spriteRenderer.sprite = CheckListSprite("AgachadoAtaque");
+                    animator.Play("Ataque Agachado protagonista");
+                    break;
+                case SpriteActual.SaltoAtaque:
+                    animator.enabled = true;
+                    //spriteRenderer.sprite = CheckListSprite("SaltoAtaque");
+                    animator.Play("Ataque Salto protagonista");
                     break;
             }
         }
