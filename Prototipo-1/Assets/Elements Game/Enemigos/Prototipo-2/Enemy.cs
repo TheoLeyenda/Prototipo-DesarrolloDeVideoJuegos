@@ -549,7 +549,7 @@ namespace Prototipo_2
                 }
             }
         }
-        public void CheckDelayAttack(bool specialAttack)
+        public virtual void CheckDelayAttack(bool specialAttack)
         {
             if (delayAttack > 0)
             {

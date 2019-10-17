@@ -17,21 +17,22 @@ namespace Prototipo_2
         {
             base.Update();
         }
+        public override void CheckDelayAttack(bool specialAttack)
+        {
+            
+        }
         public override void AnimationAttack(Proyectil proyectil)
         {
             if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
             {
-                proyectil.On();
                 spriteEnemy.animator.Play("Ataque enemigo balanceado");
             }
             else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
             {
-                proyectil.On();
                 spriteEnemy.animator.Play("Ataque enemigo balanceado");
             }
             else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
             {
-                proyectil.On();
                 spriteEnemy.animator.Play("Ataque enemigo balanceado");
             }
         }

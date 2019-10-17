@@ -1,0 +1,39 @@
+Theo:
+FUNDAMENTAL Orden hierarchy
+Borrar scripts al pedo del proto1
+
+Codigo:
+Remover las grillas que no suman. :(
+Sprite Enemy y Player son lo mismo. Unirlos
+		[System.Serializable]
+		public class SpriteAnimName
+		{
+			public SpriteActual sprite;
+			public string AnimName;
+
+		}
+
+		public List<SpriteAnimName> animNames;
+		
+public void SpecialAttack(bool doubleDamage, bool isDuck, GameObject generadorProyectilesParabola, GameObject generadorProyectilesParabolaAgachado, EnumsEnemy enumsEnemy, StructsEnemys structsEnemys, int randomMax, int randomMin)
+NO, lineas infinitas no.
+
+TODO LO QUE ESTE SEPARADO EN ENEMY Y PLAYER, UNIRLO.
+Pasar seleccion de personajes y niveles a UI basica.
+
+Ivan:
+FUNDAMENTAL Orden hierarchy, parents
+Darle forma de juego.
+State machine para el player.
+Poner bien los nombres de las cosas.
+
+Franco:
+https://www.youtube.com/watch?v=uK4oQoCmovU
+Generalizar un poco la UI
+Medularizar un poco mas las cosas.
+Gancho para seguir jugando.
+
+Pato:
+caos en el editor.
+Orden hierarchy, parents
+Hacer TODO lo del trello
