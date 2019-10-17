@@ -294,7 +294,7 @@ namespace Prototipo_2
                                     switch (player1_PvP.playerState)
                                     {
                                         case Player_PvP.State.Defendido:
-                                            cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaque;
+                                            cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaqueParado;
                                             if (player1_PvP.playerActual == Player_PvP.Player.player1)
                                             {
                                                 cuadrilla.player.Attack(DisparadorDelProyectil.Jugador1);

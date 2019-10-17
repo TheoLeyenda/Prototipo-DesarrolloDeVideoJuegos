@@ -31,7 +31,9 @@ namespace Prototipo_2 {
             Agachado,
             AnimacionAtaque,
             AtaqueEspecial,
-            ContraAtaque,
+            ContraAtaqueParado,
+            ContraAtaqueSalto,
+            ContraAtaqueAgachado,
             Count,
         }
         public List<ElementsSprites> Sprites;
@@ -99,13 +101,13 @@ namespace Prototipo_2 {
         }
         public void CheckActualSprite()
         {
-            if (ActualSprite == SpriteActual.RecibirDanio || ActualSprite == SpriteActual.ContraAtaque)
+            if (ActualSprite == SpriteActual.RecibirDanio || ActualSprite == SpriteActual.ContraAtaqueParado)
             {
                 if (ActualSprite == SpriteActual.RecibirDanio)
                 {
                     CheckDeleyRecibirDanio();
                 }
-                if (ActualSprite == SpriteActual.ContraAtaque)
+                if (ActualSprite == SpriteActual.ContraAtaqueParado)
                 {
                     CheckDeleyContraAtaque();
                 }
@@ -148,7 +150,7 @@ namespace Prototipo_2 {
                     //animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("AgachadoDefensa");
                     break;
-                case SpriteActual.ContraAtaque:
+                case SpriteActual.ContraAtaqueParado:
                     //animator.enabled = false;
                     spriteRenderer.sprite = CheckListSprite("ContraAtaque");
                     break;

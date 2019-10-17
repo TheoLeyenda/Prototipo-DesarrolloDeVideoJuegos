@@ -132,7 +132,6 @@ namespace Prototipo_2 {
         }
         public void CheckAttackButton_P1()
         {
-            
             if (InputPlayerController.AttackButton_P1() && player1.GetEnableAttack())
             {
                 //Debug.Log("JUGADOR 1 ATAQUE ACTIVED");
@@ -351,7 +350,7 @@ namespace Prototipo_2 {
         }
         public void CheckSpritePlayer1()
         {
-            if (player1.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio || player1.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ContraAtaque)
+            if (player1.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio || player1.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ContraAtaqueParado)
             {
                 if (player1.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio)
                 {
@@ -730,7 +729,7 @@ namespace Prototipo_2 {
         }
         public void CheckSpritePlayer2()
         {
-            if (player2.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio || player2.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ContraAtaque)
+            if (player2.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio || player2.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ContraAtaqueParado)
             {
                 if (player2.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio)
                 {
