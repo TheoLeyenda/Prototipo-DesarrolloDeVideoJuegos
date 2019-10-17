@@ -112,54 +112,95 @@ namespace Prototipo_2 {
                     CheckDeleyContraAtaque();
                 }
             }
-            switch (ActualSprite)
+            if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
             {
-                case SpriteActual.Parado:
-                    //animator.enabled = false;
-                    spriteRenderer.sprite = CheckListSprite("Parado");
-                    break;
-                case SpriteActual.ParadoDefensa:
-                    //animator.enabled = false;
-                    spriteRenderer.sprite = CheckListSprite("ParadoDefensa");
-                    break;
-                case SpriteActual.Salto:
-                    //animator.enabled = false;
-                    spriteRenderer.sprite = CheckListSprite("Salto");
-                    break;
-                case SpriteActual.SaltoDefensa:
-                    //animator.enabled = false;
-                    spriteRenderer.sprite = CheckListSprite("SaltoDefensa");
-                    break;
-                case SpriteActual.MoverAdelante:
-                    //animator.enabled = false;
-                    spriteRenderer.sprite = CheckListSprite("MoverAdelante");
-                    break;
-                case SpriteActual.MoverAtras:
-                    //animator.enabled = false;
-                    spriteRenderer.sprite = CheckListSprite("MoverAtras");
-                    break;
-                case SpriteActual.RecibirDanio:
-                    //animator.enabled = false;
-                    spriteRenderer.sprite = CheckListSprite("RecibirDanio");
-                    break;
-                case SpriteActual.Agachado:
-                    //animator.enabled = false;
-                    spriteRenderer.sprite = CheckListSprite("Agachado");
-                    break;
-                case SpriteActual.AgachadoDefensa:
-                    //animator.enabled = false;
-                    spriteRenderer.sprite = CheckListSprite("AgachadoDefensa");
-                    break;
-                case SpriteActual.ContraAtaqueParado:
-                    //animator.enabled = false;
-                    spriteRenderer.sprite = CheckListSprite("ContraAtaque");
-                    break;
-                case SpriteActual.ParadoAtaque:
-                    break;
-                case SpriteActual.AgachadoAtaque:
-                    break;
-                case SpriteActual.SaltoAtaque:
-                    break;
+                if (player.GetInputManager().GetEnableMovementPlayer1())
+                {
+                    switch (ActualSprite)
+                    {
+                        case SpriteActual.Parado:
+                            PlayAnimation("Parado protagonista");
+                            break;
+                        case SpriteActual.ParadoDefensa:
+                            PlayAnimation("Parado Defensa protagonista");
+                            break;
+                        case SpriteActual.Salto:
+                            PlayAnimation("Salto protagonista");
+                            break;
+                        case SpriteActual.SaltoDefensa:
+                            PlayAnimation("Salto Defensa protagonista");
+                            break;
+                        case SpriteActual.MoverAdelante:
+                            PlayAnimation("Mover Adelante protagonista");
+                            break;
+                        case SpriteActual.MoverAtras:
+                            PlayAnimation("Mover Atras protagonista");
+                            break;
+                        case SpriteActual.RecibirDanio:
+                            PlayAnimation("Recibir Danio protagonista");
+                            break;
+                        case SpriteActual.Agachado:
+                            PlayAnimation("Agachado protagonista");
+                            break;
+                        case SpriteActual.AgachadoDefensa:
+                            PlayAnimation("Agachado Defensa protagonista");
+                            break;
+                        case SpriteActual.ContraAtaqueParado:
+                            PlayAnimation("Contra Ataque Parado protagonista");
+                            break;
+                        case SpriteActual.ParadoAtaque:
+                            break;
+                        case SpriteActual.AgachadoAtaque:
+                            break;
+                        case SpriteActual.SaltoAtaque:
+                            break;
+                    }
+                }
+            }
+            else if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+            {
+                if (player.GetInputManager().GetEnableMovementPlayer2())
+                {
+                    switch (ActualSprite)
+                    {
+                        case SpriteActual.Parado:
+                            PlayAnimation("Parado protagonista");
+                            break;
+                        case SpriteActual.ParadoDefensa:
+                            PlayAnimation("Parado Defensa protagonista");
+                            break;
+                        case SpriteActual.Salto:
+                            PlayAnimation("Salto protagonista");
+                            break;
+                        case SpriteActual.SaltoDefensa:
+                            PlayAnimation("Salto Defensa protagonista");
+                            break;
+                        case SpriteActual.MoverAdelante:
+                            PlayAnimation("Mover Adelante protagonista");
+                            break;
+                        case SpriteActual.MoverAtras:
+                            PlayAnimation("Mover Atras protagonista");
+                            break;
+                        case SpriteActual.RecibirDanio:
+                            PlayAnimation("Recibir Danio protagonista");
+                            break;
+                        case SpriteActual.Agachado:
+                            PlayAnimation("Agachado protagonista");
+                            break;
+                        case SpriteActual.AgachadoDefensa:
+                            PlayAnimation("Agachado Defensa protagonista");
+                            break;
+                        case SpriteActual.ContraAtaqueParado:
+                            PlayAnimation("Contra Ataque Parado protagonista");
+                            break;
+                        case SpriteActual.ParadoAtaque:
+                            break;
+                        case SpriteActual.AgachadoAtaque:
+                            break;
+                        case SpriteActual.SaltoAtaque:
+                            break;
+                    }
+                }
             }
         }
         public Sprite CheckListSprite(string nameSprite)
@@ -198,6 +239,21 @@ namespace Prototipo_2 {
             {
                 player.AttackDown(Proyectil.DisparadorDelProyectil.Jugador2);
             }
+        }
+        public void EnableMovementPlayer()
+        {
+            if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+            {
+                player.GetInputManager().SetEnableMovementPlayer1(true);
+            }
+            else if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+            {
+                player.GetInputManager().SetEnableMovementPlayer2(true);
+            }
+        }
+        public void SetActualSprite(SpriteActual spriteActual)
+        {
+            ActualSprite = spriteActual;
         }
     }
     

@@ -675,5 +675,9 @@ namespace Prototipo_2
         {
             return enableAttack;
         }
+        public InputManager GetInputManager()
+        {
+            return inputManager;
+        }
     }
 }

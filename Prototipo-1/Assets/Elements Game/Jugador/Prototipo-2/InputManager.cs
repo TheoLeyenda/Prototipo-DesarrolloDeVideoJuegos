@@ -40,15 +40,32 @@ namespace Prototipo_2 {
         void Update()
         {
             //Debug.Log(player1.enumsPlayers.movimiento);
-            if (player1 != null && player1.gameObject.activeSelf && enableMovementPlayer1)
+            if (player1 != null && player1.gameObject.activeSelf)
             {
-                CheckInputPlayer1();
-                CheckSpritePlayer1();
+                if (enableMovementPlayer1)
+                {
+                    CheckInputPlayer1();
+                    CheckSpritePlayer1();//puta madre
+                }
+                else
+                {
+                    if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
+                    {
+                        player1.SetControllerJoystick(true);
+                        player1.MovementJump();
+                        moveVerticalPlayer1 = false;
+                        player1.SetIsDuck(false);
+                    }
+                }
+
             }
-            if (player2 != null && player2.gameObject.activeSelf && enableMovementPlayer2)
+            if (player2 != null && player2.gameObject.activeSelf)
             {
-                CheckInputPlayer2();
-                CheckSpritePlayer2();
+                if (enableMovementPlayer2)
+                {
+                    CheckInputPlayer2();
+                    CheckSpritePlayer2();
+                }
             }
         }
 
@@ -72,6 +89,7 @@ namespace Prototipo_2 {
                 player1.SetControllerJoystick(true);
                 player1.MovementDuck();
                 player1.enumsPlayers.movimiento = EnumsPlayers.Movimiento.Agacharse;
+                player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Agachado;
                 player1.SetIsDuck(true);
             }
             if (player1.GetIsDuck())
@@ -132,27 +150,33 @@ namespace Prototipo_2 {
         }
         public void CheckAttackButton_P1()
         {
-            if (InputPlayerController.AttackButton_P1() && player1.GetEnableAttack())
+            if (InputPlayerController.AttackButton_P1() && player1.GetEnableAttack() 
+                && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante 
+                && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras)
             {
                 //Debug.Log("JUGADOR 1 ATAQUE ACTIVED");
                 player1.SetControllerJoystick(true);
                 if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P1() < 0)
                 {
                     player1.spritePlayerActual.PlayAnimation("Ataque Abajo Salto protagonista");
+                    enableMovementPlayer1 = false;
                 }
                 else if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P1() >= 0)
                 {
                     player1.spritePlayerActual.PlayAnimation("Ataque Salto protagonista");
+                    enableMovementPlayer1 = false;
                 }
                 else
                 {
                     if (!player1.GetIsDuck())
                     {
                         player1.spritePlayerActual.PlayAnimation("Ataque protagonista");
+                        enableMovementPlayer1 = false;
                     }
                     else if (player1.GetIsDuck())
                     {
                         player1.spritePlayerActual.PlayAnimation("Ataque Agachado protagonista");
+                        enableMovementPlayer1 = false;
                     }
                 }
             }
@@ -433,6 +457,7 @@ namespace Prototipo_2 {
                 player2.SetControllerJoystick(true);
                 player2.MovementDuck();
                 player2.enumsPlayers.movimiento = EnumsPlayers.Movimiento.Agacharse;
+                player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Agachado;
                 player2.SetIsDuck(true);
             }
             if (player2.GetIsDuck())
@@ -522,7 +547,9 @@ namespace Prototipo_2 {
         }
         public void CheckAttackButton_P2()
         {
-            if (InputPlayerController.AttackButton_P2())
+            if (InputPlayerController.AttackButton_P2() && player2.GetEnableAttack()
+                && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante
+                && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras)
             {
                 //Debug.Log("JUGADOR 2 ATAQUE ACTIVED");
                 player2.SetControllerJoystick(true);
