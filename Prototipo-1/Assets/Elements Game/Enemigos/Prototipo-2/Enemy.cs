@@ -715,5 +715,9 @@ namespace Prototipo_2
         {
             return xpActual;
         }
+        public float GetAuxDelayAttack()
+        {
+            return auxDelayAttack;
+        }
     }
 }

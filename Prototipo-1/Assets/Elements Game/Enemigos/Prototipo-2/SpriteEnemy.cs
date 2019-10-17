@@ -299,6 +299,16 @@ namespace Prototipo_2
         {
             animator.Play(nameAnimation);
         }
-        
+        public void AttackJampEnemy()
+        {
+            enemy.delayAttack = enemy.delayAttackJumping;
+            enemy.Attack(true, false, false);
+        }
+        public void AttackEnemy()
+        {
+            enemy.delayAttack = enemy.GetAuxDelayAttack();
+            enemy.Attack(false, false, false);
+        }
+
     }
 }
