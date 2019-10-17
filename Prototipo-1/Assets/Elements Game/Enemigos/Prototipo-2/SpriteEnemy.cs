@@ -191,31 +191,31 @@ namespace Prototipo_2
                         switch (ActualSprite)
                         {
                             case SpriteActual.Agachado:
-                                spriteRenderer.sprite = CheckListSprite("Agachado-Balanceado");
+                                PlayAnimation("Agachado balanceado");
                                 break;
                             case SpriteActual.AgachadoDefensa:
-                                spriteRenderer.sprite = CheckListSprite("AgachadoDefensa-Balanceado");
+                                PlayAnimation("Agachado Defensa balanceado");
                                 break;
                             case SpriteActual.MoverAdelante:
-                                spriteRenderer.sprite = CheckListSprite("MoverseAdelante-Balanceado");
+                                PlayAnimation("Moverse Adelante balanceado");
                                 break;
                             case SpriteActual.MoverAtras:
-                                spriteRenderer.sprite = CheckListSprite("MoverseAtras-Balanceado");
+                                PlayAnimation("Moverse Atras balanceado");
                                 break;
                             case SpriteActual.RecibirDanio:
-                                spriteRenderer.sprite = CheckListSprite("RecibirDanio-Balanceado");
+                                PlayAnimation("Recibir Danio balanceado");
                                 break;
                             case SpriteActual.Parado:
-                                spriteRenderer.sprite = CheckListSprite("Parado-Balanceado");
+                                PlayAnimation("Parado balanceado");
                                 break;
                             case SpriteActual.ParadoDefensa:
-                                spriteRenderer.sprite = CheckListSprite("ParadoDefensa-Balanceado");
+                                PlayAnimation("Parado Defensa balanceado");
                                 break;
                             case SpriteActual.Salto:
-                                spriteRenderer.sprite = CheckListSprite("Salto-Balanceado");
+                                PlayAnimation("Salto balanceado");
                                 break;
                             case SpriteActual.SaltoDefensa:
-                                spriteRenderer.sprite = CheckListSprite("SaltoDefensa-Balanceado");
+                                PlayAnimation("Salto Defensa balanceado");
                                 break;
                             case SpriteActual.AgachadoAtaque:
                                 break;
