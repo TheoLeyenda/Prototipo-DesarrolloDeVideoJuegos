@@ -43,21 +43,18 @@ namespace Prototipo_2
                 delaySelectMovement = 0.1f;
             }
         }
-        public override void AnimationAttack(Proyectil proyectil)
+        public override void AnimationAttack()
         {
             if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
             {
-                proyectil.On();
                 spriteEnemy.animator.Play("Ataque enemigo defensivo");
             }
             else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
             {
-                proyectil.On();
                 spriteEnemy.animator.Play("Ataque enemigo defensivo");
             }
             else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
             {
-                proyectil.On();
                 spriteEnemy.animator.Play("Ataque enemigo defensivo");
             }
         }
@@ -171,7 +168,7 @@ namespace Prototipo_2
             
             if (!specialAttack)
             {
-                AnimationAttack(proyectil);
+                proyectil.On();
 
                 if (!shootDown)
                 {
@@ -223,7 +220,7 @@ namespace Prototipo_2
                 }
                 if (!specialAttack)
                 {
-                    AnimationAttack(proyectil);
+                    proyectil.On();
 
                     if (!shootDown)
                     {

@@ -17,7 +17,7 @@ namespace Prototipo_2
         {
             base.Update();
         }
-        public override void AnimationAttack(Proyectil proyectil)
+        public override void AnimationAttack()
         {
 
         }
@@ -68,7 +68,7 @@ namespace Prototipo_2
             }
             if (!specialAttack)
             {
-                AnimationAttack(proyectil);
+                proyectil.On();
 
                 if (!shootDown)
                 {

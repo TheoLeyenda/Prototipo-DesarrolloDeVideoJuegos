@@ -19,21 +19,37 @@ namespace Prototipo_2
         }
         public override void CheckDelayAttack(bool specialAttack)
         {
-            
+            if (delayAttack > 0)
+            {
+                delayAttack = delayAttack - Time.deltaTime;
+            }
+            else if (delayAttack <= 0)
+            {
+                Debug.Log("disparo :D");
+                AnimationAttack();
+            }
         }
-        public override void AnimationAttack(Proyectil proyectil)
+        public override void AnimationAttack()
         {
             if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
             {
                 spriteEnemy.animator.Play("Ataque enemigo balanceado");
+                delayAttack = auxDelayAttack;
             }
-            else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
+            else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
             {
-                spriteEnemy.animator.Play("Ataque enemigo balanceado");
+                spriteEnemy.animator.Play("Ataque Salto enemigo balanceado");
+                delayAttack = delayAttackJumping;
             }
             else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
             {
-                spriteEnemy.animator.Play("Ataque enemigo balanceado");
+                spriteEnemy.animator.Play("Ataque Agachado enemigo balanceado");
+                delayAttack = auxDelayAttack;
+            }
+            else if(enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+            {
+                spriteEnemy.animator.Play("Ataque Especial enemigo balanceado");
+                SetXpActual(0);
             }
         }
         public override void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage)
@@ -81,8 +97,7 @@ namespace Prototipo_2
             }
             if (!specialAttack)
             {
-                AnimationAttack(proyectil);
-
+                proyectil.On();
                 if (!shootDown)
                 {
                     proyectil.ShootForward();

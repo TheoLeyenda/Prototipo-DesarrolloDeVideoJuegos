@@ -20,21 +20,18 @@ namespace Prototipo_2
         {
             base.Update();
         }
-        public override void AnimationAttack(Proyectil proyectil)
+        public override void AnimationAttack()
         {
             if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
             {
-                proyectil.On();
                 spriteEnemy.animator.Play("Ataque enemigo agresivo");
             }
             else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
             {
-                proyectil.On();
                 spriteEnemy.animator.Play("Ataque enemigo agresivo");
             }
             else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
             {
-                proyectil.On();
                 spriteEnemy.animator.Play("Ataque enemigo agresivo");
             }
         }
@@ -89,7 +86,7 @@ namespace Prototipo_2
             }
             if (!specialAttack)
             {
-                AnimationAttack(proyectil);
+                proyectil.On();
 
                 if (!shootDown)
                 {

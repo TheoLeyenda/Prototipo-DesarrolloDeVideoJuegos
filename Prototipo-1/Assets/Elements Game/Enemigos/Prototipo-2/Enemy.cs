@@ -42,7 +42,7 @@ namespace Prototipo_2
         public float minRandomDelayMovement;
         public float delayAttack;
         public float pointsDeffence;
-        private float auxDelayAttack;
+        protected float auxDelayAttack;
         private bool doubleDamage;
         private bool isDuck;
         private bool isDeffended;
@@ -605,7 +605,7 @@ namespace Prototipo_2
                 delaySelectMovement = 0;
             }
         }
-        public virtual void AnimationAttack(Proyectil proyectil){ }
+        public virtual void AnimationAttack(){ }
         public virtual void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage){ }
         public virtual void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage, Cuadrilla cuadrilla) { }
         public void CheckSpecialAttackEnemyController(int minRandomRootShoot, int maxRandomRootShoot, GameObject generador)

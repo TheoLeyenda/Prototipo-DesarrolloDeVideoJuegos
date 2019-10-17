@@ -17,7 +17,7 @@ namespace Prototipo_2
         {
             base.Update();
         }
-        public override void AnimationAttack(Proyectil proyectil){ }
+        public override void AnimationAttack(){ }
         public override void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage)
         {
             bool shootDown = false;
@@ -65,7 +65,7 @@ namespace Prototipo_2
             }
             if (!specialAttack)
             {
-                AnimationAttack(proyectil);
+                proyectil.On();
 
                 if (!shootDown)
                 {
