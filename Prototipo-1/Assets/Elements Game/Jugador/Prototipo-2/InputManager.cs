@@ -179,7 +179,9 @@ namespace Prototipo_2 {
                         enableMovementPlayer1 = false;
                     }
                 }
+                Debug.Log("ENTRE");
             }
+           
         }
         public void CheckDeffenceButton_P1()
         {

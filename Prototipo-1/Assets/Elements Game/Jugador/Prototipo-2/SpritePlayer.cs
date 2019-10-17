@@ -216,7 +216,10 @@ namespace Prototipo_2 {
         }
         public void PlayAnimation(string nameAnimation)
         {
-            animator.Play(nameAnimation);
+            if (animator != null)
+            {
+                animator.Play(nameAnimation);
+            }
         }
         public void PlayerAttack()
         {
