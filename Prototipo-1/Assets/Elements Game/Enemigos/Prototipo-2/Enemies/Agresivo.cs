@@ -20,19 +20,38 @@ namespace Prototipo_2
         {
             base.Update();
         }
+        public override void CheckDelayAttack(bool specialAttack)
+        {
+            if (delayAttack > 0)
+            {
+                delayAttack = delayAttack - Time.deltaTime;
+            }
+            else if (delayAttack <= 0)
+            {
+                AnimationAttack();
+            }
+        }
         public override void AnimationAttack()
         {
             if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
             {
                 spriteEnemy.animator.Play("Ataque enemigo agresivo");
+                delayAttack = auxDelayAttack;
             }
-            else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
+            else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
             {
                 spriteEnemy.animator.Play("Ataque enemigo agresivo");
+                delayAttack = delayAttackJumping;
             }
             else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
             {
                 spriteEnemy.animator.Play("Ataque enemigo agresivo");
+                delayAttack = auxDelayAttack;
+            }
+            else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+            {
+                spriteEnemy.animator.Play("Ataque Especial enemigo agresivo");
+                SetXpActual(0);
             }
         }
         public override void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage)

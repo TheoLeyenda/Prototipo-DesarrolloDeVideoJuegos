@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ataque enemigo agresivo
+  m_Name: Moverse Adelante enemigo agresivo
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,22 +20,12 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: de5609d1a85f6f049b14671374230e41, type: 3}
-    - time: 0.1
-      value: {fileID: 21300000, guid: a9246c30a73aef5479b14ee856970073, type: 3}
-    - time: 0.16666667
-      value: {fileID: 21300000, guid: 1aa9270fd16b0a3448e4d86aa97022ee, type: 3}
-    - time: 0.23333333
-      value: {fileID: 21300000, guid: 195754611d9da7d4eac222c055b9b659, type: 3}
-    - time: 0.4
-      value: {fileID: 21300000, guid: e74e0d16d6a70f0459dd3d940dbc4c8d, type: 3}
-    - time: 0.56666666
-      value: {fileID: 21300000, guid: 4d19eb2531df7b6458f856da0e707a2c, type: 3}
+      value: {fileID: 21300000, guid: cd2b25e852a979c40ab465b636ca8948, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 30
+  m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -50,18 +40,13 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: de5609d1a85f6f049b14671374230e41, type: 3}
-    - {fileID: 21300000, guid: a9246c30a73aef5479b14ee856970073, type: 3}
-    - {fileID: 21300000, guid: 1aa9270fd16b0a3448e4d86aa97022ee, type: 3}
-    - {fileID: 21300000, guid: 195754611d9da7d4eac222c055b9b659, type: 3}
-    - {fileID: 21300000, guid: e74e0d16d6a70f0459dd3d940dbc4c8d, type: 3}
-    - {fileID: 21300000, guid: 4d19eb2531df7b6458f856da0e707a2c, type: 3}
+    - {fileID: 21300000, guid: cd2b25e852a979c40ab465b636ca8948, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.6
+    m_StopTime: 0.016666668
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -80,11 +65,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 0.16666667
-    functionName: AttackEnemy
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []

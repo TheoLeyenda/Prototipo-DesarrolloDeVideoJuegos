@@ -229,40 +229,29 @@ namespace Prototipo_2
                         switch (ActualSprite)
                         {
                             case SpriteActual.MoverAdelante:
-                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("MoverAdelante-Agresivo");
                                 break;
                             case SpriteActual.MoverAtras:
-                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("MoverAtras-Agresivo");
                                 break;
                             case SpriteActual.RecibirDanio:
-                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("RecibirDanio-Agresivo");
                                 break;
                             case SpriteActual.Parado:
-                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("Parado-Agresivo");
                                 break;
                             case SpriteActual.SaltoDefensa:
-                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("SaltoDefensa-Agresivo");
                                 break;
                             case SpriteActual.ParadoDefensa:
-                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("ParadoDefensa-Agresivo");
                                 break;
                             case SpriteActual.Salto:
-                                animator.enabled = false;
                                 spriteRenderer.sprite = CheckListSprite("Salto-Agresivo");
                                 break;
                             case SpriteActual.ParadoAtaque:
-                                animator.enabled = true;
-                                PlayAnimation("Ataque enemigo agresivo");
                                 break;
                             case SpriteActual.SaltoAtaque:
-                                animator.enabled = true;
-                                PlayAnimation("Ataque Salto enemigo agresivo");
                                 break;
                         }
                         break;
