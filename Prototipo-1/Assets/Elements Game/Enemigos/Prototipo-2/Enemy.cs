@@ -643,6 +643,10 @@ namespace Prototipo_2
                 {
                     isJamping = false;
                 }
+                if (delaySelectMovement <= 0)
+                {
+                    delaySelectMovement = 0.1f;
+                }
                 gridEnemy.matrizCuadrilla[gridEnemy.baseGrild][structsEnemys.dataEnemy.columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
 
                 //Debug.Log(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual].name);

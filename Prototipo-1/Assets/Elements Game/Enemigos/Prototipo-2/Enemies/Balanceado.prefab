@@ -322,9 +322,9 @@ MonoBehaviour:
   generadorProyectilesAgachado: {fileID: 8936571031340055449}
   generadorProyectilParabola: {fileID: 8936571031769918816}
   generadorProyectilParabolaAgachado: {fileID: 8936571030625975962}
-  maxRandomDelayMovement: 2
-  minRandomDelayMovement: 1.5
-  delayAttack: 0.8
+  maxRandomDelayMovement: 1.5
+  minRandomDelayMovement: 1
+  delayAttack: 0.5
   pointsDeffence: 12.5
   anguloAtaqueSalto: 180
   Speed: 20
@@ -1326,6 +1326,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4068828010732992973}
     m_Modifications:
+    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: Ball
+      value: 
+      objectReference: {fileID: 2914594783176540619, guid: 0534ba56a355eb048a94948753d4bbdd,
+        type: 3}
+    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: parentName
+      value: ProyectilesEnemigo
+      objectReference: {fileID: 0}
     - target: {fileID: 7194419974994112979, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
       propertyPath: m_Name
@@ -1406,17 +1417,6 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: Ball
-      value: 
-      objectReference: {fileID: 2914594783176540619, guid: 0534ba56a355eb048a94948753d4bbdd,
-        type: 3}
-    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: parentName
-      value: ProyectilesEnemigo
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 61245c1a77e7ad847b3751885e027da7, type: 3}
@@ -1475,6 +1475,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6602513850568851150}
     m_Modifications:
+    - target: {fileID: 4664205932121916671, guid: 9021a4b2ca0a7e2489001dca1d9ce961,
+        type: 3}
+      propertyPath: parentName
+      value: ProyectilesEnemigo
+      objectReference: {fileID: 0}
     - target: {fileID: 4664205932121916640, guid: 9021a4b2ca0a7e2489001dca1d9ce961,
         type: 3}
       propertyPath: m_Name
@@ -1534,11 +1539,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4664205932121916671, guid: 9021a4b2ca0a7e2489001dca1d9ce961,
-        type: 3}
-      propertyPath: parentName
-      value: ProyectilesEnemigo
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9021a4b2ca0a7e2489001dca1d9ce961, type: 3}

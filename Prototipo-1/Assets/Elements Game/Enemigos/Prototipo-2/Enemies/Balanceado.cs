@@ -25,7 +25,6 @@ namespace Prototipo_2
             }
             else if (delayAttack <= 0)
             {
-                Debug.Log("disparo :D");
                 AnimationAttack();
             }
         }
