@@ -934,9 +934,9 @@ MonoBehaviour:
   generadorProyectilesAgachado: {fileID: 1323542633}
   generadorProyectilParabola: {fileID: 1698922128}
   generadorProyectilParabolaAgachado: {fileID: 427011434}
-  maxRandomDelayMovement: 2
-  minRandomDelayMovement: 1.5
-  delayAttack: 1.3
+  maxRandomDelayMovement: 1.2
+  minRandomDelayMovement: 1
+  delayAttack: 0.45
   pointsDeffence: 12.5
   anguloAtaqueSalto: 180
   Speed: 20
@@ -962,8 +962,8 @@ MonoBehaviour:
   AttackDuckPorcentage: 0
   DefenceDuckPorcentage: 0
   SimpleDuckPorcentage: 0
-  AttackPorcentage: 85
-  DeffensePorcentage: 15
+  AttackPorcentage: 80
+  DeffensePorcentage: 20
   AttackSpecialPorcentage: 100
   CantCasillasOcupadas_X: 1
   CantCasillasOcupadas_Y: 2
@@ -1326,17 +1326,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1127554859473777064}
     m_Modifications:
-    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: Ball
-      value: 
-      objectReference: {fileID: 2914594783176540619, guid: 0534ba56a355eb048a94948753d4bbdd,
-        type: 3}
-    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: parentName
-      value: ProyectilesEnemigo
-      objectReference: {fileID: 0}
     - target: {fileID: 7194419974994112979, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
       propertyPath: m_Name
@@ -1416,6 +1405,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_GravityScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: Ball
+      value: 
+      objectReference: {fileID: 2914594783176540619, guid: 0534ba56a355eb048a94948753d4bbdd,
+        type: 3}
+    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: parentName
+      value: ProyectilesEnemigo
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7, type: 3}
