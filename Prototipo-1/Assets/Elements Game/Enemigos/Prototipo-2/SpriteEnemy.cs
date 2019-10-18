@@ -61,49 +61,56 @@ namespace Prototipo_2
         }
         public void CheckEnumSprite()
         {
-            if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
+            if (ActualSprite == SpriteActual.ContraAtaque)
             {
-                ActualSprite = SpriteActual.Salto;
+                CheckDeleyContraAtaque();
             }
-            else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
+            else
             {
-                ActualSprite = SpriteActual.SaltoAtaque;
-            }
-            else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
-            {
-                ActualSprite = SpriteActual.SaltoDefensa;
-            }
-            else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.MoverAdelante)
-            {
-                ActualSprite = SpriteActual.MoverAdelante;
-            }
-            else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.MoverAtras)
-            {
-                ActualSprite = SpriteActual.MoverAtras;
-            }
-            else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar)
-            {
-                ActualSprite = SpriteActual.ParadoDefensa;
-            }
-            else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
-            {
-                ActualSprite = SpriteActual.ParadoAtaque;
-            }
-            else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
-            {
-                ActualSprite = SpriteActual.AgachadoDefensa;
-            }
-            else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
-            {
-                ActualSprite = SpriteActual.AgachadoAtaque;
-            }
-            else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Agacharse && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
-            {
-                ActualSprite = SpriteActual.Agachado;
-            }
-            else if (ActualSprite != SpriteActual.RecibirDanio && ActualSprite != SpriteActual.ContraAtaque)
-            {
-                ActualSprite = SpriteActual.Parado;
+                if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
+                {
+                    ActualSprite = SpriteActual.Salto;
+                }
+                else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
+                {
+                    ActualSprite = SpriteActual.SaltoAtaque;
+                }
+                else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
+                {
+                    ActualSprite = SpriteActual.SaltoDefensa;
+                }
+                else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.MoverAdelante)
+                {
+                    ActualSprite = SpriteActual.MoverAdelante;
+                }
+                else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.MoverAtras)
+                {
+                    ActualSprite = SpriteActual.MoverAtras;
+                }
+                else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar)
+                {
+                    ActualSprite = SpriteActual.ParadoDefensa;
+                }
+                else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
+                {
+                    ActualSprite = SpriteActual.ParadoAtaque;
+                }
+                else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
+                {
+                    ActualSprite = SpriteActual.AgachadoDefensa;
+                }
+                else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
+                {
+                    ActualSprite = SpriteActual.AgachadoAtaque;
+                }
+                else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Agacharse && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
+                {
+                    ActualSprite = SpriteActual.Agachado;
+                }
+                else if (ActualSprite != SpriteActual.RecibirDanio && ActualSprite != SpriteActual.ContraAtaque)
+                {
+                    ActualSprite = SpriteActual.Parado;
+                }
             }
             //Debug.Log("Movimiento:" + enemy.enumsEnemy.GetMovement());
             //Debug.Log("Actual Sprite:"+ActualSprite);
@@ -120,32 +127,24 @@ namespace Prototipo_2
                         switch (ActualSprite)
                         {
                             case SpriteActual.Parado:
-                                animator.enabled = false;
-                                spriteRenderer.sprite = CheckListSprite("Parado-Defensivo");
+                                PlayAnimation("Parado enemigo defensivo");
                                 break;
                             case SpriteActual.ParadoDefensa:
-                                animator.enabled = false;
-                                spriteRenderer.sprite = CheckListSprite("ParadoDefensa-Defensivo");
+                                PlayAnimation("Parado Defensa enemigo defensivo");
                                 break;
                             case SpriteActual.ParadoAtaque:
-                                animator.enabled = true;
-                                PlayAnimation("Ataque enemigo defensivo");
                                 break;
                             case SpriteActual.MoverAdelante:
-                                animator.enabled = false;
-                                spriteRenderer.sprite = CheckListSprite("MoverAdelante-Defensivo");
+                                PlayAnimation("Moverse Adelante enemigo defensivo");
                                 break;
                             case SpriteActual.MoverAtras:
-                                animator.enabled = false;
-                                spriteRenderer.sprite = CheckListSprite("MoverAtras-Defensivo");
+                                PlayAnimation("Moverse Atras enemigo defensivo");
                                 break;
                             case SpriteActual.RecibirDanio:
-                                animator.enabled = false;
-                                spriteRenderer.sprite = CheckListSprite("RecibirDanio-Defensivo");
+                                PlayAnimation("Recibir Danio enemigo defensivo");
                                 break;
                             case SpriteActual.ContraAtaque:
-                                animator.enabled = false;
-                                spriteRenderer.sprite = CheckListSprite("ContraAtaque-Defensivo");
+                                PlayAnimation("Contra Ataque enemigo defensivo");
                                 break;
                             default:
                                 break;
@@ -233,6 +232,30 @@ namespace Prototipo_2
             }
             return null;
         }
+        public void CheckDeleyRecibirDanio()
+        {
+            if (delaySpriteRecibirDanio > 0)
+            {
+                delaySpriteRecibirDanio = delaySpriteRecibirDanio - Time.deltaTime;
+            }
+            else if (delaySpriteRecibirDanio <= 0)
+            {
+                delaySpriteRecibirDanio = auxDelaySpriteRecibirDanio;
+                ActualSprite = SpriteActual.Parado;
+            }
+        }
+        public void CheckDeleyContraAtaque()
+        {
+            if (delaySpriteContraAtaque > 0)
+            {
+                delaySpriteContraAtaque = delaySpriteContraAtaque - Time.deltaTime;
+            }
+            else if (delaySpriteContraAtaque <= 0)
+            {
+                delaySpriteContraAtaque = auxDelaySpriteContraAtaque;
+                ActualSprite = SpriteActual.Parado;
+            }
+        }
         private void OnTriggerStay2D(Collider2D collision)
         {
             switch (collision.gameObject.tag)
@@ -272,6 +295,7 @@ namespace Prototipo_2
                 || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque 
                 && enemy.SpeedJump >= enemy.GetAuxSpeedJamp())
             {
+                Debug.Log("ENTRE");
                 enemy.delayAttack = enemy.GetAuxDelayAttack();
             }
             else if(enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque

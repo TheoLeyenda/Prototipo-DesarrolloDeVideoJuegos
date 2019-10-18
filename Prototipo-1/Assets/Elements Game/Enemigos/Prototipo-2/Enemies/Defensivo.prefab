@@ -912,7 +912,7 @@ MonoBehaviour:
   maxLife: 500
   ImageHP: {fileID: 5416802337210650793}
   ImageCarga: {fileID: 1339264789}
-  xpNededSpecialAttack: 30
+  xpNededSpecialAttack: 20
   xpForHit: 10
   poolObjectAttack: {fileID: 455535354953003369}
   generadoresProyectiles: {fileID: 578682440}
@@ -921,7 +921,7 @@ MonoBehaviour:
   generadorProyectilParabolaAgachado: {fileID: 1398169881}
   maxRandomDelayMovement: 1.5
   minRandomDelayMovement: 1
-  delayAttack: 1.3
+  delayAttack: 0.5
   pointsDeffence: 12.5
   anguloAtaqueSalto: 180
   Speed: 20
@@ -954,7 +954,7 @@ MonoBehaviour:
   CantCasillasOcupadas_Y: 2
   ColumnaActual: 1
   Disparo: {fileID: 2581388744953208281}
-  delayStateCounterAttackDeffense: 1
+  delayStateCounterAttackDeffense: 1.2
   delayStateDeffense: 0.5
   delayVulnerable: 1
 --- !u!114 &2510886538865436556
@@ -1345,17 +1345,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2510886537487143251}
     m_Modifications:
-    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: Ball
-      value: 
-      objectReference: {fileID: 2914594783176540619, guid: 0534ba56a355eb048a94948753d4bbdd,
-        type: 3}
-    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: parentName
-      value: ProyectilesEnemigo
-      objectReference: {fileID: 0}
     - target: {fileID: 7194419974994112979, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
       propertyPath: m_Name
@@ -1435,6 +1424,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_GravityScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: Ball
+      value: 
+      objectReference: {fileID: 2914594783176540619, guid: 0534ba56a355eb048a94948753d4bbdd,
+        type: 3}
+    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: parentName
+      value: ProyectilesEnemigo
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7, type: 3}

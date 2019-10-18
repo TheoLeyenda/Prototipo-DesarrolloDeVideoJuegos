@@ -43,19 +43,38 @@ namespace Prototipo_2
                 delaySelectMovement = 0.1f;
             }
         }
+        public override void CheckDelayAttack(bool specialAttack)
+        {
+            if (delayAttack > 0)
+            {
+                delayAttack = delayAttack - Time.deltaTime;
+            }
+            else if (delayAttack <= 0)
+            {
+                AnimationAttack();
+            }
+        }
         public override void AnimationAttack()
         {
-            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
+            if (enemyPrefab.activeSelf == true)
             {
-                spriteEnemy.animator.Play("Ataque enemigo defensivo");
-            }
-            else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
-            {
-                spriteEnemy.animator.Play("Ataque enemigo defensivo");
-            }
-            else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
-            {
-                spriteEnemy.animator.Play("Ataque enemigo defensivo");
+                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
+                {
+                    spriteEnemy.animator.Play("Ataque enemigo defensivo");
+                }
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
+                {
+                    spriteEnemy.animator.Play("Ataque enemigo defensivo");
+                }
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
+                {
+                    spriteEnemy.animator.Play("Ataque enemigo defensivo");
+                }
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                {
+                    spriteEnemy.animator.Play("Ataque Especial enemigo defensivo");
+                    SetXpActual(0);
+                }
             }
         }
         public void CheckInDeffense()
