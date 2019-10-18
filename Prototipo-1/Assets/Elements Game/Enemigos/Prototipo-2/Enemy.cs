@@ -137,9 +137,8 @@ namespace Prototipo_2
                 || transform.position.y <= InitialPosition.y && !isJamping
                 && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
             {
-                //Debug.Log("ENTRE A LA INICIAL POSICION");
                 transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);
-                delaySelectMovement = 0.2f;
+                delaySelectMovement = 0.1f;// SI OCURRE DE NUEVO EL BUG DEL SALTO CAMBIAR ESTA VARIABLE POR EL VALOR 0.2f
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
                 gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                 SpeedJump = auxSpeedJump;
@@ -147,7 +146,7 @@ namespace Prototipo_2
             else if (transform.position.y > InitialPosition.y && !isJamping)
             {
                 MoveJamp(new Vector3(transform.position.x, InitialPosition.y, transform.position.z));
-                delaySelectMovement = 0.2f;
+                delaySelectMovement = 0.1f;// SI OCURRE DE NUEVO EL BUG DEL SALTO CAMBIAR ESTA VARIABLE POR EL VALOR 0.2f
             }
             
         }
