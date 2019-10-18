@@ -734,5 +734,9 @@ namespace Prototipo_2
         {
             return auxDelayAttack;
         }
+        public float GetAuxSpeedJamp()
+        {
+            return auxSpeedJump;
+        }
     }
 }
