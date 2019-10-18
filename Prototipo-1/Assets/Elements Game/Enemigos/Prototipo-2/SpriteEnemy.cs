@@ -250,7 +250,10 @@ namespace Prototipo_2
         }
         public void PlayAnimation(string nameAnimation)
         {
-            animator.Play(nameAnimation);
+            if (enemy.enemyPrefab.activeSelf == true)
+            {
+                animator.Play(nameAnimation);
+            }
         }
         public void AttackJampEnemy()
         {

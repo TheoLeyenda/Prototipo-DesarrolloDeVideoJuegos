@@ -36,24 +36,27 @@ namespace Prototipo_2
         }
         public override void AnimationAttack()
         {
-            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
+            if (enemyPrefab.activeSelf == true)
             {
-                spriteEnemy.animator.Play("Ataque enemigo agresivo");
-            }
-            else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
-                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
-            {
-                spriteEnemy.animator.Play("Ataque Salto enemigo agresivo");
+                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
+                {
+                    spriteEnemy.animator.Play("Ataque enemigo agresivo");
+                }
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                {
+                    spriteEnemy.animator.Play("Ataque Salto enemigo agresivo");
 
-            }
-            else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
-            {
-                spriteEnemy.animator.Play("Ataque enemigo agresivo");
-            }
-            else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
-            {
-                spriteEnemy.animator.Play("Ataque Especial enemigo agresivo");
-                SetXpActual(0);
+                }
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
+                {
+                    spriteEnemy.animator.Play("Ataque enemigo agresivo");
+                }
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                {
+                    spriteEnemy.animator.Play("Ataque Especial enemigo agresivo");
+                    SetXpActual(0);
+                }
             }
         }
         public override void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage)

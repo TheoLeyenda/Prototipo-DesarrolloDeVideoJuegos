@@ -22,6 +22,10 @@ namespace Prototipo_2
             if (delayAttack > 0)
             {
                 delayAttack = delayAttack - Time.deltaTime;
+                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
+                {
+                    spriteEnemy.PlayAnimation("Salto balanceado");
+                }
             }
             else if (delayAttack <= 0)
             {
@@ -30,25 +34,25 @@ namespace Prototipo_2
         }
         public override void AnimationAttack()
         {
-            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
+            if (enemyPrefab.activeSelf == true)
             {
-                spriteEnemy.animator.Play("Ataque enemigo balanceado");
-                delayAttack = auxDelayAttack;
-            }
-            else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
-            {
-                spriteEnemy.animator.Play("Ataque Salto enemigo balanceado");
-                delayAttack = delayAttackJumping;
-            }
-            else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
-            {
-                spriteEnemy.animator.Play("Ataque Agachado enemigo balanceado");
-                delayAttack = auxDelayAttack;
-            }
-            else if(enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
-            {
-                spriteEnemy.animator.Play("Ataque Especial enemigo balanceado");
-                SetXpActual(0);
+                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
+                {
+                    spriteEnemy.animator.Play("Ataque enemigo balanceado");
+                }
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                {
+                    spriteEnemy.animator.Play("Ataque Salto enemigo balanceado");
+                }
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
+                {
+                    spriteEnemy.animator.Play("Ataque Agachado enemigo balanceado");
+                }
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                {
+                    spriteEnemy.animator.Play("Ataque Especial enemigo balanceado");
+                    SetXpActual(0);
+                }
             }
         }
         public override void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage)
