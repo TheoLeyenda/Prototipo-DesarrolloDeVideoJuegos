@@ -165,7 +165,6 @@ namespace Prototipo_2
                             CheckGrid(cuadrilla);
                             cuadrillaColision = grid.matrizCuadrilla[grid.GetCuadrilla_columnas() - 1][cuadrilla.player.structsPlayer.dataPlayer.columnaActual];
                             CreateGaseosas();
-                            Debug.Log("ENTRE AL CORRECTO");
                         }
                         if (PLAYER1 != null)
                         {

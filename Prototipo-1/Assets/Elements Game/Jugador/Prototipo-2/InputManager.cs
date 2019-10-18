@@ -179,7 +179,6 @@ namespace Prototipo_2 {
                         enableMovementPlayer1 = false;
                     }
                 }
-                Debug.Log("ENTRE");
             }
            
         }
