@@ -18,6 +18,20 @@ namespace Prototipo_2
         public override void Update()
         {
             base.Update();
+            CheckSpecialAttack();
+        }
+        public void CheckSpecialAttack()
+        {
+            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
+            {
+                delaySelectMovement = 0.1f;
+            }
+            else
+            {
+                spriteEnemy.animator.SetBool("AtaqueEspecial", false);
+            }
         }
         public override void CheckDelayAttack(bool specialAttack)
         {
@@ -52,10 +66,23 @@ namespace Prototipo_2
                 {
                     spriteEnemy.animator.Play("Ataque enemigo agresivo");
                 }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
                 {
-                    spriteEnemy.animator.Play("Ataque Especial enemigo agresivo");
-                    SetXpActual(0);
+                    switch (enumsEnemy.GetMovement())
+                    {
+                        case EnumsEnemy.Movimiento.AtaqueEspecial:
+                            spriteEnemy.animator.SetBool("AtaqueEspecial", true);
+                            spriteEnemy.spriteRenderer.color = Color.white;
+                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
+                            break;
+                        case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
+                            break;
+                        case EnumsEnemy.Movimiento.AtaqueEspecialSalto:
+                            break;
+                    }
                 }
             }
         }

@@ -16,7 +16,7 @@ namespace Prototipo_2
         public override void Update()
         {
             base.Update();
-            CheckSpecialAttackJump();
+            CheckSpecialAttack();
         }
         public override void CheckDelayAttack(bool specialAttack)
         {
@@ -33,7 +33,7 @@ namespace Prototipo_2
                 AnimationAttack();
             }
         }
-        public void CheckSpecialAttackJump()
+        public void CheckSpecialAttack()
         {
             if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto 
                 || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado 
