@@ -24,7 +24,6 @@ namespace Prototipo_2
             }
             else if (timeLife <= 0)
             {
-                Debug.Log("ME APAGUE");
                 timeLife = auxTimeLife;
                 gameObject.SetActive(false);
             }

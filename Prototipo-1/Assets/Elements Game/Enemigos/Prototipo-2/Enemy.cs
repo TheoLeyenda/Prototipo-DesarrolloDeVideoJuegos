@@ -114,13 +114,21 @@ namespace Prototipo_2
         }
         public virtual void Update()
         {
+            //spriteEnemy.animator.SetBool("AtaqueEspecial", true);
+            //enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
             CheckLifeBar();
             CheckLoadSpecialAttackBar();
             CheckDead();
-            IA();
+            if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial 
+                /*&& enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialAgachado 
+                && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto*/)
+            {
+                IA();
+            }
             CheckOutLimit();
         }
         public Enemy(){}
+        
         public void CheckInitialCharacter()
         {
             structsEnemys.dataEnemy.CantCasillasOcupadas_X = CantCasillasOcupadas_X;
@@ -269,7 +277,7 @@ namespace Prototipo_2
             delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
             enumsEnemy.SetMovement(movimiento);
             //Debug.Log(movimiento.ToString());
-            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando)
+            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto)
             {
                 delayAttack = delayAttackJumping;
             }
@@ -292,15 +300,15 @@ namespace Prototipo_2
             {
                 if (_movimiento == EnumsEnemy.Movimiento.Agacharse || _movimiento == EnumsEnemy.Movimiento.AgacharseAtaque || _movimiento == EnumsEnemy.Movimiento.AgacheDefensa)
                 {
-                    movimiento = EnumsEnemy.Movimiento.AtacarEnParabolaAgachado;
+                    movimiento = EnumsEnemy.Movimiento.AtaqueEspecialAgachado;
                 }
                 else if (_movimiento == EnumsEnemy.Movimiento.Saltar || _movimiento == EnumsEnemy.Movimiento.SaltoAtaque || _movimiento == EnumsEnemy.Movimiento.SaltoDefensa)
                 {
-                    movimiento = EnumsEnemy.Movimiento.AtacarEnParabolaSaltando;
+                    movimiento = EnumsEnemy.Movimiento.AtaqueEspecialSalto;
                 }
                 else if (_movimiento == EnumsEnemy.Movimiento.AtacarEnElLugar || _movimiento == EnumsEnemy.Movimiento.DefensaEnElLugar)
                 {
-                    movimiento = EnumsEnemy.Movimiento.AtacarEnParabola;
+                    movimiento = EnumsEnemy.Movimiento.AtaqueEspecial;
                 }
             }
             return movimiento;
@@ -322,7 +330,7 @@ namespace Prototipo_2
             delaySelectMovement = Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
             enumsEnemy.SetMovement(movimiento);
             //Debug.Log(movimiento.ToString());
-            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando)
+            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto)
             {
                 delayAttack = delayAttackJumping;
             }
@@ -372,13 +380,28 @@ namespace Prototipo_2
                     {
                         delaySelectMovement = 0.1f;
                         enableSpecialAttack = false;
-                        Attack(false, true, false);
+                        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
+                        AnimationAttack();
                         xpActual = 0;
                     }
                     else if (enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Balanceado)
                     {
+                        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar
+                            || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
+                            || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
+                        {
+                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecialSalto);
+                        }
+                        else if (isDuck)
+                        {
+                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecialAgachado);
+                        }
+                        else
+                        {
+                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
+                        }
                         enableSpecialAttack = false;
-                        Attack(false, true, false);
+                        AnimationAttack();
                         xpActual = 0;
 
                     }
@@ -520,15 +543,15 @@ namespace Prototipo_2
                 case EnumsEnemy.Movimiento.Agacharse:
                     Duck(structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                     break;
-                case EnumsEnemy.Movimiento.AtacarEnParabola:
-                    CheckDelayAttack(true);
+                case EnumsEnemy.Movimiento.AtaqueEspecial:
+                    //CheckDelayAttack(true);
                     break;
-                case EnumsEnemy.Movimiento.AtacarEnParabolaAgachado:
+                case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
                     Duck(structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
-                    CheckDelayAttack(true);
+                    //CheckDelayAttack(true);
                     break;
-                case EnumsEnemy.Movimiento.AtacarEnParabolaSaltando:
-                    CheckDelayAttack(true);
+                case EnumsEnemy.Movimiento.AtaqueEspecialSalto:
+                    //CheckDelayAttack(true);
                     isJamping = true;
                     Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
                     break;
@@ -569,7 +592,7 @@ namespace Prototipo_2
             else if (delayAttack <= 0)
             {
                 delayAttack = auxDelayAttack;
-                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando)
+                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto)
                 {
                     delayAttack = delayAttackJumping;
                     Attack(true, specialAttack,false);
@@ -645,7 +668,7 @@ namespace Prototipo_2
         {
             if (CheckMove(new Vector3(transform.position.x, alturaMaxima.y, transform.position.z)) && isJamping)
             {
-                if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtacarEnParabolaSaltando)
+                if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto)
                 {
                     enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
                 }
@@ -737,6 +760,10 @@ namespace Prototipo_2
         public float GetAuxSpeedJamp()
         {
             return auxSpeedJump;
+        }
+        public void SetDelaySelectMovement(float delay)
+        {
+            delaySelectMovement = delay;
         }
     }
 }

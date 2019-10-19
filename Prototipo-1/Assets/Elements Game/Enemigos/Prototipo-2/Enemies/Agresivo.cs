@@ -52,7 +52,7 @@ namespace Prototipo_2
                 {
                     spriteEnemy.animator.Play("Ataque enemigo agresivo");
                 }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
                 {
                     spriteEnemy.animator.Play("Ataque Especial enemigo agresivo");
                     SetXpActual(0);

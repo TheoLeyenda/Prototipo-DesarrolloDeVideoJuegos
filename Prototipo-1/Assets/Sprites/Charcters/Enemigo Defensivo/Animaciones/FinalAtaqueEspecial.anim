@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ataque Especial enemigo defensivo
+  m_Name: FinalAtaqueEspecial
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,30 +20,18 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 7102c509e8fffd04aa6dad51217f812e, type: 3}
-    - time: 0.1
-      value: {fileID: 21300000, guid: 0fdb849213db3254eba5212f67db2c77, type: 3}
-    - time: 0.2
-      value: {fileID: 21300000, guid: 64ba868dd08ad6540b045bfb630b1907, type: 3}
-    - time: 0.36666667
-      value: {fileID: 21300000, guid: b80b47a46caaeca4e82d6cc249546dda, type: 3}
-    - time: 0.46666667
-      value: {fileID: 21300000, guid: 1473e9c0f813ec04d94ee61a0097aa1a, type: 3}
-    - time: 0.9
-      value: {fileID: 21300000, guid: db33ce2333eef094d995ba90dd6c8581, type: 3}
-    - time: 1.0333333
-      value: {fileID: 21300000, guid: b236c09d1092fe946b979c677f615286, type: 3}
-    - time: 1.2333333
-      value: {fileID: 21300000, guid: 2d544b78a762ece4980c6059993b14f1, type: 3}
-    - time: 1.4666667
-      value: {fileID: 21300000, guid: 0de619b0fb9862e49bdacf745a363283, type: 3}
-    - time: 1.6
       value: {fileID: 21300000, guid: ca6bd41a2d067e240a796c89251bdca8, type: 3}
+    - time: 0.083333336
+      value: {fileID: 21300000, guid: 35e35f03536831946b68994ed124287f, type: 3}
+    - time: 0.16666667
+      value: {fileID: 21300000, guid: 66adc1fa9d4dde2499720b9025a29ade, type: 3}
+    - time: 0.25
+      value: {fileID: 21300000, guid: 59fd6ec00dfc386428a7fcde03532b52, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 30
+  m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -58,22 +46,16 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 7102c509e8fffd04aa6dad51217f812e, type: 3}
-    - {fileID: 21300000, guid: 0fdb849213db3254eba5212f67db2c77, type: 3}
-    - {fileID: 21300000, guid: 64ba868dd08ad6540b045bfb630b1907, type: 3}
-    - {fileID: 21300000, guid: b80b47a46caaeca4e82d6cc249546dda, type: 3}
-    - {fileID: 21300000, guid: 1473e9c0f813ec04d94ee61a0097aa1a, type: 3}
-    - {fileID: 21300000, guid: db33ce2333eef094d995ba90dd6c8581, type: 3}
-    - {fileID: 21300000, guid: b236c09d1092fe946b979c677f615286, type: 3}
-    - {fileID: 21300000, guid: 2d544b78a762ece4980c6059993b14f1, type: 3}
-    - {fileID: 21300000, guid: 0de619b0fb9862e49bdacf745a363283, type: 3}
     - {fileID: 21300000, guid: ca6bd41a2d067e240a796c89251bdca8, type: 3}
+    - {fileID: 21300000, guid: 35e35f03536831946b68994ed124287f, type: 3}
+    - {fileID: 21300000, guid: 66adc1fa9d4dde2499720b9025a29ade, type: 3}
+    - {fileID: 21300000, guid: 59fd6ec00dfc386428a7fcde03532b52, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.6333333
+    m_StopTime: 0.26666668
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -93,8 +75,8 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 1.6
-    functionName: SpecialAttack
+  - time: 0.23333333
+    functionName: DisableSpecialAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

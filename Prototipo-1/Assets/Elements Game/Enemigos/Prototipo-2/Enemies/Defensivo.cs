@@ -6,7 +6,7 @@ namespace Prototipo_2
 {
     public class Defensivo : Enemy
     {
-        public GameObject Disparo;
+        public DisparoDeCarga Disparo;
         public enum StateDeffence
         {
             Nulo,
@@ -32,15 +32,28 @@ namespace Prototipo_2
             auxDelayStateCounterAttackDeffense = delayStateCounterAttackDeffense;
             inDeffense = false;
         }
-
+        
         // Update is called once per frame
         public override void Update()
         {
             base.Update();
             CheckInDeffense();
-            if (Disparo.activeSelf)
+            if (Disparo.gameObject.activeSelf)
             {
                 delaySelectMovement = 0.1f;
+            }
+            CheckInSpecialAttack();
+        }
+        public void CheckInSpecialAttack()
+        {
+            if (!Disparo.gameObject.activeSelf)
+            {
+                spriteEnemy.animator.SetBool("EnPlenoAtaqueEspecial", false);
+                spriteEnemy.animator.SetBool("FinalAtaqueEspecial", true);
+            }
+            else
+            {
+                spriteEnemy.animator.SetBool("EnPlenoAtaqueEspecial", true);
             }
         }
         public override void CheckDelayAttack(bool specialAttack)
@@ -70,10 +83,23 @@ namespace Prototipo_2
                 {
                     spriteEnemy.animator.Play("Ataque enemigo defensivo");
                 }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnParabolaSaltando || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial 
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado 
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto 
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
                 {
-                    spriteEnemy.animator.Play("Ataque Especial enemigo defensivo");
-                    SetXpActual(0);
+                    switch (enumsEnemy.GetMovement())
+                    {
+                        case EnumsEnemy.Movimiento.AtaqueEspecial:
+                            spriteEnemy.animator.SetBool("AtaqueEspecial", true);
+                            spriteEnemy.spriteRenderer.color = Color.white;
+                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
+                            break;
+                        case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
+                            break;
+                        case EnumsEnemy.Movimiento.AtaqueEspecialSalto:
+                            break;
+                    }
                 }
             }
         }
@@ -207,9 +233,10 @@ namespace Prototipo_2
 
             if (specialAttack)
             {
-                Disparo.SetActive(true);
+                Disparo.gameObject.SetActive(true);
+                spriteEnemy.animator.SetBool("AtaqueEspecial", false);
             }
-            if (!Disparo.activeSelf)
+            if (!Disparo.gameObject.activeSelf)
             {
                 if (!specialAttack)
                 {
