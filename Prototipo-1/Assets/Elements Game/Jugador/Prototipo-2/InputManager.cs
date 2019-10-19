@@ -66,7 +66,18 @@ namespace Prototipo_2 {
                     CheckInputPlayer2();
                     CheckSpritePlayer2();
                 }
+                else
+                {
+                    if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
+                    {
+                        player2.SetControllerJoystick(true);
+                        player2.MovementJump();
+                        moveVerticalPlayer1 = false;
+                        player2.SetIsDuck(false);
+                    }
+                }
             }
+            
         }
 
         //----- FUNCIONES Y CONTROLES DEL JUGADOR 1 -----//
@@ -575,11 +586,26 @@ namespace Prototipo_2 {
                 player2.SetControllerJoystick(true);
                 if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P2() < 0)
                 {
-                    player2.AttackDown(Proyectil.DisparadorDelProyectil.Jugador2);
+                    player2.spritePlayerActual.PlayAnimation("Ataque Abajo Salto protagonista");
+                    enableMovementPlayer2 = false;
+                }
+                else if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P2() >= 0)
+                {
+                    player2.spritePlayerActual.PlayAnimation("Ataque Salto protagonista");
+                    enableMovementPlayer2 = false;
                 }
                 else
                 {
-                    player2.Attack(Proyectil.DisparadorDelProyectil.Jugador2);
+                    if (!player2.GetIsDuck())
+                    {
+                        player2.spritePlayerActual.PlayAnimation("Ataque protagonista");
+                        enableMovementPlayer2 = false;
+                    }
+                    else if (player2.GetIsDuck())
+                    {
+                        player2.spritePlayerActual.PlayAnimation("Ataque Agachado protagonista");
+                        enableMovementPlayer2 = false;
+                    }
                 }
             }
         }
@@ -593,9 +619,28 @@ namespace Prototipo_2 {
         }
         public void CheckSpecialAttackButton_P2()
         {
-            if (InputPlayerController.SpecialAttackButton_P2())
+            if (player2.GetEnableSpecialAttack())
             {
-                player2.SpecialAttack(Proyectil.DisparadorDelProyectil.Jugador2);
+                if (InputPlayerController.SpecialAttackButton_P2())
+                {
+                    if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar
+                        || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoAtaque
+                        || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa)
+                    {
+                        player2.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL SALTANDO
+                        enableMovementPlayer2 = false;
+                    }
+                    else if (player2.GetIsDuck())
+                    {
+                        player2.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL AGACHADO
+                        enableMovementPlayer2 = false;
+                    }
+                    else
+                    {
+                        player2.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL PARADO
+                        enableMovementPlayer2 = false;
+                    }
+                }
             }
         }
         public void CheckInputPlayer2()
