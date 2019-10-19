@@ -138,12 +138,10 @@ namespace Prototipo_2
         }
         public void CheckOutLimit()
         {
-            if (transform.position.y <= InitialPosition.y && !isJamping 
-                && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar 
-                || transform.position.y <= InitialPosition.y && !isJamping
-                && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
-                || transform.position.y <= InitialPosition.y && !isJamping
-                && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
+            if (transform.position.y <= InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar && !isJamping 
+                || transform.position.y <= InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && !isJamping
+                || transform.position.y <= InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa && !isJamping
+                || transform.position.y <= InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto && !isJamping)
             {
                 transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);
                 delaySelectMovement = 0.1f;// SI OCURRE DE NUEVO EL BUG DEL SALTO CAMBIAR ESTA VARIABLE POR EL VALOR 0.2f
@@ -400,7 +398,6 @@ namespace Prototipo_2
                         {
                             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
                         }
-                        enableSpecialAttack = false;
                         AnimationAttack();
                         xpActual = 0;
 
@@ -764,6 +761,10 @@ namespace Prototipo_2
         public void SetDelaySelectMovement(float delay)
         {
             delaySelectMovement = delay;
+        }
+        public void SetEnableSpecialAttack(bool _enableSpecialAttack)
+        {
+            enableSpecialAttack = _enableSpecialAttack;
         }
     }
 }

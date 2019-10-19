@@ -16,6 +16,7 @@ namespace Prototipo_2
         public override void Update()
         {
             base.Update();
+            CheckSpecialAttackJump();
         }
         public override void CheckDelayAttack(bool specialAttack)
         {
@@ -30,6 +31,15 @@ namespace Prototipo_2
             else if (delayAttack <= 0)
             {
                 AnimationAttack();
+            }
+        }
+        public void CheckSpecialAttackJump()
+        {
+            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto 
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado 
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
+            {
+                delaySelectMovement = 0.1f;
             }
         }
         public override void AnimationAttack()
@@ -48,10 +58,32 @@ namespace Prototipo_2
                 {
                     spriteEnemy.animator.Play("Ataque Agachado enemigo balanceado");
                 }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
                 {
-                    spriteEnemy.animator.Play("Ataque Especial enemigo balanceado");
-                    SetXpActual(0);
+                    switch (enumsEnemy.GetMovement())
+                    {
+                        case EnumsEnemy.Movimiento.AtaqueEspecial:
+                            spriteEnemy.animator.SetBool("AtaqueEspecial", true);
+                            spriteEnemy.spriteRenderer.color = Color.white;
+                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
+                            SetEnableSpecialAttack(false);
+                            break;
+                        case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
+                            spriteEnemy.animator.SetBool("AtaqueEspecial", true);
+                            spriteEnemy.spriteRenderer.color = Color.white;
+                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecialAgachado);
+                            SetEnableSpecialAttack(false);
+                            break;
+                        case EnumsEnemy.Movimiento.AtaqueEspecialSalto:
+                            spriteEnemy.animator.SetBool("AtaqueEspecial", true);
+                            spriteEnemy.spriteRenderer.color = Color.white;
+                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecialSalto);
+                            SetEnableSpecialAttack(false);
+                            break;
+                    }
                 }
             }
         }

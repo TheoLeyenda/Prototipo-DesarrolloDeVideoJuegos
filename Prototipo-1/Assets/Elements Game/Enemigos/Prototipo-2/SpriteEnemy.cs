@@ -61,7 +61,7 @@ namespace Prototipo_2
         }
         public void CheckEnumSprite()
         {
-            Debug.Log(enemy.enumsEnemy.GetMovement());
+            //Debug.Log(enemy.enumsEnemy.GetMovement());
             if (enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
                     && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialAgachado
                     && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto)
