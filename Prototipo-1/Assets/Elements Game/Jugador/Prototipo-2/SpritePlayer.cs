@@ -11,7 +11,7 @@ namespace Prototipo_2 {
         [System.Serializable]
         public class ElementsSprites
         {
-            public Sprite sprite;
+            public Animation animation;
             public string name;
 
         }
@@ -36,7 +36,7 @@ namespace Prototipo_2 {
             ContraAtaqueAgachado,
             Count,
         }
-        public List<ElementsSprites> Sprites;
+        public List<ElementsSprites> Animations;
         public SpriteActual ActualSprite;
         public float delaySpriteRecibirDanio;
         private float auxDelaySpriteRecibirDanio;
@@ -203,13 +203,13 @@ namespace Prototipo_2 {
                 }
             }
         }
-        public Sprite CheckListSprite(string nameSprite)
+        public Animation CheckListAnimations(string nameSprite)
         {
-            for (int i = 0; i < Sprites.Count; i++)
+            for (int i = 0; i < Animations.Count; i++)
             {
-                if (nameSprite == Sprites[i].name)
+                if (nameSprite == Animations[i].name)
                 {
-                    return Sprites[i].sprite;
+                    return Animations[i].animation;
                 }
             }
             return null;
@@ -219,6 +219,17 @@ namespace Prototipo_2 {
             if (animator != null)
             {
                 animator.Play(nameAnimation);
+            }
+        }
+        public void PlayerSpecialAttack()
+        {
+            if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+            {
+                player.SpecialAttack(Proyectil.DisparadorDelProyectil.Jugador1);
+            }
+            else if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+            {
+                player.SpecialAttack(Proyectil.DisparadorDelProyectil.Jugador2);
             }
         }
         public void PlayerAttack()
@@ -257,6 +268,17 @@ namespace Prototipo_2 {
         public void SetActualSprite(SpriteActual spriteActual)
         {
             ActualSprite = spriteActual;
+        }
+        public void SpecialAttackPlayer()
+        {
+            if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+            {
+                player.SpecialAttack(Proyectil.DisparadorDelProyectil.Jugador1);
+            }
+            else if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+            {
+                player.SpecialAttack(Proyectil.DisparadorDelProyectil.Jugador2);
+            }
         }
     }
     

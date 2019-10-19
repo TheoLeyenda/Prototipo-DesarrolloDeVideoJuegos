@@ -192,9 +192,28 @@ namespace Prototipo_2 {
         }
         public void CheckSpecialAttackButton_P1()
         {
-            if (InputPlayerController.SpecialAttackButton_P1())
+            if (player1.GetEnableSpecialAttack())
             {
-                player1.SpecialAttack(Proyectil.DisparadorDelProyectil.Jugador1);
+                if (InputPlayerController.SpecialAttackButton_P1())
+                {
+                    if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar
+                        || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoAtaque
+                        || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa)
+                    {
+                        player1.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL SALTANDO
+                        enableMovementPlayer1 = false;
+                    }
+                    else if (player1.GetIsDuck())
+                    {
+                        player1.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL AGACHADO
+                        enableMovementPlayer1 = false;
+                    }
+                    else
+                    {
+                        player1.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL PARADO
+                        enableMovementPlayer1 = false;
+                    }
+                }
             }
         }
         public void CheckInputPlayer1()
