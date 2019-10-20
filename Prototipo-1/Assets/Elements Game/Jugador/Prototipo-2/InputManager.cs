@@ -671,7 +671,6 @@ namespace Prototipo_2 {
                             CheckHorizontalCero_P2();
                             CheckAttackButton_P2();
                             CheckDeffenceButton_P2();
-                            CheckDeffenceButton_P2();
                             CheckSpecialAttackButton_P2();
                             break;
                         case Player_PvP.PlayerSelected.Balanceado:
@@ -789,7 +788,7 @@ namespace Prototipo_2 {
                 {
                     player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoAtaque;
                 }
-                else if (InputPlayerController.CheckPressDeffenseButton_P1())
+                else if (InputPlayerController.CheckPressDeffenseButton_P2())
                 {
                     player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoDefensa;
                     player2_PvP.playerState = Player_PvP.State.Defendido;

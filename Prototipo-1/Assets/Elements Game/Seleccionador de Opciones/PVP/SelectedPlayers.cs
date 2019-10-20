@@ -68,7 +68,22 @@ namespace Prototipo_2
                 if (grillaDeSeleccion != null)
                 {
                     int i = columnas - 1;
-                    while (i > 0)
+                    if (i > 0)
+                    {
+                        while (i > 0)
+                        {
+                            for (int j = 0; j < filas; j++)
+                            {
+                                if (idOption < namePlayersOptions.Count)
+                                {
+                                    grillaDeSeleccion[j, i] = namePlayersOptions[idOption];
+                                }
+                                idOption++;
+                            }
+                            i--;
+                        }
+                    }
+                    else
                     {
                         for (int j = 0; j < filas; j++)
                         {
@@ -78,7 +93,6 @@ namespace Prototipo_2
                             }
                             idOption++;
                         }
-                        i--;
                     }
                 }
             }
@@ -270,7 +284,7 @@ namespace Prototipo_2
             if (InputPlayerController.SelectButton_P2())
             {
                 //Debug.Log(cursorPlayer1.x + ", " + cursorPlayer1.y);
-                switch (grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y])
+                switch (grillaDeSeleccion[cursorPlayer2.x, cursorPlayer2.y])
                 {
                     case "Balanceado":
                         gm.structGameManager.gm_dataCombatPvP.player2_selected = DataCombatPvP.Player_Selected.Balanceado;
