@@ -114,6 +114,7 @@ namespace Prototipo_2 {
             }
             if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
             {
+                Debug.Log(player.GetInputManager().GetEnableMovementPlayer1());
                 if (player.GetInputManager().GetEnableMovementPlayer1())
                 {
                     switch (ActualSprite)
@@ -283,6 +284,10 @@ namespace Prototipo_2 {
             {
                 player.SpecialAttack(Proyectil.DisparadorDelProyectil.Jugador2);
             }
+        }
+        public Animator GetAnimator()
+        {
+            return animator;
         }
     }
     

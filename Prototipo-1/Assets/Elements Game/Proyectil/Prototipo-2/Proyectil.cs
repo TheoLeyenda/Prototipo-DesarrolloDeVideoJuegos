@@ -264,7 +264,7 @@ namespace Prototipo_2
                     {
                         if (cuadrilla.player != null)
                         {
-                            Player_PvP player1_PvP = cuadrilla.player.gameObject.GetComponent<Player_PvP>();
+                            Player_PvP player_PvP = cuadrilla.player.gameObject.GetComponent<Player_PvP>();
                             float realDamage;
                             if (PLAYER1 != null)
                             {
@@ -276,7 +276,7 @@ namespace Prototipo_2
                                     PLAYER1.SetXpActual(PLAYER1.GetXpActual() + (PLAYER1.xpForHit / 2));
                                 }
                             }
-                            if (player1_PvP != null)
+                            if (player_PvP != null)
                             {
                                 
                                 if (PLAYER2 != null)
@@ -289,19 +289,19 @@ namespace Prototipo_2
                                         PLAYER2.SetXpActual(PLAYER2.GetXpActual() + (PLAYER2.xpForHit / 2));
                                     }
                                 }
-                                if (player1_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
+                                if (player_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
                                 {
-                                    switch (player1_PvP.playerState)
+                                    switch (player_PvP.playerState)
                                     {
                                         case Player_PvP.State.Defendido:
                                             cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaqueParado;
-                                            if (player1_PvP.playerActual == Player_PvP.Player.player1)
+                                            if (player_PvP.playerActual == Player_PvP.Player.player1)
                                             {
                                                 cuadrilla.player.Attack(DisparadorDelProyectil.Jugador1);
                                             }
-                                            else if (player1_PvP.playerActual == Player_PvP.Player.player2)
+                                            else if (player_PvP.playerActual == Player_PvP.Player.player2)
                                             {
-                                                cuadrilla.player.Attack(DisparadorDelProyectil.Enemigo);
+                                                cuadrilla.player.Attack(DisparadorDelProyectil.Jugador2);
                                             }
                                             realDamage = damage - cuadrilla.player.pointsDeffence;
                                             cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - realDamage;
