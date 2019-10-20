@@ -236,10 +236,12 @@ namespace Prototipo_2 {
         {
             if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
             {
+                //Debug.Log("DISPARO EL PLAYER 1");
                 player.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
             }
             else if(player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
             {
+                //Debug.Log("DISPARO EL PLAYER 2");
                 player.Attack(Proyectil.DisparadorDelProyectil.Jugador2);
             }
         }

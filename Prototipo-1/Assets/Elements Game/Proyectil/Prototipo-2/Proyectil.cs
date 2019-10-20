@@ -190,7 +190,7 @@ namespace Prototipo_2
                             if (PLAYER1 != null)
                             {
                                 if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1
-                                    || cuadrilla.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                                    || cuadrilla.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
                                 {
                                     //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                     PLAYER1.SetXpActual(PLAYER1.GetXpActual() + PLAYER1.xpForHit);
@@ -198,7 +198,7 @@ namespace Prototipo_2
                                     if (cuadrilla.player.delayCounterAttack > 0)
                                     {
                                         cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
-                                        if (InputPlayerController.DeffenseButton_P1())
+                                        if (InputPlayerController.DeffenseButton_P2())
                                         {
                                             cuadrilla.player.Attack(DisparadorDelProyectil.Jugador2);
                                             cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
@@ -236,7 +236,7 @@ namespace Prototipo_2
                                         cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
                                         if (InputPlayerController.DeffenseButton_P1())
                                         {
-                                            cuadrilla.player.Attack(DisparadorDelProyectil.Jugador2);
+                                            cuadrilla.player.Attack(DisparadorDelProyectil.Jugador1);
                                             cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
                                             timeLife = 0;
                                             enableDamagePlayer = false;
@@ -351,25 +351,22 @@ namespace Prototipo_2
                                     gameObject.SetActive(false);
                                 }
                             }
-                            else
+
+                            if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo||disparadorDelProyectil == DisparadorDelProyectil.Jugador2 || disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
                             {
-                                if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo||disparadorDelProyectil == DisparadorDelProyectil.Jugador2 || disparadorDelProyectil == DisparadorDelProyectil.Jugador1 && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.PvP)
+                                if (cuadrilla.player.delayCounterAttack <= 0)
                                 {
-                                    if (cuadrilla.player.delayCounterAttack <= 0)
-                                    {
-                                        
-                                        realDamage = damage - cuadrilla.player.pointsDeffence;
-                                        cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - realDamage;
-                                        cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
-                                        timeLife = 0;
-                                        damage = auxDamage;
-                                        poolObject.Recycle();
-                                        gameObject.SetActive(false);
-                                    }
-                                    else
-                                    {
-                                        cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
-                                    }
+                                    realDamage = damage - cuadrilla.player.pointsDeffence;
+                                    cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - realDamage;
+                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.GetAuxDelayCounterAttack();
+                                    timeLife = 0;
+                                    damage = auxDamage;
+                                    poolObject.Recycle();
+                                    gameObject.SetActive(false);
+                                }
+                                else
+                                {
+                                    cuadrilla.player.delayCounterAttack = cuadrilla.player.delayCounterAttack - Time.deltaTime;
                                 }
                             }
                             
