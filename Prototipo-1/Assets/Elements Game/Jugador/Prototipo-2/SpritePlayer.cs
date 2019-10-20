@@ -260,10 +260,12 @@ namespace Prototipo_2 {
         {
             if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
             {
+                Debug.Log("ENABLE MOVEMENT 1");
                 player.GetInputManager().SetEnableMovementPlayer1(true);
             }
             else if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
             {
+                Debug.Log("ENABLE MOVEMENT 2");
                 player.GetInputManager().SetEnableMovementPlayer2(true);
             }
         }
