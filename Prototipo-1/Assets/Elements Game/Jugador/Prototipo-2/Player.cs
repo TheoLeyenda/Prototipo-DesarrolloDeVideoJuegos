@@ -519,7 +519,6 @@ namespace Prototipo_2
                 }
                 else 
                 {
-                    Debug.Log("ENTRE BACK");
                     structsPlayer.dataPlayer.columnaActual--;
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
                     gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);

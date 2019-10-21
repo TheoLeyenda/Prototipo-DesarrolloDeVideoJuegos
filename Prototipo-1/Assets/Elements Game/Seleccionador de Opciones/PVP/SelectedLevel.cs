@@ -64,8 +64,9 @@ namespace Prototipo_2
                     int i = columnas-1;
                     if (i > 0)
                     {
-                        while (i > 0)
+                        while (i >= 0)
                         {
+                            Debug.Log("ENTRE");
                             for (int j = 0; j < filas; j++)
                             {
                                 if (idOption < nameLevelsOptions.Count)
@@ -128,7 +129,6 @@ namespace Prototipo_2
                 {
                     if (aviableMoveVertical)
                     {
-                        Debug.Log("ENTRE");
                         cursorPlayer1.y--;
                         CursorSelectorPlayer1.MoveUp();
                         aviableMoveVertical = false;
