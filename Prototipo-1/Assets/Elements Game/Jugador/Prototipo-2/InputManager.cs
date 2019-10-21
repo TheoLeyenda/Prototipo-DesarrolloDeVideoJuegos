@@ -5,11 +5,13 @@ using UnityEngine;
 namespace Prototipo_2 {
     public class InputManager : MonoBehaviour
     {
+        public string PauseButton;
         public Player player1;
         public Player_PvP player1_PvP;
         public Player player2;
         public Player_PvP player2_PvP;
         public bool FindPlayersAndPlayers_PvP;
+        private bool inPause = false;
 
         private bool moveHorizontalPlayer1;
         private bool moveVerticalPlayer1;
@@ -39,6 +41,9 @@ namespace Prototipo_2 {
         }
         void Update()
         {
+            Debug.Log("Aqui toy");
+            CheckPauseButton_P1();
+            CheckPauseButton_P2();
             //Debug.Log(player1.enumsPlayers.movimiento);
             if (player1 != null && player1.gameObject.activeSelf)
             {
@@ -79,8 +84,40 @@ namespace Prototipo_2 {
             }
             
         }
-
+        public void CheckValueInPause()
+        {
+            if (inPause)
+            {
+                inPause = false;
+            }
+            else if (!inPause)
+            {
+                inPause = true;
+            }
+        }
+        public void CheckInPause()
+        {
+            switch (inPause)
+            {
+                case true:
+                    Debug.Log("ENTRE TimeScale 0");
+                    Time.timeScale = 0;
+                    break;
+                case false:
+                    Debug.Log("ENTRE TimeScale 1");
+                    Time.timeScale = 1;
+                    break;
+            }
+        }
         //----- FUNCIONES Y CONTROLES DEL JUGADOR 1 -----//
+        public void CheckPauseButton_P1()
+        {
+            if (InputPlayerController.PauseButton_P1())
+            {
+                CheckValueInPause();
+                CheckInPause();
+            }
+        }
         public void CheckVerticalUp_P1()
         {
             if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && InputPlayerController.Vertical_Button_P1() > 0 && moveVerticalPlayer1
@@ -485,7 +522,14 @@ namespace Prototipo_2 {
 
 
         //----- FUNCIONES Y CONTROLES DEL JUGADOR 2 -----//
-
+        public void CheckPauseButton_P2()
+        {
+            if (InputPlayerController.PauseButton_P2())
+            {
+                CheckValueInPause();
+                CheckInPause();
+            }
+        }
         public void CheckVerticalUp_P2()
         {
             if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && InputPlayerController.Vertical_Button_P2() > 0 && moveVerticalPlayer2

@@ -17,6 +17,10 @@ public static class InputPlayerController
         r += Input.GetAxis("Horizontal");
         return Mathf.Clamp(r, -1.0f, 1.0f);
     }
+    public static bool PauseButton_P1()
+    {
+        return Input.GetButtonDown("PauseButton_P1");
+    }
     public static bool SpecialAttackButton_P1()
     {
         return Input.GetButtonDown("SpecialAttackButton_P1");
@@ -69,6 +73,10 @@ public static class InputPlayerController
         float r = 0.0f;
         r += Input.GetAxis("Horizontal_P2");
         return Mathf.Clamp(r, -1.0f, 1.0f);
+    }
+    public static bool PauseButton_P2()
+    {
+        return Input.GetButtonDown("PauseButton_P2");
     }
     public static bool SpecialAttackButton_P2()
     {

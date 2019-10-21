@@ -9,6 +9,7 @@ namespace Prototipo_2
     public class LevelManager : MonoBehaviour
     {
         public bool NivelFinal;
+        public InputManager inputManager;
         public string NameFinishSceneStoryMode;
         public GameObject marcoTexto;
         public GameObject imageJugadorHablando;
@@ -41,6 +42,7 @@ namespace Prototipo_2
             }
             Level = 1;
             ObjectiveOfPassLevel = 1;
+            CheckDiagolos();
         }
         void Update()
         {
@@ -79,8 +81,11 @@ namespace Prototipo_2
             }
             else
             {
+                if (inDialog)
+                {
+                    Time.timeScale = 1;
+                }
                 inDialog = false;
-                Time.timeScale = 1;
                 DisableChat();
             }
         }
