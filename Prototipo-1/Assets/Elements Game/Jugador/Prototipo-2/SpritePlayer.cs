@@ -119,7 +119,10 @@ namespace Prototipo_2 {
                     switch (ActualSprite)
                     {
                         case SpriteActual.Parado:
-                            PlayAnimation("Parado protagonista");
+                            if (player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga)
+                            {
+                                PlayAnimation("Parado protagonista");
+                            }
                             break;
                         case SpriteActual.ParadoDefensa:
                             PlayAnimation("Parado Defensa protagonista");
@@ -164,7 +167,10 @@ namespace Prototipo_2 {
                     switch (ActualSprite)
                     {
                         case SpriteActual.Parado:
-                            PlayAnimation("Parado protagonista");
+                            if (player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga)
+                            {
+                                PlayAnimation("Parado protagonista");
+                            }
                             break;
                         case SpriteActual.ParadoDefensa:
                             PlayAnimation("Parado Defensa protagonista");
