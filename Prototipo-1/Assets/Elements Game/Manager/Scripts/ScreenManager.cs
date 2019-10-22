@@ -83,6 +83,7 @@ namespace Prototipo_2 {
                                 gm.restartLevel = false;
                             }
                             spriteRendererFondo = sr;
+                            Debug.Log(idListaNiveles);
                             if (idListaNiveles < ListaNiveles.Count)
                             {
                                 spriteRendererFondo.sprite = ListaNiveles[idListaNiveles];
