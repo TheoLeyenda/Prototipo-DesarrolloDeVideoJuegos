@@ -28,7 +28,14 @@ namespace Prototipo_2
         // Update is called once per frame
         void Update()
         {
-            if (!levelManager.GetInDialog())
+            if (levelManager != null)
+            {
+                if (!levelManager.GetInDialog())
+                {
+                    CheckInPause();
+                }
+            }
+            else
             {
                 CheckInPause();
             }
@@ -39,9 +46,16 @@ namespace Prototipo_2
         }
         public void ReiniciarNivel()
         {
-            gm.auxCountEnemysDead = gm.countEnemysDead;
             gm.restartLevel = true;
-            if (gm.countEnemysDead == gm.auxCountEnemysDead && gm.restartLevel)
+            if (levelManager != null)
+            {
+                // SI NO FUNCIONA BIEN EL RESTArt DESCOMENTAR ESA LINEA
+                if (/*gm.countEnemysDead == gm.auxCountEnemysDead && */gm.restartLevel)
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }
+            }
+            else
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }

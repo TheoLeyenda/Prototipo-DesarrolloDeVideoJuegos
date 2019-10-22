@@ -434,7 +434,7 @@ namespace Prototipo_2
                 {
                     // SI SU VIDA ES IGUAL A 0 POS MUERE DESACTIVADO
                     enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
-                    gm.auxCountEnemysDead++;
+                    gm.countEnemysDead++;
                     gm.ResetRoundCombat(false);
                     ResetEnemy();
                     enemyPrefab.gameObject.SetActive(false);
@@ -451,7 +451,7 @@ namespace Prototipo_2
                             life = auxLife;
                             gm.generateEnemy = true;
                             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
-                            gm.auxCountEnemysDead++;
+                            gm.countEnemysDead++;
                             gm.ResetRoundCombat(false);
                             ResetEnemy();
                             poolObjectEnemy.Recycle();
@@ -464,7 +464,7 @@ namespace Prototipo_2
                             life = auxLife;
                             gm.generateEnemy = true;
                             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
-                            gm.auxCountEnemysDead++;
+                            gm.countEnemysDead++;
                             gm.ResetRoundCombat(false);
                             ResetEnemy();
                             poolObjectEnemy.Recycle();
@@ -474,7 +474,7 @@ namespace Prototipo_2
                     case EnumsGameManager.ModosDeJuego.Nulo:
                         if (life <= 0)
                         {
-                            gm.auxCountEnemysDead++;
+                            gm.countEnemysDead++;
                             gm.ResetRoundCombat(false);
                             ResetEnemy();
                             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);

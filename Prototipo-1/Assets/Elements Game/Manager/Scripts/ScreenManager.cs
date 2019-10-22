@@ -106,7 +106,8 @@ namespace Prototipo_2 {
         {
             gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Nulo;
             idListaNiveles = -1;
-            if (idListaNiveles == -1 && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Nulo)
+            Time.timeScale = 1;
+            if (idListaNiveles == -1 && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Nulo && Time.timeScale == 1)
             {
                 SceneManager.LoadScene("MENU");
             }
