@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Prototipo_2
 {
@@ -15,19 +16,34 @@ namespace Prototipo_2
             public float scorePlayer;
         }
         // SERA UNA LISTA DE LOS MEJORES 10 PUNTAJES
+        public GameObject prefabHighScoreList;
+        public GameObject inputFiled;
         public List<ScoreData> scores;
         public List<ScoreData> initialHighScoreData;
         private GameManager gm;
+        [HideInInspector]
         public float scoreActual;
+        [HideInInspector]
         public string nameActual;
+        public Text nombreIngresado;
+
         void Start()
         {
+            inputFiled.SetActive(true);
+            prefabHighScoreList.SetActive(false);
             if (GameManager.instanceGameManager != null)
             {
                 gm = GameManager.instanceGameManager;
             }
             //USAR EL VIDEO DE "Input Feld erstellen - Text / Passwort richtig auslesen - Unity 2018" PARA INCORPORAR UNA INTERFAZ
             //PARA QUE EL JUGADOR INGRESE SU NOMBRE.
+
+        }
+        public void LoadData()
+        {
+            inputFiled.SetActive(false);
+            prefabHighScoreList.SetActive(true);
+            nameActual = nombreIngresado.text;
             scoreActual = gm.playerData_P1.score;
             LoadListScore();
             CheckListScore();
