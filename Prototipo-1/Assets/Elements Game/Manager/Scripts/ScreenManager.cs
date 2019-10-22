@@ -11,9 +11,10 @@ namespace Prototipo_2 {
         public GameManager gm;
         public List<Sprite> ListaNiveles;
         private int idListaNiveles;
+
         private void Start()
         {
-            idListaNiveles = 0;
+            idListaNiveles = -1;
             if (gm == null)
             {
                 GameObject go = GameObject.Find("GameManager");
@@ -29,7 +30,10 @@ namespace Prototipo_2 {
             gm.countEnemysDead = gm.auxCountEnemysDead;
             gm.auxCountEnemysDead = 0;
             gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Historia;
-            SceneManager.LoadScene("Nivel " + numerLevel); 
+            if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
+            {
+                SceneManager.LoadScene("Nivel " + numerLevel);
+            }
         }
         public void Prueba()
         {
@@ -38,7 +42,10 @@ namespace Prototipo_2 {
         public void Supervivencia()
         {
             gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Supervivencia;
-            SceneManager.LoadScene("Supervivencia");
+            if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Supervivencia)
+            {
+                SceneManager.LoadScene("Supervivencia");
+            }
         }
         public void Salir()
         {
@@ -53,48 +60,60 @@ namespace Prototipo_2 {
         }
         public void CheckMainCameraInScreen()
         {
+            //Debug.Log(gm.restartLevel);
             if (idListaNiveles < ListaNiveles.Count)
             {
-                if (gm != null && SceneManager.GetActiveScene().name != "MENU" && SceneManager.GetActiveScene().name != "Supervivencia"
+                if ((gm != null && SceneManager.GetActiveScene().name != "MENU" && SceneManager.GetActiveScene().name != "Supervivencia"
                     && SceneManager.GetActiveScene().name != "SampleScene" && SceneManager.GetActiveScene().name != "GameOver"
                     && SceneManager.GetActiveScene().name != "SelectLevel" && SceneManager.GetActiveScene().name != "SelectPlayerScene"
-                    && SceneManager.GetActiveScene().name != "PvP")
+                    && SceneManager.GetActiveScene().name != "PvP"))
                 {
-
                     if (fondo == null)
                     {
-                        
                         fondo = GameObject.Find("Fondo");
                         SpriteRenderer sr = fondo.GetComponent<SpriteRenderer>();
                         if (sr != null)
                         {
+                            if (!gm.restartLevel)
+                            {
+                                idListaNiveles++;
+                            }
+                            else
+                            {
+                                gm.restartLevel = false;
+                            }
                             spriteRendererFondo = sr;
-                            spriteRendererFondo.sprite = ListaNiveles[idListaNiveles];
-                            idListaNiveles++;
+                            if (idListaNiveles < ListaNiveles.Count)
+                            {
+                                spriteRendererFondo.sprite = ListaNiveles[idListaNiveles];
+                            }
                         }
                     }
-                    
                 }
-            }
-            else if(SceneManager.GetActiveScene().name != "MENU")
-            {
-                idListaNiveles = 0;
+                
             }
         }
         public void PvP()
         {
             gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Nulo;
-            idListaNiveles = 0;
-            SceneManager.LoadScene("SelectPlayerScene");
+            idListaNiveles = -1;
+            if (idListaNiveles == -1 && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Nulo)
+            {
+                SceneManager.LoadScene("SelectPlayerScene");
+            }
         }
         public void Menu()
         {
             gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Nulo;
-            idListaNiveles = 0;
-            SceneManager.LoadScene("MENU");
+            idListaNiveles = -1;
+            if (idListaNiveles == -1 && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Nulo)
+            {
+                SceneManager.LoadScene("MENU");
+            }
         }
         private void Update()
         {
+            //Debug.Log(idListaNiveles);
             if (gm != null)
             {
                 if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
@@ -105,7 +124,11 @@ namespace Prototipo_2 {
         }
         public int GetIdListLevel()
         {
-            return idListaNiveles;
+            return idListaNiveles + 1;
+        }
+        public void SetIdListLevel(int id)
+        {
+            idListaNiveles = id;
         }
     }
 }

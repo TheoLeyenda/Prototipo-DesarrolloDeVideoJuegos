@@ -27,6 +27,8 @@ namespace Prototipo_2
         public ScreenManager screenManager;
         public StructGameManager structGameManager;
         private int roundCombat;
+        [HideInInspector]
+        public bool restartLevel;
         // Start is called before the first frame update
         private void Awake()
         {
@@ -55,12 +57,13 @@ namespace Prototipo_2
             {
                 CanvasGameOver.SetActive(false);
                 ResetGameManager();
+                screenManager.SetIdListLevel(-1);
             }
             if (SceneManager.GetActiveScene().name == "GameOver")
             {
                 CanvasGameOver.SetActive(true);
             }
-            Debug.Log(totalCountEnemysDead);
+            //Debug.Log(totalCountEnemysDead);
         }
         public void ResetGameManager()
         {

@@ -44,7 +44,7 @@ namespace Prototipo_2
             {
                 player.spritePlayerActual.GetAnimator().SetBool("FinalAtaqueEspecial", false);
             }
-            else
+            else if(player.enumsPlayers.specialAttackEquipped == EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga)
             {
                 player.spritePlayerActual.GetAnimator().SetBool("FinalAtaqueEspecial", true);
             }

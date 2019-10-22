@@ -150,6 +150,7 @@ namespace Prototipo_2
                     enemy.OnEnemy();
                     break;
                 case EnumsGameManager.ModosDeJuego.Historia:
+                    Debug.Log(idListEnemy);
                     if (idListEnemy < ListEnemyGenerate.Count)
                     {
                         go = ListEnemyGenerate[idListEnemy].poolEnemy.GetObject();

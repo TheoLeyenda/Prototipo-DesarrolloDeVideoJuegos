@@ -104,6 +104,9 @@ namespace Prototipo_2
         {
             if (!NivelFinal)
             {
+                gm.totalCountEnemysDead = gm.totalCountEnemysDead + gm.auxCountEnemysDead;
+                gm.countEnemysDead = gm.auxCountEnemysDead;
+                gm.auxCountEnemysDead = 0;
                 gm.screenManager.LoadLevel(gm.screenManager.GetIdListLevel() + 1);
             }
             else

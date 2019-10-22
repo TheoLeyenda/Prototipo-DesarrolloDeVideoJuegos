@@ -40,7 +40,8 @@ namespace Prototipo_2
         public void ReiniciarNivel()
         {
             gm.auxCountEnemysDead = gm.countEnemysDead;
-            if (gm.countEnemysDead == gm.auxCountEnemysDead)
+            gm.restartLevel = true;
+            if (gm.countEnemysDead == gm.auxCountEnemysDead && gm.restartLevel)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
