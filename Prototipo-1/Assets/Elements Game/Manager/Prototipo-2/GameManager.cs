@@ -7,6 +7,8 @@ namespace Prototipo_2
 {
     public class GameManager : MonoBehaviour
     {
+        public PlayerData playerData_P1;
+        public PlayerData playerData_P2;
         public GameObject CanvasGameOver;
         public TextMeshProUGUI textCountEnemigosAbatidos;
         public static GameManager instanceGameManager;

@@ -435,6 +435,7 @@ namespace Prototipo_2
                     // SI SU VIDA ES IGUAL A 0 POS MUERE DESACTIVADO
                     enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
                     gm.countEnemysDead++;
+                    gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
                     gm.ResetRoundCombat(false);
                     ResetEnemy();
                     enemyPrefab.gameObject.SetActive(false);
@@ -452,6 +453,7 @@ namespace Prototipo_2
                             gm.generateEnemy = true;
                             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
                             gm.countEnemysDead++;
+                            gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
                             gm.ResetRoundCombat(false);
                             ResetEnemy();
                             poolObjectEnemy.Recycle();
@@ -465,6 +467,7 @@ namespace Prototipo_2
                             gm.generateEnemy = true;
                             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
                             gm.countEnemysDead++;
+                            gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
                             gm.ResetRoundCombat(false);
                             ResetEnemy();
                             poolObjectEnemy.Recycle();
@@ -475,6 +478,7 @@ namespace Prototipo_2
                         if (life <= 0)
                         {
                             gm.countEnemysDead++;
+                            gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
                             gm.ResetRoundCombat(false);
                             ResetEnemy();
                             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
