@@ -20,6 +20,10 @@ namespace Prototipo_2
         public GameObject buttonGameOver;
         [HideInInspector]
         public int countEnemysDead;
+        [HideInInspector]
+        public int auxCountEnemysDead;
+        [HideInInspector]
+        public int totalCountEnemysDead;
         public ScreenManager screenManager;
         public StructGameManager structGameManager;
         private int roundCombat;
@@ -56,6 +60,7 @@ namespace Prototipo_2
             {
                 CanvasGameOver.SetActive(true);
             }
+            Debug.Log(totalCountEnemysDead);
         }
         public void ResetGameManager()
         {

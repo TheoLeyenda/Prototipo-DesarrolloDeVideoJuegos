@@ -25,8 +25,11 @@ namespace Prototipo_2 {
         }
         public void LoadLevel(int numerLevel)
         {
-           gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Historia;
-           SceneManager.LoadScene("Nivel " + numerLevel); 
+            gm.totalCountEnemysDead = gm.totalCountEnemysDead + gm.auxCountEnemysDead;
+            gm.countEnemysDead = gm.auxCountEnemysDead;
+            gm.auxCountEnemysDead = 0;
+            gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Historia;
+            SceneManager.LoadScene("Nivel " + numerLevel); 
         }
         public void Prueba()
         {

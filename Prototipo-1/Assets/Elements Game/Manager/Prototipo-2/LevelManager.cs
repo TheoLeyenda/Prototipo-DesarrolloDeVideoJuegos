@@ -31,7 +31,6 @@ namespace Prototipo_2
         }
         private void Start()
         {
-            
             if (InitDialog)
             {
                 inDialog = true;

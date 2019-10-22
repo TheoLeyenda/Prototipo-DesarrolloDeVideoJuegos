@@ -41,7 +41,6 @@ namespace Prototipo_2 {
         }
         void Update()
         {
-            Debug.Log("Aqui toy");
             CheckPauseButton_P1();
             CheckPauseButton_P2();
             //Debug.Log(player1.enumsPlayers.movimiento);
@@ -86,11 +85,11 @@ namespace Prototipo_2 {
         }
         public void CheckValueInPause()
         {
-            if (inPause)
+            /*if (inPause)
             {
                 inPause = false;
             }
-            else if (!inPause)
+            else */if (!inPause)
             {
                 inPause = true;
             }
@@ -100,11 +99,9 @@ namespace Prototipo_2 {
             switch (inPause)
             {
                 case true:
-                    Debug.Log("ENTRE TimeScale 0");
                     Time.timeScale = 0;
                     break;
                 case false:
-                    Debug.Log("ENTRE TimeScale 1");
                     Time.timeScale = 1;
                     break;
             }
