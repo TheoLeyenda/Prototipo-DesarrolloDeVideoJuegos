@@ -55,18 +55,22 @@ namespace Prototipo_2
         public void ReiniciarNivel()
         {
             DisableMenues();
-            if (levelManager != null)
+            gm.playerData_P1.score = gm.playerData_P1.auxScore;
+            if (gm.playerData_P1.score == gm.playerData_P1.auxScore)
             {
-                gm.restartLevel = true;
-                // SI NO FUNCIONA BIEN EL RESTArt DESCOMENTAR ESA LINEA
-                if (/*gm.countEnemysDead == gm.auxCountEnemysDead && */gm.restartLevel)
+                if (levelManager != null)
+                {
+                    gm.restartLevel = true;
+                    // SI NO FUNCIONA BIEN EL RESTArt DESCOMENTAR ESA LINEA
+                    if (/*gm.countEnemysDead == gm.auxCountEnemysDead && */gm.restartLevel)
+                    {
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    }
+                }
+                else
                 {
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
-            }
-            else
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
         public void CheckInPause()

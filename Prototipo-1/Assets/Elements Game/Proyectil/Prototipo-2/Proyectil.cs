@@ -146,6 +146,7 @@ namespace Prototipo_2
 
                                     //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                     PLAYER1.SetXpActual(PLAYER1.GetXpActual() + PLAYER1.xpForHit);
+                                    PLAYER1.PD.score = PLAYER1.PD.score + PLAYER1.PD.scoreForHit;
                                 }
                                 timeLife = 0;
                                 gameObject.SetActive(false);
@@ -194,6 +195,7 @@ namespace Prototipo_2
                                 {
                                     //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                     PLAYER1.SetXpActual(PLAYER1.GetXpActual() + PLAYER1.xpForHit);
+                                    PLAYER1.PD.score = PLAYER1.PD.score + PLAYER1.PD.scoreForHit;
                                     cuadrilla.player.SetEnableCounterAttack(true);
                                     if (cuadrilla.player.delayCounterAttack > 0)
                                     {
@@ -230,6 +232,7 @@ namespace Prototipo_2
                                 {
                                     //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                     PLAYER2.SetXpActual(PLAYER2.GetXpActual() + PLAYER2.xpForHit);
+                                    PLAYER2.PD.score = PLAYER2.PD.score + PLAYER2.PD.scoreForHit;
                                     cuadrilla.player.SetEnableCounterAttack(true);
                                     if (cuadrilla.player.delayCounterAttack > 0)
                                     {
@@ -274,6 +277,7 @@ namespace Prototipo_2
                                     //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                     //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
                                     PLAYER1.SetXpActual(PLAYER1.GetXpActual() + (PLAYER1.xpForHit / 2));
+                                    PLAYER1.PD.score = PLAYER1.PD.score + (PLAYER1.PD.scoreForHit / 2);
                                 }
                             }
                             if (player_PvP != null)
@@ -287,6 +291,7 @@ namespace Prototipo_2
                                         //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                         //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
                                         PLAYER2.SetXpActual(PLAYER2.GetXpActual() + (PLAYER2.xpForHit / 2));
+                                        PLAYER2.PD.score = PLAYER2.PD.score + (PLAYER2.PD.scoreForHit/2);
                                     }
                                 }
                                 if (player_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
@@ -319,6 +324,7 @@ namespace Prototipo_2
                                                     //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                                     //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
                                                     PLAYER1.SetXpActual(PLAYER1.GetXpActual() + (PLAYER1.xpForHit / 2));
+                                                    PLAYER1.PD.score = PLAYER1.PD.score + (PLAYER1.PD.scoreForHit / 2);
                                                 }
                                             }
                                             else if (PLAYER2 != null)
@@ -329,6 +335,7 @@ namespace Prototipo_2
                                                     //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                                     //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
                                                     PLAYER2.SetXpActual(PLAYER2.GetXpActual() + (PLAYER2.xpForHit / 2));
+                                                    PLAYER2.PD.score = PLAYER2.PD.score + (PLAYER2.PD.scoreForHit / 2);
                                                 }
                                             }
                                             realDamage = damage - cuadrilla.player.pointsDeffence;
@@ -378,6 +385,7 @@ namespace Prototipo_2
                                 //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                 //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
                                 PLAYER1.SetXpActual(PLAYER1.GetXpActual() + (PLAYER1.xpForHit/2));
+                                PLAYER1.PD.score = PLAYER1.PD.score + (PLAYER1.PD.scoreForHit / 2);
                                 if (cuadrilla.enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
                                 {
                                     float realDamage = damage - cuadrilla.enemy.pointsDeffence;

@@ -174,6 +174,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0317e505aadc9441bcb0c6fbaf18243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  Animations: []
+  ActualSprite: 0
+  delaySpriteRecibirDanio: 0
+  delaySpriteContraAtaque: 0
 --- !u!1 &2451611607475044872
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +356,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9121592577714499394}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: -277, y: 210, z: 0}
+  m_LocalPosition: {x: -277, y: 190, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1.0835979}
   m_Children:
   - {fileID: 4098498353947840791}
@@ -652,21 +658,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e80ed6d8b9751468846020f2df5d7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetPlayer: 0
+  scoreText: {fileID: 0}
+  PD: {fileID: 0}
   gridPlayer: {fileID: 0}
-  life: 250
-  maxLife: 250
   structsPlayer: {fileID: 0}
+  spritePlayers: []
+  spritePlayerActual: {fileID: 0}
   enumsPlayers: {fileID: 1420592905}
   BARRA_DE_VIDA: {fileID: 9121592577714499394}
+  BARRA_DE_CARGA: {fileID: 0}
   generadorProyectiles: {fileID: 9121592577794639369}
+  generadorProyectilesAgachado: {fileID: 0}
+  generadorProyectilesParabola: {fileID: 0}
+  generadorProyectilesParabolaAgachado: {fileID: 0}
   ImageHP: {fileID: 5503501260017885045}
+  ImageCarga: {fileID: 0}
+  xpNededSpecialAttack: 0
+  xpForHit: 0
   PadArrowUp: {fileID: 0}
   PadArrowDown: {fileID: 0}
   PadArrowLeft: {fileID: 0}
   PadArrowRigth: {fileID: 0}
   SpeedJump: 10
   Speed: 0
-  poolObjectAttack: {fileID: 9121592579528980573}
+  pointsDeffence: 0
+  Resistace: 0
+  Gravity: 0
+  colliderSprite: {fileID: 0}
+  ButtonDeffence: 
+  ButtonAttack: 
+  ButtonSpecialAttack: 
+  delayCounterAttack: 0
+  SpecialAttackEnabelEveryMoment: 0
+  DoubleSpeed: 0
+  LookingForward: 0
+  LookingBack: 0
+  delayAttack: 0
+  boxColliderParado: {fileID: 0}
+  boxColliderAgachado: {fileID: 0}
+  NameInputManager: 
 --- !u!114 &1420592905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,8 +710,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8a15df1adbb58a46ac4d138dace65cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  specialAttackEquipped: 0
   movimiento: 0
   estadoJugador: 0
+  numberPlayer: 0
 --- !u!1001 &4164644636569699438
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -688,6 +721,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9121592579315266116}
     m_Modifications:
+    - target: {fileID: 5142444625613618220, guid: c6d6ac12b9b9cf44092344d820274e7e,
+        type: 3}
+      propertyPath: m_Name
+      value: PoolProyectil
+      objectReference: {fileID: 0}
     - target: {fileID: 5142444625613618227, guid: c6d6ac12b9b9cf44092344d820274e7e,
         type: 3}
       propertyPath: Ball
@@ -698,11 +736,6 @@ PrefabInstance:
         type: 3}
       propertyPath: count
       value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5142444625613618220, guid: c6d6ac12b9b9cf44092344d820274e7e,
-        type: 3}
-      propertyPath: m_Name
-      value: PoolProyectil
       objectReference: {fileID: 0}
     - target: {fileID: 5142444625613618226, guid: c6d6ac12b9b9cf44092344d820274e7e,
         type: 3}
@@ -767,15 +800,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4164644636569699438}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9121592579528980573 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5142444625613618227, guid: c6d6ac12b9b9cf44092344d820274e7e,
-    type: 3}
-  m_PrefabInstance: {fileID: 4164644636569699438}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75438edaff39ea94592a8d0f5a22a436, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

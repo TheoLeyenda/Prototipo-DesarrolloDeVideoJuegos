@@ -57,6 +57,7 @@ namespace Prototipo_2
             if (ObjectiveOfPassLevel <= 0)
             {
                 NextLevel();
+                gm.playerData_P1.auxScore = gm.playerData_P1.score;
                 ObjectiveOfPassLevel = 1;
             }
         }

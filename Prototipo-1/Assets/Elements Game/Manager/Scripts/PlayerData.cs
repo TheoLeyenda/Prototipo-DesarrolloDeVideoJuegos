@@ -9,6 +9,8 @@ public class PlayerData : ScriptableObject
     public float maxLifePlayer;
     [HideInInspector]
     public float score;
+    [HideInInspector]
+    public float auxScore;
     public float scoreForHit;
     public float scoreForEnemyDead;
 }

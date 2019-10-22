@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &253350902
 RectTransform:
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -427.05017, w: 0}
   m_textInfo:
     textComponent: {fileID: 253350903}
     characterCount: 14
@@ -288,7 +288,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -223.5654, w: 0}
   m_textInfo:
     textComponent: {fileID: 804289369}
     characterCount: 18
@@ -732,8 +732,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0436bf7ab7ee1414cb0d95aed209bae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData_P1: {fileID: 11400000, guid: 753dcda979ab4a94c90bdb2076db2913, type: 2}
+  playerData_P2: {fileID: 11400000, guid: 2424c6dd895f33e47bfeb86d0eb7224e, type: 2}
   CanvasGameOver: {fileID: 4019562710179355323}
   textCountEnemigosAbatidos: {fileID: 804289369}
+  textScorePlayer: {fileID: 253350903}
   enumsGameManager: {fileID: 5378511875444093892}
   InGameOverScene: 0
   generateEnemy: 0
@@ -741,8 +744,11 @@ MonoBehaviour:
   FondoPushButton: {fileID: 4019562710876183259}
   buttonGameOver: {fileID: 4019562710179355323}
   countEnemysDead: 0
+  auxCountEnemysDead: 0
+  totalCountEnemysDead: 0
   screenManager: {fileID: 3412696478766471643}
   structGameManager: {fileID: 7269674137230057141}
+  restartLevel: 0
 --- !u!114 &5378511875444093892
 MonoBehaviour:
   m_ObjectHideFlags: 0

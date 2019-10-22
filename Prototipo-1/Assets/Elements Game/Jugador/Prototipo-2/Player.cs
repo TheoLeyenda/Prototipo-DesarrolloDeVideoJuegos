@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace Prototipo_2
 {
@@ -9,6 +10,8 @@ namespace Prototipo_2
     {
         // Start is called before the first frame update
         public bool resetPlayer;
+        public bool resetScore;
+        public TextMeshProUGUI scoreText;
         public PlayerData PD;
         public Grid gridPlayer;
         private float auxLife;
@@ -79,6 +82,10 @@ namespace Prototipo_2
             {
                 ResetPlayer();
             }
+            if (resetScore)
+            {
+                PD.score = 0;
+            }
             CheckSpritePlayerActual();
             auxDelayCounterAttack = delayCounterAttack;
             colliderSprite.enabled = true;
@@ -101,6 +108,7 @@ namespace Prototipo_2
             }
             animator = GetComponent<Animator>();
             gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
+            DrawScore();
         }
 
         // Update is called once per frame
@@ -113,6 +121,11 @@ namespace Prototipo_2
             CheckLoadSpecialAttackBar();
             CheckBoxColliderActivate();
             CheckMovementInSpecialAttack();
+            DrawScore();
+        }
+        public void DrawScore()
+        {
+            scoreText.text = "Puntaje: " + PD.score;
         }
         public void CheckMovementInSpecialAttack()
         {

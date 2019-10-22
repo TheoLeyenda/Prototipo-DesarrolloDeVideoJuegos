@@ -11,6 +11,7 @@ namespace Prototipo_2
         public PlayerData playerData_P2;
         public GameObject CanvasGameOver;
         public TextMeshProUGUI textCountEnemigosAbatidos;
+        public TextMeshProUGUI textScorePlayer;
         public static GameManager instanceGameManager;
         public EnumsGameManager enumsGameManager;
         [HideInInspector]
@@ -86,6 +87,7 @@ namespace Prototipo_2
         public void GameOver(string finishScene)
         {
             textCountEnemigosAbatidos.text = "Enemigos Abatidos: " + countEnemysDead;
+            textScorePlayer.text = "Puntaje total: " + playerData_P1.score;
             SceneManager.LoadScene(finishScene);
         }
     }
