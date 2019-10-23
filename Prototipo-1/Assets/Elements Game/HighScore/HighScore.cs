@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace Prototipo_2
 {
@@ -14,6 +15,8 @@ namespace Prototipo_2
         {
             public string namePlayer;
             public float scorePlayer;
+            public TextMeshProUGUI textNamePlayer;
+            public TextMeshProUGUI textScorePlayer;
         }
         // SERA UNA LISTA DE LOS MEJORES 10 PUNTAJES
         public GameObject prefabHighScoreList;
@@ -41,20 +44,23 @@ namespace Prototipo_2
         }
         public void LoadData()
         {
-            inputFiled.SetActive(false);
             prefabHighScoreList.SetActive(true);
+            inputFiled.SetActive(false);
             nameActual = nombreIngresado.text;
             scoreActual = gm.playerData_P1.score;
-            LoadListScore();
             CheckListScore();
             SaveListScore();
+            LoadListScore();
         }
         public void LoadListScore()
         {
             for (int i = 0; i < scores.Count; i++)
             {
                 scores[i].namePlayer = PlayerPrefs.GetString(scores[i].namePlayer, scores[i].namePlayer);
-                scores[i].scorePlayer = PlayerPrefs.GetFloat(scores[i].namePlayer, 0);
+                Debug.Log(PlayerPrefs.GetFloat(scores[i].namePlayer, scores[i].scorePlayer));
+                scores[i].scorePlayer = PlayerPrefs.GetFloat(scores[i].namePlayer, scores[i].scorePlayer);
+                scores[i].textNamePlayer.text = "" + scores[i].namePlayer;
+                scores[i].textScorePlayer.text = "" + scores[i].scorePlayer;
             }
         }
         public void SaveListScore()
@@ -72,8 +78,8 @@ namespace Prototipo_2
         }
         public void CheckListScore()
         {
-            int id = -1;
-            for (int i = 0; i < scores.Count; i++)
+            int id = scores.Count;
+            for (int i = scores.Count-1; i >= 0 ; i--)
             {
                 if (scoreActual > scores[i].scorePlayer)
                 {
