@@ -15,6 +15,8 @@ namespace Prototipo_2
         {
             public string namePlayer;
             public float scorePlayer;
+            public string claveNombre;
+            public string clavePuntos;
             public TextMeshProUGUI textNamePlayer;
             public TextMeshProUGUI textScorePlayer;
         }
@@ -22,22 +24,29 @@ namespace Prototipo_2
         public GameObject prefabHighScoreList;
         public GameObject inputFiled;
         public List<ScoreData> scores;
-        public List<ScoreData> initialHighScoreData;
+        private List<ScoreData> initialHighScoreData;
         private GameManager gm;
         [HideInInspector]
         public float scoreActual;
         [HideInInspector]
         public string nameActual;
         public Text nombreIngresado;
-
+        private bool save;
+        public bool RestartTable;
         void Start()
         {
+            initialHighScoreData = scores;
             inputFiled.SetActive(true);
             prefabHighScoreList.SetActive(false);
             if (GameManager.instanceGameManager != null)
             {
                 gm = GameManager.instanceGameManager;
             }
+            if (RestartTable)
+            {
+                ResetScoreList();
+            }
+            //SaveListScore();
             //USAR EL VIDEO DE "Input Feld erstellen - Text / Passwort richtig auslesen - Unity 2018" PARA INCORPORAR UNA INTERFAZ
             //PARA QUE EL JUGADOR INGRESE SU NOMBRE.
 
@@ -48,17 +57,17 @@ namespace Prototipo_2
             inputFiled.SetActive(false);
             nameActual = nombreIngresado.text;
             scoreActual = gm.playerData_P1.score;
+            //SaveListScore();
             CheckListScore();
-            SaveListScore();
             LoadListScore();
         }
         public void LoadListScore()
         {
             for (int i = 0; i < scores.Count; i++)
             {
-                scores[i].namePlayer = PlayerPrefs.GetString(scores[i].namePlayer, scores[i].namePlayer);
-                Debug.Log(PlayerPrefs.GetFloat(scores[i].namePlayer, scores[i].scorePlayer));
-                scores[i].scorePlayer = PlayerPrefs.GetFloat(scores[i].namePlayer, scores[i].scorePlayer);
+                Debug.Log(PlayerPrefs.GetString(scores[i].claveNombre));
+                scores[i].namePlayer = PlayerPrefs.GetString(scores[i].claveNombre, scores[i].namePlayer);
+                scores[i].scorePlayer = PlayerPrefs.GetFloat(scores[i].clavePuntos, scores[i].scorePlayer);
                 scores[i].textNamePlayer.text = "" + scores[i].namePlayer;
                 scores[i].textScorePlayer.text = "" + scores[i].scorePlayer;
             }
@@ -67,18 +76,14 @@ namespace Prototipo_2
         {
             for (int i = 0; i < scores.Count; i++)
             {
-                PlayerPrefs.SetString(scores[i].namePlayer, scores[i].namePlayer);
-                PlayerPrefs.SetFloat(scores[i].namePlayer, scores[i].scorePlayer);
+                PlayerPrefs.SetString(scores[i].claveNombre, scores[i].namePlayer);
+                PlayerPrefs.SetFloat(scores[i].clavePuntos, scores[i].scorePlayer);
             }
         }
         // Update is called once per frame
-        void Update()
-        {
-
-        }
         public void CheckListScore()
         {
-            int id = scores.Count;
+            int id = scores.Count + 1;
             for (int i = scores.Count-1; i >= 0 ; i--)
             {
                 if (scoreActual > scores[i].scorePlayer)
@@ -86,16 +91,19 @@ namespace Prototipo_2
                     id = i;
                 }
             }
+            Debug.Log(id);
             if (id >= 0 && id < scores.Count)
             {
-                scores[id].namePlayer = nameActual;
-                scores[id].scorePlayer = scoreActual;
+                PlayerPrefs.SetString(scores[id].claveNombre, nameActual);
+                PlayerPrefs.SetFloat(scores[id].clavePuntos, scoreActual);
             }
         }
         public void ResetScoreList()
         {
+            PlayerPrefs.DeleteAll();
             scores.Clear();
             scores = initialHighScoreData;
+            SaveListScore();
         }
     }
 }
