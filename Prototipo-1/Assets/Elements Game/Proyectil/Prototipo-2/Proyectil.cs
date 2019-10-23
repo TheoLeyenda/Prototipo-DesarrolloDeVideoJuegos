@@ -5,6 +5,7 @@ namespace Prototipo_2
 {
     public class Proyectil : MonoBehaviour
     {
+
         public enum DisparadorDelProyectil
         {
             Nulo,
@@ -37,8 +38,18 @@ namespace Prototipo_2
         protected Enemy ENEMY;
         protected GameManager gm;
         public DisparadorDelProyectil disparadorDelProyectil;
+        private TrailRenderer trailRenderer;
+        private void OnDisable()
+        {
+            if (trailRenderer != null)
+            {
+                trailRenderer.enabled = false;
+            }
+        }
         private void Start()
         {
+            trailRenderer = GetComponent<TrailRenderer>();
+            Debug.Log(trailRenderer);
             if (GameManager.instanceGameManager != null)
             {
                 gm = GameManager.instanceGameManager;
@@ -55,6 +66,10 @@ namespace Prototipo_2
         }
         public void On()
         {
+            if (trailRenderer != null)
+            {
+                trailRenderer.enabled = true;
+            }
             if (!dobleDamage)
             {
                 damage = auxDamage;
