@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace Prototipo_2
 {
@@ -209,7 +210,14 @@ namespace Prototipo_2
             {
                 PD.lifePlayer = PD.maxLifePlayer;
                 enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.muerto;
-                gm.GameOver("GameOver");
+                if (SceneManager.GetActiveScene().name == "Supervivencia")
+                {
+                    SceneManager.LoadScene("HighScore");
+                }
+                else
+                {
+                    gm.GameOver("GameOver");
+                }
                 gm.ResetRoundCombat(true);
             }
         }

@@ -65,7 +65,7 @@ namespace Prototipo_2
         {
             for (int i = 0; i < scores.Count; i++)
             {
-                Debug.Log(PlayerPrefs.GetString(scores[i].claveNombre));
+                //Debug.Log(PlayerPrefs.GetString(scores[i].claveNombre));
                 scores[i].namePlayer = PlayerPrefs.GetString(scores[i].claveNombre, scores[i].namePlayer);
                 scores[i].scorePlayer = PlayerPrefs.GetFloat(scores[i].clavePuntos, scores[i].scorePlayer);
                 scores[i].textNamePlayer.text = "" + scores[i].namePlayer;
