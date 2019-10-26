@@ -120,6 +120,7 @@ namespace Prototipo_2
         {
             //spriteEnemy.animator.SetBool("AtaqueEspecial", true);
             //enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
+            CheckDeffense();
             CheckBoxColliders2D();
             CheckLifeBar();
             CheckLoadSpecialAttackBar();
@@ -533,17 +534,21 @@ namespace Prototipo_2
             {
                 case EnumsEnemy.Movimiento.AtacarEnElLugar:
                     CheckDelayAttack(false);
+                    isDeffended = false;
                     break;
                 case EnumsEnemy.Movimiento.AgacharseAtaque:
                     Duck(structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                     CheckDelayAttack(false);
+                    isDeffended = false;
                     break;
                 case EnumsEnemy.Movimiento.SaltoAtaque:
                     CheckDelayAttack(false);
                     isJamping = true;
                     Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
+                    isDeffended = false;
                     break;
                 case EnumsEnemy.Movimiento.MoverAtras:
+                    isDeffended = false;
                     if (structsEnemys.dataEnemy.columnaActual < gridEnemy.GetCuadrilla_columnas() - 1)
                     {
                         MoveRight(gridEnemy.matrizCuadrilla[gridEnemy.baseGrild][structsEnemys.dataEnemy.columnaActual + 1].transform.position);
@@ -554,6 +559,7 @@ namespace Prototipo_2
                     }
                     break;
                 case EnumsEnemy.Movimiento.MoverAdelante:
+                    isDeffended = false;
                     if (structsEnemys.dataEnemy.columnaActual > 0)
                     {
                         MoveLeft(gridEnemy.matrizCuadrilla[gridEnemy.baseGrild][structsEnemys.dataEnemy.columnaActual - 1].transform.position);
@@ -564,6 +570,7 @@ namespace Prototipo_2
                     }
                     break;
                 case EnumsEnemy.Movimiento.Saltar:
+                    isDeffended = false;
                     isJamping = true;
                     Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
                     break;
@@ -580,24 +587,30 @@ namespace Prototipo_2
                     Deffence();
                     break;
                 case EnumsEnemy.Movimiento.Agacharse:
+                    isDeffended = false;
                     Duck(structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                     break;
                 case EnumsEnemy.Movimiento.AtaqueEspecial:
                     //CheckDelayAttack(true);
+                    isDeffended = false;
                     break;
                 case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
                     Duck(structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                     //CheckDelayAttack(true);
+                    isDeffended = false;
                     break;
                 case EnumsEnemy.Movimiento.AtaqueEspecialSalto:
                     //CheckDelayAttack(true);
+                    isDeffended = false;
                     isJamping = true;
                     Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
                     break;
                 case EnumsEnemy.Movimiento.MoveToPointCombat:
+                    isDeffended = false;
                     MoveToPoint(pointOfCombat);
                     break;
                 case EnumsEnemy.Movimiento.MoveToPointDeath:
+                    isDeffended = false;
                     MoveToPoint(pointOfDeath);
                     break;
             }
@@ -605,6 +618,12 @@ namespace Prototipo_2
             {
                 colliderSprites.enabled = true;
                 isDuck = false;
+            }
+            if (spriteEnemy.ActualSprite != SpriteEnemy.SpriteActual.AgachadoDefensa
+                && spriteEnemy.ActualSprite != SpriteEnemy.SpriteActual.ParadoDefensa
+                && spriteEnemy.ActualSprite != SpriteEnemy.SpriteActual.SaltoDefensa)
+            {
+                isDeffended = false;
             }
             //CHEKEA EL MOVIMIENTO DEL ENEMIGO
         }
