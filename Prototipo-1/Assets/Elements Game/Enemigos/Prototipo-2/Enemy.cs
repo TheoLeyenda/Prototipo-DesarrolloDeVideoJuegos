@@ -63,6 +63,9 @@ namespace Prototipo_2
         public Vector3 pointOfCombat;
         public bool damageCounterAttack;
         public bool activateComportamiento;
+        public BoxColliderController boxColliderControllerAgachado;
+        public BoxColliderController boxColliderControllerParado;
+        public BoxColliderController boxColliderControllerSaltando;
 
         [Header("Porcentage: Movimiento")]
         public float MovePorcentage;
@@ -116,6 +119,7 @@ namespace Prototipo_2
         {
             //spriteEnemy.animator.SetBool("AtaqueEspecial", true);
             //enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
+            CheckBoxColliders2D();
             CheckLifeBar();
             CheckLoadSpecialAttackBar();
             CheckDead();
@@ -158,6 +162,9 @@ namespace Prototipo_2
         }
         public void OnEnemy()
         {
+            boxColliderControllerParado.GetBoxCollider2D().enabled = true;
+            boxColliderControllerAgachado.GetBoxCollider2D().enabled = false;
+            boxColliderControllerSaltando.GetBoxCollider2D().enabled = false;
             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
             poolObjectEnemy = GetComponent<PoolObject>();
             if (GameManager.instanceGameManager != null)
@@ -183,6 +190,36 @@ namespace Prototipo_2
                     CheckMovement();
                     delaySelectMovement = delaySelectMovement - Time.deltaTime;
                 }
+            }
+        }
+        public void CheckBoxColliders2D()
+        {
+            if (isDuck || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Agacharse
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado)
+            {
+                boxColliderControllerAgachado.GetBoxCollider2D().enabled = true;
+                boxColliderControllerParado.GetBoxCollider2D().enabled = false;
+                boxColliderControllerSaltando.GetBoxCollider2D().enabled = false;
+            }
+            else if (isJamping || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto)
+            {
+                boxColliderControllerAgachado.GetBoxCollider2D().enabled = false;
+                boxColliderControllerParado.GetBoxCollider2D().enabled = false;
+                boxColliderControllerSaltando.GetBoxCollider2D().enabled = true;
+            }
+            else if(enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar
+                || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque
+                || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa
+                || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto)
+            {
+                boxColliderControllerAgachado.GetBoxCollider2D().enabled = false;
+                boxColliderControllerParado.GetBoxCollider2D().enabled = true;
+                boxColliderControllerSaltando.GetBoxCollider2D().enabled = false;
             }
         }
         // VA A FALTAR CREAR UNA BARRA DE ATAQUE ESPECIAL Y QUE CUANDO LA BARRA ESTE LLENA LLAME A LA FUNCION DE CHECK ATAQUE ESPECIAL
@@ -642,7 +679,7 @@ namespace Prototipo_2
         }
         public virtual void AnimationAttack(){ }
         public virtual void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage){ }
-        public virtual void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage, Cuadrilla cuadrilla) { }
+        public virtual void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage, Proyectil cuadrilla) { }
         public void CheckSpecialAttackEnemyController(int minRandomRootShoot, int maxRandomRootShoot, GameObject generador)
         {
             if (!isDuck)
@@ -725,14 +762,6 @@ namespace Prototipo_2
         public void Duck(int rangoAgachado)
         {
             isDuck = true;
-            colliderSprites.enabled = false;
-            for (int i = 0; i < structsEnemys.dataEnemy.CantCasillasOcupadas_X; i++)
-            {
-                if (structsEnemys.dataEnemy.columnaActual + i < gridEnemy.GetCuadrilla_columnas())
-                {
-                    gridEnemy.matrizCuadrilla[gridEnemy.GetCuadrilla_columnas() - rangoAgachado][structsEnemys.dataEnemy.columnaActual + i].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
-                }
-            }
         }
         public bool GetIsDeffended()
         {

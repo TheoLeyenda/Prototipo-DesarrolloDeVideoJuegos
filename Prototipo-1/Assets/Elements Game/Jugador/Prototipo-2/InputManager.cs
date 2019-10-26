@@ -133,18 +133,16 @@ namespace Prototipo_2 {
             {
                 player1.SetControllerJoystick(true);
                 player1.MovementDuck();
+                
                 player1.enumsPlayers.movimiento = EnumsPlayers.Movimiento.Agacharse;
-                player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Agachado;
+                if (player1.spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.RecibirDanio && player1.spritePlayerActual.ActualSprite
+                    != SpritePlayer.SpriteActual.ContraAtaqueAgachado)
+                {
+                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Agachado;
+                }
                 player1.SetIsDuck(true);
             }
-            if (player1.GetIsDuck())
-            {
-                player1.structsPlayer.dataPlayer.CantCasillasOcupadas_Y = player1.structsPlayer.dataPlayer.CantCasillasOcupadasAgachado;
-            }
-            else
-            {
-                player1.structsPlayer.dataPlayer.CantCasillasOcupadas_Y = player1.structsPlayer.dataPlayer.CantCasillasOcupadasParado;
-            }
+            
         }
         public void CheckVerticalCero_P1()
         {
@@ -233,6 +231,17 @@ namespace Prototipo_2 {
             {
                 player1.SetControllerJoystick(true);
                 player1.Deffence();
+                player1.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
+                player1.boxColliderParado.state = BoxColliderController.StateBoxCollider.Defendido;
+                player1.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
+                player1.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
+            }
+            else
+            {
+                player1.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Normal;
+                player1.boxColliderParado.state = BoxColliderController.StateBoxCollider.Normal;
+                player1.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Normal;
+                player1.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
             }
         }
         public void CheckSpecialAttackButton_P1()
@@ -548,15 +557,9 @@ namespace Prototipo_2 {
                 player2.enumsPlayers.movimiento = EnumsPlayers.Movimiento.Agacharse;
                 player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Agachado;
                 player2.SetIsDuck(true);
+                
             }
-            if (player2.GetIsDuck())
-            {
-                player2.structsPlayer.dataPlayer.CantCasillasOcupadas_Y = player2.structsPlayer.dataPlayer.CantCasillasOcupadasAgachado;
-            }
-            else
-            {
-                player2.structsPlayer.dataPlayer.CantCasillasOcupadas_Y = player2.structsPlayer.dataPlayer.CantCasillasOcupadasParado;
-            }
+            
         }
         public void CheckVerticalCero_P2()
         {
@@ -572,6 +575,7 @@ namespace Prototipo_2 {
             {
                 moveVerticalPlayer2 = true;
                 player2.SetIsDuck(false);
+                
             }
         }
         public void CheckHorizontalLeft_P2()
@@ -673,6 +677,17 @@ namespace Prototipo_2 {
             {
                 player2.SetControllerJoystick(true);
                 player2.Deffence();
+                player2.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
+                player2.boxColliderParado.state = BoxColliderController.StateBoxCollider.Defendido;
+                player2.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
+                player2.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
+            }
+            else
+            {
+                player2.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Normal;
+                player2.boxColliderParado.state = BoxColliderController.StateBoxCollider.Normal;
+                player2.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Normal;
+                player2.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
             }
         }
         public void CheckSpecialAttackButton_P2()

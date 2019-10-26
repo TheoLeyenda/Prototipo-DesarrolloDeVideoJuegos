@@ -113,11 +113,13 @@ namespace Prototipo_2
                 }
                 go.transform.rotation = generadoresProyectiles.transform.rotation;
                 go.transform.position = generadoresProyectiles.transform.position;
+                proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
             }
             else if (!specialAttack && GetIsDuck())
             {
                 go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
                 go.transform.position = generadorProyectilesAgachado.transform.position;
+                proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
             }
             if (specialAttack)
             {

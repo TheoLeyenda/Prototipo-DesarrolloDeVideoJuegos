@@ -49,7 +49,7 @@ namespace Prototipo_2
         private bool isDuck;
         private bool EnableCounterAttack;
         private Vector3 InitialPosition;
-        public BoxCollider2D colliderSprite;
+        //public BoxCollider2D colliderSprite;
         public string ButtonDeffence;
         public string ButtonAttack;
         public string ButtonSpecialAttack;
@@ -65,8 +65,10 @@ namespace Prototipo_2
         private float auxDelayAttack;
         private bool enableAttack;
         private bool enableSpecialAttack;
-        public BoxCollider2D boxColliderParado;
-        public BoxCollider2D boxColliderAgachado;
+        public BoxColliderController boxColliderSprite;
+        public BoxColliderController boxColliderParado;
+        public BoxColliderController boxColliderAgachado;
+        public BoxColliderController boxColliderSaltando;
         public string NameInputManager;
         private InputManager inputManager;
         void Start()
@@ -89,7 +91,7 @@ namespace Prototipo_2
             }
             CheckSpritePlayerActual();
             auxDelayCounterAttack = delayCounterAttack;
-            colliderSprite.enabled = true;
+            //colliderSprite.enabled = true;
             isDuck = false;
             auxSpeedJump = SpeedJump;
             InitialPosition = transform.position;
@@ -120,9 +122,37 @@ namespace Prototipo_2
             CheckLifeBar();
             DelayEnableAttack();
             CheckLoadSpecialAttackBar();
-            CheckBoxColliderActivate();
             CheckMovementInSpecialAttack();
             DrawScore();
+            CheckBoxColliders2D();
+        }
+        public void CheckBoxColliders2D()
+        {
+            //Debug.Log(enumsPlayers.movimiento);
+            if (isDuck || enumsPlayers.movimiento == EnumsPlayers.Movimiento.Agacharse
+                || enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacharseAtaque
+                || enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacheDefensa)
+            {
+                boxColliderAgachado.GetBoxCollider2D().enabled = true;
+                boxColliderParado.GetBoxCollider2D().enabled = false;
+                boxColliderSaltando.GetBoxCollider2D().enabled = false;
+            }
+            else if (isJumping || enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar
+                || enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoAtaque
+                || enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa)
+            {
+                boxColliderAgachado.GetBoxCollider2D().enabled = false;
+                boxColliderParado.GetBoxCollider2D().enabled = false;
+                boxColliderSaltando.GetBoxCollider2D().enabled = true;
+            }
+            else if(enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                || enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+                || enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+            {
+                boxColliderAgachado.GetBoxCollider2D().enabled = false;
+                boxColliderParado.GetBoxCollider2D().enabled = true;
+                boxColliderSaltando.GetBoxCollider2D().enabled = false;
+            }
         }
         public void DrawScore()
         {
@@ -247,11 +277,13 @@ namespace Prototipo_2
                 {
                     go.transform.position = generadorProyectiles.transform.position;
                     go.transform.rotation = generadorProyectiles.transform.rotation;
+                    proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
                 }
                 else
                 {
                     go.transform.position = generadorProyectilesAgachado.transform.position;
                     go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
+                    proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
                 }
                 proyectil.disparadorDelProyectil = disparador;
                 proyectil.On();
@@ -297,11 +329,13 @@ namespace Prototipo_2
                 {
                     go.transform.position = generadorProyectiles.transform.position;
                     go.transform.rotation = generadorProyectiles.transform.rotation;
+                    proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
                 }
                 else
                 {
                     go.transform.position = generadorProyectilesAgachado.transform.position;
                     go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
+                    proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
                 }
                 proyectil.On();
                 proyectil.disparadorDelProyectil = disparador;
@@ -607,32 +641,37 @@ namespace Prototipo_2
         public void Duck(int rangoAgachado)
         {
             isDuck = true;
-            colliderSprite.enabled = false;
+            //colliderSprite.enabled = false;
         }
         public void Deffence()
         {
-            for (int i = 0; i < gridPlayer.matrizCuadrilla.Count; i++)
+            // SACAR A LA MIERDA TODO LO QUE TENGA QUE VER CON COLISION CON CUADRILLA Y CAMBIARLO POR LOS BoxColliderController.cs
+
+            if (!isDuck
+                && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+                && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa
+                && !isJumping)
             {
-                for (int j = 0; j < gridPlayer.matrizCuadrilla[i].Count; j++) {
-                    if (gridPlayer.matrizCuadrilla[i][j].GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Ocupado)
-                    {
-                        gridPlayer.matrizCuadrilla[i][j].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Defendido);
-                    }
-                }
+                boxColliderParado.state = BoxColliderController.StateBoxCollider.Defendido;
             }
-        }
-        public void CheckBoxColliderActivate()
-        {
-            if (isDuck)
+            else if (isDuck 
+                && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+                && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa
+                && !isJumping)
             {
-                boxColliderParado.enabled = false;
-                boxColliderAgachado.enabled = true;
+                boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
             }
-            else
+            else if(enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar 
+                || enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoAtaque 
+                || enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa
+                || isJumping)
             {
-                boxColliderAgachado.enabled = false;
-                boxColliderParado.enabled = true;
+                boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
             }
+            boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
+
         }
         public bool GetEnableCounterAttack()
         {

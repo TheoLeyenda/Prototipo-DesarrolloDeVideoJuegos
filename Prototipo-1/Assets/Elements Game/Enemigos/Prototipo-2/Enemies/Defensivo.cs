@@ -173,7 +173,7 @@ namespace Prototipo_2
                 }
             }
         }
-        public override void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage,Cuadrilla cuadrilla)
+        public override void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage,Proyectil ProyectilRecibido)
         {
             bool shootDown = false;
             GameObject go = null;
@@ -191,9 +191,7 @@ namespace Prototipo_2
                 }
             }
             if (!GetIsDuck() && !specialAttack 
-                && cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaCentral
-                && cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaDerecha
-                && cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaIzquierda)
+                && ProyectilRecibido.posicionDisparo != Proyectil.PosicionDisparo.PosicionBaja)
             {
                 if (jampAttack)
                 {
@@ -201,14 +199,14 @@ namespace Prototipo_2
                 }
                 go.transform.rotation = generadoresProyectiles.transform.rotation;
                 go.transform.position = generadoresProyectiles.transform.position;
+                proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
             }
-            else if (!specialAttack && GetIsDuck() 
-                || cuadrilla.posicionCuadrilla == Cuadrilla.PosicionCuadrilla.CuadrillaBajaCentral 
-                || cuadrilla.posicionCuadrilla == Cuadrilla.PosicionCuadrilla.CuadrillaBajaDerecha
-                || cuadrilla.posicionCuadrilla == Cuadrilla.PosicionCuadrilla.CuadrillaBajaIzquierda)
+            else if (!specialAttack && GetIsDuck()
+                || ProyectilRecibido.posicionDisparo == Proyectil.PosicionDisparo.PosicionBaja)
             {
                 go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
                 go.transform.position = generadorProyectilesAgachado.transform.position;
+                proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
             }
             
             if (!specialAttack)
@@ -258,11 +256,13 @@ namespace Prototipo_2
                     }
                     go.transform.rotation = generadoresProyectiles.transform.rotation;
                     go.transform.position = generadoresProyectiles.transform.position;
+                    proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
                 }
                 else if (!specialAttack && GetIsDuck())
                 {
                     go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
                     go.transform.position = generadorProyectilesAgachado.transform.position;
+                    proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
                 }
                 if (!specialAttack)
                 {

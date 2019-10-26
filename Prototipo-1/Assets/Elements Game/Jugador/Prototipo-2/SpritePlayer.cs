@@ -81,6 +81,7 @@ namespace Prototipo_2 {
             if (delaySpriteRecibirDanio > 0)
             {
                 delaySpriteRecibirDanio = delaySpriteRecibirDanio - Time.deltaTime;
+                ActualSprite = SpriteActual.RecibirDanio;
             }
             else if(delaySpriteRecibirDanio <= 0)
             {

@@ -5,6 +5,12 @@ namespace Prototipo_2
 {
     public class Cuadrilla : MonoBehaviour
     {
+        public enum AlturaCuadrilla
+        {
+            Alta,
+            Central,
+            Baja,
+        }
         public enum StateCuadrilla
         {
             Ocupado,
@@ -30,6 +36,7 @@ namespace Prototipo_2
         public Player player;
         public StateCuadrilla stateCuadrilla;
         public PosicionCuadrilla posicionCuadrilla;
+        public AlturaCuadrilla alturaCuadrilla;
 
         public void SetStateCuadrilla(StateCuadrilla state)
         {

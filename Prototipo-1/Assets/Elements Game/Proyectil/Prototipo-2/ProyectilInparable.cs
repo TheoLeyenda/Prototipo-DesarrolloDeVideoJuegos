@@ -28,68 +28,63 @@ namespace Prototipo_2
         // Update is called once per frame
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (collision.tag == "Cuadrilla")
+            if (collision.tag == "BoxColliderController")
             {
-                Cuadrilla cuadrilla = collision.GetComponent<Cuadrilla>();
-                if (cuadrilla.enemy == null && cuadrilla.player == null || cuadrilla.enemy != null && cuadrilla.player != null)
+                BoxColliderController boxColliderController = collision.GetComponent<BoxColliderController>();
+                if (boxColliderController.enemy == null && boxColliderController.player == null || boxColliderController.enemy != null && boxColliderController.player != null)
                 {
                     return;
                 }
-                if (cuadrilla.stateCuadrilla != Cuadrilla.StateCuadrilla.Libre)
+                
+
+                if (boxColliderController.enemy != null)
                 {
-                    cuadrilla.stateCuadrilla = Cuadrilla.StateCuadrilla.Ocupado;
-                }
-                if (cuadrilla.GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Ocupado)
-                {
-                    if (cuadrilla.enemy != null)
+                    if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
                     {
-                        if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
+                        if (boxColliderController.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && boxColliderController.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
                         {
-                            if (cuadrilla.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && cuadrilla.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
-                            {
-                                cuadrilla.enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.RecibirDanio;
-                                cuadrilla.enemy.life = cuadrilla.enemy.life - damage;
-                                //AUMENTO XP PARA EL ATAQUE ESPECIAL
-                                PLAYER1.SetXpActual(PLAYER1.GetXpActual() + PLAYER1.xpForHit);
-                            }
+                            boxColliderController.enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.RecibirDanio;
+                            boxColliderController.enemy.life = boxColliderController.enemy.life - damage;
+                            //AUMENTO XP PARA EL ATAQUE ESPECIAL
+                            PLAYER1.SetXpActual(PLAYER1.GetXpActual() + PLAYER1.xpForHit);
                         }
                     }
-                    if (cuadrilla.player != null)
+                }
+                if (boxColliderController.player != null)
+                {
+
+                    if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
                     {
-
-                        if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
+                        boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
+                        boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                    }
+                    if (PLAYER1 != null)
+                    {
+                        if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1
+                            || boxColliderController.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
                         {
-                            cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
-                            cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-                        }
-                        if (PLAYER1 != null)
-                        {
-                            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1
-                                || cuadrilla.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-                            {
-                                //AUMENTO XP PARA EL ATAQUE ESPECIAL
-                                PLAYER1.SetXpActual(PLAYER1.GetXpActual() + PLAYER1.xpForHit);
-                                cuadrilla.player.SetEnableCounterAttack(true);
+                            //AUMENTO XP PARA EL ATAQUE ESPECIAL
+                            PLAYER1.SetXpActual(PLAYER1.GetXpActual() + PLAYER1.xpForHit);
+                            boxColliderController.player.SetEnableCounterAttack(true);
 
-                                cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
-                                cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                            boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
+                            boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                 
-                            }
                         }
-                        if (PLAYER2 != null)
+                    }
+                    if (PLAYER2 != null)
+                    {
+                        if (disparadorDelProyectil == DisparadorDelProyectil.Jugador2 ||
+                        boxColliderController.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1 ||
+                        PLAYER2 != null)
                         {
-                            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador2 ||
-                            cuadrilla.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1 ||
-                            PLAYER2 != null)
-                            {
-                                //AUMENTO XP PARA EL ATAQUE ESPECIAL
-                                PLAYER2.SetXpActual(PLAYER2.GetXpActual() + PLAYER2.xpForHit);
-                                cuadrilla.player.SetEnableCounterAttack(true);
+                            //AUMENTO XP PARA EL ATAQUE ESPECIAL
+                            PLAYER2.SetXpActual(PLAYER2.GetXpActual() + PLAYER2.xpForHit);
+                            boxColliderController.player.SetEnableCounterAttack(true);
 
-                                cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
-                                cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                            boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
+                            boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                
-                            }
                         }
                     }
                 }
