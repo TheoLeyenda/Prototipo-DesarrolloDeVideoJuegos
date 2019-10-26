@@ -29,14 +29,16 @@ namespace Prototipo_2
             }
         }
         private void OnTriggerStay2D(Collider2D collision)
-        { 
-            
-            Player player = collision.GetComponent<Player>();
-            if (player == null)
+        {
+            if (collision.tag == "BoxColliderController")
             {
-                return;
+                BoxColliderController boxColliderController = collision.GetComponent<BoxColliderController>();
+                if (boxColliderController.player == null)
+                {
+                    return;
+                }
+                boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
             }
-            player.PD.lifePlayer = player.PD.lifePlayer - damage;
             
         }
     }

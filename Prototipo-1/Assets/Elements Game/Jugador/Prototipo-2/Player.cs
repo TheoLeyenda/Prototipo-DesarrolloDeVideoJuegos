@@ -646,7 +646,6 @@ namespace Prototipo_2
         public void Deffence()
         {
             // SACAR A LA MIERDA TODO LO QUE TENGA QUE VER CON COLISION CON CUADRILLA Y CAMBIARLO POR LOS BoxColliderController.cs
-
             if (!isDuck
                 && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
                 && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque

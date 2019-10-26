@@ -63,6 +63,7 @@ namespace Prototipo_2
         public Vector3 pointOfCombat;
         public bool damageCounterAttack;
         public bool activateComportamiento;
+        public BoxColliderController boxColliderSprite;
         public BoxColliderController boxColliderControllerAgachado;
         public BoxColliderController boxColliderControllerParado;
         public BoxColliderController boxColliderControllerSaltando;
@@ -607,19 +608,50 @@ namespace Prototipo_2
             }
             //CHEKEA EL MOVIMIENTO DEL ENEMIGO
         }
+        public void CheckDeffense()
+        {
+            if (isDeffended)
+            {
+                boxColliderControllerAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
+                boxColliderControllerParado.state = BoxColliderController.StateBoxCollider.Defendido;
+                boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
+                boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
+            }
+            else
+            {
+                boxColliderControllerAgachado.state = BoxColliderController.StateBoxCollider.Normal;
+                boxColliderControllerParado.state = BoxColliderController.StateBoxCollider.Normal;
+                boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Normal;
+                boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
+            }
+        }
         public void Deffence()
         {
             isDeffended = true;
-            for (int i = 0; i < gridEnemy.matrizCuadrilla.Count; i++)
+            if (!isDuck
+                && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar
+                && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque
+                && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa
+                && !isJamping)
             {
-                for (int j = 0; j < gridEnemy.matrizCuadrilla[i].Count; j++)
-                {
-                    if (gridEnemy.matrizCuadrilla[i][j].GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Ocupado)
-                    {
-                        gridEnemy.matrizCuadrilla[i][j].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Defendido);
-                    }
-                }
+                boxColliderControllerParado.state = BoxColliderController.StateBoxCollider.Defendido;
             }
+            else if (isDuck
+                && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar
+                && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque
+                && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa
+                && !isJamping)
+            {
+                boxColliderControllerAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
+            }
+            else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa
+                || isJamping)
+            {
+                boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
+            }
+            boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
         }
         public virtual void CheckDelayAttack(bool specialAttack)
         {
