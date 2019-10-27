@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 0.05, y: 0.05, z: 1}
   m_Children: []
   m_Father: {fileID: 9121592579315266116}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5320142021194330069
 SpriteRenderer:
@@ -111,7 +111,7 @@ Transform:
   m_LocalScale: {x: 0.02, y: 0.02, z: 1}
   m_Children: []
   m_Father: {fileID: 9121592579315266116}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2397753631612189105
 SpriteRenderer:
@@ -488,6 +488,58 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &8651389924371397958
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6863454142101538869}
+  - component: {fileID: 2262944413882855315}
+  m_Layer: 0
+  m_Name: BoxColliderPiernas
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6863454142101538869
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8651389924371397958}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9121592579315266116}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &2262944413882855315
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8651389924371397958}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &9121592577714499394
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,7 +599,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9121592579315266116}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9121592577935181142
 GameObject:
@@ -581,7 +633,7 @@ RectTransform:
   m_Children:
   - {fileID: 9121592577714499421}
   m_Father: {fileID: 9121592579315266116}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -757,6 +809,7 @@ Transform:
   - {fileID: 7743315834128364437}
   - {fileID: 796059662865061277}
   - {fileID: 7112455414913292062}
+  - {fileID: 6863454142101538869}
   - {fileID: 9121592577794639368}
   - {fileID: 9121592577935181138}
   - {fileID: 9121592579528980572}
@@ -845,7 +898,6 @@ MonoBehaviour:
   pointsDeffence: 0
   Resistace: 0
   Gravity: 0
-  colliderSprite: {fileID: 0}
   ButtonDeffence: 
   ButtonAttack: 
   ButtonSpecialAttack: 
@@ -855,8 +907,11 @@ MonoBehaviour:
   LookingForward: 0
   LookingBack: 0
   delayAttack: 0
+  boxColliderPiernas: {fileID: 0}
+  boxColliderSprite: {fileID: 0}
   boxColliderParado: {fileID: 0}
   boxColliderAgachado: {fileID: 0}
+  boxColliderSaltando: {fileID: 0}
   NameInputManager: 
 --- !u!114 &1420592905
 MonoBehaviour:
@@ -935,7 +990,7 @@ PrefabInstance:
     - target: {fileID: 5142444625613618226, guid: c6d6ac12b9b9cf44092344d820274e7e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5142444625613618226, guid: c6d6ac12b9b9cf44092344d820274e7e,
         type: 3}

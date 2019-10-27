@@ -63,6 +63,7 @@ namespace Prototipo_2
         public Vector3 pointOfCombat;
         public bool damageCounterAttack;
         public bool activateComportamiento;
+        public BoxColliderController boxColliderPiernas;
         public BoxColliderController boxColliderSprite;
         public BoxColliderController boxColliderControllerAgachado;
         public BoxColliderController boxColliderControllerParado;
@@ -201,6 +202,10 @@ namespace Prototipo_2
                 || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa
                 || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado)
             {
+                if (boxColliderPiernas != null)
+                {
+                    boxColliderPiernas.GetBoxCollider2D().enabled = false;
+                }
                 boxColliderControllerAgachado.GetBoxCollider2D().enabled = true;
                 boxColliderControllerParado.GetBoxCollider2D().enabled = false;
                 boxColliderControllerSaltando.GetBoxCollider2D().enabled = false;
@@ -210,6 +215,10 @@ namespace Prototipo_2
                 || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa
                 || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto)
             {
+                if (boxColliderPiernas != null)
+                {
+                    boxColliderPiernas.GetBoxCollider2D().enabled = false;
+                }
                 boxColliderControllerAgachado.GetBoxCollider2D().enabled = false;
                 boxColliderControllerParado.GetBoxCollider2D().enabled = false;
                 boxColliderControllerSaltando.GetBoxCollider2D().enabled = true;
@@ -219,6 +228,10 @@ namespace Prototipo_2
                 || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa
                 || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto)
             {
+                if (boxColliderPiernas != null)
+                {
+                    boxColliderPiernas.GetBoxCollider2D().enabled = true;
+                }
                 boxColliderControllerAgachado.GetBoxCollider2D().enabled = false;
                 boxColliderControllerParado.GetBoxCollider2D().enabled = true;
                 boxColliderControllerSaltando.GetBoxCollider2D().enabled = false;

@@ -66,7 +66,6 @@ namespace Prototipo_2
                     {
                         while (i >= 0)
                         {
-                            Debug.Log("ENTRE");
                             for (int j = 0; j < filas; j++)
                             {
                                 if (idOption < nameLevelsOptions.Count)
