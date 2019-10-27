@@ -1075,6 +1075,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.07702044, y: 0.1409033}
   m_EdgeRadius: 0
+--- !u!1 &629231362 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 847702453, guid: cb4ce468098bc544b9ce9696c77f19e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1940570707}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &629231363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629231362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6074bf6659a7847b9326feb6dd21f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  enemy: {fileID: 1820463565}
+  inEnemy: 1
+  inPlayer: 0
+  ZonaContraAtaque: 1
+  state: 0
 --- !u!1001 &707766462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1090,7 +1114,7 @@ PrefabInstance:
     - target: {fileID: 4068828010732992972, guid: 1600b2d523a2a7c4a8a4c4c92917862b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4068828010732992973, guid: 1600b2d523a2a7c4a8a4c4c92917862b,
         type: 3}
@@ -1568,7 +1592,7 @@ PrefabInstance:
     - target: {fileID: 1951603196079160414, guid: e3690bba5bddbaf43a4ecf02bccf1fd9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1951603196079160414, guid: e3690bba5bddbaf43a4ecf02bccf1fd9,
         type: 3}
@@ -1936,6 +1960,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37841e313fc67e24c9f396f404745d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1260314261 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7814405002609669801, guid: cb4ce468098bc544b9ce9696c77f19e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1940570707}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &1260314267
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260314261}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0038307756, y: 0.021838307}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.07317437, y: 0.15278119}
+  m_EdgeRadius: 0
 --- !u!1001 &1460914202
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2635,7 +2691,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1940570707}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1260314261}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6761e6c71cc000442b8ea7140e5e181f, type: 3}
@@ -2859,6 +2915,11 @@ PrefabInstance:
       propertyPath: boxColliderControllerSaltando
       value: 
       objectReference: {fileID: 318357399}
+    - target: {fileID: 425209816627336813, guid: cb4ce468098bc544b9ce9696c77f19e6,
+        type: 3}
+      propertyPath: boxColliderSprite
+      value: 
+      objectReference: {fileID: 629231363}
     - target: {fileID: 1127554859473777064, guid: cb4ce468098bc544b9ce9696c77f19e6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2897,7 +2958,7 @@ PrefabInstance:
     - target: {fileID: 1127554859473777064, guid: cb4ce468098bc544b9ce9696c77f19e6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1127554859473777064, guid: cb4ce468098bc544b9ce9696c77f19e6,
         type: 3}
