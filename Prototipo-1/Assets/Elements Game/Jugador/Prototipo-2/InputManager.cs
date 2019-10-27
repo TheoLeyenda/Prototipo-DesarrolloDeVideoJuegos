@@ -195,7 +195,8 @@ namespace Prototipo_2 {
         {
             if (InputPlayerController.AttackButton_P1() && player1.GetEnableAttack() 
                 && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante 
-                && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras)
+                && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras 
+                && !InputPlayerController.CheckPressDeffenseButton_P1())
             {
                 //Debug.Log("JUGADOR 1 ATAQUE ACTIVED");
                 player1.SetControllerJoystick(true);
@@ -227,21 +228,24 @@ namespace Prototipo_2 {
         }
         public void CheckDeffenceButton_P1()
         {
-            if (InputPlayerController.CheckPressDeffenseButton_P1())
+            if (!InputPlayerController.CheckPressAttackButton_P1())
             {
-                player1.SetControllerJoystick(true);
-                player1.Deffence();
-                player1.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
-                player1.boxColliderParado.state = BoxColliderController.StateBoxCollider.Defendido;
-                player1.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
-                player1.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
-            }
-            else
-            {
-                player1.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Normal;
-                player1.boxColliderParado.state = BoxColliderController.StateBoxCollider.Normal;
-                player1.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Normal;
-                player1.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
+                if (InputPlayerController.CheckPressDeffenseButton_P1())
+                {
+                    player1.SetControllerJoystick(true);
+                    player1.Deffence();
+                    player1.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
+                    player1.boxColliderParado.state = BoxColliderController.StateBoxCollider.Defendido;
+                    player1.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
+                    player1.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
+                }
+                else
+                {
+                    player1.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Normal;
+                    player1.boxColliderParado.state = BoxColliderController.StateBoxCollider.Normal;
+                    player1.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Normal;
+                    player1.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
+                }
             }
         }
         public void CheckSpecialAttackButton_P1()
@@ -642,7 +646,8 @@ namespace Prototipo_2 {
         {
             if (InputPlayerController.AttackButton_P2() && player2.GetEnableAttack()
                 && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante
-                && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras)
+                && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
+                && !InputPlayerController.CheckPressDeffenseButton_P2())
             {
                 //Debug.Log("JUGADOR 2 ATAQUE ACTIVED");
                 player2.SetControllerJoystick(true);
@@ -673,21 +678,24 @@ namespace Prototipo_2 {
         }
         public void CheckDeffenceButton_P2()
         {
-            if (InputPlayerController.CheckPressDeffenseButton_P2())
+            if (!InputPlayerController.CheckPressAttackButton_P2())
             {
-                player2.SetControllerJoystick(true);
-                player2.Deffence();
-                player2.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
-                player2.boxColliderParado.state = BoxColliderController.StateBoxCollider.Defendido;
-                player2.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
-                player2.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
-            }
-            else
-            {
-                player2.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Normal;
-                player2.boxColliderParado.state = BoxColliderController.StateBoxCollider.Normal;
-                player2.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Normal;
-                player2.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
+                if (InputPlayerController.CheckPressDeffenseButton_P2())
+                {
+                    player2.SetControllerJoystick(true);
+                    player2.Deffence();
+                    player2.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
+                    player2.boxColliderParado.state = BoxColliderController.StateBoxCollider.Defendido;
+                    player2.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
+                    player2.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
+                }
+                else
+                {
+                    player2.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Normal;
+                    player2.boxColliderParado.state = BoxColliderController.StateBoxCollider.Normal;
+                    player2.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Normal;
+                    player2.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
+                }
             }
         }
         public void CheckSpecialAttackButton_P2()

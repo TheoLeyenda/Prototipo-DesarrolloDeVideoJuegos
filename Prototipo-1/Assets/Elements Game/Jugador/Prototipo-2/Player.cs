@@ -130,10 +130,10 @@ namespace Prototipo_2
         public void CheckBoxColliders2D()
         {
             //Debug.Log(enumsPlayers.movimiento);
-            
-            if (spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.Salto
-                || spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.SaltoAtaque
-                || spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.SaltoDefensa)
+            Debug.Log(isDuck);
+            if (!isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.Salto
+                || !isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.SaltoAtaque
+                || !isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.SaltoDefensa)
             {
                  boxColliderAgachado.GetBoxCollider2D().enabled = false;
                  boxColliderParado.GetBoxCollider2D().enabled = true;
