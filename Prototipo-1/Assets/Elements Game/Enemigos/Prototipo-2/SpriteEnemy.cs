@@ -261,7 +261,7 @@ namespace Prototipo_2
                 ActualSprite = SpriteActual.Parado;
             }
         }
-        private void OnTriggerStay2D(Collider2D collision)
+        /*private void OnTriggerStay2D(Collider2D collision)
         {
             switch (collision.gameObject.tag)
             {
@@ -275,7 +275,7 @@ namespace Prototipo_2
                     }
                     break;
             }
-        }
+        }*/
         public void PlayAnimation(string nameAnimation)
         {
             if (enemy.enemyPrefab.activeSelf == true)
