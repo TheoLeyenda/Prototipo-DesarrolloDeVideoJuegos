@@ -178,6 +178,12 @@ namespace Prototipo_2
                                 //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
                                 proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + (proyectil.GetPlayer().xpForHit / 2));
                                 proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
+                                realDamage = proyectil.damage - player.pointsDeffence;
+                                player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
+                                proyectil.timeLife = 0;
+                                proyectil.damage = proyectil.GetAuxDamage();
+                                proyectil.GetPoolObject().Recycle();
+                                proyectil.gameObject.SetActive(false);
                             }
                         }
                         if (player_PvP != null)
@@ -192,6 +198,12 @@ namespace Prototipo_2
                                     //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
                                     proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + (proyectil.GetPlayer2().xpForHit / 2));
                                     proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + (proyectil.GetPlayer2().PD.scoreForHit / 2);
+                                    realDamage = proyectil.damage - player.pointsDeffence;
+                                    player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
+                                    proyectil.timeLife = 0;
+                                    proyectil.damage = proyectil.GetAuxDamage();
+                                    proyectil.GetPoolObject().Recycle();
+                                    proyectil.gameObject.SetActive(false);
                                 }
                             }
                             if (player_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
@@ -247,7 +259,7 @@ namespace Prototipo_2
                                         break;
                                 }
                             }
-                            Debug.Log(proyectil.GetEnemy());
+                            //Debug.Log(proyectil.GetEnemy());
                             if (proyectil.GetEnemy() != null)
                             {
                                 Debug.Log("A LA DEFENSA");
