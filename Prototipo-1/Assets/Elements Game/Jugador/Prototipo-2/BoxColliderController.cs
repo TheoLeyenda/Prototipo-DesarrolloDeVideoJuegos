@@ -24,7 +24,11 @@ namespace Prototipo_2
             ColliderParado,
             ColliderAgachado,
         }
-        void Start()
+        private void OnDisable()
+        {
+            boxCollider2D = GetComponent<BoxCollider2D>();
+        }
+        void Awake()
         {
             boxCollider2D = GetComponent<BoxCollider2D>();
         }
@@ -68,8 +72,11 @@ namespace Prototipo_2
                                 }
                                 if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer || !ZonaContraAtaque)
                                 {
-                                    proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + proyectil.GetEnemy().xpForHit);
-                                    player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
+                                    if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetEnemy() != null)
+                                    {
+                                        proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + proyectil.GetEnemy().xpForHit);
+                                        player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
+                                    }
                                     player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                     if (!ZonaContraAtaque)
                                     {
@@ -96,8 +103,11 @@ namespace Prototipo_2
                                 || player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
                             {
                                 //AUMENTO XP PARA EL ATAQUE ESPECIAL
-                                proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + proyectil.GetPlayer().xpForHit);
-                                proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + proyectil.GetPlayer().PD.scoreForHit;
+                                if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer() != null)
+                                {
+                                    proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + proyectil.GetPlayer().xpForHit);
+                                    proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + proyectil.GetPlayer().PD.scoreForHit;
+                                }
                                 player.SetEnableCounterAttack(true);
                                 if (player.delayCounterAttack > 0)
                                 {
@@ -133,8 +143,11 @@ namespace Prototipo_2
                             proyectil.GetPlayer2() != null)
                             {
                                 //AUMENTO XP PARA EL ATAQUE ESPECIAL
-                                proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + proyectil.GetPlayer2().xpForHit);
-                                proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
+                                if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer2() != null)
+                                {
+                                    proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + proyectil.GetPlayer2().xpForHit);
+                                    proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
+                                }
                                 player.SetEnableCounterAttack(true);
                                 if (player.delayCounterAttack > 0)
                                 {
@@ -176,8 +189,11 @@ namespace Prototipo_2
                             {
                                 //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                 //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
-                                proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + (proyectil.GetPlayer().xpForHit / 2));
-                                proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
+                                if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer() != null)
+                                {
+                                    proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + (proyectil.GetPlayer().xpForHit / 2));
+                                    proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
+                                }
                                 realDamage = proyectil.damage - player.pointsDeffence;
                                 player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
                                 proyectil.timeLife = 0;
@@ -196,8 +212,11 @@ namespace Prototipo_2
                                 {
                                     //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                     //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
-                                    proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + (proyectil.GetPlayer2().xpForHit / 2));
-                                    proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + (proyectil.GetPlayer2().PD.scoreForHit / 2);
+                                    if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer2() != null)
+                                    {
+                                        proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + (proyectil.GetPlayer2().xpForHit / 2));
+                                        proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + (proyectil.GetPlayer2().PD.scoreForHit / 2);
+                                    }
                                     realDamage = proyectil.damage - player.pointsDeffence;
                                     player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
                                     proyectil.timeLife = 0;
@@ -235,8 +254,11 @@ namespace Prototipo_2
                                             {
                                                 //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                                 //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
-                                                proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + (proyectil.GetPlayer().xpForHit / 2));
-                                                proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
+                                                if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer() != null)
+                                                {
+                                                    proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + (proyectil.GetPlayer().xpForHit / 2));
+                                                    proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
+                                                }
                                             }
                                         }
                                         else if (proyectil.GetPlayer2() != null)
@@ -246,8 +268,11 @@ namespace Prototipo_2
                                             {
                                                 //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                                 //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
-                                                proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + (proyectil.GetPlayer2().xpForHit / 2));
-                                                proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + (proyectil.GetPlayer2().PD.scoreForHit / 2);
+                                                if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer2() != null)
+                                                {
+                                                    proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + (proyectil.GetPlayer2().xpForHit / 2));
+                                                    proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + (proyectil.GetPlayer2().PD.scoreForHit / 2);
+                                                }
                                             }
                                         }
                                         realDamage = proyectil.damage - player.pointsDeffence;
@@ -288,12 +313,16 @@ namespace Prototipo_2
                                 enemy.life = enemy.life - proyectil.damage;
 
                                 //AUMENTO XP PARA EL ATAQUE ESPECIAL
-                                proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + proyectil.GetPlayer().xpForHit);
-                                proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + proyectil.GetPlayer().PD.scoreForHit;
+                                if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer() != null)
+                                {
+                                    proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + proyectil.GetPlayer().xpForHit);
+                                    proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + proyectil.GetPlayer().PD.scoreForHit;
+                                }
+                                proyectil.timeLife = 0;
+                                proyectil.gameObject.SetActive(false);
+                                proyectil.GetPoolObject().Recycle();
                             }
-                            proyectil.timeLife = 0;
-                            proyectil.gameObject.SetActive(false);
-                            proyectil.GetPoolObject().Recycle();
+                           
 
                         }
                     }
@@ -303,8 +332,11 @@ namespace Prototipo_2
                         {
                             //AUMENTO XP PARA EL ATAQUE ESPECIAL
                             //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
-                            proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + (proyectil.GetPlayer().xpForHit / 2));
-                            proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
+                            if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer() != null)
+                            {
+                                proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + (proyectil.GetPlayer().xpForHit / 2));
+                                proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
+                            }
                             if (enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
                             {
                                 float realDamage = proyectil.damage - enemy.pointsDeffence;
@@ -360,12 +392,15 @@ namespace Prototipo_2
         }
         private void OnTriggerStay2D(Collider2D collision)
         {
-            switch (collision.tag)
+            if (gameObject.activeSelf)
             {
-                case "Proyectil":
-                    //Debug.Log("COLICIONE");
-                    CollisionWhitProyectil(collision);
-                    break;
+                switch (collision.tag)
+                {
+                    case "Proyectil":
+                        //Debug.Log("COLICIONE");
+                        CollisionWhitProyectil(collision);
+                        break;
+                }
             }
         }
     }
