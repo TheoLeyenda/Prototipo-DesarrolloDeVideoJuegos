@@ -287,7 +287,7 @@ namespace Prototipo_2
                             //Debug.Log(proyectil.GetEnemy());
                             if (proyectil.GetEnemy() != null)
                             {
-                                Debug.Log("A LA DEFENSA");
+                                //Debug.Log("A LA DEFENSA");
                                 proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + (proyectil.GetEnemy().xpForHit / 2));
                                 realDamage = proyectil.damage - player.pointsDeffence;
                                 player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
