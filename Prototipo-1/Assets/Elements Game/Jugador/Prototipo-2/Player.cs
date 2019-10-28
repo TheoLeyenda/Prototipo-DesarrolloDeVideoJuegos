@@ -72,6 +72,11 @@ namespace Prototipo_2
         public BoxColliderController boxColliderSaltando;
         public string NameInputManager;
         private InputManager inputManager;
+        private Player_PvP player_PvP;
+        private void Awake()
+        {
+            player_PvP = GetComponent<Player_PvP>();
+        }
         void Start()
         {
             GameObject go = GameObject.Find(NameInputManager);
@@ -130,7 +135,6 @@ namespace Prototipo_2
         public void CheckBoxColliders2D()
         {
             //Debug.Log(enumsPlayers.movimiento);
-            Debug.Log(isDuck);
             if (!isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.Salto
                 || !isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.SaltoAtaque
                 || !isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.SaltoDefensa)
@@ -437,6 +441,14 @@ namespace Prototipo_2
                         ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
                         proyectil.SetDobleDamage(doubleDamage);
                         proyectil.disparadorDelProyectil = disparador;
+                        if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                        {
+                            proyectil.SetPlayer(this);
+                        }
+                        else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                        {
+                            proyectil.SetPlayer2(this);
+                        }
                         if (doubleDamage)
                         {
                             proyectil.damage = proyectil.damage * 2;
@@ -785,6 +797,10 @@ namespace Prototipo_2
         public bool GetEnableSpecialAttack()
         {
             return enableSpecialAttack;
+        }
+        public Player_PvP GetPlayerPvP()
+        {
+            return player_PvP;
         }
     }
 }

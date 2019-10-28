@@ -25,10 +25,10 @@ public static class InputPlayerController
     {
         return Input.GetButtonDown("SpecialAttackButton_P1");
     }
-    public static bool CheckSpecialAttackButton_P1()
+    /*public static bool CheckSpecialAttackButton_P1()
     {
-        return Input.GetButton("SpecialAttackButton_P1");
-    }
+        //return Input.GetButton("SpecialAttackButton_P1");
+    }*/
     public static Vector3 MainJostick_P1()
     {
         return new Vector3(Horizontal_Button_P1(), 0, Vertical_Button_P1());
@@ -82,10 +82,10 @@ public static class InputPlayerController
     {
         return Input.GetButtonDown("SpecialAttackButton_P2");
     }
-    public static bool CheckSpecialAttackButton_P2()
+    /*public static bool CheckSpecialAttackButton_P2()
     {
         return Input.GetButton("SpecialAttackButton_P2");
-    }
+    }*/
     public static Vector3 MainJostick_P2()
     {
         return new Vector3(Horizontal_Button_P2(), 0, Vertical_Button_P2());

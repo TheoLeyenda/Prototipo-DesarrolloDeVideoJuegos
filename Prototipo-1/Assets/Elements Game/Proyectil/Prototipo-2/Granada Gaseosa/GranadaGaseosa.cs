@@ -28,45 +28,80 @@ namespace Prototipo_2
             OnParabola();
         }
         
-        public void CreateGaseosas()
+        public void CreateGaseosas(int cantProyectiles)
         {
-            if (grid != null)
+            if (cuadrillaColision != null)
             {
                 cuadrillasAbajo.Clear();
                 cuadrillasAbajo.Add(cuadrillaColision);
                 int num;
                 GameObject go = null;
                 Gaseosa gaseosa = null;
-                if (Cuadrilla.PosicionCuadrilla.CuadrillaBajaIzquierda == cuadrillaColision.posicionCuadrilla)
+                if (cantProyectiles == 1)
                 {
-                    cuadrillasAbajo.Add(grid.matrizCuadrilla[grid.baseGrild][1]);
-                }
-                else if (Cuadrilla.PosicionCuadrilla.CuadrillaBajaCentral == cuadrillaColision.posicionCuadrilla)
-                {
-                    num = (int)Random.Range(0, 100);
-                    if (num >= 50)
+                    for (int i = 0; i < cuadrillasAbajo.Count; i++)
                     {
-                        num = 2;
+                        go = poolGaseosa.GetObject();
+                        gaseosa = go.GetComponent<Gaseosa>();
+                        gaseosa.disparadorDelProyectil = disparadorDelProyectil;
+                        gaseosa.transform.position = cuadrillasAbajo[i].transform.position;
                     }
-                    else if (num < 50)
-                    {
-                        num = 0;
-                    }
-                    cuadrillasAbajo.Add(grid.matrizCuadrilla[grid.baseGrild][num]);
                 }
-                else if (Cuadrilla.PosicionCuadrilla.CuadrillaBajaDerecha == cuadrillaColision.posicionCuadrilla)
-                { 
-                    cuadrillasAbajo.Add(grid.matrizCuadrilla[grid.baseGrild][1]);
-                }
-                for (int i = 0; i < cuadrillasAbajo.Count; i++)
+                else if (cantProyectiles == 2)
                 {
-                    go = poolGaseosa.GetObject();
-                    gaseosa = go.GetComponent<Gaseosa>();
-                    gaseosa.disparadorDelProyectil = disparadorDelProyectil;
-                    gaseosa.transform.position = cuadrillasAbajo[i].transform.position;
+                    if (grid != null)
+                    {
+                        if (Cuadrilla.PosicionCuadrilla.CuadrillaBajaIzquierda == cuadrillaColision.posicionCuadrilla)
+                        {
+                            cuadrillasAbajo.Add(grid.matrizCuadrilla[grid.baseGrild][1]);
+                        }
+                        else if (Cuadrilla.PosicionCuadrilla.CuadrillaBajaCentral == cuadrillaColision.posicionCuadrilla)
+                        {
+                            num = (int)Random.Range(0, 100);
+                            if (num >= 50)
+                            {
+                                num = 2;
+                            }
+                            else if (num < 50)
+                            {
+                                num = 0;
+                            }
+                            cuadrillasAbajo.Add(grid.matrizCuadrilla[grid.baseGrild][num]);
+                        }
+                        else if (Cuadrilla.PosicionCuadrilla.CuadrillaBajaDerecha == cuadrillaColision.posicionCuadrilla)
+                        {
+                            cuadrillasAbajo.Add(grid.matrizCuadrilla[grid.baseGrild][1]);
+                        }
+                        for (int i = 0; i < cuadrillasAbajo.Count; i++)
+                        {
+                            go = poolGaseosa.GetObject();
+                            gaseosa = go.GetComponent<Gaseosa>();
+                            gaseosa.disparadorDelProyectil = disparadorDelProyectil;
+                            gaseosa.transform.position = cuadrillasAbajo[i].transform.position;
+                        }
+                    }
                 }
+                else if (cantProyectiles == 3)
+                {
+                    cuadrillasAbajo.Clear();
+                    if (grid != null)
+                    {
+                        for (int i = 0; i <= grid.baseGrild; i++)
+                        {
+                            cuadrillasAbajo.Add(grid.matrizCuadrilla[grid.baseGrild][i]);
+                        }
+                        for (int i = 0; i < cuadrillasAbajo.Count; i++)
+                        {
+                            go = poolGaseosa.GetObject();
+                            gaseosa = go.GetComponent<Gaseosa>();
+                            gaseosa.disparadorDelProyectil = disparadorDelProyectil;
+                            gaseosa.transform.position = cuadrillasAbajo[i].transform.position;
+                        }
+                    }
+                }
+                gameObject.SetActive(false);
+                timeLife = 0;
             }
-            timeLife = 0;
         }
         public void CheckGrid(Cuadrilla cuadrilla)
         {
@@ -108,36 +143,113 @@ namespace Prototipo_2
                     || cuadrilla.posicionCuadrilla == Cuadrilla.PosicionCuadrilla.CuadrillaBajaDerecha
                     || cuadrilla.posicionCuadrilla == Cuadrilla.PosicionCuadrilla.CuadrillaBajaIzquierda) && cuadrilla != null)
                 {
-                    
-                    if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
+                    if (cuadrilla.player != null)
                     {
-                        if (cuadrilla.player.enumsPlayers.numberPlayer != EnumsPlayers.NumberPlayer.player1)
+                        if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
                         {
+                            if (cuadrilla.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                            {
+                                CheckGrid(cuadrilla);
+                                cuadrillaColision = cuadrilla;
+                                if (PLAYER1 != null)
+                                {
+                                    if (PLAYER1.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Protagonista)
+                                    {
+                                        CreateGaseosas(3);
+                                    }
+                                    else if (PLAYER1.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Balanceado)
+                                    {
+                                        CreateGaseosas(2);
+                                    }
+                                    else
+                                    {
+                                        CreateGaseosas(1);
+                                    }
+                                }
+                            }
+                        }
+                        else if (disparadorDelProyectil == DisparadorDelProyectil.Jugador2)
+                        {
+                            if (cuadrilla.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                            {
+                                CheckGrid(cuadrilla);
+                                cuadrillaColision = cuadrilla;
+                                if (PLAYER2 != null)
+                                {
+                                    if (PLAYER2.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Protagonista)
+                                    {
+                                        CreateGaseosas(3);
+                                    }
+                                    else if (PLAYER2.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Balanceado)
+                                    {
+                                        CreateGaseosas(2);
+                                    }
+                                    else
+                                    {
+                                        CreateGaseosas(1);
+                                    }
+                                }
+                            }
+                        }
+                        if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
+                        {
+
                             CheckGrid(cuadrilla);
                             cuadrillaColision = cuadrilla;
-                            CreateGaseosas();
+                            CreateGaseosas(2);
+
                         }
                     }
-                    else if (disparadorDelProyectil == DisparadorDelProyectil.Jugador2)
+                    if (cuadrilla.enemy != null)
                     {
-                        if (cuadrilla.player.enumsPlayers.numberPlayer != EnumsPlayers.NumberPlayer.player2)
+                        if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
                         {
+                            Debug.Log("ENTRE");
                             CheckGrid(cuadrilla);
                             cuadrillaColision = cuadrilla;
-                            CreateGaseosas();
+                            Debug.Log(PLAYER1);
+                            if (PLAYER1 != null)
+                            {
+                                if (PLAYER1.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Protagonista)
+                                {
+                                    CreateGaseosas(3);
+                                }
+                                else if (PLAYER1.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Balanceado)
+                                {
+                                    CreateGaseosas(2);
+                                }
+                                else
+                                {
+                                    CreateGaseosas(1);
+                                }
+                            }
                         }
-                    }
-                    else if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
-                    {
-                        if (cuadrilla.enemy == null)
+                        else if (disparadorDelProyectil == DisparadorDelProyectil.Jugador2)
                         {
+                            Debug.Log("ENTRE");
                             CheckGrid(cuadrilla);
                             cuadrillaColision = cuadrilla;
-                            CreateGaseosas();
+                            if (PLAYER2 != null)
+                            {
+                                if (PLAYER2.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Protagonista)
+                                {
+                                    CreateGaseosas(3);
+                                }
+                                else if (PLAYER2.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Balanceado)
+                                {
+                                    CreateGaseosas(2);
+                                }
+                                else
+                                {
+                                    CreateGaseosas(1);
+                                }
+                            }
+                            
                         }
+                        
                     }
                 }
-                if (cuadrilla.GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Ocupado)
+                /*if (cuadrilla.GetStateCuadrilla() == Cuadrilla.StateCuadrilla.Ocupado)
                 {
                     if (cuadrilla.enemy != null)
                     {
@@ -148,10 +260,30 @@ namespace Prototipo_2
                                 cuadrilla.enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.RecibirDanio;
                                 cuadrilla.enemy.life = cuadrilla.enemy.life - damage;
                                 //AUMENTO XP PARA EL ATAQUE ESPECIAL
-                                PLAYER1.SetXpActual(PLAYER1.GetXpActual() + PLAYER1.xpForHit);
+                                if (PLAYER1 != null)
+                                {
+                                    PLAYER1.SetXpActual(PLAYER1.GetXpActual() + PLAYER1.xpForHit);
+                                }
                                 CheckGrid(cuadrilla);
-                                cuadrillaColision = grid.matrizCuadrilla[grid.GetCuadrilla_columnas() - 1][cuadrilla.enemy.structsEnemys.dataEnemy.columnaActual];
-                                CreateGaseosas();
+                                if (cuadrillaColision != null)
+                                {
+                                    cuadrillaColision = grid.matrizCuadrilla[grid.GetCuadrilla_columnas() - 1][cuadrilla.enemy.structsEnemys.dataEnemy.columnaActual];
+                                }
+                                if (PLAYER1 != null)
+                                {
+                                    if (PLAYER1.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Protagonista)
+                                    {
+                                        CreateGaseosas(3);
+                                    }
+                                    else if (PLAYER1.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Balanceado)
+                                    {
+                                        CreateGaseosas(2);
+                                    }
+                                    else
+                                    {
+                                        CreateGaseosas(1);
+                                    }
+                                }
                             }
                         }
                     }
@@ -163,8 +295,11 @@ namespace Prototipo_2
                             cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
                             cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                             CheckGrid(cuadrilla);
-                            cuadrillaColision = grid.matrizCuadrilla[grid.GetCuadrilla_columnas() - 1][cuadrilla.player.structsPlayer.dataPlayer.columnaActual];
-                            CreateGaseosas();
+                            if (cuadrillaColision != null)
+                            {
+                                cuadrillaColision = grid.matrizCuadrilla[grid.GetCuadrilla_columnas() - 1][cuadrilla.player.structsPlayer.dataPlayer.columnaActual];
+                            }
+                            CreateGaseosas(2);
                         }
                         if (PLAYER1 != null)
                         {
@@ -172,14 +307,32 @@ namespace Prototipo_2
                                 || cuadrilla.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
                             {
                                 //AUMENTO XP PARA EL ATAQUE ESPECIAL
+                                
                                 PLAYER1.SetXpActual(PLAYER1.GetXpActual() + PLAYER1.xpForHit);
                                 cuadrilla.player.SetEnableCounterAttack(true);
 
                                 cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
                                 cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                 CheckGrid(cuadrilla);
-                                cuadrillaColision = grid.matrizCuadrilla[grid.GetCuadrilla_columnas() - 1][cuadrilla.player.structsPlayer.dataPlayer.columnaActual];
-                                CreateGaseosas();
+                                if (cuadrillaColision != null)
+                                {
+                                    cuadrillaColision = grid.matrizCuadrilla[grid.GetCuadrilla_columnas() - 1][cuadrilla.player.structsPlayer.dataPlayer.columnaActual];
+                                }
+                                if (PLAYER1 != null)
+                                {
+                                    if (PLAYER1.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Protagonista)
+                                    {
+                                        CreateGaseosas(3);
+                                    }
+                                    else if (PLAYER1.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Balanceado)
+                                    {
+                                        CreateGaseosas(2);
+                                    }
+                                    else
+                                    {
+                                        CreateGaseosas(1);
+                                    }
+                                }
                             }
                         }
                         if (PLAYER2 != null)
@@ -194,13 +347,29 @@ namespace Prototipo_2
                                 cuadrilla.player.PD.lifePlayer = cuadrilla.player.PD.lifePlayer - damage;
                                 cuadrilla.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                 CheckGrid(cuadrilla);
-                                cuadrillaColision = grid.matrizCuadrilla[grid.GetCuadrilla_columnas() - 1][cuadrilla.player.structsPlayer.dataPlayer.columnaActual];
-                                CreateGaseosas();
-
+                                if (cuadrillaColision != null)
+                                {
+                                    cuadrillaColision = grid.matrizCuadrilla[grid.GetCuadrilla_columnas() - 1][cuadrilla.player.structsPlayer.dataPlayer.columnaActual];
+                                }
+                                if (PLAYER2 != null)
+                                {
+                                    if (PLAYER2.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Protagonista)
+                                    {
+                                        CreateGaseosas(3);
+                                    }
+                                    else if (PLAYER2.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Balanceado)
+                                    {
+                                        CreateGaseosas(2);
+                                    }
+                                    else
+                                    {
+                                        CreateGaseosas(1);
+                                    }
+                                }
                             }
                         }
                     }
-                }
+                }*/
             }
         }
     }

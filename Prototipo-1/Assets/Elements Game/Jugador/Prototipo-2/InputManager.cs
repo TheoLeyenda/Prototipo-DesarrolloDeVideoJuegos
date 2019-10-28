@@ -364,7 +364,7 @@ namespace Prototipo_2 {
         
         public void CheckSpriteParado_P1()
         {
-            if (InputPlayerController.Vertical_Button_P1() == 0 && !InputPlayerController.CheckSpecialAttackButton_P1())
+            if (InputPlayerController.Vertical_Button_P1() == 0 && !InputPlayerController.SpecialAttackButton_P1())
             {
                 player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
             }
@@ -411,7 +411,7 @@ namespace Prototipo_2 {
                 {
                     player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.SaltoDefensa;
                 }
-                else if (InputPlayerController.CheckSpecialAttackButton_P1())
+                else if (InputPlayerController.SpecialAttackButton_P1())
                 {
                     //SPRITE O ANIMACION ATAQUE ESPECIAL JUGADOR.
                 }
@@ -816,7 +816,7 @@ namespace Prototipo_2 {
         }
         public void CheckSpriteParado_P2()
         {
-            if (InputPlayerController.Vertical_Button_P2() == 0 && !InputPlayerController.CheckSpecialAttackButton_P2())
+            if (InputPlayerController.Vertical_Button_P2() == 0 && !InputPlayerController.SpecialAttackButton_P2())
             {
                 player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
             }
@@ -863,7 +863,7 @@ namespace Prototipo_2 {
                 {
                     player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.SaltoDefensa;
                 }
-                else if (InputPlayerController.CheckSpecialAttackButton_P2())
+                else if (InputPlayerController.SpecialAttackButton_P2())
                 {
                     //SPRITE O ANIMACION ATAQUE ESPECIAL JUGADOR.
                 }

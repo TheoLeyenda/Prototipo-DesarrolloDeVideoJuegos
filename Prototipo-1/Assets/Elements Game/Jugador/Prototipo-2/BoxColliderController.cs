@@ -45,7 +45,7 @@ namespace Prototipo_2
         public void CollisionWhitProyectil(Collider2D collision)
         {
             Proyectil proyectil = collision.GetComponent<Proyectil>();
-            if (proyectil.GetComponent<ProyectilInparable>() == null)
+            if (proyectil.GetComponent<ProyectilInparable>() == null && proyectil.GetComponent<GranadaGaseosa>() == null)
             {
                 if (player != null && !inEnemy && inPlayer)
                 {

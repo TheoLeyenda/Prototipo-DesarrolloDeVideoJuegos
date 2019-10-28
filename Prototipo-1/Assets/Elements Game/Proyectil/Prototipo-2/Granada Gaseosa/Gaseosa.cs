@@ -40,6 +40,15 @@ namespace Prototipo_2
                 }
                 player.PD.lifePlayer = player.PD.lifePlayer - damage;
             }
+            if (collision.tag == "Enemy")
+            {
+                Enemy enemy = collision.GetComponent<Enemy>();
+                if (enemy == null)
+                {
+                    return;
+                }
+                enemy.life = enemy.life - (damage/2);
+            }
         }
     }
 }
