@@ -91,7 +91,7 @@ namespace Prototipo_2
                     id = i;
                 }
             }
-            Debug.Log(id);
+            //Debug.Log(id);
             if (id >= 0 && id < scores.Count)
             {
                 PlayerPrefs.SetString(scores[id].claveNombre, nameActual);
