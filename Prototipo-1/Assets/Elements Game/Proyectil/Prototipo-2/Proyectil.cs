@@ -26,6 +26,22 @@ namespace Prototipo_2
             PosicionMedia,
             PosicionBaja,
         }
+        public enum typeProyectil
+        {
+            //COMENTAR LA OPCION Nulo PARA SABER DONDE TENGO QUE PONER LA OPCION DE ProyectilParabola/AtaqueEspecial
+            Nulo,
+            ProyectilAereo,
+            ProyectilNormal,
+            ProyectilBajo,
+            ProyectilParabola,
+            AtaqueEspecial,
+        }
+        public SpriteRenderer spriteRenderer;
+        public List<Sprite> propsDisparoAereo;
+        public List<Sprite> propsDisparoNormal;
+        public List<Sprite> propsDisparoBajo;
+        [HideInInspector]
+        public typeProyectil tipoDeProyectil;
         public float speed;
         public float timeLife;
         public float auxTimeLife;
@@ -72,8 +88,28 @@ namespace Prototipo_2
         {
             CheckTimeLife();
         }
-        public void On()
+        public void On(typeProyectil _tipoDeProyectil)
         {
+            tipoDeProyectil = _tipoDeProyectil;
+            int subIndiceSprite;
+            if (propsDisparoAereo.Count > 0 && propsDisparoBajo.Count > 0 && propsDisparoNormal.Count > 0)
+            {
+                switch (tipoDeProyectil)
+                {
+                    case typeProyectil.ProyectilAereo:
+                        subIndiceSprite = Random.Range(0, propsDisparoAereo.Count);
+                        spriteRenderer.sprite = propsDisparoAereo[subIndiceSprite];
+                        break;
+                    case typeProyectil.ProyectilNormal:
+                        subIndiceSprite = Random.Range(0, propsDisparoNormal.Count);
+                        spriteRenderer.sprite = propsDisparoNormal[subIndiceSprite];
+                        break;
+                    case typeProyectil.ProyectilBajo:
+                        subIndiceSprite = Random.Range(0, propsDisparoBajo.Count);
+                        spriteRenderer.sprite = propsDisparoBajo[subIndiceSprite];
+                        break;
+                }
+            }
             if (trailRenderer != null)
             {
                 trailRenderer.enabled = true;

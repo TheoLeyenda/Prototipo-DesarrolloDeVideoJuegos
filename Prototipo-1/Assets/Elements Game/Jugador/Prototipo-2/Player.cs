@@ -304,6 +304,7 @@ namespace Prototipo_2
         {
             if (enableAttack)
             {
+                Proyectil.typeProyectil tipoProyectil = Proyectil.typeProyectil.ProyectilAereo;
                 GameObject go = structsPlayer.dataAttack.poolProyectil.GetObject();
                 Proyectil proyectil = go.GetComponent<Proyectil>();
                 switch (enumsPlayers.numberPlayer)
@@ -335,7 +336,7 @@ namespace Prototipo_2
                     proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
                 }
                 proyectil.disparadorDelProyectil = disparador;
-                proyectil.On();
+                proyectil.On(tipoProyectil);
                 proyectil.ShootForwardDown();
                 delayAttack = auxDelayAttack;
             }
@@ -358,6 +359,7 @@ namespace Prototipo_2
             {
                 GameObject go = structsPlayer.dataAttack.poolProyectil.GetObject();
                 Proyectil proyectil = go.GetComponent<Proyectil>();
+                Proyectil.typeProyectil tipoProyectil = Proyectil.typeProyectil.ProyectilAereo;
                 switch (enumsPlayers.numberPlayer)
                 {
                     case EnumsPlayers.NumberPlayer.player1:
@@ -376,17 +378,27 @@ namespace Prototipo_2
                 }
                 if (!isDuck)
                 {
+                    if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                        && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+                        && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+                    {
+                        tipoProyectil = Proyectil.typeProyectil.ProyectilNormal;
+                    }
                     go.transform.position = generadorProyectiles.transform.position;
                     go.transform.rotation = generadorProyectiles.transform.rotation;
                     proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
                 }
                 else
                 {
+                    if (isDuck)
+                    {
+                        tipoProyectil = Proyectil.typeProyectil.ProyectilBajo;
+                    }
                     go.transform.position = generadorProyectilesAgachado.transform.position;
                     go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
                     proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
                 }
-                proyectil.On();
+                proyectil.On(tipoProyectil);
                 proyectil.disparadorDelProyectil = disparador;
                 proyectil.ShootForward();
                 delayAttack = auxDelayAttack;

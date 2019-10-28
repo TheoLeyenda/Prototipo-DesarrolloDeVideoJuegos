@@ -178,6 +178,7 @@ namespace Prototipo_2
             bool shootDown = false;
             GameObject go = null;
             Proyectil proyectil = null;
+            Proyectil.typeProyectil tipoProyectil = Proyectil.typeProyectil.Nulo;
             if (!specialAttack)
             {
                 go = poolObjectAttack.GetObject();
@@ -193,8 +194,10 @@ namespace Prototipo_2
             if (!GetIsDuck() && !specialAttack 
                 && ProyectilRecibido.posicionDisparo != Proyectil.PosicionDisparo.PosicionBaja)
             {
+                tipoProyectil = Proyectil.typeProyectil.ProyectilNormal;
                 if (jampAttack)
                 {
+                    tipoProyectil = Proyectil.typeProyectil.ProyectilAereo;
                     shootDown = true;
                 }
                 go.transform.rotation = generadoresProyectiles.transform.rotation;
@@ -204,6 +207,7 @@ namespace Prototipo_2
             else if (!specialAttack && GetIsDuck()
                 || ProyectilRecibido.posicionDisparo == Proyectil.PosicionDisparo.PosicionBaja)
             {
+                tipoProyectil = Proyectil.typeProyectil.ProyectilBajo;
                 go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
                 go.transform.position = generadorProyectilesAgachado.transform.position;
                 proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
@@ -211,7 +215,7 @@ namespace Prototipo_2
             
             if (!specialAttack)
             {
-                proyectil.On();
+                proyectil.On(tipoProyectil);
 
                 if (!shootDown)
                 {
@@ -228,7 +232,7 @@ namespace Prototipo_2
             bool shootDown = false;
             GameObject go = null;
             Proyectil proyectil = null;
-
+            Proyectil.typeProyectil tipoProyectil = Proyectil.typeProyectil.Nulo;
             if (specialAttack)
             {
                 Disparo.gameObject.SetActive(true);
@@ -250,8 +254,10 @@ namespace Prototipo_2
                 }
                 if (!GetIsDuck() && !specialAttack)
                 {
+                    tipoProyectil = Proyectil.typeProyectil.ProyectilNormal;
                     if (jampAttack)
                     {
+                        tipoProyectil = Proyectil.typeProyectil.ProyectilAereo;
                         shootDown = true;
                     }
                     go.transform.rotation = generadoresProyectiles.transform.rotation;
@@ -260,13 +266,14 @@ namespace Prototipo_2
                 }
                 else if (!specialAttack && GetIsDuck())
                 {
+                    tipoProyectil = Proyectil.typeProyectil.ProyectilBajo;
                     go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
                     go.transform.position = generadorProyectilesAgachado.transform.position;
                     proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
                 }
                 if (!specialAttack)
                 {
-                    proyectil.On();
+                    proyectil.On(tipoProyectil);
 
                     if (!shootDown)
                     {

@@ -92,7 +92,7 @@ namespace Prototipo_2
             GameObject go = null;
             Proyectil proyectil = null;
             ProyectilInparable proyectilInparable = null;
-
+            Proyectil.typeProyectil tipoProyectil = Proyectil.typeProyectil.Nulo;
             if (!specialAttack)
             {
                 go = poolObjectAttack.GetObject();
@@ -107,8 +107,10 @@ namespace Prototipo_2
             }
             if (!GetIsDuck() && !specialAttack)
             {
+                tipoProyectil = Proyectil.typeProyectil.ProyectilNormal;
                 if (jampAttack)
                 {
+                    tipoProyectil = Proyectil.typeProyectil.ProyectilAereo;
                     shootDown = true;
                 }
                 go.transform.rotation = generadoresProyectiles.transform.rotation;
@@ -117,12 +119,15 @@ namespace Prototipo_2
             }
             else if (!specialAttack && GetIsDuck())
             {
+                tipoProyectil = Proyectil.typeProyectil.ProyectilBajo;
                 go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
                 go.transform.position = generadorProyectilesAgachado.transform.position;
                 proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
             }
             if (specialAttack)
             {
+                //CAMBIAR ESTE NULO POR EL ATAQUE ESPECIAL CORRESPONDIENTE (Ya sea ProyectilParabola o AtaqueEspecial
+                tipoProyectil = Proyectil.typeProyectil.Nulo;
                 go = poolProyectilImparable.GetObject();
                 proyectilInparable = go.GetComponent<ProyectilInparable>();
                 proyectilInparable.SetEnemy(gameObject.GetComponent<Enemy>());
@@ -139,7 +144,7 @@ namespace Prototipo_2
             }
             if (!specialAttack)
             {
-                proyectil.On();
+                proyectil.On(tipoProyectil);
 
                 if (!shootDown)
                 {

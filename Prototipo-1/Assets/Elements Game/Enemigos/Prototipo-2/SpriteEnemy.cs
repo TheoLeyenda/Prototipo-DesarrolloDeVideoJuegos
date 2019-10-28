@@ -278,7 +278,7 @@ namespace Prototipo_2
         }*/
         public void PlayAnimation(string nameAnimation)
         {
-            if (enemy.enemyPrefab.activeSelf == true)
+            if (enemy.enemyPrefab.activeSelf == true && animator != null)
             {
                 animator.Play(nameAnimation);
             }
