@@ -183,7 +183,11 @@ namespace Prototipo_2
             {
                 if (delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque))
                 {
-                    if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAdelante && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAtras)
+                    if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial 
+                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialAgachado
+                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto
+                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAdelante 
+                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAtras)
                     {
                         CheckComportamiento();
                     }

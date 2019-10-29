@@ -581,6 +581,8 @@ namespace Prototipo_2
         {
             if (enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
             {
+                structsPlayer.particleMovement.particleJump.transform.position = new Vector3(transform.position.x, structsPlayer.particleMovement.particleJump.transform.position.y, structsPlayer.particleMovement.particleJump.transform.position.z);
+                structsPlayer.particleMovement.particleJump.gameObject.SetActive(true);
                 isJumping = true;
                 SpeedJump = auxSpeedJump;
             }

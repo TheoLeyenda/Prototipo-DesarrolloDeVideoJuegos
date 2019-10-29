@@ -117,6 +117,7 @@ namespace Prototipo_2 {
         }
         public void CheckVerticalUp_P1()
         {
+            
             if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && InputPlayerController.Vertical_Button_P1() > 0 && moveVerticalPlayer1
                 || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
             {

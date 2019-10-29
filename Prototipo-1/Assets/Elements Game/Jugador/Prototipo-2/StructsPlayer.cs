@@ -29,14 +29,35 @@ namespace Prototipo_2
             public GameObject DisparoDeCarga;
             public Pool poolGranadaGaseosa;
         }
+        [System.Serializable]
+        public struct ParticleMovement
+        {
+            public float timeLifeParticleJamp;
+            public float auxTimeLifeParticleJamp;
+            public GameObject particleJump;
+        }
         public Player player;
         public DataSpecialAttack dataAttack;
         public GameObject ruta;
         public GameObject rutaAgachado;
         public DataPlayer dataPlayer;
+        public ParticleMovement particleMovement;
         public void Update()
         {
             CheckSpecialAttackDisparoDeCarga();
+            CheckParticleJumpActivate();
+        }
+        public void CheckParticleJumpActivate()
+        {
+            if (particleMovement.timeLifeParticleJamp > 0 && particleMovement.particleJump.activeSelf)
+            {
+                particleMovement.timeLifeParticleJamp = particleMovement.timeLifeParticleJamp - Time.deltaTime;
+            }
+            else if (particleMovement.timeLifeParticleJamp <= 0)
+            {
+                particleMovement.timeLifeParticleJamp = particleMovement.auxTimeLifeParticleJamp;
+                particleMovement.particleJump.SetActive(false);
+            }
         }
         public void CheckSpecialAttackDisparoDeCarga()
         {
