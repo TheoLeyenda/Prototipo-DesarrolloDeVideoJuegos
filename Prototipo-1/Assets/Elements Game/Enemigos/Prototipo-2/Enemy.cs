@@ -559,6 +559,11 @@ namespace Prototipo_2
                     isDeffended = false;
                     break;
                 case EnumsEnemy.Movimiento.SaltoAtaque:
+                    if (!isJamping && SpeedJump > 0 && structsEnemys.particleMovement.particleJump != null)
+                    {
+                        structsEnemys.particleMovement.particleJump.transform.position = new Vector3(transform.position.x, structsEnemys.particleMovement.particleJump.transform.position.y, structsEnemys.particleMovement.particleJump.transform.position.z);
+                        structsEnemys.particleMovement.particleJump.SetActive(true);
+                    }
                     CheckDelayAttack(false);
                     isJamping = true;
                     Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
@@ -587,6 +592,11 @@ namespace Prototipo_2
                     }
                     break;
                 case EnumsEnemy.Movimiento.Saltar:
+                    if (!isJamping && SpeedJump > 0 && structsEnemys.particleMovement.particleJump != null)
+                    {
+                        structsEnemys.particleMovement.particleJump.transform.position = new Vector3(transform.position.x, structsEnemys.particleMovement.particleJump.transform.position.y, structsEnemys.particleMovement.particleJump.transform.position.z);
+                        structsEnemys.particleMovement.particleJump.SetActive(true);
+                    }
                     isDeffended = false;
                     isJamping = true;
                     Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
@@ -595,6 +605,11 @@ namespace Prototipo_2
                     Deffence();
                     break;
                 case EnumsEnemy.Movimiento.SaltoDefensa:
+                    if (!isJamping && SpeedJump > 0 && structsEnemys.particleMovement.particleJump != null)
+                    {
+                        structsEnemys.particleMovement.particleJump.transform.position = new Vector3(transform.position.x, structsEnemys.particleMovement.particleJump.transform.position.y, structsEnemys.particleMovement.particleJump.transform.position.z);
+                        structsEnemys.particleMovement.particleJump.SetActive(true);
+                    }
                     isJamping = true;
                     Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
                     Deffence();
@@ -618,6 +633,11 @@ namespace Prototipo_2
                     break;
                 case EnumsEnemy.Movimiento.AtaqueEspecialSalto:
                     //CheckDelayAttack(true);
+                    if (!isJamping && SpeedJump > 0 && structsEnemys.particleMovement.particleJump != null)
+                    {
+                        structsEnemys.particleMovement.particleJump.transform.position = new Vector3(transform.position.x, structsEnemys.particleMovement.particleJump.transform.position.y, structsEnemys.particleMovement.particleJump.transform.position.z);
+                        structsEnemys.particleMovement.particleJump.SetActive(true);
+                    }
                     isDeffended = false;
                     isJamping = true;
                     Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
