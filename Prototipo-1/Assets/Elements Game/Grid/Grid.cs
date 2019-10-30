@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Prototipo_2;
+using UnityEngine.SceneManagement;
 public class Grid : MonoBehaviour
 {
     public enum IdPlataforma
@@ -14,6 +15,7 @@ public class Grid : MonoBehaviour
         PlataformaQuimica,
         PlataformaProgramacion,
         PlataformaTESIS,
+        PlatafomaCafeteria,
         Count,
 
     }
@@ -26,28 +28,47 @@ public class Grid : MonoBehaviour
     public Cuadrilla leftCuadrilla;
     public Cuadrilla rightCuadrilla;
     public int baseGrild = 2;
+    private GameManager gm;
     private void Awake()
     {
         matrizCuadrilla = new List<List<Cuadrilla>>();
         InitGrid();
         InitMatrizCuadrilla();
+        if (GameManager.instanceGameManager != null)
+        {
+            gm = GameManager.instanceGameManager;
+        }
     }
     private void Start()
     {
-        //ActivatePlataforma();
+        ActivatePlataforma();
+        
     }
     public void ActivatePlataforma()
     {
-        for (int i = 0; i < Plataformas.Count; i++)
+        if (Plataformas.Count > 0)
         {
-            if (Plataformas[i] != null)
+            for (int i = 0; i < Plataformas.Count; i++)
             {
-                Plataformas[i].SetActive(false);
+                if (Plataformas[i] != null)
+                {
+                    Plataformas[i].SetActive(false);
+                }
             }
-        }
-        if (Plataformas[(int)idPlataforma] != null)
-        {
-            Plataformas[(int)idPlataforma].SetActive(true);
+            if (SceneManager.GetActiveScene().name != "PvP")
+            {
+                if (Plataformas[(int)idPlataforma] != null)
+                {
+                    Plataformas[(int)idPlataforma].SetActive(true);
+                }
+            }
+            else if (SceneManager.GetActiveScene().name == "PvP")
+            {
+                if (gm != null)
+                {
+                    Plataformas[(int)gm.structGameManager.gm_dataCombatPvP.level_selected].SetActive(true);
+                }
+            }
         }
     }
     public void InitGrid()

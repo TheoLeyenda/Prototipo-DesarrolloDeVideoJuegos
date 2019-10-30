@@ -109,7 +109,6 @@ namespace Prototipo_2
         }
         public void Dead()
         {
-            Debug.Log("Destrui la balita");
             poolObject.Recycle();
             gameObject.SetActive(false);
         }
