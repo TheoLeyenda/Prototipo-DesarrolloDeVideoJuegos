@@ -233,31 +233,40 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.18181801
+        value: 0.46904945
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.21097527, b: 0, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
-      key3: {r: 0, g: 0, b: 0, a: 0}
-      key4: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 1, g: 0, b: 0.037246227, a: 1}
+      key1: {r: 1, g: 0.72072256, b: 0.19339621, a: 0}
+      key2: {r: 1, g: 0.94426596, b: 0.023584902, a: 0}
+      key3: {r: 1, g: 0.99139845, b: 0.8537736, a: 0}
+      key4: {r: 1, g: 1, b: 1, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 65535
-      ctime2: 0
-      ctime3: 0
-      ctime4: 0
+      ctime1: 16384
+      ctime2: 33153
+      ctime3: 52235
+      ctime4: 65535
       ctime5: 0
       ctime6: 0
       ctime7: 0
@@ -270,7 +279,7 @@ TrailRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_NumColorKeys: 2
+      m_NumColorKeys: 5
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 10
@@ -293,6 +302,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd67e8d820093eb468e161f15c7eaaed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  propsDisparoAereo: []
+  propsDisparoNormal: []
+  propsDisparoBajo: []
+  tipoDeProyectil: 0
   speed: 20
   timeLife: 10
   auxTimeLife: 10
@@ -305,6 +319,7 @@ MonoBehaviour:
   vectorForwardDown: {fileID: 954585989134851890}
   pool: {fileID: 2309628886694141226, guid: 2778ca04b9c23df4e9af6dea3a2917b7, type: 3}
   disparadorDelProyectil: 0
+  posicionDisparo: 0
   rutaParabola_AtaqueJugador: {fileID: 0}
   rutaParabolaAgachado_AtaqueJugador: {fileID: 0}
   rutaParabola_AtaqueEnemigo: {fileID: 0}
