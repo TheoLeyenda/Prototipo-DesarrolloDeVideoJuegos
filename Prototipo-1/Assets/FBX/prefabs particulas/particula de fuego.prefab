@@ -47,7 +47,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -221,8 +221,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.990566, g: 0.7659931, b: 0.07943219, a: 1}
-      maxColor: {r: 0.9339623, g: 0.32366857, b: 0.2511125, a: 1}
+      minColor: {r: 0.509434, g: 0.08658761, b: 0, a: 1}
+      maxColor: {r: 0.7924528, g: 0.7696715, b: 0.08597367, a: 0.99215686}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -600,7 +600,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 30
+    maxNumParticles: 150
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -865,7 +865,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 50
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -983,20 +983,20 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0.09459913
-          inSlope: -0.000026209227
-          outSlope: -0.000026209227
+          inSlope: 0.93083835
+          outSlope: 0.93083835
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.21384826
+          outWeight: 0.1510093
         - serializedVersion: 3
-          time: 0.8249991
-          value: 0.48648298
-          inSlope: -1.1578115
-          outSlope: -1.1578115
+          time: 0.8652001
+          value: 0.48648387
+          inSlope: -0.09719578
+          outSlope: -0.09719578
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.09797375
+          inWeight: 0.16073674
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -4717,6 +4717,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4728,7 +4729,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
