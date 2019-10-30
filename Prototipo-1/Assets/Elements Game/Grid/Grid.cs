@@ -4,6 +4,21 @@ using UnityEngine;
 using Prototipo_2;
 public class Grid : MonoBehaviour
 {
+    public enum IdPlataforma
+    {
+        PlataformaAnatomia,
+        PlataformaHistoria,
+        PlataformaEducacionFisica,
+        PlataformaArte,
+        PlataformaMatematica,
+        PlataformaQuimica,
+        PlataformaProgramacion,
+        PlataformaTESIS,
+        Count,
+
+    }
+    public IdPlataforma idPlataforma;
+    public List<GameObject> Plataformas;
     public Cuadrilla[] cuadrilla;
     public List<List<Cuadrilla>> matrizCuadrilla;
     private int cuadrilla_columnas = 3;
@@ -16,6 +31,24 @@ public class Grid : MonoBehaviour
         matrizCuadrilla = new List<List<Cuadrilla>>();
         InitGrid();
         InitMatrizCuadrilla();
+    }
+    private void Start()
+    {
+        //ActivatePlataforma();
+    }
+    public void ActivatePlataforma()
+    {
+        for (int i = 0; i < Plataformas.Count; i++)
+        {
+            if (Plataformas[i] != null)
+            {
+                Plataformas[i].SetActive(false);
+            }
+        }
+        if (Plataformas[(int)idPlataforma] != null)
+        {
+            Plataformas[(int)idPlataforma].SetActive(true);
+        }
     }
     public void InitGrid()
     {

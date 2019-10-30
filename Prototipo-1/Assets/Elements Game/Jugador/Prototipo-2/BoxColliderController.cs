@@ -66,8 +66,9 @@ namespace Prototipo_2
                                         proyectil.gameObject.SetActive(false);
                                         player.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
                                         player.delayCounterAttack = player.GetAuxDelayCounterAttack();
-                                        proyectil.timeLife = 0;
-                                        enableDamagePlayer = false;
+                                        //proyectil.timeLife = 0;
+                                        //enableDamagePlayer = false;
+                                        proyectil.AnimationHit();
                                     }
                                 }
                                 if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer || !ZonaContraAtaque)
@@ -80,8 +81,9 @@ namespace Prototipo_2
                                     player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                     if (!ZonaContraAtaque)
                                     {
-                                        proyectil.timeLife = 0;
-                                        proyectil.gameObject.SetActive(false);
+                                        //proyectil.timeLife = 0;
+                                        //proyectil.gameObject.SetActive(false);
+                                        proyectil.AnimationHit();
                                     }
                                 }
                                 else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer || !ZonaContraAtaque)
@@ -91,8 +93,9 @@ namespace Prototipo_2
                                     player.SetEnableCounterAttack(false);
                                     player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                                     player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-                                    proyectil.timeLife = 0;
-                                    proyectil.gameObject.SetActive(false);
+                                    //proyectil.timeLife = 0;
+                                    //proyectil.gameObject.SetActive(false);
+                                    proyectil.AnimationHit();
                                 }
                             }
 
@@ -116,8 +119,9 @@ namespace Prototipo_2
                                     {
                                         player.Attack(Proyectil.DisparadorDelProyectil.Jugador2);
                                         player.delayCounterAttack = player.GetAuxDelayCounterAttack();
-                                        proyectil.timeLife = 0;
                                         enableDamagePlayer = false;
+                                        //proyectil.timeLife = 0;
+                                        proyectil.AnimationHit();
                                     }
                                 }
                                 if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer)
@@ -131,8 +135,9 @@ namespace Prototipo_2
                                     player.SetEnableCounterAttack(false);
                                     player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                                     player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-                                    proyectil.timeLife = 0;
-                                    proyectil.gameObject.SetActive(false);
+                                    //proyectil.timeLife = 0;
+                                    //proyectil.gameObject.SetActive(false);
+                                    proyectil.AnimationHit();
                                 }
                             }
                         }
@@ -156,8 +161,9 @@ namespace Prototipo_2
                                     {
                                         player.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
                                         player.delayCounterAttack = player.GetAuxDelayCounterAttack();
-                                        proyectil.timeLife = 0;
                                         enableDamagePlayer = false;
+                                        //proyectil.timeLife = 0;
+                                        proyectil.AnimationHit();
                                     }
                                 }
                                 if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer)
@@ -171,9 +177,10 @@ namespace Prototipo_2
                                     player.SetEnableCounterAttack(false);
                                     player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                                     player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-                                    proyectil.timeLife = 0;
-                                    proyectil.gameObject.SetActive(false);
-                                    proyectil.GetPoolObject().Recycle();
+                                    //proyectil.timeLife = 0;
+                                    //proyectil.gameObject.SetActive(false);
+                                    //proyectil.GetPoolObject().Recycle();
+                                    proyectil.AnimationHit();
                                 }
                             }
                         }
@@ -196,10 +203,11 @@ namespace Prototipo_2
                                 }
                                 realDamage = proyectil.damage - player.pointsDeffence;
                                 player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
-                                proyectil.timeLife = 0;
                                 proyectil.damage = proyectil.GetAuxDamage();
-                                proyectil.GetPoolObject().Recycle();
-                                proyectil.gameObject.SetActive(false);
+                                //proyectil.timeLife = 0;
+                                //proyectil.GetPoolObject().Recycle();
+                                //proyectil.gameObject.SetActive(false);
+                                proyectil.AnimationHit();
                             }
                         }
                         if (player_PvP != null)
@@ -219,10 +227,11 @@ namespace Prototipo_2
                                     }
                                     realDamage = proyectil.damage - player.pointsDeffence;
                                     player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
-                                    proyectil.timeLife = 0;
                                     proyectil.damage = proyectil.GetAuxDamage();
-                                    proyectil.GetPoolObject().Recycle();
-                                    proyectil.gameObject.SetActive(false);
+                                    //proyectil.timeLife = 0;
+                                    //proyectil.GetPoolObject().Recycle();
+                                    //proyectil.gameObject.SetActive(false);
+                                    proyectil.AnimationHit();
                                 }
                             }
                             if (player_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
@@ -241,10 +250,11 @@ namespace Prototipo_2
                                         }
                                         realDamage = proyectil.damage - player.pointsDeffence;
                                         player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
-                                        proyectil.timeLife = 0;
                                         proyectil.damage = proyectil.GetAuxDamage();
-                                        proyectil.GetPoolObject().Recycle();
-                                        proyectil.gameObject.SetActive(false);
+                                        //proyectil.GetPoolObject().Recycle();
+                                        //proyectil.gameObject.SetActive(false);
+                                        //proyectil.timeLife = 0;
+                                        proyectil.AnimationHit();
                                         break;
                                     default:
                                         if (proyectil.GetPlayer() != null)
@@ -277,10 +287,11 @@ namespace Prototipo_2
                                         }
                                         realDamage = proyectil.damage - player.pointsDeffence;
                                         player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
-                                        proyectil.timeLife = 0;
                                         proyectil.damage = proyectil.GetAuxDamage();
-                                        proyectil.GetPoolObject().Recycle();
-                                        proyectil.gameObject.SetActive(false);
+                                        //proyectil.timeLife = 0;
+                                        //proyectil.GetPoolObject().Recycle();
+                                        //proyectil.gameObject.SetActive(false);
+                                        proyectil.AnimationHit();
                                         break;
                                 }
                             }
@@ -291,10 +302,11 @@ namespace Prototipo_2
                                 proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + (proyectil.GetEnemy().xpForHit / 2));
                                 realDamage = proyectil.damage - player.pointsDeffence;
                                 player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
-                                proyectil.timeLife = 0;
                                 proyectil.damage = proyectil.GetAuxDamage();
-                                proyectil.GetPoolObject().Recycle();
-                                proyectil.gameObject.SetActive(false);
+                                //proyectil.timeLife = 0;
+                                //proyectil.GetPoolObject().Recycle();
+                                //proyectil.gameObject.SetActive(false);
+                                proyectil.AnimationHit();
                             }
                         }
                     }
@@ -318,9 +330,10 @@ namespace Prototipo_2
                                     proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + proyectil.GetPlayer().xpForHit);
                                     proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + proyectil.GetPlayer().PD.scoreForHit;
                                 }
-                                proyectil.timeLife = 0;
-                                proyectil.gameObject.SetActive(false);
-                                proyectil.GetPoolObject().Recycle();
+                                //proyectil.timeLife = 0;
+                                //proyectil.gameObject.SetActive(false);
+                                //proyectil.GetPoolObject().Recycle();
+                                proyectil.AnimationHit();
                             }
                            
 
@@ -381,9 +394,10 @@ namespace Prototipo_2
                                     enemy.life = enemy.life - proyectil.damage;
                                 }
                             }
-                            proyectil.timeLife = 0;
-                            proyectil.GetPoolObject().Recycle();
-                            proyectil.gameObject.SetActive(false);
+                            //proyectil.timeLife = 0;
+                            //proyectil.GetPoolObject().Recycle();
+                            //proyectil.gameObject.SetActive(false);
+                            proyectil.AnimationHit();
 
                         }
                     }

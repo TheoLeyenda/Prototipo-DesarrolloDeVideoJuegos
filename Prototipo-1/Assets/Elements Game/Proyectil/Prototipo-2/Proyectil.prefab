@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 2704542344242506306}
   - component: {fileID: 8037629832574115538}
   - component: {fileID: 3546365984257640956}
+  - component: {fileID: 66405764}
   m_Layer: 0
   m_Name: Proyectil
   m_TagString: Proyectil
@@ -105,7 +106,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -129,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1045993e7f37f94d8ba3d797974e2d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameAnimationHit: Hit_Proyectil
   spriteRenderer: {fileID: 301498923488935498}
   propsDisparoAereo:
   - {fileID: 21300000, guid: fe9f4171085b4d74da3a4a6108b6067a, type: 3}
@@ -156,6 +158,7 @@ MonoBehaviour:
   pool: {fileID: 8744921956802162880, guid: 124cdede344a9344a98c2efa26021301, type: 3}
   disparadorDelProyectil: 0
   posicionDisparo: 0
+  animator: {fileID: 66405764}
 --- !u!50 &2704542344242506306
 Rigidbody2D:
   serializedVersion: 4
@@ -231,7 +234,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Time: 0.2
   m_Parameters:
     serializedVersion: 3
@@ -298,6 +301,25 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!95 &66405764
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2914594783176540619}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ce5b57494e0a7854a80bb68ec54f644c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3219022371612275389
 GameObject:
   m_ObjectHideFlags: 0

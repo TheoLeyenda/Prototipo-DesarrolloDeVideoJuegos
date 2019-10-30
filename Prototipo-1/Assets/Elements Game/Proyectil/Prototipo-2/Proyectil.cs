@@ -36,6 +36,7 @@ namespace Prototipo_2
             ProyectilParabola,
             AtaqueEspecial,
         }
+        public string nameAnimationHit;
         public SpriteRenderer spriteRenderer;
         public List<Sprite> propsDisparoAereo;
         public List<Sprite> propsDisparoNormal;
@@ -64,6 +65,20 @@ namespace Prototipo_2
         private TrailRenderer trailRenderer;
         [HideInInspector]
         public PosicionDisparo posicionDisparo;
+        public Animator animator;
+        private CircleCollider2D circleCollider2D;
+        private void Awake()
+        {
+            circleCollider2D = GetComponent<CircleCollider2D>();
+            if (circleCollider2D != null)
+            {
+                circleCollider2D.enabled = true;
+            }
+            if (animator != null)
+            {
+                animator.enabled = false;
+            }
+        }
         private void OnDisable()
         {
             if (trailRenderer != null)
@@ -83,6 +98,10 @@ namespace Prototipo_2
         private void OnEnable()
         {
             timeLife = auxTimeLife;
+            if (circleCollider2D != null)
+            {
+                circleCollider2D.enabled = true;
+            }
         }
         private void Update()
         {
@@ -90,10 +109,20 @@ namespace Prototipo_2
         }
         public void Dead()
         {
+            Debug.Log("Destrui la balita");
             poolObject.Recycle();
+            gameObject.SetActive(false);
         }
         public void On(typeProyectil _tipoDeProyectil)
         {
+            if (circleCollider2D != null)
+            {
+                circleCollider2D.enabled = true;
+            }
+            if (animator != null)
+            {
+                animator.enabled = false;
+            }
             tipoDeProyectil = _tipoDeProyectil;
             int subIndiceSprite;
             if (propsDisparoAereo.Count > 0 && propsDisparoBajo.Count > 0 && propsDisparoNormal.Count > 0)
@@ -191,8 +220,23 @@ namespace Prototipo_2
         {
             return auxDamage;
         }
-        private void OnTriggerStay2D(Collider2D collision)
-        { 
+        public void AnimationHit()
+        {
+            if (animator != null)
+            {
+                trailRenderer.enabled = false;
+                rg2D.velocity = Vector3.zero;
+                animator.enabled = true;
+                if (circleCollider2D != null)
+                {
+                    circleCollider2D.enabled = false;
+                }
+                animator.Play(nameAnimationHit);
+            }
+            else
+            {
+                Dead();
+            }
         }
     }
 }
