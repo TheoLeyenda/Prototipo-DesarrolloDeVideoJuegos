@@ -19,7 +19,7 @@ public class Grid : MonoBehaviour
         Count,
 
     }
-    public IdPlataforma idPlataforma;
+    private IdPlataforma idPlataforma;
     public List<GameObject> Plataformas;
     public Cuadrilla[] cuadrilla;
     public List<List<Cuadrilla>> matrizCuadrilla;
@@ -57,10 +57,23 @@ public class Grid : MonoBehaviour
             }
             if (SceneManager.GetActiveScene().name != "PvP")
             {
-                if (Plataformas[(int)idPlataforma] != null)
+                //CUANDO AYA MAS NIVELES AGREGARLOS ACA PARA ACTIVAR LAS PLATAFORMAS DEPENDIENDO DEL NIVEL
+                switch (SceneManager.GetActiveScene().name)
                 {
-                    Plataformas[(int)idPlataforma].SetActive(true);
+                    case "Nivel 1":
+                        idPlataforma = IdPlataforma.PlataformaAnatomia;
+                        break;
+                    case "Nivel 2":
+                        idPlataforma = IdPlataforma.PlataformaHistoria;
+                        break;
+                    case "Nivel 3":
+                        idPlataforma = IdPlataforma.PlataformaEducacionFisica;
+                        break;
+                    case "Supervivencia":
+                        idPlataforma = IdPlataforma.PlatafomaCafeteria;
+                        break;
                 }
+                Plataformas[(int)idPlataforma].SetActive(true);
             }
             else if (SceneManager.GetActiveScene().name == "PvP")
             {
