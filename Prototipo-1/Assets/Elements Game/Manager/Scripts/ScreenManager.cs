@@ -24,6 +24,10 @@ namespace Prototipo_2 {
                 }
             }
         }
+        public void Creditos()
+        {
+            SceneManager.LoadScene("Creditos");
+        }
         public void LoadLevel(int numerLevel)
         {
             gm.totalCountEnemysDead = gm.totalCountEnemysDead + gm.auxCountEnemysDead;

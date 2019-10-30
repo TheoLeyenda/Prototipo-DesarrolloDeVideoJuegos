@@ -88,6 +88,10 @@ namespace Prototipo_2
         {
             CheckTimeLife();
         }
+        public void Dead()
+        {
+            poolObject.Recycle();
+        }
         public void On(typeProyectil _tipoDeProyectil)
         {
             tipoDeProyectil = _tipoDeProyectil;
@@ -188,8 +192,7 @@ namespace Prototipo_2
             return auxDamage;
         }
         private void OnTriggerStay2D(Collider2D collision)
-        {
-            
+        { 
         }
     }
 }
