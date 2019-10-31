@@ -61,7 +61,7 @@ Transform:
   m_GameObject: {fileID: 3880064559695748603}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.41, y: -2.59, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 185705710638670135}
   - {fileID: 4087424401345640796}
@@ -109,7 +109,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.6981132, g: 0.10386053, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -289,7 +289,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b24c16bb528108546a2b0ae3eba6663e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 0}
+  nameAnimationHit: 
+  spriteRenderer: {fileID: 1838973913409184378}
   propsDisparoAereo: []
   propsDisparoNormal: []
   propsDisparoBajo: []
@@ -307,6 +308,7 @@ MonoBehaviour:
   pool: {fileID: 4664205932121916671, guid: 9021a4b2ca0a7e2489001dca1d9ce961, type: 3}
   disparadorDelProyectil: 0
   posicionDisparo: 0
+  animator: {fileID: 0}
   rutaParabola_AtaqueJugador: {fileID: 0}
   rutaParabolaAgachado_AtaqueJugador: {fileID: 0}
   rutaParabola_AtaqueEnemigo: {fileID: 0}
@@ -314,6 +316,17 @@ MonoBehaviour:
   parabolaController: {fileID: 5347520700725556}
   TypeRoot: 0
   poolGaseosa: {fileID: 2309628886464252504}
+  propsProyectilGaseosa:
+  - {fileID: 21300000, guid: ce2e75a08965e98479339970cbe377c2, type: 3}
+  - {fileID: 21300000, guid: ce2e75a08965e98479339970cbe377c2, type: 3}
+  - {fileID: 21300000, guid: ce2e75a08965e98479339970cbe377c2, type: 3}
+  - {fileID: 21300000, guid: ce2e75a08965e98479339970cbe377c2, type: 3}
+  - {fileID: 21300000, guid: ce2e75a08965e98479339970cbe377c2, type: 3}
+  - {fileID: 21300000, guid: 49487b3ea2e81b34c8fdc451af4580f7, type: 3}
+  - {fileID: 21300000, guid: 49487b3ea2e81b34c8fdc451af4580f7, type: 3}
+  - {fileID: 21300000, guid: 49487b3ea2e81b34c8fdc451af4580f7, type: 3}
+  - {fileID: 21300000, guid: 49487b3ea2e81b34c8fdc451af4580f7, type: 3}
+  - {fileID: 21300000, guid: 49487b3ea2e81b34c8fdc451af4580f7, type: 3}
 --- !u!1 &4582409173489260129
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,11 +394,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6464822812185551963}
     m_Modifications:
-    - target: {fileID: 6928401684704543608, guid: 1a32ba341a57932499a2565fae392e72,
-        type: 3}
-      propertyPath: m_Name
-      value: PoolGaseosa
-      objectReference: {fileID: 0}
     - target: {fileID: 6928401684704543590, guid: 1a32ba341a57932499a2565fae392e72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -440,6 +448,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928401684704543608, guid: 1a32ba341a57932499a2565fae392e72,
+        type: 3}
+      propertyPath: m_Name
+      value: PoolGaseosa
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a32ba341a57932499a2565fae392e72, type: 3}

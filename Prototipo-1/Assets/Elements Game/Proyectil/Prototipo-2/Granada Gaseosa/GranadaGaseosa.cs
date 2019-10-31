@@ -12,6 +12,7 @@ namespace Prototipo_2
         private PoolObject poolObject;
         private Cuadrilla cuadrillaColision;
         List<Cuadrilla> cuadrillasAbajo = new List<Cuadrilla>();
+        public List<Sprite> propsProyectilGaseosa;
         private void Start()
         {
             poolObject = GetComponent<PoolObject>();
@@ -25,6 +26,11 @@ namespace Prototipo_2
         private void OnEnable()
         {
             timeLife = auxTimeLife;
+            int random = Random.Range(0, propsProyectilGaseosa.Count);
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.sprite = propsProyectilGaseosa[random];
+            }
             OnParabola();
         }
         
