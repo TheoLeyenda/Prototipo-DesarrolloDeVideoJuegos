@@ -63,13 +63,17 @@ namespace Prototipo_2
         {
             if (dataAttack.DisparoDeCarga.activeSelf && player.enumsPlayers.specialAttackEquipped == EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga)
             {
-                Debug.Log(player);
-                player.spritePlayerActual.GetAnimator().SetBool("FinalAtaqueEspecial", false);
+                if (player.spritePlayerActual != null)
+                {
+                    player.spritePlayerActual.GetAnimator().SetBool("FinalAtaqueEspecial", false);
+                }
             }
             else if(player.enumsPlayers.specialAttackEquipped == EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga)
             {
-                Debug.Log(player);
-                player.spritePlayerActual.GetAnimator().SetBool("FinalAtaqueEspecial", true);
+                if (player.spritePlayerActual != null)
+                {
+                    player.spritePlayerActual.GetAnimator().SetBool("FinalAtaqueEspecial", true);
+                }
             }
         }
     }
