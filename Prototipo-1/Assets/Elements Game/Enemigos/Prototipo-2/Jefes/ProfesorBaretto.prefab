@@ -342,6 +342,7 @@ MonoBehaviour:
   pointOfCombat: {x: 0, y: 0, z: 0}
   damageCounterAttack: 1
   activateComportamiento: 0
+  boxColliderPiernas: {fileID: 0}
   boxColliderSprite: {fileID: 634614481}
   boxColliderControllerAgachado: {fileID: 395462258}
   boxColliderControllerParado: {fileID: 291934831}
@@ -380,6 +381,10 @@ MonoBehaviour:
   rutaAgachado: {fileID: 0}
   countRoot: 0
   initialRoot: 0
+  particleMovement:
+    timeLifeParticleJamp: 0
+    auxTimeLifeParticleJamp: 0
+    particleJump: {fileID: 0}
 --- !u!114 &6116245461051623943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1154,7 +1159,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 81c72cd987938794597c011f0c711230, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1614,6 +1619,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6116245459813727448}
     m_Modifications:
+    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 4379714924118451906, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 3166592495478960300, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
     - target: {fileID: 2688081505215426912, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_Name
@@ -1692,35 +1722,19 @@ PrefabInstance:
       propertyPath: stateCuadrilla
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+    - target: {fileID: 2107844361, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
       propertyPath: enemy
       value: 
       objectReference: {fileID: 2763968484158011846}
-    - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+    - target: {fileID: 2107844361, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
       propertyPath: stateCuadrilla
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2107844366, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+    - target: {fileID: 2107844360, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
       propertyPath: enemy
       value: 
       objectReference: {fileID: 2763968484158011846}
-    - target: {fileID: 2107844366, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: stateCuadrilla
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2107844365, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: enemy
-      value: 
-      objectReference: {fileID: 2763968484158011846}
-    - target: {fileID: 2107844365, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: stateCuadrilla
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2107844364, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: enemy
-      value: 
-      objectReference: {fileID: 2763968484158011846}
-    - target: {fileID: 2107844364, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+    - target: {fileID: 2107844360, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
       propertyPath: stateCuadrilla
       value: 1
       objectReference: {fileID: 0}
@@ -1740,43 +1754,44 @@ PrefabInstance:
       propertyPath: stateCuadrilla
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2107844361, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+    - target: {fileID: 2107844365, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
       propertyPath: enemy
       value: 
       objectReference: {fileID: 2763968484158011846}
-    - target: {fileID: 2107844361, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+    - target: {fileID: 2107844365, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
       propertyPath: stateCuadrilla
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2107844360, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+    - target: {fileID: 2107844364, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
       propertyPath: enemy
       value: 
       objectReference: {fileID: 2763968484158011846}
-    - target: {fileID: 2107844360, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+    - target: {fileID: 2107844364, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
       propertyPath: stateCuadrilla
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3166592495478960300, guid: b929ac675e510d440a80e8c74d8c4990,
+    - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 2763968484158011846}
+    - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: stateCuadrilla
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107844366, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 2763968484158011846}
+    - target: {fileID: 2107844366, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: stateCuadrilla
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5384459324330873755, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_TagString
       value: Cuadrilla
       objectReference: {fileID: 0}
-    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 4379714924118451906, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
+    - target: {fileID: 4830216970014270298, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_TagString
       value: Cuadrilla
@@ -1787,16 +1802,6 @@ PrefabInstance:
       value: Cuadrilla
       objectReference: {fileID: 0}
     - target: {fileID: 8140130460209845590, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 5384459324330873755, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 4830216970014270298, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_TagString
       value: Cuadrilla
@@ -1852,6 +1857,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6116245459813727448}
     m_Modifications:
+    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: Ball
+      value: 
+      objectReference: {fileID: 2914594783176540619, guid: 0534ba56a355eb048a94948753d4bbdd,
+        type: 3}
+    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: parentName
+      value: ProyectilesEnemigo
+      objectReference: {fileID: 0}
     - target: {fileID: 7194419974994112979, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
       propertyPath: m_Name
@@ -1931,17 +1947,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_GravityScale
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: Ball
-      value: 
-      objectReference: {fileID: 2914594783176540619, guid: 0534ba56a355eb048a94948753d4bbdd,
-        type: 3}
-    - target: {fileID: 2632940009463256808, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: parentName
-      value: ProyectilesEnemigo
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6486436780931659209, guid: 61245c1a77e7ad847b3751885e027da7, type: 3}

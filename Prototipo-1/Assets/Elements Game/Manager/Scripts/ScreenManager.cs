@@ -74,7 +74,7 @@ namespace Prototipo_2 {
                 {
                     if (fondo == null)
                     {
-                        fondo = GameObject.Find("Fondo");
+                        fondo = GameObject.Find("SpriteFondo");
                         SpriteRenderer sr = fondo.GetComponent<SpriteRenderer>();
                         if (sr != null)
                         {

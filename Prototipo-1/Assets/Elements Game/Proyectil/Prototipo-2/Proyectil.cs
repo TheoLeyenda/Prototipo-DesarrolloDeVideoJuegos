@@ -62,11 +62,12 @@ namespace Prototipo_2
         protected Enemy ENEMY;
         protected GameManager gm;
         public DisparadorDelProyectil disparadorDelProyectil;
-        private TrailRenderer trailRenderer;
+        public TrailRenderer trailRenderer;
         [HideInInspector]
         public PosicionDisparo posicionDisparo;
         public Animator animator;
         private CircleCollider2D circleCollider2D;
+        private float auxTimeTrileRenderer;
         private void Awake()
         {
             circleCollider2D = GetComponent<CircleCollider2D>();
@@ -81,14 +82,10 @@ namespace Prototipo_2
         }
         private void OnDisable()
         {
-            if (trailRenderer != null)
-            {
-                trailRenderer.enabled = false;
-            }
+            trailRenderer.enabled = false;
         }
         private void Start()
         {
-            trailRenderer = GetComponent<TrailRenderer>();
             if (GameManager.instanceGameManager != null)
             {
                 gm = GameManager.instanceGameManager;
@@ -102,6 +99,7 @@ namespace Prototipo_2
             {
                 circleCollider2D.enabled = true;
             }
+            trailRenderer.enabled = true;
         }
         private void Update()
         {
@@ -114,6 +112,7 @@ namespace Prototipo_2
         }
         public void On(typeProyectil _tipoDeProyectil)
         {
+            trailRenderer.enabled = true;
             if (circleCollider2D != null)
             {
                 circleCollider2D.enabled = true;
@@ -122,6 +121,7 @@ namespace Prototipo_2
             {
                 animator.enabled = false;
             }
+           
             tipoDeProyectil = _tipoDeProyectil;
             int subIndiceSprite;
             if (propsDisparoAereo.Count > 0 && propsDisparoBajo.Count > 0 && propsDisparoNormal.Count > 0)
@@ -142,10 +142,7 @@ namespace Prototipo_2
                         break;
                 }
             }
-            if (trailRenderer != null)
-            {
-                trailRenderer.enabled = true;
-            }
+            
             if (!dobleDamage)
             {
                 damage = auxDamage;
@@ -173,14 +170,17 @@ namespace Prototipo_2
         }
         public void ShootForward()
         {
+            trailRenderer.enabled = true;
             rg2D.AddForce(transform.right * speed, ForceMode2D.Force);
         }
         public void ShootForwardUp()
         {
+            trailRenderer.enabled = true;
             rg2D.AddRelativeForce(vectorForwardUp.right * speed);
         }
         public void ShootForwardDown()
         {
+            trailRenderer.enabled = true;
             rg2D.AddRelativeForce(vectorForwardDown.right * speed, ForceMode2D.Force);
         }
         public PoolObject GetPoolObject()
@@ -223,14 +223,17 @@ namespace Prototipo_2
         {
             if (animator != null)
             {
-                trailRenderer.enabled = false;
                 rg2D.velocity = Vector3.zero;
                 animator.enabled = true;
                 if (circleCollider2D != null)
                 {
                     circleCollider2D.enabled = false;
                 }
-                animator.Play(nameAnimationHit);
+                if (gameObject.activeSelf && animator.gameObject.activeSelf)
+                {
+                    animator.Play(nameAnimationHit);
+                }
+                trailRenderer.enabled = false;
             }
             else
             {
