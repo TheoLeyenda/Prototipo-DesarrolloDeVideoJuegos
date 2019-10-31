@@ -37,11 +37,10 @@ namespace Prototipo_2 {
         //LA LISTA levels DEBE SER INICIALIZADA EN EL MISMO ORDEN QUE EL ENUMERADOR Level_Selected.
         public List<Sprite> levels;
 
-        public SpriteRenderer fondoNivel;
         public Player_Selected player1_selected;
         public Player_Selected player2_selected;
         public Level_Selected level_selected;
-        
+        public List<GameObject> FondosNivel;
         private GameManager gm;
         void Start()
         {
@@ -58,7 +57,17 @@ namespace Prototipo_2 {
             level_selected = gm.structGameManager.gm_dataCombatPvP.level_selected;
             Instantiate(Players1[(int)player1_selected]);
             Instantiate(Players2[(int)player2_selected]);
-            fondoNivel.sprite = levels[(int)level_selected];
+            for (int i = 0; i < FondosNivel.Count; i++)
+            {
+                if (FondosNivel[i] != null)
+                {
+                    FondosNivel[i].SetActive(false);
+                }
+            }
+            if (FondosNivel[(int)level_selected] != null)
+            {
+                FondosNivel[(int)level_selected].SetActive(true);
+            }
         }
         // ESTE SCRIPT DEBE TOMAR LA DEDICION CORRESPONDIENTE EN CUANTO AL NIVEL ELEJIDO Y PERSONAJE ELEJIDO DEPENDIENDO DE LA INFO QUE LE PASE EL
         // STRUCT GAME MANAGER
