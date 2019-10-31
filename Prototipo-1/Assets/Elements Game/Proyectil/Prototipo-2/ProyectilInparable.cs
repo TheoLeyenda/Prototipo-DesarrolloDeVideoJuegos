@@ -6,6 +6,9 @@ namespace Prototipo_2
 {
     public class ProyectilInparable : Proyectil
     {
+        public List<Sprite> propsProyectilImparable;
+        public float speedRotation;
+        public SpriteRenderer spriteRenderer;
         // Start is called before the first frame update
         void Start()
         {
@@ -19,10 +22,16 @@ namespace Prototipo_2
         private void OnEnable()
         {
             timeLife = auxTimeLife;
+            int random = Random.Range(0, propsProyectilImparable.Count);
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.sprite = propsProyectilImparable[random];
+            }
         }
         private void Update()
         {
             CheckTimeLife();
+            transform.Rotate(new Vector3(0, 0,speedRotation));
         }
 
         // Update is called once per frame
