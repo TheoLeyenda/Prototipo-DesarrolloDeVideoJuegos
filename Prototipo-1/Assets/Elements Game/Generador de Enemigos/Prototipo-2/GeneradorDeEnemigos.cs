@@ -47,6 +47,7 @@ namespace Prototipo_2
         public bool InitGenerate;
         public TypeGeneration typeGeneration;
         public GeneratorForGameMode GeneradorDelModoDeJuego;
+        public bool generarJefes;
         private void Awake()
         {
         }
@@ -128,7 +129,7 @@ namespace Prototipo_2
             switch (gm.enumsGameManager.modoDeJuego)
             {
                 case EnumsGameManager.ModosDeJuego.Supervivencia:
-                    if (gm.countEnemysDead % RondasPorJefe == 0 && gm.countEnemysDead > 0)
+                    if (gm.countEnemysDead % RondasPorJefe == 0 && gm.countEnemysDead > 0 && generarJefes)
                     {
                         randomEnemyGenerate = Random.Range(0, ListBossGenerate.Count);
                         go = ListBossGenerate[randomEnemyGenerate].poolBoss.GetObject();
