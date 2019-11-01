@@ -12,6 +12,8 @@ namespace Prototipo_2
         private PoolObject poolObject;
         private Cuadrilla cuadrillaColision;
         List<Cuadrilla> cuadrillasAbajo = new List<Cuadrilla>();
+        public Sprite propLata;
+        public Sprite propBotella;
         public List<Sprite> propsProyectilGaseosa;
         private void Start()
         {
@@ -29,7 +31,10 @@ namespace Prototipo_2
             int random = Random.Range(0, propsProyectilGaseosa.Count);
             if (spriteRenderer != null)
             {
-                spriteRenderer.sprite = propsProyectilGaseosa[random];
+                if (propsProyectilGaseosa.Count > 0)
+                {
+                    spriteRenderer.sprite = propsProyectilGaseosa[random];
+                }
             }
             OnParabola();
         }

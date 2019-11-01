@@ -457,6 +457,15 @@ namespace Prototipo_2
                         ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
                         proyectil.SetDobleDamage(doubleDamage);
                         proyectil.disparadorDelProyectil = disparador;
+                        switch (player_PvP.playerSelected)
+                        {
+                            case Player_PvP.PlayerSelected.Protagonista:
+                                proyectil.spriteRenderer.sprite = proyectil.GetComponent<GranadaGaseosa>().propBotella;
+                                break;
+                            case Player_PvP.PlayerSelected.Balanceado:
+                                proyectil.spriteRenderer.sprite = proyectil.GetComponent<GranadaGaseosa>().propLata;
+                                break;
+                        }
                         if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
                         {
                             proyectil.SetPlayer(this);

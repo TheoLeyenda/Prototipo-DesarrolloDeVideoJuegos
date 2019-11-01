@@ -317,17 +317,9 @@ MonoBehaviour:
   parabolaController: {fileID: 5347520700725556}
   TypeRoot: 0
   poolGaseosa: {fileID: 2309628886464252504}
-  propsProyectilGaseosa:
-  - {fileID: 21300000, guid: ce2e75a08965e98479339970cbe377c2, type: 3}
-  - {fileID: 21300000, guid: ce2e75a08965e98479339970cbe377c2, type: 3}
-  - {fileID: 21300000, guid: ce2e75a08965e98479339970cbe377c2, type: 3}
-  - {fileID: 21300000, guid: ce2e75a08965e98479339970cbe377c2, type: 3}
-  - {fileID: 21300000, guid: ce2e75a08965e98479339970cbe377c2, type: 3}
-  - {fileID: 21300000, guid: 49487b3ea2e81b34c8fdc451af4580f7, type: 3}
-  - {fileID: 21300000, guid: 49487b3ea2e81b34c8fdc451af4580f7, type: 3}
-  - {fileID: 21300000, guid: 49487b3ea2e81b34c8fdc451af4580f7, type: 3}
-  - {fileID: 21300000, guid: 49487b3ea2e81b34c8fdc451af4580f7, type: 3}
-  - {fileID: 21300000, guid: 49487b3ea2e81b34c8fdc451af4580f7, type: 3}
+  propLata: {fileID: 21300000, guid: 49487b3ea2e81b34c8fdc451af4580f7, type: 3}
+  propBotella: {fileID: 21300000, guid: ce2e75a08965e98479339970cbe377c2, type: 3}
+  propsProyectilGaseosa: []
 --- !u!1 &4582409173489260129
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,6 +387,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6464822812185551963}
     m_Modifications:
+    - target: {fileID: 6928401684704543608, guid: 1a32ba341a57932499a2565fae392e72,
+        type: 3}
+      propertyPath: m_Name
+      value: PoolGaseosa
+      objectReference: {fileID: 0}
     - target: {fileID: 6928401684704543590, guid: 1a32ba341a57932499a2565fae392e72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -449,11 +446,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6928401684704543608, guid: 1a32ba341a57932499a2565fae392e72,
-        type: 3}
-      propertyPath: m_Name
-      value: PoolGaseosa
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a32ba341a57932499a2565fae392e72, type: 3}

@@ -128,6 +128,7 @@ namespace Prototipo_2
             if (specialAttack)
             {
                 //CAMBIAR ESTE NULO POR EL ATAQUE ESPECIAL CORRESPONDIENTE (Ya sea ProyectilParabola o AtaqueEspecial
+                
                 tipoProyectil = Proyectil.typeProyectil.Nulo;
                 if (!GetIsDuck())
                 {

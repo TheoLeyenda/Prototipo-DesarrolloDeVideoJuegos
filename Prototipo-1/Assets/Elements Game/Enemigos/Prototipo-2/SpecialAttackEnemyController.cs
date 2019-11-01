@@ -31,6 +31,10 @@ namespace Prototipo_2
 
             if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
             {
+                if (proyectil.GetComponent<GranadaGaseosa>().propLata != null)
+                {
+                    proyectil.spriteRenderer.sprite = proyectil.GetComponent<GranadaGaseosa>().propLata;
+                }
                 switch (proyectil.TypeRoot)
                 {
                     case 1:
