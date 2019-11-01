@@ -289,12 +289,12 @@ namespace Prototipo_2
             {
                 enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.muerto;
                 if (SceneManager.GetActiveScene().name == "Supervivencia")
-                {
-                    SceneManager.LoadScene("HighScore");
+                { 
+                    gm.GameOver("GameOverSupervivencia");
                 }
                 else if (SceneManager.GetActiveScene().name != "PvP")
                 {
-                    gm.GameOver("GameOver");
+                    gm.GameOver("GameOverHistoria");
                 }
                 else if (SceneManager.GetActiveScene().name == "PvP")
                 {

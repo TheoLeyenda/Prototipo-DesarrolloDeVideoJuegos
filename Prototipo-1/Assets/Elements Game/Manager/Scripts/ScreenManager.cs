@@ -32,6 +32,14 @@ namespace Prototipo_2 {
         {
             SceneManager.LoadScene("Creditos");
         }
+        public void HighScore()
+        {
+            gm.CanvasGameOver.SetActive(false);
+            if (!gm.CanvasGameOver.activeSelf)
+            {
+                SceneManager.LoadScene("HighScore");
+            }
+        }
         public void LoadLevel(int numerLevel)
         {
             gm.totalCountEnemysDead = gm.totalCountEnemysDead + gm.auxCountEnemysDead;
@@ -125,7 +133,11 @@ namespace Prototipo_2 {
             Time.timeScale = 1;
             if (idListaNiveles == -1 && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Nulo && Time.timeScale == 1)
             {
-                SceneManager.LoadScene("MENU");
+                gm.CanvasGameOver.SetActive(false);
+                if (!gm.CanvasGameOver.activeSelf)
+                {
+                    SceneManager.LoadScene("MENU");
+                }
             }
         }
         private void Update()

@@ -62,10 +62,6 @@ namespace Prototipo_2
                 ResetGameManager();
                 screenManager.SetIdListLevel(-1);
             }
-            if (SceneManager.GetActiveScene().name == "GameOver")
-            {
-                CanvasGameOver.SetActive(true);
-            }
             //Debug.Log(totalCountEnemysDead);
         }
         public void ResetGameManager()
@@ -88,6 +84,7 @@ namespace Prototipo_2
         {
             textCountEnemigosAbatidos.text = "Enemigos Abatidos: " + countEnemysDead;
             textScorePlayer.text = "Puntaje total: " + playerData_P1.score;
+            CanvasGameOver.SetActive(true);
             SceneManager.LoadScene(finishScene);
         }
     }
