@@ -43,6 +43,10 @@ namespace Prototipo_2 {
                 SceneManager.LoadScene("Nivel " + numerLevel);
             }
         }
+        public void SelectPlayerScene()
+        {
+            SceneManager.LoadScene("SelectPlayerScene");
+        }
         public void Prueba()
         {
             SceneManager.LoadScene("SampleScene");
