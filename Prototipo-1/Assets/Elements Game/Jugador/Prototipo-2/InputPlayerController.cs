@@ -5,6 +5,10 @@ using UnityEngine;
 public static class InputPlayerController
 {
     // -------CONTROLES JUGADOR 1--------- //
+    public static bool JumpButton_P1()
+    {
+        return Input.GetButtonDown("JumpButton_P1");
+    }
     public static float Vertical_Button_P1()
     {
         float r = 0.0f;
@@ -59,9 +63,11 @@ public static class InputPlayerController
     }
     //--------------------------------------//
 
-
-
     // -------CONTROLES JUGADOR 2--------- //
+    public static bool JumpButton_P2()
+    {
+        return Input.GetButtonDown("JumpButton_P2");
+    }
     public static float Vertical_Button_P2()
     {
         float r = 0.0f;

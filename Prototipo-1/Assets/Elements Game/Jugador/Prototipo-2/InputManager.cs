@@ -118,8 +118,10 @@ namespace Prototipo_2 {
         public void CheckVerticalUp_P1()
         {
             
-            if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && InputPlayerController.Vertical_Button_P1() > 0 && moveVerticalPlayer1
-                || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
+            if ((player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && InputPlayerController.Vertical_Button_P1() > 0 && moveVerticalPlayer1
+                || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar) || 
+                (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && InputPlayerController.JumpButton_P1() && moveVerticalPlayer1
+                || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar))
             {
                 player1.SetControllerJoystick(true);
                 player1.MovementJump();
@@ -127,6 +129,7 @@ namespace Prototipo_2 {
                 player1.SetIsDuck(false);
             }
         }
+        
         public void CheckVerticalDown_P1()
         {
             if (InputPlayerController.Vertical_Button_P1() < 0 && player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
@@ -312,6 +315,7 @@ namespace Prototipo_2 {
                 {
                     case Player_PvP.PlayerSelected.Agresivo:
                         CheckVerticalUp_P1();
+                        //CheckButtonJump_P1();
                         CheckVerticalCero_P1();
                         CheckHorizontalLeft_P1();
                         CheckHorizontalRight_P1();
@@ -323,6 +327,7 @@ namespace Prototipo_2 {
                         break;
                     case Player_PvP.PlayerSelected.Balanceado:
                         CheckVerticalUp_P1();
+                        //CheckButtonJump_P1();
                         CheckVerticalDown_P1();
                         CheckVerticalCero_P1();
                         CheckHorizontalLeft_P1();
@@ -343,6 +348,7 @@ namespace Prototipo_2 {
                         break;
                     case Player_PvP.PlayerSelected.Protagonista:
                         CheckVerticalUp_P1();
+                        //CheckButtonJump_P1();
                         CheckVerticalDown_P1();
                         CheckVerticalCero_P1();
                         CheckHorizontalLeft_P1();
@@ -544,7 +550,9 @@ namespace Prototipo_2 {
         public void CheckVerticalUp_P2()
         {
             if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && InputPlayerController.Vertical_Button_P2() > 0 && moveVerticalPlayer2
-                || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
+                || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar
+                || (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && InputPlayerController.JumpButton_P2() && moveVerticalPlayer2
+                || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar))
             {
                 player2.SetControllerJoystick(true);
                 player2.MovementJump();
@@ -749,6 +757,7 @@ namespace Prototipo_2 {
                 if (player2_PvP == null)
                 {
                     CheckVerticalUp_P2();
+                    //CheckButtonJump_P2();
                     CheckVerticalDown_P2();
                     CheckVerticalCero_P2();
                     CheckHorizontalLeft_P2();
@@ -764,6 +773,7 @@ namespace Prototipo_2 {
                     {
                         case Player_PvP.PlayerSelected.Agresivo:
                             CheckVerticalUp_P2();
+                            //CheckButtonJump_P2();
                             CheckVerticalCero_P2();
                             CheckHorizontalLeft_P2();
                             CheckHorizontalRight_P2();
@@ -774,6 +784,7 @@ namespace Prototipo_2 {
                             break;
                         case Player_PvP.PlayerSelected.Balanceado:
                             CheckVerticalUp_P2();
+                            //CheckButtonJump_P2();
                             CheckVerticalDown_P2();
                             CheckVerticalCero_P2();
                             CheckHorizontalLeft_P2();
@@ -794,6 +805,7 @@ namespace Prototipo_2 {
                             break;
                         case Player_PvP.PlayerSelected.Protagonista:
                             CheckVerticalUp_P2();
+                            //CheckButtonJump_P2();
                             CheckVerticalDown_P2();
                             CheckVerticalCero_P2();
                             CheckHorizontalLeft_P2();
