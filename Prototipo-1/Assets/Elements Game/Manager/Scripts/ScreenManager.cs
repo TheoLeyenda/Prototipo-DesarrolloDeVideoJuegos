@@ -24,6 +24,10 @@ namespace Prototipo_2 {
                 }
             }
         }
+        public void Controles()
+        {
+            SceneManager.LoadScene("Controles");
+        }
         public void Creditos()
         {
             SceneManager.LoadScene("Creditos");
@@ -75,22 +79,25 @@ namespace Prototipo_2 {
                     if (fondo == null)
                     {
                         fondo = GameObject.Find("SpriteFondo");
-                        SpriteRenderer sr = fondo.GetComponent<SpriteRenderer>();
-                        if (sr != null)
+                        if (fondo != null)
                         {
-                            if (!gm.restartLevel)
+                            SpriteRenderer sr = fondo.GetComponent<SpriteRenderer>();
+                            if (sr != null)
                             {
-                                idListaNiveles++;
-                            }
-                            else
-                            {
-                                gm.restartLevel = false;
-                            }
-                            spriteRendererFondo = sr;
-                            //Debug.Log(idListaNiveles);
-                            if (idListaNiveles < ListaNiveles.Count)
-                            {
-                                spriteRendererFondo.sprite = ListaNiveles[idListaNiveles];
+                                if (!gm.restartLevel)
+                                {
+                                    idListaNiveles++;
+                                }
+                                else
+                                {
+                                    gm.restartLevel = false;
+                                }
+                                spriteRendererFondo = sr;
+                                //Debug.Log(idListaNiveles);
+                                if (idListaNiveles < ListaNiveles.Count)
+                                {
+                                    spriteRendererFondo.sprite = ListaNiveles[idListaNiveles];
+                                }
                             }
                         }
                     }

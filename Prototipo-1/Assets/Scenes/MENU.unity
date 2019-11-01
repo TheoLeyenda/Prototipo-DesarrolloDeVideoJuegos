@@ -312,7 +312,7 @@ RectTransform:
   - {fileID: 578953554}
   - {fileID: 872361374}
   m_Father: {fileID: 1107006080477397339}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -362,8 +362,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1107006080477397338}
-        m_MethodName: ActivateControls
+      - m_Target: {fileID: 725872128}
+        m_MethodName: Controles
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -763,6 +763,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuPausa
       objectReference: {fileID: 0}
+    - target: {fileID: 7783762763244865312, guid: 3b9b4a990a63e17489955ce5ee46fa8b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7783762763244865315, guid: 3b9b4a990a63e17489955ce5ee46fa8b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1121,7 +1126,7 @@ PrefabInstance:
     - target: {fileID: 1107006081261517644, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1107006080779697038, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8,
         type: 3}
@@ -1354,7 +1359,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1107006080477397338}
+      objectReference: {fileID: 0}
     - target: {fileID: 6323204283115487080, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -1462,38 +1467,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8, type: 3}
---- !u!1 &1107006080477397335 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2674170301061386004, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1107006080477397334}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1107006080477397336 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 961580309696058171, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1107006080477397334}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1107006080477397337 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1107006081141894839, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1107006080477397334}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1107006080477397338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1107006080477397337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4111858630926a46832ee19bcfd228b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menu: {fileID: 1107006080477397336}
-  controles: {fileID: 1107006080477397335}
 --- !u!224 &1107006080477397339 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3524655920621877946, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8,
