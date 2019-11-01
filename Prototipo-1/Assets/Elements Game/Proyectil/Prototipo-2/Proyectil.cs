@@ -68,6 +68,8 @@ namespace Prototipo_2
         public Animator animator;
         private CircleCollider2D circleCollider2D;
         private float auxTimeTrileRenderer;
+        [HideInInspector]
+        public Transform initialPosition;
         private void Awake()
         {
             circleCollider2D = GetComponent<CircleCollider2D>();
