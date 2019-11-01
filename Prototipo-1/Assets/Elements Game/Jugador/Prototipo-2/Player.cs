@@ -287,15 +287,19 @@ namespace Prototipo_2
         {
             if (PD.lifePlayer <= 0)
             {
-                PD.lifePlayer = PD.maxLifePlayer;
                 enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.muerto;
                 if (SceneManager.GetActiveScene().name == "Supervivencia")
                 {
                     SceneManager.LoadScene("HighScore");
                 }
-                else
+                else if (SceneManager.GetActiveScene().name != "PvP")
                 {
                     gm.GameOver("GameOver");
+                }
+                else if (SceneManager.GetActiveScene().name == "PvP")
+                {
+                    inputManager.SetEnableMovementPlayer1(false);
+                    inputManager.SetEnableMovementPlayer1(false);
                 }
                 gm.ResetRoundCombat(true);
             }

@@ -34,9 +34,17 @@ namespace Prototipo_2 {
         public List<GameObject> Players1;
         public List<GameObject> Players2;
 
+        public List<Sprite> spriteWining;
+        public GameObject fondoWining;
+        public GameObject prefabWinPlayer1;
+        public GameObject prefabWinPlayer2;
         //LA LISTA levels DEBE SER INICIALIZADA EN EL MISMO ORDEN QUE EL ENUMERADOR Level_Selected.
         public List<Sprite> levels;
+        public Player player1;
+        public Player player2;
 
+        public SpriteRenderer spritePlayer1Win;
+        public SpriteRenderer spritePlayer2Win;
         public Player_Selected player1_selected;
         public Player_Selected player2_selected;
         public Level_Selected level_selected;
@@ -44,11 +52,14 @@ namespace Prototipo_2 {
         private GameManager gm;
         void Start()
         {
+            fondoWining.SetActive(false);
             if (GameManager.instanceGameManager != null)
             {
                 gm = GameManager.instanceGameManager;
             }
             InitDataCombat();
+            player1 = GameObject.Find("Player1").GetComponent<Player>();
+            player2 = GameObject.Find("Player2").GetComponent<Player>();
         }
         public void InitDataCombat()
         {
@@ -67,6 +78,47 @@ namespace Prototipo_2 {
             if (FondosNivel[(int)level_selected] != null)
             {
                 FondosNivel[(int)level_selected].SetActive(true);
+            }
+        }
+        private void Update()
+        {
+            //Debug.Log("P1:"+player1);
+            //Debug.Log("P2:"+player2);
+            if (player1 != null && player2 != null)
+            {
+                CheckWin();
+            }
+        }
+        public void CheckWin()
+        {
+            if (player1.PD.lifePlayer <= 0)
+            {
+                FondosNivel[(int)level_selected].SetActive(false);
+                fondoWining.SetActive(true);
+                prefabWinPlayer2.SetActive(true);
+                prefabWinPlayer1.SetActive(false);
+                spritePlayer2Win.sprite = spriteWining[(int)player2_selected];
+                player1.BARRA_DE_CARGA.SetActive(false);
+                player1.BARRA_DE_VIDA.SetActive(false);
+                player2.BARRA_DE_CARGA.SetActive(false);
+                player2.BARRA_DE_VIDA.SetActive(false);
+                player1.gameObject.SetActive(false);
+                player2.gameObject.SetActive(false);
+
+            }
+            else if (player2.PD.lifePlayer <= 0)
+            {
+                FondosNivel[(int)level_selected].SetActive(false);
+                fondoWining.SetActive(true);
+                prefabWinPlayer2.SetActive(false);
+                prefabWinPlayer1.SetActive(true);
+                spritePlayer1Win.sprite = spriteWining[(int)player1_selected];
+                player1.BARRA_DE_CARGA.SetActive(false);
+                player1.BARRA_DE_VIDA.SetActive(false);
+                player2.BARRA_DE_CARGA.SetActive(false);
+                player2.BARRA_DE_VIDA.SetActive(false);
+                player1.gameObject.SetActive(false);
+                player2.gameObject.SetActive(false);
             }
         }
         // ESTE SCRIPT DEBE TOMAR LA DEDICION CORRESPONDIENTE EN CUANTO AL NIVEL ELEJIDO Y PERSONAJE ELEJIDO DEPENDIENDO DE LA INFO QUE LE PASE EL
