@@ -31,7 +31,6 @@ namespace Prototipo_2
         [HideInInspector]
         public string nameActual;
         public Text nombreIngresado;
-        private bool save;
         public bool RestartTable;
         private void Start()
         {
@@ -50,7 +49,11 @@ namespace Prototipo_2
         }
         public void LoadData()
         {
-            if (nombreIngresado.text != "")
+            if (RestartTable)
+            {
+                ResetScoreList();
+            }
+            else if (nombreIngresado.text != "")
             {
                 prefabHighScoreList.SetActive(true);
                 inputFiled.SetActive(false);
@@ -83,6 +86,7 @@ namespace Prototipo_2
         // Update is called once per frame
         public void CheckListScore()
         {
+            LoadListScore();
             int id = scores.Count + 1;
             for (int i = scores.Count-1; i >= 0 ; i--)
             {
@@ -94,6 +98,8 @@ namespace Prototipo_2
             //Debug.Log(id);
             if (id >= 0 && id < scores.Count)
             {
+                PlayerPrefs.DeleteKey(scores[id].claveNombre);
+                PlayerPrefs.DeleteKey(scores[id].clavePuntos);
                 PlayerPrefs.SetString(scores[id].claveNombre, nameActual);
                 PlayerPrefs.SetFloat(scores[id].clavePuntos, scoreActual);
             }
