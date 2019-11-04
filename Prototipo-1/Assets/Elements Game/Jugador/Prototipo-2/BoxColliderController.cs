@@ -122,7 +122,7 @@ namespace Prototipo_2
                                         //proyectil.AnimationHit();
                                     }
                                 }
-                                if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer)
+                                if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer || !ZonaContraAtaque)
                                 {
                                     player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                                     player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
@@ -133,7 +133,7 @@ namespace Prototipo_2
                                     }
                                     proyectil.AnimationHit();
                                 }
-                                else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer)
+                                else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer || !ZonaContraAtaque)
                                 {
                                     player.delayCounterAttack = player.GetAuxDelayCounterAttack();
                                     player.SetEnableCounterAttack(false);
