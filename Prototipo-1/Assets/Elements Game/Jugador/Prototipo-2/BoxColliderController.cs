@@ -106,11 +106,7 @@ namespace Prototipo_2
                                 || player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
                             {
                                 //AUMENTO XP PARA EL ATAQUE ESPECIAL
-                                if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer() != null)
-                                {
-                                    proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + proyectil.GetPlayer().xpForHit);
-                                    proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + proyectil.GetPlayer().PD.scoreForHit;
-                                }
+                                
                                 player.SetEnableCounterAttack(true);
                                 if (player.delayCounterAttack > 0)
                                 {
@@ -128,6 +124,12 @@ namespace Prototipo_2
                                 {
                                     player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                                     player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                                    if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer() != null)
+                                    {
+                                        proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + proyectil.GetPlayer().xpForHit);
+                                        proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + proyectil.GetPlayer().PD.scoreForHit;
+                                    }
+                                    proyectil.AnimationHit();
                                 }
                                 else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer)
                                 {
@@ -137,6 +139,11 @@ namespace Prototipo_2
                                     player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                     //proyectil.timeLife = 0;
                                     //proyectil.gameObject.SetActive(false);
+                                    if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer2() != null)
+                                    {
+                                        proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + proyectil.GetPlayer2().xpForHit);
+                                        proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
+                                    }
                                     proyectil.AnimationHit();
                                 }
                             }
@@ -148,11 +155,7 @@ namespace Prototipo_2
                             proyectil.GetPlayer2() != null)
                             {
                                 //AUMENTO XP PARA EL ATAQUE ESPECIAL
-                                if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer2() != null)
-                                {
-                                    proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + proyectil.GetPlayer2().xpForHit);
-                                    proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
-                                }
+                                
                                 player.SetEnableCounterAttack(true);
                                 if (player.delayCounterAttack > 0)
                                 {
@@ -166,17 +169,28 @@ namespace Prototipo_2
                                         proyectil.AnimationHit();
                                     }
                                 }
-                                if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer)
+                                if ((player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer) || !ZonaContraAtaque)
                                 {
                                     player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                                     player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                                    if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer2() != null)
+                                    {
+                                        proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + proyectil.GetPlayer2().xpForHit);
+                                        proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
+                                    }
+                                    proyectil.AnimationHit();
                                 }
-                                else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer)
+                                else if ((player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer) || !ZonaContraAtaque)
                                 {
                                     player.delayCounterAttack = player.GetAuxDelayCounterAttack();
                                     player.SetEnableCounterAttack(false);
                                     player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                                     player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                                    if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer2() != null)
+                                    {
+                                        proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + proyectil.GetPlayer2().xpForHit);
+                                        proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
+                                    }
                                     //proyectil.timeLife = 0;
                                     //proyectil.gameObject.SetActive(false);
                                     //proyectil.GetPoolObject().Recycle();
