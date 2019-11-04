@@ -66,9 +66,10 @@ namespace Prototipo_2
                                         proyectil.gameObject.SetActive(false);
                                         player.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
                                         player.delayCounterAttack = player.GetAuxDelayCounterAttack();
-                                        //proyectil.timeLife = 0;
+                                        proyectil.timeLife = 0;
+                                        proyectil.GetPoolObject().Recycle();
                                         //enableDamagePlayer = false;
-                                        proyectil.AnimationHit();
+                                        //proyectil.AnimationHit();
                                     }
                                 }
                                 if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer || !ZonaContraAtaque)
@@ -116,8 +117,9 @@ namespace Prototipo_2
                                         player.Attack(Proyectil.DisparadorDelProyectil.Jugador2);
                                         player.delayCounterAttack = player.GetAuxDelayCounterAttack();
                                         enableDamagePlayer = false;
-                                        //proyectil.timeLife = 0;
-                                        proyectil.AnimationHit();
+                                        proyectil.timeLife = 0;
+                                        proyectil.GetPoolObject().Recycle();
+                                        //proyectil.AnimationHit();
                                     }
                                 }
                                 if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer)
@@ -165,8 +167,9 @@ namespace Prototipo_2
                                         player.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
                                         player.delayCounterAttack = player.GetAuxDelayCounterAttack();
                                         enableDamagePlayer = false;
-                                        //proyectil.timeLife = 0;
-                                        proyectil.AnimationHit();
+                                        proyectil.timeLife = 0;
+                                        proyectil.GetPoolObject().Recycle();
+                                        //proyectil.AnimationHit();
                                     }
                                 }
                                 if ((player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer) || !ZonaContraAtaque)
