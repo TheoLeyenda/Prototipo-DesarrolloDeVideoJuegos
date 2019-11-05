@@ -62,6 +62,8 @@ namespace Prototipo_2
         public bool LookingForward;
         public bool LookingBack;
         public float delayAttack;
+        public float delayParabolaAttack;
+        private float auxDelayParabolaAttack;
         private float auxDelayAttack;
         private bool enableAttack;
         private bool enableSpecialAttack;
@@ -73,18 +75,22 @@ namespace Prototipo_2
         public string NameInputManager;
         private InputManager inputManager;
         private Player_PvP player_PvP;
+        private bool enableParabolaAttack;
+        public bool enableMecanicParabolaAttack;
         private void Awake()
         {
             player_PvP = GetComponent<Player_PvP>();
         }
         void Start()
         {
+            enableParabolaAttack = false;
             GameObject go = GameObject.Find(NameInputManager);
             inputManager = go.GetComponent<InputManager>();
             xpActual = 0;
             enableSpecialAttack = false;
             enableAttack = true;
             auxDelayAttack = delayAttack;
+            auxDelayParabolaAttack = delayParabolaAttack;
             delayAttack = 0;
             controllerJoystick = false;
             if (resetPlayer)
@@ -127,6 +133,7 @@ namespace Prototipo_2
             CheckDead();
             CheckLifeBar();
             DelayEnableAttack();
+            DelayEnableParabolaAttack();
             CheckLoadSpecialAttackBar();
             CheckMovementInSpecialAttack();
             DrawScore();
@@ -299,7 +306,7 @@ namespace Prototipo_2
                 else if (SceneManager.GetActiveScene().name == "PvP")
                 {
                     inputManager.SetEnableMovementPlayer1(false);
-                    inputManager.SetEnableMovementPlayer1(false);
+                    inputManager.SetEnableMovementPlayer2(false);
                 }
                 gm.ResetRoundCombat(true);
             }
@@ -357,6 +364,18 @@ namespace Prototipo_2
                 enableAttack = true;
             }
         }
+        public void DelayEnableParabolaAttack()
+        {
+            if (delayParabolaAttack > 0)
+            {
+                delayParabolaAttack = delayParabolaAttack - Time.deltaTime;
+                enableParabolaAttack = false;
+            }
+            else
+            {
+                enableParabolaAttack = true;
+            }
+        }
         public void Attack(Proyectil.DisparadorDelProyectil disparador)
         {
             if (enableAttack)
@@ -410,6 +429,43 @@ namespace Prototipo_2
         }
 
         //ATAQUE EN PARABOLA.
+        public void ParabolaAttack(Proyectil.DisparadorDelProyectil disparador)
+        {
+            if (enableParabolaAttack && enableMecanicParabolaAttack)
+            {
+                GameObject go = structsPlayer.dataAttack.poolProyectilParabola.GetObject();
+                ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
+                proyectil.SetDobleDamage(doubleDamage);
+                proyectil.disparadorDelProyectil = disparador;
+                if (doubleDamage)
+                {
+                    proyectil.damage = proyectil.damage * 2;
+                }
+                if (!isDuck)
+                {
+                    proyectil.TypeRoot = 1;
+                    go.transform.position = generadorProyectilesParabola.transform.position;
+                }
+                else
+                {
+                    proyectil.TypeRoot = 2;
+                    go.transform.position = generadorProyectilesParabolaAgachado.transform.position;
+                }
+                switch (proyectil.TypeRoot)
+                {
+                    case 1:
+                        proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
+                        break;
+                    case 2:
+                        proyectil.rutaParabolaAgachado_AtaqueJugador = structsPlayer.rutaAgachado;
+                        break;
+                }
+                proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
+                proyectil.OnParabola();
+                enableParabolaAttack = false;
+                delayParabolaAttack = auxDelayParabolaAttack;
+            }
+        }
         public void SpecialAttack(Proyectil.DisparadorDelProyectil disparador)
         {
             switch (enumsPlayers.specialAttackEquipped)

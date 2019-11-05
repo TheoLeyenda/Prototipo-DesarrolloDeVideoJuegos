@@ -5,6 +5,10 @@ using UnityEngine;
 public static class InputPlayerController
 {
     // -------CONTROLES JUGADOR 1--------- //
+    public static bool ParabolaAttack_P1()
+    {
+        return Input.GetButtonDown("ParabolaAttack_P1");
+    }
     public static bool JumpButton_P1()
     {
         return Input.GetButtonDown("JumpButton_P1");
@@ -64,6 +68,10 @@ public static class InputPlayerController
     //--------------------------------------//
 
     // -------CONTROLES JUGADOR 2--------- //
+    public static bool ParabolaAttack_P2()
+    {
+        return Input.GetButtonDown("ParabolaAttack_P2");
+    }
     public static bool JumpButton_P2()
     {
         return Input.GetButtonDown("JumpButton_P2");
