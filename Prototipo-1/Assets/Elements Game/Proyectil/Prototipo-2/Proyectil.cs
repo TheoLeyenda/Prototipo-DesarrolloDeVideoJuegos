@@ -70,6 +70,7 @@ namespace Prototipo_2
         private float auxTimeTrileRenderer;
         [HideInInspector]
         public Transform initialPosition;
+        public bool colisionPlayer;
         private void Awake()
         {
             circleCollider2D = GetComponent<CircleCollider2D>();

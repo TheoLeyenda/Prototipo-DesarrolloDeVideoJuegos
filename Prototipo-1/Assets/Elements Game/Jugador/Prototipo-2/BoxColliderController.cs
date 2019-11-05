@@ -45,7 +45,9 @@ namespace Prototipo_2
         public void CollisionWhitProyectil(Collider2D collision)
         {
             Proyectil proyectil = collision.GetComponent<Proyectil>();
-            if (proyectil.GetComponent<ProyectilInparable>() == null && proyectil.GetComponent<GranadaGaseosa>() == null)
+            //Debug.Log(proyectil);
+            //Debug.Log(proyectil.disparadorDelProyectil);
+            if (proyectil.GetComponent<ProyectilInparable>() == null && proyectil.GetComponent<GranadaGaseosa>() == null && proyectil != null)
             {
                 if (player != null && !inEnemy && inPlayer)
                 {
@@ -72,7 +74,7 @@ namespace Prototipo_2
                                         //proyectil.AnimationHit();
                                     }
                                 }
-                                if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer || !ZonaContraAtaque)
+                                if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer || !ZonaContraAtaque || proyectil.colisionPlayer)
                                 {
                                     if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetEnemy() != null)
                                     {
@@ -87,7 +89,7 @@ namespace Prototipo_2
                                         proyectil.AnimationHit();
                                     }
                                 }
-                                else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer || !ZonaContraAtaque)
+                                else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer || !ZonaContraAtaque || proyectil.colisionPlayer)
                                 {
                                     proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + proyectil.GetEnemy().xpForHit);
                                     player.delayCounterAttack = player.GetAuxDelayCounterAttack();
@@ -103,8 +105,7 @@ namespace Prototipo_2
                         }
                         if (proyectil.GetPlayer() != null)
                         {
-                            if (proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador1
-                                || player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                            if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
                             {
                                 //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                 
@@ -122,7 +123,7 @@ namespace Prototipo_2
                                         //proyectil.AnimationHit();
                                     }
                                 }
-                                if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer || !ZonaContraAtaque)
+                                if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer || !ZonaContraAtaque || proyectil.colisionPlayer)
                                 {
                                     
                                     if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer() != null)
@@ -135,7 +136,7 @@ namespace Prototipo_2
                                     }
                                     
                                 }
-                                else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer || !ZonaContraAtaque)
+                                else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer || !ZonaContraAtaque || proyectil.colisionPlayer)
                                 {
                                     
                                     //proyectil.timeLife = 0;
@@ -156,9 +157,7 @@ namespace Prototipo_2
                         }
                         if (proyectil.GetPlayer2() != null)
                         {
-                            if (proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador2 ||
-                            player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1 ||
-                            proyectil.GetPlayer2() != null)
+                            if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
                             {
                                 //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                 
@@ -176,7 +175,7 @@ namespace Prototipo_2
                                         //proyectil.AnimationHit();
                                     }
                                 }
-                                if ((player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer) || !ZonaContraAtaque)
+                                if ((player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer) || !ZonaContraAtaque || proyectil.colisionPlayer)
                                 {
                                     
                                     if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer2() != null)
@@ -189,7 +188,7 @@ namespace Prototipo_2
                                     }
                                     
                                 }
-                                else if ((player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer) || !ZonaContraAtaque)
+                                else if ((player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer) || !ZonaContraAtaque || proyectil.colisionPlayer)
                                 {
                                     
                                     if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer2() != null)
@@ -216,8 +215,7 @@ namespace Prototipo_2
                         float realDamage;
                         if (proyectil.GetPlayer() != null)
                         {
-                            if (proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador1
-                                || player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                            if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
                             {
                                 //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                 //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
@@ -240,8 +238,7 @@ namespace Prototipo_2
                             //Debug.Log(proyectil.GetEnemy());
                             if (proyectil.GetPlayer2() != null)
                             {
-                                if (proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador2
-                                || player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                                if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
                                 {
                                     //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                     //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
@@ -284,8 +281,7 @@ namespace Prototipo_2
                                     default:
                                         if (proyectil.GetPlayer() != null)
                                         {
-                                            if (proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador1
-                                                || player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                                            if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
                                             {
                                                 //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                                 //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
@@ -298,8 +294,7 @@ namespace Prototipo_2
                                         }
                                         else if (proyectil.GetPlayer2() != null)
                                         {
-                                            if (proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador2
-                                            || player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                                            if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
                                             {
                                                 //AUMENTO XP PARA EL ATAQUE ESPECIAL
                                                 //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.

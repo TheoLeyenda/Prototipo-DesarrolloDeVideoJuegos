@@ -437,6 +437,14 @@ namespace Prototipo_2
                 ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
                 proyectil.SetDobleDamage(doubleDamage);
                 proyectil.disparadorDelProyectil = disparador;
+                if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                {
+                    proyectil.SetPlayer(this);
+                }
+                else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                {
+                    proyectil.SetPlayer2(this);
+                }
                 if (doubleDamage)
                 {
                     proyectil.damage = proyectil.damage * 2;
@@ -477,6 +485,14 @@ namespace Prototipo_2
                         ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
                         proyectil.SetDobleDamage(doubleDamage);
                         proyectil.disparadorDelProyectil = disparador;
+                        if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                        {
+                            proyectil.SetPlayer(this);
+                        }
+                        else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                        {
+                            proyectil.SetPlayer2(this);
+                        }
                         if (doubleDamage)
                         {
                             proyectil.damage = proyectil.damage * 2;
