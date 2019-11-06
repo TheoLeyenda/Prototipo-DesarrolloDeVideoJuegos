@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Prototipo_2 {
     public class DataCombatPvP : MonoBehaviour
@@ -50,6 +51,7 @@ namespace Prototipo_2 {
         public Level_Selected level_selected;
         public List<GameObject> FondosNivel;
         private GameManager gm;
+        public bool resetScorePlayers;
         void Start()
         {
             fondoWining.SetActive(false);
@@ -93,33 +95,64 @@ namespace Prototipo_2 {
         {
             if (player1.PD.lifePlayer <= 0)
             {
-                FondosNivel[(int)level_selected].SetActive(false);
-                fondoWining.SetActive(true);
-                prefabWinPlayer2.SetActive(true);
-                prefabWinPlayer1.SetActive(false);
-                spritePlayer2Win.sprite = spriteWining[(int)player2_selected];
-                player1.BARRA_DE_CARGA.SetActive(false);
-                player1.BARRA_DE_VIDA.SetActive(false);
-                player2.BARRA_DE_CARGA.SetActive(false);
-                player2.BARRA_DE_VIDA.SetActive(false);
-                player1.gameObject.SetActive(false);
-                player2.gameObject.SetActive(false);
+                if (resetScorePlayers)
+                {
+                    player1.PD.score = 0;
+                    player2.PD.score = 0;
+                }
+                gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP2++;
+                if (gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP2 < gm.structGameManager.gm_dataCombatPvP.countRounds)
+                {
+                    ReiniciarRonda();
+                    
+                }
+                else
+                {
+                    FondosNivel[(int)level_selected].SetActive(false);
+                    fondoWining.SetActive(true);
+                    prefabWinPlayer2.SetActive(true);
+                    prefabWinPlayer1.SetActive(false);
+                    spritePlayer2Win.sprite = spriteWining[(int)player2_selected];
+                    player1.BARRA_DE_CARGA.SetActive(false);
+                    player1.BARRA_DE_VIDA.SetActive(false);
+                    player2.BARRA_DE_CARGA.SetActive(false);
+                    player2.BARRA_DE_VIDA.SetActive(false);
+                    player1.gameObject.SetActive(false);
+                    player2.gameObject.SetActive(false);
+                }
 
             }
             else if (player2.PD.lifePlayer <= 0)
             {
-                FondosNivel[(int)level_selected].SetActive(false);
-                fondoWining.SetActive(true);
-                prefabWinPlayer2.SetActive(false);
-                prefabWinPlayer1.SetActive(true);
-                spritePlayer1Win.sprite = spriteWining[(int)player1_selected];
-                player1.BARRA_DE_CARGA.SetActive(false);
-                player1.BARRA_DE_VIDA.SetActive(false);
-                player2.BARRA_DE_CARGA.SetActive(false);
-                player2.BARRA_DE_VIDA.SetActive(false);
-                player1.gameObject.SetActive(false);
-                player2.gameObject.SetActive(false);
+                if (resetScorePlayers)
+                {
+                    player1.PD.score = 0;
+                    player2.PD.score = 0;
+                }
+                gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP1++;
+                if (gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP1 < gm.structGameManager.gm_dataCombatPvP.countRounds)
+                {
+                    ReiniciarRonda();
+                }
+                else
+                {
+                    FondosNivel[(int)level_selected].SetActive(false);
+                    fondoWining.SetActive(true);
+                    prefabWinPlayer2.SetActive(false);
+                    prefabWinPlayer1.SetActive(true);
+                    spritePlayer1Win.sprite = spriteWining[(int)player1_selected];
+                    player1.BARRA_DE_CARGA.SetActive(false);
+                    player1.BARRA_DE_VIDA.SetActive(false);
+                    player2.BARRA_DE_CARGA.SetActive(false);
+                    player2.BARRA_DE_VIDA.SetActive(false);
+                    player1.gameObject.SetActive(false);
+                    player2.gameObject.SetActive(false);
+                }
             }
+        }
+        public void ReiniciarRonda()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         // ESTE SCRIPT DEBE TOMAR LA DEDICION CORRESPONDIENTE EN CUANTO AL NIVEL ELEJIDO Y PERSONAJE ELEJIDO DEPENDIENDO DE LA INFO QUE LE PASE EL
         // STRUCT GAME MANAGER

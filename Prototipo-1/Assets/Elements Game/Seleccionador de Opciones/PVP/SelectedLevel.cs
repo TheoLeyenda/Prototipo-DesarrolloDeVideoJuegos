@@ -41,8 +41,15 @@ namespace Prototipo_2
         private bool aviableMoveVertical;
         public SpriteRenderer background;
         public List<Sprite> fondos;
+        public GameObject CamvasSeleccionRounds;
+        public GameObject Fondo;
+        public GameObject CuadrillaDeSeleccion;
+        public bool activateCountRoundsSelection;
         void Start()
         {
+            CamvasSeleccionRounds.SetActive(false);
+            Fondo.SetActive(true);
+            CuadrillaDeSeleccion.SetActive(true);
             aviableMoveHorizontal = true;
             aviableMoveVertical = true;
             if (GameManager.instanceGameManager != null)
@@ -202,8 +209,21 @@ namespace Prototipo_2
             cursorPlayer2.condirmed = true; // SACAR ESTO Y REMPLAZARLO POR LO MISMO QUE HICE CON cursorPlayer1 PERO UTILIZANDO cursorPlayer2
             if (cursorPlayer1.condirmed && cursorPlayer2.condirmed)
             {
-                SceneManager.LoadScene(nameNextScene);
+                if (activateCountRoundsSelection)
+                {
+                    CamvasSeleccionRounds.SetActive(true);
+                    Fondo.SetActive(true);
+                    CuadrillaDeSeleccion.SetActive(true);
+                }
+                else
+                {
+                    NextScene();
+                }
             }
+        }
+        public void NextScene()
+        {
+            SceneManager.LoadScene(nameNextScene);
         }
         public void CheckFondo()
         {

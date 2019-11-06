@@ -40,6 +40,7 @@ namespace Prototipo_2 {
                 SceneManager.LoadScene("HighScore");
             }
         }
+        
         public void LoadLevel(int numerLevel)
         {
             gm.totalCountEnemysDead = gm.totalCountEnemysDead + gm.auxCountEnemysDead;

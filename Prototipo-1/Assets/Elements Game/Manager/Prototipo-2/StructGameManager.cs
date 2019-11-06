@@ -12,6 +12,9 @@ namespace Prototipo_2
             public DataCombatPvP.Level_Selected level_selected;
             public DataCombatPvP.Player_Selected player1_selected;
             public DataCombatPvP.Player_Selected player2_selected;
+            public int countRounds;
+            public int countRoundsWiningP1;
+            public int countRoundsWiningP2;
         }
         public GM_DataCombatPvP gm_dataCombatPvP;
     }
