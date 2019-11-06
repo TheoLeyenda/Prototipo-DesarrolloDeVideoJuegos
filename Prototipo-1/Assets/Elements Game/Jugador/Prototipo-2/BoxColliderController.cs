@@ -88,6 +88,10 @@ namespace Prototipo_2
                                         //proyectil.gameObject.SetActive(false);
                                         proyectil.AnimationHit();
                                     }
+                                    if (proyectil.colisionPlayer)
+                                    {
+                                        proyectil.AnimationHit();
+                                    }
                                 }
                                 else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer || !ZonaContraAtaque || proyectil.colisionPlayer)
                                 {

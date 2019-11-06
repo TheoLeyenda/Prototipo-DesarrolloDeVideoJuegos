@@ -10,6 +10,7 @@ namespace Prototipo_2 {
         public GameObject rutaParabolaAgachado_AtaqueJugador;
         public GameObject rutaParabola_AtaqueEnemigo;
         public GameObject rutaParabolaAgachado_AtaqueEnemigo;
+        public Sprite spriteProyectilParabola;
         [SerializeField]
         private ParabolaController parabolaController;
         private PoolObject poolObject;
@@ -17,6 +18,7 @@ namespace Prototipo_2 {
         public int TypeRoot;
         void Start()
         {
+            spriteProyectilParabola = spriteRenderer.sprite;
             timeLife = auxTimeLife;
             if (GameManager.instanceGameManager != null)
             {
@@ -25,6 +27,8 @@ namespace Prototipo_2 {
         }
         private void OnEnable()
         {
+            inAnimation = false;
+            spriteRenderer.sprite = spriteProyectilParabola;
             timeLife = auxTimeLife;
             OnParabola();
         }
@@ -53,7 +57,10 @@ namespace Prototipo_2 {
         {
             if(rg2D.velocity.x <= 0 && rg2D.velocity.y <= 0)
             {
-                Move(Vector3.down);
+                if (!inAnimation)
+                {
+                    Move(Vector3.down);
+                }
             }
         }
         public void Move(Vector3 direccion)

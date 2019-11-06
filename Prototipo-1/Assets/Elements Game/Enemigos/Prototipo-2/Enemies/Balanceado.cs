@@ -46,43 +46,60 @@ namespace Prototipo_2
         {
             if (enemyPrefab.activeSelf == true)
             {
-                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
-                {
-                    spriteEnemy.animator.Play("Ataque enemigo balanceado");
-                }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
-                {
-                    spriteEnemy.animator.Play("Ataque Salto enemigo balanceado");
-                }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
-                {
-                    spriteEnemy.animator.Play("Ataque Agachado enemigo balanceado");
-                }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
+                
+                float valueAttack = Random.Range(0, 100);
+                if (valueAttack >= parabolaAttack
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto 
+                    || !enableMecanicParabolaAttack)
                 {
-                    switch (enumsEnemy.GetMovement())
+                    if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
                     {
-                        case EnumsEnemy.Movimiento.AtaqueEspecial:
-                            spriteEnemy.animator.SetBool("AtaqueEspecial", true);
-                            spriteEnemy.spriteRenderer.color = Color.white;
-                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
-                            SetEnableSpecialAttack(false);
-                            break;
-                        case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
-                            spriteEnemy.animator.SetBool("AtaqueEspecial", true);
-                            spriteEnemy.spriteRenderer.color = Color.white;
-                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecialAgachado);
-                            SetEnableSpecialAttack(false);
-                            break;
-                        case EnumsEnemy.Movimiento.AtaqueEspecialSalto:
-                            spriteEnemy.animator.SetBool("AtaqueEspecial", true);
-                            spriteEnemy.spriteRenderer.color = Color.white;
-                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecialSalto);
-                            SetEnableSpecialAttack(false);
-                            break;
+                        spriteEnemy.animator.Play("Ataque enemigo balanceado");
+                    }
+                    else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                    {
+                        spriteEnemy.animator.Play("Ataque Salto enemigo balanceado");
+                    }
+                    else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
+                    {
+                        spriteEnemy.animator.Play("Ataque Agachado enemigo balanceado");
+                    }
+                    else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
+                        || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
+                        || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
+                        || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                    {
+                        switch (enumsEnemy.GetMovement())
+                        {
+                            case EnumsEnemy.Movimiento.AtaqueEspecial:
+                                spriteEnemy.animator.SetBool("AtaqueEspecial", true);
+                                spriteEnemy.spriteRenderer.color = Color.white;
+                                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
+                                SetEnableSpecialAttack(false);
+                                break;
+                            case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
+                                spriteEnemy.animator.SetBool("AtaqueEspecial", true);
+                                spriteEnemy.spriteRenderer.color = Color.white;
+                                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecialAgachado);
+                                SetEnableSpecialAttack(false);
+                                break;
+                            case EnumsEnemy.Movimiento.AtaqueEspecialSalto:
+                                spriteEnemy.animator.SetBool("AtaqueEspecial", true);
+                                spriteEnemy.spriteRenderer.color = Color.white;
+                                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecialSalto);
+                                SetEnableSpecialAttack(false);
+                                break;
+                        }
+                    }
+                }
+                else if(valueAttack < parabolaAttack)
+                {
+                    if (delayAttack <= 0)
+                    {
+                        ParabolaAttack();
+                        spriteEnemy.RestartDelayAttackEnemy();
                     }
                 }
             }

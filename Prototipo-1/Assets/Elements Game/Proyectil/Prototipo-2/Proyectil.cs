@@ -71,6 +71,7 @@ namespace Prototipo_2
         [HideInInspector]
         public Transform initialPosition;
         public bool colisionPlayer;
+        protected bool inAnimation;
         private void Awake()
         {
             circleCollider2D = GetComponent<CircleCollider2D>();
@@ -89,6 +90,7 @@ namespace Prototipo_2
         }
         private void Start()
         {
+            inAnimation = false;
             if (GameManager.instanceGameManager != null)
             {
                 gm = GameManager.instanceGameManager;
@@ -97,6 +99,7 @@ namespace Prototipo_2
         }
         private void OnEnable()
         {
+            inAnimation = false;
             timeLife = auxTimeLife;
             if (circleCollider2D != null)
             {
@@ -226,6 +229,7 @@ namespace Prototipo_2
         {
             if (animator != null)
             {
+                inAnimation = true;
                 rg2D.velocity = Vector3.zero;
                 animator.enabled = true;
                 if (circleCollider2D != null)

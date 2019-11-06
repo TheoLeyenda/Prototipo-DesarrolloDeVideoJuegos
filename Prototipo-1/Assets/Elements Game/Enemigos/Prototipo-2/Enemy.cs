@@ -27,6 +27,7 @@ namespace Prototipo_2
         private float xpActual;
         public float xpNededSpecialAttack;
         public float xpForHit;
+        public Pool poolParabolaAttack;
         public Pool poolObjectAttack;
         private Rigidbody2D rg2D;
         private GameManager gm;
@@ -41,8 +42,10 @@ namespace Prototipo_2
         public float maxRandomDelayMovement;
         public float minRandomDelayMovement;
         public float delayAttack;
+        //public float delayParabolaAttack;
         public float pointsDeffence;
         protected float auxDelayAttack;
+        //protected float auxDelayParabolaAttack;
         private bool doubleDamage;
         private bool isDuck;
         private bool isDeffended;
@@ -68,6 +71,7 @@ namespace Prototipo_2
         public BoxColliderController boxColliderControllerAgachado;
         public BoxColliderController boxColliderControllerParado;
         public BoxColliderController boxColliderControllerSaltando;
+        public bool enableMecanicParabolaAttack;
 
         [Header("Porcentage: Movimiento")]
         public float MovePorcentage;
@@ -95,7 +99,10 @@ namespace Prototipo_2
 
         [Header("Porcentaje: Ataque Especial")]
         public float AttackSpecialPorcentage;
-        
+
+        [Header("Porcentaje: Tipo de ataque")]
+        public float parabolaAttack;
+
         [Header("Datos del personaje para la grilla")]
         public int CantCasillasOcupadas_X;
         public int CantCasillasOcupadas_Y;
@@ -106,6 +113,7 @@ namespace Prototipo_2
             auxSpeedJump = SpeedJump;
             InitialPosition = transform.position;
             auxDelayAttack = delayAttack;
+            //auxDelayParabolaAttack = delayParabolaAttack;
             delaySelectMovement = 0;
             auxLife = life;
             poolObjectEnemy = GetComponent<PoolObject>();
@@ -119,6 +127,7 @@ namespace Prototipo_2
         }
         public virtual void Update()
         {
+            //Debug.Log(delaySelectMovement);
             //spriteEnemy.animator.SetBool("AtaqueEspecial", true);
             //enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
             CheckDeffense();
@@ -819,6 +828,39 @@ namespace Prototipo_2
             }
 
             //CheckOutLimit();
+        }
+        public void ParabolaAttack()
+        {
+            if (enableMecanicParabolaAttack)
+            {
+                GameObject go = poolParabolaAttack.GetObject();
+                ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
+                proyectil.SetDobleDamage(false);
+                proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
+                proyectil.SetEnemy(this);
+                if (!GetIsDuck())
+                {
+                    proyectil.TypeRoot = 1;
+                    go.transform.position = generadorProyectilParabola.transform.position;
+                }
+                else
+                {
+                    proyectil.TypeRoot = 2;
+                    go.transform.position = generadorProyectilParabolaAgachado.transform.position;
+                }
+                switch (proyectil.TypeRoot)
+                {
+                    case 1:
+                        proyectil.rutaParabola_AtaqueEnemigo = structsEnemys.ruta;
+                        break;
+                    case 2:
+                        proyectil.rutaParabolaAgachado_AtaqueEnemigo = structsEnemys.rutaAgachado;
+                        break;
+                }
+                proyectil.rutaParabola_AtaqueEnemigo = structsEnemys.ruta;
+                proyectil.OnParabola();
+                delayAttack = auxDelayAttack;
+            }
         }
         public bool CheckMove(Vector3 PosicionDestino)
         {

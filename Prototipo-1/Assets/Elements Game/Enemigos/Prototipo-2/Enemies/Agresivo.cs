@@ -52,36 +52,52 @@ namespace Prototipo_2
         {
             if (enemyPrefab.activeSelf == true)
             {
-                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
-                {
-                    spriteEnemy.animator.Play("Ataque enemigo agresivo");
-                }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
-                {
-                    spriteEnemy.animator.Play("Ataque Salto enemigo agresivo");
-
-                }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
-                {
-                    spriteEnemy.animator.Play("Ataque enemigo agresivo");
-                }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
+                float valueAttack = Random.Range(0, 100);
+                //Debug.Log(valueAttack);
+                if (valueAttack >= parabolaAttack || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                    || !enableMecanicParabolaAttack)
                 {
-                    switch (enumsEnemy.GetMovement())
+                    if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
                     {
-                        case EnumsEnemy.Movimiento.AtaqueEspecial:
-                            spriteEnemy.animator.SetBool("AtaqueEspecial", true);
-                            spriteEnemy.spriteRenderer.color = Color.white;
-                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
-                            break;
-                        case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
-                            break;
-                        case EnumsEnemy.Movimiento.AtaqueEspecialSalto:
-                            break;
+                        spriteEnemy.animator.Play("Ataque enemigo agresivo");
+                    }
+                    else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
+                        || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                    {
+                        spriteEnemy.animator.Play("Ataque Salto enemigo agresivo");
+
+                    }
+                    else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
+                    {
+                        spriteEnemy.animator.Play("Ataque enemigo agresivo");
+                    }
+                    else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
+                        || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
+                        || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
+                        || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                    {
+                        switch (enumsEnemy.GetMovement())
+                        {
+                            case EnumsEnemy.Movimiento.AtaqueEspecial:
+                                spriteEnemy.animator.SetBool("AtaqueEspecial", true);
+                                spriteEnemy.spriteRenderer.color = Color.white;
+                                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
+                                break;
+                            case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
+                                break;
+                            case EnumsEnemy.Movimiento.AtaqueEspecialSalto:
+                                break;
+                        }
+                    }
+                }
+                else if (valueAttack < parabolaAttack)
+                {
+                    if (delayAttack <= 0)
+                    {
+                        ParabolaAttack();
+                        spriteEnemy.RestartDelayAttackEnemy();
                     }
                 }
             }
