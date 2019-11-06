@@ -56,7 +56,8 @@ namespace Prototipo_2
         // Update is called once per frame
         void Update()
         {
-            if (SceneManager.GetActiveScene().name == "MENU")
+            if (SceneManager.GetActiveScene().name == "MENU" 
+                || SceneManager.GetActiveScene().name == "SelectPlayerScene")
             {
                 CanvasGameOver.SetActive(false);
                 ResetGameManager();
@@ -68,6 +69,10 @@ namespace Prototipo_2
         {
             countEnemysDead = 0;
             roundCombat = 0;
+            structGameManager.gm_dataCombatPvP.rondaActual = 0;
+            structGameManager.gm_dataCombatPvP.countRoundsWiningP1 = 0;
+            structGameManager.gm_dataCombatPvP.countRoundsWiningP2 = 0;
+            structGameManager.gm_dataCombatPvP.countRounds = 0;
         }
         public void ResetRoundCombat(bool PlayerDeath)
         {

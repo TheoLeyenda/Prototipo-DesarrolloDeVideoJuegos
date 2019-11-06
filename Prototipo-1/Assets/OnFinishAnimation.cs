@@ -10,6 +10,14 @@ namespace Prototipo_2 {
         {
             gameObject.SetActive(false);
         }
+        public void DisableMovementPlayers()
+        {
+            if (dataCombatPvP.player1 != null & dataCombatPvP.player2 != null)
+            {
+                dataCombatPvP.player1.GetInputManager().SetEnableMovementPlayer1(false);
+                dataCombatPvP.player2.GetInputManager().SetEnableMovementPlayer2(false);
+            }
+        }
         public void EnableMovementPlayers()
         {
             if(dataCombatPvP.player1 != null & dataCombatPvP.player2 != null)

@@ -33,9 +33,11 @@ namespace Prototipo_2
                     for (int i = 0; i < gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP1; i++)
                     {
                         go = PoolLogosDeVictoria.GetObject();
+                        Debug.Log(go);
                         if (go != null)
                         {
-                            go.transform.position = new Vector3(transform.position.x - unidadesDeSeparacion * i, transform.position.y, transform.position.z);
+                            go.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                            go.transform.position = new Vector3(transform.position.x - unidadesDeSeparacion * i, transform.position.y, 0.5f);
                             OneEjecution = false;
                         }
                     }
@@ -47,7 +49,8 @@ namespace Prototipo_2
                         go = PoolLogosDeVictoria.GetObject();
                         if (go != null)
                         {
-                            go.transform.position = new Vector3(transform.position.x + unidadesDeSeparacion * i, transform.position.y, transform.position.z);
+                            go.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                            go.transform.position = new Vector3(transform.position.x + unidadesDeSeparacion * i, transform.position.y, 0.5f);
                             OneEjecution = false;
                         }
                     }

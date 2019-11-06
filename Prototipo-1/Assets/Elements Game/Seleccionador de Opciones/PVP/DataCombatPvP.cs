@@ -62,6 +62,7 @@ namespace Prototipo_2 {
             InitDataCombat();
             player1 = GameObject.Find("Player1").GetComponent<Player>();
             player2 = GameObject.Find("Player2").GetComponent<Player>();
+            
         }
         public void InitDataCombat()
         {
