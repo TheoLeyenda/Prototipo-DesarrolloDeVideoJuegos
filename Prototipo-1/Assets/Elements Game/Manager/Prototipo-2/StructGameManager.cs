@@ -15,6 +15,7 @@ namespace Prototipo_2
             public int countRounds;
             public int countRoundsWiningP1;
             public int countRoundsWiningP2;
+            public int rondaActual;
         }
         public GM_DataCombatPvP gm_dataCombatPvP;
     }

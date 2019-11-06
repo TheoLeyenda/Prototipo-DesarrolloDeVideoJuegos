@@ -120,7 +120,7 @@ namespace Prototipo_2 {
                     player1.gameObject.SetActive(false);
                     player2.gameObject.SetActive(false);
                 }
-
+                gm.structGameManager.gm_dataCombatPvP.rondaActual++;
             }
             else if (player2.PD.lifePlayer <= 0)
             {
@@ -148,6 +148,7 @@ namespace Prototipo_2 {
                     player1.gameObject.SetActive(false);
                     player2.gameObject.SetActive(false);
                 }
+                gm.structGameManager.gm_dataCombatPvP.rondaActual++;
             }
         }
         public void ReiniciarRonda()
