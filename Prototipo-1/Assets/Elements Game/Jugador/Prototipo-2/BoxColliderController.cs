@@ -265,14 +265,22 @@ namespace Prototipo_2
                                 switch (player_PvP.playerState)
                                 {
                                     case Player_PvP.State.Defendido:
-                                        player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaqueParado;
+                                        
                                         if (player_PvP.playerActual == Player_PvP.Player.player1)
                                         {
-                                            player.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
+                                            if (player_PvP.stateDeffence == Player_PvP.StateDeffence.CounterAttackDeffense)
+                                            {
+                                                player.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
+                                                player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaqueParado; 
+                                            }
                                         }
                                         else if (player_PvP.playerActual == Player_PvP.Player.player2)
                                         {
-                                            player.Attack(Proyectil.DisparadorDelProyectil.Jugador2);
+                                            if (player_PvP.stateDeffence == Player_PvP.StateDeffence.CounterAttackDeffense)
+                                            {
+                                                player.Attack(Proyectil.DisparadorDelProyectil.Jugador2);
+                                                player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaqueParado;
+                                            }
                                         }
                                         realDamage = proyectil.damage - player.pointsDeffence;
                                         player.PD.lifePlayer = player.PD.lifePlayer - realDamage;

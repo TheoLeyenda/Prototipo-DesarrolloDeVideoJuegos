@@ -33,7 +33,7 @@ public class Pool : MonoBehaviour {
     {
         if (parent != null)
         {
-            go.transform.parent = parent.transform;
+            go.transform.SetParent(parent.transform);
         }
     }
     public void FindParent(string parentName)

@@ -826,6 +826,23 @@ namespace Prototipo_2
                 boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
             }
             boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
+            if (player_PvP != null)
+            {
+                if (player_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
+                {
+                    if (player_PvP.delayCounterAttackDeffense > 0)
+                    {
+                        player_PvP.delayCounterAttackDeffense = player_PvP.delayCounterAttackDeffense - Time.deltaTime;
+                        player_PvP.stateDeffence = Player_PvP.StateDeffence.CounterAttackDeffense;
+                        spritePlayerActual.spriteRenderer.color = Color.yellow;
+                    }
+                    else
+                    {
+                        player_PvP.stateDeffence = Player_PvP.StateDeffence.NormalDeffense;
+                        spritePlayerActual.spriteRenderer.color = Color.white;
+                    }
+                }
+            }
 
         }
         public bool GetEnableCounterAttack()

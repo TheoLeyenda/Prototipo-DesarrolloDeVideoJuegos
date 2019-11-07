@@ -25,12 +25,21 @@ namespace Prototipo_2
             player1,
             player2,
         }
+        public enum StateDeffence
+        {
+            Nulo,
+            NormalDeffense,
+            CounterAttackDeffense,
+        }
+        public StateDeffence stateDeffence;
         public Player playerActual;
         public State playerState;
+        public float delayCounterAttackDeffense;
+        public float auxDelayCounterAttackDeffense;
         // Start is called before the first frame update
         private void Start()
         {
-            
+            auxDelayCounterAttackDeffense = delayCounterAttackDeffense;
         }
         // Update is called once per frame
     }

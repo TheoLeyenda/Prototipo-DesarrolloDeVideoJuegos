@@ -1380,8 +1380,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSelected: 3
+  stateDeffence: 0
   playerActual: 0
   playerState: 0
+  delayCounterAttackDeffense: 0
+  auxDelayCounterAttackDeffense: 0
 --- !u!114 &1065991129846059951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2491,7 +2494,7 @@ PrefabInstance:
     - target: {fileID: 7097743373262305301, guid: f8c03c23c66899e4197e2fbc415ec43b,
         type: 3}
       propertyPath: pointsDeffence
-      value: 15.5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7097743373262305301, guid: f8c03c23c66899e4197e2fbc415ec43b,
         type: 3}
@@ -3278,16 +3281,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7730496465387366895}
     m_Modifications:
-    - target: {fileID: -5763248104556806029, guid: 74cb0cad388e0164080489e1d1851f06,
-        type: 3}
-      propertyPath: PoolLogosDeVictoria
-      value: 
-      objectReference: {fileID: 1893169174}
-    - target: {fileID: -5763248104556806029, guid: 74cb0cad388e0164080489e1d1851f06,
-        type: 3}
-      propertyPath: unidadesDeSeparacion
-      value: 40
-      objectReference: {fileID: 0}
     - target: {fileID: 3006040467536426297, guid: 74cb0cad388e0164080489e1d1851f06,
         type: 3}
       propertyPath: m_Name
@@ -3397,6 +3390,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -5763248104556806029, guid: 74cb0cad388e0164080489e1d1851f06,
+        type: 3}
+      propertyPath: PoolLogosDeVictoria
+      value: 
+      objectReference: {fileID: 1893169174}
+    - target: {fileID: -5763248104556806029, guid: 74cb0cad388e0164080489e1d1851f06,
+        type: 3}
+      propertyPath: unidadesDeSeparacion
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74cb0cad388e0164080489e1d1851f06, type: 3}
