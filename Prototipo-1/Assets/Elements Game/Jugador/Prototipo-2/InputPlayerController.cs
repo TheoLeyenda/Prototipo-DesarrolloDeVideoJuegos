@@ -11,6 +11,12 @@ public static class InputPlayerController
         r += Input.GetAxis("Horizontal_Analogico");
         return Mathf.Clamp(r, -1.0f, 1.0f);
     }
+    public static float Vertical_Analogico_P1()
+    {
+        float r = 0.0f;
+        r += Input.GetAxis("Vertical_Analogico");
+        return Mathf.Clamp(r, -1.0f, 1.0f);
+    }
     public static bool ParabolaAttack_P1()
     {
         return Input.GetButtonDown("ParabolaAttack_P1");
