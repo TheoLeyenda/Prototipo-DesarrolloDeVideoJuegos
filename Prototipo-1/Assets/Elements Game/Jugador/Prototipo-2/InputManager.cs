@@ -6,6 +6,7 @@ namespace Prototipo_2 {
     public class InputManager : MonoBehaviour
     {
         public string PauseButton;
+        public bool enableAnalogic;
         public Player player1;
         public Player_PvP player1_PvP;
         public Player player2;
@@ -173,7 +174,7 @@ namespace Prototipo_2 {
         }
         public void CheckHorizontalLeft_P1()
         {
-            if (InputPlayerController.Horizontal_Button_P1() < 0 && moveHorizontalPlayer1 && player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo
+            if (((InputPlayerController.Horizontal_Button_P1() < 0 || InputPlayerController.Horizontal_Analogico_P1() < -0.9f) && moveHorizontalPlayer1 && player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
                 || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
             {
                 player1.SetControllerJoystick(true);
@@ -185,7 +186,7 @@ namespace Prototipo_2 {
         }
         public void CheckHorizontalRight_P1()
         {
-            if (InputPlayerController.Horizontal_Button_P1() > 0 && moveHorizontalPlayer1 && player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo 
+            if (((InputPlayerController.Horizontal_Button_P1() > 0 || InputPlayerController.Horizontal_Analogico_P1() > 0.9f) && moveHorizontalPlayer1 && player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
                 || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
             {
                 player1.SetControllerJoystick(true);
@@ -193,11 +194,10 @@ namespace Prototipo_2 {
                 player1.MovementRight();
                 player1.SetIsDuck(false);
             }
-            
         }
         public void CheckHorizontalCero_P1()
         {
-            if (InputPlayerController.Horizontal_Button_P1() == 0)
+            if (InputPlayerController.Horizontal_Button_P1() == 0 && (InputPlayerController.Horizontal_Analogico_P1() > -0.9f && InputPlayerController.Horizontal_Analogico_P1() < 0.9f))
             {
                 moveHorizontalPlayer1 = true;
             }
@@ -392,39 +392,38 @@ namespace Prototipo_2 {
         
         public void CheckSpriteParado_P1()
         {
-            if (InputPlayerController.Vertical_Button_P1() == 0 && !InputPlayerController.SpecialAttackButton_P1())
+            if (InputPlayerController.Vertical_Button_P1() == 0 && !InputPlayerController.SpecialAttackButton_P1() && InputPlayerController.Horizontal_Button_P1() == 0)
             {
                 player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
             }
         }
         public void CheckSpriteMoverAdelante_P1()
         {
-            if (InputPlayerController.Horizontal_Button_P1() > 0 && InputPlayerController.Vertical_Button_P1() == 0
-                    || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante)
+            bool movingRight = InputPlayerController.Horizontal_Button_P1() > 0;
+            bool movingRightAnalog = InputPlayerController.Horizontal_Analogico_P1() > 0.9f;
+            bool verticalStill = InputPlayerController.Vertical_Button_P1() == 0;
+            bool avanzando = player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante;
+
+            bool cambioSpriteHabilitado = false;
+            if (enableAnalogic)
             {
-                if (player1.structsPlayer.dataPlayer.columnaActual < player1.gridPlayer.GetCuadrilla_columnas() - 1)
-                {
-                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAdelante;
-                }
-                else
-                {
-                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
-                }
+                cambioSpriteHabilitado = (((movingRight || movingRightAnalog) && verticalStill) || avanzando);
+            }
+            else
+            {
+                cambioSpriteHabilitado = ((movingRight && verticalStill) || avanzando);
+            }
+            if (cambioSpriteHabilitado)
+            {
+                player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAdelante;
             }
         }
         public void CheckSpriteMoverAtras_P1()
         {
-            if (InputPlayerController.Horizontal_Button_P1() < 0 && InputPlayerController.Vertical_Button_P1() == 0
+            if (((InputPlayerController.Horizontal_Button_P1() < 0 || InputPlayerController.Horizontal_Analogico_P1() < -0.9f) && InputPlayerController.Vertical_Button_P1() == 0 && player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
                     || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras)
             {
-                if (player1.structsPlayer.dataPlayer.columnaActual > 0)
-                {
-                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAtras;
-                }
-                else
-                {
-                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
-                }
+                player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAtras;
             }
         }
         public void CheckSpritesSalto_P1()
@@ -472,7 +471,6 @@ namespace Prototipo_2 {
                 }
                 else
                 {
-                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
                     player1.spritePlayerActual.delaySpriteRecibirDanio = player1.spritePlayerActual.GetAuxDelaySpriteRecibirDanio();
                 }
             }
