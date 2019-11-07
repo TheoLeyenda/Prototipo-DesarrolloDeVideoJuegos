@@ -252,11 +252,14 @@ namespace Prototipo_2 {
                 }
                 else
                 {
-                    if (player1_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
+                    if (player1_PvP != null)
                     {
-                        player1_PvP.stateDeffence = Player_PvP.StateDeffence.CounterAttackDeffense;
-                        player1_PvP.delayCounterAttackDeffense = player1_PvP.auxDelayCounterAttackDeffense;
-                        player1.spritePlayerActual.spriteRenderer.color = Color.white;
+                        if (player1_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
+                        {
+                            player1_PvP.stateDeffence = Player_PvP.StateDeffence.CounterAttackDeffense;
+                            player1_PvP.delayCounterAttackDeffense = player1_PvP.auxDelayCounterAttackDeffense;
+                            player1.spritePlayerActual.spriteRenderer.color = Color.white;
+                        }
                     }
                     player1.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Normal;
                     player1.boxColliderParado.state = BoxColliderController.StateBoxCollider.Normal;
@@ -725,11 +728,14 @@ namespace Prototipo_2 {
                 }
                 else
                 {
-                    if (player2_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
+                    if (player2_PvP != null)
                     {
-                        player2_PvP.stateDeffence = Player_PvP.StateDeffence.CounterAttackDeffense;
-                        player2_PvP.delayCounterAttackDeffense = player2_PvP.auxDelayCounterAttackDeffense;
-                        player2.spritePlayerActual.spriteRenderer.color = Color.white;
+                        if (player2_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
+                        {
+                            player2_PvP.stateDeffence = Player_PvP.StateDeffence.CounterAttackDeffense;
+                            player2_PvP.delayCounterAttackDeffense = player2_PvP.auxDelayCounterAttackDeffense;
+                            player2.spritePlayerActual.spriteRenderer.color = Color.white;
+                        }
                     }
                     player2.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Normal;
                     player2.boxColliderParado.state = BoxColliderController.StateBoxCollider.Normal;
