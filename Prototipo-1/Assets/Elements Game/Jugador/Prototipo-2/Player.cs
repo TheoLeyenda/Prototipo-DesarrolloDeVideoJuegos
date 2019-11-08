@@ -716,7 +716,7 @@ namespace Prototipo_2
                 }
                 else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
                 {
-                    Debug.Log("ENTRE");
+                    //Debug.Log("ENTRE");
                     structsPlayer.dataPlayer.columnaActual--;
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
                     gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);

@@ -247,7 +247,7 @@ namespace Prototipo_2 {
             }
             if (movimientoHorizontalHabilitado)
             {
-                Debug.Log("ENTRE");
+                //Debug.Log("ENTRE");
                 player1.SetControllerJoystick(true);
                 moveHorizontalPlayer1 = false;
                 player1.MovementLeft();
