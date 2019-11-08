@@ -219,7 +219,7 @@ namespace Prototipo_2 {
         }
         public void CheckVerticalCero_P1()
         {
-            if ((InputPlayerController.Vertical_Button_P1() == 0 && (enableAnalogic && (InputPlayerController.Vertical_Analogico_P1() > -0.9 && InputPlayerController.Vertical_Analogico_P1() < 0.8f))) &&
+            if ((InputPlayerController.Vertical_Button_P1() == 0 && ((InputPlayerController.Vertical_Analogico_P1() > -0.9 && InputPlayerController.Vertical_Analogico_P1() < 0.8f))) &&
                 (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Agacharse
                 || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacharseAtaque
                 || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacheDefensa))
@@ -227,7 +227,7 @@ namespace Prototipo_2 {
                 player1.enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
                 player1.SetIsDuck(false);
             }
-            else if (InputPlayerController.Vertical_Button_P1() == 0 && (enableAnalogic && (InputPlayerController.Vertical_Analogico_P1() > -0.9 && InputPlayerController.Vertical_Analogico_P1() < 0.8)))
+            else if (InputPlayerController.Vertical_Button_P1() == 0 && ((InputPlayerController.Vertical_Analogico_P1() > -0.9 && InputPlayerController.Vertical_Analogico_P1() < 0.8)))
             {
                 moveVerticalPlayer1 = true;
                 player1.SetIsDuck(false);
