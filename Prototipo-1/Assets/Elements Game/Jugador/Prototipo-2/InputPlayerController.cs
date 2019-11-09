@@ -76,6 +76,18 @@ public static class InputPlayerController
     //--------------------------------------//
 
     // -------CONTROLES JUGADOR 2--------- //
+    public static float Horizontal_Analogico_P2()
+    {
+        float r = 0.0f;
+        r += Input.GetAxis("Horizontal_Analogico_P2");
+        return Mathf.Clamp(r, -1.0f, 1.0f);
+    }
+    public static float Vertical_Analogico_P2()
+    {
+        float r = 0.0f;
+        r += Input.GetAxis("Vertical_Analogico_P2");
+        return Mathf.Clamp(r, -1.0f, 1.0f);
+    }
     public static bool ParabolaAttack_P2()
     {
         return Input.GetButtonDown("ParabolaAttack_P2");
