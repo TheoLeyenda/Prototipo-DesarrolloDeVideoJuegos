@@ -518,7 +518,7 @@ namespace Prototipo_2 {
         
         public void CheckSpriteParado_P1()
         {
-            if (InputPlayerController.Vertical_Button_P1() == 0 && !InputPlayerController.SpecialAttackButton_P1() && InputPlayerController.Horizontal_Button_P1() == 0)
+            if (InputPlayerController.Vertical_Button_P1() == 0 && !InputPlayerController.SpecialAttackButton_P1())
             {
                 player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
             }
