@@ -228,8 +228,6 @@ namespace Prototipo_2
                                     proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + (proyectil.GetPlayer().xpForHit / 2));
                                     proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
                                 }
-                                realDamage = proyectil.damage - player.pointsDeffence;
-                                player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
                                 proyectil.damage = proyectil.GetAuxDamage();
                                 player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                                 //proyectil.timeLife = 0;
@@ -252,8 +250,6 @@ namespace Prototipo_2
                                         proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + (proyectil.GetPlayer2().xpForHit / 2));
                                         proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + (proyectil.GetPlayer2().PD.scoreForHit / 2);
                                     }
-                                    realDamage = proyectil.damage - player.pointsDeffence;
-                                    player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
                                     proyectil.damage = proyectil.GetAuxDamage();
                                     player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                                     //proyectil.timeLife = 0;
@@ -284,8 +280,6 @@ namespace Prototipo_2
                                                 player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaqueParado;
                                             }
                                         }
-                                        realDamage = proyectil.damage - player.pointsDeffence;
-                                        player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
                                         proyectil.damage = proyectil.GetAuxDamage();
                                         player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                                         //proyectil.GetPoolObject().Recycle();
@@ -320,8 +314,6 @@ namespace Prototipo_2
                                                 }
                                             }
                                         }
-                                        realDamage = proyectil.damage - player.pointsDeffence;
-                                        player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
                                         proyectil.damage = proyectil.GetAuxDamage();
                                         player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                                         //proyectil.timeLife = 0;
@@ -336,8 +328,6 @@ namespace Prototipo_2
                             {
                                 //Debug.Log("A LA DEFENSA");
                                 proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + (proyectil.GetEnemy().xpForHit / 2));
-                                realDamage = proyectil.damage - player.pointsDeffence;
-                                player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
                                 proyectil.damage = proyectil.GetAuxDamage();
                                 player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                                 //proyectil.timeLife = 0;
@@ -351,7 +341,7 @@ namespace Prototipo_2
                 else if (enemy != null && !inPlayer && inEnemy)
                 {
                     bool enableDamagePlayer = true;
-                    //Debug.Log(disparadorDelProyectil);
+                    //Debug.Log(state);
                     if (state == StateBoxCollider.Normal)
                     {
                         if (proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador1)
@@ -387,53 +377,40 @@ namespace Prototipo_2
                                 proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + (proyectil.GetPlayer().xpForHit / 2));
                                 proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
                             }
-                            if (enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
+
+                            Debug.Log(enemy.enumsEnemy.GetMovement());
+                            if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar)
                             {
-                                float realDamage = proyectil.damage - enemy.pointsDeffence;
-                                enemy.life = enemy.life - realDamage;
+                                //MECANICA DEFENSIVA DEL ENEMIGO DEFENSIVO//
+                                if (enemy.GetComponent<Defensivo>() != null)
+                                {
+                                    Defensivo enemyDeffended = enemy.GetComponent<Defensivo>();
+                                    if (enemyDeffended.GetStateDeffence() == Defensivo.StateDeffence.CounterAttackDeffense)
+                                    {
+                                        enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.ContraAtaque;
+                                        //enemy.Attack(false, false, true, cuadrilla);
+                                        enemy.Attack(false, false, true, proyectil);
+                                        enemyDeffended.SetStateDeffense(Defensivo.StateDeffence.Nulo);
+                                        enemyDeffended.delayStateCounterAttackDeffense = 0;
+                                        enemyDeffended.delayStateDeffense = enemyDeffended.GetAuxDelayStateDeffense();
+                                        enemyDeffended.delayVulnerable = enemyDeffended.GetAuxDelayVulnerable();
+                                    }
+                                }
+                                //-----------------------------------------//
                             }
                             else
                             {
-                                if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar)
-                                {
-                                    //MECANICA DEFENSIVA DEL ENEMIGO DEFENSIVO//
-                                    if (enemy.GetComponent<Defensivo>() != null)
-                                    {
-                                        Defensivo enemyDeffended = enemy.GetComponent<Defensivo>();
-                                        if (enemyDeffended.GetStateDeffence() == Defensivo.StateDeffence.CounterAttackDeffense)
-                                        {
-                                            enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.ContraAtaque;
-                                            //enemy.Attack(false, false, true, cuadrilla);
-                                            enemy.Attack(false, false, true, proyectil);
-                                            enemyDeffended.SetStateDeffense(Defensivo.StateDeffence.Nulo);
-                                            enemyDeffended.delayStateCounterAttackDeffense = 0;
-                                            enemyDeffended.delayStateDeffense = enemyDeffended.GetAuxDelayStateDeffense();
-                                            enemyDeffended.delayVulnerable = enemyDeffended.GetAuxDelayVulnerable();
-                                            if (enemy.damageCounterAttack)
-                                            {
-                                                float realDamage = proyectil.damage - enemy.pointsDeffence;
-                                                enemy.life = enemy.life - realDamage;
-                                            }
-                                        }
-                                        else if (enemyDeffended.GetStateDeffence() == Defensivo.StateDeffence.NormalDeffense)
-                                        {
-                                            if (enemy.damageCounterAttack)
-                                            {
-                                                float realDamage = proyectil.damage - enemy.pointsDeffence;
-                                                enemy.life = enemy.life - realDamage;
-                                            }
-                                        }
-                                    }
-                                    //-----------------------------------------//
-                                }
-                                else
-                                {
-                                    enemy.life = enemy.life - proyectil.damage;
-                                }
+                                enemy.life = enemy.life - proyectil.damage;
                             }
                             //proyectil.timeLife = 0;
                             //proyectil.GetPoolObject().Recycle();
                             //proyectil.gameObject.SetActive(false);
+                            if (enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
+                                && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialAgachado
+                                && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto)
+                            {
+                                enemy.barraDeEscudo.SubstractPorcentageBar(enemy.barraDeEscudo.substractForHit);
+                            }
                             proyectil.AnimationHit();
 
                         }

@@ -40,7 +40,6 @@ namespace Prototipo_2
         public Button PadArrowRigth;
         public float SpeedJump;
         public float Speed;
-        public float pointsDeffence;
         public float Resistace;
         public float Gravity;
         private float auxSpeedJump;

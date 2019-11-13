@@ -122,7 +122,9 @@ namespace Prototipo_2
         }
         public void CheckInDeffense()
         {
-            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar)
+            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar 
+                && barraDeEscudo.GetValueShild() > barraDeEscudo.porcentageNededForDeffence
+                    && barraDeEscudo.GetEnableDeffence())
             {
                 inDeffense = true;
                 if (inDeffense)
@@ -170,6 +172,13 @@ namespace Prototipo_2
                 delayVulnerable = auxDelayVulnerable;
                 delaySelectMovement = 0;
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+            }
+            if (barraDeEscudo.nededBarMaxPorcentage && barraDeEscudo.ValueShild < barraDeEscudo.MaxValueShild 
+                && (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar 
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa))
+            {
+                delaySelectMovement = 0.0f;
             }
         }
         public void CheckVulnerable()
@@ -254,6 +263,7 @@ namespace Prototipo_2
             {
                 Disparo.gameObject.SetActive(true);
                 spriteEnemy.animator.SetBool("AtaqueEspecial", false);
+                enumsEnemy.SetMovement( EnumsEnemy.Movimiento.AtaqueEspecial);
             }
             if (!Disparo.gameObject.activeSelf)
             {

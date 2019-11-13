@@ -132,20 +132,28 @@ namespace Prototipo_2
                         switch (ActualSprite)
                         {
                             case SpriteActual.Parado:
+                                spriteRenderer.color = Color.white;
                                 PlayAnimation("Parado enemigo defensivo");
                                 break;
                             case SpriteActual.ParadoDefensa:
-                                PlayAnimation("Parado Defensa enemigo defensivo");
+                                if (!enemy.barraDeEscudo.nededBarMaxPorcentage)
+                                {
+                                    PlayAnimation("Parado Defensa enemigo defensivo");
+                                }
                                 break;
                             case SpriteActual.ParadoAtaque:
+                                spriteRenderer.color = Color.white;
                                 break;
                             case SpriteActual.MoverAdelante:
+                                spriteRenderer.color = Color.white;
                                 PlayAnimation("Moverse Adelante enemigo defensivo");
                                 break;
                             case SpriteActual.MoverAtras:
+                                spriteRenderer.color = Color.white;
                                 PlayAnimation("Moverse Atras enemigo defensivo");
                                 break;
                             case SpriteActual.RecibirDanio:
+                                spriteRenderer.color = Color.white;
                                 PlayAnimation("Recibir Danio enemigo defensivo");
                                 break;
                             case SpriteActual.ContraAtaque:
@@ -226,6 +234,14 @@ namespace Prototipo_2
                 }
             }
         }
+        public void InSpecialAttack()
+        {
+            enemy.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
+            enemy.boxColliderControllerAgachado.state = BoxColliderController.StateBoxCollider.Normal;
+            enemy.boxColliderControllerParado.state = BoxColliderController.StateBoxCollider.Normal;
+            enemy.boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Normal;
+            //enemy.boxColliderPiernas.state = BoxColliderController.StateBoxCollider.Normal;
+        }
         public Sprite CheckListSprite(string nameSprite)
         {
             for (int i = 0; i < Sprites.Count; i++)
@@ -282,6 +298,10 @@ namespace Prototipo_2
             {
                 animator.Play(nameAnimation);
             }
+        }
+        public void InPlayAnimationAttack()
+        {
+            enemy.barraDeEscudo.AddPorcentageBar();
         }
         public void AttackJampEnemy()
         {

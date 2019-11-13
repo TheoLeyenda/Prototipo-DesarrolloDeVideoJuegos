@@ -338,7 +338,6 @@ GameObject:
   - component: {fileID: 7194419974994112977}
   - component: {fileID: 7194419974994112974}
   - component: {fileID: 7194419974994112971}
-  - component: {fileID: 6486436780931659209}
   m_Layer: 0
   m_Name: Enemigo
   m_TagString: Enemy
@@ -402,76 +401,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6486436780931659209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7194419974994112979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c69c4e25e05cb64aa50bddf96037227, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteEnemy: {fileID: 0}
-  enemyPrefab: {fileID: 0}
-  gridEnemy: {fileID: 0}
-  enumsEnemy: {fileID: 0}
-  structsEnemys: {fileID: 0}
-  SpriteRendererEnemigo: {fileID: 0}
-  specialAttackEnemyController: {fileID: 0}
-  BARRA_DE_VIDA: {fileID: 0}
-  InPool: 0
-  life: 0
-  maxLife: 0
-  ImageHP: {fileID: 0}
-  ImageCarga: {fileID: 0}
-  xpNededSpecialAttack: 0
-  xpForHit: 0
-  poolObjectAttack: {fileID: 0}
-  generadoresProyectiles: {fileID: 0}
-  generadorProyectilesAgachado: {fileID: 0}
-  generadorProyectilParabola: {fileID: 0}
-  generadorProyectilParabolaAgachado: {fileID: 0}
-  maxRandomDelayMovement: 0
-  minRandomDelayMovement: 0
-  delayAttack: 0
-  pointsDeffence: 0
-  anguloAtaqueSalto: 0
-  Speed: 0
-  SpeedJump: 0
-  Resistace: 0
-  Gravity: 0
-  delayAttackJumping: 0
-  colliderSprites: {fileID: 0}
-  InitialPosition: {x: 0, y: 0, z: 0}
-  pointOfDeath: {x: 0, y: 0, z: 0}
-  pointOfCombat: {x: 0, y: 0, z: 0}
-  damageCounterAttack: 0
-  activateComportamiento: 0
-  boxColliderSprite: {fileID: 0}
-  boxColliderControllerAgachado: {fileID: 0}
-  boxColliderControllerParado: {fileID: 0}
-  boxColliderControllerSaltando: {fileID: 0}
-  MovePorcentage: 0
-  JumpPorcentage: 0
-  DuckPorcentage: 0
-  IdlePorcentage: 0
-  MoveForwardPorcentage: 0
-  MoveBackPorcentage: 0
-  AttackJumpPorcentage: 0
-  DefenceJumpPorcentage: 0
-  SimpleJumpPorcentage: 0
-  AttackDuckPorcentage: 0
-  DefenceDuckPorcentage: 0
-  SimpleDuckPorcentage: 0
-  AttackPorcentage: 0
-  DeffensePorcentage: 0
-  AttackSpecialPorcentage: 0
-  CantCasillasOcupadas_X: 0
-  CantCasillasOcupadas_Y: 0
-  ColumnaActual: 0
 --- !u!1 &7634778971475588847
 GameObject:
   m_ObjectHideFlags: 0

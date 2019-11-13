@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace Prototipo_2
-{
-    //HACER QUE CUANDO LA BARRA DE DEFENSA LLEGA A 0 NO SE PUEDA UTILIZAR HASTA QUE ESTA ESTE AL 100% 
+{  
     public class BarraDeEscudo : MonoBehaviour
     {
         // Start is called before the first frame update
+        public Enemy enemy;
         public Player player;
         public float porcentageNededForDeffence;
         public float ValueShild;
@@ -20,7 +20,8 @@ namespace Prototipo_2
         private float porcentageBar;
         private bool enableDeffence;
         private bool startDelayEnableDeffence;
-        private bool nededBarMaxPorcentage;
+        [HideInInspector]
+        public bool nededBarMaxPorcentage;
         public Image ImageBar;
 
         private void Start()
@@ -36,7 +37,7 @@ namespace Prototipo_2
         }
         public void SubstractPorcentageBar()
         {
-            ValueShild = ValueShild - Time.deltaTime * speedSubstractBar;
+            ValueShild = ValueShild - Time.unscaledDeltaTime * speedSubstractBar;
             CheckImageFillAmaut();
             delayLoadBar = auxDelayLoadBar;
         }
@@ -70,27 +71,46 @@ namespace Prototipo_2
         {
             return porcentageNededForDeffence;
         }
+        public void LoadBar()
+        {
+            if (!enableDeffence)
+            {
+                if (ValueShild <= porcentageNededForDeffence && !startDelayEnableDeffence)
+                {
+                    startDelayEnableDeffence = true;
+                    delayLoadBar = auxDelayLoadBar;
+                }
+                if (startDelayEnableDeffence && delayLoadBar > 0)
+                {
+                    delayLoadBar = delayLoadBar - Time.unscaledDeltaTime;
+                }
+                else if (startDelayEnableDeffence && delayLoadBar <= 0)
+                {
+                    startDelayEnableDeffence = false;
+                }
+            }
+        }
         public void CheckLoadBar()
         {
-            if ((!InputPlayerController.CheckPressDeffenseButton_P1() && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-                || (!InputPlayerController.CheckPressDeffenseButton_P2() && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2))
+            //PONER UNA CONDICION OR PARA EL ENEMIGO
+            if (player != null)
             {
-                
-                if (!enableDeffence)
+                if (((!InputPlayerController.CheckPressDeffenseButton_P1()
+                        && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                    || (!InputPlayerController.CheckPressDeffenseButton_P2()
+                        && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)))
                 {
-                    if (ValueShild <= porcentageNededForDeffence && !startDelayEnableDeffence)
-                    {
-                        startDelayEnableDeffence = true;
-                        delayLoadBar = auxDelayLoadBar;
-                    }
-                    if (startDelayEnableDeffence && delayLoadBar > 0)
-                    {
-                        delayLoadBar = delayLoadBar - Time.deltaTime;
-                    }
-                    else if (startDelayEnableDeffence && delayLoadBar <= 0)
-                    {
-                        startDelayEnableDeffence = false;
-                    }
+                    LoadBar();
+                }
+            }
+            else if(enemy != null)
+            {
+                if ((enemy != null
+                    && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar
+                    && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacheDefensa
+                    && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa))
+                {
+                    LoadBar();
                 }
             }
             if (ValueShild <= 0)
@@ -110,21 +130,40 @@ namespace Prototipo_2
         }
         public void AddPorcentageBar()
         {
-            if ((!InputPlayerController.CheckPressDeffenseButton_P1() && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-                || (!InputPlayerController.CheckPressDeffenseButton_P2() && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
-                || nededBarMaxPorcentage)
+            //PONER UNA CONDICION OR PARA EL ENEMIGO
+            if (player != null)
             {
-                
-                if (delayLoadBar <= 0)
+                if ((!InputPlayerController.CheckPressDeffenseButton_P1() && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                || (!InputPlayerController.CheckPressDeffenseButton_P2() && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2))
                 {
-                    ValueShild = ValueShild + Time.deltaTime * speedAddedBar;
-                    CheckImageFillAmaut();
+                    AddPorcentage();
+                }
+            }
 
-                }
-                else if (delayLoadBar > 0)
-                {
-                    delayLoadBar = delayLoadBar - Time.deltaTime;
-                }
+            if (enemy != null) {
+                /*if ((enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar
+                    && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacheDefensa
+                    && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa))
+                {*/
+                    AddPorcentage();
+                //}
+            }
+            else if (nededBarMaxPorcentage)
+            {
+                AddPorcentage();
+            }
+        }
+        public void AddPorcentage()
+        {
+            if (delayLoadBar <= 0)
+            {
+                ValueShild = ValueShild + Time.unscaledDeltaTime * speedAddedBar;
+                CheckImageFillAmaut();
+
+            }
+            else if (delayLoadBar > 0)
+            {
+                delayLoadBar = delayLoadBar - Time.unscaledDeltaTime;
             }
         }
         public bool GetEnableDeffence()

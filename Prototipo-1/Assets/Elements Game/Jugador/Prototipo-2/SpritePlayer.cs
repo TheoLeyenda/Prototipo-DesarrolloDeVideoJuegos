@@ -234,6 +234,7 @@ namespace Prototipo_2 {
                 animator.Play(nameAnimation);
             }
         }
+        //REMPLAZAR ESTO POR Time.unscaledDeltaTime
         public void InPlayAnimationAttack()
         {
             player.barraDeEscudo.AddPorcentageBar();
