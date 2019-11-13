@@ -136,10 +136,7 @@ namespace Prototipo_2 {
             //Debug.Log(player1.enumsPlayers.movimiento);
             if (player1 != null && player1.gameObject.activeSelf)
             {
-                if (!InputPlayerController.CheckPressDeffenseButton_P1())
-                {
-                    player1.barraDeEscudo.SetEnableDeffence(true);
-                }
+               
                 if (enableMovementPlayer1)
                 {
                     CheckInputPlayer1();

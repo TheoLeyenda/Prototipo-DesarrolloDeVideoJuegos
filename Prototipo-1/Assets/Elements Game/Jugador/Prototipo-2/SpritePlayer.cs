@@ -119,7 +119,6 @@ namespace Prototipo_2 {
                 {
                     if (player.GetInputManager().GetEnableMovementPlayer1())
                     {
-                        Debug.Log(ActualSprite);
                         switch (ActualSprite)
                         {
                             case SpriteActual.Parado:
