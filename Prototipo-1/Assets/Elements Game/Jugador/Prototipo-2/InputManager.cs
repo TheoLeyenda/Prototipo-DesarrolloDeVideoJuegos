@@ -650,8 +650,8 @@ namespace Prototipo_2 {
             {
                 spriteAgachadoHabilitado = (movingDown_P1 && !saltando_P1);
             }
-
-            if (spriteAgachadoHabilitado)
+            //Debug.Log(player1.GetIsDuck());
+            if (spriteAgachadoHabilitado && player1.GetIsDuck())
             {
                 if (InputPlayerController.CheckPressAttackButton_P1())
                 {
@@ -663,7 +663,7 @@ namespace Prototipo_2 {
                 {
                     player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.AgachadoDefensa;
                 }
-                else
+                else 
                 {
                     player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Agachado;
                 }
@@ -1185,7 +1185,7 @@ namespace Prototipo_2 {
                 {
                     player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.AgachadoDefensa;
                 }
-                else
+                else if (player2.GetIsDuck())
                 {
                     player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Agachado;
                 }
