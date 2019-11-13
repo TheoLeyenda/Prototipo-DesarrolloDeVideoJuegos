@@ -136,6 +136,10 @@ namespace Prototipo_2 {
             //Debug.Log(player1.enumsPlayers.movimiento);
             if (player1 != null && player1.gameObject.activeSelf)
             {
+                if (!InputPlayerController.CheckPressDeffenseButton_P1())
+                {
+                    player1.barraDeEscudo.SetEnableDeffence(true);
+                }
                 if (enableMovementPlayer1)
                 {
                     CheckInputPlayer1();
@@ -366,7 +370,9 @@ namespace Prototipo_2 {
         {
             if (!InputPlayerController.CheckPressAttackButton_P1())
             {
-                if (InputPlayerController.CheckPressDeffenseButton_P1())
+                if (InputPlayerController.CheckPressDeffenseButton_P1() 
+                    && player1.barraDeEscudo.GetValueShild() > player1.barraDeEscudo.porcentageNededForDeffence
+                    && player1.barraDeEscudo.GetEnableDeffence())
                 {
                     player1.SetControllerJoystick(true);
                     player1.Deffence();
@@ -390,8 +396,15 @@ namespace Prototipo_2 {
                     player1.boxColliderParado.state = BoxColliderController.StateBoxCollider.Normal;
                     player1.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Normal;
                     player1.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
+                    player1.barraDeEscudo.AddPorcentageBar();
+                    if (player1.barraDeEscudo.GetValueShild() <= player1.barraDeEscudo.porcentageNededForDeffence)
+                    {
+                        //Debug.Log("ENTRE");
+                        player1.barraDeEscudo.SetEnableDeffence(false);
+                    }
                 }
             }
+            
         }
         public void CheckSpecialAttackButton_P1()
         {
@@ -465,7 +478,6 @@ namespace Prototipo_2 {
                         CheckHorizontalRight_P1();
                         CheckHorizontalCero_P1();
                         CheckAttackButton_P1();
-                        CheckDeffenceButton_P1();
                         CheckDeffenceButton_P1();
                         CheckSpecialAttackButton_P1();
                         break;
@@ -576,7 +588,9 @@ namespace Prototipo_2 {
                 {
                     player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.SaltoAtaque;
                 }
-                else if (InputPlayerController.CheckPressDeffenseButton_P1())
+                else if (InputPlayerController.CheckPressDeffenseButton_P1()
+                     && player1.barraDeEscudo.GetValueShild() > player1.barraDeEscudo.porcentageNededForDeffence
+                    && player1.barraDeEscudo.GetEnableDeffence())
                 {
                     player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.SaltoDefensa;
                 }
@@ -603,7 +617,9 @@ namespace Prototipo_2 {
                 {
                     player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoAtaque;
                 }
-                else if (InputPlayerController.CheckPressDeffenseButton_P1())
+                else if (InputPlayerController.CheckPressDeffenseButton_P1() 
+                    && player1.barraDeEscudo.GetValueShild() > player1.barraDeEscudo.porcentageNededForDeffence
+                    && player1.barraDeEscudo.GetEnableDeffence())
                 {
                     player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoDefensa;
                     if (player1_PvP != null)
@@ -641,7 +657,9 @@ namespace Prototipo_2 {
                 {
                     player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.AgachadoAtaque;
                 }
-                else if (InputPlayerController.CheckPressDeffenseButton_P1())
+                else if (InputPlayerController.CheckPressDeffenseButton_P1()
+                     && player1.barraDeEscudo.GetValueShild() > player1.barraDeEscudo.porcentageNededForDeffence
+                    && player1.barraDeEscudo.GetEnableDeffence())
                 {
                     player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.AgachadoDefensa;
                 }
@@ -882,9 +900,10 @@ namespace Prototipo_2 {
         }
         public void CheckDeffenceButton_P2()
         {
-            if (!InputPlayerController.CheckPressAttackButton_P2())
+            if (!InputPlayerController.CheckPressAttackButton_P2() )
             {
-                if (InputPlayerController.CheckPressDeffenseButton_P2())
+                if (InputPlayerController.CheckPressDeffenseButton_P2() &&
+                player2.barraDeEscudo.GetValueShild() >= player2.barraDeEscudo.porcentageNededForDeffence)
                 {
                     player2.SetControllerJoystick(true);
                     player2.Deffence();
@@ -908,6 +927,7 @@ namespace Prototipo_2 {
                     player2.boxColliderParado.state = BoxColliderController.StateBoxCollider.Normal;
                     player2.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Normal;
                     player2.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
+                    player2.barraDeEscudo.AddPorcentageBar();
                 }
             }
         }

@@ -234,6 +234,10 @@ namespace Prototipo_2 {
                 animator.Play(nameAnimation);
             }
         }
+        public void InPlayAnimationAttack()
+        {
+            player.barraDeEscudo.AddPorcentageBar();
+        }
         public void PlayerSpecialAttack()
         {
             if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)

@@ -12,6 +12,7 @@ namespace Prototipo_2
         // Start is called before the first frame update
         public bool resetPlayer;
         public bool resetScore;
+        public BarraDeEscudo barraDeEscudo;
         public TextMeshProUGUI scoreText;
         public PlayerData PD;
         public Grid gridPlayer;
@@ -844,6 +845,11 @@ namespace Prototipo_2
                         spritePlayerActual.spriteRenderer.color = Color.white;
                     }
                 }
+            }
+            // A MEDIDA QUE ME DEFIENDO BAJO EL PORCENTAJE A LA BARRA DE DEFENSA
+            if (barraDeEscudo != null)
+            {
+                barraDeEscudo.SubstractPorcentageBar();
             }
 
         }

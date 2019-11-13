@@ -231,6 +231,7 @@ namespace Prototipo_2
                                 realDamage = proyectil.damage - player.pointsDeffence;
                                 player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
                                 proyectil.damage = proyectil.GetAuxDamage();
+                                player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                                 //proyectil.timeLife = 0;
                                 //proyectil.GetPoolObject().Recycle();
                                 //proyectil.gameObject.SetActive(false);
@@ -254,6 +255,7 @@ namespace Prototipo_2
                                     realDamage = proyectil.damage - player.pointsDeffence;
                                     player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
                                     proyectil.damage = proyectil.GetAuxDamage();
+                                    player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                                     //proyectil.timeLife = 0;
                                     //proyectil.GetPoolObject().Recycle();
                                     //proyectil.gameObject.SetActive(false);
@@ -285,6 +287,7 @@ namespace Prototipo_2
                                         realDamage = proyectil.damage - player.pointsDeffence;
                                         player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
                                         proyectil.damage = proyectil.GetAuxDamage();
+                                        player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                                         //proyectil.GetPoolObject().Recycle();
                                         //proyectil.gameObject.SetActive(false);
                                         //proyectil.timeLife = 0;
@@ -320,6 +323,7 @@ namespace Prototipo_2
                                         realDamage = proyectil.damage - player.pointsDeffence;
                                         player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
                                         proyectil.damage = proyectil.GetAuxDamage();
+                                        player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                                         //proyectil.timeLife = 0;
                                         //proyectil.GetPoolObject().Recycle();
                                         //proyectil.gameObject.SetActive(false);
@@ -335,6 +339,7 @@ namespace Prototipo_2
                                 realDamage = proyectil.damage - player.pointsDeffence;
                                 player.PD.lifePlayer = player.PD.lifePlayer - realDamage;
                                 proyectil.damage = proyectil.GetAuxDamage();
+                                player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                                 //proyectil.timeLife = 0;
                                 //proyectil.GetPoolObject().Recycle();
                                 //proyectil.gameObject.SetActive(false);
