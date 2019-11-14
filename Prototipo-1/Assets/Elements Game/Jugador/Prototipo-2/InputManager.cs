@@ -410,6 +410,7 @@ namespace Prototipo_2 {
                     player1.boxColliderParado.state = BoxColliderController.StateBoxCollider.Normal;
                     player1.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Normal;
                     player1.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
+                    player1.GetPlayerPvP().stateDeffence = Player_PvP.StateDeffence.NormalDeffense;
                     player1.barraDeEscudo.AddPorcentageBar();
                     if (player1.barraDeEscudo.GetValueShild() <= player1.barraDeEscudo.porcentageNededForDeffence)
                     {
@@ -942,6 +943,7 @@ namespace Prototipo_2 {
                     player2.boxColliderParado.state = BoxColliderController.StateBoxCollider.Normal;
                     player2.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Normal;
                     player2.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
+                    player2.GetPlayerPvP().stateDeffence = Player_PvP.StateDeffence.NormalDeffense;
                     player2.barraDeEscudo.AddPorcentageBar();
                     if (player2.barraDeEscudo.GetValueShild() <= player2.barraDeEscudo.porcentageNededForDeffence)
                     {

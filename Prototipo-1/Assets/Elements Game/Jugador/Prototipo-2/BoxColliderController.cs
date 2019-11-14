@@ -63,7 +63,7 @@ namespace Prototipo_2
                                 if (player.delayCounterAttack > 0)
                                 {
                                     player.delayCounterAttack = player.delayCounterAttack - Time.deltaTime;
-                                    if (InputPlayerController.DeffenseButton_P1())
+                                    if (InputPlayerController.DeffenseButton_P1() && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage)
                                     {
                                         proyectil.gameObject.SetActive(false);
                                         player.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
@@ -117,7 +117,8 @@ namespace Prototipo_2
                                 if (player.delayCounterAttack > 0)
                                 {
                                     player.delayCounterAttack = player.delayCounterAttack - Time.deltaTime;
-                                    if (InputPlayerController.DeffenseButton_P2())
+                                    
+                                    if (InputPlayerController.DeffenseButton_P2() && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage)
                                     {
                                         player.Attack(Proyectil.DisparadorDelProyectil.Jugador2);
                                         player.delayCounterAttack = player.GetAuxDelayCounterAttack();
@@ -169,7 +170,7 @@ namespace Prototipo_2
                                 if (player.delayCounterAttack > 0)
                                 {
                                     player.delayCounterAttack = player.delayCounterAttack - Time.deltaTime;
-                                    if (InputPlayerController.DeffenseButton_P1())
+                                    if (InputPlayerController.DeffenseButton_P1() && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage)
                                     {
                                         player.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
                                         player.delayCounterAttack = player.GetAuxDelayCounterAttack();
@@ -263,25 +264,27 @@ namespace Prototipo_2
                                 switch (player_PvP.playerState)
                                 {
                                     case Player_PvP.State.Defendido:
-                                        
-                                        if (player_PvP.playerActual == Player_PvP.Player.player1)
+                                        if (player.barraDeEscudo != null)
                                         {
-                                            if (player_PvP.stateDeffence == Player_PvP.StateDeffence.CounterAttackDeffense)
+                                            if (player_PvP.playerActual == Player_PvP.Player.player1)
                                             {
-                                                player.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
-                                                player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaqueParado; 
+                                                if (player_PvP.stateDeffence == Player_PvP.StateDeffence.CounterAttackDeffense)
+                                                {
+                                                    player.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
+                                                    player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaqueParado;
+                                                }
                                             }
-                                        }
-                                        else if (player_PvP.playerActual == Player_PvP.Player.player2)
-                                        {
-                                            if (player_PvP.stateDeffence == Player_PvP.StateDeffence.CounterAttackDeffense)
+                                            else if (player_PvP.playerActual == Player_PvP.Player.player2)
                                             {
-                                                player.Attack(Proyectil.DisparadorDelProyectil.Jugador2);
-                                                player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaqueParado;
+                                                if (player_PvP.stateDeffence == Player_PvP.StateDeffence.CounterAttackDeffense)
+                                                {
+                                                    player.Attack(Proyectil.DisparadorDelProyectil.Jugador2);
+                                                    player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaqueParado;
+                                                }
                                             }
+                                            proyectil.damage = proyectil.GetAuxDamage();
+                                            player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                                         }
-                                        proyectil.damage = proyectil.GetAuxDamage();
-                                        player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                                         //proyectil.GetPoolObject().Recycle();
                                         //proyectil.gameObject.SetActive(false);
                                         //proyectil.timeLife = 0;
