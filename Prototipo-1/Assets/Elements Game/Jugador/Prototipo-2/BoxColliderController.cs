@@ -401,11 +401,14 @@ namespace Prototipo_2
                             //proyectil.timeLife = 0;
                             //proyectil.GetPoolObject().Recycle();
                             //proyectil.gameObject.SetActive(false);
-                            if (enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
-                                && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialAgachado
-                                && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto)
+                            if (enemy.barraDeEscudo != null)
                             {
-                                enemy.barraDeEscudo.SubstractPorcentageBar(enemy.barraDeEscudo.substractForHit);
+                                if (enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
+                                    && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialAgachado
+                                    && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto)
+                                {
+                                    enemy.barraDeEscudo.SubstractPorcentageBar(enemy.barraDeEscudo.substractForHit);
+                                }
                             }
                             proyectil.AnimationHit();
                         }

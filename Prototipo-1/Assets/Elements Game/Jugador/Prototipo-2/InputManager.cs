@@ -148,7 +148,7 @@ namespace Prototipo_2 {
                 if (enableMovementPlayer1)
                 {
                     CheckInputPlayer1();
-                    CheckSpritePlayer1();//puta madre
+                    CheckSpritePlayer1();
                 }
                 else
                 {
@@ -584,7 +584,7 @@ namespace Prototipo_2 {
             }
             
         }
-        public void CheckSpritesSalto_P1()
+        public void CheckSpritesSalto_P1() 
         {
             bool spriteSaltoHabilitado = false;
             if (enableAnalogic)
@@ -622,7 +622,7 @@ namespace Prototipo_2 {
                 }
             }
         }
-        public void CheckSpritesParado_P1()
+        public void CheckSpritesParado_P1() 
         {
             if (player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
                     && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Agacharse && InputPlayerController.Horizontal_Button_P1() == 0)
@@ -647,7 +647,7 @@ namespace Prototipo_2 {
                 }
             }
         }
-        public void CheckSpritesAgachado_P1()
+        public void CheckSpritesAgachado_P1() 
         {
             /*horizontalStill_P1 = InputPlayerController.Horizontal_Button_P1() == 0;
             //Debug.Log(InputPlayerController.Vertical_Analogico_P1());
@@ -1137,7 +1137,9 @@ namespace Prototipo_2 {
                 {
                     player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.SaltoAtaque;
                 }
-                else if (InputPlayerController.CheckPressDeffenseButton_P2())
+                else if (InputPlayerController.CheckPressDeffenseButton_P2()
+                     && player2.barraDeEscudo.GetValueShild() > player2.barraDeEscudo.porcentageNededForDeffence
+                    && player2.barraDeEscudo.GetEnableDeffence())
                 {
                     player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.SaltoDefensa;
                 }
@@ -1164,7 +1166,9 @@ namespace Prototipo_2 {
                 {
                     player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoAtaque;
                 }
-                else if (InputPlayerController.CheckPressDeffenseButton_P2())
+                else if (InputPlayerController.CheckPressDeffenseButton_P2()
+                    && player2.barraDeEscudo.GetValueShild() > player2.barraDeEscudo.porcentageNededForDeffence
+                    && player2.barraDeEscudo.GetEnableDeffence())
                 {
                     player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoDefensa;
                     if (player2_PvP != null)
@@ -1195,18 +1199,20 @@ namespace Prototipo_2 {
             {
                 spriteAgachadoHabilitado = (movingDown_P2 && !saltando_P2);
             }
-
-            if (spriteAgachadoHabilitado)
+            //Debug.Log(player1.GetIsDuck());
+            if (spriteAgachadoHabilitado && player2.GetIsDuck())
             {
                 if (InputPlayerController.CheckPressAttackButton_P2())
                 {
                     player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.AgachadoAtaque;
                 }
-                else if (InputPlayerController.CheckPressDeffenseButton_P2())
+                else if (InputPlayerController.CheckPressDeffenseButton_P2()
+                     && player2.barraDeEscudo.GetValueShild() > player2.barraDeEscudo.porcentageNededForDeffence
+                    && player2.barraDeEscudo.GetEnableDeffence())
                 {
                     player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.AgachadoDefensa;
                 }
-                else if (player2.GetIsDuck())
+                else
                 {
                     player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Agachado;
                 }

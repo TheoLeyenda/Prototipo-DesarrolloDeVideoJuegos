@@ -353,9 +353,10 @@ MonoBehaviour:
   ValueShild: 100
   MaxValueShild: 100
   speedSubstractBar: 15
-  speedAddedBar: 40
+  speedAddedBar: 15
   substractForHit: 15
   delayLoadBar: 1.2
+  nededBarMaxPorcentage: 0
   ImageBar: {fileID: 1242506903990086637}
 --- !u!1001 &2617850729110030377
 PrefabInstance:
@@ -364,6 +365,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9206527140079764957}
     m_Modifications:
+    - target: {fileID: 2875353543593848923, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Sacaputa
+      objectReference: {fileID: 0}
     - target: {fileID: 2875353543593848924, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -483,11 +489,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.8516554
-      objectReference: {fileID: 0}
-    - target: {fileID: 2875353543593848923, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Sacaputa
       objectReference: {fileID: 0}
     - target: {fileID: 2875353543593848925, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
         type: 3}

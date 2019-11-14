@@ -117,7 +117,7 @@ namespace Prototipo_2
             InitialPosition = transform.position;
             auxDelayAttack = delayAttack;
             //auxDelayParabolaAttack = delayParabolaAttack;
-            delaySelectMovement = 0;
+            delaySelectMovement = 0.2f;
             auxLife = life;
             poolObjectEnemy = GetComponent<PoolObject>();
             animator = GetComponent<Animator>();
@@ -388,6 +388,18 @@ namespace Prototipo_2
             if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
             {
                 movimiento = (EnumsEnemy.Movimiento)Random.Range(min, max);
+                switch (movimiento)
+                {
+                    case EnumsEnemy.Movimiento.AgacheDefensa:
+                        movimiento = EnumsEnemy.Movimiento.Agacharse;
+                        break;
+                    case EnumsEnemy.Movimiento.DefensaEnElLugar:
+                        movimiento = EnumsEnemy.Movimiento.AtacarEnElLugar;
+                        break;
+                    case EnumsEnemy.Movimiento.SaltoDefensa:
+                        movimiento = EnumsEnemy.Movimiento.Saltar;
+                        break;
+                }
             }
             else
             {
@@ -565,13 +577,14 @@ namespace Prototipo_2
         }
         public void CheckMovement()
         {
-            if ((enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar
+            if (barraDeEscudo != null)
+            {
+                if ((enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar
                 && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacheDefensa
                 && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa)
                 || barraDeEscudo.nededBarMaxPorcentage)
-            {
-                if (barraDeEscudo != null)
                 {
+
                     barraDeEscudo.AddPorcentageBar();
 
                     if (barraDeEscudo.GetValueShild() <= barraDeEscudo.porcentageNededForDeffence)
@@ -724,28 +737,31 @@ namespace Prototipo_2
         public void CheckDeffense()
         {
             //Debug.Log(isDeffended);
-            if (isDeffended && barraDeEscudo.GetValueShild() > barraDeEscudo.porcentageNededForDeffence
-                    && barraDeEscudo.GetEnableDeffence())
+            if (barraDeEscudo != null)
             {
-                boxColliderControllerAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
-                boxColliderControllerParado.state = BoxColliderController.StateBoxCollider.Defendido;
-                boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
-                boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
-            }
-            else
-            {
-                boxColliderControllerAgachado.state = BoxColliderController.StateBoxCollider.Normal;
-                boxColliderControllerParado.state = BoxColliderController.StateBoxCollider.Normal;
-                boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Normal;
-                boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
-                if (barraDeEscudo != null)
+                if (isDeffended && barraDeEscudo.GetValueShild() > barraDeEscudo.porcentageNededForDeffence
+                        && barraDeEscudo.GetEnableDeffence())
                 {
-                    barraDeEscudo.AddPorcentageBar();
-
-                    if (barraDeEscudo.GetValueShild() <= barraDeEscudo.porcentageNededForDeffence)
+                    boxColliderControllerAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
+                    boxColliderControllerParado.state = BoxColliderController.StateBoxCollider.Defendido;
+                    boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
+                    boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
+                }
+                else
+                {
+                    boxColliderControllerAgachado.state = BoxColliderController.StateBoxCollider.Normal;
+                    boxColliderControllerParado.state = BoxColliderController.StateBoxCollider.Normal;
+                    boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Normal;
+                    boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
+                    if (barraDeEscudo != null)
                     {
-                        //Debug.Log("ENTRE");
-                        barraDeEscudo.SetEnableDeffence(false);
+                        barraDeEscudo.AddPorcentageBar();
+
+                        if (barraDeEscudo.GetValueShild() <= barraDeEscudo.porcentageNededForDeffence)
+                        {
+                            //Debug.Log("ENTRE");
+                            barraDeEscudo.SetEnableDeffence(false);
+                        }
                     }
                 }
             }
@@ -780,11 +796,12 @@ namespace Prototipo_2
             if (barraDeEscudo != null)
             {
                 barraDeEscudo.SubstractPorcentageBar();
+                if (barraDeEscudo.nededBarMaxPorcentage && barraDeEscudo.ValueShild < barraDeEscudo.MaxValueShild)
+                {
+                    delaySelectMovement = 0.0f;
+                }
             }
-            if (barraDeEscudo.nededBarMaxPorcentage && barraDeEscudo.ValueShild < barraDeEscudo.MaxValueShild)
-            {
-                delaySelectMovement = 0.0f;
-            }
+            
         }
         public virtual void CheckDelayAttack(bool specialAttack)
         {
