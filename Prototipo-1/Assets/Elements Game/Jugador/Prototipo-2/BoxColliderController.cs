@@ -378,7 +378,7 @@ namespace Prototipo_2
                                 proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
                             }
 
-                            Debug.Log(enemy.enumsEnemy.GetMovement());
+                            //Debug.Log(enemy.enumsEnemy.GetMovement());
                             if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar)
                             {
                                 //MECANICA DEFENSIVA DEL ENEMIGO DEFENSIVO//
@@ -408,7 +408,6 @@ namespace Prototipo_2
                                 enemy.barraDeEscudo.SubstractPorcentageBar(enemy.barraDeEscudo.substractForHit);
                             }
                             proyectil.AnimationHit();
-
                         }
                     }
                 }

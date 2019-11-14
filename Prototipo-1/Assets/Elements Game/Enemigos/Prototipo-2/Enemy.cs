@@ -106,6 +106,10 @@ namespace Prototipo_2
         public int CantCasillasOcupadas_X;
         public int CantCasillasOcupadas_Y;
         public int ColumnaActual;
+        private void OnEnable()
+        {
+            delaySelectMovement = 0.2f;
+        }
         public virtual void Start()
         {
             enableSpecialAttack = false;
@@ -566,13 +570,16 @@ namespace Prototipo_2
                 && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa)
                 || barraDeEscudo.nededBarMaxPorcentage)
             {
-                barraDeEscudo.AddPorcentageBar();
-                if (barraDeEscudo.GetValueShild() <= barraDeEscudo.porcentageNededForDeffence)
+                if (barraDeEscudo != null)
                 {
-                    //Debug.Log("ENTRE");
-                    barraDeEscudo.SetEnableDeffence(false);
-                    //if (spriteEnemy.ActualSprite != SpriteEnemy.SpriteActual.RecibirDanio)
-                    //{
+                    barraDeEscudo.AddPorcentageBar();
+
+                    if (barraDeEscudo.GetValueShild() <= barraDeEscudo.porcentageNededForDeffence)
+                    {
+                        //Debug.Log("ENTRE");
+                        barraDeEscudo.SetEnableDeffence(false);
+                        //if (spriteEnemy.ActualSprite != SpriteEnemy.SpriteActual.RecibirDanio)
+                        //{
                         if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa)
                         {
                             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Agacharse);
@@ -581,14 +588,15 @@ namespace Prototipo_2
                         {
                             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
                         }
-                        else if(enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa
+                        else if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa
                             && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque
                             && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar
                             && !isDuck)
                         {
                             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
                         }
-                    //}
+                        //}
+                    }
                 }
             }
             switch (enumsEnemy.GetMovement())
@@ -700,19 +708,22 @@ namespace Prototipo_2
                 colliderSprites.enabled = true;
                 isDuck = false;
             }
-            if (spriteEnemy.ActualSprite != SpriteEnemy.SpriteActual.AgachadoDefensa
-                && spriteEnemy.ActualSprite != SpriteEnemy.SpriteActual.ParadoDefensa
-                && spriteEnemy.ActualSprite != SpriteEnemy.SpriteActual.SaltoDefensa 
-                && barraDeEscudo.GetValueShild() > barraDeEscudo.porcentageNededForDeffence
-                    && barraDeEscudo.GetEnableDeffence())
+            if (barraDeEscudo != null)
             {
-                isDeffended = false;
+                if (spriteEnemy.ActualSprite != SpriteEnemy.SpriteActual.AgachadoDefensa
+                    && spriteEnemy.ActualSprite != SpriteEnemy.SpriteActual.ParadoDefensa
+                    && spriteEnemy.ActualSprite != SpriteEnemy.SpriteActual.SaltoDefensa
+                    && barraDeEscudo.GetValueShild() > barraDeEscudo.porcentageNededForDeffence
+                        && barraDeEscudo.GetEnableDeffence())
+                {
+                    isDeffended = false;
+                }
             }
             //CHEKEA EL MOVIMIENTO DEL ENEMIGO
         }
         public void CheckDeffense()
         {
-            Debug.Log(isDeffended);
+            //Debug.Log(isDeffended);
             if (isDeffended && barraDeEscudo.GetValueShild() > barraDeEscudo.porcentageNededForDeffence
                     && barraDeEscudo.GetEnableDeffence())
             {
@@ -727,11 +738,15 @@ namespace Prototipo_2
                 boxColliderControllerParado.state = BoxColliderController.StateBoxCollider.Normal;
                 boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Normal;
                 boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
-                barraDeEscudo.AddPorcentageBar();
-                if (barraDeEscudo.GetValueShild() <= barraDeEscudo.porcentageNededForDeffence)
+                if (barraDeEscudo != null)
                 {
-                    //Debug.Log("ENTRE");
-                    barraDeEscudo.SetEnableDeffence(false);
+                    barraDeEscudo.AddPorcentageBar();
+
+                    if (barraDeEscudo.GetValueShild() <= barraDeEscudo.porcentageNededForDeffence)
+                    {
+                        //Debug.Log("ENTRE");
+                        barraDeEscudo.SetEnableDeffence(false);
+                    }
                 }
             }
         }
