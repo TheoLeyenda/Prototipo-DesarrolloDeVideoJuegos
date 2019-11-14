@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//CODIGO PARA VERSIONAR
 namespace Prototipo_2 {
     public class OnFinishAnimation : MonoBehaviour
     {
