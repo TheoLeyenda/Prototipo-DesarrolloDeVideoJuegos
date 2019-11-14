@@ -113,8 +113,14 @@ namespace Prototipo_2
         }
         public void Dead()
         {
-            poolObject.Recycle();
-            gameObject.SetActive(false);
+            if (poolObject != null && poolObject.gameObject.activeSelf)
+            {
+                trailRenderer.Clear();
+                damage = auxDamage;
+                dobleDamage = false;
+                poolObject.Recycle();
+                gameObject.SetActive(false);
+            }
         }
         public void On(typeProyectil _tipoDeProyectil)
         {
@@ -166,6 +172,7 @@ namespace Prototipo_2
             }
             else if (timeLife <= 0)
             {
+                trailRenderer.Clear();
                 damage = auxDamage;
                 dobleDamage = false;
                 if (poolObject != null)
@@ -229,6 +236,7 @@ namespace Prototipo_2
         {
             if (animator != null)
             {
+                trailRenderer.Clear();
                 inAnimation = true;
                 rg2D.velocity = Vector3.zero;
                 animator.enabled = true;
@@ -243,6 +251,13 @@ namespace Prototipo_2
                 trailRenderer.enabled = false;
             }
             else
+            {
+                Dead();
+            }
+        }
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.tag == "limite")
             {
                 Dead();
             }
