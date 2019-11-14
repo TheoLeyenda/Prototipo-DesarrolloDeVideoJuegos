@@ -712,6 +712,7 @@ namespace Prototipo_2
         }
         public void CheckDeffense()
         {
+            Debug.Log(isDeffended);
             if (isDeffended && barraDeEscudo.GetValueShild() > barraDeEscudo.porcentageNededForDeffence
                     && barraDeEscudo.GetEnableDeffence())
             {

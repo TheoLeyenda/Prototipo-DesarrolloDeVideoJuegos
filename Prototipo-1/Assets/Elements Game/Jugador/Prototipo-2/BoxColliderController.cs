@@ -398,10 +398,6 @@ namespace Prototipo_2
                                 }
                                 //-----------------------------------------//
                             }
-                            else
-                            {
-                                enemy.life = enemy.life - proyectil.damage;
-                            }
                             //proyectil.timeLife = 0;
                             //proyectil.GetPoolObject().Recycle();
                             //proyectil.gameObject.SetActive(false);
