@@ -8,6 +8,12 @@ namespace Prototipo_2 {
     {
         // ESTE SCRIPT DEBE TOMAR LA DEDICION CORRESPONDIENTE EN CUANTO AL NIVEL ELEJIDO Y PERSONAJE ELEJIDO DEPENDIENDO DE LA INFO QUE LE PASE EL
         // STRUCT GAME MANAGER
+        public enum ModoDeJuego
+        {
+            PvP,
+            TiroAlBlanco,
+            DueloPorPuntos,
+        }
         public enum Player_Selected
         {
             Balanceado,
@@ -49,6 +55,7 @@ namespace Prototipo_2 {
         public Player_Selected player1_selected;
         public Player_Selected player2_selected;
         public Level_Selected level_selected;
+        public ModoDeJuego modoDeJuego;
         public List<GameObject> FondosNivel;
         private GameManager gm;
         public bool resetScorePlayers;
@@ -89,68 +96,103 @@ namespace Prototipo_2 {
             //Debug.Log("P2:"+player2);
             if (player1 != null && player2 != null)
             {
-                CheckWin();
+                switch (modoDeJuego)
+                {
+                    case ModoDeJuego.PvP:
+                        CheckWinPvP();
+                        break;
+                    case ModoDeJuego.TiroAlBlanco:
+                        CheckWinTiroAlBlanco();
+                        break;
+                }
             }
         }
-        public void CheckWin()
+        public void CheckWinTiroAlBlanco()
+        {
+            if (player1.PD.lifePlayer <= 0 || player1.PD.lifePlayer <= 0)
+            {
+                if (player1.PD.score == player2.PD.score)
+                {
+                    // QUE CARGUE UNA PANTALLA DE EMPATE
+                }
+                else if (player1.PD.score > player2.PD.score)
+                {
+                    CheckWinPlayer1();
+                }
+                else if (player2.PD.score > player1.PD.score)
+                {
+                    CheckWinPlayer2();
+                }
+            }
+        }
+
+        public void CheckWinPvP()
         {
             if (player1.PD.lifePlayer <= 0)
             {
-                if (resetScorePlayers)
-                {
-                    player1.PD.score = 0;
-                    player2.PD.score = 0;
-                }
-                gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP2++;
-                if (gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP2 < gm.structGameManager.gm_dataCombatPvP.countRounds)
-                {
-                    ReiniciarRonda();
-                    
-                }
-                else
-                {
-                    FondosNivel[(int)level_selected].SetActive(false);
-                    fondoWining.SetActive(true);
-                    prefabWinPlayer2.SetActive(true);
-                    prefabWinPlayer1.SetActive(false);
-                    spritePlayer2Win.sprite = spriteWining[(int)player2_selected];
-                    player1.BARRA_DE_CARGA.SetActive(false);
-                    player1.BARRA_DE_VIDA.SetActive(false);
-                    player2.BARRA_DE_CARGA.SetActive(false);
-                    player2.BARRA_DE_VIDA.SetActive(false);
-                    player1.gameObject.SetActive(false);
-                    player2.gameObject.SetActive(false);
-                }
-                gm.structGameManager.gm_dataCombatPvP.rondaActual++;
+                ResetScore();
+                CheckWinPlayer2();
             }
             else if (player2.PD.lifePlayer <= 0)
             {
-                if (resetScorePlayers)
-                {
-                    player1.PD.score = 0;
-                    player2.PD.score = 0;
-                }
-                gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP1++;
-                if (gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP1 < gm.structGameManager.gm_dataCombatPvP.countRounds)
-                {
-                    ReiniciarRonda();
-                }
-                else
-                {
-                    FondosNivel[(int)level_selected].SetActive(false);
-                    fondoWining.SetActive(true);
-                    prefabWinPlayer2.SetActive(false);
-                    prefabWinPlayer1.SetActive(true);
-                    spritePlayer1Win.sprite = spriteWining[(int)player1_selected];
-                    player1.BARRA_DE_CARGA.SetActive(false);
-                    player1.BARRA_DE_VIDA.SetActive(false);
-                    player2.BARRA_DE_CARGA.SetActive(false);
-                    player2.BARRA_DE_VIDA.SetActive(false);
-                    player1.gameObject.SetActive(false);
-                    player2.gameObject.SetActive(false);
-                }
-                gm.structGameManager.gm_dataCombatPvP.rondaActual++;
+                ResetScore();
+                CheckWinPlayer1();
             }
+        }
+        public void ResetScore()
+        {
+            if (resetScorePlayers)
+            {
+                player1.PD.score = 0;
+                player2.PD.score = 0;
+            }
+        }
+        public void CheckWinPlayer1()
+        {
+            gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP1++;
+            if (gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP1 < gm.structGameManager.gm_dataCombatPvP.countRounds)
+            {
+                ReiniciarRonda();
+            }
+            else
+            {
+                FondosNivel[(int)level_selected].SetActive(false);
+                fondoWining.SetActive(true);
+                prefabWinPlayer2.SetActive(false);
+                prefabWinPlayer1.SetActive(true);
+                spritePlayer1Win.sprite = spriteWining[(int)player1_selected];
+                player1.BARRA_DE_CARGA.SetActive(false);
+                player1.BARRA_DE_VIDA.SetActive(false);
+                player2.BARRA_DE_CARGA.SetActive(false);
+                player2.BARRA_DE_VIDA.SetActive(false);
+                player1.gameObject.SetActive(false);
+                player2.gameObject.SetActive(false);
+            }
+            gm.structGameManager.gm_dataCombatPvP.rondaActual++;
+        }
+        public void CheckWinPlayer2()
+        {
+            gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP2++;
+            if (gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP2 < gm.structGameManager.gm_dataCombatPvP.countRounds)
+            {
+                ReiniciarRonda();
+
+            }
+            else
+            {
+                FondosNivel[(int)level_selected].SetActive(false);
+                fondoWining.SetActive(true);
+                prefabWinPlayer2.SetActive(true);
+                prefabWinPlayer1.SetActive(false);
+                spritePlayer2Win.sprite = spriteWining[(int)player2_selected];
+                player1.BARRA_DE_CARGA.SetActive(false);
+                player1.BARRA_DE_VIDA.SetActive(false);
+                player2.BARRA_DE_CARGA.SetActive(false);
+                player2.BARRA_DE_VIDA.SetActive(false);
+                player1.gameObject.SetActive(false);
+                player2.gameObject.SetActive(false);
+            }
+            gm.structGameManager.gm_dataCombatPvP.rondaActual++;
         }
         public void ReiniciarRonda()
         {
