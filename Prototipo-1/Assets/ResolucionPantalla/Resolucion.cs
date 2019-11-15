@@ -11,5 +11,12 @@ public class Resolucion : MonoBehaviour
     void Start()
     {
         Screen.SetResolution(Resolucion_X, Resolucion_Y, fullScreen);
+        if (Screen.width != Resolucion_X && Screen.height != Resolucion_Y)
+        {
+            Screen.SetResolution(Resolucion_X / 2, Resolucion_Y / 2, fullScreen);
+        }
+        //Debug.Log(Screen.width + " "Screen.height);
+
     }
+    
 }

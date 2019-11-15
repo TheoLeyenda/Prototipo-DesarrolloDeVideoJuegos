@@ -19,7 +19,6 @@ namespace Prototipo_2
         [HideInInspector]
         public bool generateEnemy;
         public GameObject TituloPushButton;
-        public GameObject FondoPushButton;
         public GameObject buttonGameOver;
         [HideInInspector]
         public int countEnemysDead;
@@ -47,7 +46,6 @@ namespace Prototipo_2
         }
         void Start()
         {
-            FondoPushButton.SetActive(false);
             TituloPushButton.SetActive(false);
             buttonGameOver.SetActive(false);
             countEnemysDead = 0;
