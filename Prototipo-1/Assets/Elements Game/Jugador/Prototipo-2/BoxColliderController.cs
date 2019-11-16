@@ -270,6 +270,8 @@ namespace Prototipo_2
                                             {
                                                 if (player_PvP.stateDeffence == Player_PvP.StateDeffence.CounterAttackDeffense)
                                                 {
+                                                    // SI ANDA MAL EL DISPARO COMENTAR LA LINEA DE ABAJO (player.enableAttack = true;)
+                                                    player.enableAttack = true;
                                                     player.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
                                                     player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaqueParado;
                                                 }
@@ -278,6 +280,8 @@ namespace Prototipo_2
                                             {
                                                 if (player_PvP.stateDeffence == Player_PvP.StateDeffence.CounterAttackDeffense)
                                                 {
+                                                    // SI ANDA MAL EL DISPARO COMENTAR LA LINEA DE ABAJO (player.enableAttack = true;)
+                                                    player.enableAttack = true;
                                                     player.Attack(Proyectil.DisparadorDelProyectil.Jugador2);
                                                     player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaqueParado;
                                                 }
@@ -288,7 +292,8 @@ namespace Prototipo_2
                                         //proyectil.GetPoolObject().Recycle();
                                         //proyectil.gameObject.SetActive(false);
                                         //proyectil.timeLife = 0;
-                                        proyectil.AnimationHit();
+                                        proyectil.GetPoolObject().Recycle();
+                                        //proyectil.AnimationHit();
                                         break;
                                     default:
                                         if (proyectil.GetPlayer() != null)

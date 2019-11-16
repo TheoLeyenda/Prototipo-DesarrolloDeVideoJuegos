@@ -65,7 +65,8 @@ namespace Prototipo_2
         public float delayParabolaAttack;
         private float auxDelayParabolaAttack;
         private float auxDelayAttack;
-        private bool enableAttack;
+        [HideInInspector]
+        public bool enableAttack;
         private bool enableSpecialAttack;
         public BoxColliderController boxColliderPiernas;
         public BoxColliderController boxColliderSprite;
