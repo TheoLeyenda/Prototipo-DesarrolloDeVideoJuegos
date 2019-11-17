@@ -9,7 +9,10 @@ namespace Prototipo_2
 {
     public class Player : MonoBehaviour
     {
-        // Start is called before the first frame update
+        //DATOS PARA EL MOVIMIENTO
+        public GameObject alturaMaxima;
+        public GameObject[] posicionesDeMovimiento;
+        //-------------------------------------------//
         public bool resetPlayer;
         public bool resetScore;
         public BarraDeEscudo barraDeEscudo;
@@ -123,13 +126,17 @@ namespace Prototipo_2
                 gm = GameManager.instanceGameManager;
             }
             animator = GetComponent<Animator>();
-            gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
+            //gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
             DrawScore();
+
         }
 
         // Update is called once per frame
         void Update()
         {
+            //BORRAR ESTO LUEGO
+            //xpActual = 100;
+            //--------------------
             CheckOutLimit();
             CheckDead();
             CheckLifeBar();
@@ -635,14 +642,14 @@ namespace Prototipo_2
             {
                 if (structsPlayer.dataPlayer.columnaActual > 0)
                 {
-                    MoveLeft(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual - 1].transform.position);
+                    MoveLeft(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual - 1].transform.position);
                 }
             }
             else if (LookingBack)
             {
                 if (structsPlayer.dataPlayer.columnaActual > 0)
                 {
-                    MoveLeft(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual - 1].transform.position);
+                    MoveLeft(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual - 1].transform.position);
                 }
             }
         }
@@ -650,16 +657,16 @@ namespace Prototipo_2
         {
             if (LookingForward)
             {
-                if (structsPlayer.dataPlayer.columnaActual < gridPlayer.GetCuadrilla_columnas() - 1)
+                if (structsPlayer.dataPlayer.columnaActual < posicionesDeMovimiento.Length - 1)
                 {
-                    MoveRight(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual + 1].transform.position);
+                    MoveRight(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual + 1].transform.position);
                 }
             }
             else if (LookingBack)
             {
-                if (structsPlayer.dataPlayer.columnaActual < gridPlayer.GetCuadrilla_columnas() - 1)
+                if (structsPlayer.dataPlayer.columnaActual < posicionesDeMovimiento.Length - 1)
                 {
-                    MoveRight(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual + 1].transform.position);
+                    MoveRight(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual + 1].transform.position);
                 }
             }
         }
@@ -672,7 +679,7 @@ namespace Prototipo_2
                 isJumping = true;
                 SpeedJump = auxSpeedJump;
             }
-            Jump(gridPlayer.matrizCuadrilla[0][structsPlayer.dataPlayer.columnaActual].transform.position);
+            Jump(alturaMaxima.transform.position);
         }
         public void MovementDuck()
         {
@@ -682,7 +689,7 @@ namespace Prototipo_2
         {
             Vector3 distaciaObjetivo = transform.position - PosicionDestino;
             bool mover = false;
-            if (distaciaObjetivo.magnitude > 0.1f)
+            if (distaciaObjetivo.magnitude > 0f)
             {
                 mover = true;
             }
@@ -710,7 +717,7 @@ namespace Prototipo_2
         {
             if (LookingForward)
             {
-                if (CheckMove(new Vector3(gridPlayer.leftCuadrilla.transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
+                if (CheckMove(new Vector3(posicionesDeMovimiento[0].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
                 {
                     Move(Vector3.left);
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAtras;
@@ -720,12 +727,12 @@ namespace Prototipo_2
                     //Debug.Log("ENTRE");
                     structsPlayer.dataPlayer.columnaActual--;
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-                    gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
+                    //gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
                 }
             }
             else if (LookingBack)
             {
-                if (CheckMove(new Vector3(gridPlayer.leftCuadrilla.transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
+                if (CheckMove(new Vector3(posicionesDeMovimiento[0].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
                 {
                     Move(-Vector3.left);
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAtras;
@@ -735,7 +742,7 @@ namespace Prototipo_2
                    
                     structsPlayer.dataPlayer.columnaActual--;
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-                    gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
+                    //gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
                 }
             }
         }
@@ -743,7 +750,7 @@ namespace Prototipo_2
         {
             if (LookingForward)
             {
-                if (CheckMove(new Vector3(gridPlayer.rightCuadrilla.transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
+                if (CheckMove(new Vector3(posicionesDeMovimiento[posicionesDeMovimiento.Length-1].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
                 {
                     Move(Vector3.right);
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
@@ -752,12 +759,12 @@ namespace Prototipo_2
                 {
                     structsPlayer.dataPlayer.columnaActual++;
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-                    gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
+                    //gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
                 }
             }
             else if (LookingBack)
             {
-                if (CheckMove(new Vector3(gridPlayer.rightCuadrilla.transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
+                if (CheckMove(new Vector3(posicionesDeMovimiento[posicionesDeMovimiento.Length - 1].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
                 {
                     Move(-Vector3.right);
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
@@ -766,7 +773,7 @@ namespace Prototipo_2
                 {
                     structsPlayer.dataPlayer.columnaActual++;
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-                    gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
+                    //gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
                 }
             }
         }
@@ -780,7 +787,7 @@ namespace Prototipo_2
                 {
                     isJumping = false;
                 }
-                gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
+                //gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
                 //Debug.Log(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual].name);
             }
             else

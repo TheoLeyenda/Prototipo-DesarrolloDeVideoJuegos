@@ -534,13 +534,13 @@ namespace Prototipo_2 {
                         break;
                 }
             }
-            if (!InputPlayerController.CheckPressDeffenseButton_P1() && !player1.GetIsJumping()
+            /*if (!InputPlayerController.CheckPressDeffenseButton_P1() && !player1.GetIsJumping()
                 && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
                 && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
                 && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
             {
                 player1.gridPlayer.CheckCuadrillaOcupada(player1.structsPlayer.dataPlayer.columnaActual, player1.structsPlayer.dataPlayer.CantCasillasOcupadas_X, player1.structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
-            }
+            }*/
         }
         
         public void CheckSpriteParado_P1()
@@ -1071,13 +1071,13 @@ namespace Prototipo_2 {
                     }
                 }
 
-                if (!InputPlayerController.CheckPressDeffenseButton_P2() && !player2.GetIsJumping()
+                /*if (!InputPlayerController.CheckPressDeffenseButton_P2() && !player2.GetIsJumping()
                     && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
                     && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
                     && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
                 {
                     player2.gridPlayer.CheckCuadrillaOcupada(player2.structsPlayer.dataPlayer.columnaActual, player2.structsPlayer.dataPlayer.CantCasillasOcupadas_X, player2.structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
-                }
+                }*/
             }
         }
         public void CheckSpriteParado_P2()

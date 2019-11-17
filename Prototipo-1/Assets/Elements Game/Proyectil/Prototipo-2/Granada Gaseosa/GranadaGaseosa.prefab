@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: -8474218129516937928}
   m_Layer: 0
   m_Name: GranadaGaseosa
-  m_TagString: Proyectil
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -310,10 +310,13 @@ MonoBehaviour:
   trailRenderer: {fileID: 3214800171908601292}
   posicionDisparo: 0
   animator: {fileID: 0}
+  initialPosition: {fileID: 0}
+  colisionPlayer: 0
   rutaParabola_AtaqueJugador: {fileID: 0}
   rutaParabolaAgachado_AtaqueJugador: {fileID: 0}
   rutaParabola_AtaqueEnemigo: {fileID: 0}
   rutaParabolaAgachado_AtaqueEnemigo: {fileID: 0}
+  spriteProyectilParabola: {fileID: 0}
   parabolaController: {fileID: 5347520700725556}
   TypeRoot: 0
   poolGaseosa: {fileID: 2309628886464252504}

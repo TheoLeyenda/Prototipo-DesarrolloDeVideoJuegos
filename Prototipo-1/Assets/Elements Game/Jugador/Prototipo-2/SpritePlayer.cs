@@ -49,7 +49,7 @@ namespace Prototipo_2 {
             auxDelaySpriteRecibirDanio = delaySpriteRecibirDanio;
             auxDelaySpriteContraAtaque = delaySpriteContraAtaque;
         }
-        private void OnTriggerStay2D(Collider2D collision)
+        /*private void OnTriggerStay2D(Collider2D collision)
         {
             switch (collision.gameObject.tag)
             {
@@ -67,7 +67,7 @@ namespace Prototipo_2 {
                     //Debug.Log("ENTRE");
                     break;
             }
-        }
+        }*/
         public void Update()
         {
             CheckActualSprite();

@@ -7,6 +7,10 @@ namespace Prototipo_2
 {
     public class Enemy : MonoBehaviour
     {
+        //DATOS PARA EL MOVIMIENTO
+        public GameObject alturaMaxima;
+        public GameObject[] posicionesDeMovimiento;
+        //-------------------------------------------//
         public BarraDeEscudo barraDeEscudo;
         private bool enableSpecialAttack;
         public SpriteEnemy spriteEnemy;
@@ -153,7 +157,7 @@ namespace Prototipo_2
             structsEnemys.dataEnemy.CantCasillasOcupadas_X = CantCasillasOcupadas_X;
             structsEnemys.dataEnemy.CantCasillasOcupadas_Y = CantCasillasOcupadas_Y;
             structsEnemys.dataEnemy.columnaActual = ColumnaActual;
-            gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+            //gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
         }
         public void CheckOutLimit()
         {
@@ -165,7 +169,7 @@ namespace Prototipo_2
                 transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);
                 delaySelectMovement = 0.1f;// SI OCURRE DE NUEVO EL BUG DEL SALTO CAMBIAR ESTA VARIABLE POR EL VALOR 0.2f
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
-                gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+                //gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                 SpeedJump = auxSpeedJump;
             }
             else if (transform.position.y > InitialPosition.y && !isJamping)
@@ -382,7 +386,7 @@ namespace Prototipo_2
         public void DefaultBehavior()
         {
             EnumsEnemy.Movimiento movimiento;
-            gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+            //gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
             int min = (int)EnumsEnemy.Movimiento.Nulo + 1;
             int max = (int)EnumsEnemy.Movimiento.Count - 3;
             if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
@@ -631,14 +635,14 @@ namespace Prototipo_2
                     }
                     CheckDelayAttack(false);
                     isJamping = true;
-                    Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
+                    Jump(alturaMaxima.transform.position);
                     isDeffended = false;
                     break;
                 case EnumsEnemy.Movimiento.MoverAtras:
                     isDeffended = false;
                     if (structsEnemys.dataEnemy.columnaActual < gridEnemy.GetCuadrilla_columnas() - 1)
                     {
-                        MoveRight(gridEnemy.matrizCuadrilla[gridEnemy.baseGrild][structsEnemys.dataEnemy.columnaActual + 1].transform.position);
+                        MoveRight(posicionesDeMovimiento[structsEnemys.dataEnemy.columnaActual + 1].transform.position);
                     }
                     else
                     {
@@ -649,7 +653,7 @@ namespace Prototipo_2
                     isDeffended = false;
                     if (structsEnemys.dataEnemy.columnaActual > 0)
                     {
-                        MoveLeft(gridEnemy.matrizCuadrilla[gridEnemy.baseGrild][structsEnemys.dataEnemy.columnaActual - 1].transform.position);
+                        MoveLeft(posicionesDeMovimiento[structsEnemys.dataEnemy.columnaActual - 1].transform.position);
                     }
                     else
                     {
@@ -664,7 +668,7 @@ namespace Prototipo_2
                     }
                     isDeffended = false;
                     isJamping = true;
-                    Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
+                    Jump(alturaMaxima.transform.position);
                     break;
                 case EnumsEnemy.Movimiento.DefensaEnElLugar:
                     Deffence();
@@ -676,7 +680,7 @@ namespace Prototipo_2
                         structsEnemys.particleMovement.particleJump.SetActive(true);
                     }
                     isJamping = true;
-                    Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
+                    Jump(alturaMaxima.transform.position);
                     Deffence();
                     break;
                 case EnumsEnemy.Movimiento.AgacheDefensa:
@@ -705,7 +709,7 @@ namespace Prototipo_2
                     }
                     isDeffended = false;
                     isJamping = true;
-                    Jump(gridEnemy.matrizCuadrilla[0][structsEnemys.dataEnemy.columnaActual].transform.position);
+                    Jump(alturaMaxima.transform.position);
                     break;
                 case EnumsEnemy.Movimiento.MoveToPointCombat:
                     isDeffended = false;
@@ -831,7 +835,7 @@ namespace Prototipo_2
         }
         public void MoveLeft(Vector3 cuadrillaDestino)
         {
-            if (CheckMove(new Vector3(gridEnemy.leftCuadrilla.transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
+            if (CheckMove(new Vector3(posicionesDeMovimiento[0].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
             {
                 Move(Vector3.left);
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoverAdelante);
@@ -840,13 +844,13 @@ namespace Prototipo_2
             {
                 structsEnemys.dataEnemy.columnaActual--;
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
-                gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+                //gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                 delaySelectMovement = 0;
             }
         }
         public void MoveRight(Vector3 cuadrillaDestino)
         {
-            if (CheckMove(new Vector3(gridEnemy.rightCuadrilla.transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
+            if (CheckMove(new Vector3(posicionesDeMovimiento[posicionesDeMovimiento.Length-1].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
             {
                 Move(Vector3.right);
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoverAtras);
@@ -855,7 +859,7 @@ namespace Prototipo_2
             {
                 structsEnemys.dataEnemy.columnaActual++;
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
-                gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+                //gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                 delaySelectMovement = 0;
             }
         }
@@ -901,13 +905,13 @@ namespace Prototipo_2
                 {
                     delaySelectMovement = 0.1f;
                 }
-                gridEnemy.matrizCuadrilla[gridEnemy.baseGrild][structsEnemys.dataEnemy.columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
+                //gridEnemy.matrizCuadrilla[gridEnemy.baseGrild][structsEnemys.dataEnemy.columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
 
                 //Debug.Log(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual].name);
                 if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
                 {
-                    gridEnemy.matrizCuadrilla[gridEnemy.baseGrild - 1][structsEnemys.dataEnemy.columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
-                    gridEnemy.matrizCuadrilla[gridEnemy.baseGrild - 2][structsEnemys.dataEnemy.columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                    //gridEnemy.matrizCuadrilla[gridEnemy.baseGrild - 1][structsEnemys.dataEnemy.columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
+                    //gridEnemy.matrizCuadrilla[gridEnemy.baseGrild - 2][structsEnemys.dataEnemy.columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
                     Deffence();
                 }
             }

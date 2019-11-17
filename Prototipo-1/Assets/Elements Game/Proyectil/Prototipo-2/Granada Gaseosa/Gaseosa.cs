@@ -9,10 +9,16 @@ namespace Prototipo_2
         // Start is called before the first frame update
         public float damage;
         public float timeLife;
-        private float auxTimeLife;
+        public float auxTimeLife;
         public SpriteRenderer spriteRenderer;
         public Proyectil.DisparadorDelProyectil disparadorDelProyectil;
 
+        private void OnEnable()
+        {
+
+            Debug.Log(auxTimeLife);
+            timeLife = auxTimeLife;
+        }
         private void Update()
         {
             CheckTimeLife();
