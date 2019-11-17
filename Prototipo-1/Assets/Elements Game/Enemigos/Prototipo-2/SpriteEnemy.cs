@@ -277,21 +277,7 @@ namespace Prototipo_2
                 ActualSprite = SpriteActual.Parado;
             }
         }
-        /*private void OnTriggerStay2D(Collider2D collision)
-        {
-            switch (collision.gameObject.tag)
-            {
-                case "Cuadrilla":
-                    Cuadrilla cuadrilla = collision.GetComponent<Cuadrilla>();
-                    if (cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaCentral
-                            && cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaDerecha
-                            && cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaIzquierda || !cuadrilla.enemy.GetIsJamping())
-                    {
-                        cuadrilla.stateCuadrilla = Cuadrilla.StateCuadrilla.Ocupado;
-                    }
-                    break;
-            }
-        }*/
+        
         public void PlayAnimation(string nameAnimation)
         {
             if (enemy.enemyPrefab.activeSelf == true && animator != null)

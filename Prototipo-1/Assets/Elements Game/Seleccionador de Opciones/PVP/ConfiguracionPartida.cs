@@ -31,7 +31,15 @@ namespace Prototipo_2
         // Update is called once per frame
         public void StartGame()
         {
-            SceneManager.LoadScene(nameNextScene);
+            Debug.Log(gm.structGameManager.gm_dataCombatPvP.modoElegido);
+            if (gm.structGameManager.gm_dataCombatPvP.modoElegido == StructGameManager.ModoPvPElegido.PvP)
+            {
+                SceneManager.LoadScene("PvP");
+            }
+            else if (gm.structGameManager.gm_dataCombatPvP.modoElegido == StructGameManager.ModoPvPElegido.TiroAlBlanco)
+            {
+                SceneManager.LoadScene("TiroAlBlanco");
+            }
         }
         private void Update()
         {

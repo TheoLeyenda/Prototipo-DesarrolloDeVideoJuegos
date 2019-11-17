@@ -49,25 +49,7 @@ namespace Prototipo_2 {
             auxDelaySpriteRecibirDanio = delaySpriteRecibirDanio;
             auxDelaySpriteContraAtaque = delaySpriteContraAtaque;
         }
-        /*private void OnTriggerStay2D(Collider2D collision)
-        {
-            switch (collision.gameObject.tag)
-            {
-                case "Cuadrilla":
-                    Cuadrilla cuadrilla = collision.GetComponent<Cuadrilla>();
-                    if (cuadrilla.stateCuadrilla != Cuadrilla.StateCuadrilla.Defendido)
-                    {
-                        if (cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaCentral
-                            && cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaDerecha
-                            && cuadrilla.posicionCuadrilla != Cuadrilla.PosicionCuadrilla.CuadrillaBajaIzquierda || !cuadrilla.player.GetIsJumping())
-                        {
-                            cuadrilla.stateCuadrilla = Cuadrilla.StateCuadrilla.Ocupado;
-                        }
-                    }
-                    //Debug.Log("ENTRE");
-                    break;
-            }
-        }*/
+        
         public void Update()
         {
             CheckActualSprite();

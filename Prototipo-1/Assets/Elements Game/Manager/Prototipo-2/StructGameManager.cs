@@ -7,6 +7,12 @@ namespace Prototipo_2
     //ALMACENA TODOS LOS DATOS ELEGIDOS TANTOS POR EL SELECT LEVEL COMO POR EL SELEC PLAYER.
     public class StructGameManager : MonoBehaviour
     {
+        public enum ModoPvPElegido
+        {
+            Nulo,
+            PvP,
+            TiroAlBlanco,
+        }
         public struct GM_DataCombatPvP
         {
             public DataCombatPvP.Level_Selected level_selected;
@@ -16,6 +22,7 @@ namespace Prototipo_2
             public int countRoundsWiningP1;
             public int countRoundsWiningP2;
             public int rondaActual;
+            public ModoPvPElegido modoElegido;
         }
         public GM_DataCombatPvP gm_dataCombatPvP;
     }

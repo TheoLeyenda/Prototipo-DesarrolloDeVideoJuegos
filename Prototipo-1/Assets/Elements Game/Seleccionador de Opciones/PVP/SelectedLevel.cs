@@ -27,7 +27,6 @@ namespace Prototipo_2
             Count
         }
         private GameManager gm;
-        public string nameNextScene;
         public List<string> nameLevelsOptions;
         public Cursor CursorSelectorPlayer1;
         //public Cursor CursorSelectorPlayer2;
@@ -223,7 +222,14 @@ namespace Prototipo_2
         }
         public void NextScene()
         {
-            SceneManager.LoadScene(nameNextScene);
+            if (gm.structGameManager.gm_dataCombatPvP.modoElegido == StructGameManager.ModoPvPElegido.PvP)
+            {
+                SceneManager.LoadScene("PvP");
+            }
+            else if(gm.structGameManager.gm_dataCombatPvP.modoElegido == StructGameManager.ModoPvPElegido.TiroAlBlanco)
+            {
+                SceneManager.LoadScene("TiroAlBlanco");
+            }
         }
         public void CheckFondo()
         {

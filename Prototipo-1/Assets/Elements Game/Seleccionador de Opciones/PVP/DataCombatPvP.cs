@@ -43,6 +43,7 @@ namespace Prototipo_2 {
 
         public List<Sprite> spriteWining;
         public GameObject fondoWining;
+        public GameObject fondoEmpate;
         public GameObject prefabWinPlayer1;
         public GameObject prefabWinPlayer2;
         //LA LISTA levels DEBE SER INICIALIZADA EN EL MISMO ORDEN QUE EL ENUMERADOR Level_Selected.
@@ -62,6 +63,7 @@ namespace Prototipo_2 {
         void Start()
         {
             fondoWining.SetActive(false);
+            fondoEmpate.SetActive(false);
             if (GameManager.instanceGameManager != null)
             {
                 gm = GameManager.instanceGameManager;
@@ -113,7 +115,7 @@ namespace Prototipo_2 {
             {
                 if (player1.PD.score == player2.PD.score)
                 {
-                    // QUE CARGUE UNA PANTALLA DE EMPATE
+                    CheckEmpate();
                 }
                 else if (player1.PD.score > player2.PD.score)
                 {
@@ -146,6 +148,36 @@ namespace Prototipo_2 {
                 player1.PD.score = 0;
                 player2.PD.score = 0;
             }
+        }
+        public void CheckEmpate()
+        {
+            if (gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP1 < gm.structGameManager.gm_dataCombatPvP.countRounds
+                && gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP2 < gm.structGameManager.gm_dataCombatPvP.countRounds)
+            {
+                ReiniciarRonda();
+            }
+            else
+            {
+                FondosNivel[(int)level_selected].SetActive(false);
+                fondoEmpate.SetActive(true);
+                prefabWinPlayer1.SetActive(true);
+                prefabWinPlayer2.SetActive(true);
+                spritePlayer1Win.sprite = spriteWining[(int)player1_selected];
+                spritePlayer2Win.sprite = spriteWining[(int)player2_selected];
+                player1.BARRA_DE_CARGA.SetActive(false);
+                player1.BARRA_DE_VIDA.SetActive(false);
+                player2.BARRA_DE_CARGA.SetActive(false);
+                player2.BARRA_DE_VIDA.SetActive(false);
+                player1.gameObject.SetActive(false);
+                player2.gameObject.SetActive(false);
+                player1.BARRA_DE_CARGA.SetActive(false);
+                player1.BARRA_DE_VIDA.SetActive(false);
+                player2.BARRA_DE_CARGA.SetActive(false);
+                player2.BARRA_DE_VIDA.SetActive(false);
+                player1.gameObject.SetActive(false);
+                player2.gameObject.SetActive(false);
+            }
+            gm.structGameManager.gm_dataCombatPvP.rondaActual++;
         }
         public void CheckWinPlayer1()
         {

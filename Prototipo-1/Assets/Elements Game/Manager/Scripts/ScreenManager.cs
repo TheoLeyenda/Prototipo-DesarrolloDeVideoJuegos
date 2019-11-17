@@ -8,19 +8,33 @@ namespace Prototipo_2 {
     {
         private GameObject fondo;
         private SpriteRenderer spriteRendererFondo;
-        public GameManager gm;
+        private GameManager gm;
         public List<Sprite> ListaNiveles;
         private int idListaNiveles;
 
         private void Start()
         {
             idListaNiveles = -1;
-            if (gm == null)
+            if (GameManager.instanceGameManager != null)
             {
-                GameObject go = GameObject.Find("GameManager");
-                if (go != null)
+                gm = GameManager.instanceGameManager;
+            }
+        }
+        public void Multijugador()
+        {
+            SceneManager.LoadScene("Multijugador");
+        }
+        public void TiroAlBlanco()
+        {
+            if (gm != null)
+            {
+                gm.structGameManager.gm_dataCombatPvP.modoElegido = StructGameManager.ModoPvPElegido.TiroAlBlanco;
+                gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Nulo;
+                idListaNiveles = -1;
+                if (idListaNiveles == -1 && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Nulo
+                    && gm.structGameManager.gm_dataCombatPvP.modoElegido == StructGameManager.ModoPvPElegido.TiroAlBlanco)
                 {
-                    gm = go.GetComponent<GameManager>();
+                    SceneManager.LoadScene("SelectPlayerScene");
                 }
             }
         }
@@ -120,11 +134,15 @@ namespace Prototipo_2 {
         }
         public void PvP()
         {
-            gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Nulo;
-            idListaNiveles = -1;
-            if (idListaNiveles == -1 && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Nulo)
+            if (gm != null)
             {
-                SceneManager.LoadScene("SelectPlayerScene");
+                gm.structGameManager.gm_dataCombatPvP.modoElegido = StructGameManager.ModoPvPElegido.PvP;
+                gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Nulo;
+                idListaNiveles = -1;
+                if (idListaNiveles == -1 && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Nulo)
+                {
+                    SceneManager.LoadScene("SelectPlayerScene");
+                }
             }
         }
         public void Menu()
