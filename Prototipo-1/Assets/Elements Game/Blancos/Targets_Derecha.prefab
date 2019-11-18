@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4173613373542368704}
   - component: {fileID: 4173613373542368707}
   - component: {fileID: 4173613373542368706}
+  - component: {fileID: 100012994574388619}
   m_Layer: 0
   m_Name: target_Medio
   m_TagString: Untagged
@@ -70,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 9e77d0f1ab7500b42898f8b8a98e921d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -129,6 +130,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
+--- !u!114 &100012994574388619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4173613373542368708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a608a6343b0d624d990267bfc398a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreForHit: 100
+  spriteRenderer: {fileID: 4173613373542368704}
+  numberPlayerInThis: 2
+  delayColor: 1
+  auxDelayColor: 1
 --- !u!1 &4173613373668542812
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,6 +159,7 @@ GameObject:
   - component: {fileID: 4173613373668542808}
   - component: {fileID: 4173613373668542811}
   - component: {fileID: 4173613373668542810}
+  - component: {fileID: 4007345062650401360}
   m_Layer: 0
   m_Name: target_Arriba
   m_TagString: Untagged
@@ -199,7 +218,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 9e77d0f1ab7500b42898f8b8a98e921d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -258,6 +277,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
+--- !u!114 &4007345062650401360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4173613373668542812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a608a6343b0d624d990267bfc398a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreForHit: 100
+  spriteRenderer: {fileID: 4173613373668542808}
+  numberPlayerInThis: 2
+  delayColor: 1
+  auxDelayColor: 1
 --- !u!1 &4173613374077030870
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,6 +339,7 @@ GameObject:
   - component: {fileID: 4173613374752518718}
   - component: {fileID: 4173613374752518849}
   - component: {fileID: 4173613374752518848}
+  - component: {fileID: 3914673037361627434}
   m_Layer: 0
   m_Name: target_Abajo
   m_TagString: Untagged
@@ -361,7 +398,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 9e77d0f1ab7500b42898f8b8a98e921d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -420,3 +457,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
+--- !u!114 &3914673037361627434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4173613374752518850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a608a6343b0d624d990267bfc398a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreForHit: 100
+  spriteRenderer: {fileID: 4173613374752518718}
+  numberPlayerInThis: 2
+  delayColor: 1
+  auxDelayColor: 1

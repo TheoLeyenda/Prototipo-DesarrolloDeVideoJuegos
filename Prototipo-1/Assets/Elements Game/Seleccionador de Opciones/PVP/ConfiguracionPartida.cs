@@ -12,9 +12,15 @@ namespace Prototipo_2
         public string nameNextScene;
         public int maxRounds;
         public int minRounds;
+        [Header("Configuracion De Rondas")]
         public TextMeshProUGUI textCountRounds;
         public GameObject ButtonAddRounds;
         public GameObject ButtonSubstractRounds;
+        [Header("Configuracion De Puntos Por Golpe")]
+        public GameObject ConfiguracionPuntosPorGolpe;
+        public GameObject ButtonYesPointForHit;
+        public GameObject ButtonNoPointForHit;
+        public TextMeshProUGUI textYesOrNot;
         // Start is called before the first frame update
 
         void Start()
@@ -25,13 +31,26 @@ namespace Prototipo_2
                 gm.structGameManager.gm_dataCombatPvP.countRounds = minRounds;
                 gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP1 = 0;
                 gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP2 = 0;
+                gm.structGameManager.gm_dataCombatPvP.pointsForHit = true;
+                if (gm.structGameManager.gm_dataCombatPvP.modoElegido != StructGameManager.ModoPvPElegido.TiroAlBlanco)
+                {
+                    ConfiguracionPuntosPorGolpe.SetActive(false);
+                }
+                if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
+                {
+                    YesPointForHit();
+                }
+                else
+                {
+                    NoPointForHit();
+                }
             }
         }
 
         // Update is called once per frame
         public void StartGame()
         {
-            Debug.Log(gm.structGameManager.gm_dataCombatPvP.modoElegido);
+            //Debug.Log(gm.structGameManager.gm_dataCombatPvP.modoElegido);
             if (gm.structGameManager.gm_dataCombatPvP.modoElegido == StructGameManager.ModoPvPElegido.PvP)
             {
                 SceneManager.LoadScene("PvP");
@@ -83,6 +102,20 @@ namespace Prototipo_2
                 gm.structGameManager.gm_dataCombatPvP.countRounds--;
                 textCountRounds.text = "" + gm.structGameManager.gm_dataCombatPvP.countRounds;
             }
+        }
+        public void YesPointForHit()
+        {
+            ButtonNoPointForHit.SetActive(true);
+            ButtonYesPointForHit.SetActive(false);
+            gm.structGameManager.gm_dataCombatPvP.pointsForHit = true;
+            textYesOrNot.text = "Si";
+        }
+        public void NoPointForHit()
+        {
+            ButtonNoPointForHit.SetActive(false);
+            ButtonYesPointForHit.SetActive(true);
+            gm.structGameManager.gm_dataCombatPvP.pointsForHit = false;
+            textYesOrNot.text = "No";
         }
     }
 }

@@ -15,8 +15,6 @@ namespace Prototipo_2
 
         private void OnEnable()
         {
-
-            Debug.Log(auxTimeLife);
             timeLife = auxTimeLife;
         }
         private void Update()

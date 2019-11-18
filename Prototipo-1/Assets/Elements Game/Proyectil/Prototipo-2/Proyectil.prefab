@@ -106,7 +106,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 6
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -160,6 +160,8 @@ MonoBehaviour:
   trailRenderer: {fileID: 3546365984257640956}
   posicionDisparo: 0
   animator: {fileID: 66405764}
+  initialPosition: {fileID: 0}
+  colisionPlayer: 0
 --- !u!50 &2704542344242506306
 Rigidbody2D:
   serializedVersion: 4
@@ -235,7 +237,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Time: 0.2
   m_Parameters:
     serializedVersion: 3

@@ -23,6 +23,7 @@ namespace Prototipo_2
             public int countRoundsWiningP2;
             public int rondaActual;
             public ModoPvPElegido modoElegido;
+            public bool pointsForHit;
         }
         public GM_DataCombatPvP gm_dataCombatPvP;
     }

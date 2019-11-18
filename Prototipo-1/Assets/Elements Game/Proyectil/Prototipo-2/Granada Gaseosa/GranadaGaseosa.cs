@@ -258,7 +258,6 @@ namespace Prototipo_2
                 }
                 else if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
                 {
-                    Debug.Log("ENTRE A LA CREACION DE GASEOSA");
                     cuadrillaColision = cuadrilla;
                     CreateGaseosas(2);
 

@@ -307,11 +307,11 @@ namespace Prototipo_2
                 { 
                     gm.GameOver("GameOverSupervivencia");
                 }
-                else if (SceneManager.GetActiveScene().name != "PvP")
+                else if (SceneManager.GetActiveScene().name != "PvP" && SceneManager.GetActiveScene().name != "TiroAlBlanco")
                 {
                     gm.GameOver("GameOverHistoria");
                 }
-                else if (SceneManager.GetActiveScene().name == "PvP")
+                else if (SceneManager.GetActiveScene().name == "PvP" || SceneManager.GetActiveScene().name == "TiroAlBlanco")
                 {
                     inputManager.SetEnableMovementPlayer1(false);
                     inputManager.SetEnableMovementPlayer2(false);

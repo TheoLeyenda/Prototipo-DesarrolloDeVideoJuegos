@@ -46,6 +46,7 @@ namespace Prototipo_2
         }
         void Start()
         {
+            structGameManager.gm_dataCombatPvP.pointsForHit = true;
             TituloPushButton.SetActive(false);
             buttonGameOver.SetActive(false);
             countEnemysDead = 0;

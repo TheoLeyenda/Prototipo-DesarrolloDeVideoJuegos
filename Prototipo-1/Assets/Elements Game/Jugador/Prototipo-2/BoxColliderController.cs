@@ -12,6 +12,8 @@ namespace Prototipo_2
         public bool inPlayer;
         public bool ZonaContraAtaque;
         private BoxCollider2D boxCollider2D;
+        //public bool pointsForHit;
+        private GameManager gm;
         // Start is called before the first frame update
         public enum StateBoxCollider
         {
@@ -31,6 +33,13 @@ namespace Prototipo_2
         void Awake()
         {
             boxCollider2D = GetComponent<BoxCollider2D>();
+        }
+        private void Start()
+        {
+            if (GameManager.instanceGameManager != null)
+            {
+                gm = GameManager.instanceGameManager;
+            }
         }
         /*void Update()
         {
@@ -136,7 +145,10 @@ namespace Prototipo_2
                                         player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                                         player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                         proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + proyectil.GetPlayer().xpForHit);
-                                        proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + proyectil.GetPlayer().PD.scoreForHit;
+                                        if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
+                                        {
+                                            proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + proyectil.GetPlayer().PD.scoreForHit;
+                                        }
                                         proyectil.AnimationHit();
                                     }
                                     
@@ -153,7 +165,10 @@ namespace Prototipo_2
                                         player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                                         player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                         proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + proyectil.GetPlayer2().xpForHit);
-                                        proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
+                                        if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
+                                        {
+                                            proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
+                                        }
                                         proyectil.AnimationHit();
                                     }
                                     
@@ -188,7 +203,10 @@ namespace Prototipo_2
                                         player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                                         player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                         proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + proyectil.GetPlayer2().xpForHit);
-                                        proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
+                                        if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
+                                        {
+                                            proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
+                                        }
                                         proyectil.AnimationHit();
                                     }
                                     
@@ -203,7 +221,10 @@ namespace Prototipo_2
                                         player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                                         player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                         proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + proyectil.GetPlayer2().xpForHit);
-                                        proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
+                                        if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
+                                        {
+                                            proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
+                                        }
                                         proyectil.AnimationHit();
                                     }
                                     //proyectil.timeLife = 0;
@@ -227,7 +248,10 @@ namespace Prototipo_2
                                 if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer() != null)
                                 {
                                     proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + (proyectil.GetPlayer().xpForHit / 2));
-                                    proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
+                                    if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
+                                    {
+                                        proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
+                                    }
                                 }
                                 proyectil.damage = proyectil.GetAuxDamage();
                                 player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
@@ -249,7 +273,10 @@ namespace Prototipo_2
                                     if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer2() != null)
                                     {
                                         proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + (proyectil.GetPlayer2().xpForHit / 2));
-                                        proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + (proyectil.GetPlayer2().PD.scoreForHit / 2);
+                                        if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
+                                        {
+                                            proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + (proyectil.GetPlayer2().PD.scoreForHit / 2);
+                                        }
                                     }
                                     proyectil.damage = proyectil.GetAuxDamage();
                                     player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
@@ -305,7 +332,10 @@ namespace Prototipo_2
                                                 if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer() != null)
                                                 {
                                                     proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + (proyectil.GetPlayer().xpForHit / 2));
-                                                    proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
+                                                    if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
+                                                    {
+                                                        proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
+                                                    }
                                                 }
                                             }
                                         }
@@ -318,7 +348,10 @@ namespace Prototipo_2
                                                 if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer2() != null)
                                                 {
                                                     proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + (proyectil.GetPlayer2().xpForHit / 2));
-                                                    proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + (proyectil.GetPlayer2().PD.scoreForHit / 2);
+                                                    if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
+                                                    {
+                                                        proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + (proyectil.GetPlayer2().PD.scoreForHit / 2);
+                                                    }
                                                 }
                                             }
                                         }
@@ -363,7 +396,10 @@ namespace Prototipo_2
                                 if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer() != null)
                                 {
                                     proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + proyectil.GetPlayer().xpForHit);
-                                    proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + proyectil.GetPlayer().PD.scoreForHit;
+                                    if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
+                                    {
+                                        proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + proyectil.GetPlayer().PD.scoreForHit;
+                                    }
                                 }
                                 //proyectil.timeLife = 0;
                                 //proyectil.gameObject.SetActive(false);
@@ -383,7 +419,10 @@ namespace Prototipo_2
                             if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer() != null)
                             {
                                 proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + (proyectil.GetPlayer().xpForHit / 2));
-                                proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
+                                if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
+                                {
+                                    proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
+                                }
                             }
 
                             //Debug.Log(enemy.enumsEnemy.GetMovement());

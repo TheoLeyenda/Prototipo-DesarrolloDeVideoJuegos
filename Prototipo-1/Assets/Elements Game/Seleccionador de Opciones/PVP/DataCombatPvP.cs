@@ -151,8 +151,8 @@ namespace Prototipo_2 {
         }
         public void CheckEmpate()
         {
-            if (gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP1 < gm.structGameManager.gm_dataCombatPvP.countRounds
-                && gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP2 < gm.structGameManager.gm_dataCombatPvP.countRounds)
+            gm.structGameManager.gm_dataCombatPvP.rondaActual++;
+            if (gm.structGameManager.gm_dataCombatPvP.rondaActual < gm.structGameManager.gm_dataCombatPvP.countRounds)
             {
                 ReiniciarRonda();
             }
@@ -177,7 +177,6 @@ namespace Prototipo_2 {
                 player1.gameObject.SetActive(false);
                 player2.gameObject.SetActive(false);
             }
-            gm.structGameManager.gm_dataCombatPvP.rondaActual++;
         }
         public void CheckWinPlayer1()
         {
