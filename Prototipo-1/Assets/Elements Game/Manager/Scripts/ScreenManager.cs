@@ -23,9 +23,12 @@ namespace Prototipo_2 {
         public void Multijugador()
         {
             SceneManager.LoadScene("Multijugador");
+            //SceneManager.LoadScene("Ejemplo", LoadSceneMode.Additive);
+            
         }
         public void TiroAlBlanco()
         {
+            //SceneManager.UnloadSceneAsync("Ejemplo");
             if (gm != null)
             {
                 gm.structGameManager.gm_dataCombatPvP.modoElegido = StructGameManager.ModoPvPElegido.TiroAlBlanco;
