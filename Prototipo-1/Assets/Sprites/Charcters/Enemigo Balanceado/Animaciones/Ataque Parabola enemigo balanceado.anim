@@ -97,21 +97,21 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 21300000, guid: e55c4c2431479674981c47a55535b02d, type: 3}
-    - time: 0.016666668
+    - time: 0.1
       value: {fileID: 21300000, guid: 468eb262082cd724384306d5631e287f, type: 3}
-    - time: 0.033333335
+    - time: 0.16666667
       value: {fileID: 21300000, guid: e4a85a9cf75e562438d2b0597d39d28a, type: 3}
-    - time: 0.05
+    - time: 0.23333333
       value: {fileID: 21300000, guid: ce6d07c4f61dba944b5b9dc0d945bf0d, type: 3}
-    - time: 0.06666667
+    - time: 0.43333334
       value: {fileID: 21300000, guid: db26c929b4693e647b527e97d6b183a9, type: 3}
-    - time: 0.083333336
+    - time: 0.56666666
       value: {fileID: 21300000, guid: 4d4af5ac23fdfe84baac2979a34f5b5a, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 60
+  m_SampleRate: 30
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -165,7 +165,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.1
+    m_StopTime: 0.6
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -260,4 +260,18 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.16666667
+    functionName: ParabolaAttackEnemy
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.36666667
+    functionName: DisableInAttackEnemy
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

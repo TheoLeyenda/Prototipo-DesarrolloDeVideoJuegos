@@ -97,7 +97,7 @@ namespace Prototipo_2
                         else if (distanceOfCenterFloor.magnitude < 1.4f)
                         {
                             num = (int)Random.Range(0, 100);
-                            Debug.Log(num);
+                            //Debug.Log(num);
                             arr[0] = refPlataformas.plataformas[idPlataforma].plataformaCentral.transform.position.x;
                             if (num >= 50)
                             {
