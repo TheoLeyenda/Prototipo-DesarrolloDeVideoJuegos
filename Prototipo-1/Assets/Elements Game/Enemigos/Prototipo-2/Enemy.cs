@@ -75,6 +75,8 @@ namespace Prototipo_2
         public BoxColliderController boxColliderControllerParado;
         public BoxColliderController boxColliderControllerSaltando;
         public bool enableMecanicParabolaAttack;
+        [HideInInspector]
+        public bool inAttack;
 
         [Header("Porcentage: Movimiento")]
         public float MovePorcentage;
@@ -134,6 +136,7 @@ namespace Prototipo_2
         }
         public virtual void Update()
         {
+            //Debug.Log(inAttack);
             //Debug.Log(delaySelectMovement);
             //spriteEnemy.animator.SetBool("AtaqueEspecial", true);
             //enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
@@ -948,7 +951,7 @@ namespace Prototipo_2
                 }
                 proyectil.rutaParabola_AtaqueEnemigo = structsEnemys.ruta;
                 proyectil.OnParabola();
-                delayAttack = auxDelayAttack;
+                //delayAttack = auxDelayAttack;
             }
         }
         public bool CheckMove(Vector3 PosicionDestino)

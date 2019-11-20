@@ -54,6 +54,7 @@ namespace Prototipo_2
         public void CollisionWhitProyectil(Collider2D collision)
         {
             Proyectil proyectil = collision.GetComponent<Proyectil>();
+            bool notProyectilParabola = proyectil.GetComponent<ProyectilParabola>() == null;
             //Debug.Log(proyectil);
             //Debug.Log(proyectil.disparadorDelProyectil);
             if (proyectil.GetComponent<ProyectilInparable>() == null && proyectil.GetComponent<GranadaGaseosa>() == null && proyectil != null)
@@ -83,7 +84,7 @@ namespace Prototipo_2
                                         //proyectil.AnimationHit();
                                     }
                                 }
-                                if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer || !ZonaContraAtaque || proyectil.colisionPlayer)
+                                if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer && notProyectilParabola || !ZonaContraAtaque || proyectil.colisionPlayer)
                                 {
                                     if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetEnemy() != null)
                                     {
@@ -102,7 +103,7 @@ namespace Prototipo_2
                                         proyectil.AnimationHit();
                                     }
                                 }
-                                else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer || !ZonaContraAtaque || proyectil.colisionPlayer)
+                                else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer && notProyectilParabola || !ZonaContraAtaque || proyectil.colisionPlayer)
                                 {
                                     proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + proyectil.GetEnemy().xpForHit);
                                     player.delayCounterAttack = player.GetAuxDelayCounterAttack();
@@ -137,7 +138,7 @@ namespace Prototipo_2
                                         //proyectil.AnimationHit();
                                     }
                                 }
-                                if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer || !ZonaContraAtaque || proyectil.colisionPlayer)
+                                if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer && notProyectilParabola || !ZonaContraAtaque || proyectil.colisionPlayer)
                                 {
                                     
                                     if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer() != null)
@@ -153,7 +154,7 @@ namespace Prototipo_2
                                     }
                                     
                                 }
-                                else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer || !ZonaContraAtaque || proyectil.colisionPlayer)
+                                else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer && notProyectilParabola || !ZonaContraAtaque || proyectil.colisionPlayer)
                                 {
                                     
                                     //proyectil.timeLife = 0;
@@ -195,7 +196,7 @@ namespace Prototipo_2
                                         //proyectil.AnimationHit();
                                     }
                                 }
-                                if ((player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer) || !ZonaContraAtaque || proyectil.colisionPlayer)
+                                if ((player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer) && notProyectilParabola || !ZonaContraAtaque || proyectil.colisionPlayer)
                                 {
                                     
                                     if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer2() != null)
@@ -211,7 +212,7 @@ namespace Prototipo_2
                                     }
                                     
                                 }
-                                else if ((player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer) || !ZonaContraAtaque || proyectil.colisionPlayer)
+                                else if ((player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer) && notProyectilParabola || !ZonaContraAtaque || proyectil.colisionPlayer)
                                 {
                                     
                                     if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer2() != null)

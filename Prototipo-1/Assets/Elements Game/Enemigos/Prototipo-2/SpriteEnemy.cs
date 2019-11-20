@@ -204,6 +204,12 @@ namespace Prototipo_2
                     case EnumsEnemy.TiposDeEnemigo.Agresivo:
                         switch (ActualSprite)
                         {
+                            case SpriteActual.Agachado:
+                                PlayAnimation("Agachado enemigo agresivo");
+                                break;
+                            case SpriteActual.AgachadoDefensa:
+                                PlayAnimation("Agachado Defensa enemigo agresivo");
+                                break;
                             case SpriteActual.MoverAdelante:
                                 PlayAnimation("Moverse Adelante enemigo agresivo");
                                 break;
@@ -307,6 +313,15 @@ namespace Prototipo_2
         {
             enemy.delayAttack = enemy.GetAuxDelayAttack();
             enemy.Attack(false, false, false);
+        }
+        public void ParabolaAttackEnemy()
+        {
+            enemy.delayAttack = enemy.GetAuxDelayAttack();
+            enemy.ParabolaAttack();
+        }
+        public void DisableInAttackEnemy()
+        {
+            enemy.inAttack = false;
         }
         public void RestartDelayAttackEnemy()
         {
