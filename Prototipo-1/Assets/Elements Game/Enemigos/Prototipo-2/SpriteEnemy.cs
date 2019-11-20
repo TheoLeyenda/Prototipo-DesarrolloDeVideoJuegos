@@ -72,15 +72,15 @@ namespace Prototipo_2
                 }
                 else
                 {
-                    if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
+                    if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar)
                     {
                         ActualSprite = SpriteActual.Salto;
                     }
-                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
+                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
                     {
                         ActualSprite = SpriteActual.SaltoAtaque;
                     }
-                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
+                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
                     {
                         ActualSprite = SpriteActual.SaltoDefensa;
                     }
@@ -100,15 +100,15 @@ namespace Prototipo_2
                     {
                         ActualSprite = SpriteActual.ParadoAtaque;
                     }
-                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
+                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa)
                     {
                         ActualSprite = SpriteActual.AgachadoDefensa;
                     }
-                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
+                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
                     {
                         ActualSprite = SpriteActual.AgachadoAtaque;
                     }
-                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Agacharse && enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Defensivo)
+                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Agacharse)
                     {
                         ActualSprite = SpriteActual.Agachado;
                     }
@@ -140,6 +140,22 @@ namespace Prototipo_2
                                 {
                                     PlayAnimation("Parado Defensa enemigo defensivo");
                                 }
+                                break;
+                            case SpriteActual.Salto:
+                                spriteRenderer.color = Color.white;
+                                PlayAnimation("Salto enemigo defensivo");
+                                break;
+                            case SpriteActual.SaltoDefensa:
+                                spriteRenderer.color = Color.white;
+                                PlayAnimation("Salto Defensa enemigo defensivo");
+                                break;
+                            case SpriteActual.Agachado:
+                                spriteRenderer.color = Color.white;
+                                PlayAnimation("Agachado enemigo defensivo");
+                                break;
+                            case SpriteActual.AgachadoDefensa:
+                                spriteRenderer.color = Color.white;
+                                PlayAnimation("Agachado Defensa enemigo defensivo");
                                 break;
                             case SpriteActual.ParadoAtaque:
                                 spriteRenderer.color = Color.white;

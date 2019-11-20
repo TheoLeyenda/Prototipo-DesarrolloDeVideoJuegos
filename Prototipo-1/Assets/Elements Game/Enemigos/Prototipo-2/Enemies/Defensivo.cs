@@ -7,6 +7,7 @@ namespace Prototipo_2
     public class Defensivo : Enemy
     {
         public DisparoDeCarga Disparo;
+        float valueAttack;
         public enum StateDeffence
         {
             Nulo,
@@ -61,6 +62,10 @@ namespace Prototipo_2
             if (delayAttack > 0)
             {
                 delayAttack = delayAttack - Time.deltaTime;
+                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
+                {
+                    spriteEnemy.PlayAnimation("Salto enemigo defensivo");
+                }
             }
             else if (delayAttack <= 0)
             {
@@ -71,25 +76,31 @@ namespace Prototipo_2
         {
             if (enemyPrefab.activeSelf == true)
             {
-                float valueAttack = Random.Range(0, 100);
+                if (!inAttack)
+                {
+                    valueAttack = Random.Range(0, 100);
+                }
                 //Debug.Log(valueAttack);
                 if (valueAttack >= parabolaAttack || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
                     || !enableMecanicParabolaAttack)
                 {
-
-                    if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
+                    if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
                     {
                         spriteEnemy.animator.Play("Ataque enemigo defensivo");
+                        inAttack = true;
                     }
-                    else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
+                    else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
+                        || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
                     {
-                        spriteEnemy.animator.Play("Ataque enemigo defensivo");
+                        spriteEnemy.animator.Play("Ataque Salto enemigo defensivo");
+                        inAttack = true;
                     }
                     else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
                     {
-                        spriteEnemy.animator.Play("Ataque enemigo defensivo");
+                        spriteEnemy.animator.Play("Ataque Agachado enemigo defensivo");
+                        inAttack = true;
                     }
                     else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
                         || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
@@ -102,6 +113,7 @@ namespace Prototipo_2
                                 spriteEnemy.animator.SetBool("AtaqueEspecial", true);
                                 spriteEnemy.spriteRenderer.color = Color.white;
                                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
+                                inAttack = true;
                                 break;
                             case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
                                 break;
@@ -112,11 +124,24 @@ namespace Prototipo_2
                 }
                 else if (valueAttack < parabolaAttack)
                 {
-                    if (delayAttack <= 0)
+                    //ParabolaAttack();
+                    if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
+                        && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp() && delayAttack <= 0)
                     {
-                        ParabolaAttack();
-                        spriteEnemy.RestartDelayAttackEnemy();
+                        spriteEnemy.PlayAnimation("Ataque Parabola enemigo defensivo");
+                        inAttack = true;
                     }
+                    else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && delayAttack <= 0)
+                    {
+                        spriteEnemy.PlayAnimation("Ataque Parabola Salto enemigo defensivo");
+                        inAttack = true;
+                    }
+                    else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && delayAttack <= 0)
+                    {
+                        spriteEnemy.PlayAnimation("Ataque Parabola Agachado enemigo defensivo");
+                        inAttack = true;
+                    }
+                    //spriteEnemy.RestartDelayAttackEnemy();
                 }
             }
         }

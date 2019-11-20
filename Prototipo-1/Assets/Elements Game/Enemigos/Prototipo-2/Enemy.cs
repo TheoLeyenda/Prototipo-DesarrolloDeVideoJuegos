@@ -123,7 +123,7 @@ namespace Prototipo_2
             InitialPosition = transform.position;
             auxDelayAttack = delayAttack;
             //auxDelayParabolaAttack = delayParabolaAttack;
-            delaySelectMovement = 0.2f;
+            delaySelectMovement = 0.5f;
             auxLife = life;
             poolObjectEnemy = GetComponent<PoolObject>();
             animator = GetComponent<Animator>();
