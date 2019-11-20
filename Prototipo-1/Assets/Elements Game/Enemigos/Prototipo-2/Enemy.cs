@@ -198,6 +198,10 @@ namespace Prototipo_2
         }
         public void IA()
         {
+            if (transform.position.y > InitialPosition.y)
+            {
+                delaySelectMovement = 0.1f;
+            }
             if (life > 0)
             {
                 if (delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque))
