@@ -1,39 +1,123 @@
-Theo:
-FUNDAMENTAL Orden hierarchy
-Borrar scripts al pedo del proto1
+﻿TODO
+Yo
+Pasarles cosas de optimizacion.
+Pasarle a Pato el StP
 
-Codigo:
-Remover las grillas que no suman. :(
-Sprite Enemy y Player son lo mismo. Unirlos
-		[System.Serializable]
-		public class SpriteAnimName
-		{
-			public SpriteActual sprite;
-			public string AnimName;
+Para Todos:
+Para aprovar la parte de programaciòn de la materia deben aplicar en codigo y en proyecto de Unity todo lo aprendido en la materia anterior DV02. Ver las devoluciones de los tps de esa clase junto con los pdfs (ejemplo Clase 04.pdf)
+Conceptos como UI separada de la mecanica del juego; Coding conventions; nombres de variables scripts y metodos claros; etc.
+Todos estos puntos ya vistos seràn fundamentales en la evaluaciòn del proyecto final. 
+Vayan viendolos desde ahora para cualquier duda que vaya surgiendo.
+Script de UI. PREFIJO UI.
+Bugs.
+Audio.
 
-		}
+RUSO
+====
+Tirar independent event system a la mierda.
+Fix perdida de focus de la ui. (mouse)
+NullReferenceException: Object reference not set to an instance of an object
+FirstSignSelected.SetSelected () (at Assets/Scripts/UI/FirstSignSelected.cs:20)
+CharacterSelectionManager.Update () (at Assets/Scripts/Managers/CharacterSelectionManager.cs:51)
 
-		public List<SpriteAnimName> animNames;
-		
-public void SpecialAttack(bool doubleDamage, bool isDuck, GameObject generadorProyectilesParabola, GameObject generadorProyectilesParabolaAgachado, EnumsEnemy enumsEnemy, StructsEnemys structsEnemys, int randomMax, int randomMin)
-NO, lineas infinitas no.
+Menu de Pausa.
 
-TODO LO QUE ESTE SEPARADO EN ENEMY Y PLAYER, UNIRLO.
-Pasar seleccion de personajes y niveles a UI basica.
+Nombres claros de variables.
+Cambiar los bools esos horribles por cosas con un sentido logico.
 
-Ivan:
-FUNDAMENTAL Orden hierarchy, parents
-Darle forma de juego.
-State machine para el player.
-Poner bien los nombres de las cosas.
+C# standards
+Ball, usar bitmask para cambiar esas bools de estados.
+simplificar los if else cuando se pueda.
+switch (p1Selected)
+{
+    case CharacterSelectionManager.Character.nullCharacter:
+        break;
+    case CharacterSelectionManager.Character.raildrive:
+        p1Instance = Instantiate(railPrefab, p1Position.transform);
+        break;
+    case CharacterSelectionManager.Character.magstream:
+        p1Instance = Instantiate(magPrefab, p1Position.transform);
+        break;
+    case CharacterSelectionManager.Character.kunst:
+        p1Instance = Instantiate(kunstPrefab, p1Position.transform);
+        break;
+    case CharacterSelectionManager.Character.knockout:
+        p1Instance = Instantiate(knockoutPrefab, p1Position.transform);
+        break;
+    case CharacterSelectionManager.Character.djinn:
+        p1Instance = Instantiate(djinnPrefab, p1Position.transform);
+        break;
+    default:
+        break;
+}
+p1Instance = Instantiate(naves[(int)p1Selected], p1Position.transform);
 
-Franco:
-https://www.youtube.com/watch?v=uK4oQoCmovU
-Generalizar un poco la UI
-Medularizar un poco mas las cosas.
-Gancho para seguir jugando.
 
-Pato:
-caos en el editor.
-Orden hierarchy, parents
-Hacer TODO lo del trello
+FRANCO
+======
+
+Interpolar la camara cuando apretas la barra espaciadora. AnimationCurve.
+UIChangeScene Imperativo
+string goToTutorial = PlayerPrefs.GetString("isFirstTimePlaying", "yes"); pasar a Int
+FXManager.Get().LaunchFx("Gem Getted"); // Cuando los fx se complejizan a veces es mejor tener un manager de effects
+Fairy.OnFairyDanger = ChangeIndicatorColor; DANGER.
+mirar un poco las variables estaticas y las referencias cruzadas y ver que se puede hacer.
+unity bake artifacts
+
+Mariano
+=======
+Desvincular el GameManager del Player.
+Magic numbers remember remove 
+warningAux = Instantiate(warningPositions[rnd], posCenterWarning.transform.position, Quaternion.identity);
+if (GameManager.Get().score == 0 )
+        {
+            if (transform.position.y < generationPoint.position.y-8f)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y + 8f, transform.position.z);
+                randomBlock = 3;
+                GameObject go = ObjectPool.instance.GetPooledObject(randomBlock.ToString());
+
+                go.transform.position = transform.position;
+            }
+            
+        }
+Encontrar patron y si puede ser desvincularlo del GameManager
+Que los objetos generados tengan un parent en el hierarchy
+Arrows.cs (Encontrar patron) Listar los gameobjects???
+
+PATO
+====
+cambiar las escalas, que no queden los colliders2D con ningun cambio de escala ni siquiera de sus parents.
+DeParent
+		transform.GetChild(0).parent = transform.parent.parent;
+
+THEO
+====
+Estructura de Proyecto:
+	Scenes
+	Art
+	Scripts
+		UI
+		Etc
+	Prefabs
+
+Las escenas principales autoplayable
+https://github.com/federicoBarra/DVJ02-2019
+Borrar cosas viejas o que no se usen mas.
+Limpiar todo el tema de las grillas. Proxima clase vemos como sacar las que quedan.
+LAS COSAS QUE NO SE USAN SACARLAS.
+Separar UI de gameplay del juego.
+No hacer nunca mas copy/paste en tu vida!
+ver todos los scripts y encontrar los patrones en el codigo que simplifiquen el codiogo.
+Leer los pdfs de las clases de DVJ02
+
+https://www.youtube.com/watch?v=vu4Rv1SmzwM
+
+
+
+
+
+
+
+
+
