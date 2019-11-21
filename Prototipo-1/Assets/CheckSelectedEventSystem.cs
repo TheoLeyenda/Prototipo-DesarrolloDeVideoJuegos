@@ -6,11 +6,17 @@ using UnityEngine.EventSystems;
 public class CheckSelectedEventSystem : MonoBehaviour
 {
     // Update is called once per frame
+    public GameObject newCurrentGameObject;
+   
+    
     void Update()
     {
-        if (!EventSystem.current.currentSelectedGameObject)
+        if (EventSystem.current != null)
         {
-            EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
+            if (!EventSystem.current.currentSelectedGameObject)
+            {
+                EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
+            }
         }
     }
 }
