@@ -1114,7 +1114,6 @@ GameObject:
   m_Component:
   - component: {fileID: 570515247}
   - component: {fileID: 570515250}
-  - component: {fileID: 570515249}
   - component: {fileID: 570515248}
   m_Layer: 5
   m_Name: ButtonRestarRondas
@@ -1200,36 +1199,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &570515249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 570515246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &570515250
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3904,11 +3873,11 @@ MonoBehaviour:
   maxRounds: 5
   minRounds: 1
   textCountRounds: {fileID: 23322657}
-  ButtonAddRounds: {fileID: 1100697414}
-  ButtonSubstractRounds: {fileID: 570515248}
+  textButtonAddRonds: {fileID: 1730226018}
+  textButtonSubstractRounds: {fileID: 1280227831}
   ConfiguracionPuntosPorGolpe: {fileID: 1841524186}
-  ButtonYesPointForHit: {fileID: 1225859138}
-  ButtonNoPointForHit: {fileID: 865577828}
+  textButtonYesPointForHit: {fileID: 459823207}
+  textButtonNoPointForHit: {fileID: 848194616}
   textYesOrNot: {fileID: 1128670328}
 --- !u!1001 &8225111841769072218
 PrefabInstance:

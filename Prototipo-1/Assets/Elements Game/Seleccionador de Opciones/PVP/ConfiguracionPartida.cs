@@ -15,12 +15,12 @@ namespace Prototipo_2
         public int minRounds;
         [Header("Configuracion De Rondas")]
         public TextMeshProUGUI textCountRounds;
-        public Button ButtonAddRounds;
-        public Button ButtonSubstractRounds;
+        public TextMeshProUGUI textButtonAddRonds;
+        public TextMeshProUGUI textButtonSubstractRounds;
         [Header("Configuracion De Puntos Por Golpe")]
         public GameObject ConfiguracionPuntosPorGolpe;
-        public Button ButtonYesPointForHit;
-        public Button ButtonNoPointForHit;
+        public TextMeshProUGUI textButtonYesPointForHit;
+        public TextMeshProUGUI textButtonNoPointForHit;
         public TextMeshProUGUI textYesOrNot;
         // Start is called before the first frame update
 
@@ -73,20 +73,20 @@ namespace Prototipo_2
         {
             if (gm.structGameManager.gm_dataCombatPvP.countRounds < maxRounds)
             {
-                ButtonAddRounds.interactable = true;
+                textButtonAddRonds.text = ">";
             }
             else
             {
-                ButtonAddRounds.interactable = false;
+                textButtonAddRonds.text = " ";
             }
 
             if (gm.structGameManager.gm_dataCombatPvP.countRounds > minRounds)
             {
-                ButtonSubstractRounds.interactable = true;
+                textButtonSubstractRounds.text = "<";
             }
             else
             {
-                ButtonSubstractRounds.interactable = false;
+                textButtonSubstractRounds.text = " ";
             }
         }
         public void AddRounds()
@@ -107,15 +107,15 @@ namespace Prototipo_2
         }
         public void YesPointForHit()
         {
-            ButtonNoPointForHit.interactable = true;
-            ButtonYesPointForHit.interactable = false;
+            textButtonNoPointForHit.text = ">";
+            textButtonYesPointForHit.text = " ";
             gm.structGameManager.gm_dataCombatPvP.pointsForHit = true;
             textYesOrNot.text = "Si";
         }
         public void NoPointForHit()
         {
-            ButtonNoPointForHit.interactable = false;
-            ButtonYesPointForHit.interactable = true;
+            textButtonNoPointForHit.text = " ";
+            textButtonYesPointForHit.text = "<";
             gm.structGameManager.gm_dataCombatPvP.pointsForHit = false;
             textYesOrNot.text = "No";
         }
