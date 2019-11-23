@@ -422,18 +422,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b94bd2a02b9d55b4e93722cf94a37b27, type: 3}
---- !u!114 &725872128 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3412696478766471643, guid: b94bd2a02b9d55b4e93722cf94a37b27,
-    type: 3}
-  m_PrefabInstance: {fileID: 725872126}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d84aa2b07bbb62b4fac9537dd3edffb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1152237334
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,7 +617,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 725872128}
+      objectReference: {fileID: 62250269}
     - target: {fileID: 1107006080779697039, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -639,12 +627,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 725872128}
+      objectReference: {fileID: 62250269}
+    - target: {fileID: 1107006081299833005, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Supervivencia
+      objectReference: {fileID: 0}
     - target: {fileID: 1107006080665573588, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 725872128}
+      objectReference: {fileID: 62250269}
+    - target: {fileID: 1107006080665573588, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Salir
+      objectReference: {fileID: 0}
     - target: {fileID: 378488059, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8, type: 3}
       propertyPath: m_Material
       value: 
@@ -669,11 +667,20 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 725872128}
+      objectReference: {fileID: 62250269}
+    - target: {fileID: 3391803755261097365, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Creditos
+      objectReference: {fileID: 0}
     - target: {fileID: 579285283, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 725872128}
+      objectReference: {fileID: 62250269}
+    - target: {fileID: 579285283, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Controles
+      objectReference: {fileID: 0}
     - target: {fileID: 6323204283115487080, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
