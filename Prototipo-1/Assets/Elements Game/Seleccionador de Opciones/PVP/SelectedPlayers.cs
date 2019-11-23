@@ -147,46 +147,49 @@ namespace Prototipo_2
         }
         public void MoveCursor()
         {
-            //---MOVIMIENTO DEL CURSOR DEL PLAYER 1---//
-            if (cursorPlayer1.x >= 0 && cursorPlayer1.x < filas)
+            if (!cursorPlayer1.condirmed)
             {
-                if (InputPlayerController.Horizontal_Button_P1() > 0 && cursorPlayer1.x < filas-1)
+                //---MOVIMIENTO DEL CURSOR DEL PLAYER 1---//
+                if (cursorPlayer1.x >= 0 && cursorPlayer1.x < filas)
                 {
-                    if (aviableMoveHorizontalP1)
+                    if (InputPlayerController.Horizontal_Button_P1() > 0 && cursorPlayer1.x < filas - 1)
                     {
-                        cursorPlayer1.x++;
-                        CursorSelectorPlayer1.MoveRight();
-                        aviableMoveHorizontalP1 = false;
+                        if (aviableMoveHorizontalP1)
+                        {
+                            cursorPlayer1.x++;
+                            CursorSelectorPlayer1.MoveRight();
+                            aviableMoveHorizontalP1 = false;
+                        }
+                    }
+                    else if (InputPlayerController.Horizontal_Button_P1() < 0 && cursorPlayer1.x > 0)
+                    {
+                        if (aviableMoveHorizontalP1)
+                        {
+                            cursorPlayer1.x--;
+                            CursorSelectorPlayer1.MoveLeft();
+                            aviableMoveHorizontalP1 = false;
+                        }
                     }
                 }
-                else if (InputPlayerController.Horizontal_Button_P1() < 0 && cursorPlayer1.x > 0)
+                if (cursorPlayer1.y >= 0 && cursorPlayer1.y < columnas)
                 {
-                    if (aviableMoveHorizontalP1)
+                    if (InputPlayerController.Vertical_Button_P1() > 0 && cursorPlayer1.y > 0)
                     {
-                        cursorPlayer1.x--;
-                        CursorSelectorPlayer1.MoveLeft();
-                        aviableMoveHorizontalP1 = false;
+                        if (aviableMoveVerticalP1)
+                        {
+                            cursorPlayer1.y--;
+                            CursorSelectorPlayer1.MoveUp();
+                            aviableMoveVerticalP1 = false;
+                        }
                     }
-                }
-            }
-            if (cursorPlayer1.y >= 0 && cursorPlayer1.y < columnas)
-            {
-                if (InputPlayerController.Vertical_Button_P1() > 0 && cursorPlayer1.y > 0)
-                {
-                    if (aviableMoveVerticalP1)
+                    else if (InputPlayerController.Vertical_Button_P1() < 0 && cursorPlayer1.y < columnas - 1)
                     {
-                        cursorPlayer1.y--;
-                        CursorSelectorPlayer1.MoveUp();
-                        aviableMoveVerticalP1 = false;
-                    }
-                }
-                else if (InputPlayerController.Vertical_Button_P1() < 0 && cursorPlayer1.y < columnas-1)
-                {
-                    if (aviableMoveVerticalP1)
-                    {
-                        cursorPlayer1.y++;
-                        CursorSelectorPlayer1.MoveDown();
-                        aviableMoveVerticalP1 = false;
+                        if (aviableMoveVerticalP1)
+                        {
+                            cursorPlayer1.y++;
+                            CursorSelectorPlayer1.MoveDown();
+                            aviableMoveVerticalP1 = false;
+                        }
                     }
                 }
             }
@@ -201,45 +204,48 @@ namespace Prototipo_2
             //----------------------------------------//
 
             //---MOVIMIENTO DEL CURSOR DEL PLAYER 2---//
-            if (cursorPlayer2.x >= 0 && cursorPlayer2.x < filas)
+            if (!cursorPlayer2.condirmed)
             {
-                if (InputPlayerController.Horizontal_Button_P2() > 0 && cursorPlayer2.x < filas - 1)
+                if (cursorPlayer2.x >= 0 && cursorPlayer2.x < filas)
                 {
-                    if (aviableMoveHorizontalP2)
+                    if (InputPlayerController.Horizontal_Button_P2() > 0 && cursorPlayer2.x < filas - 1)
                     {
-                        cursorPlayer2.x++;
-                        CursorSelectorPlayer2.MoveRight();
-                        aviableMoveHorizontalP2 = false;
+                        if (aviableMoveHorizontalP2)
+                        {
+                            cursorPlayer2.x++;
+                            CursorSelectorPlayer2.MoveRight();
+                            aviableMoveHorizontalP2 = false;
+                        }
+                    }
+                    else if (InputPlayerController.Horizontal_Button_P2() < 0 && cursorPlayer2.x > 0)
+                    {
+                        if (aviableMoveHorizontalP2)
+                        {
+                            cursorPlayer2.x--;
+                            CursorSelectorPlayer2.MoveLeft();
+                            aviableMoveHorizontalP2 = false;
+                        }
                     }
                 }
-                else if (InputPlayerController.Horizontal_Button_P2() < 0 && cursorPlayer2.x > 0)
+                if (cursorPlayer2.y >= 0 && cursorPlayer2.y < columnas)
                 {
-                    if (aviableMoveHorizontalP2)
+                    if (InputPlayerController.Vertical_Button_P2() > 0 && cursorPlayer2.y > 0)
                     {
-                        cursorPlayer2.x--;
-                        CursorSelectorPlayer2.MoveLeft();
-                        aviableMoveHorizontalP2 = false;
+                        if (aviableMoveVerticalP2)
+                        {
+                            cursorPlayer2.y--;
+                            CursorSelectorPlayer2.MoveUp();
+                            aviableMoveVerticalP2 = false;
+                        }
                     }
-                }
-            }
-            if (cursorPlayer2.y >= 0 && cursorPlayer2.y < columnas)
-            {
-                if (InputPlayerController.Vertical_Button_P2() > 0 && cursorPlayer2.y > 0)
-                {
-                    if (aviableMoveVerticalP2)
+                    else if (InputPlayerController.Vertical_Button_P2() < 0 && cursorPlayer2.y < columnas - 1)
                     {
-                        cursorPlayer2.y--;
-                        CursorSelectorPlayer2.MoveUp();
-                        aviableMoveVerticalP2 = false;
-                    }
-                }
-                else if (InputPlayerController.Vertical_Button_P2() < 0 && cursorPlayer2.y < columnas - 1)
-                {
-                    if (aviableMoveVerticalP2)
-                    {
-                        cursorPlayer2.y++;
-                        CursorSelectorPlayer2.MoveDown();
-                        aviableMoveVerticalP2 = false;
+                        if (aviableMoveVerticalP2)
+                        {
+                            cursorPlayer2.y++;
+                            CursorSelectorPlayer2.MoveDown();
+                            aviableMoveVerticalP2 = false;
+                        }
                     }
                 }
             }
