@@ -43,6 +43,7 @@ namespace Prototipo_2
         public GameObject CamvasSeleccionRounds;
         public GameObject Fondo;
         public GameObject CuadrillaDeSeleccion;
+        public GameObject PantallaAnterior;
         public bool activateCountRoundsSelection;
         void Start()
         {
@@ -213,6 +214,10 @@ namespace Prototipo_2
                     CamvasSeleccionRounds.SetActive(true);
                     Fondo.SetActive(true);
                     CuadrillaDeSeleccion.SetActive(true);
+                    if (PantallaAnterior != null)
+                    {
+                        PantallaAnterior.SetActive(false);
+                    }
                 }
                 else
                 {
