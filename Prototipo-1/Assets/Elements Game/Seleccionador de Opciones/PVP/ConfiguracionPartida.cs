@@ -10,6 +10,7 @@ namespace Prototipo_2
     public class ConfiguracionPartida : MonoBehaviour
     {
         private GameManager gm;
+        public Color colorDisable;
         public string nameNextScene;
         public int maxRounds;
         public int minRounds;
@@ -73,20 +74,20 @@ namespace Prototipo_2
         {
             if (gm.structGameManager.gm_dataCombatPvP.countRounds < maxRounds)
             {
-                textButtonAddRonds.text = ">";
+                textButtonAddRonds.color = Color.white;
             }
             else
             {
-                textButtonAddRonds.text = " ";
+                textButtonAddRonds.color = colorDisable;
             }
 
             if (gm.structGameManager.gm_dataCombatPvP.countRounds > minRounds)
             {
-                textButtonSubstractRounds.text = "<";
+                textButtonSubstractRounds.color = Color.white;
             }
             else
             {
-                textButtonSubstractRounds.text = " ";
+                textButtonSubstractRounds.color = colorDisable;
             }
         }
         public void AddRounds()
@@ -107,15 +108,15 @@ namespace Prototipo_2
         }
         public void YesPointForHit()
         {
-            textButtonNoPointForHit.text = ">";
-            textButtonYesPointForHit.text = " ";
+            textButtonNoPointForHit.color = Color.white;
+            textButtonYesPointForHit.color = colorDisable;
             gm.structGameManager.gm_dataCombatPvP.pointsForHit = true;
             textYesOrNot.text = "Si";
         }
         public void NoPointForHit()
         {
-            textButtonNoPointForHit.text = " ";
-            textButtonYesPointForHit.text = "<";
+            textButtonNoPointForHit.color = colorDisable;
+            textButtonYesPointForHit.color = Color.white;
             gm.structGameManager.gm_dataCombatPvP.pointsForHit = false;
             textYesOrNot.text = "No";
         }
