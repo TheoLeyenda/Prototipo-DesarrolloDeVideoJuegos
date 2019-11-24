@@ -217,7 +217,7 @@ namespace Prototipo_2
                 if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
                 {
                     cuadrillaColision = cuadrilla;
-                    Debug.Log(PLAYER1);
+                    //Debug.Log(PLAYER1);
                     if (PLAYER1 != null)
                     {
                         if (PLAYER1.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Protagonista)

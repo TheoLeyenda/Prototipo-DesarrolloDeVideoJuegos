@@ -298,6 +298,10 @@ namespace Prototipo_2 {
         {
             return animator;
         }
+        public void DeathPlayer()
+        {
+            player.Dead();
+        }
     }
     
 }

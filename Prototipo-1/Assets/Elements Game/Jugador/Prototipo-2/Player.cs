@@ -302,22 +302,34 @@ namespace Prototipo_2
         {
             if (PD.lifePlayer <= 0)
             {
-                enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.muerto;
-                if (SceneManager.GetActiveScene().name == "Supervivencia")
-                { 
-                    gm.GameOver("GameOverSupervivencia");
-                }
-                else if (SceneManager.GetActiveScene().name != "PvP" && SceneManager.GetActiveScene().name != "TiroAlBlanco")
-                {
-                    gm.GameOver("GameOverHistoria");
-                }
-                else if (SceneManager.GetActiveScene().name == "PvP" || SceneManager.GetActiveScene().name == "TiroAlBlanco")
+                if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
                 {
                     inputManager.SetEnableMovementPlayer1(false);
+                }
+                else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                {
                     inputManager.SetEnableMovementPlayer2(false);
                 }
-                gm.ResetRoundCombat(true);
+                spritePlayerActual.PlayAnimation("Death");
             }
+        }
+        public void Dead()
+        {
+            enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.muerto;
+            if (SceneManager.GetActiveScene().name == "Supervivencia")
+            {
+                gm.GameOver("GameOverSupervivencia");
+            }
+            else if (SceneManager.GetActiveScene().name != "PvP" && SceneManager.GetActiveScene().name != "TiroAlBlanco")
+            {
+                gm.GameOver("GameOverHistoria");
+            }
+            else if (SceneManager.GetActiveScene().name == "PvP" || SceneManager.GetActiveScene().name == "TiroAlBlanco")
+            {
+                inputManager.SetEnableMovementPlayer1(false);
+                inputManager.SetEnableMovementPlayer2(false);
+            }
+            gm.ResetRoundCombat(true);
         }
         public void AttackDown(Proyectil.DisparadorDelProyectil disparador)
         {

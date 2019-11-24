@@ -62,6 +62,8 @@ namespace Prototipo_2
                 ResetGameManager();
                 screenManager.SetIdListLevel(-1);
             }
+            CheckGameOverScene("GameOverHistoria");
+            CheckGameOverScene("GameOverSupervivencia");
             //Debug.Log(totalCountEnemysDead);
         }
         public void ResetGameManager()
@@ -86,10 +88,16 @@ namespace Prototipo_2
         }
         public void GameOver(string finishScene)
         {
-            textCountEnemigosAbatidos.text = "Enemigos Abatidos: " + countEnemysDead;
-            textScorePlayer.text = "Puntaje total: " + playerData_P1.score;
-            CanvasGameOver.SetActive(true);
             SceneManager.LoadScene(finishScene);
+        }
+        public void CheckGameOverScene(string finishScene)
+        {
+            if (SceneManager.GetActiveScene().name == finishScene)
+            {
+                textCountEnemigosAbatidos.text = "Enemigos Abatidos: " + countEnemysDead;
+                textScorePlayer.text = "Puntaje total: " + playerData_P1.score;
+                CanvasGameOver.SetActive(true);
+            }
         }
     }
 }
