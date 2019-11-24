@@ -131,6 +131,7 @@ namespace Prototipo_2 {
         }
         void Update()
         {
+            Debug.Log(enableMovementPlayer1);
             CheckPauseButton_P1();
             CheckPauseButton_P2();
             //Debug.Log(player1.enumsPlayers.movimiento);
@@ -368,11 +369,13 @@ namespace Prototipo_2 {
                 {
                     if (!player1.GetIsDuck())
                     {
+                        Debug.Log("ENTRE AL ATAQUE PARADO");
                         player1.spritePlayerActual.PlayAnimation("Ataque protagonista");
                         enableMovementPlayer1 = false;
                     }
                     else if (player1.GetIsDuck())
                     {
+                        Debug.Log("ENTRE AL ATAQUE AGACHADO");
                         player1.spritePlayerActual.PlayAnimation("Ataque Agachado protagonista");
                         enableMovementPlayer1 = false;
                     }
@@ -511,6 +514,9 @@ namespace Prototipo_2 {
                         break;
                     case Player_PvP.PlayerSelected.Defensivo:
                         CheckParabolaAttack_P1();
+                        CheckVerticalUp_P1();
+                        //CheckButtonJump_P1();
+                        CheckVerticalDown_P1();
                         CheckVerticalCero_P1();
                         CheckHorizontalLeft_P1();
                         CheckHorizontalRight_P1();
@@ -731,7 +737,9 @@ namespace Prototipo_2 {
                             CheckSpriteParado_P1();
                             CheckSpriteMoverAdelante_P1();
                             CheckSpriteMoverAtras_P1();
+                            CheckSpritesSalto_P1();
                             CheckSpritesParado_P1();
+                            CheckSpritesAgachado_P1();
                             break;
                         case Player_PvP.PlayerSelected.Protagonista:
                             CheckSpriteParado_P1();

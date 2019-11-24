@@ -238,7 +238,7 @@ namespace Prototipo_2
                             inputManager.SetEnableMovementPlayer2(false);
                         }
                     }
-                    else
+                    /*else
                     {
                         if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
                         {
@@ -248,7 +248,7 @@ namespace Prototipo_2
                         {
                             inputManager.SetEnableMovementPlayer2(true);
                         }
-                    }
+                    }*/
                     break;
             }
         }
