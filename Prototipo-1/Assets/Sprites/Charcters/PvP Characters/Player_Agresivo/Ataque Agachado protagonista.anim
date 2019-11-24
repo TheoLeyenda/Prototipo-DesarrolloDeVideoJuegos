@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ataque Agachado enemigo agresivo
+  m_Name: Ataque Agachado protagonista
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -262,14 +262,21 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.16666667
-    functionName: PlayerAttack
+    functionName: AttackEnemy
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.2
+    functionName: RestartDelayAttackEnemy
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.4
-    functionName: EnableMovementPlayer
+    functionName: DisableSpecialAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
