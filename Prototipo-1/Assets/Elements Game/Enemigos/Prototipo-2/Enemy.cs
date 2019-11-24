@@ -184,8 +184,9 @@ namespace Prototipo_2
                 {
                     if (CheckMove(new Vector3(transform.position.x, InitialPosition.y, transform.position.z)))
                     {
-                        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
-                        MoveJamp(Vector3.down);                    }
+                        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
+                        MoveJamp(Vector3.down);
+                    }
                     else
                     {
                         transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);
