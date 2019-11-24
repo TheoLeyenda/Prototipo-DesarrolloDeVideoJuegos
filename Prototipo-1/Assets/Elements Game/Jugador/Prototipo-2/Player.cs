@@ -868,6 +868,10 @@ namespace Prototipo_2
         {
             EnableCounterAttack = _enableCounterAttack;
         }
+        public float GetAuxDelayAttack()
+        {
+            return auxDelayAttack;
+        }
         public float GetAuxDelayCounterAttack()
         {
             return auxDelayCounterAttack;

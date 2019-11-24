@@ -282,6 +282,18 @@ namespace Prototipo_2 {
                 player.SpecialAttack(Proyectil.DisparadorDelProyectil.Jugador2);
             }
         }
+        public void ParabolaAttackPlayer()
+        {
+            if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+            {
+                player.ParabolaAttack(Proyectil.DisparadorDelProyectil.Jugador1);
+            }
+            else if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+            {
+                player.ParabolaAttack(Proyectil.DisparadorDelProyectil.Jugador2);
+            }
+            player.delayAttack = player.GetAuxDelayAttack();
+        }
         public Animator GetAnimator()
         {
             return animator;

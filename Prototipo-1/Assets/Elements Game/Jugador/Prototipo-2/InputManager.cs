@@ -226,9 +226,33 @@ namespace Prototipo_2 {
         }
         public void CheckParabolaAttack_P1()
         {
-            if (InputPlayerController.ParabolaAttack_P1())
+            if (InputPlayerController.ParabolaAttack_P1() && player1.GetEnableAttack()
+                && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante
+                && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
+                && !InputPlayerController.CheckPressDeffenseButton_P1())
             {
-                player1.ParabolaAttack(Proyectil.DisparadorDelProyectil.Jugador1);
+                if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P1() >= 0)
+                {
+                    //ANIMACION ATAQUE EN PARABOLA SALTANDO
+                    player1.spritePlayerActual.PlayAnimation("Ataque Parabola Salto protagonista");
+                    enableMovementPlayer1 = false;
+                }
+                else
+                {
+                    if (!player1.GetIsDuck())
+                    {
+                        //ANIMACION ATAQUE EN PARABOLA PARADO
+                        player1.spritePlayerActual.PlayAnimation("Ataque Parabola protagonista");
+                        enableMovementPlayer1 = false;
+                    }
+                    else if (player1.GetIsDuck())
+                    {
+                        //ANIMACION ATAQUE EN PARABOLA AGACHADO
+                        player1.spritePlayerActual.PlayAnimation("Ataque Parabola Agachado protagonista");
+                        enableMovementPlayer1 = false;
+                    }
+                }
+                //player1.ParabolaAttack(Proyectil.DisparadorDelProyectil.Jugador1);
             }
         }
         public void CheckVerticalUp_P1()
@@ -759,9 +783,33 @@ namespace Prototipo_2 {
         //----- FUNCIONES Y CONTROLES DEL JUGADOR 2 -----//
         public void CheckParabolaAttack_P2()
         {
-            if (InputPlayerController.ParabolaAttack_P2())
+            if (InputPlayerController.ParabolaAttack_P2() && player2.GetEnableAttack()
+                && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante
+                && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
+                && !InputPlayerController.CheckPressDeffenseButton_P2())
             {
-                player2.ParabolaAttack(Proyectil.DisparadorDelProyectil.Jugador2);
+                if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P2() >= 0)
+                {
+                    //ANIMACION ATAQUE EN PARABOLA SALTANDO
+                    player2.spritePlayerActual.PlayAnimation("Ataque Parabola Salto protagonista");
+                    enableMovementPlayer2 = false;
+                }
+                else
+                {
+                    if (!player2.GetIsDuck())
+                    {
+                        //ANIMACION ATAQUE EN PARABOLA PARADO
+                        player2.spritePlayerActual.PlayAnimation("Ataque Parabola protagonista");
+                        enableMovementPlayer2 = false;
+                    }
+                    else if (player2.GetIsDuck())
+                    {
+                        //ANIMACION ATAQUE EN PARABOLA AGACHADO
+                        player2.spritePlayerActual.PlayAnimation("Ataque Parabola Agachado protagonista");
+                        enableMovementPlayer2 = false;
+                    }
+                }
+                //player1.ParabolaAttack(Proyectil.DisparadorDelProyectil.Jugador1);
             }
         }
         public void CheckPauseButton_P2()
