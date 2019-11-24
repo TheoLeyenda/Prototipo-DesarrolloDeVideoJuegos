@@ -60,6 +60,9 @@ namespace Prototipo_2 {
         public List<GameObject> FondosNivel;
         private GameManager gm;
         public bool resetScorePlayers;
+        private bool startDelayFinishRound;
+        public float delayFinishRound;
+        public float auxDelayFinishRound;
         void Start()
         {
             fondoWining.SetActive(false);
@@ -98,15 +101,36 @@ namespace Prototipo_2 {
             //Debug.Log("P2:"+player2);
             if (player1 != null && player2 != null)
             {
-                switch (modoDeJuego)
+                if ((player1.PD.lifePlayer <= 0 || player2.PD.lifePlayer <= 0))
                 {
-                    case ModoDeJuego.PvP:
-                        CheckWinPvP();
-                        break;
-                    case ModoDeJuego.TiroAlBlanco:
-                        CheckWinTiroAlBlanco();
-                        break;
+                    startDelayFinishRound = true;
                 }
+                else if (player1.PD.lifePlayer > 0 && player2.PD.lifePlayer > 0)
+                {
+                    startDelayFinishRound = false;
+                    delayFinishRound = auxDelayFinishRound;
+                }
+
+                if (delayFinishRound > 0 && startDelayFinishRound)
+                {
+                    delayFinishRound = delayFinishRound - Time.deltaTime;
+                }
+                else if (delayFinishRound <= 0)
+                {
+                    CheckConditionWin();
+                }
+            }
+        }
+        public void CheckConditionWin()
+        { 
+            switch (modoDeJuego)
+            {
+                case ModoDeJuego.PvP:
+                    CheckWinPvP();
+                    break;
+                case ModoDeJuego.TiroAlBlanco:
+                    CheckWinTiroAlBlanco();
+                    break;
             }
         }
         public void CheckWinTiroAlBlanco()

@@ -115,6 +115,7 @@ namespace Prototipo_2
         private void OnEnable()
         {
             delaySelectMovement = 0.2f;
+            enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
         }
         public virtual void Start()
         {
@@ -133,6 +134,7 @@ namespace Prototipo_2
             }
             rg2D = GetComponent<Rigidbody2D>();
             CheckInitialCharacter();
+            enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
         }
         public virtual void Update()
         {
@@ -146,6 +148,7 @@ namespace Prototipo_2
             CheckLoadSpecialAttackBar();
             CheckDead();
             if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial 
+                && enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto
                 /*&& enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialAgachado 
                 && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto*/)
             {
@@ -164,21 +167,32 @@ namespace Prototipo_2
         }
         public void CheckOutLimit()
         {
-            if (transform.position.y <= InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar && !isJamping 
-                || transform.position.y <= InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && !isJamping
-                || transform.position.y <= InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa && !isJamping
-                || transform.position.y <= InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto && !isJamping)
+            if (enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto)
             {
-                transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);
-                delaySelectMovement = 0.1f;// SI OCURRE DE NUEVO EL BUG DEL SALTO CAMBIAR ESTA VARIABLE POR EL VALOR 0.2f
-                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
-                //gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
-                SpeedJump = auxSpeedJump;
-            }
-            else if (transform.position.y > InitialPosition.y && !isJamping)
-            {
-                MoveJamp(new Vector3(transform.position.x, InitialPosition.y, transform.position.z));
-                delaySelectMovement = 0.1f;// SI OCURRE DE NUEVO EL BUG DEL SALTO CAMBIAR ESTA VARIABLE POR EL VALOR 0.2f
+                if (transform.position.y <= InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar && !isJamping
+                    || transform.position.y <= InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && !isJamping
+                    || transform.position.y <= InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa && !isJamping
+                    || transform.position.y <= InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto && !isJamping)
+                {
+                    transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);
+                    delaySelectMovement = 0.1f;// SI OCURRE DE NUEVO EL BUG DEL SALTO CAMBIAR ESTA VARIABLE POR EL VALOR 0.2f
+                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+                    //gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
+                    SpeedJump = auxSpeedJump;
+                }
+                else if (transform.position.y > InitialPosition.y && (life <= 0))
+                {
+                    if (CheckMove(new Vector3(transform.position.x, InitialPosition.y, transform.position.z)))
+                    {
+                        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+                        MoveJamp(Vector3.down);                    }
+                    else
+                    {
+                        transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);
+                        CheckDead();
+                    }
+                    delaySelectMovement = 0.1f;// SI OCURRE DE NUEVO EL BUG DEL SALTO CAMBIAR ESTA VARIABLE POR EL VALOR 0.2f
+                }
             }
             
         }
@@ -202,14 +216,14 @@ namespace Prototipo_2
             {
                 delaySelectMovement = 0.1f;
             }
-            if (life > 0)
+            if (life > 0 && enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto)
             {
                 if (delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque))
                 {
-                    if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial 
+                    if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
                         && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialAgachado
                         && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto
-                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAdelante 
+                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAdelante
                         && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAtras)
                     {
                         CheckComportamiento();
@@ -523,14 +537,13 @@ namespace Prototipo_2
             }
         }
         //INTERACTUA CON GAME MANAGER
-        public void CheckDead()
+        public void Dead()
         {
             if (!InPool)
             {
                 if (life <= 0)
                 {
                     // SI SU VIDA ES IGUAL A 0 POS MUERE DESACTIVADO
-                    enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
                     gm.countEnemysDead++;
                     gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
                     gm.ResetRoundCombat(false);
@@ -548,7 +561,6 @@ namespace Prototipo_2
                         {
                             life = auxLife;
                             gm.generateEnemy = true;
-                            enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
                             gm.countEnemysDead++;
                             gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
                             gm.ResetRoundCombat(false);
@@ -562,7 +574,6 @@ namespace Prototipo_2
                         {
                             life = auxLife;
                             gm.generateEnemy = true;
-                            enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
                             gm.countEnemysDead++;
                             gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
                             gm.ResetRoundCombat(false);
@@ -578,12 +589,20 @@ namespace Prototipo_2
                             gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
                             gm.ResetRoundCombat(false);
                             ResetEnemy();
-                            enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
                             enemyPrefab.gameObject.SetActive(false);
                             xpActual = 0;
                         }
                         break;
                 }
+            }
+        }
+        public void CheckDead()
+        {
+            if (life <= 0 && transform.position.y <= InitialPosition.y)
+            {
+                spriteEnemy.PlayAnimation("Death");
+                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+                enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
             }
         }
         public void CheckMovement()
