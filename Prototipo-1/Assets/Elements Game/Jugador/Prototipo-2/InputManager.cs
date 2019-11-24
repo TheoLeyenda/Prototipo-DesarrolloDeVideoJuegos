@@ -149,7 +149,10 @@ namespace Prototipo_2 {
                 if (enableMovementPlayer1)
                 {
                     CheckInputPlayer1();
-                    CheckSpritePlayer1();
+                    if (player1.PD.lifePlayer > 0)
+                    {
+                        CheckSpritePlayer1();
+                    }
                 }
                 else
                 {
@@ -177,7 +180,10 @@ namespace Prototipo_2 {
                 if (enableMovementPlayer2)
                 {
                     CheckInputPlayer2();
-                    CheckSpritePlayer2();
+                    if (player2.PD.lifePlayer > 0)
+                    {
+                        CheckSpritePlayer2();
+                    }
                 }
                 else
                 {

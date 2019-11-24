@@ -310,7 +310,15 @@ namespace Prototipo_2
                 {
                     inputManager.SetEnableMovementPlayer2(false);
                 }
-                spritePlayerActual.PlayAnimation("Death");
+
+                if (transform.position.y <= InitialPosition.y)
+                {
+                    spritePlayerActual.PlayAnimation("Death");
+                }
+                else if (transform.position.y > InitialPosition.y)
+                {
+                    spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Salto;
+                }
             }
         }
         public void Dead()
