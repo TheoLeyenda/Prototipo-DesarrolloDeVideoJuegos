@@ -131,7 +131,7 @@ namespace Prototipo_2 {
         }
         void Update()
         {
-            Debug.Log(enableMovementPlayer1);
+            //Debug.Log(enableMovementPlayer1);
             CheckPauseButton_P1();
             CheckPauseButton_P2();
             //Debug.Log(player1.enumsPlayers.movimiento);
@@ -369,13 +369,13 @@ namespace Prototipo_2 {
                 {
                     if (!player1.GetIsDuck())
                     {
-                        Debug.Log("ENTRE AL ATAQUE PARADO");
+                        //Debug.Log("ENTRE AL ATAQUE PARADO");
                         player1.spritePlayerActual.PlayAnimation("Ataque protagonista");
                         enableMovementPlayer1 = false;
                     }
                     else if (player1.GetIsDuck())
                     {
-                        Debug.Log("ENTRE AL ATAQUE AGACHADO");
+                        //Debug.Log("ENTRE AL ATAQUE AGACHADO");
                         player1.spritePlayerActual.PlayAnimation("Ataque Agachado protagonista");
                         enableMovementPlayer1 = false;
                     }
