@@ -231,7 +231,7 @@ namespace Prototipo_2 {
                 && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
                 && !InputPlayerController.CheckPressDeffenseButton_P1())
             {
-                if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P1() >= 0)
+                if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
                 {
                     //ANIMACION ATAQUE EN PARABOLA SALTANDO
                     player1.spritePlayerActual.PlayAnimation("Ataque Parabola Salto protagonista");
@@ -788,7 +788,7 @@ namespace Prototipo_2 {
                 && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
                 && !InputPlayerController.CheckPressDeffenseButton_P2())
             {
-                if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P2() >= 0)
+                if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
                 {
                     //ANIMACION ATAQUE EN PARABOLA SALTANDO
                     player2.spritePlayerActual.PlayAnimation("Ataque Parabola Salto protagonista");
