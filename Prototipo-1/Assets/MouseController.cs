@@ -5,7 +5,7 @@ using UnityEngine;
 public class MouseController : MonoBehaviour
 {
     // Start is called before the first frame update
-    public bool HideMouse;
+    //public bool HideMouse;
     void Start()
     {
         LockedAndInvisibleCursor();
