@@ -90,8 +90,9 @@ namespace Prototipo_2
                 case TypeGeneration.DeadthEnemy:
                     if (enemigoActual != null)
                     {
-                        if (enemigoActual.life <= 0 || enemigoActual.enumsEnemy.GetStateEnemy() == EnumsEnemy.EstadoEnemigo.muerto)
+                        if (enemigoActual.life <= 0 && enemigoActual.enumsEnemy.GetStateEnemy() == EnumsEnemy.EstadoEnemigo.muerto || !enemigoActual.enemyPrefab.gameObject.activeSelf)
                         {
+                            //Debug.Log("ENTRE");
                             Generate();
                         }
                     }

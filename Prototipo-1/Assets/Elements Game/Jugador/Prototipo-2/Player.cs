@@ -957,5 +957,9 @@ namespace Prototipo_2
         {
             return player_PvP;
         }
+        public Vector3 GetInitialPosition()
+        {
+            return InitialPosition;
+        }
     }
 }

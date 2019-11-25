@@ -77,6 +77,8 @@ namespace Prototipo_2
         public bool enableMecanicParabolaAttack;
         [HideInInspector]
         public bool inAttack;
+        //[HideInInspector]
+        //public bool iAmDead;
 
         [Header("Porcentage: Movimiento")]
         public float MovePorcentage;
@@ -114,11 +116,13 @@ namespace Prototipo_2
         public int ColumnaActual;
         private void OnEnable()
         {
+            //iAmDead = false;
             delaySelectMovement = 0.2f;
             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
         }
         public virtual void Start()
         {
+            //iAmDead = false;
             enableSpecialAttack = false;
             auxSpeedJump = SpeedJump;
             InitialPosition = transform.position;
@@ -540,6 +544,7 @@ namespace Prototipo_2
         //INTERACTUA CON GAME MANAGER
         public void Dead()
         {
+            //iAmDead = true;
             if (!InPool)
             {
                 if (life <= 0)

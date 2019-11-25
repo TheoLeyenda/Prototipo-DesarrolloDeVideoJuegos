@@ -387,12 +387,43 @@ namespace Prototipo_2 {
                 if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && (InputPlayerController.Vertical_Button_P1() < 0 
                     || (enableAnalogic && movingDownAnalog_P1)))
                 {
-                    player1.spritePlayerActual.PlayAnimation("Ataque Abajo Salto protagonista");
-                    enableMovementPlayer1 = false;
+                    float alturaActual = (player1.transform.position.y - player1.GetInitialPosition().y);
+                    if (player1.GetEnableAttack())
+                    {
+                        if (alturaActual > 2f)
+                        {
+                            player1.spritePlayerActual.PlayAnimation("Ataque Abajo Salto protagonista");
+                        }
+                        else if (alturaActual <= 2f && !player1.GetIsJumping())
+                        {
+                            player1.spritePlayerActual.PlayAnimation("Ataque protagonista");
+                        }
+                        else if (player1.GetIsJumping())
+                        {
+                            player1.spritePlayerActual.PlayAnimation("Ataque Agachado protagonista");
+                        }
+                        enableMovementPlayer1 = false;
+                    }
                 }
                 else if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P1() >= 0)
                 {
-                    player1.spritePlayerActual.PlayAnimation("Ataque Salto protagonista");
+                    if (player1.GetEnableAttack())
+                    {
+                        float alturaActual = (player1.transform.position.y - player1.GetInitialPosition().y);
+                        //Debug.Log(alturaActual);
+                        if (alturaActual > 2f)
+                        {
+                            player1.spritePlayerActual.PlayAnimation("Ataque Salto protagonista");
+                        }
+                        else if (alturaActual <= 2f && !player1.GetIsJumping())
+                        {
+                            player1.spritePlayerActual.PlayAnimation("Ataque protagonista");
+                        }
+                        else if(player1.GetIsJumping())
+                        {
+                            player1.spritePlayerActual.PlayAnimation("Ataque Salto protagonista");
+                        }
+                    }
                     enableMovementPlayer1 = false;
                 }
                 else
