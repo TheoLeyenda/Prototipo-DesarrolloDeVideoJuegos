@@ -135,68 +135,71 @@ namespace Prototipo_2 {
             CheckPauseButton_P1();
             CheckPauseButton_P2();
             //Debug.Log(player1.enumsPlayers.movimiento);
-            if (player1 != null && player1.gameObject.activeSelf)
+            if (Time.timeScale == 1)
             {
-                if (!InputPlayerController.CheckPressDeffenseButton_P1() || player1.barraDeEscudo.nededBarMaxPorcentage)
+                if (player1 != null && player1.gameObject.activeSelf)
                 {
-                    player1.barraDeEscudo.AddPorcentageBar();
-                    if (player1.barraDeEscudo.GetValueShild() <= player1.barraDeEscudo.porcentageNededForDeffence)
+                    if (!InputPlayerController.CheckPressDeffenseButton_P1() || player1.barraDeEscudo.nededBarMaxPorcentage)
                     {
-                        //Debug.Log("ENTRE");
-                        player1.barraDeEscudo.SetEnableDeffence(false);
+                        player1.barraDeEscudo.AddPorcentageBar();
+                        if (player1.barraDeEscudo.GetValueShild() <= player1.barraDeEscudo.porcentageNededForDeffence)
+                        {
+                            //Debug.Log("ENTRE");
+                            player1.barraDeEscudo.SetEnableDeffence(false);
+                        }
                     }
-                }
-                if (enableMovementPlayer1)
-                {
-                    CheckInputPlayer1();
-                    if (player1.PD.lifePlayer > 0)
+                    if (enableMovementPlayer1)
                     {
-                        CheckSpritePlayer1();
+                        CheckInputPlayer1();
+                        if (player1.PD.lifePlayer > 0)
+                        {
+                            CheckSpritePlayer1();
+                        }
                     }
-                }
-                else
-                {
-                    if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
+                    else
                     {
-                        player1.SetControllerJoystick(true);
-                        player1.MovementJump();
-                        moveVerticalPlayer1 = false;
-                        player1.SetIsDuck(false);
+                        if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && !inPause)
+                        {
+                            player1.SetControllerJoystick(true);
+                            player1.MovementJump();
+                            moveVerticalPlayer1 = false;
+                            player1.SetIsDuck(false);
+                        }
                     }
-                }
 
+                }
+                if (player2 != null && player2.gameObject.activeSelf)
+                {
+                    if (!InputPlayerController.CheckPressDeffenseButton_P2() || player2.barraDeEscudo.nededBarMaxPorcentage)
+                    {
+                        player2.barraDeEscudo.AddPorcentageBar();
+                        if (player2.barraDeEscudo.GetValueShild() <= player2.barraDeEscudo.porcentageNededForDeffence)
+                        {
+                            //Debug.Log("ENTRE");
+                            player2.barraDeEscudo.SetEnableDeffence(false);
+                        }
+                    }
+                    if (enableMovementPlayer2)
+                    {
+                        CheckInputPlayer2();
+                        if (player2.PD.lifePlayer > 0)
+                        {
+                            CheckSpritePlayer2();
+                        }
+                    }
+                    else
+                    {
+                        if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && !inPause)
+                        {
+                            player2.SetControllerJoystick(true);
+                            player2.MovementJump();
+                            moveVerticalPlayer1 = false;
+                            player2.SetIsDuck(false);
+                        }
+                    }
+                }
+                inPause = false;
             }
-            if (player2 != null && player2.gameObject.activeSelf)
-            {
-                if (!InputPlayerController.CheckPressDeffenseButton_P2() || player2.barraDeEscudo.nededBarMaxPorcentage)
-                {
-                    player2.barraDeEscudo.AddPorcentageBar();
-                    if (player2.barraDeEscudo.GetValueShild() <= player2.barraDeEscudo.porcentageNededForDeffence)
-                    {
-                        //Debug.Log("ENTRE");
-                        player2.barraDeEscudo.SetEnableDeffence(false);
-                    }
-                }
-                if (enableMovementPlayer2)
-                {
-                    CheckInputPlayer2();
-                    if (player2.PD.lifePlayer > 0)
-                    {
-                        CheckSpritePlayer2();
-                    }
-                }
-                else
-                {
-                    if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
-                    {
-                        player2.SetControllerJoystick(true);
-                        player2.MovementJump();
-                        moveVerticalPlayer1 = false;
-                        player2.SetIsDuck(false);
-                    }
-                }
-            }
-            
         }
         public void CheckValueInPause()
         {
@@ -274,7 +277,7 @@ namespace Prototipo_2 {
             {
                 movimientoVerticalHabilitado = ((movimientoNulo_P1 && (movingUp_P1 || pressButtonJamp_P1) && moveVerticalPlayer1) || saltando_P1);
             }
-            if (movimientoVerticalHabilitado)
+            if (movimientoVerticalHabilitado && !inPause)
             {
                 player1.SetControllerJoystick(true);
                 player1.MovementJump();
@@ -387,43 +390,12 @@ namespace Prototipo_2 {
                 if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && (InputPlayerController.Vertical_Button_P1() < 0 
                     || (enableAnalogic && movingDownAnalog_P1)))
                 {
-                    float alturaActual = (player1.transform.position.y - player1.GetInitialPosition().y);
-                    if (player1.GetEnableAttack())
-                    {
-                        if (alturaActual > 2f)
-                        {
-                            player1.spritePlayerActual.PlayAnimation("Ataque Abajo Salto protagonista");
-                        }
-                        else if (alturaActual <= 2f && !player1.GetIsJumping())
-                        {
-                            player1.spritePlayerActual.PlayAnimation("Ataque protagonista");
-                        }
-                        else if (player1.GetIsJumping())
-                        {
-                            player1.spritePlayerActual.PlayAnimation("Ataque Agachado protagonista");
-                        }
-                        enableMovementPlayer1 = false;
-                    }
+                    player1.spritePlayerActual.PlayAnimation("Ataque Abajo Salto protagonista");
+                    enableMovementPlayer1 = false;
                 }
                 else if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P1() >= 0)
                 {
-                    if (player1.GetEnableAttack())
-                    {
-                        float alturaActual = (player1.transform.position.y - player1.GetInitialPosition().y);
-                        //Debug.Log(alturaActual);
-                        if (alturaActual > 2f)
-                        {
-                            player1.spritePlayerActual.PlayAnimation("Ataque Salto protagonista");
-                        }
-                        else if (alturaActual <= 2f && !player1.GetIsJumping())
-                        {
-                            player1.spritePlayerActual.PlayAnimation("Ataque protagonista");
-                        }
-                        else if(player1.GetIsJumping())
-                        {
-                            player1.spritePlayerActual.PlayAnimation("Ataque Salto protagonista");
-                        }
-                    }
+                    player1.spritePlayerActual.PlayAnimation("Ataque Salto protagonista");
                     enableMovementPlayer1 = false;
                 }
                 else
@@ -872,7 +844,7 @@ namespace Prototipo_2 {
             {
                 movimientoVerticalHabilitado = ((movimientoNulo_P2 && (movingUp_P2 || pressButtonJamp_P2) && moveVerticalPlayer2) || saltando_P2);
             }
-            if (movimientoVerticalHabilitado)
+            if (movimientoVerticalHabilitado && !inPause)
             {
                 player2.SetControllerJoystick(true);
                 player2.MovementJump();

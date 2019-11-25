@@ -37,7 +37,7 @@ namespace Prototipo_2
         }
         public void SubstractPorcentageBar()
         {
-            ValueShild = ValueShild - Time.unscaledDeltaTime * speedSubstractBar;
+            ValueShild = ValueShild - Time.deltaTime * speedSubstractBar;
             CheckImageFillAmaut();
             delayLoadBar = auxDelayLoadBar;
         }
@@ -82,7 +82,7 @@ namespace Prototipo_2
                 }
                 if (startDelayEnableDeffence && delayLoadBar > 0)
                 {
-                    delayLoadBar = delayLoadBar - Time.unscaledDeltaTime;
+                    delayLoadBar = delayLoadBar - Time.deltaTime;
                 }
                 else if (startDelayEnableDeffence && delayLoadBar <= 0)
                 {
@@ -157,13 +157,13 @@ namespace Prototipo_2
         {
             if (delayLoadBar <= 0)
             {
-                ValueShild = ValueShild + Time.unscaledDeltaTime * speedAddedBar;
+                ValueShild = ValueShild + Time.deltaTime * speedAddedBar;
                 CheckImageFillAmaut();
 
             }
             else if (delayLoadBar > 0)
             {
-                delayLoadBar = delayLoadBar - Time.unscaledDeltaTime;
+                delayLoadBar = delayLoadBar - Time.deltaTime;
             }
         }
         public bool GetEnableDeffence()

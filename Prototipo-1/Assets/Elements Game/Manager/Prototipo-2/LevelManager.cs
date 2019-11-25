@@ -9,7 +9,6 @@ namespace Prototipo_2
     public class LevelManager : MonoBehaviour
     {
         public bool NivelFinal;
-        public InputManager inputManager;
         public string NameFinishSceneStoryMode;
         public GameObject marcoTexto;
         public GameObject imageJugadorHablando;
@@ -81,7 +80,7 @@ namespace Prototipo_2
             }
             else
             {
-                if (inDialog)
+                if (inDialog && !InputPlayerController.JumpButton_P1())
                 {
                     Time.timeScale = 1;
                 }
@@ -94,12 +93,12 @@ namespace Prototipo_2
             idDialogo++;
         }
         public void DisableChat()
-        {
-            idDialogo = 0;
-            marcoTexto.SetActive(false);
-            imageEnemigoHablando.SetActive(false);
-            imageJugadorHablando.SetActive(false);
-            textDialog.gameObject.SetActive(false);
+        { 
+                idDialogo = 0;
+                marcoTexto.SetActive(false);
+                imageEnemigoHablando.SetActive(false);
+                imageJugadorHablando.SetActive(false);
+                textDialog.gameObject.SetActive(false);
         }
         public void NextLevel()
         {
