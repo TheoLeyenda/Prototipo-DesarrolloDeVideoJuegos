@@ -380,37 +380,40 @@ namespace Prototipo_2 {
         }
         public void CheckAttackButton_P1()
         {
-            if (InputPlayerController.AttackButton_P1() && player1.GetEnableAttack() 
-                && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante 
-                && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras 
-                && !InputPlayerController.CheckPressDeffenseButton_P1())
+            if (!inPause)
             {
-                //Debug.Log("JUGADOR 1 ATAQUE ACTIVED");
-                player1.SetControllerJoystick(true);
-                if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && (InputPlayerController.Vertical_Button_P1() < 0 
-                    || (enableAnalogic && movingDownAnalog_P1)))
+                if (InputPlayerController.AttackButton_P1() && player1.GetEnableAttack()
+                    && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante
+                    && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
+                    && !InputPlayerController.CheckPressDeffenseButton_P1())
                 {
-                    player1.spritePlayerActual.PlayAnimation("Ataque Abajo Salto protagonista");
-                    enableMovementPlayer1 = false;
-                }
-                else if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P1() >= 0)
-                {
-                    player1.spritePlayerActual.PlayAnimation("Ataque Salto protagonista");
-                    enableMovementPlayer1 = false;
-                }
-                else
-                {
-                    if (!player1.GetIsDuck())
+                    //Debug.Log("JUGADOR 1 ATAQUE ACTIVED");
+                    player1.SetControllerJoystick(true);
+                    if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && (InputPlayerController.Vertical_Button_P1() < 0
+                        || (enableAnalogic && movingDownAnalog_P1)))
                     {
-                        //Debug.Log("ENTRE AL ATAQUE PARADO");
-                        player1.spritePlayerActual.PlayAnimation("Ataque protagonista");
+                        player1.spritePlayerActual.PlayAnimation("Ataque Abajo Salto protagonista");
                         enableMovementPlayer1 = false;
                     }
-                    else if (player1.GetIsDuck())
+                    else if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P1() >= 0)
                     {
-                        //Debug.Log("ENTRE AL ATAQUE AGACHADO");
-                        player1.spritePlayerActual.PlayAnimation("Ataque Agachado protagonista");
+                        player1.spritePlayerActual.PlayAnimation("Ataque Salto protagonista");
                         enableMovementPlayer1 = false;
+                    }
+                    else
+                    {
+                        if (!player1.GetIsDuck())
+                        {
+                            //Debug.Log("ENTRE AL ATAQUE PARADO");
+                            player1.spritePlayerActual.PlayAnimation("Ataque protagonista");
+                            enableMovementPlayer1 = false;
+                        }
+                        else if (player1.GetIsDuck())
+                        {
+                            //Debug.Log("ENTRE AL ATAQUE AGACHADO");
+                            player1.spritePlayerActual.PlayAnimation("Ataque Agachado protagonista");
+                            enableMovementPlayer1 = false;
+                        }
                     }
                 }
             }

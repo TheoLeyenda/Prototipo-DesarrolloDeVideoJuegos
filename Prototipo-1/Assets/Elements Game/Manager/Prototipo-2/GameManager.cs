@@ -55,6 +55,7 @@ namespace Prototipo_2
         // Update is called once per frame
         void Update()
         {
+            UnityEngine.Cursor.visible = false;
             if (SceneManager.GetActiveScene().name == "MENU" 
                 || SceneManager.GetActiveScene().name == "SelectPlayerScene")
             {

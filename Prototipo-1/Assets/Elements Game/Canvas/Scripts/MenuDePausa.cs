@@ -51,6 +51,7 @@ namespace Prototipo_2
         public void Reanudar()
         {
             Time.timeScale = 1;
+            UnityEngine.Cursor.visible = false;
         }
         public void ReiniciarNivel()
         {
