@@ -58,6 +58,8 @@ namespace Prototipo_2 {
         public Level_Selected level_selected;
         public ModoDeJuego modoDeJuego;
         public List<GameObject> FondosNivel;
+        public GameObject menuPausa_P1;
+        public GameObject menuPausa_P2;
         private GameManager gm;
         public bool resetScorePlayers;
         private bool startDelayFinishRound;
@@ -117,36 +119,43 @@ namespace Prototipo_2 {
                 }
                 else if (delayFinishRound <= 0)
                 {
+                    //Debug.Log("ENTRE");
                     CheckConditionWin();
                 }
             }
         }
         public void CheckConditionWin()
-        { 
+        {
+            
             switch (modoDeJuego)
             {
                 case ModoDeJuego.PvP:
+                    //Debug.Log("ENTRE A TIRO AL BLANCO");
                     CheckWinPvP();
                     break;
                 case ModoDeJuego.TiroAlBlanco:
+                    //Debug.Log("ENTRE A TIRO AL BLANCO");
                     CheckWinTiroAlBlanco();
                     break;
             }
         }
         public void CheckWinTiroAlBlanco()
         {
-            if (player1.PD.lifePlayer <= 0 || player1.PD.lifePlayer <= 0)
+            if (player1.PD.lifePlayer <= 0 || player2.PD.lifePlayer <= 0)
             {
                 if (player1.PD.score == player2.PD.score)
                 {
+                    //Debug.Log("ENTRE AL EMPATE");
                     CheckEmpate();
                 }
                 else if (player1.PD.score > player2.PD.score)
                 {
+                    //Debug.Log("GANO EL JUGADOR 1");
                     CheckWinPlayer1();
                 }
                 else if (player2.PD.score > player1.PD.score)
                 {
+                    //Debug.Log("GANO EL JUGADOR 2");
                     CheckWinPlayer2();
                 }
             }
@@ -182,6 +191,8 @@ namespace Prototipo_2 {
             }
             else
             {
+                menuPausa_P1.SetActive(false);
+                menuPausa_P2.SetActive(false);
                 FondosNivel[(int)level_selected].SetActive(false);
                 fondoEmpate.SetActive(true);
                 prefabWinPlayer1.SetActive(true);
@@ -211,6 +222,8 @@ namespace Prototipo_2 {
             }
             else
             {
+                menuPausa_P1.SetActive(false);
+                menuPausa_P2.SetActive(false);
                 FondosNivel[(int)level_selected].SetActive(false);
                 fondoWining.SetActive(true);
                 prefabWinPlayer2.SetActive(false);
@@ -235,6 +248,8 @@ namespace Prototipo_2 {
             }
             else
             {
+                menuPausa_P1.SetActive(false);
+                menuPausa_P2.SetActive(false);
                 FondosNivel[(int)level_selected].SetActive(false);
                 fondoWining.SetActive(true);
                 prefabWinPlayer2.SetActive(true);

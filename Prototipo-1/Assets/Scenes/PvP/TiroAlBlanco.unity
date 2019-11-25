@@ -708,6 +708,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d33b22d74e91f24180f0aa369a6e9d6, type: 3}
+--- !u!1 &751178732 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7076556727897840759, guid: 0d33b22d74e91f24180f0aa369a6e9d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 751178731}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &751178733 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7076556726805429123, guid: 0d33b22d74e91f24180f0aa369a6e9d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 751178731}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &947978576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1461,13 +1473,23 @@ PrefabInstance:
     - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
         type: 3}
       propertyPath: delayFinishRound
-      value: 1
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
         type: 3}
       propertyPath: auxDelayFinishRound
-      value: 1
+      value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
+        type: 3}
+      propertyPath: menuPausa_P1
+      value: 
+      objectReference: {fileID: 751178733}
+    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
+        type: 3}
+      propertyPath: menuPausa_P2
+      value: 
+      objectReference: {fileID: 751178732}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8928e77982af45438c66e3ccf001ec8, type: 3}
 --- !u!114 &1583978047 stripped

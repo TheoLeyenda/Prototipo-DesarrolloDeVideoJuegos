@@ -521,6 +521,7 @@ namespace Prototipo_2 {
                         CheckParabolaAttack_P1();
                         CheckVerticalUp_P1();
                         //CheckButtonJump_P1();
+                        CheckVerticalDown_P1();
                         CheckVerticalCero_P1();
                         CheckHorizontalLeft_P1();
                         CheckHorizontalRight_P1();
@@ -754,6 +755,7 @@ namespace Prototipo_2 {
                             CheckSpriteMoverAtras_P1();
                             CheckSpritesSalto_P1();
                             CheckSpritesParado_P1();
+                            CheckSpritesAgachado_P1();
                             break;
                         case Player_PvP.PlayerSelected.Balanceado:
                             CheckSpriteParado_P1();
@@ -1086,6 +1088,7 @@ namespace Prototipo_2 {
                             CheckParabolaAttack_P2();
                             CheckVerticalUp_P2();
                             //CheckButtonJump_P2();
+                            CheckVerticalDown_P2();
                             CheckVerticalCero_P2();
                             CheckHorizontalLeft_P2();
                             CheckHorizontalRight_P2();
@@ -1109,6 +1112,9 @@ namespace Prototipo_2 {
                             break;
                         case Player_PvP.PlayerSelected.Defensivo:
                             CheckParabolaAttack_P2();
+                            CheckVerticalUp_P2();
+                            //CheckButtonJump_P2();
+                            CheckVerticalDown_P2();
                             CheckVerticalCero_P2();
                             CheckHorizontalLeft_P2();
                             CheckHorizontalRight_P2();
@@ -1316,6 +1322,7 @@ namespace Prototipo_2 {
                             CheckSpriteMoverAtras_P2();
                             CheckSpritesSalto_P2();
                             CheckSpritesParado_P2();
+                            CheckSpritesAgachado_P2();
                             break;
                         case Player_PvP.PlayerSelected.Balanceado:
                             CheckSpriteParado_P2();
@@ -1329,7 +1336,9 @@ namespace Prototipo_2 {
                             CheckSpriteParado_P2();
                             CheckSpriteMoverAdelante_P2();
                             CheckSpriteMoverAtras_P2();
+                            CheckSpritesSalto_P2();
                             CheckSpritesParado_P2();
+                            CheckSpritesAgachado_P2();
                             break;
                         case Player_PvP.PlayerSelected.Protagonista:
                             CheckSpriteParado_P2();
