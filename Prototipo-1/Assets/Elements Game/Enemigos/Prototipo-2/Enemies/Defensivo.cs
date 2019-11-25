@@ -37,6 +37,10 @@ namespace Prototipo_2
         // Update is called once per frame
         public override void Update()
         {
+            if (life <= 0)
+            {
+                Disparo.gameObject.SetActive(false);
+            }
             base.Update();
             CheckInDeffense();
             if (Disparo.gameObject.activeSelf)

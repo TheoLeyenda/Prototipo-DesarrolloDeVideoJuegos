@@ -40,6 +40,7 @@ namespace Prototipo_2
             if (GameManager.instanceGameManager != null)
             {
                 gm = GameManager.instanceGameManager;
+                gm.CanvasGameOver.SetActive(false);
             }
             if (RestartTable)
             {
