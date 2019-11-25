@@ -27,6 +27,8 @@ namespace Prototipo_2
         public List<string> namePlayersOptions;
         public Cursor CursorSelectorPlayer1;
         public Cursor CursorSelectorPlayer2;
+        public GameObject CursorGrandePlayer1;
+        public GameObject CursorChicoPlayer1;
         private string[,] grillaDeSeleccion;
         public int filas;
         public int columnas;
@@ -103,6 +105,20 @@ namespace Prototipo_2
             MoveCursor();
             CheckSelectCursor();
             DecoratePlayerSelected();
+            CheckPositionCursor();
+        }
+        public void CheckPositionCursor()
+        {
+            if (cursorPlayer1.x == cursorPlayer2.x && cursorPlayer2.y == cursorPlayer1.y)
+            {
+                CursorGrandePlayer1.SetActive(true);
+                CursorChicoPlayer1.SetActive(false);
+            }
+            else
+            {
+                CursorChicoPlayer1.SetActive(true);
+                CursorGrandePlayer1.SetActive(false);
+            }
         }
         public void DecoratePlayerSelected()
         {
