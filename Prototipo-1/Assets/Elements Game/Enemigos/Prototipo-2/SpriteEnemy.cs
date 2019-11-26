@@ -174,7 +174,19 @@ namespace Prototipo_2
                                 PlayAnimation("Recibir Danio enemigo defensivo");
                                 break;
                             case SpriteActual.ContraAtaque:
-                                PlayAnimation("Contra Ataque enemigo defensivo");
+                                if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
+                                {
+                                    PlayAnimation("Contra Ataque Salto enemigo defensivo");
+                                }
+                                else if (enemy.GetIsDuck() || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa)
+                                {
+                                    PlayAnimation("Contra Ataque Agachado enemigo defensivo");
+                                }
+                                else if (!enemy.GetIsDuck())
+                                {
+                                    PlayAnimation("Contra Ataque enemigo defensivo");
+                                }
+
                                 break;
                             default:
                                 break;

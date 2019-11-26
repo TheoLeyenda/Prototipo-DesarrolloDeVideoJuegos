@@ -171,7 +171,6 @@ namespace Prototipo_2
                 }
                 if (delayStateCounterAttackDeffense > 0)
                 {
-                    Debug.Log("ENTRE");
                     spriteEnemy.spriteRenderer.color = Color.yellow;
                     stateDeffence = StateDeffence.CounterAttackDeffense;
                     delayStateCounterAttackDeffense = delayStateCounterAttackDeffense - Time.deltaTime;
