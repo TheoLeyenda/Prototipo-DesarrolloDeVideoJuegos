@@ -149,7 +149,6 @@ namespace Prototipo_2
                                 PlayAnimation("Salto enemigo defensivo");
                                 break;
                             case SpriteActual.SaltoDefensa:
-                                spriteRenderer.color = Color.white;
                                 PlayAnimation("Salto Defensa enemigo defensivo");
                                 break;
                             case SpriteActual.Agachado:
@@ -157,7 +156,6 @@ namespace Prototipo_2
                                 PlayAnimation("Agachado enemigo defensivo");
                                 break;
                             case SpriteActual.AgachadoDefensa:
-                                spriteRenderer.color = Color.white;
                                 PlayAnimation("Agachado Defensa enemigo defensivo");
                                 break;
                             case SpriteActual.ParadoAtaque:

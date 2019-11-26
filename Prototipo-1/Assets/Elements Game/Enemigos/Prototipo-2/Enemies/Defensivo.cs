@@ -68,6 +68,7 @@ namespace Prototipo_2
                 delayAttack = delayAttack - Time.deltaTime;
                 if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
                 {
+                    spriteEnemy.spriteRenderer.color = Color.white;
                     spriteEnemy.PlayAnimation("Salto enemigo defensivo");
                 }
             }
@@ -92,17 +93,20 @@ namespace Prototipo_2
                 {
                     if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
                     {
+                        spriteEnemy.spriteRenderer.color = Color.white;
                         spriteEnemy.animator.Play("Ataque enemigo defensivo");
                         inAttack = true;
                     }
                     else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
                         || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
                     {
+                        spriteEnemy.spriteRenderer.color = Color.white;
                         spriteEnemy.animator.Play("Ataque Salto enemigo defensivo");
                         inAttack = true;
                     }
                     else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
                     {
+                        spriteEnemy.spriteRenderer.color = Color.white;
                         spriteEnemy.animator.Play("Ataque Agachado enemigo defensivo");
                         inAttack = true;
                     }
@@ -132,16 +136,19 @@ namespace Prototipo_2
                     if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
                         && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp() && delayAttack <= 0)
                     {
+                        spriteEnemy.spriteRenderer.color = Color.white;
                         spriteEnemy.PlayAnimation("Ataque Parabola enemigo defensivo");
                         inAttack = true;
                     }
                     else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && delayAttack <= 0)
                     {
+                        spriteEnemy.spriteRenderer.color = Color.white;
                         spriteEnemy.PlayAnimation("Ataque Parabola Salto enemigo defensivo");
                         inAttack = true;
                     }
                     else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && delayAttack <= 0)
                     {
+                        spriteEnemy.spriteRenderer.color = Color.white;
                         spriteEnemy.PlayAnimation("Ataque Parabola Agachado enemigo defensivo");
                         inAttack = true;
                     }
@@ -151,7 +158,9 @@ namespace Prototipo_2
         }
         public void CheckInDeffense()
         {
-            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar 
+            if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar 
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa)
                 && barraDeEscudo.GetValueShild() > barraDeEscudo.porcentageNededForDeffence
                     && barraDeEscudo.GetEnableDeffence())
             {
@@ -162,6 +171,7 @@ namespace Prototipo_2
                 }
                 if (delayStateCounterAttackDeffense > 0)
                 {
+                    Debug.Log("ENTRE");
                     spriteEnemy.spriteRenderer.color = Color.yellow;
                     stateDeffence = StateDeffence.CounterAttackDeffense;
                     delayStateCounterAttackDeffense = delayStateCounterAttackDeffense - Time.deltaTime;
