@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class EventWise : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public string nombreEvento;
-    public GameObject objetoMusical;
     void Start()
     {
-        AkSoundEngine.PostEvent(nombreEvento,objetoMusical);
+        AkSoundEngine.PostEvent("inicio",gameObject);
     }
     
 }
