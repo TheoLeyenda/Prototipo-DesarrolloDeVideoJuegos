@@ -97,6 +97,7 @@ namespace Prototipo_2 {
             }
             if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
             {
+                Debug.Log(ActualSprite);
                 if (player.GetInputManager() != null)
                 {
                     if (player.GetInputManager().GetEnableMovementPlayer1())
@@ -104,10 +105,10 @@ namespace Prototipo_2 {
                         switch (ActualSprite)
                         {
                             case SpriteActual.Parado:
-                                if (player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga)
-                                {
+                                //if (player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga)
+                                //{
                                     PlayAnimation("Parado protagonista");
-                                }
+                                //}
                                 break;
                             case SpriteActual.ParadoDefensa:
                                 PlayAnimation("Parado Defensa protagonista");
@@ -179,10 +180,10 @@ namespace Prototipo_2 {
                         switch (ActualSprite)
                         {
                             case SpriteActual.Parado:
-                                if (player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga)
-                                {
+                                //if (player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga)
+                                //{
                                     PlayAnimation("Parado protagonista");
-                                }
+                                //}
                                 break;
                             case SpriteActual.ParadoDefensa:
                                 PlayAnimation("Parado Defensa protagonista");
@@ -314,6 +315,10 @@ namespace Prototipo_2 {
             {
                 player.GetInputManager().SetEnableMovementPlayer2(true);
             }
+            /*if (!player.GetIsDuck())
+            {
+                ActualSprite = SpriteActual.Parado;
+            }*/
         }
         public void SetActualSprite(SpriteActual spriteActual)
         {
