@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class EventWise : MonoBehaviour
 {
+    public string nombre;
+    public bool initEventInStart;
     void Start()
     {
-        AkSoundEngine.PostEvent("inicio",gameObject);
+        if (initEventInStart)
+        {
+            StartEvent();
+        }
+    }
+
+    public void StartEvent()
+    {
+        AkSoundEngine.PostEvent(nombre, gameObject);
     }
     
 }
