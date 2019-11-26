@@ -134,7 +134,31 @@ namespace Prototipo_2 {
                                 PlayAnimation("Agachado Defensa protagonista");
                                 break;
                             case SpriteActual.ContraAtaqueParado:
-                                PlayAnimation("Contra Ataque Parado protagonista");
+                                if (player.GetPlayerPvP() != null)
+                                {
+                                    if (player.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Defensivo)
+                                    {
+                                        if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa 
+                                            || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
+                                        {
+                                            PlayAnimation("Contra Ataque Salto protagonista");
+                                        }
+                                        else if (player.GetIsDuck() || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacheDefensa 
+                                            || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Agacharse)
+                                        {
+                                            PlayAnimation("Contra Ataque Agachado protagonista");
+                                        }
+
+                                        else if (!player.GetIsDuck())
+                                        {
+                                            PlayAnimation("Contra Ataque Parado protagonista");
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    PlayAnimation("Contra Ataque Parado protagonista");
+                                }
                                 break;
                             case SpriteActual.ParadoAtaque:
                                 break;
