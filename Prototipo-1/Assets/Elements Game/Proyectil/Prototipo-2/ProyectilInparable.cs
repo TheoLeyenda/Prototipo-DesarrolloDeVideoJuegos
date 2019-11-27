@@ -21,6 +21,10 @@ namespace Prototipo_2
                 gm = GameManager.instanceGameManager;
             }
         }
+        private void OnDisable()
+        {
+            soundgenerate = false;
+        }
         private void OnEnable()
         {
             timeLife = auxTimeLife;

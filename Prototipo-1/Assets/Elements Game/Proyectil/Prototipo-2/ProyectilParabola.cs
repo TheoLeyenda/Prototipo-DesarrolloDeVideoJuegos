@@ -19,7 +19,7 @@ namespace Prototipo_2 {
         private EventWise eventWise;
         void Start()
         {
-            
+            soundgenerate = false;
             spriteProyectilParabola = spriteRenderer.sprite;
             timeLife = auxTimeLife;
             if (GameManager.instanceGameManager != null)
@@ -27,16 +27,25 @@ namespace Prototipo_2 {
                 gm = GameManager.instanceGameManager;
             }
         }
+        private void OnDisable()
+        {
+            soundgenerate = false;
+        }
         private void OnEnable()
         {
-            if (eventWise != null)
-            {
-                Sonido();
-            }
             inAnimation = false;
             spriteRenderer.sprite = spriteProyectilParabola;
             timeLife = auxTimeLife;
             OnParabola();
+            if (eventWise == null)
+            {
+                eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
+            }
+            if (eventWise != null && !soundgenerate)
+            {
+                soundgenerate = true;
+                Sonido();
+            }
         }
         public override void Sonido()
         {
