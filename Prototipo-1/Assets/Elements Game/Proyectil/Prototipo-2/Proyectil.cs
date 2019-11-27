@@ -73,9 +73,11 @@ namespace Prototipo_2
         public bool colisionPlayer;
         protected bool inAnimation;
         private EventWise eventWise;
+        private bool soundgenerate;
 
         private void Awake()
         {
+            soundgenerate = false;
             circleCollider2D = GetComponent<CircleCollider2D>();
             if (circleCollider2D != null)
             {
@@ -89,6 +91,7 @@ namespace Prototipo_2
         private void OnDisable()
         {
             trailRenderer.enabled = false;
+            soundgenerate = false;
         }
         private void Start()
         {
@@ -103,10 +106,7 @@ namespace Prototipo_2
         private void OnEnable()
         {
 
-            if (eventWise != null)
-            {
-                Sonido();
-            }
+           
             inAnimation = false;
             timeLife = auxTimeLife;
             if (circleCollider2D != null)
@@ -124,6 +124,11 @@ namespace Prototipo_2
             if (eventWise == null)
             {
                 eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
+            }
+            if (eventWise != null && !soundgenerate)
+            {
+                soundgenerate = true;
+                Sonido();
             }
             CheckTimeLife();
         }
