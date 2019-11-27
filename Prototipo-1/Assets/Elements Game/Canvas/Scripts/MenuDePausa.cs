@@ -13,6 +13,7 @@ namespace Prototipo_2
             MenuOpciones,
             MenuControles,
         }
+        public EventWise eventwise;
         public GameObject MenuPausa;
         public GameObject MenuOpciones;
         public GameObject MenuControles;
@@ -52,6 +53,7 @@ namespace Prototipo_2
         {
             Time.timeScale = 1;
             UnityEngine.Cursor.visible = false;
+            eventwise.StartEvent("despausar");
         }
         public void ReiniciarNivel()
         {

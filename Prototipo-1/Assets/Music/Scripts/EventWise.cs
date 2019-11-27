@@ -19,5 +19,9 @@ public class EventWise : MonoBehaviour
     {
         AkSoundEngine.PostEvent(nombre, gameObject);
     }
+    public void StartEvent(string nameEvent)
+    {
+        AkSoundEngine.PostEvent(nameEvent, gameObject);
+    }
     
 }
