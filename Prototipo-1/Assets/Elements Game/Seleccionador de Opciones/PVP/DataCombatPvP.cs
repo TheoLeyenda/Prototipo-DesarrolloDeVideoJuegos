@@ -66,8 +66,10 @@ namespace Prototipo_2 {
         private bool startDelayFinishRound;
         public float delayFinishRound;
         public float auxDelayFinishRound;
+        private bool soundEnter;
         void Start()
         {
+            soundEnter = false;
             fondoWining.SetActive(false);
             fondoEmpate.SetActive(false);
             if (GameManager.instanceGameManager != null)
@@ -189,6 +191,7 @@ namespace Prototipo_2 {
             if (gm.structGameManager.gm_dataCombatPvP.rondaActual < gm.structGameManager.gm_dataCombatPvP.countRounds)
             {
                 ReiniciarRonda();
+                soundEnter = false;
             }
             else
             {
@@ -222,10 +225,15 @@ namespace Prototipo_2 {
             if (gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP1 < gm.structGameManager.gm_dataCombatPvP.countRounds)
             {
                 ReiniciarRonda();
+                soundEnter = false;
             }
             else
             {
-                AkSoundEngine.PostEvent("pvp_ganador", eventWisse);
+                if (!soundEnter)
+                {
+                    AkSoundEngine.PostEvent("pvp_ganador", eventWisse);
+                    soundEnter = true;
+                }
 
                 menuPausa_P1.SetActive(false);
                 menuPausa_P2.SetActive(false);
@@ -249,11 +257,15 @@ namespace Prototipo_2 {
             if (gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP2 < gm.structGameManager.gm_dataCombatPvP.countRounds)
             {
                 ReiniciarRonda();
-
+                soundEnter = false;
             }
             else
             {
-                AkSoundEngine.PostEvent("pvp_ganador", eventWisse);
+                if (!soundEnter)
+                {
+                    AkSoundEngine.PostEvent("pvp_ganador", eventWisse);
+                    soundEnter = true;
+                }
 
                 menuPausa_P1.SetActive(false);
                 menuPausa_P2.SetActive(false);

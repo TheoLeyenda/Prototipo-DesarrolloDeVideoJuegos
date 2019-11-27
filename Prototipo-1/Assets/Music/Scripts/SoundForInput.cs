@@ -43,8 +43,8 @@ public class SoundForInput : MonoBehaviour
     }
     public void CheckSelectionP1()
     {
-        Debug.Log("Hola");
-        Debug.Log(mov);
+        //Debug.Log("Hola");
+        //Debug.Log(mov);
         if (InputPlayerController.Horizontal_Button_P1() == 0 && InputPlayerController.Vertical_Button_P1() == 0)
         {
             mov = Movimiento.Habilitado;
@@ -61,7 +61,7 @@ public class SoundForInput : MonoBehaviour
         }
         if (movimientoVertical)
         {
-            Debug.Log(InputPlayerController.Vertical_Button_P1());
+            //Debug.Log(InputPlayerController.Vertical_Button_P1());
             if (((InputPlayerController.Vertical_Button_P1() > 0.5f || InputPlayerController.Vertical_Button_P1() < -0.5f)
                 || (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))) && mov == Movimiento.Habilitado)
             {

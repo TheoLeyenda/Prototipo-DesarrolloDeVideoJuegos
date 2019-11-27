@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 namespace Prototipo_2
 {
@@ -23,6 +24,8 @@ namespace Prototipo_2
         // SERA UNA LISTA DE LOS MEJORES 10 PUNTAJES
         public GameObject prefabHighScoreList;
         public GameObject inputFiled;
+        public GameObject TextIngresado;
+        public GameObject Placeholder;
         public List<ScoreData> scores;
         private List<ScoreData> initialHighScoreData;
         private GameManager gm;
@@ -31,6 +34,7 @@ namespace Prototipo_2
         [HideInInspector]
         public string nameActual;
         public Text nombreIngresado;
+        public CheckSelectedEventSystem checkSelectedEventSystem;
         public bool RestartTable;
         private void Start()
         {
@@ -57,12 +61,20 @@ namespace Prototipo_2
             else if (nombreIngresado.text != "")
             {
                 prefabHighScoreList.SetActive(true);
-                inputFiled.SetActive(false);
                 nameActual = nombreIngresado.text;
                 scoreActual = gm.playerData_P1.score;
                 //SaveListScore();
                 CheckListScore();
                 LoadListScore();
+                
+                if (inputFiled != null && inputFiled.activeSelf)
+                {
+                    inputFiled.GetComponent<InputField>().enabled = false;
+                    inputFiled.GetComponent<Image>().enabled = false;
+                    Placeholder.gameObject.SetActive(false);
+                    TextIngresado.gameObject.SetActive(false);
+                }
+                checkSelectedEventSystem.NewObjectCurrentFirst();
             }
         }
         public void LoadListScore()

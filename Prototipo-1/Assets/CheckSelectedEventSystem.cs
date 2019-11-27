@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 public class CheckSelectedEventSystem : MonoBehaviour
 {
     // Update is called once per frame
-   
-    
+
+    public GameObject newFirstGo;
     void Update()
     {
         if (EventSystem.current != null)
@@ -17,5 +17,9 @@ public class CheckSelectedEventSystem : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
             }
         }
+    }
+    public void NewObjectCurrentFirst()
+    {
+        EventSystem.current.SetSelectedGameObject(newFirstGo);
     }
 }

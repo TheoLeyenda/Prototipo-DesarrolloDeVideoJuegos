@@ -20,7 +20,10 @@ namespace Prototipo_2 {
             {
                 gm = GameManager.instanceGameManager;
             }
-            eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
+            if (eventWise != null)
+            {
+                eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
+            }
         }
         public void Multijugador()
         {
@@ -155,7 +158,10 @@ namespace Prototipo_2 {
         }
         public void Menu()
         {
-            eventWise.StartEvent("volver_al_menu");
+            if (eventWise != null)
+            {
+                eventWise.StartEvent("volver_al_menu");
+            }
             gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Nulo;
             idListaNiveles = -1;
             Time.timeScale = 1;
