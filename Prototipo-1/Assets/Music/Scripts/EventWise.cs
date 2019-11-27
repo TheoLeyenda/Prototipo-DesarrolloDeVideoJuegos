@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EventWise : MonoBehaviour
 {
+    // CODIGO PARA HACER SWITCHES CON WWISE: AkSoundEngine.SwitchState(string del nombre del nuevo estado);
     public string nombre;
     public bool initEventInStart;
     void Start()
