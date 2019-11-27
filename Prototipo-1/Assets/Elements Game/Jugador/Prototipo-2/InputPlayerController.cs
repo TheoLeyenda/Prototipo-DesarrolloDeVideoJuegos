@@ -41,6 +41,10 @@ public static class InputPlayerController
     {
         return Input.GetButtonDown("PauseButton_P1");
     }
+    public static bool CheckPauseButtonP1()
+    {
+        return Input.GetButton("PauseButton_P1");
+    }
     public static bool SpecialAttackButton_P1()
     {
         return Input.GetButtonDown("SpecialAttackButton_P1");
@@ -111,6 +115,10 @@ public static class InputPlayerController
     public static bool PauseButton_P2()
     {
         return Input.GetButtonDown("PauseButton_P2");
+    }
+    public static bool CheckPauseButtonP2()
+    {
+        return Input.GetButton("PauseButton_P2");
     }
     public static bool SpecialAttackButton_P2()
     {
