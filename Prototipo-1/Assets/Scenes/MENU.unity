@@ -661,6 +661,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MENU PRINCIPAL
       objectReference: {fileID: 0}
+    - target: {fileID: 1107006081261517647, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1107006081141894832, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -866,8 +871,28 @@ PrefabInstance:
       propertyPath: m_textInfo.characterCount
       value: 34
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 776443814, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8, type: 3}
+      propertyPath: m_FirstSelected
+      value: 
+      objectReference: {fileID: 1107006080477397335}
+    - target: {fileID: 1489508543, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4662476526967329876, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8,
+        type: 3}
+      propertyPath: m_FirstSelected
+      value: 
+      objectReference: {fileID: 1107006080477397335}
+    m_RemovedComponents:
+    - {fileID: 1489508545, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8, type: 3}
+--- !u!1 &1107006080477397335 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1107006080779697025, guid: fcad7b5b6e82f7443a5c35b7c5a13ee8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1107006080477397334}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3084037903458706540
 PrefabInstance:
   m_ObjectHideFlags: 0
