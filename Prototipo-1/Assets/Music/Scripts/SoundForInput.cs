@@ -51,20 +51,21 @@ public class SoundForInput : MonoBehaviour
         }
         if (movimientoHorizontal)
         {
-            if ((InputPlayerController.Horizontal_Button_P1() > 0.5f || InputPlayerController.Horizontal_Button_P1() < - 0.5f) 
-                && mov == Movimiento.Habilitado)
+            if (((InputPlayerController.Horizontal_Button_P1() > 0.5f || InputPlayerController.Horizontal_Button_P1() < - 0.5f) 
+                || (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))) && mov == Movimiento.Habilitado)
             {
-                Debug.Log("ENTRE AL EVENTO DE SONIDO MASTER");
+                //Debug.Log("ENTRE AL EVENTO DE SONIDO MASTER");
                 AkSoundEngine.PostEvent(nombreEventoMovimiento, gameObject);
                 mov = Movimiento.Nulo;
             }
         }
         if (movimientoVertical)
         {
-            if ((InputPlayerController.Vertical_Button_P1() > 0.5f || InputPlayerController.Vertical_Button_P1() < -0.5f)
-                && mov == Movimiento.Habilitado)
+            Debug.Log(InputPlayerController.Vertical_Button_P1());
+            if (((InputPlayerController.Vertical_Button_P1() > 0.5f || InputPlayerController.Vertical_Button_P1() < -0.5f)
+                || (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))) && mov == Movimiento.Habilitado)
             {
-                Debug.Log("ENTRE AL EVENTO DE SONIDO MASTER");
+                //Debug.Log("ENTRE AL EVENTO DE SONIDO MASTER");
                 AkSoundEngine.PostEvent(nombreEventoMovimiento, gameObject);
                 mov = Movimiento.Nulo;
             }
@@ -84,8 +85,8 @@ public class SoundForInput : MonoBehaviour
         }
         if (movimientoHorizontal)
         {
-            if ((InputPlayerController.Horizontal_Button_P2() > 0.5f || InputPlayerController.Horizontal_Button_P2() < -0.5f)
-                && mov == Movimiento.Habilitado)
+            if (((InputPlayerController.Horizontal_Button_P2() > 0.5f || InputPlayerController.Horizontal_Button_P2() < -0.5f)
+                || (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))) && mov == Movimiento.Habilitado)
             {
                 AkSoundEngine.PostEvent(nombreEventoMovimiento, gameObject);
                 mov = Movimiento.Nulo;
@@ -93,8 +94,8 @@ public class SoundForInput : MonoBehaviour
         }
         if (movimientoVertical)
         {
-            if ((InputPlayerController.Vertical_Button_P2() > 0.5f || InputPlayerController.Vertical_Button_P2() < -0.5f)
-                && mov == Movimiento.Habilitado)
+            if (((InputPlayerController.Vertical_Button_P2() > 0.5f || InputPlayerController.Vertical_Button_P2() < -0.5f)
+                || (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))) && mov == Movimiento.Habilitado)
             {
                 AkSoundEngine.PostEvent(nombreEventoMovimiento, gameObject);
                 mov = Movimiento.Nulo;
@@ -110,12 +111,12 @@ public class SoundForInput : MonoBehaviour
     {
         if (InputPlayerController.CheckPauseButtonP1() && Time.timeScale == 1)
         {
-            AkSoundEngine.PostEvent(nombreEventoPausa, gameObject);
+            AkSoundEngine.PostEvent("pausa", gameObject);
             controlPausador = ControlPausador.player1;
         }
         if (InputPlayerController.CheckPauseButtonP2() && Time.timeScale == 1)
         {
-            AkSoundEngine.PostEvent(nombreEventoPausa, gameObject);
+            AkSoundEngine.PostEvent("pausa", gameObject);
             controlPausador = ControlPausador.player2;
         }
         if (Time.timeScale == 0 && controlPausador == ControlPausador.player1)
@@ -127,6 +128,14 @@ public class SoundForInput : MonoBehaviour
         {
             mov = Movimiento.Habilitado;
             CheckSelectionP2();
+        }
+    }
+    public void PauseSelected()
+    {
+        if (mov == Movimiento.Habilitado)
+        {
+            AkSoundEngine.PostEvent(nombreEventoMovimiento, gameObject);
+            mov = Movimiento.Nulo;
         }
     }
 }
