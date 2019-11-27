@@ -12,6 +12,7 @@ namespace Prototipo_2
         public float auxTimeLife;
         public SpriteRenderer spriteRenderer;
         public Proyectil.DisparadorDelProyectil disparadorDelProyectil;
+        public Animator animator;
 
         private void OnEnable()
         {
@@ -53,6 +54,10 @@ namespace Prototipo_2
                 }
                 enemy.life = enemy.life - (damage/2);
             }
+        }
+        public void PlaySegundaAnimacion()
+        {
+            animator.Play("FinalAnimacion");
         }
     }
 }
