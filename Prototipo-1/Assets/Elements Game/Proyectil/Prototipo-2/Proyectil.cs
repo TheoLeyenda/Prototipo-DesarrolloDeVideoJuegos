@@ -73,7 +73,7 @@ namespace Prototipo_2
         public bool colisionPlayer;
         protected bool inAnimation;
         private EventWise eventWise;
-        private bool soundgenerate;
+        protected bool soundgenerate;
 
         private void Awake()
         {
@@ -105,8 +105,6 @@ namespace Prototipo_2
         }
         private void OnEnable()
         {
-
-           
             inAnimation = false;
             timeLife = auxTimeLife;
             if (circleCollider2D != null)
