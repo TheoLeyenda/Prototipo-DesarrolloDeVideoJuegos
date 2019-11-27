@@ -44,6 +44,7 @@ public class SoundForInput : MonoBehaviour
     public void CheckSelectionP1()
     {
         Debug.Log("Hola");
+        Debug.Log(mov);
         if (InputPlayerController.Horizontal_Button_P1() == 0 && InputPlayerController.Vertical_Button_P1() == 0)
         {
             mov = Movimiento.Habilitado;
