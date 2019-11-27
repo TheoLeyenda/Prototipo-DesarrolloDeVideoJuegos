@@ -81,12 +81,14 @@ namespace Prototipo_2
         private Player_PvP player_PvP;
         private bool enableParabolaAttack;
         public bool enableMecanicParabolaAttack;
+        private EventWise eventWise;
         private void Awake()
         {
             player_PvP = GetComponent<Player_PvP>();
         }
         void Start()
         {
+            eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
             enableParabolaAttack = false;
             GameObject go = GameObject.Find(NameInputManager);
             inputManager = go.GetComponent<InputManager>();
@@ -662,6 +664,7 @@ namespace Prototipo_2
             {
                 if (structsPlayer.dataPlayer.columnaActual > 0)
                 {
+                    eventWise.StartEvent("moverse");
                     MoveLeft(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual - 1].transform.position);
                 }
             }
@@ -669,6 +672,7 @@ namespace Prototipo_2
             {
                 if (structsPlayer.dataPlayer.columnaActual > 0)
                 {
+                    eventWise.StartEvent("moverse");
                     MoveLeft(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual - 1].transform.position);
                 }
             }
@@ -679,6 +683,7 @@ namespace Prototipo_2
             {
                 if (structsPlayer.dataPlayer.columnaActual < posicionesDeMovimiento.Length - 1)
                 {
+                    eventWise.StartEvent("moverse");
                     MoveRight(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual + 1].transform.position);
                 }
             }
@@ -686,6 +691,7 @@ namespace Prototipo_2
             {
                 if (structsPlayer.dataPlayer.columnaActual < posicionesDeMovimiento.Length - 1)
                 {
+                    eventWise.StartEvent("moverse");
                     MoveRight(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual + 1].transform.position);
                 }
             }
@@ -803,6 +809,7 @@ namespace Prototipo_2
             {
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.Saltar;
                 MoveJamp(Vector3.up);
+                eventWise.StartEvent("saltar");
                 if (SpeedJump <= 0)
                 {
                     isJumping = false;
@@ -815,6 +822,7 @@ namespace Prototipo_2
                 isJumping = false;
                 if (CheckMove(new Vector3(transform.position.x, InitialPosition.y, transform.position.z)))
                 {
+                    eventWise.StartEvent("caer");
                     MoveJamp(Vector3.down);
                 }
                 else

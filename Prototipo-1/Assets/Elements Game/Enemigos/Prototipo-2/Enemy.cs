@@ -77,6 +77,7 @@ namespace Prototipo_2
         public bool enableMecanicParabolaAttack;
         [HideInInspector]
         public bool inAttack;
+        private EventWise eventWise;
         //[HideInInspector]
         //public bool iAmDead;
 
@@ -122,6 +123,7 @@ namespace Prototipo_2
         }
         public virtual void Start()
         {
+            eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
             //iAmDead = false;
             enableSpecialAttack = false;
             auxSpeedJump = SpeedJump;
@@ -190,6 +192,7 @@ namespace Prototipo_2
                     {
                         enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
                         MoveJamp(Vector3.down);
+                        eventWise.StartEvent("caer");
                     }
                     else
                     {
@@ -869,6 +872,7 @@ namespace Prototipo_2
         {
             if (CheckMove(new Vector3(posicionesDeMovimiento[0].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
             {
+                eventWise.StartEvent("moverse");
                 Move(Vector3.left);
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoverAdelante);
             }
@@ -884,6 +888,7 @@ namespace Prototipo_2
         {
             if (CheckMove(new Vector3(posicionesDeMovimiento[posicionesDeMovimiento.Length-1].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
             {
+                eventWise.StartEvent("moverse");
                 Move(Vector3.right);
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoverAtras);
             }
@@ -929,6 +934,7 @@ namespace Prototipo_2
                     enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
                 }
                 MoveJamp(Vector3.up);
+                eventWise.StartEvent("saltar");
                 if (SpeedJump <= 0)
                 {
                     isJamping = false;
@@ -945,6 +951,10 @@ namespace Prototipo_2
                     //gridEnemy.matrizCuadrilla[gridEnemy.baseGrild - 1][structsEnemys.dataEnemy.columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
                     //gridEnemy.matrizCuadrilla[gridEnemy.baseGrild - 2][structsEnemys.dataEnemy.columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
                     Deffence();
+                }
+                if (!isJamping)
+                {
+                    eventWise.StartEvent("caer");
                 }
             }
 

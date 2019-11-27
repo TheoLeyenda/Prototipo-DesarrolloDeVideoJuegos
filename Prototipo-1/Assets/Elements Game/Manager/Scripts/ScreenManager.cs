@@ -10,6 +10,7 @@ namespace Prototipo_2 {
         private SpriteRenderer spriteRendererFondo;
         private GameManager gm;
         public List<Sprite> ListaNiveles;
+        private EventWise eventWise;
         private int idListaNiveles;
 
         private void Start()
@@ -19,6 +20,7 @@ namespace Prototipo_2 {
             {
                 gm = GameManager.instanceGameManager;
             }
+            eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
         }
         public void Multijugador()
         {
@@ -153,6 +155,7 @@ namespace Prototipo_2 {
         }
         public void Menu()
         {
+            eventWise.StartEvent("volver_al_menu");
             gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Nulo;
             idListaNiveles = -1;
             Time.timeScale = 1;

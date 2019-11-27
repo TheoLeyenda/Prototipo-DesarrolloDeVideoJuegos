@@ -16,8 +16,10 @@ namespace Prototipo_2 {
         private PoolObject poolObject;
         [HideInInspector]
         public int TypeRoot;
+        private EventWise eventWise;
         void Start()
         {
+            eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
             spriteProyectilParabola = spriteRenderer.sprite;
             timeLife = auxTimeLife;
             if (GameManager.instanceGameManager != null)
@@ -27,10 +29,15 @@ namespace Prototipo_2 {
         }
         private void OnEnable()
         {
+            Sonido();
             inAnimation = false;
             spriteRenderer.sprite = spriteProyectilParabola;
             timeLife = auxTimeLife;
             OnParabola();
+        }
+        public override void Sonido()
+        {
+            eventWise.StartEvent("tirar_parabola");
         }
         // Update is called once per frame
         void Update()

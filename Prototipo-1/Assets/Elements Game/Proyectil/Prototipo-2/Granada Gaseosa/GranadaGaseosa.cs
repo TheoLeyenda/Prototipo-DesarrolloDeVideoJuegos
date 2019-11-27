@@ -16,10 +16,11 @@ namespace Prototipo_2
         public Sprite propLata;
         public Sprite propBotella;
         public List<Sprite> propsProyectilGaseosa;
-        
+        private EventWise eventWise;
 
         private void Start()
         {
+            eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
             idPlataforma = 0;
             
             poolObject = GetComponent<PoolObject>();
@@ -32,6 +33,7 @@ namespace Prototipo_2
         }
         private void OnEnable()
         {
+            Sonido();
             timeLife = auxTimeLife;
             int random = Random.Range(0, propsProyectilGaseosa.Count);
             if (spriteRenderer != null)
@@ -42,6 +44,10 @@ namespace Prototipo_2
                 }
             }
             OnParabola();
+        }
+        public override void Sonido()
+        {
+            eventWise.StartEvent("tirar_parabola");
         }
         public void CreateGaseosas(int cantProyectiles)
         {
@@ -156,6 +162,7 @@ namespace Prototipo_2
                         }
                     }
                 }
+                eventWise.StartEvent("botella_romper");
                 gameObject.SetActive(false);
                 timeLife = 0;
                 GetPoolObject().Recycle();

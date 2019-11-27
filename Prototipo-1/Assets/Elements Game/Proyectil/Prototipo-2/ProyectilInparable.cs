@@ -9,9 +9,11 @@ namespace Prototipo_2
         public List<Sprite> propsProyectilImparable;
         public float speedRotation;
         public SpriteRenderer spriteRenderer;
+        private EventWise eventWise;
         // Start is called before the first frame update
         void Start()
         {
+            eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
             ShootForward();
             timeLife = auxTimeLife;
             if (GameManager.instanceGameManager != null)
@@ -21,12 +23,17 @@ namespace Prototipo_2
         }
         private void OnEnable()
         {
+            Sonido();
             timeLife = auxTimeLife;
             int random = Random.Range(0, propsProyectilImparable.Count);
             if (spriteRenderer != null)
             {
                 spriteRenderer.sprite = propsProyectilImparable[random];
             }
+        }
+        public override void Sonido()
+        {
+            eventWise.StartEvent("patear_pelota");
         }
         private void Update()
         {

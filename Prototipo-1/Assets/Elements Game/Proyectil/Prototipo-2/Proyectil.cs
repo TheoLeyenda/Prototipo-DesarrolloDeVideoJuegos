@@ -72,6 +72,8 @@ namespace Prototipo_2
         public Transform initialPosition;
         public bool colisionPlayer;
         protected bool inAnimation;
+        private EventWise eventWise;
+
         private void Awake()
         {
             circleCollider2D = GetComponent<CircleCollider2D>();
@@ -90,6 +92,7 @@ namespace Prototipo_2
         }
         private void Start()
         {
+            eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
             inAnimation = false;
             if (GameManager.instanceGameManager != null)
             {
@@ -99,6 +102,7 @@ namespace Prototipo_2
         }
         private void OnEnable()
         {
+            Sonido();
             inAnimation = false;
             timeLife = auxTimeLife;
             if (circleCollider2D != null)
@@ -106,6 +110,10 @@ namespace Prototipo_2
                 circleCollider2D.enabled = true;
             }
             trailRenderer.enabled = true;
+        }
+        public virtual void Sonido()
+        {
+            eventWise.StartEvent("tirar_goma");
         }
         private void Update()
         {

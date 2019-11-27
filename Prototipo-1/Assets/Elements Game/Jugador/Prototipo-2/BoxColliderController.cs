@@ -12,6 +12,7 @@ namespace Prototipo_2
         public bool inPlayer;
         public bool ZonaContraAtaque;
         private BoxCollider2D boxCollider2D;
+        public EventWise eventWise;
         //public bool pointsForHit;
         private GameManager gm;
         // Start is called before the first frame update
@@ -36,6 +37,8 @@ namespace Prototipo_2
         }
         private void Start()
         {
+            GameObject go = GameObject.Find("EventWise");
+            eventWise = go.GetComponent<EventWise>();
             if (GameManager.instanceGameManager != null)
             {
                 gm = GameManager.instanceGameManager;
@@ -96,10 +99,12 @@ namespace Prototipo_2
                                     {
                                         //proyectil.timeLife = 0;
                                         //proyectil.gameObject.SetActive(false);
+                                        eventWise.StartEvent("golpear_p1");
                                         proyectil.AnimationHit();
                                     }
                                     if (proyectil.colisionPlayer)
                                     {
+                                        eventWise.StartEvent("golpear_p1");
                                         proyectil.AnimationHit();
                                     }
                                 }
@@ -112,6 +117,7 @@ namespace Prototipo_2
                                     player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                     //proyectil.timeLife = 0;
                                     //proyectil.gameObject.SetActive(false);
+                                    eventWise.StartEvent("golpear_p1");
                                     proyectil.AnimationHit();
                                 }
                             }
@@ -150,6 +156,7 @@ namespace Prototipo_2
                                         {
                                             proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + proyectil.GetPlayer().PD.scoreForHit;
                                         }
+                                        eventWise.StartEvent("golpear_p1");
                                         proyectil.AnimationHit();
                                     }
                                     
@@ -170,6 +177,7 @@ namespace Prototipo_2
                                         {
                                             proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
                                         }
+                                        eventWise.StartEvent("golpear_p1");
                                         proyectil.AnimationHit();
                                     }
                                     
@@ -208,6 +216,7 @@ namespace Prototipo_2
                                         {
                                             proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
                                         }
+                                        eventWise.StartEvent("golpear_p1");
                                         proyectil.AnimationHit();
                                     }
                                     
@@ -226,6 +235,7 @@ namespace Prototipo_2
                                         {
                                             proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
                                         }
+                                        eventWise.StartEvent("golpear_p1");
                                         proyectil.AnimationHit();
                                     }
                                     //proyectil.timeLife = 0;
@@ -259,6 +269,7 @@ namespace Prototipo_2
                                 //proyectil.timeLife = 0;
                                 //proyectil.GetPoolObject().Recycle();
                                 //proyectil.gameObject.SetActive(false);
+                                eventWise.StartEvent("golpear_p1");
                                 proyectil.AnimationHit();
                             }
                         }
@@ -284,6 +295,7 @@ namespace Prototipo_2
                                     //proyectil.timeLife = 0;
                                     //proyectil.GetPoolObject().Recycle();
                                     //proyectil.gameObject.SetActive(false);
+                                    eventWise.StartEvent("golpear_p1");
                                     proyectil.AnimationHit();
                                 }
                             }
@@ -361,6 +373,7 @@ namespace Prototipo_2
                                         //proyectil.timeLife = 0;
                                         //proyectil.GetPoolObject().Recycle();
                                         //proyectil.gameObject.SetActive(false);
+                                        eventWise.StartEvent("golpear_p1");
                                         proyectil.AnimationHit();
                                         break;
                                 }
@@ -375,6 +388,7 @@ namespace Prototipo_2
                                 //proyectil.timeLife = 0;
                                 //proyectil.GetPoolObject().Recycle();
                                 //proyectil.gameObject.SetActive(false);
+                                eventWise.StartEvent("golpear_p1");
                                 proyectil.AnimationHit();
                             }
                         }
@@ -405,6 +419,7 @@ namespace Prototipo_2
                                 //proyectil.timeLife = 0;
                                 //proyectil.gameObject.SetActive(false);
                                 //proyectil.GetPoolObject().Recycle();
+                                eventWise.StartEvent("golpear_p1");
                                 proyectil.AnimationHit();
                             }
                            
@@ -460,6 +475,7 @@ namespace Prototipo_2
                                     enemy.barraDeEscudo.SubstractPorcentageBar(enemy.barraDeEscudo.substractForHit);
                                 }
                             }
+                            eventWise.StartEvent("golpear_p1");
                             proyectil.AnimationHit();
                         }
                     }
