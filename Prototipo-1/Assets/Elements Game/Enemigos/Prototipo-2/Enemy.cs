@@ -192,7 +192,7 @@ namespace Prototipo_2
                     {
                         enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
                         MoveJamp(Vector3.down);
-                        eventWise.StartEvent("caer");
+                        //eventWise.StartEvent("caer");
                     }
                     else
                     {
@@ -872,7 +872,10 @@ namespace Prototipo_2
         {
             if (CheckMove(new Vector3(posicionesDeMovimiento[0].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
             {
-                eventWise.StartEvent("moverse");
+                if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAdelante)
+                {
+                    eventWise.StartEvent("moverse");
+                }
                 Move(Vector3.left);
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoverAdelante);
             }
@@ -888,7 +891,10 @@ namespace Prototipo_2
         {
             if (CheckMove(new Vector3(posicionesDeMovimiento[posicionesDeMovimiento.Length-1].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
             {
-                eventWise.StartEvent("moverse");
+                if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAtras)
+                {
+                    eventWise.StartEvent("moverse");
+                }
                 Move(Vector3.right);
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoverAtras);
             }
@@ -929,12 +935,15 @@ namespace Prototipo_2
         {
             if (CheckMove(new Vector3(transform.position.x, alturaMaxima.y, transform.position.z)) && isJamping)
             {
+                if (transform.position.y <= InitialPosition.y)
+                {
+                    eventWise.StartEvent("saltar");
+                }
                 if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto)
                 {
                     enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
                 }
                 MoveJamp(Vector3.up);
-                eventWise.StartEvent("saltar");
                 if (SpeedJump <= 0)
                 {
                     isJamping = false;

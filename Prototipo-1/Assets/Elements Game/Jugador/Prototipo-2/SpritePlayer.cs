@@ -97,7 +97,7 @@ namespace Prototipo_2 {
             }
             if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
             {
-                Debug.Log(ActualSprite);
+                //Debug.Log(ActualSprite);
                 if (player.GetInputManager() != null)
                 {
                     if (player.GetInputManager().GetEnableMovementPlayer1())

@@ -19,7 +19,7 @@ namespace Prototipo_2 {
         private EventWise eventWise;
         void Start()
         {
-            eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
+            
             spriteProyectilParabola = spriteRenderer.sprite;
             timeLife = auxTimeLife;
             if (GameManager.instanceGameManager != null)
@@ -29,7 +29,10 @@ namespace Prototipo_2 {
         }
         private void OnEnable()
         {
-            Sonido();
+            if (eventWise != null)
+            {
+                Sonido();
+            }
             inAnimation = false;
             spriteRenderer.sprite = spriteProyectilParabola;
             timeLife = auxTimeLife;
@@ -42,6 +45,10 @@ namespace Prototipo_2 {
         // Update is called once per frame
         void Update()
         {
+            if (eventWise == null)
+            {
+                eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
+            }
             if (parabolaController != null)
             {
                 CheckTimeLifeParabola();

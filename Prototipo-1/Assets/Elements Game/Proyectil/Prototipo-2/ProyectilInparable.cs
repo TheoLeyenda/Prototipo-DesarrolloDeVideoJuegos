@@ -13,7 +13,6 @@ namespace Prototipo_2
         // Start is called before the first frame update
         void Start()
         {
-            eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
             ShootForward();
             timeLife = auxTimeLife;
             if (GameManager.instanceGameManager != null)
@@ -23,7 +22,10 @@ namespace Prototipo_2
         }
         private void OnEnable()
         {
-            Sonido();
+            if (eventWise != null)
+            {
+                Sonido();
+            }
             timeLife = auxTimeLife;
             int random = Random.Range(0, propsProyectilImparable.Count);
             if (spriteRenderer != null)
@@ -37,6 +39,10 @@ namespace Prototipo_2
         }
         private void Update()
         {
+            if (eventWise == null)
+            {
+                eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
+            }
             CheckTimeLife();
             transform.Rotate(new Vector3(0, 0,speedRotation));
         }

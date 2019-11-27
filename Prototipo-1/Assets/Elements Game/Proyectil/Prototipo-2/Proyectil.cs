@@ -92,7 +92,7 @@ namespace Prototipo_2
         }
         private void Start()
         {
-            eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
+            //eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
             inAnimation = false;
             if (GameManager.instanceGameManager != null)
             {
@@ -102,7 +102,11 @@ namespace Prototipo_2
         }
         private void OnEnable()
         {
-            Sonido();
+
+            if (eventWise != null)
+            {
+                Sonido();
+            }
             inAnimation = false;
             timeLife = auxTimeLife;
             if (circleCollider2D != null)
@@ -117,6 +121,10 @@ namespace Prototipo_2
         }
         private void Update()
         {
+            if (eventWise == null)
+            {
+                eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
+            }
             CheckTimeLife();
         }
         public void Dead()

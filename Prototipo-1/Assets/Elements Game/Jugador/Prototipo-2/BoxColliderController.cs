@@ -269,7 +269,7 @@ namespace Prototipo_2
                                 //proyectil.timeLife = 0;
                                 //proyectil.GetPoolObject().Recycle();
                                 //proyectil.gameObject.SetActive(false);
-                                eventWise.StartEvent("golpear_p1");
+                                eventWise.StartEvent("jugador_1_bloquear");
                                 proyectil.AnimationHit();
                             }
                         }
@@ -295,7 +295,7 @@ namespace Prototipo_2
                                     //proyectil.timeLife = 0;
                                     //proyectil.GetPoolObject().Recycle();
                                     //proyectil.gameObject.SetActive(false);
-                                    eventWise.StartEvent("golpear_p1");
+                                    eventWise.StartEvent("jugador_1_bloquear");
                                     proyectil.AnimationHit();
                                 }
                             }
@@ -333,6 +333,7 @@ namespace Prototipo_2
                                         //proyectil.gameObject.SetActive(false);
                                         //proyectil.timeLife = 0;
                                         proyectil.GetPoolObject().Recycle();
+                                        eventWise.StartEvent("jugador_1_bloquear");
                                         //proyectil.AnimationHit();
                                         break;
                                     default:
@@ -373,7 +374,7 @@ namespace Prototipo_2
                                         //proyectil.timeLife = 0;
                                         //proyectil.GetPoolObject().Recycle();
                                         //proyectil.gameObject.SetActive(false);
-                                        eventWise.StartEvent("golpear_p1");
+                                        eventWise.StartEvent("jugador_1_bloquear");
                                         proyectil.AnimationHit();
                                         break;
                                 }
@@ -388,7 +389,7 @@ namespace Prototipo_2
                                 //proyectil.timeLife = 0;
                                 //proyectil.GetPoolObject().Recycle();
                                 //proyectil.gameObject.SetActive(false);
-                                eventWise.StartEvent("golpear_p1");
+                                eventWise.StartEvent("jugador_1_bloquear");
                                 proyectil.AnimationHit();
                             }
                         }
@@ -475,7 +476,7 @@ namespace Prototipo_2
                                     enemy.barraDeEscudo.SubstractPorcentageBar(enemy.barraDeEscudo.substractForHit);
                                 }
                             }
-                            eventWise.StartEvent("golpear_p1");
+                            eventWise.StartEvent("jugador_1_bloquear");
                             proyectil.AnimationHit();
                         }
                     }

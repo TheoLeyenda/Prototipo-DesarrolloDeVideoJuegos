@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="11" SoundbankVersion="134">
 	<RootPaths>
-		<ProjectRoot>C:\Users\Administrador\Desktop\School's Out!!\</ProjectRoot>
-		<SourceFilesRoot>C:\Users\Administrador\Desktop\School's Out!!\.cache\Windows\</SourceFilesRoot>
-		<SoundBanksRoot>C:\Users\Administrador\Desktop\School's Out!!\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ProjectRoot>D:\School's Out!!\School's Out!!\</ProjectRoot>
+		<SourceFilesRoot>D:\School's Out!!\School's Out!!\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>D:\School's Out!!\School's Out!!\GeneratedSoundBanks\Windows\</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>C:\Users\Administrador\Desktop\School's Out!!\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>D:\School's Out!!\School's Out!!\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<StreamedFiles/>
@@ -21,17 +21,13 @@
 			<ShortName>main</ShortName>
 			<Path>main.bnk</Path>
 			<IncludedEvents>
-				<Event Id="1985893511" Name="aula_biologia" ObjectPath="\Events\Default Work Unit\aula_biologia"/>
-				<Event Id="2107195691" Name="aula_computacion" ObjectPath="\Events\Default Work Unit\aula_computacion"/>
-				<Event Id="884851824" Name="aula_geografia" ObjectPath="\Events\Default Work Unit\aula_geografia"/>
-				<Event Id="3863248690" Name="aula_quimica" ObjectPath="\Events\Default Work Unit\aula_quimica"/>
+				<Event Id="3214022966" Name="botella_romper" ObjectPath="\Events\Default Work Unit\botella_romper"/>
 				<Event Id="3870729452" Name="caer" ObjectPath="\Events\Default Work Unit\caer"/>
-				<Event Id="1108116845" Name="cafeteria" ObjectPath="\Events\Default Work Unit\cafeteria"/>
 				<Event Id="3406505131" Name="despausar" ObjectPath="\Events\Default Work Unit\despausar"/>
+				<Event Id="1464367099" Name="empate" ObjectPath="\Events\Default Work Unit\empate"/>
 				<Event Id="997344291" Name="especial_lista" ObjectPath="\Events\Default Work Unit\especial_lista"/>
 				<Event Id="3249189695" Name="fuego_empieza" ObjectPath="\Events\Default Work Unit\fuego_empieza"/>
 				<Event Id="3542359744" Name="fuego_termina" ObjectPath="\Events\Default Work Unit\fuego_termina"/>
-				<Event Id="3530593856" Name="gimnasio" ObjectPath="\Events\Default Work Unit\gimnasio"/>
 				<Event Id="2311903553" Name="golpear_p1" ObjectPath="\Events\Default Work Unit\golpear_p1"/>
 				<Event Id="2311903554" Name="golpear_p2" ObjectPath="\Events\Default Work Unit\golpear_p2"/>
 				<Event Id="928907744" Name="inicia_menu" ObjectPath="\Events\Default Work Unit\inicia_menu"/>
@@ -47,6 +43,12 @@
 				<Event Id="1119248036" Name="jugador_2_bloquear" ObjectPath="\Events\Default Work Unit\jugador_2_bloquear"/>
 				<Event Id="3634810774" Name="mover_seleccion" ObjectPath="\Events\Default Work Unit\mover_seleccion"/>
 				<Event Id="1931278216" Name="moverse" ObjectPath="\Events\Default Work Unit\moverse"/>
+				<Event Id="3591408803" Name="musica_1" ObjectPath="\Events\Default Work Unit\musica_1"/>
+				<Event Id="3591408800" Name="musica_2" ObjectPath="\Events\Default Work Unit\musica_2"/>
+				<Event Id="3591408801" Name="musica_3" ObjectPath="\Events\Default Work Unit\musica_3"/>
+				<Event Id="3591408806" Name="musica_4" ObjectPath="\Events\Default Work Unit\musica_4"/>
+				<Event Id="3591408807" Name="musica_5" ObjectPath="\Events\Default Work Unit\musica_5"/>
+				<Event Id="3591408804" Name="musica_6" ObjectPath="\Events\Default Work Unit\musica_6"/>
 				<Event Id="2733797788" Name="patear_pelota" ObjectPath="\Events\Default Work Unit\patear_pelota"/>
 				<Event Id="3092587489" Name="pausa" ObjectPath="\Events\Default Work Unit\pausa"/>
 				<Event Id="2433235219" Name="perder" ObjectPath="\Events\Default Work Unit\perder"/>
@@ -59,13 +61,129 @@
 				<Event Id="3411128985" Name="volver_al_menu" ObjectPath="\Events\Default Work Unit\volver_al_menu"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
+				<File Id="2924607" Language="SFX">
+					<ShortName>VictoryStinger2.wav</ShortName>
+					<Path>SFX\VictoryStinger2_CA0198D6.wem</Path>
+				</File>
+				<File Id="22232919" Language="SFX">
+					<ShortName>Rubbers'n'battlesb168.wav</ShortName>
+					<Path>SFX\Rubbers'n'battlesb168_181A13A0.wem</Path>
+				</File>
+				<File Id="83002284" Language="SFX">
+					<ShortName>damefuegodamedamefuego.wav</ShortName>
+					<Path>SFX\damefuegodamedamefuego_181A13A0.wem</Path>
+				</File>
+				<File Id="121492834" Language="SFX">
+					<ShortName>volveramenuprincipaldesdeescape.wav</ShortName>
+					<Path>SFX\volveramenuprincipaldesdeescape_CA0198D6.wem</Path>
+				</File>
+				<File Id="162273826" Language="SFX">
+					<ShortName>golpe2.wav</ShortName>
+					<Path>SFX\golpe2_CA0198D6.wem</Path>
+				</File>
+				<File Id="208206010" Language="SFX">
+					<ShortName>sonidodeiniciarataqueespecial.wav</ShortName>
+					<Path>SFX\sonidodeiniciarataqueespecial_CA0198D6.wem</Path>
+				</File>
+				<File Id="232350508" Language="SFX">
+					<ShortName>golpe3.wav</ShortName>
+					<Path>SFX\golpe3_CA0198D6.wem</Path>
+				</File>
 				<File Id="324120074" Language="SFX">
 					<ShortName>IntroLoop.wav</ShortName>
 					<Path>SFX\IntroLoop_F26CE7B0.wem</Path>
 				</File>
-				<File Id="670369080" Language="SFX">
+				<File Id="324710112" Language="SFX">
+					<ShortName>golpe1.wav</ShortName>
+					<Path>SFX\golpe1_CA0198D6.wem</Path>
+				</File>
+				<File Id="381412982" Language="SFX">
+					<ShortName>voler_a_menu_inicio.wav</ShortName>
+					<Path>SFX\voler_a_menu_inicio_CA0198D6.wem</Path>
+				</File>
+				<File Id="385197353" Language="SFX">
+					<ShortName>especialfantasmas.wav</ShortName>
+					<Path>SFX\especialfantasmas_CA0198D6.wem</Path>
+				</File>
+				<File Id="412410830" Language="SFX">
 					<ShortName>Bully's over.wav</ShortName>
 					<Path>SFX\Bully's over_181A13A0.wem</Path>
+				</File>
+				<File Id="423121435" Language="SFX">
+					<ShortName>sonidodeselecciondepersonajespvp.wav</ShortName>
+					<Path>SFX\sonidodeselecciondepersonajespvp_CA0198D6.wem</Path>
+				</File>
+				<File Id="461007770" Language="SFX">
+					<ShortName>campanaescolar.wav</ShortName>
+					<Path>SFX\campanaescolar_CA0198D6.wem</Path>
+				</File>
+				<File Id="485758218" Language="SFX">
+					<ShortName>golpefinalcaepersonaje3.wav</ShortName>
+					<Path>SFX\golpefinalcaepersonaje3_CA0198D6.wem</Path>
+				</File>
+				<File Id="529726793" Language="SFX">
+					<ShortName>arrojaravioncito.wav</ShortName>
+					<Path>SFX\arrojaravioncito_CA0198D6.wem</Path>
+				</File>
+				<File Id="532994792" Language="SFX">
+					<ShortName>golpefinalcaepersonaje1.wav</ShortName>
+					<Path>SFX\golpefinalcaepersonaje1_CA0198D6.wem</Path>
+				</File>
+				<File Id="551263504" Language="SFX">
+					<ShortName>arrojarboladepapel.wav</ShortName>
+					<Path>SFX\arrojarboladepapel_CA0198D6.wem</Path>
+				</File>
+				<File Id="596358593" Language="SFX">
+					<ShortName>impactobombamolotov.wav</ShortName>
+					<Path>SFX\impactobombamolotov_CA0198D6.wem</Path>
+				</File>
+				<File Id="640985106" Language="SFX">
+					<ShortName>movimientodashentrecuadradosdepersonaje.wav</ShortName>
+					<Path>SFX\movimientodashentrecuadradosdepersonaje_CA0198D6.wem</Path>
+				</File>
+				<File Id="757378275" Language="SFX">
+					<ShortName>sonidodecaidaimpactocontraelsuelo.wav</ShortName>
+					<Path>SFX\sonidodecaidaimpactocontraelsuelo_CA0198D6.wem</Path>
+				</File>
+				<File Id="793714700" Language="SFX">
+					<ShortName>golpefinalcaepersonaje2.wav</ShortName>
+					<Path>SFX\golpefinalcaepersonaje2_CA0198D6.wem</Path>
+				</File>
+				<File Id="801312740" Language="SFX">
+					<ShortName>VictoryStinger.wav</ShortName>
+					<Path>SFX\VictoryStinger_CA0198D6.wem</Path>
+				</File>
+				<File Id="826660059" Language="SFX">
+					<ShortName>salto.wav</ShortName>
+					<Path>SFX\salto_CA0198D6.wem</Path>
+				</File>
+				<File Id="847614260" Language="SFX">
+					<ShortName>LostStinger2.wav</ShortName>
+					<Path>SFX\LostStinger2_CA0198D6.wem</Path>
+				</File>
+				<File Id="885526831" Language="SFX">
+					<ShortName>salirdepausa.wav</ShortName>
+					<Path>SFX\salirdepausa_CA0198D6.wem</Path>
+				</File>
+				<File Id="965590129" Language="SFX">
+					<ShortName>barraespeciallena.wav</ShortName>
+					<Path>SFX\barraespeciallena_CA0198D6.wem</Path>
+				</File>
+				<File Id="965718914" Language="SFX">
+					<ShortName>especialpelota.wav</ShortName>
+					<Path>SFX\especialpelota_CA0198D6.wem</Path>
+				</File>
+				<File Id="991206202" Language="SFX">
+					<ShortName>elegiralgunmododebatalla.wav</ShortName>
+					<Path>SFX\elegiralgunmododebatalla_CA0198D6.wem</Path>
+				</File>
+				<File Id="1000310429" Language="SFX">
+					<ShortName>sonidodeentrarapausa.wav</ShortName>
+					<Path>SFX\sonidodeentrarapausa_CA0198D6.wem</Path>
+				</File>
+				<File Id="1055290361" Language="SFX">
+					<ShortName>movimiento_entre_opciones_del_menu_inicio.wav</ShortName>
+					<Path>SFX\movimiento_entre_opciones_del_menu_inicio_CA0198D6.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
