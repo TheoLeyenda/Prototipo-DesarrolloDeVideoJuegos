@@ -664,7 +664,6 @@ namespace Prototipo_2
             {
                 if (structsPlayer.dataPlayer.columnaActual > 0)
                 {
-                    eventWise.StartEvent("moverse");
                     MoveLeft(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual - 1].transform.position);
                 }
             }
@@ -672,7 +671,6 @@ namespace Prototipo_2
             {
                 if (structsPlayer.dataPlayer.columnaActual > 0)
                 {
-                    eventWise.StartEvent("moverse");
                     MoveLeft(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual - 1].transform.position);
                 }
             }
@@ -683,7 +681,6 @@ namespace Prototipo_2
             {
                 if (structsPlayer.dataPlayer.columnaActual < posicionesDeMovimiento.Length - 1)
                 {
-                    eventWise.StartEvent("moverse");
                     MoveRight(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual + 1].transform.position);
                 }
             }
@@ -691,7 +688,6 @@ namespace Prototipo_2
             {
                 if (structsPlayer.dataPlayer.columnaActual < posicionesDeMovimiento.Length - 1)
                 {
-                    eventWise.StartEvent("moverse");
                     MoveRight(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual + 1].transform.position);
                 }
             }
@@ -746,6 +742,10 @@ namespace Prototipo_2
                 if (CheckMove(new Vector3(posicionesDeMovimiento[0].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
                 {
                     Move(Vector3.left);
+                    if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras)
+                    {
+                        eventWise.StartEvent("moverse");
+                    }
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAtras;
                 }
                 else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
@@ -761,6 +761,10 @@ namespace Prototipo_2
                 if (CheckMove(new Vector3(posicionesDeMovimiento[0].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
                 {
                     Move(-Vector3.left);
+                    if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras)
+                    {
+                        eventWise.StartEvent("moverse");
+                    }
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAtras;
                 }
                 else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
@@ -779,6 +783,10 @@ namespace Prototipo_2
                 if (CheckMove(new Vector3(posicionesDeMovimiento[posicionesDeMovimiento.Length-1].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
                 {
                     Move(Vector3.right);
+                    if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante)
+                    {
+                        eventWise.StartEvent("moverse");
+                    }
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
                 }
                 else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
@@ -792,6 +800,10 @@ namespace Prototipo_2
             {
                 if (CheckMove(new Vector3(posicionesDeMovimiento[posicionesDeMovimiento.Length - 1].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
                 {
+                    if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante)
+                    {
+                        eventWise.StartEvent("moverse");
+                    }
                     Move(-Vector3.right);
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
                 }
@@ -807,9 +819,12 @@ namespace Prototipo_2
         {
             if (CheckMove(new Vector3(transform.position.x, alturaMaxima.y, transform.position.z)) && isJumping)
             {
+                if(enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar)
+                {
+                    eventWise.StartEvent("saltar");
+                }
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.Saltar;
                 MoveJamp(Vector3.up);
-                eventWise.StartEvent("saltar");
                 if (SpeedJump <= 0)
                 {
                     isJumping = false;
@@ -822,11 +837,11 @@ namespace Prototipo_2
                 isJumping = false;
                 if (CheckMove(new Vector3(transform.position.x, InitialPosition.y, transform.position.z)))
                 {
-                    eventWise.StartEvent("caer");
                     MoveJamp(Vector3.down);
                 }
                 else
                 {
+                    eventWise.StartEvent("caer");
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
                     SpeedJump = auxSpeedJump;
                 }

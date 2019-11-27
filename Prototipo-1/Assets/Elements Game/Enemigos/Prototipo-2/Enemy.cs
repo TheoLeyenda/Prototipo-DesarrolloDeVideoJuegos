@@ -937,6 +937,7 @@ namespace Prototipo_2
             {
                 if (transform.position.y <= InitialPosition.y)
                 {
+                    Debug.Log("ENTRO COMO UN FORRO");
                     eventWise.StartEvent("saltar");
                 }
                 if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto)
@@ -960,10 +961,6 @@ namespace Prototipo_2
                     //gridEnemy.matrizCuadrilla[gridEnemy.baseGrild - 1][structsEnemys.dataEnemy.columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
                     //gridEnemy.matrizCuadrilla[gridEnemy.baseGrild - 2][structsEnemys.dataEnemy.columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Ocupado);
                     Deffence();
-                }
-                if (!isJamping)
-                {
-                    eventWise.StartEvent("caer");
                 }
             }
 
