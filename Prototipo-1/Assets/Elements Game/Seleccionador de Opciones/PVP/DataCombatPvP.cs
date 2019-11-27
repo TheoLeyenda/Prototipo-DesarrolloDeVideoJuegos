@@ -46,6 +46,7 @@ namespace Prototipo_2 {
         public GameObject fondoEmpate;
         public GameObject prefabWinPlayer1;
         public GameObject prefabWinPlayer2;
+        public GameObject eventWisse;
         //LA LISTA levels DEBE SER INICIALIZADA EN EL MISMO ORDEN QUE EL ENUMERADOR Level_Selected.
         public List<Sprite> levels;
         public Player player1;
@@ -191,6 +192,8 @@ namespace Prototipo_2 {
             }
             else
             {
+                // EVENTO DE EMPATE DEL SONIDO 
+
                 menuPausa_P1.SetActive(false);
                 menuPausa_P2.SetActive(false);
                 FondosNivel[(int)level_selected].SetActive(false);
@@ -222,6 +225,8 @@ namespace Prototipo_2 {
             }
             else
             {
+                AkSoundEngine.PostEvent("pvp_ganador", eventWisse);
+
                 menuPausa_P1.SetActive(false);
                 menuPausa_P2.SetActive(false);
                 FondosNivel[(int)level_selected].SetActive(false);
@@ -248,6 +253,8 @@ namespace Prototipo_2 {
             }
             else
             {
+                AkSoundEngine.PostEvent("pvp_ganador", eventWisse);
+
                 menuPausa_P1.SetActive(false);
                 menuPausa_P2.SetActive(false);
                 FondosNivel[(int)level_selected].SetActive(false);
