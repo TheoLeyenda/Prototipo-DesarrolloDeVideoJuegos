@@ -78,6 +78,7 @@ namespace Prototipo_2
         [HideInInspector]
         public bool inAttack;
         private EventWise eventWise;
+        private bool insound;
         //[HideInInspector]
         //public bool iAmDead;
 
@@ -872,8 +873,9 @@ namespace Prototipo_2
         {
             if (CheckMove(new Vector3(posicionesDeMovimiento[0].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
             {
-                if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAdelante)
+                if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAdelante || !insound)
                 {
+                    insound = true;
                     eventWise.StartEvent("moverse");
                 }
                 Move(Vector3.left);
@@ -881,6 +883,7 @@ namespace Prototipo_2
             }
             else if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Nulo)
             {
+                insound = false;
                 structsEnemys.dataEnemy.columnaActual--;
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
                 //gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
@@ -891,8 +894,9 @@ namespace Prototipo_2
         {
             if (CheckMove(new Vector3(posicionesDeMovimiento[posicionesDeMovimiento.Length-1].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
             {
-                if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAtras)
+                if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAtras || !insound)
                 {
+                    insound = true;
                     eventWise.StartEvent("moverse");
                 }
                 Move(Vector3.right);
@@ -900,6 +904,7 @@ namespace Prototipo_2
             }
             else if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Nulo)
             {
+                insound = false;
                 structsEnemys.dataEnemy.columnaActual++;
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
                 //gridEnemy.CheckCuadrillaOcupada(structsEnemys.dataEnemy.columnaActual, structsEnemys.dataEnemy.CantCasillasOcupadas_X, structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
