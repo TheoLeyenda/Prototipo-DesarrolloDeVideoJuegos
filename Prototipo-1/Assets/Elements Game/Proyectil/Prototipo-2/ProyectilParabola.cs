@@ -37,15 +37,7 @@ namespace Prototipo_2 {
             spriteRenderer.sprite = spriteProyectilParabola;
             timeLife = auxTimeLife;
             OnParabola();
-            if (eventWise == null)
-            {
-                eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
-            }
-            if (eventWise != null && !soundgenerate)
-            {
-                soundgenerate = true;
-                Sonido();
-            }
+            
         }
         public override void Sonido()
         {
@@ -58,9 +50,10 @@ namespace Prototipo_2 {
             {
                 eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
             }
-            if (parabolaController != null)
+            if (eventWise != null && !soundgenerate)
             {
-                CheckTimeLifeParabola();
+                soundgenerate = true;
+                Sonido();
             }
             CheckMovement();
         }

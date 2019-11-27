@@ -20,10 +20,14 @@ namespace Prototipo_2
 
         private void Start()
         {
-            
+            soundgenerate = false;
             idPlataforma = 0;
             
             poolObject = GetComponent<PoolObject>();
+        }
+        private void OnDisable()
+        {
+            soundgenerate = false;
         }
         // Update is called once per frame
         void Update()
@@ -32,15 +36,16 @@ namespace Prototipo_2
             {
                 eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
             }
+            if (eventWise != null && !soundgenerate)
+            {
+                soundgenerate = true;
+                Sonido();
+            }
             CheckMovement();
             CheckTimeLife();
         }
         private void OnEnable()
         {
-            if (eventWise != null)
-            {
-                Sonido();
-            }
             timeLife = auxTimeLife;
             int random = Random.Range(0, propsProyectilGaseosa.Count);
             if (spriteRenderer != null)
