@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Prototipo_2
 {
-    public class SpriteEnemy : MonoBehaviour
+    public class SpriteEnemy : SpriteCharacter
     {
         [HideInInspector]
         public Animator animator;
@@ -63,7 +63,6 @@ namespace Prototipo_2
         {
             if (enemy.enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto)
             {
-                //Debug.Log(enemy.enumsEnemy.GetMovement());
                 if (enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
                         && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialAgachado
                         && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto)
@@ -121,8 +120,6 @@ namespace Prototipo_2
                     }
                     CheckActualSprite();
                 }
-                //Debug.Log("Movimiento:" + enemy.enumsEnemy.GetMovement());
-                //Debug.Log("Actual Sprite:"+ActualSprite);
             }
         }
         

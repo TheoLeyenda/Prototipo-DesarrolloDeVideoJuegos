@@ -6,7 +6,6 @@ namespace Prototipo_2
 {
     public class Agresivo : Enemy
     {
-        // Start is called before the first frame update
         public GameObject GeneradorAtaqueEspecial;
         public Pool poolProyectilImparable;
         float valueAttack;

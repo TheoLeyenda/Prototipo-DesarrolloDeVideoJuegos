@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Prototipo_2 {
-    public class SpritePlayer : MonoBehaviour
+    public class SpritePlayer : SpriteCharacter
     {
         public Player player;
         public SpriteRenderer spriteRenderer;

@@ -64,8 +64,7 @@ namespace Prototipo_2
                 if (levelManager != null)
                 {
                     gm.restartLevel = true;
-                    // SI NO FUNCIONA BIEN EL RESTArt DESCOMENTAR ESA LINEA
-                    if (/*gm.countEnemysDead == gm.auxCountEnemysDead && */gm.restartLevel)
+                    if (gm.restartLevel)
                     {
                         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                     }

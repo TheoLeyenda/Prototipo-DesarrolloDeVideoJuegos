@@ -130,7 +130,6 @@ namespace Prototipo_2
         }
         public void AddPorcentageBar()
         {
-            //PONER UNA CONDICION OR PARA EL ENEMIGO
             if (player != null)
             {
                 if ((!InputPlayerController.CheckPressDeffenseButton_P1() && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
@@ -140,13 +139,9 @@ namespace Prototipo_2
                 }
             }
 
-            if (enemy != null) {
-                /*if ((enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar
-                    && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacheDefensa
-                    && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa))
-                {*/
+            if (enemy != null)
+            {
                     AddPorcentage();
-                //}
             }
             else if (nededBarMaxPorcentage)
             {

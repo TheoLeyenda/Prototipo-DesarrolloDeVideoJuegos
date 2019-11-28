@@ -23,7 +23,6 @@ namespace Prototipo_2
         private float auxDelayStateCounterAttackDeffense;
         private bool inDeffense;
         private StateDeffence stateDeffence;
-        // Start is called before the first frame update
         public override void Start()
         {
             base.Start();
@@ -34,7 +33,6 @@ namespace Prototipo_2
             inDeffense = false;
         }
         
-        // Update is called once per frame
         public override void Update()
         {
             if (life <= 0)
@@ -85,7 +83,6 @@ namespace Prototipo_2
                 {
                     valueAttack = Random.Range(0, 100);
                 }
-                //Debug.Log(valueAttack);
                 if (valueAttack >= parabolaAttack || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
@@ -132,7 +129,6 @@ namespace Prototipo_2
                 }
                 else if (valueAttack < parabolaAttack)
                 {
-                    //ParabolaAttack();
                     if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
                         && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp() && delayAttack <= 0)
                     {
@@ -152,7 +148,6 @@ namespace Prototipo_2
                         spriteEnemy.PlayAnimation("Ataque Parabola Agachado enemigo defensivo");
                         inAttack = true;
                     }
-                    //spriteEnemy.RestartDelayAttackEnemy();
                 }
             }
         }
