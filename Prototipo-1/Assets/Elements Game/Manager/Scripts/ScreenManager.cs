@@ -174,7 +174,6 @@ namespace Prototipo_2 {
         }
         private void Update()
         {
-            //Debug.Log(idListaNiveles);
             if (gm != null)
             {
                 if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
