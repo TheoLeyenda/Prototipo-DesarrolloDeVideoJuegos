@@ -74,13 +74,13 @@ public class SoundForInput : MonoBehaviour
     }
     public void CheckSelectionP2()
     {
-        if (InputPlayerController.Horizontal_Button_P2() == 0 && InputPlayerController.Vertical_Button_P2() == 0)
+        if (InputPlayerController.GetInputAxis("Horizontal_P2") == 0 && InputPlayerController.GetInputAxis("Vertical_P2") == 0)
         {
             mov = Movimiento.Habilitado;
         }
         if (movimientoHorizontal)
         {
-            if (((InputPlayerController.Horizontal_Button_P2() > 0.5f || InputPlayerController.Horizontal_Button_P2() < -0.5f)
+            if (((InputPlayerController.GetInputAxis("Horizontal_P2") > 0.5f || InputPlayerController.GetInputAxis("Horizontal_P2") < -0.5f)
                 || (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))) && mov == Movimiento.Habilitado)
             {
                 AkSoundEngine.PostEvent(nombreEventoMovimiento, gameObject);
@@ -89,7 +89,7 @@ public class SoundForInput : MonoBehaviour
         }
         if (movimientoVertical)
         {
-            if (((InputPlayerController.Vertical_Button_P2() > 0.5f || InputPlayerController.Vertical_Button_P2() < -0.5f)
+            if (((InputPlayerController.GetInputAxis("Vertical_P2") > 0.5f || InputPlayerController.GetInputAxis("Vertical_P2") < -0.5f)
                 || (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))) && mov == Movimiento.Habilitado)
             {
                 AkSoundEngine.PostEvent(nombreEventoMovimiento, gameObject);
@@ -97,7 +97,7 @@ public class SoundForInput : MonoBehaviour
             }
         }
 
-        if (InputPlayerController.SelectButton_P2())
+        if (InputPlayerController.GetInputButtonDown("SelectButton_P2"))
         {
             AkSoundEngine.PostEvent(nombreEventoSeleccion, gameObject);
         }
@@ -109,7 +109,7 @@ public class SoundForInput : MonoBehaviour
             AkSoundEngine.PostEvent("pausa", gameObject);
             controlPausador = ControlPausador.player1;
         }
-        if (InputPlayerController.CheckPauseButtonP2() && Time.timeScale == 1)
+        if (InputPlayerController.GetInputButton("PauseButton_P2") && Time.timeScale == 1)
         {
             AkSoundEngine.PostEvent("pausa", gameObject);
             controlPausador = ControlPausador.player2;

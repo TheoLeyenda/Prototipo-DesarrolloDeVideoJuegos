@@ -123,7 +123,7 @@ namespace Prototipo_2
                                 {
                                     player.delayCounterAttack = player.delayCounterAttack - Time.deltaTime;
                                     
-                                    if (InputPlayerController.CheckPressDeffenseButton_P2() && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage)
+                                    if (InputPlayerController.GetInputButton("DeffenseButton_P2") && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage)
                                     {
                                         player.Attack(Proyectil.DisparadorDelProyectil.Jugador2);
                                         player.delayCounterAttack = player.GetAuxDelayCounterAttack();
@@ -259,9 +259,6 @@ namespace Prototipo_2
                                 }
                                 proyectil.damage = proyectil.GetAuxDamage();
                                 player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
-                                //proyectil.timeLife = 0;
-                                //proyectil.GetPoolObject().Recycle();
-                                //proyectil.gameObject.SetActive(false);
                                 eventWise.StartEvent("jugador_1_bloquear");
                                 proyectil.AnimationHit();
                             }
@@ -285,9 +282,6 @@ namespace Prototipo_2
                                     }
                                     proyectil.damage = proyectil.GetAuxDamage();
                                     player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
-                                    //proyectil.timeLife = 0;
-                                    //proyectil.GetPoolObject().Recycle();
-                                    //proyectil.gameObject.SetActive(false);
                                     eventWise.StartEvent("jugador_1_bloquear");
                                     proyectil.AnimationHit();
                                 }
@@ -322,9 +316,6 @@ namespace Prototipo_2
                                             proyectil.damage = proyectil.GetAuxDamage();
                                             player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                                         }
-                                        //proyectil.GetPoolObject().Recycle();
-                                        //proyectil.gameObject.SetActive(false);
-                                        //proyectil.timeLife = 0;
                                         proyectil.GetPoolObject().Recycle();
                                         eventWise.StartEvent("jugador_1_bloquear");
                                         //proyectil.AnimationHit();

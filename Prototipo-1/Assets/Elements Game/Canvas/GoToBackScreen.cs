@@ -18,7 +18,7 @@ public class GoToBackScreen : MonoBehaviour
         }
         if (activateInputP2)
         {
-            if (InputPlayerController.CheckPressDeffenseButton_P2())
+            if (InputPlayerController.GetInputButton("DeffenseButton_P2"))
             {
                 LoadBackScene();
             }

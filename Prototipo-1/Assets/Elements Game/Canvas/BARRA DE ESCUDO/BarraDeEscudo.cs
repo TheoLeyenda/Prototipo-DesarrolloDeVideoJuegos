@@ -97,7 +97,7 @@ namespace Prototipo_2
             {
                 if (((!InputPlayerController.GetInputButton("DeffenseButton_P1")
                         && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-                    || (!InputPlayerController.CheckPressDeffenseButton_P2()
+                    || (!InputPlayerController.GetInputButton("DeffenseButton_P2")
                         && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)))
                 {
                     LoadBar();
@@ -133,7 +133,7 @@ namespace Prototipo_2
             if (player != null)
             {
                 if ((!InputPlayerController.GetInputButton("DeffenseButton_P1") && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-                || (!InputPlayerController.CheckPressDeffenseButton_P2() && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2))
+                || (!InputPlayerController.GetInputButton("DeffenseButton_P2") && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2))
                 {
                     AddPorcentage();
                 }

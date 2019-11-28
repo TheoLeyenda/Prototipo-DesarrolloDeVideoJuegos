@@ -19,7 +19,7 @@ namespace Prototipo_2 {
                 menuPlayer1.SetActive(true);
                 menuPlayer2.SetActive(false);
             }
-            else if(InputPlayerController.PauseButton_P2())
+            else if(InputPlayerController.GetInputButtonDown("PauseButton_P2"))
             {
                 menuPlayer1.SetActive(false);
                 menuPlayer2.SetActive(true);

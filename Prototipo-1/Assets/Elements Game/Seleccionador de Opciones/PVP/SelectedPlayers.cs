@@ -227,7 +227,7 @@ namespace Prototipo_2
             {
                 if (cursorPlayer2.x >= 0 && cursorPlayer2.x < filas)
                 {
-                    if (InputPlayerController.Horizontal_Button_P2() > 0 && cursorPlayer2.x < filas - 1)
+                    if (InputPlayerController.GetInputAxis("Horizontal_P2") > 0 && cursorPlayer2.x < filas - 1)
                     {
                         if (aviableMoveHorizontalP2)
                         {
@@ -236,7 +236,7 @@ namespace Prototipo_2
                             aviableMoveHorizontalP2 = false;
                         }
                     }
-                    else if (InputPlayerController.Horizontal_Button_P2() < 0 && cursorPlayer2.x > 0)
+                    else if (InputPlayerController.GetInputAxis("Horizontal_P2") < 0 && cursorPlayer2.x > 0)
                     {
                         if (aviableMoveHorizontalP2)
                         {
@@ -248,7 +248,7 @@ namespace Prototipo_2
                 }
                 if (cursorPlayer2.y >= 0 && cursorPlayer2.y < columnas)
                 {
-                    if (InputPlayerController.Vertical_Button_P2() > 0 && cursorPlayer2.y > 0)
+                    if (InputPlayerController.GetInputAxis("Vertical_P2") > 0 && cursorPlayer2.y > 0)
                     {
                         if (aviableMoveVerticalP2)
                         {
@@ -257,7 +257,7 @@ namespace Prototipo_2
                             aviableMoveVerticalP2 = false;
                         }
                     }
-                    else if (InputPlayerController.Vertical_Button_P2() < 0 && cursorPlayer2.y < columnas - 1)
+                    else if (InputPlayerController.GetInputAxis("Vertical_P2") < 0 && cursorPlayer2.y < columnas - 1)
                     {
                         if (aviableMoveVerticalP2)
                         {
@@ -268,11 +268,11 @@ namespace Prototipo_2
                     }
                 }
             }
-            if (InputPlayerController.Vertical_Button_P2() == 0)
+            if (InputPlayerController.GetInputAxis("Vertical_P2") == 0)
             {
                 aviableMoveVerticalP2 = true;
             }
-            if (InputPlayerController.Horizontal_Button_P2() == 0)
+            if (InputPlayerController.GetInputAxis("Horizontal_P2") == 0)
             {
                 aviableMoveHorizontalP2 = true;
             }
@@ -317,7 +317,7 @@ namespace Prototipo_2
                         break;
                 }
             }
-            if (InputPlayerController.SelectButton_P2())
+            if (InputPlayerController.GetInputButtonDown("SelectButton_P2"))
             {
                 switch (grillaDeSeleccion[cursorPlayer2.x, cursorPlayer2.y])
                 {
