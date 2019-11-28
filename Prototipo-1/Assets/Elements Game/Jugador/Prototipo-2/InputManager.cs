@@ -151,7 +151,7 @@ namespace Prototipo_2 {
                         CheckInputPlayer1();
                         if (player1.PD.lifePlayer > 0)
                         {
-                            CheckSpritePlayer1();
+                            CheckSpritePlayer(player1);
                         }
                     }
                     else
@@ -181,7 +181,7 @@ namespace Prototipo_2 {
                         CheckInputPlayer2();
                         if (player2.PD.lifePlayer > 0)
                         {
-                            CheckSpritePlayer2();
+                            CheckSpritePlayer(player2);
                         }
                     }
                     else
@@ -200,11 +200,7 @@ namespace Prototipo_2 {
         }
         public void CheckValueInPause()
         {
-            /*if (inPause)
-            {
-                inPause = false;
-            }
-            else */if (!inPause)
+            if (!inPause)
             {
                 inPause = true;
             }
@@ -258,7 +254,6 @@ namespace Prototipo_2 {
                         enableMovementPlayer1 = false;
                     }
                 }
-                //player1.ParabolaAttack(Proyectil.DisparadorDelProyectil.Jugador1);
             }
         }
         public void CheckVerticalUp_P1()
@@ -290,7 +285,6 @@ namespace Prototipo_2 {
             {
 
                 movimientoVerticalHabilitado = (((movingDown_P1 || movingDownAnalog_P1) && movimientoNulo_P1) || agachandose_P1);
-                //Debug.Log(movimientoVerticalHabilitado);
             }
             else
             {
@@ -342,7 +336,6 @@ namespace Prototipo_2 {
             }
             if (movimientoHorizontalHabilitado)
             {
-                //Debug.Log("ENTRE");
                 player1.SetControllerJoystick(true);
                 moveHorizontalPlayer1 = false;
                 player1.MovementLeft();
@@ -645,22 +638,22 @@ namespace Prototipo_2 {
                 }
             }
         }
-        public void CheckSpritePlayer1()
+        public void CheckSpritePlayer(Player player)
         {
-            if (player1.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio || player1.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ContraAtaque)
+            if (player.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio || player.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ContraAtaque)
             {
-                if (player1.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio)
+                if (player.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio)
                 {
-                    player1.spritePlayerActual.CheckDeleyRecibirDanio();
+                    player.spritePlayerActual.CheckDeleyRecibirDanio();
                 }
                 else
                 {
-                    player1.spritePlayerActual.CheckDeleyContraAtaque();
+                    player.spritePlayerActual.CheckDeleyContraAtaque();
                 }
             }
             else
             {
-                if (player1_PvP == null)
+                if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
                 {
                     CheckSpriteParado_P1();
                     CheckSpriteMoverAdelante_P1();
@@ -669,48 +662,19 @@ namespace Prototipo_2 {
                     CheckSpritesParado_P1();
                     CheckSpritesAgachado_P1();
                 }
-                else
+                else if(player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
                 {
-                    switch (player1_PvP.playerSelected)
-                    {
-                        case Player_PvP.PlayerSelected.Agresivo:
-                            CheckSpriteParado_P1();
-                            CheckSpriteMoverAdelante_P1();
-                            CheckSpriteMoverAtras_P1();
-                            CheckSpritesSalto_P1();
-                            CheckSpritesParado_P1();
-                            CheckSpritesAgachado_P1();
-                            break;
-                        case Player_PvP.PlayerSelected.Balanceado:
-                            CheckSpriteParado_P1();
-                            CheckSpriteMoverAdelante_P1();
-                            CheckSpriteMoverAtras_P1();
-                            CheckSpritesSalto_P1();
-                            CheckSpritesParado_P1();
-                            CheckSpritesAgachado_P1();
-                            break;
-                        case Player_PvP.PlayerSelected.Defensivo:
-                            CheckSpriteParado_P1();
-                            CheckSpriteMoverAdelante_P1();
-                            CheckSpriteMoverAtras_P1();
-                            CheckSpritesSalto_P1();
-                            CheckSpritesParado_P1();
-                            CheckSpritesAgachado_P1();
-                            break;
-                        case Player_PvP.PlayerSelected.Protagonista:
-                            CheckSpriteParado_P1();
-                            CheckSpriteMoverAdelante_P1();
-                            CheckSpriteMoverAtras_P1();
-                            CheckSpritesSalto_P1();
-                            CheckSpritesParado_P1();
-                            CheckSpritesAgachado_P1();
-                            break;
-                    }
+                    CheckSpriteParado_P2();
+                    CheckSpriteMoverAdelante_P2();
+                    CheckSpriteMoverAtras_P2();
+                    CheckSpritesSalto_P2();
+                    CheckSpritesParado_P2();
+                    CheckSpritesAgachado_P2();
                 }
             }
         }
         //-----------------------------------------------//
-
+        
 
         //----- FUNCIONES Y CONTROLES DEL JUGADOR 2 -----//
         public void CheckParabolaAttack_P2()
@@ -1128,70 +1092,7 @@ namespace Prototipo_2 {
                 }
             }
         }
-        public void CheckSpritePlayer2()
-        {
-            if (player2.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio || player2.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ContraAtaque)
-            {
-                if (player2.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio)
-                {
-                    player2.spritePlayerActual.CheckDeleyRecibirDanio();
-                }
-                else
-                {
-                    player2.spritePlayerActual.CheckDeleyContraAtaque();
-                }
-            }
-            else
-            {
-                if (player2_PvP == null)
-                {
-                    CheckSpriteParado_P2();
-                    CheckSpriteMoverAdelante_P2();
-                    CheckSpriteMoverAtras_P2();
-                    CheckSpritesSalto_P2();
-                    CheckSpritesParado_P2();
-                    CheckSpritesAgachado_P2();
-                }
-                else
-                {
-                    switch (player2_PvP.playerSelected)
-                    {
-                        case Player_PvP.PlayerSelected.Agresivo:
-                            CheckSpriteParado_P2();
-                            CheckSpriteMoverAdelante_P2();
-                            CheckSpriteMoverAtras_P2();
-                            CheckSpritesSalto_P2();
-                            CheckSpritesParado_P2();
-                            CheckSpritesAgachado_P2();
-                            break;
-                        case Player_PvP.PlayerSelected.Balanceado:
-                            CheckSpriteParado_P2();
-                            CheckSpriteMoverAdelante_P2();
-                            CheckSpriteMoverAtras_P2();
-                            CheckSpritesSalto_P2();
-                            CheckSpritesParado_P2();
-                            CheckSpritesAgachado_P2();
-                            break;
-                        case Player_PvP.PlayerSelected.Defensivo:
-                            CheckSpriteParado_P2();
-                            CheckSpriteMoverAdelante_P2();
-                            CheckSpriteMoverAtras_P2();
-                            CheckSpritesSalto_P2();
-                            CheckSpritesParado_P2();
-                            CheckSpritesAgachado_P2();
-                            break;
-                        case Player_PvP.PlayerSelected.Protagonista:
-                            CheckSpriteParado_P2();
-                            CheckSpriteMoverAdelante_P2();
-                            CheckSpriteMoverAtras_P2();
-                            CheckSpritesSalto_P2();
-                            CheckSpritesParado_P2();
-                            CheckSpritesAgachado_P2();
-                            break;
-                    }
-                }
-            }
-        }
+        
         //-----------------------------------------------//
         public void SetEnableMovementPlayer1(bool enableMovement)
         {
