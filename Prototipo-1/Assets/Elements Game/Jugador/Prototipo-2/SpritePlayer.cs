@@ -6,8 +6,7 @@ namespace Prototipo_2 {
     public class SpritePlayer : SpriteCharacter
     {
         public Player player;
-        public SpriteRenderer spriteRenderer;
-        private Animator animator;
+        
         [System.Serializable]
         public class ElementsSprites
         {
@@ -15,33 +14,9 @@ namespace Prototipo_2 {
             public string name;
 
         }
-        public enum SpriteActual
-        {
-            SaltoAtaque,
-            SaltoDefensa,
-            Salto,
-            ParadoAtaque,
-            ParadoDefensa,
-            Parado,
-            RecibirDanio,
-            MoverAtras,
-            MoverAdelante,
-            AgachadoAtaque,
-            AgachadoDefensa,
-            Agachado,
-            AnimacionAtaque,
-            AtaqueEspecial,
-            ContraAtaqueParado,
-            ContraAtaqueSalto,
-            ContraAtaqueAgachado,
-            Count,
-        }
+        
         public List<ElementsSprites> Animations;
-        public SpriteActual ActualSprite;
-        public float delaySpriteRecibirDanio;
-        private float auxDelaySpriteRecibirDanio;
-        public float delaySpriteContraAtaque;
-        private float auxDelaySpriteContraAtaque;
+        
         private void Start()
         {
             animator = GetComponent<Animator>();
@@ -54,50 +29,22 @@ namespace Prototipo_2 {
         {
             CheckActualSprite();
         }
-        public float GetAuxDelaySpriteRecibirDanio()
-        {
-            return auxDelaySpriteRecibirDanio;
-        }
-        public void CheckDeleyRecibirDanio()
-        {
-            if (delaySpriteRecibirDanio > 0)
-            {
-                delaySpriteRecibirDanio = delaySpriteRecibirDanio - Time.deltaTime;
-                ActualSprite = SpriteActual.RecibirDanio;
-            }
-            else if(delaySpriteRecibirDanio <= 0)
-            {
-                ActualSprite = SpriteActual.Parado;
-            }
-        }
-        public void CheckDeleyContraAtaque()
-        {
-            if (delaySpriteContraAtaque > 0)
-            {
-                delaySpriteContraAtaque = delaySpriteContraAtaque - Time.deltaTime;
-            }
-            else if (delaySpriteContraAtaque <= 0)
-            {
-                delaySpriteContraAtaque = auxDelaySpriteContraAtaque;
-                ActualSprite = SpriteActual.Parado;
-            }
-        }
+      
         public void CheckActualSprite()
         {
-            if (ActualSprite == SpriteActual.RecibirDanio || ActualSprite == SpriteActual.ContraAtaqueParado)
+            if (ActualSprite == SpriteActual.RecibirDanio || ActualSprite == SpriteActual.ContraAtaque)
             {
                 if (ActualSprite == SpriteActual.RecibirDanio)
                 {
                     CheckDeleyRecibirDanio();
                 }
-                if (ActualSprite == SpriteActual.ContraAtaqueParado)
+                if (ActualSprite == SpriteActual.ContraAtaque)
                 {
                     CheckDeleyContraAtaque();
                 }
             }
             if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
             {
-                //Debug.Log(ActualSprite);
                 if (player.GetInputManager() != null)
                 {
                     if (player.GetInputManager().GetEnableMovementPlayer1())
@@ -134,7 +81,7 @@ namespace Prototipo_2 {
                             case SpriteActual.AgachadoDefensa:
                                 PlayAnimation("Agachado Defensa protagonista");
                                 break;
-                            case SpriteActual.ContraAtaqueParado:
+                            case SpriteActual.ContraAtaque:
                                 if (player.GetPlayerPvP() != null)
                                 {
                                     if (player.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Defensivo)
@@ -209,7 +156,7 @@ namespace Prototipo_2 {
                             case SpriteActual.AgachadoDefensa:
                                 PlayAnimation("Agachado Defensa protagonista");
                                 break;
-                            case SpriteActual.ContraAtaqueParado:
+                            case SpriteActual.ContraAtaque:
                                 if (player.GetPlayerPvP() != null)
                                 {
                                     if (player.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Defensivo)
@@ -258,15 +205,8 @@ namespace Prototipo_2 {
             }
             return null;
         }
-        public void PlayAnimation(string nameAnimation)
-        {
-            if (animator != null)
-            {
-                animator.Play(nameAnimation);
-            }
-        }
         //REMPLAZAR ESTO POR Time.unscaledDeltaTime
-        public void InPlayAnimationAttack()
+        public override void InPlayAnimationAttack()
         {
             player.barraDeEscudo.AddPorcentageBar();
         }
@@ -285,12 +225,10 @@ namespace Prototipo_2 {
         {
             if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
             {
-                //Debug.Log("DISPARO EL PLAYER 1");
                 player.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
             }
             else if(player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
             {
-                //Debug.Log("DISPARO EL PLAYER 2");
                 player.Attack(Proyectil.DisparadorDelProyectil.Jugador2);
             }
         }
@@ -315,10 +253,6 @@ namespace Prototipo_2 {
             {
                 player.GetInputManager().SetEnableMovementPlayer2(true);
             }
-            /*if (!player.GetIsDuck())
-            {
-                ActualSprite = SpriteActual.Parado;
-            }*/
         }
         public void SetActualSprite(SpriteActual spriteActual)
         {
@@ -347,10 +281,7 @@ namespace Prototipo_2 {
             }
             player.delayAttack = player.GetAuxDelayAttack();
         }
-        public Animator GetAnimator()
-        {
-            return animator;
-        }
+
         public void DeathPlayer()
         {
             player.Dead();

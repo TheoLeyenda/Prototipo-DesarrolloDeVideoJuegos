@@ -30,7 +30,7 @@ namespace Prototipo_2
             }
             else
             {
-                spriteEnemy.animator.SetBool("AtaqueEspecial", false);
+                spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", false);
             }
         }
         public override void CheckDelayAttack(bool specialAttack)
@@ -65,18 +65,18 @@ namespace Prototipo_2
                 {
                     if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
                     {
-                        spriteEnemy.animator.Play("Ataque enemigo agresivo");
+                        spriteEnemy.GetAnimator().Play("Ataque enemigo agresivo");
                         inAttack = true;
                     }
                     else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
                         || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
                     {
-                        spriteEnemy.animator.Play("Ataque Salto enemigo agresivo");
+                        spriteEnemy.GetAnimator().Play("Ataque Salto enemigo agresivo");
                         inAttack = true;
                     }
                     else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
                     {
-                        spriteEnemy.animator.Play("Ataque Agachado enemigo agresivo");
+                        spriteEnemy.GetAnimator().Play("Ataque Agachado enemigo agresivo");
                         inAttack = true;
                     }
                     else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
@@ -87,7 +87,7 @@ namespace Prototipo_2
                         switch (enumsEnemy.GetMovement())
                         {
                             case EnumsEnemy.Movimiento.AtaqueEspecial:
-                                spriteEnemy.animator.SetBool("AtaqueEspecial", true);
+                                spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", true);
                                 spriteEnemy.spriteRenderer.color = Color.white;
                                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
                                 inAttack = true;

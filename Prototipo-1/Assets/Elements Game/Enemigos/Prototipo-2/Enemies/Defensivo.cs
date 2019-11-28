@@ -51,12 +51,12 @@ namespace Prototipo_2
         {
             if (!Disparo.gameObject.activeSelf)
             {
-                spriteEnemy.animator.SetBool("EnPlenoAtaqueEspecial", false);
-                spriteEnemy.animator.SetBool("FinalAtaqueEspecial", true);
+                spriteEnemy.GetAnimator().SetBool("EnPlenoAtaqueEspecial", false);
+                spriteEnemy.GetAnimator().SetBool("FinalAtaqueEspecial", true);
             }
             else
             {
-                spriteEnemy.animator.SetBool("EnPlenoAtaqueEspecial", true);
+                spriteEnemy.GetAnimator().SetBool("EnPlenoAtaqueEspecial", true);
             }
         }
         public override void CheckDelayAttack(bool specialAttack)
@@ -91,20 +91,20 @@ namespace Prototipo_2
                     if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
                     {
                         spriteEnemy.spriteRenderer.color = Color.white;
-                        spriteEnemy.animator.Play("Ataque enemigo defensivo");
+                        spriteEnemy.GetAnimator().Play("Ataque enemigo defensivo");
                         inAttack = true;
                     }
                     else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
                         || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
                     {
                         spriteEnemy.spriteRenderer.color = Color.white;
-                        spriteEnemy.animator.Play("Ataque Salto enemigo defensivo");
+                        spriteEnemy.GetAnimator().Play("Ataque Salto enemigo defensivo");
                         inAttack = true;
                     }
                     else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
                     {
                         spriteEnemy.spriteRenderer.color = Color.white;
-                        spriteEnemy.animator.Play("Ataque Agachado enemigo defensivo");
+                        spriteEnemy.GetAnimator().Play("Ataque Agachado enemigo defensivo");
                         inAttack = true;
                     }
                     else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
@@ -115,7 +115,7 @@ namespace Prototipo_2
                         switch (enumsEnemy.GetMovement())
                         {
                             case EnumsEnemy.Movimiento.AtaqueEspecial:
-                                spriteEnemy.animator.SetBool("AtaqueEspecial", true);
+                                spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", true);
                                 spriteEnemy.spriteRenderer.color = Color.white;
                                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
                                 inAttack = true;
@@ -295,7 +295,7 @@ namespace Prototipo_2
             if (specialAttack)
             {
                 Disparo.gameObject.SetActive(true);
-                spriteEnemy.animator.SetBool("AtaqueEspecial", false);
+                spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", false);
                 enumsEnemy.SetMovement( EnumsEnemy.Movimiento.AtaqueEspecial);
             }
             if (!Disparo.gameObject.activeSelf)

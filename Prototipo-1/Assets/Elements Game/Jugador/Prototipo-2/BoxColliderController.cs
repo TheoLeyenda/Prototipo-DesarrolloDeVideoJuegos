@@ -44,11 +44,6 @@ namespace Prototipo_2
                 gm = GameManager.instanceGameManager;
             }
         }
-        /*void Update()
-        {
-
-        }*/
-        //public TypeCollider tipoDeCollider;
         public StateBoxCollider state;
         public BoxCollider2D GetBoxCollider2D()
         {
@@ -313,7 +308,7 @@ namespace Prototipo_2
                                                     // SI ANDA MAL EL DISPARO COMENTAR LA LINEA DE ABAJO (player.enableAttack = true;)
                                                     player.enableAttack = true;
                                                     player.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
-                                                    player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaqueParado;
+                                                    player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaque;
                                                 }
                                             }
                                             else if (player_PvP.playerActual == Player_PvP.Player.player2)
@@ -323,7 +318,7 @@ namespace Prototipo_2
                                                     // SI ANDA MAL EL DISPARO COMENTAR LA LINEA DE ABAJO (player.enableAttack = true;)
                                                     player.enableAttack = true;
                                                     player.Attack(Proyectil.DisparadorDelProyectil.Jugador2);
-                                                    player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaqueParado;
+                                                    player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaque;
                                                 }
                                             }
                                             proyectil.damage = proyectil.GetAuxDamage();

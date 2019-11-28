@@ -6,10 +6,7 @@ namespace Prototipo_2
 {
     public class SpriteEnemy : SpriteCharacter
     {
-        [HideInInspector]
-        public Animator animator;
         public Enemy enemy;
-        public SpriteRenderer spriteRenderer;
 
         [System.Serializable]
         public class ElementsSprites
@@ -18,30 +15,8 @@ namespace Prototipo_2
             public string name;
 
         }
-        public enum SpriteActual
-        {
-            SaltoAtaque,
-            SaltoDefensa,
-            Salto,
-            ParadoAtaque,
-            ParadoDefensa,
-            Parado,
-            RecibirDanio,
-            MoverAtras,
-            MoverAdelante,
-            AgachadoAtaque,
-            AgachadoDefensa,
-            Agachado,
-            ContraAtaque,
-            AnimacionAtaque,
-            Count,
-        }
+        
         public List<ElementsSprites> Sprites;
-        public SpriteActual ActualSprite;
-        public float delaySpriteRecibirDanio;
-        private float auxDelaySpriteRecibirDanio;
-        public float delaySpriteContraAtaque;
-        private float auxDelaySpriteContraAtaque;
         private void Start()
         {
             auxDelaySpriteRecibirDanio = delaySpriteRecibirDanio;
@@ -285,39 +260,16 @@ namespace Prototipo_2
             }
             return null;
         }
-        public void CheckDeleyRecibirDanio()
-        {
-            if (delaySpriteRecibirDanio > 0)
-            {
-                delaySpriteRecibirDanio = delaySpriteRecibirDanio - Time.deltaTime;
-            }
-            else if (delaySpriteRecibirDanio <= 0)
-            {
-                delaySpriteRecibirDanio = auxDelaySpriteRecibirDanio;
-                ActualSprite = SpriteActual.Parado;
-            }
-        }
-        public void CheckDeleyContraAtaque()
-        {
-            if (delaySpriteContraAtaque > 0)
-            {
-                delaySpriteContraAtaque = delaySpriteContraAtaque - Time.deltaTime;
-            }
-            else if (delaySpriteContraAtaque <= 0)
-            {
-                delaySpriteContraAtaque = auxDelaySpriteContraAtaque;
-                ActualSprite = SpriteActual.Parado;
-            }
-        }
-        
-        public void PlayAnimation(string nameAnimation)
+
+
+        public override void PlayAnimation(string nameAnimation)
         {
             if (enemy.enemyPrefab.activeSelf == true && animator != null)
             {
                 animator.Play(nameAnimation);
             }
         }
-        public void InPlayAnimationAttack()
+        public override void InPlayAnimationAttack()
         {
             enemy.barraDeEscudo.AddPorcentageBar();
         }
