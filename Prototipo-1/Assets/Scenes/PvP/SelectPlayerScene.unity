@@ -971,6 +971,16 @@ PrefabInstance:
       propertyPath: CursorChicoPlayer1
       value: 
       objectReference: {fileID: 327300524375746850}
+    - target: {fileID: -5673953108494337262, guid: 7bc6523b6f88d7140b304cf97868c003,
+        type: 3}
+      propertyPath: spriteCursor1
+      value: 
+      objectReference: {fileID: 327300524375746852}
+    - target: {fileID: -5673953108494337262, guid: 7bc6523b6f88d7140b304cf97868c003,
+        type: 3}
+      propertyPath: spriteCursor2
+      value: 
+      objectReference: {fileID: 327300524375746851}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bc6523b6f88d7140b304cf97868c003, type: 3}
 --- !u!114 &1808636425 stripped
@@ -1515,6 +1525,16 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 327300523858583198, guid: f433ad0a62f792a42b7bec8f85da7c93,
+        type: 3}
+      propertyPath: m_Name
+      value: Cursor1
+      objectReference: {fileID: 0}
+    - target: {fileID: 327300525262225775, guid: f433ad0a62f792a42b7bec8f85da7c93,
+        type: 3}
+      propertyPath: m_Name
+      value: Cursor2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f433ad0a62f792a42b7bec8f85da7c93, type: 3}
 --- !u!4 &327300524375746849 stripped
@@ -1526,6 +1546,18 @@ Transform:
 --- !u!1 &327300524375746850 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 327300523858583198, guid: f433ad0a62f792a42b7bec8f85da7c93,
+    type: 3}
+  m_PrefabInstance: {fileID: 327300524375746848}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &327300524375746851 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 327300525262225777, guid: f433ad0a62f792a42b7bec8f85da7c93,
+    type: 3}
+  m_PrefabInstance: {fileID: 327300524375746848}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &327300524375746852 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 327300523858583199, guid: f433ad0a62f792a42b7bec8f85da7c93,
     type: 3}
   m_PrefabInstance: {fileID: 327300524375746848}
   m_PrefabAsset: {fileID: 0}

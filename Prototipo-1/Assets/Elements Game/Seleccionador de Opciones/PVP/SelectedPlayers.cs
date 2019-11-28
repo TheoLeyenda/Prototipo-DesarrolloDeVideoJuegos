@@ -48,6 +48,8 @@ namespace Prototipo_2
         public List<Sprite> spritesPlayers;
         public GameObject DireccionLeft;
         public GameObject DireccionRight;
+        public SpriteRenderer spriteCursor1;
+        public SpriteRenderer spriteCursor2;
         //----------------------------------//
         private void Start()
         {
@@ -106,6 +108,7 @@ namespace Prototipo_2
             CheckSelectCursor();
             DecoratePlayerSelected();
             CheckPositionCursor();
+            CheckCursorSelected();
         }
         public void CheckPositionCursor()
         {
@@ -274,6 +277,18 @@ namespace Prototipo_2
                 aviableMoveHorizontalP2 = true;
             }
             //----------------------------------------//
+        }
+        public void CheckCursorSelected()
+        {
+            if (cursorPlayer1.condirmed)
+            {
+                spriteCursor1.color = Color.yellow;
+                CursorGrandePlayer1.GetComponent<SpriteRenderer>().color = Color.yellow;
+            }
+            if (cursorPlayer2.condirmed)
+            {
+                spriteCursor2.color = Color.yellow;
+            }
         }
         public void CheckSelectCursor()
         {
