@@ -71,15 +71,13 @@ namespace Prototipo_2
                                 if (player.delayCounterAttack > 0)
                                 {
                                     player.delayCounterAttack = player.delayCounterAttack - Time.deltaTime;
-                                    if (InputPlayerController.DeffenseButton_P1() && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage)
+                                    if (InputPlayerController.GetInputButtonDown("DeffenseButton_P1") && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage)
                                     {
                                         proyectil.gameObject.SetActive(false);
                                         player.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
                                         player.delayCounterAttack = player.GetAuxDelayCounterAttack();
                                         proyectil.timeLife = 0;
                                         proyectil.GetPoolObject().Recycle();
-                                        //enableDamagePlayer = false;
-                                        //proyectil.AnimationHit();
                                     }
                                 }
                                 if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer && notProyectilParabola || !ZonaContraAtaque || proyectil.colisionPlayer)
@@ -92,8 +90,6 @@ namespace Prototipo_2
                                     player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                                     if (!ZonaContraAtaque)
                                     {
-                                        //proyectil.timeLife = 0;
-                                        //proyectil.gameObject.SetActive(false);
                                         eventWise.StartEvent("golpear_p1");
                                         proyectil.AnimationHit();
                                     }
@@ -110,8 +106,6 @@ namespace Prototipo_2
                                     player.SetEnableCounterAttack(false);
                                     player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                                     player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-                                    //proyectil.timeLife = 0;
-                                    //proyectil.gameObject.SetActive(false);
                                     eventWise.StartEvent("golpear_p1");
                                     proyectil.AnimationHit();
                                 }
@@ -129,14 +123,13 @@ namespace Prototipo_2
                                 {
                                     player.delayCounterAttack = player.delayCounterAttack - Time.deltaTime;
                                     
-                                    if (InputPlayerController.DeffenseButton_P2() && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage)
+                                    if (InputPlayerController.CheckPressDeffenseButton_P2() && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage)
                                     {
                                         player.Attack(Proyectil.DisparadorDelProyectil.Jugador2);
                                         player.delayCounterAttack = player.GetAuxDelayCounterAttack();
                                         enableDamagePlayer = false;
                                         proyectil.timeLife = 0;
                                         proyectil.GetPoolObject().Recycle();
-                                        //proyectil.AnimationHit();
                                     }
                                 }
                                 if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer && notProyectilParabola || !ZonaContraAtaque || proyectil.colisionPlayer)
@@ -189,7 +182,8 @@ namespace Prototipo_2
                                 if (player.delayCounterAttack > 0)
                                 {
                                     player.delayCounterAttack = player.delayCounterAttack - Time.deltaTime;
-                                    if (InputPlayerController.DeffenseButton_P1() && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage)
+
+                                    if (InputPlayerController.GetInputButtonDown("DeffenseButton_P1") && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage)
                                     {
                                         player.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
                                         player.delayCounterAttack = player.GetAuxDelayCounterAttack();

@@ -14,7 +14,7 @@ namespace Prototipo_2 {
         }
         public void CheckMenu()
         {
-            if (InputPlayerController.PauseButton_P1())
+            if (InputPlayerController.GetInputButtonDown("PauseButton_P1"))
             {
                 menuPlayer1.SetActive(true);
                 menuPlayer2.SetActive(false);

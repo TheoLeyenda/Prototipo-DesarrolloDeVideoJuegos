@@ -168,7 +168,7 @@ namespace Prototipo_2
                 //---MOVIMIENTO DEL CURSOR DEL PLAYER 1---//
                 if (cursorPlayer1.x >= 0 && cursorPlayer1.x < filas)
                 {
-                    if (InputPlayerController.Horizontal_Button_P1() > 0 && cursorPlayer1.x < filas - 1)
+                    if (InputPlayerController.GetInputAxis("Horizontal") > 0 && cursorPlayer1.x < filas - 1)
                     {
                         if (aviableMoveHorizontalP1)
                         {
@@ -177,7 +177,7 @@ namespace Prototipo_2
                             aviableMoveHorizontalP1 = false;
                         }
                     }
-                    else if (InputPlayerController.Horizontal_Button_P1() < 0 && cursorPlayer1.x > 0)
+                    else if (InputPlayerController.GetInputAxis("Horizontal") < 0 && cursorPlayer1.x > 0)
                     {
                         if (aviableMoveHorizontalP1)
                         {
@@ -189,7 +189,7 @@ namespace Prototipo_2
                 }
                 if (cursorPlayer1.y >= 0 && cursorPlayer1.y < columnas)
                 {
-                    if (InputPlayerController.Vertical_Button_P1() > 0 && cursorPlayer1.y > 0)
+                    if (InputPlayerController.GetInputAxis("Vertical") > 0 && cursorPlayer1.y > 0)
                     {
                         if (aviableMoveVerticalP1)
                         {
@@ -198,7 +198,7 @@ namespace Prototipo_2
                             aviableMoveVerticalP1 = false;
                         }
                     }
-                    else if (InputPlayerController.Vertical_Button_P1() < 0 && cursorPlayer1.y < columnas - 1)
+                    else if (InputPlayerController.GetInputAxis("Vertical") < 0 && cursorPlayer1.y < columnas - 1)
                     {
                         if (aviableMoveVerticalP1)
                         {
@@ -209,11 +209,11 @@ namespace Prototipo_2
                     }
                 }
             }
-            if (InputPlayerController.Vertical_Button_P1() == 0)
+            if (InputPlayerController.GetInputAxis("Vertical") == 0)
             {
                 aviableMoveVerticalP1 = true;
             }
-            if (InputPlayerController.Horizontal_Button_P1() == 0)
+            if (InputPlayerController.GetInputAxis("Horizontal") == 0)
             {
                 aviableMoveHorizontalP1 = true;
             }
@@ -277,9 +277,8 @@ namespace Prototipo_2
         }
         public void CheckSelectCursor()
         {
-            if (InputPlayerController.SelectButton_P1())
+            if (InputPlayerController.GetInputButtonDown("SelectButton_P1"))
             {
-                //Debug.Log(cursorPlayer1.x+", "+cursorPlayer1.y);
                 switch (grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y])
                 {
                     case "Balanceado":
@@ -305,7 +304,6 @@ namespace Prototipo_2
             }
             if (InputPlayerController.SelectButton_P2())
             {
-                //Debug.Log(cursorPlayer1.x + ", " + cursorPlayer1.y);
                 switch (grillaDeSeleccion[cursorPlayer2.x, cursorPlayer2.y])
                 {
                     case "Balanceado":
@@ -335,6 +333,5 @@ namespace Prototipo_2
                 SceneManager.LoadScene(nameNextScene);
             }
         }
-        // ESTE SCRIPT DEBE COMUNICAR AL STRUCT DEL GAME MANAGER LAS SELECCIONES DE LOS JUGADORES (tanto player1 como player2)
     }
 }

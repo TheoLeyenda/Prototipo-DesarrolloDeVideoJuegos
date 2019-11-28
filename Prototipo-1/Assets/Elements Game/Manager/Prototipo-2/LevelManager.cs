@@ -46,7 +46,7 @@ namespace Prototipo_2
         {
             CheckDiagolos();
             CheckPassLevel();
-            if (InputPlayerController.SelectButton_P1())
+            if (InputPlayerController.GetInputButtonDown("SelectButton_P1"))
             {
                 NextId();
             }
@@ -80,7 +80,7 @@ namespace Prototipo_2
             }
             else
             {
-                if (inDialog && !InputPlayerController.JumpButton_P1())
+                if (inDialog && !InputPlayerController.GetInputButtonDown("JumpButton_P1"))
                 {
                     Time.timeScale = 1;
                 }

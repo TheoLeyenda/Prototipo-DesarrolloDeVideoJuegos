@@ -81,27 +81,26 @@ namespace Prototipo_2 {
         }
         public void CheckBools_P1()
         {
-            horizontalStill_P1 = InputPlayerController.Horizontal_Button_P1() == 0;
-            //Debug.Log(InputPlayerController.Vertical_Analogico_P1());
-            movingDown_P1 = InputPlayerController.Vertical_Button_P1() < 0;
+            horizontalStill_P1 = InputPlayerController.GetInputAxis("Horizontal") == 0;
+            movingDown_P1 = InputPlayerController.GetInputAxis("Vertical") < 0;
             agachandose_P1 = player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Agacharse;
-            movingDownAnalog_P1 = InputPlayerController.Vertical_Analogico_P1() > 0.5f;
+            movingDownAnalog_P1 = InputPlayerController.GetInputAxis("Vertical_Analogico") > 0.5f;
 
-            movingUpAnalog_P1 = InputPlayerController.Vertical_Analogico_P1() < -0.9f;
+            movingUpAnalog_P1 = InputPlayerController.GetInputAxis("Vertical_Analogico") < -0.9f;
             movimientoNulo_P1 = player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo;
-            movingUp_P1 = InputPlayerController.Vertical_Button_P1() > 0;
-            pressButtonJamp_P1 = InputPlayerController.JumpButton_P1();
+            movingUp_P1 = InputPlayerController.GetInputAxis("Vertical") > 0;
+            pressButtonJamp_P1 = InputPlayerController.GetInputButtonDown("JumpButton_P1");
             saltando_P1 = player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar;
             saltandoAtaque_P1 = player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoAtaque;
             saltandoDefensa_P1 = player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa;
 
-            movingLeft_P1 = InputPlayerController.Horizontal_Button_P1() < 0;
-            movingLeftAnalog_P1 = InputPlayerController.Horizontal_Analogico_P1() < -0.9f;
-            verticalStill_P1 = InputPlayerController.Vertical_Button_P1() == 0;
+            movingLeft_P1 = InputPlayerController.GetInputAxis("Horizontal") < 0;
+            movingLeftAnalog_P1 = InputPlayerController.GetInputAxis("Horizontal_Analogico") < -0.9f;
+            verticalStill_P1 = InputPlayerController.GetInputAxis("Vertical") == 0;
             retroceder_P1 = player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras;
 
-            movingRight_P1 = InputPlayerController.Horizontal_Button_P1() > 0;
-            movingRightAnalog_P1 = InputPlayerController.Horizontal_Analogico_P1() > 0.9f;
+            movingRight_P1 = InputPlayerController.GetInputAxis("Horizontal") > 0;
+            movingRightAnalog_P1 = InputPlayerController.GetInputAxis("Horizontal_Analogico") > 0.9f;
             avanzando_P1 = player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante;
         }
 
@@ -139,7 +138,7 @@ namespace Prototipo_2 {
             {
                 if (player1 != null && player1.gameObject.activeSelf)
                 {
-                    if (!InputPlayerController.CheckPressDeffenseButton_P1() || player1.barraDeEscudo.nededBarMaxPorcentage)
+                    if (!InputPlayerController.GetInputButton("DeffenseButton_P1") || player1.barraDeEscudo.nededBarMaxPorcentage)
                     {
                         player1.barraDeEscudo.AddPorcentageBar();
                         if (player1.barraDeEscudo.GetValueShild() <= player1.barraDeEscudo.porcentageNededForDeffence)
@@ -227,7 +226,7 @@ namespace Prototipo_2 {
         //----- FUNCIONES Y CONTROLES DEL JUGADOR 1 -----//
         public void CheckPauseButton_P1()
         {
-            if (InputPlayerController.PauseButton_P1())
+            if (InputPlayerController.GetInputButtonDown("PauseButton_P1"))
             {
                 CheckValueInPause();
                 CheckInPause();
@@ -235,10 +234,10 @@ namespace Prototipo_2 {
         }
         public void CheckParabolaAttack_P1()
         {
-            if (InputPlayerController.ParabolaAttack_P1() && player1.GetEnableAttack()
+            if (InputPlayerController.GetInputButtonDown("ParabolaAttack_P1") && player1.GetEnableAttack()
                 && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante
                 && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
-                && !InputPlayerController.CheckPressDeffenseButton_P1())
+                && !InputPlayerController.GetInputButton("DeffenseButton_P1"))
             {
                 if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
                 {
@@ -317,7 +316,7 @@ namespace Prototipo_2 {
         }
         public void CheckVerticalCero_P1()
         {
-            if ((InputPlayerController.Vertical_Button_P1() == 0 && ((InputPlayerController.Vertical_Analogico_P1() > -0.9 && InputPlayerController.Vertical_Analogico_P1() < 0.8f))) &&
+            if ((InputPlayerController.GetInputAxis("Vertical") == 0 && ((InputPlayerController.GetInputAxis("Vertical_Analogico") > -0.9 && InputPlayerController.GetInputAxis("Vertical_Analogico") < 0.8f))) &&
                 (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Agacharse
                 || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacharseAtaque
                 || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacheDefensa))
@@ -325,7 +324,7 @@ namespace Prototipo_2 {
                 player1.enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
                 player1.SetIsDuck(false);
             }
-            else if (InputPlayerController.Vertical_Button_P1() == 0 && ((InputPlayerController.Vertical_Analogico_P1() > -0.9 && InputPlayerController.Vertical_Analogico_P1() < 0.8)))
+            else if (InputPlayerController.GetInputAxis("Vertical") == 0 && ((InputPlayerController.GetInputAxis("Vertical_Analogico") > -0.9 && InputPlayerController.GetInputAxis("Vertical_Analogico") < 0.8)))
             {
                 moveVerticalPlayer1 = true;
                 player1.SetIsDuck(false);
@@ -373,7 +372,7 @@ namespace Prototipo_2 {
         }
         public void CheckHorizontalCero_P1()
         {
-            if (InputPlayerController.Horizontal_Button_P1() == 0 && (InputPlayerController.Horizontal_Analogico_P1() > -0.9f && InputPlayerController.Horizontal_Analogico_P1() < 0.9f))
+            if (InputPlayerController.GetInputAxis("Horizontal") == 0 && (InputPlayerController.GetInputAxis("Horizontal_Analogico") > -0.9f && InputPlayerController.GetInputAxis("Horizontal_Analogico") < 0.9f))
             {
                 moveHorizontalPlayer1 = true;
             }
@@ -382,20 +381,19 @@ namespace Prototipo_2 {
         {
             if (!inPause)
             {
-                if (InputPlayerController.AttackButton_P1() && player1.GetEnableAttack()
+                if (InputPlayerController.GetInputButtonDown("AttackButton_P1") && player1.GetEnableAttack()
                     && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante
                     && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
-                    && !InputPlayerController.CheckPressDeffenseButton_P1())
+                    && !InputPlayerController.GetInputButton("DeffenseButton_P1"))
                 {
-                    //Debug.Log("JUGADOR 1 ATAQUE ACTIVED");
                     player1.SetControllerJoystick(true);
-                    if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && (InputPlayerController.Vertical_Button_P1() < 0
+                    if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && (InputPlayerController.GetInputAxis("Vertical") < 0
                         || (enableAnalogic && movingDownAnalog_P1)))
                     {
                         player1.spritePlayerActual.PlayAnimation("Ataque Abajo Salto protagonista");
                         enableMovementPlayer1 = false;
                     }
-                    else if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.Vertical_Button_P1() >= 0)
+                    else if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.GetInputAxis("Vertical") >= 0)
                     {
                         player1.spritePlayerActual.PlayAnimation("Ataque Salto protagonista");
                         enableMovementPlayer1 = false;
@@ -404,13 +402,11 @@ namespace Prototipo_2 {
                     {
                         if (!player1.GetIsDuck())
                         {
-                            //Debug.Log("ENTRE AL ATAQUE PARADO");
                             player1.spritePlayerActual.PlayAnimation("Ataque protagonista");
                             enableMovementPlayer1 = false;
                         }
                         else if (player1.GetIsDuck())
                         {
-                            //Debug.Log("ENTRE AL ATAQUE AGACHADO");
                             player1.spritePlayerActual.PlayAnimation("Ataque Agachado protagonista");
                             enableMovementPlayer1 = false;
                         }
@@ -421,9 +417,9 @@ namespace Prototipo_2 {
         } 
         public void CheckDeffenceButton_P1()
         {
-            if (!InputPlayerController.CheckPressAttackButton_P1())
+            if (!InputPlayerController.GetInputButton("AttackButton_P1"))
             {
-                if (InputPlayerController.CheckPressDeffenseButton_P1() 
+                if (InputPlayerController.GetInputButton("DeffenseButton_P1") 
                     && player1.barraDeEscudo.GetValueShild() > player1.barraDeEscudo.porcentageNededForDeffence
                     && player1.barraDeEscudo.GetEnableDeffence())
                 {
@@ -453,7 +449,6 @@ namespace Prototipo_2 {
                     player1.barraDeEscudo.AddPorcentageBar();
                     if (player1.barraDeEscudo.GetValueShild() <= player1.barraDeEscudo.porcentageNededForDeffence)
                     {
-                        //Debug.Log("ENTRE");
                         player1.barraDeEscudo.SetEnableDeffence(false);
                     }
                 }
@@ -464,7 +459,7 @@ namespace Prototipo_2 {
         {
             if (player1.GetEnableSpecialAttack())
             {
-                if (InputPlayerController.SpecialAttackButton_P1())
+                if (InputPlayerController.GetInputButtonDown("SpecialAttackButton_P1"))
                 {
                     if (player1.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.ProyectilImparable)
                     {
@@ -526,7 +521,6 @@ namespace Prototipo_2 {
                     case Player_PvP.PlayerSelected.Agresivo:
                         CheckParabolaAttack_P1();
                         CheckVerticalUp_P1();
-                        //CheckButtonJump_P1();
                         CheckVerticalDown_P1();
                         CheckVerticalCero_P1();
                         CheckHorizontalLeft_P1();
@@ -539,7 +533,6 @@ namespace Prototipo_2 {
                     case Player_PvP.PlayerSelected.Balanceado:
                         CheckParabolaAttack_P1();
                         CheckVerticalUp_P1();
-                        //CheckButtonJump_P1();
                         CheckVerticalDown_P1();
                         CheckVerticalCero_P1();
                         CheckHorizontalLeft_P1();
@@ -552,7 +545,6 @@ namespace Prototipo_2 {
                     case Player_PvP.PlayerSelected.Defensivo:
                         CheckParabolaAttack_P1();
                         CheckVerticalUp_P1();
-                        //CheckButtonJump_P1();
                         CheckVerticalDown_P1();
                         CheckVerticalCero_P1();
                         CheckHorizontalLeft_P1();
@@ -565,7 +557,6 @@ namespace Prototipo_2 {
                     case Player_PvP.PlayerSelected.Protagonista:
                         CheckParabolaAttack_P1();
                         CheckVerticalUp_P1();
-                        //CheckButtonJump_P1();
                         CheckVerticalDown_P1();
                         CheckVerticalCero_P1();
                         CheckHorizontalLeft_P1();
@@ -577,18 +568,12 @@ namespace Prototipo_2 {
                         break;
                 }
             }
-            /*if (!InputPlayerController.CheckPressDeffenseButton_P1() && !player1.GetIsJumping()
-                && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-                && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-                && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
-            {
-                player1.gridPlayer.CheckCuadrillaOcupada(player1.structsPlayer.dataPlayer.columnaActual, player1.structsPlayer.dataPlayer.CantCasillasOcupadas_X, player1.structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
-            }*/
+            
         }
         
         public void CheckSpriteParado_P1()
         {
-            if (InputPlayerController.Vertical_Button_P1() == 0 && !InputPlayerController.SpecialAttackButton_P1())
+            if (InputPlayerController.GetInputAxis("Vertical") == 0 && !InputPlayerController.GetInputButtonDown("SpecialAttackButton_P1"))
             {
                 player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
             }
@@ -642,17 +627,17 @@ namespace Prototipo_2 {
 
             if (spriteSaltoHabilitado)
             {
-                if (InputPlayerController.CheckPressAttackButton_P1())
+                if (InputPlayerController.GetInputButton("AttackButton_P1"))
                 {
                     player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.SaltoAtaque;
                 }
-                else if (InputPlayerController.CheckPressDeffenseButton_P1()
+                else if (InputPlayerController.GetInputButton("DeffenseButton_P1")
                      && player1.barraDeEscudo.GetValueShild() > player1.barraDeEscudo.porcentageNededForDeffence
                     && player1.barraDeEscudo.GetEnableDeffence())
                 {
                     player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.SaltoDefensa;
                 }
-                else if (InputPlayerController.SpecialAttackButton_P1())
+                else if (InputPlayerController.GetInputButtonDown("SpecialAttackButton_P1"))
                 {
                     //SPRITE O ANIMACION ATAQUE ESPECIAL JUGADOR.
                 }
@@ -669,13 +654,13 @@ namespace Prototipo_2 {
         public void CheckSpritesParado_P1() 
         {
             if (player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-                    && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Agacharse && InputPlayerController.Horizontal_Button_P1() == 0)
+                    && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Agacharse && InputPlayerController.GetInputAxis("Horizontal") == 0)
             {
-                if (InputPlayerController.CheckPressAttackButton_P1())
+                if (InputPlayerController.GetInputButton("AttackButton_P1"))
                 {
                     player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoAtaque;
                 }
-                else if (InputPlayerController.CheckPressDeffenseButton_P1() 
+                else if (InputPlayerController.GetInputButton("DeffenseButton_P1") 
                     && player1.barraDeEscudo.GetValueShild() > player1.barraDeEscudo.porcentageNededForDeffence
                     && player1.barraDeEscudo.GetEnableDeffence())
                 {
@@ -693,11 +678,7 @@ namespace Prototipo_2 {
         }
         public void CheckSpritesAgachado_P1() 
         {
-            /*horizontalStill_P1 = InputPlayerController.Horizontal_Button_P1() == 0;
-            //Debug.Log(InputPlayerController.Vertical_Analogico_P1());
-            movingDown_P1 = InputPlayerController.Vertical_Button_P1() < 0;
-            agachandose_P1 = player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Agacharse;
-            movingDownAnalog_P1 = InputPlayerController.Vertical_Analogico_P1() > 0.5f;*/
+            
 
             bool spriteAgachadoHabilitado = false;
             if (enableAnalogic)
@@ -708,14 +689,13 @@ namespace Prototipo_2 {
             {
                 spriteAgachadoHabilitado = (movingDown_P1 && !saltando_P1);
             }
-            //Debug.Log(player1.GetIsDuck());
             if (spriteAgachadoHabilitado && player1.GetIsDuck())
             {
-                if (InputPlayerController.CheckPressAttackButton_P1())
+                if (InputPlayerController.GetInputButton("AttackButton_P1"))
                 {
                     player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.AgachadoAtaque;
                 }
-                else if (InputPlayerController.CheckPressDeffenseButton_P1()
+                else if (InputPlayerController.GetInputButton("DeffenseButton_P1")
                      && player1.barraDeEscudo.GetValueShild() > player1.barraDeEscudo.porcentageNededForDeffence
                     && player1.barraDeEscudo.GetEnableDeffence())
                 {

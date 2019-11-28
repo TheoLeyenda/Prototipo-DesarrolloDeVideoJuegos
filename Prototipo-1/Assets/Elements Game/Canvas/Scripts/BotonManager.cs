@@ -33,14 +33,14 @@ namespace Prototipo_2
                 // EN CASO DE USAR ESTE SCRIPT EN OTRO PROYECTO TENEMOS DOS OPCIONES:
                 // 1) Llevarme el script de InputManager y el de InputPlayerController y configurar el playerSetting -> input tal cual como en este proyecto
                 // 2) cambiar los la condicion del if con el Input.GetKeyDown(KeyCode.BotonCorrespondiente) para que seleccione el boton.
-                if (InputPlayerController.Horizontal_Button_P1() > 0)
+                if (InputPlayerController.GetInputAxis("Horizontal") > 0)
                 {
                     SumarPosicion();
                 }
                 // EN CASO DE USAR ESTE SCRIPT EN OTRO PROYECTO TENEMOS DOS OPCIONES:
                 // 1) Llevarme el script de InputManager y el de InputPlayerController y configurar el playerSetting -> input tal cual como en este proyecto
                 // 2) cambiar los la condicion del if con el Input.GetKeyDown(KeyCode.BotonCorrespondiente) para que seleccione el boton.
-                if (InputPlayerController.Horizontal_Button_P1() < 0)
+                if (InputPlayerController.GetInputAxis("Horizontal") < 0)
                 {
                     RestarPosicion();
                 }
@@ -50,14 +50,14 @@ namespace Prototipo_2
                 // EN CASO DE USAR ESTE SCRIPT EN OTRO PROYECTO TENEMOS DOS OPCIONES:
                 // 1) Llevarme el script de InputManager y el de InputPlayerController y configurar el playerSetting -> input tal cual como en este proyecto
                 // 2) cambiar los la condicion del if con el Input.GetKeyDown(KeyCode.BotonCorrespondiente) para que seleccione el boton.
-                if (InputPlayerController.Vertical_Button_P1() > 0)
+                if (InputPlayerController.GetInputAxis("Vertical") > 0)
                 {
                     SumarPosicion();
                 }
                 // EN CASO DE USAR ESTE SCRIPT EN OTRO PROYECTO TENEMOS DOS OPCIONES:
                 // 1) Llevarme el script de InputManager y el de InputPlayerController y configurar el playerSetting -> input tal cual como en este proyecto
                 // 2) cambiar los la condicion del if con el Input.GetKeyDown(KeyCode.BotonCorrespondiente) para que seleccione el boton.
-                if (InputPlayerController.Vertical_Button_P1() < 0)
+                if (InputPlayerController.GetInputAxis("Vertical") < 0)
                 {
                     RestarPosicion();
                 }

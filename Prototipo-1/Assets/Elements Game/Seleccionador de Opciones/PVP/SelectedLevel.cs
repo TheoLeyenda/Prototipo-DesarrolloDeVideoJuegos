@@ -110,7 +110,7 @@ namespace Prototipo_2
         {
             if (cursorPlayer1.x >= 0 && cursorPlayer1.x < filas)
             {
-                if (InputPlayerController.Horizontal_Button_P1() > 0 && cursorPlayer1.x < filas - 1)
+                if (InputPlayerController.GetInputAxis("Horizontal") > 0 && cursorPlayer1.x < filas - 1)
                 {
                     if (aviableMoveHorizontal)
                     {
@@ -119,7 +119,7 @@ namespace Prototipo_2
                         aviableMoveHorizontal = false;
                     }
                 }
-                else if (InputPlayerController.Horizontal_Button_P1() < 0 && cursorPlayer1.x > 0)
+                else if (InputPlayerController.GetInputAxis("Horizontal") < 0 && cursorPlayer1.x > 0)
                 {
                     if (aviableMoveHorizontal)
                     {
@@ -131,7 +131,7 @@ namespace Prototipo_2
             }
             if (cursorPlayer1.y >= 0 && cursorPlayer1.y < columnas)
             {
-                if (InputPlayerController.Vertical_Button_P1() > 0 && cursorPlayer1.y > 0)
+                if (InputPlayerController.GetInputAxis("Vertical") > 0 && cursorPlayer1.y > 0)
                 {
                     if (aviableMoveVertical)
                     {
@@ -140,7 +140,7 @@ namespace Prototipo_2
                         aviableMoveVertical = false;
                     }
                 }
-                else if (InputPlayerController.Vertical_Button_P1() < 0 && cursorPlayer1.y < columnas - 1)
+                else if (InputPlayerController.GetInputAxis("Vertical") < 0 && cursorPlayer1.y < columnas - 1)
                 {
                     if (aviableMoveVertical)
                     {
@@ -150,18 +150,18 @@ namespace Prototipo_2
                     }
                 }
             }
-            if (InputPlayerController.Vertical_Button_P1() == 0)
+            if (InputPlayerController.GetInputAxis("Vertical") == 0)
             {
                 aviableMoveVertical = true;
             }
-            if (InputPlayerController.Horizontal_Button_P1() == 0)
+            if (InputPlayerController.GetInputAxis("Horizontal") == 0)
             {
                 aviableMoveHorizontal = true;
             }
         }
         public void CheckSelectCursor()
         {
-            if (InputPlayerController.SelectButton_P1())
+            if (InputPlayerController.GetInputButtonDown("SelectButton_P1"))
             {
                 switch (grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y])
                 {
@@ -206,7 +206,7 @@ namespace Prototipo_2
                         break;
                 }
             }
-            cursorPlayer2.condirmed = true; // SACAR ESTO Y REMPLAZARLO POR LO MISMO QUE HICE CON cursorPlayer1 PERO UTILIZANDO cursorPlayer2
+            cursorPlayer2.condirmed = true; 
             if (cursorPlayer1.condirmed && cursorPlayer2.condirmed)
             {
                 if (activateCountRoundsSelection)
@@ -238,11 +238,7 @@ namespace Prototipo_2
         }
         public void CheckFondo()
         {
-            /*
-             * BackgroundLevels currentLevel = BackgroundLevels.Cafeteria;
-
-            background.sprite = fondos[(int)currentLevel];
-            */
+            
             switch (grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y])
             {
                 case "Aula_Anatomia":
@@ -274,6 +270,5 @@ namespace Prototipo_2
                     break;
             }
         }
-        // ESTE SCRIPT DEBE COMUNICAR AL STRUCT DEL GAME MANAGER LAS SELECCIONES DE LOS NIVELES
     }
 }

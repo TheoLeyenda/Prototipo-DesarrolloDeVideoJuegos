@@ -95,7 +95,7 @@ namespace Prototipo_2
             //PONER UNA CONDICION OR PARA EL ENEMIGO
             if (player != null)
             {
-                if (((!InputPlayerController.CheckPressDeffenseButton_P1()
+                if (((!InputPlayerController.GetInputButton("DeffenseButton_P1")
                         && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
                     || (!InputPlayerController.CheckPressDeffenseButton_P2()
                         && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)))
@@ -132,7 +132,7 @@ namespace Prototipo_2
         {
             if (player != null)
             {
-                if ((!InputPlayerController.CheckPressDeffenseButton_P1() && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                if ((!InputPlayerController.GetInputButton("DeffenseButton_P1") && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
                 || (!InputPlayerController.CheckPressDeffenseButton_P2() && player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2))
                 {
                     AddPorcentage();

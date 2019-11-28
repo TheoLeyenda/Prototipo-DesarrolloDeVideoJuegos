@@ -43,35 +43,30 @@ public class SoundForInput : MonoBehaviour
     }
     public void CheckSelectionP1()
     {
-        //Debug.Log("Hola");
-        //Debug.Log(mov);
-        if (InputPlayerController.Horizontal_Button_P1() == 0 && InputPlayerController.Vertical_Button_P1() == 0)
+        if (InputPlayerController.GetInputAxis("Horizontal") == 0 && InputPlayerController.GetInputAxis("Vertical") == 0)
         {
             mov = Movimiento.Habilitado;
         }
         if (movimientoHorizontal)
         {
-            if (((InputPlayerController.Horizontal_Button_P1() > 0.5f || InputPlayerController.Horizontal_Button_P1() < - 0.5f) 
+            if (((InputPlayerController.GetInputAxis("Horizontal") > 0.5f || InputPlayerController.GetInputAxis("Horizontal") < - 0.5f) 
                 || (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))) && mov == Movimiento.Habilitado)
             {
-                //Debug.Log("ENTRE AL EVENTO DE SONIDO MASTER");
                 AkSoundEngine.PostEvent(nombreEventoMovimiento, gameObject);
                 mov = Movimiento.Nulo;
             }
         }
         if (movimientoVertical)
         {
-            //Debug.Log(InputPlayerController.Vertical_Button_P1());
-            if (((InputPlayerController.Vertical_Button_P1() > 0.5f || InputPlayerController.Vertical_Button_P1() < -0.5f)
+            if (((InputPlayerController.GetInputAxis("Vertical") > 0.5f || InputPlayerController.GetInputAxis("Vertical") < -0.5f)
                 || (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))) && mov == Movimiento.Habilitado)
             {
-                //Debug.Log("ENTRE AL EVENTO DE SONIDO MASTER");
                 AkSoundEngine.PostEvent(nombreEventoMovimiento, gameObject);
                 mov = Movimiento.Nulo;
             }
         }
         
-        if (InputPlayerController.SelectButton_P1())
+        if (InputPlayerController.GetInputButtonDown("SelectButton_P1"))
         {
             AkSoundEngine.PostEvent(nombreEventoSeleccion, gameObject);
         }
@@ -109,7 +104,7 @@ public class SoundForInput : MonoBehaviour
     }
     public void CheckSelectionPause()
     {
-        if (InputPlayerController.CheckPauseButtonP1() && Time.timeScale == 1)
+        if (InputPlayerController.GetInputButton("PauseButton_P1") && Time.timeScale == 1)
         {
             AkSoundEngine.PostEvent("pausa", gameObject);
             controlPausador = ControlPausador.player1;

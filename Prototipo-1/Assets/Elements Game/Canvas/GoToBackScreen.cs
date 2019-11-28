@@ -12,7 +12,7 @@ public class GoToBackScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InputPlayerController.CheckPressDeffenseButton_P1())
+        if (InputPlayerController.GetInputButton("DeffenseButton_P1"))
         {
             LoadBackScene();
         }
