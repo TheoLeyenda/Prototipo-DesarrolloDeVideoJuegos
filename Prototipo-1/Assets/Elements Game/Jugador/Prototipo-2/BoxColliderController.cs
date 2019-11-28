@@ -234,6 +234,10 @@ namespace Prototipo_2
                                 }
                             }
                         }
+                        if (player.delayCounterAttack <= 0)
+                        {
+                            player.delayCounterAttack = player.GetAuxDelayCounterAttack();
+                        }
                     }
                     else if (state == StateBoxCollider.Defendido)
                     {

@@ -130,7 +130,6 @@ namespace Prototipo_2 {
         }
         void Update()
         {
-            //Debug.Log(enableMovementPlayer1);
             CheckPauseButton_P1();
             CheckPauseButton_P2();
             //Debug.Log(player1.enumsPlayers.movimiento);
