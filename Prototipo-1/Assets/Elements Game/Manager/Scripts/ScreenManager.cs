@@ -20,11 +20,9 @@ namespace Prototipo_2 {
             {
                 gm = GameManager.instanceGameManager;
             }
-            if (eventWise != null)
-            {
-                eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
-            }
+           
         }
+        
         public void Multijugador()
         {
             SceneManager.LoadScene("Multijugador");
@@ -182,6 +180,13 @@ namespace Prototipo_2 {
                 if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
                 {
                     Historia();
+                }
+            }
+            if (eventWise == null)
+            {
+                if (GameObject.Find("EventWise") != null)
+                {
+                    eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
                 }
             }
         }
