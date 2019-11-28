@@ -499,74 +499,16 @@ namespace Prototipo_2 {
         public void CheckInputPlayer1()
         {
             CheckBools_P1();
-            if (player1_PvP == null)
-            {
-                CheckParabolaAttack_P1();
-                CheckVerticalUp_P1();
-                CheckVerticalDown_P1();
-                CheckVerticalCero_P1();
-                CheckHorizontalLeft_P1();
-                CheckHorizontalRight_P1();
-                CheckHorizontalCero_P1();
-                CheckAttackButton_P1();
-                CheckDeffenceButton_P1();
-                CheckSpecialAttackButton_P1();
-            }
-            else
-            {
-                switch (player1_PvP.playerSelected)
-                {
-                    case Player_PvP.PlayerSelected.Agresivo:
-                        CheckParabolaAttack_P1();
-                        CheckVerticalUp_P1();
-                        CheckVerticalDown_P1();
-                        CheckVerticalCero_P1();
-                        CheckHorizontalLeft_P1();
-                        CheckHorizontalRight_P1();
-                        CheckHorizontalCero_P1();
-                        CheckAttackButton_P1();
-                        CheckDeffenceButton_P1();
-                        CheckSpecialAttackButton_P1();
-                        break;
-                    case Player_PvP.PlayerSelected.Balanceado:
-                        CheckParabolaAttack_P1();
-                        CheckVerticalUp_P1();
-                        CheckVerticalDown_P1();
-                        CheckVerticalCero_P1();
-                        CheckHorizontalLeft_P1();
-                        CheckHorizontalRight_P1();
-                        CheckHorizontalCero_P1();
-                        CheckAttackButton_P1();
-                        CheckDeffenceButton_P1();
-                        CheckSpecialAttackButton_P1();
-                        break;
-                    case Player_PvP.PlayerSelected.Defensivo:
-                        CheckParabolaAttack_P1();
-                        CheckVerticalUp_P1();
-                        CheckVerticalDown_P1();
-                        CheckVerticalCero_P1();
-                        CheckHorizontalLeft_P1();
-                        CheckHorizontalRight_P1();
-                        CheckHorizontalCero_P1();
-                        CheckAttackButton_P1();
-                        CheckDeffenceButton_P1();
-                        CheckSpecialAttackButton_P1();
-                        break;
-                    case Player_PvP.PlayerSelected.Protagonista:
-                        CheckParabolaAttack_P1();
-                        CheckVerticalUp_P1();
-                        CheckVerticalDown_P1();
-                        CheckVerticalCero_P1();
-                        CheckHorizontalLeft_P1();
-                        CheckHorizontalRight_P1();
-                        CheckHorizontalCero_P1();
-                        CheckAttackButton_P1();
-                        CheckDeffenceButton_P1();
-                        CheckSpecialAttackButton_P1();
-                        break;
-                }
-            }
-            
+            CheckParabolaAttack_P1();
+            CheckVerticalUp_P1();
+            CheckVerticalDown_P1();
+            CheckVerticalCero_P1();
+            CheckHorizontalLeft_P1();
+            CheckHorizontalRight_P1();
+            CheckHorizontalCero_P1();
+            CheckAttackButton_P1();
+            CheckDeffenceButton_P1();
+            CheckSpecialAttackButton_P1();
         }
         
         public void CheckSpriteParado_P1()
@@ -676,8 +618,6 @@ namespace Prototipo_2 {
         }
         public void CheckSpritesAgachado_P1() 
         {
-            
-
             bool spriteAgachadoHabilitado = false;
             if (enableAnalogic)
             {
@@ -801,7 +741,6 @@ namespace Prototipo_2 {
                         enableMovementPlayer2 = false;
                     }
                 }
-                //player1.ParabolaAttack(Proyectil.DisparadorDelProyectil.Jugador1);
             }
         }
         public void CheckPauseButton_P2()
@@ -838,9 +777,7 @@ namespace Prototipo_2 {
             bool movimientoVerticalHabilitado = false;
             if (enableAnalogic)
             {
-
                 movimientoVerticalHabilitado = (((movingDown_P2 || movingDownAnalog_P2) && movimientoNulo_P2) || agachandose_P2);
-                //Debug.Log(movimientoVerticalHabilitado);
             }
             else
             {
@@ -1046,81 +983,17 @@ namespace Prototipo_2 {
         public void CheckInputPlayer2()
         {
             CheckBools_P2();
-            if (player2 != null)
-            {
-                if (player2_PvP == null)
-                {
-                    CheckParabolaAttack_P2();
-                    CheckVerticalUp_P2();
-                    //CheckButtonJump_P2();
-                    CheckVerticalDown_P2();
-                    CheckVerticalCero_P2();
-                    CheckHorizontalLeft_P2();
-                    CheckHorizontalRight_P2();
-                    CheckHorizontalCero_P2();
-                    CheckAttackButton_P2();
-                    CheckDeffenceButton_P2();
-                    CheckSpecialAttackButton_P2();
-                }
-                else
-                {
-                    switch (player2_PvP.playerSelected)
-                    {
-                        case Player_PvP.PlayerSelected.Agresivo:
-                            CheckParabolaAttack_P2();
-                            CheckVerticalUp_P2();
-                            //CheckButtonJump_P2();
-                            CheckVerticalDown_P2();
-                            CheckVerticalCero_P2();
-                            CheckHorizontalLeft_P2();
-                            CheckHorizontalRight_P2();
-                            CheckHorizontalCero_P2();
-                            CheckAttackButton_P2();
-                            CheckDeffenceButton_P2();
-                            CheckSpecialAttackButton_P2();
-                            break;
-                        case Player_PvP.PlayerSelected.Balanceado:
-                            CheckParabolaAttack_P2();
-                            CheckVerticalUp_P2();
-                            //CheckButtonJump_P2();
-                            CheckVerticalDown_P2();
-                            CheckVerticalCero_P2();
-                            CheckHorizontalLeft_P2();
-                            CheckHorizontalRight_P2();
-                            CheckHorizontalCero_P2();
-                            CheckAttackButton_P2();
-                            CheckDeffenceButton_P2();
-                            CheckSpecialAttackButton_P2();
-                            break;
-                        case Player_PvP.PlayerSelected.Defensivo:
-                            CheckParabolaAttack_P2();
-                            CheckVerticalUp_P2();
-                            //CheckButtonJump_P2();
-                            CheckVerticalDown_P2();
-                            CheckVerticalCero_P2();
-                            CheckHorizontalLeft_P2();
-                            CheckHorizontalRight_P2();
-                            CheckHorizontalCero_P2();
-                            CheckAttackButton_P2();
-                            CheckDeffenceButton_P2();
-                            CheckSpecialAttackButton_P2();
-                            break;
-                        case Player_PvP.PlayerSelected.Protagonista:
-                            CheckParabolaAttack_P2();
-                            CheckVerticalUp_P2();
-                            //CheckButtonJump_P2();
-                            CheckVerticalDown_P2();
-                            CheckVerticalCero_P2();
-                            CheckHorizontalLeft_P2();
-                            CheckHorizontalRight_P2();
-                            CheckHorizontalCero_P2();
-                            CheckAttackButton_P2();
-                            CheckDeffenceButton_P2();
-                            CheckSpecialAttackButton_P2();
-                            break;
-                    }
-                }
-            }
+            CheckParabolaAttack_P2();
+            CheckVerticalUp_P2();
+            CheckVerticalDown_P2();
+            CheckVerticalCero_P2();
+            CheckHorizontalLeft_P2();
+            CheckHorizontalRight_P2();
+            CheckHorizontalCero_P2();
+            CheckAttackButton_P2();
+            CheckDeffenceButton_P2();
+            CheckSpecialAttackButton_P2();
+               
         }
         public void CheckSpriteParado_P2()
         {
