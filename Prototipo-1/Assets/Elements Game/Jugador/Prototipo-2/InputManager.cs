@@ -551,31 +551,58 @@ namespace Prototipo_2 {
             }
         }
         
-        public void CheckSpritesParado_P1() 
+        public void CheckSpritesParado(string inputHorizontal, string inputAttackButton, string inputDeffenseButton, Player player, Player_PvP player_PvP) 
         {
-            if (player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-                    && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Agacharse && InputPlayerController.GetInputAxis("Horizontal") == 0)
+            //PARAMETROS P1: ("Horizontal")("AttackButton_P1")("DeffenseButton_P1")(player)(player_PvP)
+            //PARAMETROS P2: ("Horizontal_P2")("AttackButton_P2")("DeffenseButton_P2")(player)(player_PvP)
+            if (player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                    && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Agacharse && InputPlayerController.GetInputAxis(inputHorizontal) == 0)
             {
-                if (InputPlayerController.GetInputButton("AttackButton_P1"))
+                if (InputPlayerController.GetInputButton(inputAttackButton))
                 {
-                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoAtaque;
+                    player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoAtaque;
                 }
-                else if (InputPlayerController.GetInputButton("DeffenseButton_P1") 
-                    && player1.barraDeEscudo.GetValueShild() > player1.barraDeEscudo.porcentageNededForDeffence
-                    && player1.barraDeEscudo.GetEnableDeffence())
+                else if (InputPlayerController.GetInputButton(inputDeffenseButton) 
+                    && player.barraDeEscudo.GetValueShild() > player.barraDeEscudo.porcentageNededForDeffence
+                    && player.barraDeEscudo.GetEnableDeffence())
                 {
-                    player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoDefensa;
-                    if (player1_PvP != null)
+                    player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoDefensa;
+                    if (player_PvP != null)
                     {
-                        player1_PvP.playerState = Player_PvP.State.Defendido;
+                        player_PvP.playerState = Player_PvP.State.Defendido;
                     }
                 }
                 else
                 {
-                    player1.spritePlayerActual.delaySpriteRecibirDanio = player1.spritePlayerActual.GetAuxDelaySpriteRecibirDanio();
+                    player.spritePlayerActual.delaySpriteRecibirDanio = player.spritePlayerActual.GetAuxDelaySpriteRecibirDanio();
                 }
             }
         }
+        /*public void CheckSpritesParado_P2()
+        {
+            if (player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                    && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Agacharse && InputPlayerController.GetInputAxis("Horizontal_P2") == 0)
+            {
+                if (InputPlayerController.GetInputButton("AttackButton_P2"))
+                {
+                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoAtaque;
+                }
+                else if (InputPlayerController.GetInputButton("DeffenseButton_P2")
+                    && player2.barraDeEscudo.GetValueShild() > player2.barraDeEscudo.porcentageNededForDeffence
+                    && player2.barraDeEscudo.GetEnableDeffence())
+                {
+                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoDefensa;
+                    if (player2_PvP != null)
+                    {
+                        player2_PvP.playerState = Player_PvP.State.Defendido;
+                    }
+                }
+                else
+                {
+                    player2.spritePlayerActual.delaySpriteRecibirDanio = player2.spritePlayerActual.GetAuxDelaySpriteRecibirDanio();
+                }
+            }
+        }*/
         public void CheckSpritesAgachado_P1() 
         {
             bool spriteAgachadoHabilitado = false;
@@ -626,7 +653,8 @@ namespace Prototipo_2 {
                     CheckSpriteMoverDerecha("Horizontal", "Horizontal_Analogico", "Vertical",moveHorizontalPlayer1,player);
                     CheckSpriteMoverIzquierda("Horizontal", "Horizontal_Analogico", "Vertical", moveHorizontalPlayer1,player);
                     CheckSpritesSalto("Vertical", "Vertical_Analogico", "Horizontal", "AttackButton_P1", "DeffenseButton_P1", "SpecialAttackButton_P1", player);
-                    CheckSpritesParado_P1();
+                    //PARAMETROS P1: ("Horizontal")("AttackButton_P1")("DeffenseButton_P1")(player)(player_PvP)
+                    CheckSpritesParado("Horizontal", "AttackButton_P1", "DeffenseButton_P1",player, player1_PvP);
                     CheckSpritesAgachado_P1();
                 }
                 else if(player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
@@ -635,7 +663,8 @@ namespace Prototipo_2 {
                     CheckSpriteMoverDerecha("Horizontal_P2", "Horizontal_Analogico_P2", "Vertical_P2",moveHorizontalPlayer2, player);
                     CheckSpriteMoverIzquierda("Horizontal_P2", "Horizontal_Analogico_P2", "Vertical_P2",moveHorizontalPlayer2, player);
                     CheckSpritesSalto("Vertical_P2", "Vertical_Analogico_P2", "Horizontal_P2", "AttackButton_P2", "DeffenseButton_P2", "SpecialAttackButton_P2", player);
-                    CheckSpritesParado_P2();
+                    //PARAMETROS P2: ("Horizontal_P2")("AttackButton_P2")("DeffenseButton_P2")(player)(player_PvP)
+                    CheckSpritesParado("Horizontal_P2", "AttackButton_P2", "DeffenseButton_P2",player, player2_PvP);
                     CheckSpritesAgachado_P2();
                 }
             }
@@ -911,35 +940,6 @@ namespace Prototipo_2 {
             }
         }
         
-        
-        
-        
-        
-        public void CheckSpritesParado_P2()
-        {
-            if (player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-                    && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Agacharse && InputPlayerController.GetInputAxis("Horizontal_P2") == 0)
-            {
-                if (InputPlayerController.GetInputButton("AttackButton_P2"))
-                {
-                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoAtaque;
-                }
-                else if (InputPlayerController.GetInputButton("DeffenseButton_P2")
-                    && player2.barraDeEscudo.GetValueShild() > player2.barraDeEscudo.porcentageNededForDeffence
-                    && player2.barraDeEscudo.GetEnableDeffence())
-                {
-                    player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ParadoDefensa;
-                    if (player2_PvP != null)
-                    {
-                        player2_PvP.playerState = Player_PvP.State.Defendido;
-                    }
-                }
-                else
-                {
-                    player2.spritePlayerActual.delaySpriteRecibirDanio = player2.spritePlayerActual.GetAuxDelaySpriteRecibirDanio();
-                }
-            }
-        }
         public void CheckSpritesAgachado_P2()
         {
             bool spriteAgachadoHabilitado = false;
