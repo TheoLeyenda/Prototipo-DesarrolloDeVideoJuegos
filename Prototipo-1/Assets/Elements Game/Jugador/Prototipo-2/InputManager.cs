@@ -503,14 +503,35 @@ namespace Prototipo_2 {
             CheckDeffenceButton_P1();
             CheckSpecialAttackButton_P1();
         }
-        
-        public void CheckSpriteParado_P1()
+        public void CheckInputPlayer2()
         {
-            if (InputPlayerController.GetInputAxis("Vertical") == 0 && !InputPlayerController.GetInputButtonDown("SpecialAttackButton_P1"))
+            CheckBools_P2();
+            CheckParabolaAttack_P2();
+            CheckVerticalUp_P2();
+            CheckVerticalDown_P2();
+            CheckVerticalCero_P2();
+            CheckHorizontalLeft_P2();
+            CheckHorizontalRight_P2();
+            CheckHorizontalCero_P2();
+            CheckAttackButton_P2();
+            CheckDeffenceButton_P2();
+            CheckSpecialAttackButton_P2();
+
+        }
+        public void CheckSpriteParado(string inputVertical, string inputSpecialAttackButton, Player player)
+        {
+            if (InputPlayerController.GetInputAxis(inputVertical) == 0 && !InputPlayerController.GetInputButtonDown(inputSpecialAttackButton))
             {
-                player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
+                player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
             }
         }
+        /*public void CheckSpriteParado_P2()
+        {
+            if (InputPlayerController.GetInputAxis("Vertical_P2") == 0 && !InputPlayerController.GetInputButtonDown("SpecialAttackButton_P2"))
+            {
+                player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
+            }
+        }*/
         public void CheckSpriteMoverAdelante_P1()
         {
 
@@ -655,7 +676,7 @@ namespace Prototipo_2 {
             {
                 if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
                 {
-                    CheckSpriteParado_P1();
+                    CheckSpriteParado("Vertical", "SpecialAttackButton_P1" , player);
                     CheckSpriteMoverAdelante_P1();
                     CheckSpriteMoverAtras_P1();
                     CheckSpritesSalto_P1();
@@ -664,7 +685,7 @@ namespace Prototipo_2 {
                 }
                 else if(player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
                 {
-                    CheckSpriteParado_P2();
+                    CheckSpriteParado("Vertical_P2","SpecialAttackButton_P2", player);
                     CheckSpriteMoverAdelante_P2();
                     CheckSpriteMoverAtras_P2();
                     CheckSpritesSalto_P2();
@@ -944,28 +965,8 @@ namespace Prototipo_2 {
                 }
             }
         }
-        public void CheckInputPlayer2()
-        {
-            CheckBools_P2();
-            CheckParabolaAttack_P2();
-            CheckVerticalUp_P2();
-            CheckVerticalDown_P2();
-            CheckVerticalCero_P2();
-            CheckHorizontalLeft_P2();
-            CheckHorizontalRight_P2();
-            CheckHorizontalCero_P2();
-            CheckAttackButton_P2();
-            CheckDeffenceButton_P2();
-            CheckSpecialAttackButton_P2();
-               
-        }
-        public void CheckSpriteParado_P2()
-        {
-            if (InputPlayerController.GetInputAxis("Vertical_P2") == 0 && !InputPlayerController.GetInputButtonDown("SpecialAttackButton_P2"))
-            {
-                player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
-            }
-        }
+        
+        
         public void CheckSpriteMoverAdelante_P2()
         {
             bool cambioSpriteHabilitado = false;
