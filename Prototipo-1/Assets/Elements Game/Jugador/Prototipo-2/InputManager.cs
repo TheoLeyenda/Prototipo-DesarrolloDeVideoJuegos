@@ -22,14 +22,9 @@ namespace Prototipo_2 {
         private bool enableMovementPlayer1;
         private bool enableMovementPlayer2;
 
-
         bool movingLeft_P1;
         bool movingLeftAnalog_P1;
-        bool verticalStill_P1;
         bool retroceder_P1;
-        bool movingRight_P1;
-        bool movingRightAnalog_P1;
-        bool avanzando_P1;
         bool movimientoNulo_P1;
         bool movingUp_P1;
         bool pressButtonJamp_P1;
@@ -44,11 +39,7 @@ namespace Prototipo_2 {
 
         bool movingLeft_P2;
         bool movingLeftAnalog_P2;
-        bool verticalStill_P2;
         bool retroceder_P2;
-        bool movingRight_P2;
-        bool movingRightAnalog_P2;
-        bool avanzando_P2;
         bool movimientoNulo_P2;
         bool movingUp_P2;
         bool pressButtonJamp_P2;
@@ -96,12 +87,8 @@ namespace Prototipo_2 {
 
             movingLeft_P1 = InputPlayerController.GetInputAxis("Horizontal") < 0;
             movingLeftAnalog_P1 = InputPlayerController.GetInputAxis("Horizontal_Analogico") < -0.9f;
-            verticalStill_P1 = InputPlayerController.GetInputAxis("Vertical") == 0;
             retroceder_P1 = player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras;
 
-            movingRight_P1 = InputPlayerController.GetInputAxis("Horizontal") > 0;
-            movingRightAnalog_P1 = InputPlayerController.GetInputAxis("Horizontal_Analogico") > 0.9f;
-            avanzando_P1 = player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante;
         }
 
         public void CheckBools_P2()
@@ -121,18 +108,13 @@ namespace Prototipo_2 {
 
             movingLeft_P2 = InputPlayerController.GetInputAxis("Horizontal_P2") < 0;
             movingLeftAnalog_P2 = InputPlayerController.GetInputAxis("Horizontal_Analogico_P2") < -0.9f;
-            verticalStill_P2 = InputPlayerController.GetInputAxis("Vertical_P2") == 0;
             retroceder_P2 = player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAtras;
 
-            movingRight_P2 = InputPlayerController.GetInputAxis("Horizontal_P2") > 0;
-            movingRightAnalog_P2 = InputPlayerController.GetInputAxis("Horizontal_Analogico_P2") > 0.9f;
-            avanzando_P2 = player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante;
         }
         void Update()
         {
             CheckPauseButton_P1();
             CheckPauseButton_P2();
-            //Debug.Log(player1.enumsPlayers.movimiento);
             if (Time.timeScale == 1)
             {
                 if (player1 != null && player1.gameObject.activeSelf)
@@ -347,11 +329,11 @@ namespace Prototipo_2 {
             bool movimientoHorizontalHabilitado = false;
             if (enableAnalogic)
             {
-                movimientoHorizontalHabilitado = (((movingRight_P1 || movingRightAnalog_P1) && moveHorizontalPlayer1 && movimientoNulo_P1) || avanzando_P1);
+                movimientoHorizontalHabilitado = (((InputPlayerController.GetInputAxis("Horizontal") > 0 || InputPlayerController.GetInputAxis("Horizontal_Analogico") > 0.9f) && moveHorizontalPlayer1 && movimientoNulo_P1) || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante);
             }
             else
             {
-                movimientoHorizontalHabilitado = ((movingRight_P1 && moveHorizontalPlayer1 && movimientoNulo_P1) || avanzando_P1);
+                movimientoHorizontalHabilitado = ((InputPlayerController.GetInputAxis("Horizontal") > 0 && moveHorizontalPlayer1 && movimientoNulo_P1) || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante);
             }
             if (movimientoHorizontalHabilitado)
             {
@@ -525,28 +507,29 @@ namespace Prototipo_2 {
                 player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
             }
         }
-        /*public void CheckSpriteParado_P2()
-        {
-            if (InputPlayerController.GetInputAxis("Vertical_P2") == 0 && !InputPlayerController.GetInputButtonDown("SpecialAttackButton_P2"))
-            {
-                player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Parado;
-            }
-        }*/
-        public void CheckSpriteMoverAdelante_P1()
+        public void CheckSpriteMoverDerecha(string inputHorizontal , string inputHorizontalAnalog, string inputVertical, Player player)
         {
 
             bool cambioSpriteHabilitado = false;
             if (enableAnalogic)
             {
-                cambioSpriteHabilitado = (((movingRight_P1 || movingRightAnalog_P1) && verticalStill_P1 && moveHorizontalPlayer1) || avanzando_P1);
+                cambioSpriteHabilitado = (((InputPlayerController.GetInputAxis(inputHorizontal) > 0 || InputPlayerController.GetInputAxis(inputHorizontalAnalog) > 0.9f) && InputPlayerController.GetInputAxis(inputVertical) == 0 && moveHorizontalPlayer1) || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante);
             }
             else
             {
-                cambioSpriteHabilitado = ((movingRight_P1 && verticalStill_P1 && moveHorizontalPlayer1) || avanzando_P1);
+
+                cambioSpriteHabilitado = ((InputPlayerController.GetInputAxis(inputHorizontal) > 0 && InputPlayerController.GetInputAxis(inputVertical) == 0 && moveHorizontalPlayer1) || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante);
             }
             if (cambioSpriteHabilitado)
             {
-                player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAdelante;
+                if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                {
+                    player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAdelante;
+                }
+                else if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                {
+                    player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAtras;
+                }
             }
         }
         public void CheckSpriteMoverAtras_P1()
@@ -555,18 +538,37 @@ namespace Prototipo_2 {
 
             if (enableAnalogic)
             {
-                cambioSpriteHabilitado = (((movingLeft_P1 || movingLeftAnalog_P1) && verticalStill_P1 && moveHorizontalPlayer1) || retroceder_P1);
+                cambioSpriteHabilitado = (((movingLeft_P1 || movingLeftAnalog_P1) && InputPlayerController.GetInputAxis("Vertical") == 0 && moveHorizontalPlayer1) || retroceder_P1);
             }
             else
             {
-                cambioSpriteHabilitado = ((movingLeft_P1 && verticalStill_P1 && moveHorizontalPlayer1) || retroceder_P1);
+                cambioSpriteHabilitado = ((movingLeft_P1 && InputPlayerController.GetInputAxis("Vertical") == 0 && moveHorizontalPlayer1) || retroceder_P1);
             }
             if (cambioSpriteHabilitado)
             {
                 player1.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAtras;
             }
-            
+
         }
+        public void CheckSpriteMoverAdelante_P2()
+        {
+            bool cambioSpriteHabilitado = false;
+
+            if (enableAnalogic)
+            {
+                cambioSpriteHabilitado = (((movingLeft_P2 || movingLeftAnalog_P2) && InputPlayerController.GetInputAxis("Vertical_P2") == 0 && moveHorizontalPlayer2) || retroceder_P2);
+            }
+            else
+            {
+                cambioSpriteHabilitado = ((movingLeft_P2 && InputPlayerController.GetInputAxis("Vertical_P2") == 0 && moveHorizontalPlayer2) || retroceder_P2);
+            }
+            if (cambioSpriteHabilitado)
+            {
+                player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAdelante;
+            }
+
+        }
+        
         public void CheckSpritesSalto_P1() 
         {
             bool spriteSaltoHabilitado = false;
@@ -677,7 +679,7 @@ namespace Prototipo_2 {
                 if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
                 {
                     CheckSpriteParado("Vertical", "SpecialAttackButton_P1" , player);
-                    CheckSpriteMoverAdelante_P1();
+                    CheckSpriteMoverDerecha("Horizontal", "Horizontal_Analogico", "Vertical",player);
                     CheckSpriteMoverAtras_P1();
                     CheckSpritesSalto_P1();
                     CheckSpritesParado_P1();
@@ -686,8 +688,8 @@ namespace Prototipo_2 {
                 else if(player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
                 {
                     CheckSpriteParado("Vertical_P2","SpecialAttackButton_P2", player);
+                    CheckSpriteMoverDerecha("Horizontal_P2", "Horizontal_Analogico_P2", "Vertical_P2", player);
                     CheckSpriteMoverAdelante_P2();
-                    CheckSpriteMoverAtras_P2();
                     CheckSpritesSalto_P2();
                     CheckSpritesParado_P2();
                     CheckSpritesAgachado_P2();
@@ -825,11 +827,11 @@ namespace Prototipo_2 {
             bool movimientoHorizontalHabilitado = false;
             if (enableAnalogic)
             {
-                movimientoHorizontalHabilitado = (((movingRight_P2 || movingRightAnalog_P2) && moveHorizontalPlayer2 && movimientoNulo_P2) || avanzando_P2);
+                movimientoHorizontalHabilitado = (((InputPlayerController.GetInputAxis("Horizontal_P2") > 0 || InputPlayerController.GetInputAxis("Horizontal_Analogico_P2") > 0.9f) && moveHorizontalPlayer2 && movimientoNulo_P2) || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante);
             }
             else
             {
-                movimientoHorizontalHabilitado = ((movingRight_P2 && moveHorizontalPlayer2 && movimientoNulo_P2) || avanzando_P2);
+                movimientoHorizontalHabilitado = ((InputPlayerController.GetInputAxis("Horizontal_P2") > 0 && moveHorizontalPlayer2 && movimientoNulo_P2) || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante);
             }
             if (movimientoHorizontalHabilitado)
             {
@@ -967,40 +969,8 @@ namespace Prototipo_2 {
         }
         
         
-        public void CheckSpriteMoverAdelante_P2()
-        {
-            bool cambioSpriteHabilitado = false;
-
-            if (enableAnalogic)
-            {
-                cambioSpriteHabilitado = (((movingLeft_P2 || movingLeftAnalog_P2) && verticalStill_P2 && moveHorizontalPlayer2) || retroceder_P2);
-            }
-            else
-            {
-                cambioSpriteHabilitado = ((movingLeft_P2 && verticalStill_P2 && moveHorizontalPlayer2) || retroceder_P2);
-            }
-            if (cambioSpriteHabilitado)
-            {
-                player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAdelante;
-            }
-
-        }
-        public void CheckSpriteMoverAtras_P2()
-        {
-            bool cambioSpriteHabilitado = false;
-            if (enableAnalogic)
-            {
-                cambioSpriteHabilitado = (((movingRight_P2 || movingRightAnalog_P2) && verticalStill_P2 && moveHorizontalPlayer2) || avanzando_P2);
-            }
-            else
-            {
-                cambioSpriteHabilitado = ((movingRight_P2 && verticalStill_P2 && moveHorizontalPlayer2) || avanzando_P2);
-            }
-            if (cambioSpriteHabilitado)
-            {
-                player2.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.MoverAtras;
-            }
-        }
+        
+        
         public void CheckSpritesSalto_P2()
         {
             bool spriteSaltoHabilitado = false;
