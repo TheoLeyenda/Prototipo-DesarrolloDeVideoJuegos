@@ -106,7 +106,8 @@ namespace Prototipo_2
         {
             MoveCursor("Horizontal", "Vertical", ref aviableMoveHorizontalP1,ref aviableMoveVerticalP1,ref cursorPlayer1,ref CursorSelectorPlayer1);
             MoveCursor("Horizontal_P2", "Vertical_P2", ref aviableMoveHorizontalP2, ref aviableMoveVerticalP2,ref cursorPlayer2,ref CursorSelectorPlayer2);
-            CheckSelectCursor();
+            CheckSelectCursor("SelectButton_P1", ref cursorPlayer1, ref gm.structGameManager.gm_dataCombatPvP.player1_selected);
+            CheckSelectCursor("SelectButton_P2", ref cursorPlayer2, ref gm.structGameManager.gm_dataCombatPvP.player2_selected);
             DecoratePlayerSelected(imagePlayer1, cursorPlayer1);
             DecoratePlayerSelected(imagePlayer2, cursorPlayer2);
             CheckPositionCursor();
@@ -212,59 +213,33 @@ namespace Prototipo_2
                 spriteCursor2.color = Color.yellow;
             }
         }
-        public void CheckSelectCursor()
+        public void CheckSelectCursor(string inputSelectButton, ref CursorMatriz cursorPlayer,ref DataCombatPvP.Player_Selected player_Selected)
         {
-            if (InputPlayerController.GetInputButtonDown("SelectButton_P1"))
+            if (InputPlayerController.GetInputButtonDown(inputSelectButton))
             {
-                switch (grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y])
+                switch (grillaDeSeleccion[cursorPlayer.x, cursorPlayer.y])
                 {
                     case "Balanceado":
-                        gm.structGameManager.gm_dataCombatPvP.player1_selected = DataCombatPvP.Player_Selected.Balanceado;
-                        cursorPlayer1.condirmed = true;
+                        player_Selected = DataCombatPvP.Player_Selected.Balanceado;
+                        cursorPlayer.condirmed = true;
                         break;
                     case "Agresivo":
-                        gm.structGameManager.gm_dataCombatPvP.player1_selected = DataCombatPvP.Player_Selected.Agresivo;
-                        cursorPlayer1.condirmed = true;
+                        player_Selected = DataCombatPvP.Player_Selected.Agresivo;
+                        cursorPlayer.condirmed = true;
                         break;
                     case "Defensivo":
-                        gm.structGameManager.gm_dataCombatPvP.player1_selected = DataCombatPvP.Player_Selected.Defensivo;
-                        cursorPlayer1.condirmed = true;
+                        player_Selected = DataCombatPvP.Player_Selected.Defensivo;
+                        cursorPlayer.condirmed = true;
                         break;
                     case "Protagonista":
-                        gm.structGameManager.gm_dataCombatPvP.player1_selected = DataCombatPvP.Player_Selected.Protagonista;
-                        cursorPlayer1.condirmed = true;
+                        player_Selected = DataCombatPvP.Player_Selected.Protagonista;
+                        cursorPlayer.condirmed = true;
                         break;
                     default:
-                        cursorPlayer1.condirmed = false;
+                        cursorPlayer.condirmed = false;
                         break;
                 }
             }
-            if (InputPlayerController.GetInputButtonDown("SelectButton_P2"))
-            {
-                switch (grillaDeSeleccion[cursorPlayer2.x, cursorPlayer2.y])
-                {
-                    case "Balanceado":
-                        gm.structGameManager.gm_dataCombatPvP.player2_selected = DataCombatPvP.Player_Selected.Balanceado;
-                        cursorPlayer2.condirmed = true;
-                        break;
-                    case "Agresivo":
-                        gm.structGameManager.gm_dataCombatPvP.player2_selected = DataCombatPvP.Player_Selected.Agresivo;
-                        cursorPlayer2.condirmed = true;
-                        break;
-                    case "Defensivo":
-                        gm.structGameManager.gm_dataCombatPvP.player2_selected = DataCombatPvP.Player_Selected.Defensivo;
-                        cursorPlayer2.condirmed = true;
-                        break;
-                    case "Protagonista":
-                        gm.structGameManager.gm_dataCombatPvP.player2_selected = DataCombatPvP.Player_Selected.Protagonista;
-                        cursorPlayer2.condirmed = true;
-                        break;
-                    default:
-                        cursorPlayer2.condirmed = false;
-                        break;
-                }
-            }
-
             if (cursorPlayer1.condirmed && cursorPlayer2.condirmed)
             {
                 SceneManager.LoadScene(nameNextScene);
