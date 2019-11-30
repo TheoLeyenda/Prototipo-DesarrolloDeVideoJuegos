@@ -122,7 +122,7 @@ namespace Prototipo_2 {
                 CheckHorizontalCero("Horizontal", "Horizontal_Analogico", ref moveHorizontalPlayer1);
                 CheckAttackButton("AttackButton_P1", "DeffenseButton_P1", "Vertical", "Vertical_Analogico" , ref enableMovementPlayer1, player);
                 CheckDeffenceButton("AttackButton_P1", "DeffenseButton_P1", player1_PvP, player);
-                CheckSpecialAttackButton_P1();
+                CheckSpecialAttackButton("SpecialAttackButton_P1",ref enableMovementPlayer1, player);
             }
             else if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
             {
@@ -135,7 +135,7 @@ namespace Prototipo_2 {
                 CheckHorizontalCero("Horizontal_P2", "Horizontal_Analogico_P2", ref moveHorizontalPlayer2);
                 CheckAttackButton("AttackButton_P2", "DeffenseButton_P2", "Vertical_P2", "Vertical_Analogico_P2", ref enableMovementPlayer2, player);
                 CheckDeffenceButton("AttackButton_P2", "DeffenseButton_P2", player2_PvP,player);
-                CheckSpecialAttackButton_P2();
+                CheckSpecialAttackButton("SpecialAttackButton_P2",ref enableMovementPlayer2, player);
             }
         }
 
@@ -427,50 +427,50 @@ namespace Prototipo_2 {
             }
         }
         
-        public void CheckSpecialAttackButton_P1()
+        public void CheckSpecialAttackButton(string inputSpecialAttackButton, ref bool enableMovementPlayer, Player player)
         {
-            if (player1.GetEnableSpecialAttack())
+            if (player.GetEnableSpecialAttack())
             {
-                if (InputPlayerController.GetInputButtonDown("SpecialAttackButton_P1"))
+                if (InputPlayerController.GetInputButtonDown(inputSpecialAttackButton))
                 {
-                    if (player1.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.ProyectilImparable)
+                    if (player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.ProyectilImparable)
                     {
-                        if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar
-                            || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoAtaque
-                            || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa)
+                        if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar
+                            || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoAtaque
+                            || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa)
                         {
-                            player1.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL SALTANDO
-                            enableMovementPlayer1 = false;
+                            player.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL SALTANDO
+                            enableMovementPlayer = false;
                         }
-                        else if (player1.GetIsDuck())
+                        else if (player.GetIsDuck())
                         {
-                            player1.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL AGACHADO
-                            enableMovementPlayer1 = false;
+                            player.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL AGACHADO
+                            enableMovementPlayer = false;
                         }
                         else
                         {
-                            player1.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL PARADO
-                            enableMovementPlayer1 = false;
+                            player.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL PARADO
+                            enableMovementPlayer = false;
                         }
                     }
                     else
                     {
-                        if (player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-                            && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-                            && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+                        if (player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                            && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+                            && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
                         {
-                            player1.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL SALTANDO
-                            enableMovementPlayer1 = false;
+                            player.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL SALTANDO
+                            enableMovementPlayer = false;
                         }
                         else
                         {
-                            player1.spritePlayerActual.PlayAnimation("Salto protagonista");
+                            player.spritePlayerActual.PlayAnimation("Salto protagonista");
                         }
                     }
                 }
             }
         }
-        
+
         public void CheckSpriteParado(string inputVertical, string inputSpecialAttackButton, Player player)
         {
             if (InputPlayerController.GetInputAxis(inputVertical) == 0 && !InputPlayerController.GetInputButtonDown(inputSpecialAttackButton))
@@ -633,51 +633,6 @@ namespace Prototipo_2 {
             }
         }
 
-        public void CheckSpecialAttackButton_P2()
-        {
-            if (player2.GetEnableSpecialAttack())
-            {
-                if (InputPlayerController.GetInputButtonDown("SpecialAttackButton_P2"))
-                {
-                    if (player2.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.ProyectilImparable)
-                    {
-                        if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar
-                            || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoAtaque
-                            || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa)
-                        {
-                            player2.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL SALTANDO
-                            enableMovementPlayer2 = false;
-                        }
-                        else if (player2.GetIsDuck())
-                        {
-                            player2.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL AGACHADO
-                            enableMovementPlayer2 = false;
-                        }
-                        else
-                        {
-                            player2.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL PARADO
-                            enableMovementPlayer2 = false;
-                        }
-                    }
-                    else
-                    {
-                        if (player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-                            && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-                            && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
-                        {
-                            player2.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL SALTANDO
-                            enableMovementPlayer2 = false;
-                        }
-                        else
-                        {
-                            //player2.spritePlayerActual.PlayAnimation("Salto protagonista");
-                        }
-                    }
-                }
-            }
-        }
-        
-        //-----------------------------------------------//
         public void SetEnableMovementPlayer1(bool enableMovement)
         {
             enableMovementPlayer1 = enableMovement;
