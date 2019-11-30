@@ -13,9 +13,7 @@ namespace Prototipo_2
         public bool ZonaContraAtaque;
         private BoxCollider2D boxCollider2D;
         public EventWise eventWise;
-        //public bool pointsForHit;
         private GameManager gm;
-        // Start is called before the first frame update
         public enum StateBoxCollider
         {
             Defendido,
@@ -53,8 +51,6 @@ namespace Prototipo_2
         {
             Proyectil proyectil = collision.GetComponent<Proyectil>();
             bool notProyectilParabola = proyectil.GetComponent<ProyectilParabola>() == null;
-            //Debug.Log(proyectil);
-            //Debug.Log(proyectil.disparadorDelProyectil);
             if (proyectil.GetComponent<ProyectilInparable>() == null && proyectil.GetComponent<GranadaGaseosa>() == null && proyectil != null)
             {
                 if (player != null && !inEnemy && inPlayer)
@@ -152,8 +148,6 @@ namespace Prototipo_2
                                 else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer && notProyectilParabola || !ZonaContraAtaque || proyectil.colisionPlayer)
                                 {
                                     
-                                    //proyectil.timeLife = 0;
-                                    //proyectil.gameObject.SetActive(false);
                                     if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer2() != null)
                                     {
                                         player.delayCounterAttack = player.GetAuxDelayCounterAttack();
@@ -190,7 +184,6 @@ namespace Prototipo_2
                                         enableDamagePlayer = false;
                                         proyectil.timeLife = 0;
                                         proyectil.GetPoolObject().Recycle();
-                                        //proyectil.AnimationHit();
                                     }
                                 }
                                 if ((player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer) && notProyectilParabola || !ZonaContraAtaque || proyectil.colisionPlayer)
@@ -227,10 +220,6 @@ namespace Prototipo_2
                                         eventWise.StartEvent("golpear_p1");
                                         proyectil.AnimationHit();
                                     }
-                                    //proyectil.timeLife = 0;
-                                    //proyectil.gameObject.SetActive(false);
-                                    //proyectil.GetPoolObject().Recycle();
-
                                 }
                             }
                         }
@@ -265,7 +254,6 @@ namespace Prototipo_2
                         }
                         if (player_PvP != null)
                         {
-                            //Debug.Log(proyectil.GetEnemy());
                             if (proyectil.GetPlayer2() != null)
                             {
                                 if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
@@ -355,24 +343,16 @@ namespace Prototipo_2
                                         }
                                         proyectil.damage = proyectil.GetAuxDamage();
                                         player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
-                                        //proyectil.timeLife = 0;
-                                        //proyectil.GetPoolObject().Recycle();
-                                        //proyectil.gameObject.SetActive(false);
                                         eventWise.StartEvent("jugador_1_bloquear");
                                         proyectil.AnimationHit();
                                         break;
                                 }
                             }
-                            //Debug.Log(proyectil.GetEnemy());
                             if (proyectil.GetEnemy() != null)
                             {
-                                //Debug.Log("A LA DEFENSA");
                                 proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + (proyectil.GetEnemy().xpForHit / 2));
                                 proyectil.damage = proyectil.GetAuxDamage();
                                 player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
-                                //proyectil.timeLife = 0;
-                                //proyectil.GetPoolObject().Recycle();
-                                //proyectil.gameObject.SetActive(false);
                                 eventWise.StartEvent("jugador_1_bloquear");
                                 proyectil.AnimationHit();
                             }
@@ -382,7 +362,6 @@ namespace Prototipo_2
                 else if (enemy != null && !inPlayer && inEnemy)
                 {
                     bool enableDamagePlayer = true;
-                    //Debug.Log(state);
                     if (state == StateBoxCollider.Normal)
                     {
                         if (proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador1)
@@ -401,14 +380,9 @@ namespace Prototipo_2
                                         proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + proyectil.GetPlayer().PD.scoreForHit;
                                     }
                                 }
-                                //proyectil.timeLife = 0;
-                                //proyectil.gameObject.SetActive(false);
-                                //proyectil.GetPoolObject().Recycle();
                                 eventWise.StartEvent("golpear_p1");
                                 proyectil.AnimationHit();
                             }
-                           
-
                         }
                     }
                     else if (state == StateBoxCollider.Defendido)
@@ -426,7 +400,6 @@ namespace Prototipo_2
                                 }
                             }
 
-                            //Debug.Log(enemy.enumsEnemy.GetMovement());
                             if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar 
                                 || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa
                                 || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
@@ -438,7 +411,6 @@ namespace Prototipo_2
                                     if (enemyDeffended.GetStateDeffence() == Defensivo.StateDeffence.CounterAttackDeffense)
                                     {
                                         enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.ContraAtaque;
-                                        //enemy.Attack(false, false, true, cuadrilla);
                                         enemy.Attack(false, false, true, proyectil);
                                         enemyDeffended.SetStateDeffense(Defensivo.StateDeffence.Nulo);
                                         enemyDeffended.delayStateCounterAttackDeffense = 0;
@@ -448,9 +420,6 @@ namespace Prototipo_2
                                 }
                                 //-----------------------------------------//
                             }
-                            //proyectil.timeLife = 0;
-                            //proyectil.GetPoolObject().Recycle();
-                            //proyectil.gameObject.SetActive(false);
                             if (enemy.barraDeEscudo != null)
                             {
                                 if (enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
@@ -474,7 +443,6 @@ namespace Prototipo_2
                 switch (collision.tag)
                 {
                     case "Proyectil":
-                        //Debug.Log("COLICIONE");
                         CollisionWhitProyectil(collision);
                         break;
                 }
