@@ -42,8 +42,8 @@ namespace Prototipo_2 {
 
         void Update()
         {
-            CheckPauseButton_P1();
-            CheckPauseButton_P2();
+            CheckPauseButton("PauseButton_P1");
+            CheckPauseButton("PauseButton_P2");
             if (Time.timeScale == 1)
             {
                 if (player1 != null && player1.gameObject.activeSelf)
@@ -194,14 +194,15 @@ namespace Prototipo_2 {
             }
         }
 
-        public void CheckPauseButton_P1()
+        public void CheckPauseButton(string inputPauseButton)
         {
-            if (InputPlayerController.GetInputButtonDown("PauseButton_P1"))
+            if (InputPlayerController.GetInputButtonDown(inputPauseButton))
             {
                 CheckValueInPause();
                 CheckInPause();
             }
         }
+
         public void CheckParabolaAttack(string inputParabolaAttack, string inputDeffenceButton,ref bool enableMovement, Player player)
         {
             if (InputPlayerController.GetInputButtonDown(inputParabolaAttack) && player.GetEnableAttack()
@@ -621,15 +622,6 @@ namespace Prototipo_2 {
                 {
                     player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Agachado;
                 }
-            }
-        }
-        
-        public void CheckPauseButton_P2()
-        {
-            if (InputPlayerController.GetInputButtonDown("PauseButton_P2"))
-            {
-                CheckValueInPause();
-                CheckInPause();
             }
         }
 
