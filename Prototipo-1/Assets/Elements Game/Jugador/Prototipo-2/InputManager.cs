@@ -274,13 +274,14 @@ namespace Prototipo_2 {
             }
         }
 
-        public void CheckHorizontalCero_P1()
+        public void CheckHorizontalCero(string inputHorizontal, string inputHorizontalAnalog, ref bool moveHorizontalPlayer)
         {
-            if (InputPlayerController.GetInputAxis("Horizontal") == 0 && (InputPlayerController.GetInputAxis("Horizontal_Analogico") > -0.9f && InputPlayerController.GetInputAxis("Horizontal_Analogico") < 0.9f))
+            if (InputPlayerController.GetInputAxis(inputHorizontal) == 0 && (InputPlayerController.GetInputAxis(inputHorizontalAnalog) > -0.9f && InputPlayerController.GetInputAxis(inputHorizontalAnalog) < 0.9f))
             {
-                moveHorizontalPlayer1 = true;
+                moveHorizontalPlayer = true;
             }
         }
+        
         public void CheckAttackButton_P1()
         {
             if (!inPause)
@@ -412,7 +413,7 @@ namespace Prototipo_2 {
                 CheckVerticalCero("Vertical", "Vertical_Analogico", ref moveVerticalPlayer1, player);
                 CheckHorizontalLeft("Horizontal", "Horizontal_Analogico", ref moveHorizontalPlayer1, player);
                 CheckHorizontalRight("Horizontal", "Horizontal_Analogico", ref moveHorizontalPlayer1, player);
-                CheckHorizontalCero_P1();
+                CheckHorizontalCero("Horizontal", "Horizontal_Analogico", ref moveHorizontalPlayer1);
                 CheckAttackButton_P1();
                 CheckDeffenceButton_P1();
                 CheckSpecialAttackButton_P1();
@@ -425,7 +426,7 @@ namespace Prototipo_2 {
                 CheckVerticalCero("Vertical_P2", "Vertical_Analogico_P2", ref moveVerticalPlayer2, player);
                 CheckHorizontalLeft("Horizontal_P2", "Horizontal_Analogico_P2", ref moveHorizontalPlayer2, player);
                 CheckHorizontalRight("Horizontal_P2", "Horizontal_Analogico_P2", ref moveHorizontalPlayer2, player);
-                CheckHorizontalCero_P2();
+                CheckHorizontalCero("Horizontal_P2", "Horizontal_Analogico_P2", ref moveHorizontalPlayer2);
                 CheckAttackButton_P2();
                 CheckDeffenceButton_P2();
                 CheckSpecialAttackButton_P2();
@@ -631,14 +632,7 @@ namespace Prototipo_2 {
                 CheckInPause();
             }
         }
-        
-        public void CheckHorizontalCero_P2()
-        {
-            if (InputPlayerController.GetInputAxis("Horizontal_P2") == 0 && (InputPlayerController.GetInputAxis("Horizontal_Analogico_P2") > -0.9f && InputPlayerController.GetInputAxis("Horizontal_Analogico_P2") < 0.9f))
-            {
-                moveHorizontalPlayer2 = true;
-            }
-        }
+
         public void CheckAttackButton_P2()
         {
             if (InputPlayerController.GetInputButtonDown("AttackButton_P2") && player2.GetEnableAttack()
