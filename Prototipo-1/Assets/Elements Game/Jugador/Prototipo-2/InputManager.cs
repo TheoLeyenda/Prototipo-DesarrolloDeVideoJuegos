@@ -22,10 +22,8 @@ namespace Prototipo_2 {
         private bool enableMovementPlayer1;
         private bool enableMovementPlayer2;
 
-        bool pressButtonJamp_P1;
         bool agachandose_P1;
 
-        bool pressButtonJamp_P2;
         bool agachandose_P2;
 
         private void Start()
@@ -48,15 +46,11 @@ namespace Prototipo_2 {
         public void CheckBools_P1()
         {
             agachandose_P1 = player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Agacharse;
-            pressButtonJamp_P1 = InputPlayerController.GetInputButtonDown("JumpButton_P1");
-
         }
 
         public void CheckBools_P2()
         {
             agachandose_P2 = player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Agacharse;
-            pressButtonJamp_P2 = InputPlayerController.GetInputButtonDown("JumpButton_P2");
-
         }
         void Update()
         {
@@ -76,7 +70,7 @@ namespace Prototipo_2 {
                     }
                     if (enableMovementPlayer1)
                     {
-                        CheckInputPlayer1();
+                        CheckInputPlayer(player1);
                         if (player1.PD.lifePlayer > 0)
                         {
                             CheckSpritePlayer(player1);
@@ -106,7 +100,7 @@ namespace Prototipo_2 {
                     }
                     if (enableMovementPlayer2)
                     {
-                        CheckInputPlayer2();
+                        CheckInputPlayer(player2);
                         if (player2.PD.lifePlayer > 0)
                         {
                             CheckSpritePlayer(player2);
@@ -145,7 +139,7 @@ namespace Prototipo_2 {
                     break;
             }
         }
-        //----- FUNCIONES Y CONTROLES DEL JUGADOR 1 -----//
+
         public void CheckPauseButton_P1()
         {
             if (InputPlayerController.GetInputButtonDown("PauseButton_P1"))
@@ -154,58 +148,58 @@ namespace Prototipo_2 {
                 CheckInPause();
             }
         }
-        public void CheckParabolaAttack_P1()
+        public void CheckParabolaAttack(string inputParabolaAttack, string inputDeffenceButton,ref bool enableMovement, Player player)
         {
-            if (InputPlayerController.GetInputButtonDown("ParabolaAttack_P1") && player1.GetEnableAttack()
-                && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante
-                && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
-                && !InputPlayerController.GetInputButton("DeffenseButton_P1"))
+            if (InputPlayerController.GetInputButtonDown(inputParabolaAttack) && player.GetEnableAttack()
+                && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante
+                && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
+                && !InputPlayerController.GetInputButton(inputDeffenceButton))
             {
-                if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
+                if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
                 {
                     //ANIMACION ATAQUE EN PARABOLA SALTANDO
-                    player1.spritePlayerActual.PlayAnimation("Ataque Parabola Salto protagonista");
-                    enableMovementPlayer1 = false;
+                    player.spritePlayerActual.PlayAnimation("Ataque Parabola Salto protagonista");
+                    enableMovement = false;
                 }
                 else
                 {
-                    if (!player1.GetIsDuck())
+                    if (!player.GetIsDuck())
                     {
                         //ANIMACION ATAQUE EN PARABOLA PARADO
-                        player1.spritePlayerActual.PlayAnimation("Ataque Parabola protagonista");
-                        enableMovementPlayer1 = false;
+                        player.spritePlayerActual.PlayAnimation("Ataque Parabola protagonista");
+                        enableMovement = false;
                     }
-                    else if (player1.GetIsDuck())
+                    else if (player.GetIsDuck())
                     {
                         //ANIMACION ATAQUE EN PARABOLA AGACHADO
-                        player1.spritePlayerActual.PlayAnimation("Ataque Parabola Agachado protagonista");
-                        enableMovementPlayer1 = false;
+                        player.spritePlayerActual.PlayAnimation("Ataque Parabola Agachado protagonista");
+                        enableMovement = false;
                     }
                 }
             }
         }
-        public void CheckVerticalUp_P1()
+
+        public void CheckVerticalUp(string inputVertical, string inputJumpButton, string VerticalAnalog, ref bool moveVerticalPlayer, Player player)
         {
             bool movimientoVerticalHabilitado = false;
 
-
             if (enableAnalogic)
             {
-                movimientoVerticalHabilitado = ((player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && (InputPlayerController.GetInputAxis("Vertical") > 0 || pressButtonJamp_P1 || InputPlayerController.GetInputAxis("Vertical_Analogico") < -0.9f) && moveVerticalPlayer1) || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar);
+                movimientoVerticalHabilitado = ((player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && (InputPlayerController.GetInputAxis(inputVertical) > 0 || InputPlayerController.GetInputButtonDown(inputJumpButton) || InputPlayerController.GetInputAxis(VerticalAnalog) < -0.9f) && moveVerticalPlayer) || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar);
             }
             else
             {
-                movimientoVerticalHabilitado = ((player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && (InputPlayerController.GetInputAxis("Vertical") > 0 || pressButtonJamp_P1) && moveVerticalPlayer1) || player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar);
+                movimientoVerticalHabilitado = ((player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && (InputPlayerController.GetInputAxis(inputVertical) > 0 || InputPlayerController.GetInputButtonDown(inputJumpButton)) && moveVerticalPlayer) || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar);
             }
             if (movimientoVerticalHabilitado && !inPause)
             {
-                player1.SetControllerJoystick(true);
-                player1.MovementJump();
-                moveVerticalPlayer1 = false;
-                player1.SetIsDuck(false);
+                player.SetControllerJoystick(true);
+                player.MovementJump();
+                moveVerticalPlayer = false;
+                player.SetIsDuck(false);
             }
         }
-        
+
         public void CheckVerticalDown_P1()
         {
             bool movimientoVerticalHabilitado = false;
@@ -417,34 +411,36 @@ namespace Prototipo_2 {
                 }
             }
         }
-        public void CheckInputPlayer1()
+        public void CheckInputPlayer(Player player)
         {
-            CheckBools_P1();
-            CheckParabolaAttack_P1();
-            CheckVerticalUp_P1();
-            CheckVerticalDown_P1();
-            CheckVerticalCero_P1();
-            CheckHorizontalLeft_P1();
-            CheckHorizontalRight_P1();
-            CheckHorizontalCero_P1();
-            CheckAttackButton_P1();
-            CheckDeffenceButton_P1();
-            CheckSpecialAttackButton_P1();
-        }
-        public void CheckInputPlayer2()
-        {
-            CheckBools_P2();
-            CheckParabolaAttack_P2();
-            CheckVerticalUp_P2();
-            CheckVerticalDown_P2();
-            CheckVerticalCero_P2();
-            CheckHorizontalLeft_P2();
-            CheckHorizontalRight_P2();
-            CheckHorizontalCero_P2();
-            CheckAttackButton_P2();
-            CheckDeffenceButton_P2();
-            CheckSpecialAttackButton_P2();
-
+            if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+            {
+                CheckBools_P1();
+                CheckParabolaAttack("ParabolaAttack_P1", "DeffenseButton_P1",ref enableMovementPlayer1, player);
+                CheckVerticalUp("Vertical", "JumpButton_P1", "Vertical_Analogico", ref moveVerticalPlayer1, player);
+                CheckVerticalDown_P1();
+                CheckVerticalCero_P1();
+                CheckHorizontalLeft_P1();
+                CheckHorizontalRight_P1();
+                CheckHorizontalCero_P1();
+                CheckAttackButton_P1();
+                CheckDeffenceButton_P1();
+                CheckSpecialAttackButton_P1();
+            }
+            else if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+            {
+                CheckBools_P2();
+                CheckParabolaAttack("ParabolaAttack_P2", "DeffenseButton_P2",ref enableMovementPlayer2, player);
+                CheckVerticalUp("Vertical_P2", "JumpButton_P2", "Vertical_Analogico_P2", ref moveVerticalPlayer2, player);
+                CheckVerticalDown_P2();
+                CheckVerticalCero_P2();
+                CheckHorizontalLeft_P2();
+                CheckHorizontalRight_P2();
+                CheckHorizontalCero_P2();
+                CheckAttackButton_P2();
+                CheckDeffenceButton_P2();
+                CheckSpecialAttackButton_P2();
+            }
         }
         public void CheckSpriteParado(string inputVertical, string inputSpecialAttackButton, Player player)
         {
@@ -637,36 +633,7 @@ namespace Prototipo_2 {
         //-----------------------------------------------//
 
         //----- FUNCIONES Y CONTROLES DEL JUGADOR 2 -----//
-        public void CheckParabolaAttack_P2()
-        {
-            if (InputPlayerController.GetInputButtonDown("ParabolaAttack_P2") && player2.GetEnableAttack()
-                && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante
-                && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
-                && !InputPlayerController.GetInputButton("DeffenseButton_P2"))
-            {
-                if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
-                {
-                    //ANIMACION ATAQUE EN PARABOLA SALTANDO
-                    player2.spritePlayerActual.PlayAnimation("Ataque Parabola Salto protagonista");
-                    enableMovementPlayer2 = false;
-                }
-                else
-                {
-                    if (!player2.GetIsDuck())
-                    {
-                        //ANIMACION ATAQUE EN PARABOLA PARADO
-                        player2.spritePlayerActual.PlayAnimation("Ataque Parabola protagonista");
-                        enableMovementPlayer2 = false;
-                    }
-                    else if (player2.GetIsDuck())
-                    {
-                        //ANIMACION ATAQUE EN PARABOLA AGACHADO
-                        player2.spritePlayerActual.PlayAnimation("Ataque Parabola Agachado protagonista");
-                        enableMovementPlayer2 = false;
-                    }
-                }
-            }
-        }
+        
         public void CheckPauseButton_P2()
         {
             if (InputPlayerController.GetInputButtonDown("PauseButton_P2"))
@@ -675,27 +642,7 @@ namespace Prototipo_2 {
                 CheckInPause();
             }
         }
-        public void CheckVerticalUp_P2()
-        {
-            bool movimientoVerticalHabilitado = false;
-
-
-            if (enableAnalogic)
-            {
-                movimientoVerticalHabilitado = ((player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && (InputPlayerController.GetInputAxis("Vertical_P2") > 0 || pressButtonJamp_P2 || InputPlayerController.GetInputAxis("Vertical_Analogico_P2") < -0.9f) && moveVerticalPlayer2) || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar);
-            }
-            else
-            {
-                movimientoVerticalHabilitado = ((player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo && (InputPlayerController.GetInputAxis("Vertical_P2") > 0 || pressButtonJamp_P2) && moveVerticalPlayer2) || player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar);
-            }
-            if (movimientoVerticalHabilitado && !inPause)
-            {
-                player2.SetControllerJoystick(true);
-                player2.MovementJump();
-                moveVerticalPlayer2 = false;
-                player2.SetIsDuck(false);
-            }
-        }
+        
         public void CheckVerticalDown_P2()
         {
             bool movimientoVerticalHabilitado = false;

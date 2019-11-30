@@ -108,20 +108,20 @@ public class SoundForInput : MonoBehaviour
         {
             AkSoundEngine.PostEvent("pausa", gameObject);
             controlPausador = ControlPausador.player1;
+            mov = Movimiento.Habilitado;
         }
         if (InputPlayerController.GetInputButton("PauseButton_P2") && Time.timeScale == 1)
         {
+            mov = Movimiento.Habilitado;
             AkSoundEngine.PostEvent("pausa", gameObject);
             controlPausador = ControlPausador.player2;
         }
         if (Time.timeScale == 0 && controlPausador == ControlPausador.player1)
         {
-            mov = Movimiento.Habilitado;
             CheckSelectionP1();
         }
         else if (Time.timeScale == 0 && controlPausador == ControlPausador.player2)
         {
-            mov = Movimiento.Habilitado;
             CheckSelectionP2();
         }
     }
