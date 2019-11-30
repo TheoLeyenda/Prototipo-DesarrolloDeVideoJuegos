@@ -13,7 +13,6 @@ namespace Prototipo_2
         {
             public Sprite sprite;
             public string name;
-
         }
         
         public List<ElementsSprites> Sprites;

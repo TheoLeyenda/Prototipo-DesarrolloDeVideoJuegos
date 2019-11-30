@@ -79,8 +79,6 @@ namespace Prototipo_2
         public bool inAttack;
         private EventWise eventWise;
         private bool insound;
-        //[HideInInspector]
-        //public bool iAmDead;
 
         [Header("Porcentage: Movimiento")]
         public float MovePorcentage;
@@ -125,12 +123,10 @@ namespace Prototipo_2
         public virtual void Start()
         {
             eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
-            //iAmDead = false;
             enableSpecialAttack = false;
             auxSpeedJump = SpeedJump;
             InitialPosition = transform.position;
             auxDelayAttack = delayAttack;
-            //auxDelayParabolaAttack = delayParabolaAttack;
             delaySelectMovement = 0.5f;
             auxLife = life;
             poolObjectEnemy = GetComponent<PoolObject>();
@@ -937,7 +933,6 @@ namespace Prototipo_2
                     Deffence();
                 }
             }
-
         }
         public void ParabolaAttack()
         {

@@ -52,11 +52,9 @@ namespace Prototipo_2
         private bool isDuck;
         private bool EnableCounterAttack;
         private Vector3 InitialPosition;
-        //public BoxCollider2D colliderSprite;
         public string ButtonDeffence;
         public string ButtonAttack;
         public string ButtonSpecialAttack;
-        //public BoxCollider2D colliderCounterAttack;
         public float delayCounterAttack;
         public bool SpecialAttackEnabelEveryMoment;
         private float auxDelayCounterAttack;
@@ -109,7 +107,6 @@ namespace Prototipo_2
             }
             CheckSpritePlayerActual();
             auxDelayCounterAttack = delayCounterAttack;
-            //colliderSprite.enabled = true;
             isDuck = false;
             auxSpeedJump = SpeedJump;
             InitialPosition = transform.position;
@@ -128,17 +125,12 @@ namespace Prototipo_2
                 gm = GameManager.instanceGameManager;
             }
             animator = GetComponent<Animator>();
-            //gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
             DrawScore();
 
         }
 
-        // Update is called once per frame
         void Update()
         {
-            //BORRAR ESTO LUEGO
-            //xpActual = 100;
-            //--------------------
             CheckOutLimit();
             CheckDead();
             CheckLifeBar();
@@ -151,7 +143,6 @@ namespace Prototipo_2
         }
         public void CheckBoxColliders2D()
         {
-            //Debug.Log(enumsPlayers.movimiento);
             if (!isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.Salto
                 || !isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.SaltoAtaque
                 || !isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.SaltoDefensa)
@@ -240,17 +231,6 @@ namespace Prototipo_2
                             inputManager.SetEnableMovementPlayer2(false);
                         }
                     }
-                    /*else
-                    {
-                        if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-                        {
-                            inputManager.SetEnableMovementPlayer1(true);
-                        }
-                        else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
-                        {
-                            inputManager.SetEnableMovementPlayer2(true);
-                        }
-                    }*/
                     break;
             }
         }
@@ -656,7 +636,6 @@ namespace Prototipo_2
                 transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);
             }
         }
-        //HIDE HECHO MIERDA / HECHO PIJA BUSCALO BOLUDO
         
         public void MovementLeft()
         {
@@ -750,10 +729,8 @@ namespace Prototipo_2
                 }
                 else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
                 {
-                    //Debug.Log("ENTRE");
                     structsPlayer.dataPlayer.columnaActual--;
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-                    //gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
                 }
             }
             else if (LookingBack)
@@ -769,10 +746,8 @@ namespace Prototipo_2
                 }
                 else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
                 {
-                   
                     structsPlayer.dataPlayer.columnaActual--;
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-                    //gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
                 }
             }
         }
@@ -793,7 +768,6 @@ namespace Prototipo_2
                 {
                     structsPlayer.dataPlayer.columnaActual++;
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-                    //gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
                 }
             }
             else if (LookingBack)
@@ -811,7 +785,6 @@ namespace Prototipo_2
                 {
                     structsPlayer.dataPlayer.columnaActual++;
                     enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-                    //gridPlayer.CheckCuadrillaOcupada(structsPlayer.dataPlayer.columnaActual, structsPlayer.dataPlayer.CantCasillasOcupadas_X, structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
                 }
             }
         }
@@ -829,8 +802,6 @@ namespace Prototipo_2
                 {
                     isJumping = false;
                 }
-                //gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual].SetStateCuadrilla(Cuadrilla.StateCuadrilla.Libre);
-                //Debug.Log(gridPlayer.matrizCuadrilla[gridPlayer.baseGrild][structsPlayer.dataPlayer.columnaActual].name);
             }
             else
             {
@@ -850,11 +821,9 @@ namespace Prototipo_2
         public void Duck(int rangoAgachado)
         {
             isDuck = true;
-            //colliderSprite.enabled = false;
         }
         public void Deffence()
         {
-            // SACAR A LA MIERDA TODO LO QUE TENGA QUE VER CON COLISION CON CUADRILLA Y CAMBIARLO POR LOS BoxColliderController.cs
             if (!isDuck
                 && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
                 && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
@@ -919,7 +888,6 @@ namespace Prototipo_2
         {
             return auxDelayCounterAttack;
         }
-
         public bool GetIsDuck()
         {
             return isDuck;

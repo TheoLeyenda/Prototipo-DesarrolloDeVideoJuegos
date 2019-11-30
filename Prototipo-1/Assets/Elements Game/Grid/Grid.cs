@@ -28,9 +28,6 @@ public class Grid : MonoBehaviour
     public Plataformas[] plataformas;
     private void Awake()
     {
-        //matrizCuadrilla = new List<List<Cuadrilla>>();
-        //InitGrid();
-        //InitMatrizCuadrilla();
         if (GameManager.instanceGameManager != null)
         {
             gm = GameManager.instanceGameManager;

@@ -44,5 +44,4 @@ public class EnumsPlayers : MonoBehaviour
     public Movimiento movimiento;
     public EstadoJugador estadoJugador;
     public NumberPlayer numberPlayer;
-    //CAMBIAR ESTO Y PONER SETERS Y GETTERS
 }

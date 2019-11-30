@@ -92,7 +92,6 @@ namespace Prototipo_2
                     {
                         if (enemigoActual.life <= 0 && enemigoActual.enumsEnemy.GetStateEnemy() == EnumsEnemy.EstadoEnemigo.muerto || !enemigoActual.enemyPrefab.gameObject.activeSelf)
                         {
-                            //Debug.Log("ENTRE");
                             Generate();
                         }
                     }

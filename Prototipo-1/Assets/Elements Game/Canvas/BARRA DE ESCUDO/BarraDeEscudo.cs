@@ -92,7 +92,6 @@ namespace Prototipo_2
         }
         public void CheckLoadBar()
         {
-            //PONER UNA CONDICION OR PARA EL ENEMIGO
             if (player != null)
             {
                 if (((!InputPlayerController.GetInputButton("DeffenseButton_P1")

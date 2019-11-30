@@ -5,9 +5,7 @@ namespace Prototipo_2
 {
     public class Piso : MonoBehaviour
     {
-        
         public Enemy enemy;
         public Player player;
-
     }
 }
