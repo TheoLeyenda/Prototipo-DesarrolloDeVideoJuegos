@@ -205,7 +205,6 @@ namespace Prototipo_2 {
             }
             return null;
         }
-        //REMPLAZAR ESTO POR Time.unscaledDeltaTime
         public override void InPlayAnimationAttack()
         {
             player.barraDeEscudo.AddPorcentageBar();

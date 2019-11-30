@@ -129,38 +129,30 @@ namespace Prototipo_2
             {
                 case "Balanceado":
                     imagePlayer1.sprite = spritesPlayers[(int)Characters.Balanceado];
-                    //imagePlayer1.transform.rotation = DireccionLeft.transform.rotation;
                     break;
                 case "Agresivo":
                     imagePlayer1.sprite = spritesPlayers[(int)Characters.Agresivo];
-                    //imagePlayer1.transform.rotation = DireccionLeft.transform.rotation;
                     break;
                 case "Defensivo":
                     imagePlayer1.sprite = spritesPlayers[(int)Characters.Defensivo];
-                    //imagePlayer1.transform.rotation = DireccionLeft.transform.rotation;
                     break;
                 case "Protagonista":
                     imagePlayer1.sprite = spritesPlayers[(int)Characters.Protagonista];
-                    //imagePlayer1.transform.rotation = DireccionLeft.transform.rotation;
                     break;
             }
             switch (grillaDeSeleccion[cursorPlayer2.x, cursorPlayer2.y])
             {
                 case "Balanceado":
                     imagePlayer2.sprite = spritesPlayers[(int)Characters.Balanceado];
-                    //imagePlayer2.transform.rotation = DireccionRight.transform.rotation;
                     break;
                 case "Agresivo":
                     imagePlayer2.sprite = spritesPlayers[(int)Characters.Agresivo];
-                    //imagePlayer2.transform.rotation = DireccionRight.transform.rotation;
                     break;
                 case "Defensivo":
                     imagePlayer2.sprite = spritesPlayers[(int)Characters.Defensivo];
-                    //imagePlayer2.transform.rotation = DireccionRight.transform.rotation;
                     break;
                 case "Protagonista":
                     imagePlayer2.sprite = spritesPlayers[(int)Characters.Protagonista];
-                    //imagePlayer2.transform.rotation = DireccionRight.transform.rotation;
                     break;
             }
         }

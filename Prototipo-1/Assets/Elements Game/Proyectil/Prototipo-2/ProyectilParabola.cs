@@ -65,7 +65,6 @@ namespace Prototipo_2 {
             }
             else if (timeLife <= 0)
             {
-                //CAMBIARLO POR EL ATAQUE ESPECIAL QUE REALICE Y LUEGO LLAMAR A LA FUNCION CheckTimeLife();
                 CheckTimeLife();
             }
         }

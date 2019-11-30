@@ -102,8 +102,6 @@ namespace Prototipo_2 {
         }
         private void Update()
         {
-            //Debug.Log("P1:"+player1);
-            //Debug.Log("P2:"+player2);
             if (player1 != null && player2 != null)
             {
                 if ((player1.PD.lifePlayer <= 0 || player2.PD.lifePlayer <= 0))
@@ -122,7 +120,6 @@ namespace Prototipo_2 {
                 }
                 else if (delayFinishRound <= 0)
                 {
-                    //Debug.Log("ENTRE");
                     CheckConditionWin();
                 }
             }
@@ -133,11 +130,9 @@ namespace Prototipo_2 {
             switch (modoDeJuego)
             {
                 case ModoDeJuego.PvP:
-                    //Debug.Log("ENTRE A TIRO AL BLANCO");
                     CheckWinPvP();
                     break;
                 case ModoDeJuego.TiroAlBlanco:
-                    //Debug.Log("ENTRE A TIRO AL BLANCO");
                     CheckWinTiroAlBlanco();
                     break;
             }
@@ -148,17 +143,14 @@ namespace Prototipo_2 {
             {
                 if (player1.PD.score == player2.PD.score)
                 {
-                    //Debug.Log("ENTRE AL EMPATE");
                     CheckEmpate();
                 }
                 else if (player1.PD.score > player2.PD.score)
                 {
-                    //Debug.Log("GANO EL JUGADOR 1");
                     CheckWinPlayer1();
                 }
                 else if (player2.PD.score > player1.PD.score)
                 {
-                    //Debug.Log("GANO EL JUGADOR 2");
                     CheckWinPlayer2();
                 }
             }

@@ -7,7 +7,7 @@ public class PlayerData : ScriptableObject
 {
     public float lifePlayer;
     public float maxLifePlayer;
-    //[HideInInspector]
+    [HideInInspector]
     public float score;
     [HideInInspector]
     public float auxScore;

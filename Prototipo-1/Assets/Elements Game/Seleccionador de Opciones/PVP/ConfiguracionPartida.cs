@@ -49,10 +49,8 @@ namespace Prototipo_2
             }
         }
 
-        // Update is called once per frame
         public void StartGame()
         {
-            //Debug.Log(gm.structGameManager.gm_dataCombatPvP.modoElegido);
             if (gm.structGameManager.gm_dataCombatPvP.modoElegido == StructGameManager.ModoPvPElegido.PvP)
             {
                 SceneManager.LoadScene("PvP");
