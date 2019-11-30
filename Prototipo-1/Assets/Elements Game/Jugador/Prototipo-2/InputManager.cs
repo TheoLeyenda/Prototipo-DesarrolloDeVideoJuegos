@@ -108,6 +108,72 @@ namespace Prototipo_2 {
                 inPause = false;
             }
         }
+
+        public void CheckInputPlayer(Player player)
+        {
+            if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+            {
+                CheckParabolaAttack("ParabolaAttack_P1", "DeffenseButton_P1", ref enableMovementPlayer1, player);
+                CheckVerticalUp("Vertical", "JumpButton_P1", "Vertical_Analogico", ref moveVerticalPlayer1, player);
+                CheckVerticalDown("Vertical", "Vertical_Analogico", player);
+                CheckVerticalCero("Vertical", "Vertical_Analogico", ref moveVerticalPlayer1, player);
+                CheckHorizontalLeft("Horizontal", "Horizontal_Analogico", ref moveHorizontalPlayer1, player);
+                CheckHorizontalRight("Horizontal", "Horizontal_Analogico", ref moveHorizontalPlayer1, player);
+                CheckHorizontalCero("Horizontal", "Horizontal_Analogico", ref moveHorizontalPlayer1);
+                CheckAttackButton("AttackButton_P1", "DeffenseButton_P1", "Vertical", "Vertical_Analogico" , ref enableMovementPlayer1, player);
+                CheckDeffenceButton("AttackButton_P1", "DeffenseButton_P1", player1_PvP, player);
+                CheckSpecialAttackButton_P1();
+            }
+            else if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+            {
+                CheckParabolaAttack("ParabolaAttack_P2", "DeffenseButton_P2", ref enableMovementPlayer2, player);
+                CheckVerticalUp("Vertical_P2", "JumpButton_P2", "Vertical_Analogico_P2", ref moveVerticalPlayer2, player);
+                CheckVerticalDown("Vertical_P2", "Vertical_Analogico_P2", player);
+                CheckVerticalCero("Vertical_P2", "Vertical_Analogico_P2", ref moveVerticalPlayer2, player);
+                CheckHorizontalLeft("Horizontal_P2", "Horizontal_Analogico_P2", ref moveHorizontalPlayer2, player);
+                CheckHorizontalRight("Horizontal_P2", "Horizontal_Analogico_P2", ref moveHorizontalPlayer2, player);
+                CheckHorizontalCero("Horizontal_P2", "Horizontal_Analogico_P2", ref moveHorizontalPlayer2);
+                CheckAttackButton("AttackButton_P2", "DeffenseButton_P2", "Vertical_P2", "Vertical_Analogico_P2", ref enableMovementPlayer2, player);
+                CheckDeffenceButton("AttackButton_P2", "DeffenseButton_P2", player2_PvP,player);
+                CheckSpecialAttackButton_P2();
+            }
+        }
+
+        public void CheckSpritePlayer(Player player)
+        {
+            if (player.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio || player.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ContraAtaque)
+            {
+                if (player.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio)
+                {
+                    player.spritePlayerActual.CheckDeleyRecibirDanio();
+                }
+                else
+                {
+                    player.spritePlayerActual.CheckDeleyContraAtaque();
+                }
+            }
+            else
+            {
+                if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                {
+                    CheckSpriteParado("Vertical", "SpecialAttackButton_P1", player);
+                    CheckSpriteMoverDerecha("Horizontal", "Horizontal_Analogico", "Vertical", moveHorizontalPlayer1, player);
+                    CheckSpriteMoverIzquierda("Horizontal", "Horizontal_Analogico", "Vertical", moveHorizontalPlayer1, player);
+                    CheckSpritesSalto("Vertical", "Vertical_Analogico", "Horizontal", "AttackButton_P1", "DeffenseButton_P1", "SpecialAttackButton_P1", player);
+                    CheckSpritesParado("Horizontal", "AttackButton_P1", "DeffenseButton_P1", player, player1_PvP);
+                    CheckSpritesAgachado("Vertical", "Vertical_Analogico", "AttackButton_P1", "DeffenseButton_P1", player);
+                }
+                else if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                {
+                    CheckSpriteParado("Vertical_P2", "SpecialAttackButton_P2", player);
+                    CheckSpriteMoverDerecha("Horizontal_P2", "Horizontal_Analogico_P2", "Vertical_P2", moveHorizontalPlayer2, player);
+                    CheckSpriteMoverIzquierda("Horizontal_P2", "Horizontal_Analogico_P2", "Vertical_P2", moveHorizontalPlayer2, player);
+                    CheckSpritesSalto("Vertical_P2", "Vertical_Analogico_P2", "Horizontal_P2", "AttackButton_P2", "DeffenseButton_P2", "SpecialAttackButton_P2", player);
+                    CheckSpritesParado("Horizontal_P2", "AttackButton_P2", "DeffenseButton_P2", player, player2_PvP);
+                    CheckSpritesAgachado("Vertical_P2", "Vertical_Analogico_P2", "AttackButton_P2", "DeffenseButton_P2", player);
+                }
+            }
+        }
         public void CheckValueInPause()
         {
             if (!inPause)
@@ -282,84 +348,85 @@ namespace Prototipo_2 {
             }
         }
         
-        public void CheckAttackButton_P1()
+        public void CheckAttackButton(string inputAttackButton, string inputDeffenseButton, string inputVertical, string inputVerticalAnalogico, ref bool enableMovementPlayer, Player player)
         {
+            
             if (!inPause)
             {
-                if (InputPlayerController.GetInputButtonDown("AttackButton_P1") && player1.GetEnableAttack()
-                    && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante
-                    && player1.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
-                    && !InputPlayerController.GetInputButton("DeffenseButton_P1"))
+                if (InputPlayerController.GetInputButtonDown(inputAttackButton) && player.GetEnableAttack()
+                    && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante
+                    && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
+                    && !InputPlayerController.GetInputButton(inputDeffenseButton))
                 {
-                    player1.SetControllerJoystick(true);
-                    if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && (InputPlayerController.GetInputAxis("Vertical") < 0
-                        || (enableAnalogic && InputPlayerController.GetInputAxis("Vertical_Analogico") > 0.5f)))
+                    player.SetControllerJoystick(true);
+                    if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && (InputPlayerController.GetInputAxis(inputVertical) < 0
+                        || (enableAnalogic && InputPlayerController.GetInputAxis(inputVerticalAnalogico) > 0.5f)))
                     {
-                        player1.spritePlayerActual.PlayAnimation("Ataque Abajo Salto protagonista");
-                        enableMovementPlayer1 = false;
+                        player.spritePlayerActual.PlayAnimation("Ataque Abajo Salto protagonista");
+                        enableMovementPlayer = false;
                     }
-                    else if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.GetInputAxis("Vertical") >= 0)
+                    else if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.GetInputAxis(inputVertical) >= 0)
                     {
-                        player1.spritePlayerActual.PlayAnimation("Ataque Salto protagonista");
-                        enableMovementPlayer1 = false;
+                        player.spritePlayerActual.PlayAnimation("Ataque Salto protagonista");
+                        enableMovementPlayer = false;
                     }
                     else
                     {
-                        if (!player1.GetIsDuck())
+                        if (!player.GetIsDuck())
                         {
-                            player1.spritePlayerActual.PlayAnimation("Ataque protagonista");
-                            enableMovementPlayer1 = false;
+                            player.spritePlayerActual.PlayAnimation("Ataque protagonista");
+                            enableMovementPlayer = false;
                         }
-                        else if (player1.GetIsDuck())
+                        else if (player.GetIsDuck())
                         {
-                            player1.spritePlayerActual.PlayAnimation("Ataque Agachado protagonista");
-                            enableMovementPlayer1 = false;
+                            player.spritePlayerActual.PlayAnimation("Ataque Agachado protagonista");
+                            enableMovementPlayer = false;
                         }
                     }
                 }
             }
-           
-        } 
-        public void CheckDeffenceButton_P1()
+        }
+        
+        public void CheckDeffenceButton(string inputAttackButton, string inputDeffenseButton, Player_PvP player_PvP, Player player)
         {
-            if (!InputPlayerController.GetInputButton("AttackButton_P1"))
+            if (!InputPlayerController.GetInputButton(inputAttackButton))
             {
-                if (InputPlayerController.GetInputButton("DeffenseButton_P1") 
-                    && player1.barraDeEscudo.GetValueShild() > player1.barraDeEscudo.porcentageNededForDeffence
-                    && player1.barraDeEscudo.GetEnableDeffence())
+                if (InputPlayerController.GetInputButton(inputDeffenseButton) 
+                    && player.barraDeEscudo.GetValueShild() > player.barraDeEscudo.porcentageNededForDeffence
+                    && player.barraDeEscudo.GetEnableDeffence())
                 {
-                    player1.SetControllerJoystick(true);
-                    player1.Deffence();
-                    player1.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
-                    player1.boxColliderParado.state = BoxColliderController.StateBoxCollider.Defendido;
-                    player1.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
-                    player1.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
+                    player.SetControllerJoystick(true);
+                    player.Deffence();
+                    player.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
+                    player.boxColliderParado.state = BoxColliderController.StateBoxCollider.Defendido;
+                    player.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
+                    player.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
                 }
                 else
                 {
-                    if (player1_PvP != null)
+                    if (player_PvP != null)
                     {
-                        if (player1_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
+                        if (player_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
                         {
-                            player1_PvP.stateDeffence = Player_PvP.StateDeffence.CounterAttackDeffense;
-                            player1_PvP.delayCounterAttackDeffense = player1_PvP.auxDelayCounterAttackDeffense;
-                            player1.spritePlayerActual.spriteRenderer.color = Color.white;
+                            player_PvP.stateDeffence = Player_PvP.StateDeffence.CounterAttackDeffense;
+                            player_PvP.delayCounterAttackDeffense = player_PvP.auxDelayCounterAttackDeffense;
+                            player.spritePlayerActual.spriteRenderer.color = Color.white;
                         }
                     }
-                    player1.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Normal;
-                    player1.boxColliderParado.state = BoxColliderController.StateBoxCollider.Normal;
-                    player1.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Normal;
-                    player1.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
-                    player1.GetPlayerPvP().stateDeffence = Player_PvP.StateDeffence.NormalDeffense;
-                    player1.barraDeEscudo.AddPorcentageBar();
-                    if (player1.barraDeEscudo.GetValueShild() <= player1.barraDeEscudo.porcentageNededForDeffence)
+                    player.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Normal;
+                    player.boxColliderParado.state = BoxColliderController.StateBoxCollider.Normal;
+                    player.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Normal;
+                    player.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
+                    player.GetPlayerPvP().stateDeffence = Player_PvP.StateDeffence.NormalDeffense;
+                    player.barraDeEscudo.AddPorcentageBar();
+                    if (player.barraDeEscudo.GetValueShild() <= player.barraDeEscudo.porcentageNededForDeffence)
                     {
-                        player1.barraDeEscudo.SetEnableDeffence(false);
+                        player.barraDeEscudo.SetEnableDeffence(false);
                     }
                 }
             }
-
         }
+        
         public void CheckSpecialAttackButton_P1()
         {
             if (player1.GetEnableSpecialAttack())
@@ -403,35 +470,7 @@ namespace Prototipo_2 {
                 }
             }
         }
-        public void CheckInputPlayer(Player player)
-        {
-            if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-            {
-                CheckParabolaAttack("ParabolaAttack_P1", "DeffenseButton_P1",ref enableMovementPlayer1, player);
-                CheckVerticalUp("Vertical", "JumpButton_P1", "Vertical_Analogico", ref moveVerticalPlayer1, player);
-                CheckVerticalDown("Vertical", "Vertical_Analogico", player);
-                CheckVerticalCero("Vertical", "Vertical_Analogico", ref moveVerticalPlayer1, player);
-                CheckHorizontalLeft("Horizontal", "Horizontal_Analogico", ref moveHorizontalPlayer1, player);
-                CheckHorizontalRight("Horizontal", "Horizontal_Analogico", ref moveHorizontalPlayer1, player);
-                CheckHorizontalCero("Horizontal", "Horizontal_Analogico", ref moveHorizontalPlayer1);
-                CheckAttackButton_P1();
-                CheckDeffenceButton_P1();
-                CheckSpecialAttackButton_P1();
-            }
-            else if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
-            {
-                CheckParabolaAttack("ParabolaAttack_P2", "DeffenseButton_P2",ref enableMovementPlayer2, player);
-                CheckVerticalUp("Vertical_P2", "JumpButton_P2", "Vertical_Analogico_P2", ref moveVerticalPlayer2, player);
-                CheckVerticalDown("Vertical_P2", "Vertical_Analogico_P2", player);
-                CheckVerticalCero("Vertical_P2", "Vertical_Analogico_P2", ref moveVerticalPlayer2, player);
-                CheckHorizontalLeft("Horizontal_P2", "Horizontal_Analogico_P2", ref moveHorizontalPlayer2, player);
-                CheckHorizontalRight("Horizontal_P2", "Horizontal_Analogico_P2", ref moveHorizontalPlayer2, player);
-                CheckHorizontalCero("Horizontal_P2", "Horizontal_Analogico_P2", ref moveHorizontalPlayer2);
-                CheckAttackButton_P2();
-                CheckDeffenceButton_P2();
-                CheckSpecialAttackButton_P2();
-            }
-        }
+        
         public void CheckSpriteParado(string inputVertical, string inputSpecialAttackButton, Player player)
         {
             if (InputPlayerController.GetInputAxis(inputVertical) == 0 && !InputPlayerController.GetInputButtonDown(inputSpecialAttackButton))
@@ -585,45 +624,6 @@ namespace Prototipo_2 {
             }
         }
         
-        public void CheckSpritePlayer(Player player)
-        {
-            if (player.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio || player.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ContraAtaque)
-            {
-                if (player.spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.RecibirDanio)
-                {
-                    player.spritePlayerActual.CheckDeleyRecibirDanio();
-                }
-                else
-                {
-                    player.spritePlayerActual.CheckDeleyContraAtaque();
-                }
-            }
-            else
-            {
-                if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-                {
-                    CheckSpriteParado("Vertical", "SpecialAttackButton_P1" , player);
-                    CheckSpriteMoverDerecha("Horizontal", "Horizontal_Analogico", "Vertical",moveHorizontalPlayer1,player);
-                    CheckSpriteMoverIzquierda("Horizontal", "Horizontal_Analogico", "Vertical", moveHorizontalPlayer1,player);
-                    CheckSpritesSalto("Vertical", "Vertical_Analogico", "Horizontal", "AttackButton_P1", "DeffenseButton_P1", "SpecialAttackButton_P1", player);
-                    CheckSpritesParado("Horizontal", "AttackButton_P1", "DeffenseButton_P1",player, player1_PvP);
-                    CheckSpritesAgachado("Vertical", "Vertical_Analogico", "AttackButton_P1", "DeffenseButton_P1", player);
-                }
-                else if(player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
-                {
-                    CheckSpriteParado("Vertical_P2","SpecialAttackButton_P2", player);
-                    CheckSpriteMoverDerecha("Horizontal_P2", "Horizontal_Analogico_P2", "Vertical_P2",moveHorizontalPlayer2, player);
-                    CheckSpriteMoverIzquierda("Horizontal_P2", "Horizontal_Analogico_P2", "Vertical_P2",moveHorizontalPlayer2, player);
-                    CheckSpritesSalto("Vertical_P2", "Vertical_Analogico_P2", "Horizontal_P2", "AttackButton_P2", "DeffenseButton_P2", "SpecialAttackButton_P2", player);
-                    CheckSpritesParado("Horizontal_P2", "AttackButton_P2", "DeffenseButton_P2",player, player2_PvP);
-                    CheckSpritesAgachado("Vertical_P2", "Vertical_Analogico_P2", "AttackButton_P2", "DeffenseButton_P2", player);
-                }
-            }
-        }
-        //-----------------------------------------------//
-
-        //----- FUNCIONES Y CONTROLES DEL JUGADOR 2 -----//
-        
         public void CheckPauseButton_P2()
         {
             if (InputPlayerController.GetInputButtonDown("PauseButton_P2"))
@@ -633,81 +633,6 @@ namespace Prototipo_2 {
             }
         }
 
-        public void CheckAttackButton_P2()
-        {
-            if (InputPlayerController.GetInputButtonDown("AttackButton_P2") && player2.GetEnableAttack()
-                && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante
-                && player2.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
-                && !InputPlayerController.GetInputButton("DeffenseButton_P2"))
-            {
-                player2.SetControllerJoystick(true);
-                if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && (InputPlayerController.GetInputAxis("Vertical_P2") < 0
-                    || (enableAnalogic && InputPlayerController.GetInputAxis("Vertical_Analogico_P2") > 0.5f)))
-                {
-                    player2.spritePlayerActual.PlayAnimation("Ataque Abajo Salto protagonista");
-                    enableMovementPlayer2 = false;
-                }
-                else if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && InputPlayerController.GetInputAxis("Vertical_P2") >= 0)
-                {
-                    player2.spritePlayerActual.PlayAnimation("Ataque Salto protagonista");
-                    enableMovementPlayer2 = false;
-                }
-                else
-                {
-                    if (!player2.GetIsDuck())
-                    {
-                        player2.spritePlayerActual.PlayAnimation("Ataque protagonista");
-                        enableMovementPlayer2 = false;
-                    }
-                    else if (player2.GetIsDuck())
-                    {
-                        player2.spritePlayerActual.PlayAnimation("Ataque Agachado protagonista");
-                        enableMovementPlayer2 = false;
-                    }
-                }
-            }
-
-        }
-        public void CheckDeffenceButton_P2()
-        {
-            if (!InputPlayerController.GetInputButton("AttackButton_P2"))
-            {
-                if (InputPlayerController.GetInputButton("DeffenseButton_P2")
-                    && player2.barraDeEscudo.GetValueShild() > player2.barraDeEscudo.porcentageNededForDeffence
-                    && player2.barraDeEscudo.GetEnableDeffence())
-                {
-                    player2.SetControllerJoystick(true);
-                    player2.Deffence();
-                    player2.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
-                    player2.boxColliderParado.state = BoxColliderController.StateBoxCollider.Defendido;
-                    player2.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
-                    player2.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
-                }
-                else
-                {
-                    if (player2_PvP != null)
-                    {
-                        if (player2_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
-                        {
-                            player2_PvP.stateDeffence = Player_PvP.StateDeffence.CounterAttackDeffense;
-                            player2_PvP.delayCounterAttackDeffense = player2_PvP.auxDelayCounterAttackDeffense;
-                            player2.spritePlayerActual.spriteRenderer.color = Color.white;
-                        }
-                    }
-                    player2.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Normal;
-                    player2.boxColliderParado.state = BoxColliderController.StateBoxCollider.Normal;
-                    player2.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Normal;
-                    player2.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
-                    player2.GetPlayerPvP().stateDeffence = Player_PvP.StateDeffence.NormalDeffense;
-                    player2.barraDeEscudo.AddPorcentageBar();
-                    if (player2.barraDeEscudo.GetValueShild() <= player2.barraDeEscudo.porcentageNededForDeffence)
-                    {
-                        player2.barraDeEscudo.SetEnableDeffence(false);
-                    }
-                }
-            }
-            
-        }
         public void CheckSpecialAttackButton_P2()
         {
             if (player2.GetEnableSpecialAttack())
