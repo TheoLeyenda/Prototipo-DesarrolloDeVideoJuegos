@@ -46,69 +46,43 @@ namespace Prototipo_2 {
             CheckPauseButton("PauseButton_P2");
             if (Time.timeScale == 1)
             {
-                if (player1 != null && player1.gameObject.activeSelf)
-                {
-                    if (!InputPlayerController.GetInputButton("DeffenseButton_P1") || player1.barraDeEscudo.nededBarMaxPorcentage)
-                    {
-                        player1.barraDeEscudo.AddPorcentageBar();
-                        if (player1.barraDeEscudo.GetValueShild() <= player1.barraDeEscudo.porcentageNededForDeffence)
-                        {
-                            player1.barraDeEscudo.SetEnableDeffence(false);
-                        }
-                    }
-                    if (enableMovementPlayer1)
-                    {
-                        CheckInputPlayer(player1);
-                        if (player1.PD.lifePlayer > 0)
-                        {
-                            CheckSpritePlayer(player1);
-                        }
-                    }
-                    else
-                    {
-                        if (player1.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && !inPause)
-                        {
-                            player1.SetControllerJoystick(true);
-                            player1.MovementJump();
-                            moveVerticalPlayer1 = false;
-                            player1.SetIsDuck(false);
-                        }
-                    }
-
-                }
-                if (player2 != null && player2.gameObject.activeSelf)
-                {
-                    if (!InputPlayerController.GetInputButton("DeffenseButton_P2") || player2.barraDeEscudo.nededBarMaxPorcentage)
-                    {
-                        player2.barraDeEscudo.AddPorcentageBar();
-                        if (player2.barraDeEscudo.GetValueShild() <= player2.barraDeEscudo.porcentageNededForDeffence)
-                        {
-                            player2.barraDeEscudo.SetEnableDeffence(false);
-                        }
-                    }
-                    if (enableMovementPlayer2)
-                    {
-                        CheckInputPlayer(player2);
-                        if (player2.PD.lifePlayer > 0)
-                        {
-                            CheckSpritePlayer(player2);
-                        }
-                    }
-                    else
-                    {
-                        if (player2.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && !inPause)
-                        {
-                            player2.SetControllerJoystick(true);
-                            player2.MovementJump();
-                            moveVerticalPlayer1 = false;
-                            player2.SetIsDuck(false);
-                        }
-                    }
-                }
+                CheckPlayer("DeffenseButton_P1", ref enableMovementPlayer1,ref moveVerticalPlayer1, player1);
+                CheckPlayer("DeffenseButton_P2",ref enableMovementPlayer2,ref moveVerticalPlayer2, player2);
                 inPause = false;
             }
         }
-
+        public void CheckPlayer(string inputDeffenceButton, ref bool enableMovementPlayer,ref bool moveVerticalPlayer, Player player)
+        {
+            if (player != null && player.gameObject.activeSelf)
+            {
+                if (!InputPlayerController.GetInputButton(inputDeffenceButton) || player.barraDeEscudo.nededBarMaxPorcentage)
+                {
+                    player.barraDeEscudo.AddPorcentageBar();
+                    if (player.barraDeEscudo.GetValueShild() <= player.barraDeEscudo.porcentageNededForDeffence)
+                    {
+                        player.barraDeEscudo.SetEnableDeffence(false);
+                    }
+                }
+                if (enableMovementPlayer)
+                {
+                    CheckInputPlayer(player);
+                    if (player.PD.lifePlayer > 0)
+                    {
+                        CheckSpritePlayer(player);
+                    }
+                }
+                else
+                {
+                    if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar && !inPause)
+                    {
+                        player.SetControllerJoystick(true);
+                        player.MovementJump();
+                        moveVerticalPlayer = false;
+                        player.SetIsDuck(false);
+                    }
+                }
+            }
+        }
         public void CheckInputPlayer(Player player)
         {
             if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
