@@ -45,4 +45,4 @@ This game was also possible thanks to the support of these professors:
 
 ## Links
 
-Download it from itch.io: https://lqngames.itch.io/under-control
+Download it from itch.io: https://facundogt.itch.io/school-out
