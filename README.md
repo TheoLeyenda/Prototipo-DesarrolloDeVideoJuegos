@@ -4,13 +4,15 @@
 <img src="logo.png" alt="PONER NOMBRE DEL JUEGO ACA"/>
 </p>
 
-https://drive.google.com/open?id=1lyOfqXsKDL_0cQcxdy4Ha5qBSIXOgZua
+# School's Out!!
 
-# Nombre del juego
+Un juego de lucha basado en proyectiles, ambientado en una escuela secundaria donde los estudiantes luchan entre sí para vencer a sus maestros primero para aprobar sus exámenes.
 
-Lorem ipsum dolor sit amet consectetur adipiscing elit, quam nunc per litora montes himenaeos. Porttitor tellus dis cubilia vitae tortor felis litora vestibulum lacinia, cras diam ut dictumst orci consequat gravida rhoncus, hac faucibus volutpat ligula massa sem ornare posuere.
+Juega como Aki, un estudiante decidido a aprobar todos sus exámenes y dejar atrás la vida escolar para perseguir sus sueños. 
 
-Aliquam massa ut at semper parturient ridiculus netus suspendisse eros, vivamus lobortis libero lacinia tempor fusce dis rutrum natoque non, tincidunt tempus mus eleifend luctus tellus odio platea. 
+¡Derrota a tus enemigos estudiantes lanzando tus varios útiles escolares y tu botella de soda expirada para explotar a sus pies! Esquiva saltando o agachándose por encima y debajo de los ataques enemigos, o defiendete cuando sea necesario, ¡pero ten cuidado con tu Stamina! 
+
+¡Jugá contra la computadora en el Modo Historia o Modo Supervivencia, o también lucha contra tus amigos en el modo Multijugador!
 
 This is a game (demo/protoype/vertical slice) developed by students from <a href="https://www.imagecampus.edu.ar/">Image Campus</a>
 
