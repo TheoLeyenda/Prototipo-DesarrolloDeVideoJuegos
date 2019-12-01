@@ -43,12 +43,6 @@ This game was also possible thanks to the support of these professors:
 - **Fernando Puig**
 - **Eugenio Taboada**
 
-
-## Acknowledgements
-
-Otras personas a las que quieran agradecerles, sino sacar este título
-
-
 ## Links
 
 Download it from itch.io: https://lqngames.itch.io/under-control
