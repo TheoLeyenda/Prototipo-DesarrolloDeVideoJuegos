@@ -31,7 +31,6 @@ namespace Prototipo_2
         private int roundCombat;
         [HideInInspector]
         public bool restartLevel;
-        // Start is called before the first frame update
         private void Awake()
         {
             if (instanceGameManager == null)
@@ -52,7 +51,6 @@ namespace Prototipo_2
             countEnemysDead = 0;
         }
 
-        // Update is called once per frame
         void Update()
         {
             UnityEngine.Cursor.visible = false;
@@ -65,7 +63,6 @@ namespace Prototipo_2
             }
             CheckGameOverScene("GameOverHistoria");
             CheckGameOverScene("GameOverSupervivencia");
-            //Debug.Log(totalCountEnemysDead);
         }
         public void ResetGameManager()
         {
@@ -89,6 +86,10 @@ namespace Prototipo_2
         }
         public void GameOver(string finishScene)
         {
+            if (screenManager.eventWise != null)
+            {
+                screenManager.eventWise.StartEvent("volver_al_menu");
+            }
             SceneManager.LoadScene(finishScene);
         }
         public void CheckGameOverScene(string finishScene)

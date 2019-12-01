@@ -10,7 +10,8 @@ namespace Prototipo_2 {
         private SpriteRenderer spriteRendererFondo;
         private GameManager gm;
         public List<Sprite> ListaNiveles;
-        private EventWise eventWise;
+        [HideInInspector]
+        public EventWise eventWise;
         private int idListaNiveles;
 
         private void Start()

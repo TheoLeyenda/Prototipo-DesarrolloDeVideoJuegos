@@ -116,7 +116,7 @@ namespace Prototipo_2
         public int ColumnaActual;
         private void OnEnable()
         {
-            //iAmDead = false;
+            life = maxLife;
             delaySelectMovement = 0.2f;
             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
         }
