@@ -38,8 +38,8 @@ This is a game (demo/protoype/vertical slice) developed by students from <a href
 This game was also possible thanks to the support of these professors:
 
 - **Sergio Baretto**
-- **Federico Barra**
 - **Jorge Cuéllar**
+- **Federico Barra**
 - **Fernando Puig**
 - **Eugenio Taboada**
 
