@@ -5,960 +5,915 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System;
-namespace Prototipo_2
+
+public class Player : MonoBehaviour
 {
-    public class Player : MonoBehaviour
+    //DATOS PARA EL MOVIMIENTO
+    public GameObject alturaMaxima;
+    public GameObject[] posicionesDeMovimiento;
+    //-------------------------------------------//
+    public BarraDeEscudo barraDeEscudo;
+    public bool resetPlayer;
+    public bool resetScore;
+    public PlayerData PD;
+    public Grid gridPlayer;
+    private float auxLife;
+    public StructsPlayer structsPlayer;
+    public List<SpritePlayer> spritePlayers;
+    [HideInInspector]
+    public SpritePlayer spritePlayerActual;
+    public EnumsPlayers enumsPlayers;
+
+    public GameObject generadorProyectiles;
+    public GameObject generadorProyectilesAgachado;
+    public GameObject generadorProyectilesParabola;
+    public GameObject generadorProyectilesParabolaAgachado;
+    private Animator animator;
+
+    [HideInInspector]
+    public float xpActual;
+    public float xpNededSpecialAttack;
+    public float xpForHit;
+    public float SpeedJump;
+    public float Speed;
+    public float Resistace;
+    public float Gravity;
+    private float auxSpeedJump;
+    private GameManager gm;
+    private bool doubleDamage;
+    private bool isJumping;
+    private bool isDuck;
+    private bool EnableCounterAttack;
+    private Vector3 InitialPosition;
+    public string ButtonDeffence;
+    public string ButtonAttack;
+    public string ButtonSpecialAttack;
+    public float delayCounterAttack;
+    public bool SpecialAttackEnabelEveryMoment;
+    private float auxDelayCounterAttack;
+    private bool controllerJoystick;
+    public bool DoubleSpeed;
+    public bool LookingForward;
+    public bool LookingBack;
+    public float delayAttack;
+    public float delayParabolaAttack;
+    private float auxDelayParabolaAttack;
+    private float auxDelayAttack;
+    [HideInInspector]
+    public bool enableAttack;
+    [HideInInspector]
+    public bool enableSpecialAttack;
+    public BoxColliderController boxColliderPiernas;
+    public BoxColliderController boxColliderSprite;
+    public BoxColliderController boxColliderParado;
+    public BoxColliderController boxColliderAgachado;
+    public BoxColliderController boxColliderSaltando;
+    public string NameInputManager;
+    private InputManager inputManager;
+    private Player_PvP player_PvP;
+    private bool enableParabolaAttack;
+    public bool enableMecanicParabolaAttack;
+    private EventWise eventWise;
+    private void Awake()
     {
-        /*
-        public GameObject BARRA_DE_VIDA;
-        public GameObject BARRA_DE_CARGA;
-        public TextMeshProUGUI scoreText;
-        
-        public Image ImageHP;
-        public Image ImageCarga;
-        public Button PadArrowUp;
-        public Button PadArrowDown;
-        public Button PadArrowLeft;
-        public Button PadArrowRigth;
-        public void CheckLifeBar()
+        player_PvP = GetComponent<Player_PvP>();
+    }
+    void Start()
+    {
+        eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
+        enableParabolaAttack = false;
+        GameObject go = GameObject.Find(NameInputManager);
+        inputManager = go.GetComponent<InputManager>();
+        xpActual = 0;
+        enableSpecialAttack = false;
+        enableAttack = true;
+        auxDelayAttack = delayAttack;
+        auxDelayParabolaAttack = delayParabolaAttack;
+        delayAttack = 0;
+        controllerJoystick = false;
+        if (resetPlayer)
         {
-            if (PD.lifePlayer <= PD.maxLifePlayer)
-            {
-                ImageHP.fillAmount = PD.lifePlayer / PD.maxLifePlayer;
-            }
-            else if (PD.lifePlayer > PD.maxLifePlayer)
-            {
-                PD.lifePlayer = PD.maxLifePlayer;
-            }
-            else if (PD.lifePlayer < 0)
-            {
-                PD.lifePlayer = 0;
-            }
+            ResetPlayer();
         }
-        public void CheckLoadSpecialAttackBar()
+        if (resetScore)
         {
-            if (xpActual >= xpNededSpecialAttack)
-            {
-                xpActual = xpNededSpecialAttack;
-                enableSpecialAttack = true;
-            }
-            if (xpActual <= xpNededSpecialAttack)
-            {
-                ImageCarga.fillAmount = xpActual / xpNededSpecialAttack;
-            }
-            if (xpActual < 0)
-            {
-                xpActual = 0;
-            }
-        }*/
-
-        //DATOS PARA EL MOVIMIENTO
-        public GameObject alturaMaxima;
-        public GameObject[] posicionesDeMovimiento;
-        //-------------------------------------------//
-        public BarraDeEscudo barraDeEscudo;
-        public bool resetPlayer;
-        public bool resetScore;
-        public PlayerData PD;
-        public Grid gridPlayer;
-        private float auxLife;
-        public StructsPlayer structsPlayer;
-        public List<SpritePlayer> spritePlayers;
-        [HideInInspector]
-        public SpritePlayer spritePlayerActual;
-        public EnumsPlayers enumsPlayers;
-
-        public GameObject generadorProyectiles;
-        public GameObject generadorProyectilesAgachado;
-        public GameObject generadorProyectilesParabola;
-        public GameObject generadorProyectilesParabolaAgachado;
-        private Animator animator;
-
-        [HideInInspector]
-        public float xpActual;
-        public float xpNededSpecialAttack;
-        public float xpForHit;
-        public float SpeedJump;
-        public float Speed;
-        public float Resistace;
-        public float Gravity;
-        private float auxSpeedJump;
-        private GameManager gm;
-        private bool doubleDamage;
-        private bool isJumping;
-        private bool isDuck;
-        private bool EnableCounterAttack;
-        private Vector3 InitialPosition;
-        public string ButtonDeffence;
-        public string ButtonAttack;
-        public string ButtonSpecialAttack;
-        public float delayCounterAttack;
-        public bool SpecialAttackEnabelEveryMoment;
-        private float auxDelayCounterAttack;
-        private bool controllerJoystick;
-        public bool DoubleSpeed;
-        public bool LookingForward;
-        public bool LookingBack;
-        public float delayAttack;
-        public float delayParabolaAttack;
-        private float auxDelayParabolaAttack;
-        private float auxDelayAttack;
-        [HideInInspector]
-        public bool enableAttack;
-        [HideInInspector]
-        public bool enableSpecialAttack;
-        public BoxColliderController boxColliderPiernas;
-        public BoxColliderController boxColliderSprite;
-        public BoxColliderController boxColliderParado;
-        public BoxColliderController boxColliderAgachado;
-        public BoxColliderController boxColliderSaltando;
-        public string NameInputManager;
-        private InputManager inputManager;
-        private Player_PvP player_PvP;
-        private bool enableParabolaAttack;
-        public bool enableMecanicParabolaAttack;
-        private EventWise eventWise;
-        private void Awake()
-        {
-            player_PvP = GetComponent<Player_PvP>();
+            PD.score = 0;
         }
-        void Start()
+        CheckSpritePlayerActual();
+        auxDelayCounterAttack = delayCounterAttack;
+        isDuck = false;
+        auxSpeedJump = SpeedJump;
+        InitialPosition = transform.position;
+        isJumping = false;
+        enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+        structsPlayer.dataPlayer.CantCasillasOcupadas_X = 1;
+        structsPlayer.dataPlayer.CantCasillasOcupadas_Y = 2;
+        structsPlayer.dataPlayer.CantCasillasOcupadasAgachado = structsPlayer.dataPlayer.CantCasillasOcupadas_Y /2;
+        structsPlayer.dataPlayer.CantCasillasOcupadasParado = structsPlayer.dataPlayer.CantCasillasOcupadas_Y;
+        structsPlayer.dataPlayer.columnaActual = 1;
+        doubleDamage = false;
+        enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+        enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.vivo;
+        if (GameManager.instanceGameManager != null)
         {
-            eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
-            enableParabolaAttack = false;
-            GameObject go = GameObject.Find(NameInputManager);
-            inputManager = go.GetComponent<InputManager>();
-            xpActual = 0;
-            enableSpecialAttack = false;
-            enableAttack = true;
-            auxDelayAttack = delayAttack;
-            auxDelayParabolaAttack = delayParabolaAttack;
-            delayAttack = 0;
-            controllerJoystick = false;
-            if (resetPlayer)
-            {
-                ResetPlayer();
-            }
-            if (resetScore)
-            {
-                PD.score = 0;
-            }
-            CheckSpritePlayerActual();
-            auxDelayCounterAttack = delayCounterAttack;
-            isDuck = false;
-            auxSpeedJump = SpeedJump;
-            InitialPosition = transform.position;
-            isJumping = false;
-            enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-            structsPlayer.dataPlayer.CantCasillasOcupadas_X = 1;
-            structsPlayer.dataPlayer.CantCasillasOcupadas_Y = 2;
-            structsPlayer.dataPlayer.CantCasillasOcupadasAgachado = structsPlayer.dataPlayer.CantCasillasOcupadas_Y /2;
-            structsPlayer.dataPlayer.CantCasillasOcupadasParado = structsPlayer.dataPlayer.CantCasillasOcupadas_Y;
-            structsPlayer.dataPlayer.columnaActual = 1;
-            doubleDamage = false;
-            enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-            enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.vivo;
-            if (GameManager.instanceGameManager != null)
-            {
-                gm = GameManager.instanceGameManager;
-            }
-            animator = GetComponent<Animator>();
-            //DrawScore();
-
+            gm = GameManager.instanceGameManager;
         }
+        animator = GetComponent<Animator>();
+        //DrawScore();
 
-        void Update()
-        {
-            CheckOutLimit();
-            CheckDead();
-            //CheckLifeBar();
-            DelayEnableAttack();
-            DelayEnableParabolaAttack();
-            //CheckLoadSpecialAttackBar();
-            CheckMovementInSpecialAttack();
-            //DrawScore();
-            CheckBoxColliders2D();
-        }
+    }
 
-        public void CheckBoxColliders2D()
+    void Update()
+    {
+        CheckOutLimit();
+        CheckDead();
+        //CheckLifeBar();
+        DelayEnableAttack();
+        DelayEnableParabolaAttack();
+        //CheckLoadSpecialAttackBar();
+        CheckMovementInSpecialAttack();
+        //DrawScore();
+        CheckBoxColliders2D();
+    }
+
+    public void CheckBoxColliders2D()
+    {
+        if (!isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.Salto
+            || !isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.SaltoAtaque
+            || !isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.SaltoDefensa)
         {
-            if (!isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.Salto
-                || !isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.SaltoAtaque
-                || !isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.SaltoDefensa)
-            {
-                 boxColliderAgachado.GetBoxCollider2D().enabled = false;
-                 boxColliderParado.GetBoxCollider2D().enabled = true;
-                 boxColliderSaltando.GetBoxCollider2D().enabled = false;
-                 if (spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ParadoDefensa)
-                 {
-                     if (boxColliderPiernas != null)
-                     {
-                         boxColliderPiernas.GetBoxCollider2D().enabled = true;
-                     }
-                 }
-                 else
-                 {
-                     if (boxColliderPiernas != null)
-                     {
-                         boxColliderPiernas.GetBoxCollider2D().enabled = false;
-                     }
-                 }
-            }
-            else if (isDuck || enumsPlayers.movimiento == EnumsPlayers.Movimiento.Agacharse
-                || enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacharseAtaque
-                || enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacheDefensa)
-            {
-                 boxColliderAgachado.GetBoxCollider2D().enabled = true;
-                 boxColliderParado.GetBoxCollider2D().enabled = false;
-                 boxColliderSaltando.GetBoxCollider2D().enabled = false;
-                 if (spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ParadoDefensa)
-                 {
-                     if (boxColliderPiernas != null)
-                     {
-                        boxColliderPiernas.GetBoxCollider2D().enabled = true;
-                     }
-                 }
-                 else
-                 {
-                     if (boxColliderPiernas != null)
-                     {
-                         boxColliderPiernas.GetBoxCollider2D().enabled = false;
-                     }
-                 }
-            }
-            else if (isJumping || enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar
-                || enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoAtaque
-                || enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa)
-            {
-                 if (spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ParadoDefensa)
-                 {
-                     if (boxColliderPiernas != null)
-                     {
-                         boxColliderPiernas.GetBoxCollider2D().enabled = true;
-                     }
-                 }
-                 else
-                 {
-                     if (boxColliderPiernas != null)
-                     {
-                         boxColliderPiernas.GetBoxCollider2D().enabled = false;
-                     }
-                 }
-                 boxColliderAgachado.GetBoxCollider2D().enabled = false;
-                 boxColliderParado.GetBoxCollider2D().enabled = false;
-                 boxColliderSaltando.GetBoxCollider2D().enabled = true;
-            }
-            
-        }
-        
-        public void CheckMovementInSpecialAttack()
-        {
-            switch (enumsPlayers.specialAttackEquipped)
-            {
-                case EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga:
-                    if (structsPlayer.dataAttack.DisparoDeCarga.activeSelf)
+                boxColliderAgachado.GetBoxCollider2D().enabled = false;
+                boxColliderParado.GetBoxCollider2D().enabled = true;
+                boxColliderSaltando.GetBoxCollider2D().enabled = false;
+                if (spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ParadoDefensa)
+                {
+                    if (boxColliderPiernas != null)
                     {
-                        if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-                        {
-                            inputManager.SetEnableMovementPlayer1(false);
-                        }
-                        else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
-                        {
-                            inputManager.SetEnableMovementPlayer2(false);
-                        }
+                        boxColliderPiernas.GetBoxCollider2D().enabled = true;
                     }
-                    break;
-            }
-        }
-        public void ResetPlayer()
-        {
-            PD.lifePlayer = PD.maxLifePlayer;
-        }
-
-        public void CheckSpritePlayerActual()
-        {
-            for (int i = 0; i < spritePlayers.Count; i++)
-            {
-                if (spritePlayers[i].gameObject.activeSelf)
-                {
-                    spritePlayerActual = spritePlayers[i];
                 }
+                else
+                {
+                    if (boxColliderPiernas != null)
+                    {
+                        boxColliderPiernas.GetBoxCollider2D().enabled = false;
+                    }
+                }
+        }
+        else if (isDuck || enumsPlayers.movimiento == EnumsPlayers.Movimiento.Agacharse
+            || enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacharseAtaque
+            || enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacheDefensa)
+        {
+                boxColliderAgachado.GetBoxCollider2D().enabled = true;
+                boxColliderParado.GetBoxCollider2D().enabled = false;
+                boxColliderSaltando.GetBoxCollider2D().enabled = false;
+                if (spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ParadoDefensa)
+                {
+                    if (boxColliderPiernas != null)
+                    {
+                    boxColliderPiernas.GetBoxCollider2D().enabled = true;
+                    }
+                }
+                else
+                {
+                    if (boxColliderPiernas != null)
+                    {
+                        boxColliderPiernas.GetBoxCollider2D().enabled = false;
+                    }
+                }
+        }
+        else if (isJumping || enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar
+            || enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoAtaque
+            || enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa)
+        {
+                if (spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ParadoDefensa)
+                {
+                    if (boxColliderPiernas != null)
+                    {
+                        boxColliderPiernas.GetBoxCollider2D().enabled = true;
+                    }
+                }
+                else
+                {
+                    if (boxColliderPiernas != null)
+                    {
+                        boxColliderPiernas.GetBoxCollider2D().enabled = false;
+                    }
+                }
+                boxColliderAgachado.GetBoxCollider2D().enabled = false;
+                boxColliderParado.GetBoxCollider2D().enabled = false;
+                boxColliderSaltando.GetBoxCollider2D().enabled = true;
+        }
+            
+    }
+        
+    public void CheckMovementInSpecialAttack()
+    {
+        switch (enumsPlayers.specialAttackEquipped)
+        {
+            case EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga:
+                if (structsPlayer.dataAttack.DisparoDeCarga.activeSelf)
+                {
+                    if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                    {
+                        inputManager.SetEnableMovementPlayer1(false);
+                    }
+                    else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                    {
+                        inputManager.SetEnableMovementPlayer2(false);
+                    }
+                }
+                break;
+        }
+    }
+    public void ResetPlayer()
+    {
+        PD.lifePlayer = PD.maxLifePlayer;
+    }
+
+    public void CheckSpritePlayerActual()
+    {
+        for (int i = 0; i < spritePlayers.Count; i++)
+        {
+            if (spritePlayers[i].gameObject.activeSelf)
+            {
+                spritePlayerActual = spritePlayers[i];
             }
         }
+    }
         
         
-        public void CheckDead()
+    public void CheckDead()
+    {
+        if (PD.lifePlayer <= 0)
         {
-            if (PD.lifePlayer <= 0)
-            {
-                if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-                {
-                    inputManager.SetEnableMovementPlayer1(false);
-                }
-                else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
-                {
-                    inputManager.SetEnableMovementPlayer2(false);
-                }
-
-                if (transform.position.y <= InitialPosition.y)
-                {
-                    spritePlayerActual.PlayAnimation("Death");
-                }
-                else if (transform.position.y > InitialPosition.y)
-                {
-                    spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Salto;
-                }
-            }
-        }
-        public void Dead()
-        {
-            enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.muerto;
-            if (SceneManager.GetActiveScene().name == "Supervivencia")
-            {
-                gm.GameOver("GameOverSupervivencia");
-            }
-            else if (SceneManager.GetActiveScene().name != "PvP" && SceneManager.GetActiveScene().name != "TiroAlBlanco")
-            {
-                gm.GameOver("GameOverHistoria");
-            }
-            else if (SceneManager.GetActiveScene().name == "PvP" || SceneManager.GetActiveScene().name == "TiroAlBlanco")
+            if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
             {
                 inputManager.SetEnableMovementPlayer1(false);
+            }
+            else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+            {
                 inputManager.SetEnableMovementPlayer2(false);
             }
-            gm.ResetRoundCombat(true);
-        }
-        public void AttackDown(Proyectil.DisparadorDelProyectil disparador)
-        {
-            if (enableAttack)
-            {
-                Proyectil.typeProyectil tipoProyectil = Proyectil.typeProyectil.ProyectilAereo;
-                GameObject go = structsPlayer.dataAttack.poolProyectil.GetObject();
-                Proyectil proyectil = go.GetComponent<Proyectil>();
-                switch (enumsPlayers.numberPlayer)
-                {
-                    case EnumsPlayers.NumberPlayer.player1:
-                        proyectil.SetPlayer(gameObject.GetComponent<Player>());
-                        disparador = Proyectil.DisparadorDelProyectil.Jugador1;
-                        break;
-                    case EnumsPlayers.NumberPlayer.player2:
-                        proyectil.SetPlayer2(gameObject.GetComponent<Player>());
-                        disparador = Proyectil.DisparadorDelProyectil.Jugador2;
-                        break;
-                }
-                proyectil.SetDobleDamage(doubleDamage);
-                if (doubleDamage)
-                {
-                    proyectil.damage = proyectil.damage * 2;
-                }
-                if (!isDuck)
-                {
-                    go.transform.position = generadorProyectiles.transform.position;
-                    go.transform.rotation = generadorProyectiles.transform.rotation;
-                    proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
-                }
-                else
-                {
-                    go.transform.position = generadorProyectilesAgachado.transform.position;
-                    go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
-                    proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
-                }
-                proyectil.disparadorDelProyectil = disparador;
-                proyectil.On(tipoProyectil);
-                proyectil.ShootForwardDown();
-                delayAttack = auxDelayAttack;
-            }
-        }
-        public void DelayEnableAttack()
-        {
-            if (delayAttack > 0)
-            {
-                delayAttack = delayAttack - Time.deltaTime;
-                enableAttack = false;
-            }
-            else
-            {
-                enableAttack = true;
-            }
-        }
-        public void DelayEnableParabolaAttack()
-        {
-            if (delayParabolaAttack > 0)
-            {
-                delayParabolaAttack = delayParabolaAttack - Time.deltaTime;
-                enableParabolaAttack = false;
-            }
-            else
-            {
-                enableParabolaAttack = true;
-            }
-        }
-        public void Attack(Proyectil.DisparadorDelProyectil disparador)
-        {
-            if (enableAttack)
-            {
-                GameObject go = structsPlayer.dataAttack.poolProyectil.GetObject();
-                Proyectil proyectil = go.GetComponent<Proyectil>();
-                Proyectil.typeProyectil tipoProyectil = Proyectil.typeProyectil.ProyectilAereo;
-                switch (enumsPlayers.numberPlayer)
-                {
-                    case EnumsPlayers.NumberPlayer.player1:
-                        proyectil.SetPlayer(gameObject.GetComponent<Player>());
-                        disparador = Proyectil.DisparadorDelProyectil.Jugador1;
-                        break;
-                    case EnumsPlayers.NumberPlayer.player2:
-                        proyectil.SetPlayer2(gameObject.GetComponent<Player>());
-                        disparador = Proyectil.DisparadorDelProyectil.Jugador2;
-                        break;
-                }
-                proyectil.SetDobleDamage(doubleDamage);
-                if (doubleDamage)
-                {
-                    proyectil.damage = proyectil.damage * 2;
-                }
-                if (!isDuck)
-                {
-                    if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-                        && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-                        && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
-                    {
-                        tipoProyectil = Proyectil.typeProyectil.ProyectilNormal;
-                    }
-                    go.transform.position = generadorProyectiles.transform.position;
-                    go.transform.rotation = generadorProyectiles.transform.rotation;
-                    proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
-                }
-                else
-                {
-                    if (isDuck)
-                    {
-                        tipoProyectil = Proyectil.typeProyectil.ProyectilBajo;
-                    }
-                    go.transform.position = generadorProyectilesAgachado.transform.position;
-                    go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
-                    proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
-                }
-                proyectil.On(tipoProyectil);
-                proyectil.disparadorDelProyectil = disparador;
-                proyectil.ShootForward();
-                delayAttack = auxDelayAttack;
-            }
-        }
 
-        //ATAQUE EN PARABOLA.
-        public void ParabolaAttack(Proyectil.DisparadorDelProyectil disparador)
-        {
-            if (enableParabolaAttack && enableMecanicParabolaAttack)
-            {
-                GameObject go = structsPlayer.dataAttack.poolProyectilParabola.GetObject();
-                ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
-                proyectil.SetDobleDamage(doubleDamage);
-                proyectil.disparadorDelProyectil = disparador;
-                if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-                {
-                    proyectil.SetPlayer(this);
-                }
-                else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
-                {
-                    proyectil.SetPlayer2(this);
-                }
-                if (doubleDamage)
-                {
-                    proyectil.damage = proyectil.damage * 2;
-                }
-                if (!isDuck)
-                {
-                    proyectil.TypeRoot = 1;
-                    go.transform.position = generadorProyectilesParabola.transform.position;
-                }
-                else
-                {
-                    proyectil.TypeRoot = 2;
-                    go.transform.position = generadorProyectilesParabolaAgachado.transform.position;
-                }
-                switch (proyectil.TypeRoot)
-                {
-                    case 1:
-                        proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
-                        break;
-                    case 2:
-                        proyectil.rutaParabolaAgachado_AtaqueJugador = structsPlayer.rutaAgachado;
-                        break;
-                }
-                proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
-                proyectil.OnParabola();
-                enableParabolaAttack = false;
-                delayParabolaAttack = auxDelayParabolaAttack;
-            }
-        }
-        public void SpecialAttack(Proyectil.DisparadorDelProyectil disparador)
-        {
-            switch (enumsPlayers.specialAttackEquipped)
-            {
-                case EnumsPlayers.SpecialAttackEquipped.Default:
-                    if (enableSpecialAttack)
-                    {
-                        GameObject go = structsPlayer.dataAttack.poolProyectilParabola.GetObject();
-                        ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
-                        proyectil.SetDobleDamage(doubleDamage);
-                        proyectil.disparadorDelProyectil = disparador;
-                        if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-                        {
-                            proyectil.SetPlayer(this);
-                        }
-                        else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
-                        {
-                            proyectil.SetPlayer2(this);
-                        }
-                        if (doubleDamage)
-                        {
-                            proyectil.damage = proyectil.damage * 2;
-                        }
-                        if (!isDuck)
-                        {
-                            proyectil.TypeRoot = 1;
-                            go.transform.position = generadorProyectilesParabola.transform.position;
-                        }
-                        else
-                        {
-                            proyectil.TypeRoot = 2;
-                            go.transform.position = generadorProyectilesParabolaAgachado.transform.position;
-                        }
-                        switch (proyectil.TypeRoot)
-                        {
-                            case 1:
-                                proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
-                                break;
-                            case 2:
-                                proyectil.rutaParabolaAgachado_AtaqueJugador = structsPlayer.rutaAgachado;
-                                break;
-                        }
-                        proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
-                        proyectil.OnParabola();
-                        enableSpecialAttack = false;
-                        xpActual = 0;
-                    }
-                    break;
-                case EnumsPlayers.SpecialAttackEquipped.GranadaGaseosa:
-                    if (enableSpecialAttack)
-                    {
-                        GameObject go = structsPlayer.dataAttack.poolGranadaGaseosa.GetObject();
-                        ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
-                        proyectil.SetDobleDamage(doubleDamage);
-                        proyectil.disparadorDelProyectil = disparador;
-                        switch (player_PvP.playerSelected)
-                        {
-                            case Player_PvP.PlayerSelected.Protagonista:
-                                proyectil.spriteRenderer.sprite = proyectil.GetComponent<GranadaGaseosa>().propBotella;
-                                break;
-                            case Player_PvP.PlayerSelected.Balanceado:
-                                proyectil.spriteRenderer.sprite = proyectil.GetComponent<GranadaGaseosa>().propLata;
-                                break;
-                        }
-                        if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-                        {
-                            proyectil.SetPlayer(this);
-                        }
-                        else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
-                        {
-                            proyectil.SetPlayer2(this);
-                        }
-                        if (doubleDamage)
-                        {
-                            proyectil.damage = proyectil.damage * 2;
-                        }
-                        if (!isDuck)
-                        {
-                            proyectil.TypeRoot = 1;
-                            go.transform.position = generadorProyectilesParabola.transform.position;
-                        }
-                        else
-                        {
-                            proyectil.TypeRoot = 2;
-                            go.transform.position = generadorProyectilesParabolaAgachado.transform.position;
-                        }
-                        switch (proyectil.TypeRoot)
-                        {
-                            case 1:
-                                proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
-                                break;
-                            case 2:
-                                proyectil.rutaParabolaAgachado_AtaqueJugador = structsPlayer.rutaAgachado;
-                                break;
-                        }
-                        proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
-                        proyectil.OnParabola();
-                        enableSpecialAttack = false;
-                        xpActual = 0;
-                    }
-                    break;
-                case EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga:
-                    if (enableSpecialAttack)
-                    {
-                        if (!isJumping && !isDuck
-                        && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-                        && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-                        && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
-                        {
-                            structsPlayer.dataAttack.DisparoDeCarga.SetActive(true);
-                            enableSpecialAttack = false;
-                            xpActual = 0;
-                        }
-                    }
-                    break;
-                case EnumsPlayers.SpecialAttackEquipped.ProyectilImparable:
-                    if (enableSpecialAttack)
-                    {
-                        if (!isJumping && !isDuck
-                        && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-                        && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-                        && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
-                        {
-                            GameObject go = structsPlayer.dataAttack.poolProyectilImparable.GetObject();
-                            ProyectilInparable proyectilInparable = go.GetComponent<ProyectilInparable>();
-                            proyectilInparable.SetEnemy(gameObject.GetComponent<Enemy>());
-                            proyectilInparable.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
-                            if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-                            {
-                                proyectilInparable.SetPlayer(gameObject.GetComponent<Player>());
-                            }
-                            else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
-                            {
-                                proyectilInparable.SetPlayer2(gameObject.GetComponent<Player>());
-                            }
-                            go.transform.position = generadorProyectilesAgachado.transform.position;
-                            go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
-                            proyectilInparable.ShootForward();
-                            enableSpecialAttack = false;
-                            xpActual = 0;
-                        }
-                    }
-                    break;
-            }
-        }
-        public void CheckOutLimit()
-        {
             if (transform.position.y <= InitialPosition.y)
             {
-                transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);
+                spritePlayerActual.PlayAnimation("Death");
+            }
+            else if (transform.position.y > InitialPosition.y)
+            {
+                spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Salto;
             }
         }
-        
-        public void MovementLeft()
+    }
+    public void Dead()
+    {
+        enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.muerto;
+        if (SceneManager.GetActiveScene().name == "Supervivencia")
         {
-            if (LookingForward)
-            {
-                if (structsPlayer.dataPlayer.columnaActual > 0)
-                {
-                    MoveLeft(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual - 1].transform.position);
-                }
-            }
-            else if (LookingBack)
-            {
-                if (structsPlayer.dataPlayer.columnaActual > 0)
-                {
-                    MoveLeft(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual - 1].transform.position);
-                }
-            }
+            gm.GameOver("GameOverSupervivencia");
         }
-        public void MovementRight()
+        else if (SceneManager.GetActiveScene().name != "PvP" && SceneManager.GetActiveScene().name != "TiroAlBlanco")
         {
-            if (LookingForward)
-            {
-                if (structsPlayer.dataPlayer.columnaActual < posicionesDeMovimiento.Length - 1)
-                {
-                    MoveRight(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual + 1].transform.position);
-                }
-            }
-            else if (LookingBack)
-            {
-                if (structsPlayer.dataPlayer.columnaActual < posicionesDeMovimiento.Length - 1)
-                {
-                    MoveRight(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual + 1].transform.position);
-                }
-            }
+            gm.GameOver("GameOverHistoria");
         }
-        public void MovementJump()
+        else if (SceneManager.GetActiveScene().name == "PvP" || SceneManager.GetActiveScene().name == "TiroAlBlanco")
         {
-            if (enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
-            {
-                structsPlayer.particleMovement.particleJump.transform.position = new Vector3(transform.position.x, structsPlayer.particleMovement.particleJump.transform.position.y, structsPlayer.particleMovement.particleJump.transform.position.z);
-                structsPlayer.particleMovement.particleJump.gameObject.SetActive(true);
-                isJumping = true;
-                SpeedJump = auxSpeedJump;
-            }
-            Jump(alturaMaxima.transform.position);
+            inputManager.SetEnableMovementPlayer1(false);
+            inputManager.SetEnableMovementPlayer2(false);
         }
-        public void MovementDuck()
+        gm.ResetRoundCombat(true);
+    }
+    public void AttackDown(Proyectil.DisparadorDelProyectil disparador)
+    {
+        if (enableAttack)
         {
-            Duck(structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
-        }
-        public bool CheckMove(Vector3 PosicionDestino)
-        {
-            Vector3 distaciaObjetivo = transform.position - PosicionDestino;
-            bool mover = false;
-            if (distaciaObjetivo.magnitude > 0f)
+            Proyectil.typeProyectil tipoProyectil = Proyectil.typeProyectil.ProyectilAereo;
+            GameObject go = structsPlayer.dataAttack.poolProyectil.GetObject();
+            Proyectil proyectil = go.GetComponent<Proyectil>();
+            switch (enumsPlayers.numberPlayer)
             {
-                mover = true;
+                case EnumsPlayers.NumberPlayer.player1:
+                    proyectil.SetPlayer(gameObject.GetComponent<Player>());
+                    disparador = Proyectil.DisparadorDelProyectil.Jugador1;
+                    break;
+                case EnumsPlayers.NumberPlayer.player2:
+                    proyectil.SetPlayer2(gameObject.GetComponent<Player>());
+                    disparador = Proyectil.DisparadorDelProyectil.Jugador2;
+                    break;
             }
-            return mover;
-        }
-        public void Move(Vector3 direccion)
-        {
-            transform.Translate(direccion * Speed * Time.deltaTime);
-        }
-        public void MoveJamp(Vector3 direccion)
-        {
-            if (direccion == Vector3.up)
+            proyectil.SetDobleDamage(doubleDamage);
+            if (doubleDamage)
             {
-                transform.Translate(direccion * SpeedJump * Time.deltaTime);
-                SpeedJump = SpeedJump - Time.deltaTime * Resistace;
+                proyectil.damage = proyectil.damage * 2;
             }
-            else if (direccion == Vector3.down)
+            if (!isDuck)
             {
-                transform.Translate(direccion * SpeedJump * Time.deltaTime);
-                SpeedJump = SpeedJump + Time.deltaTime * Gravity;
-            }
-        }
-
-        public void MoveLeft(Vector3 cuadrillaDestino)
-        {
-            if (LookingForward)
-            {
-                if (CheckMove(new Vector3(posicionesDeMovimiento[0].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
-                {
-                    Move(Vector3.left);
-                    if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras)
-                    {
-                        eventWise.StartEvent("moverse");
-                    }
-                    enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAtras;
-                }
-                else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
-                {
-                    structsPlayer.dataPlayer.columnaActual--;
-                    enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-                }
-            }
-            else if (LookingBack)
-            {
-                if (CheckMove(new Vector3(posicionesDeMovimiento[0].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
-                {
-                    Move(-Vector3.left);
-                    if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras)
-                    {
-                        eventWise.StartEvent("moverse");
-                    }
-                    enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAtras;
-                }
-                else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
-                {
-                    structsPlayer.dataPlayer.columnaActual--;
-                    enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-                }
-            }
-        }
-        public void MoveRight(Vector3 cuadrillaDestino)
-        {
-            if (LookingForward)
-            {
-                if (CheckMove(new Vector3(posicionesDeMovimiento[posicionesDeMovimiento.Length-1].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
-                {
-                    Move(Vector3.right);
-                    if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante)
-                    {
-                        eventWise.StartEvent("moverse");
-                    }
-                    enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
-                }
-                else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
-                {
-                    structsPlayer.dataPlayer.columnaActual++;
-                    enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-                }
-            }
-            else if (LookingBack)
-            {
-                if (CheckMove(new Vector3(posicionesDeMovimiento[posicionesDeMovimiento.Length - 1].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
-                {
-                    if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante)
-                    {
-                        eventWise.StartEvent("moverse");
-                    }
-                    Move(-Vector3.right);
-                    enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
-                }
-                else 
-                {
-                    structsPlayer.dataPlayer.columnaActual++;
-                    enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-                }
-            }
-        }
-        public void Jump(Vector3 alturaMaxima)
-        {
-            if (CheckMove(new Vector3(transform.position.x, alturaMaxima.y, transform.position.z)) && isJumping)
-            {
-                if(enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar)
-                {
-                    eventWise.StartEvent("saltar");
-                }
-                enumsPlayers.movimiento = EnumsPlayers.Movimiento.Saltar;
-                MoveJamp(Vector3.up);
-                if (SpeedJump <= 0)
-                {
-                    isJumping = false;
-                }
+                go.transform.position = generadorProyectiles.transform.position;
+                go.transform.rotation = generadorProyectiles.transform.rotation;
+                proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
             }
             else
             {
-                isJumping = false;
-                if (CheckMove(new Vector3(transform.position.x, InitialPosition.y, transform.position.z)))
-                {
-                    MoveJamp(Vector3.down);
-                }
-                else
-                {
-                    eventWise.StartEvent("caer");
-                    enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-                    SpeedJump = auxSpeedJump;
-                }
+                go.transform.position = generadorProyectilesAgachado.transform.position;
+                go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
+                proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
             }
+            proyectil.disparadorDelProyectil = disparador;
+            proyectil.On(tipoProyectil);
+            proyectil.ShootForwardDown();
+            delayAttack = auxDelayAttack;
         }
-        public void Duck(int rangoAgachado)
+    }
+    public void DelayEnableAttack()
+    {
+        if (delayAttack > 0)
         {
-            isDuck = true;
+            delayAttack = delayAttack - Time.deltaTime;
+            enableAttack = false;
         }
-        public void Deffence()
+        else
         {
-            if (!isDuck
-                && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-                && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-                && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa
-                && !isJumping)
+            enableAttack = true;
+        }
+    }
+    public void DelayEnableParabolaAttack()
+    {
+        if (delayParabolaAttack > 0)
+        {
+            delayParabolaAttack = delayParabolaAttack - Time.deltaTime;
+            enableParabolaAttack = false;
+        }
+        else
+        {
+            enableParabolaAttack = true;
+        }
+    }
+    public void Attack(Proyectil.DisparadorDelProyectil disparador)
+    {
+        if (enableAttack)
+        {
+            GameObject go = structsPlayer.dataAttack.poolProyectil.GetObject();
+            Proyectil proyectil = go.GetComponent<Proyectil>();
+            Proyectil.typeProyectil tipoProyectil = Proyectil.typeProyectil.ProyectilAereo;
+            switch (enumsPlayers.numberPlayer)
             {
-                boxColliderParado.state = BoxColliderController.StateBoxCollider.Defendido;
+                case EnumsPlayers.NumberPlayer.player1:
+                    proyectil.SetPlayer(gameObject.GetComponent<Player>());
+                    disparador = Proyectil.DisparadorDelProyectil.Jugador1;
+                    break;
+                case EnumsPlayers.NumberPlayer.player2:
+                    proyectil.SetPlayer2(gameObject.GetComponent<Player>());
+                    disparador = Proyectil.DisparadorDelProyectil.Jugador2;
+                    break;
             }
-            else if (isDuck 
-                && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-                && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-                && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa
-                && !isJumping)
+            proyectil.SetDobleDamage(doubleDamage);
+            if (doubleDamage)
             {
-                boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
+                proyectil.damage = proyectil.damage * 2;
             }
-            else if(enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar 
-                || enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoAtaque 
-                || enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa
-                || isJumping)
+            if (!isDuck)
             {
-                boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
-            }
-            boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
-            if (player_PvP != null)
-            {
-                if (player_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
+                if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
                 {
-                    if (player_PvP.delayCounterAttackDeffense > 0)
+                    tipoProyectil = Proyectil.typeProyectil.ProyectilNormal;
+                }
+                go.transform.position = generadorProyectiles.transform.position;
+                go.transform.rotation = generadorProyectiles.transform.rotation;
+                proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
+            }
+            else
+            {
+                if (isDuck)
+                {
+                    tipoProyectil = Proyectil.typeProyectil.ProyectilBajo;
+                }
+                go.transform.position = generadorProyectilesAgachado.transform.position;
+                go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
+                proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
+            }
+            proyectil.On(tipoProyectil);
+            proyectil.disparadorDelProyectil = disparador;
+            proyectil.ShootForward();
+            delayAttack = auxDelayAttack;
+        }
+    }
+
+    //ATAQUE EN PARABOLA.
+    public void ParabolaAttack(Proyectil.DisparadorDelProyectil disparador)
+    {
+        if (enableParabolaAttack && enableMecanicParabolaAttack)
+        {
+            GameObject go = structsPlayer.dataAttack.poolProyectilParabola.GetObject();
+            ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
+            proyectil.SetDobleDamage(doubleDamage);
+            proyectil.disparadorDelProyectil = disparador;
+            if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+            {
+                proyectil.SetPlayer(this);
+            }
+            else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+            {
+                proyectil.SetPlayer2(this);
+            }
+            if (doubleDamage)
+            {
+                proyectil.damage = proyectil.damage * 2;
+            }
+            if (!isDuck)
+            {
+                proyectil.TypeRoot = 1;
+                go.transform.position = generadorProyectilesParabola.transform.position;
+            }
+            else
+            {
+                proyectil.TypeRoot = 2;
+                go.transform.position = generadorProyectilesParabolaAgachado.transform.position;
+            }
+            switch (proyectil.TypeRoot)
+            {
+                case 1:
+                    proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
+                    break;
+                case 2:
+                    proyectil.rutaParabolaAgachado_AtaqueJugador = structsPlayer.rutaAgachado;
+                    break;
+            }
+            proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
+            proyectil.OnParabola();
+            enableParabolaAttack = false;
+            delayParabolaAttack = auxDelayParabolaAttack;
+        }
+    }
+    public void SpecialAttack(Proyectil.DisparadorDelProyectil disparador)
+    {
+        switch (enumsPlayers.specialAttackEquipped)
+        {
+            case EnumsPlayers.SpecialAttackEquipped.Default:
+                if (enableSpecialAttack)
+                {
+                    GameObject go = structsPlayer.dataAttack.poolProyectilParabola.GetObject();
+                    ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
+                    proyectil.SetDobleDamage(doubleDamage);
+                    proyectil.disparadorDelProyectil = disparador;
+                    if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
                     {
-                        player_PvP.delayCounterAttackDeffense = player_PvP.delayCounterAttackDeffense - Time.deltaTime;
-                        player_PvP.stateDeffence = Player_PvP.StateDeffence.CounterAttackDeffense;
-                        spritePlayerActual.spriteRenderer.color = Color.yellow;
+                        proyectil.SetPlayer(this);
+                    }
+                    else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                    {
+                        proyectil.SetPlayer2(this);
+                    }
+                    if (doubleDamage)
+                    {
+                        proyectil.damage = proyectil.damage * 2;
+                    }
+                    if (!isDuck)
+                    {
+                        proyectil.TypeRoot = 1;
+                        go.transform.position = generadorProyectilesParabola.transform.position;
                     }
                     else
                     {
-                        player_PvP.stateDeffence = Player_PvP.StateDeffence.NormalDeffense;
-                        spritePlayerActual.spriteRenderer.color = Color.white;
+                        proyectil.TypeRoot = 2;
+                        go.transform.position = generadorProyectilesParabolaAgachado.transform.position;
+                    }
+                    switch (proyectil.TypeRoot)
+                    {
+                        case 1:
+                            proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
+                            break;
+                        case 2:
+                            proyectil.rutaParabolaAgachado_AtaqueJugador = structsPlayer.rutaAgachado;
+                            break;
+                    }
+                    proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
+                    proyectil.OnParabola();
+                    enableSpecialAttack = false;
+                    xpActual = 0;
+                }
+                break;
+            case EnumsPlayers.SpecialAttackEquipped.GranadaGaseosa:
+                if (enableSpecialAttack)
+                {
+                    GameObject go = structsPlayer.dataAttack.poolGranadaGaseosa.GetObject();
+                    ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
+                    proyectil.SetDobleDamage(doubleDamage);
+                    proyectil.disparadorDelProyectil = disparador;
+                    switch (player_PvP.playerSelected)
+                    {
+                        case Player_PvP.PlayerSelected.Protagonista:
+                            proyectil.spriteRenderer.sprite = proyectil.GetComponent<GranadaGaseosa>().propBotella;
+                            break;
+                        case Player_PvP.PlayerSelected.Balanceado:
+                            proyectil.spriteRenderer.sprite = proyectil.GetComponent<GranadaGaseosa>().propLata;
+                            break;
+                    }
+                    if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                    {
+                        proyectil.SetPlayer(this);
+                    }
+                    else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                    {
+                        proyectil.SetPlayer2(this);
+                    }
+                    if (doubleDamage)
+                    {
+                        proyectil.damage = proyectil.damage * 2;
+                    }
+                    if (!isDuck)
+                    {
+                        proyectil.TypeRoot = 1;
+                        go.transform.position = generadorProyectilesParabola.transform.position;
+                    }
+                    else
+                    {
+                        proyectil.TypeRoot = 2;
+                        go.transform.position = generadorProyectilesParabolaAgachado.transform.position;
+                    }
+                    switch (proyectil.TypeRoot)
+                    {
+                        case 1:
+                            proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
+                            break;
+                        case 2:
+                            proyectil.rutaParabolaAgachado_AtaqueJugador = structsPlayer.rutaAgachado;
+                            break;
+                    }
+                    proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
+                    proyectil.OnParabola();
+                    enableSpecialAttack = false;
+                    xpActual = 0;
+                }
+                break;
+            case EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga:
+                if (enableSpecialAttack)
+                {
+                    if (!isJumping && !isDuck
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+                    {
+                        structsPlayer.dataAttack.DisparoDeCarga.SetActive(true);
+                        enableSpecialAttack = false;
+                        xpActual = 0;
                     }
                 }
-            }
-            // A MEDIDA QUE ME DEFIENDO BAJO EL PORCENTAJE A LA BARRA DE DEFENSA
-            if (barraDeEscudo != null)
+                break;
+            case EnumsPlayers.SpecialAttackEquipped.ProyectilImparable:
+                if (enableSpecialAttack)
+                {
+                    if (!isJumping && !isDuck
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+                    {
+                        GameObject go = structsPlayer.dataAttack.poolProyectilImparable.GetObject();
+                        ProyectilInparable proyectilInparable = go.GetComponent<ProyectilInparable>();
+                        proyectilInparable.SetEnemy(gameObject.GetComponent<Enemy>());
+                        proyectilInparable.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
+                        if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                        {
+                            proyectilInparable.SetPlayer(gameObject.GetComponent<Player>());
+                        }
+                        else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                        {
+                            proyectilInparable.SetPlayer2(gameObject.GetComponent<Player>());
+                        }
+                        go.transform.position = generadorProyectilesAgachado.transform.position;
+                        go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
+                        proyectilInparable.ShootForward();
+                        enableSpecialAttack = false;
+                        xpActual = 0;
+                    }
+                }
+                break;
+        }
+    }
+    public void CheckOutLimit()
+    {
+        if (transform.position.y <= InitialPosition.y)
+        {
+            transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);
+        }
+    }
+        
+    public void MovementLeft()
+    {
+        if (LookingForward)
+        {
+            if (structsPlayer.dataPlayer.columnaActual > 0)
             {
-                barraDeEscudo.SubstractPorcentageBar();
+                MoveLeft(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual - 1].transform.position);
             }
+        }
+        else if (LookingBack)
+        {
+            if (structsPlayer.dataPlayer.columnaActual > 0)
+            {
+                MoveLeft(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual - 1].transform.position);
+            }
+        }
+    }
+    public void MovementRight()
+    {
+        if (LookingForward)
+        {
+            if (structsPlayer.dataPlayer.columnaActual < posicionesDeMovimiento.Length - 1)
+            {
+                MoveRight(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual + 1].transform.position);
+            }
+        }
+        else if (LookingBack)
+        {
+            if (structsPlayer.dataPlayer.columnaActual < posicionesDeMovimiento.Length - 1)
+            {
+                MoveRight(posicionesDeMovimiento[structsPlayer.dataPlayer.columnaActual + 1].transform.position);
+            }
+        }
+    }
+    public void MovementJump()
+    {
+        if (enumsPlayers.movimiento == EnumsPlayers.Movimiento.Nulo)
+        {
+            structsPlayer.particleMovement.particleJump.transform.position = new Vector3(transform.position.x, structsPlayer.particleMovement.particleJump.transform.position.y, structsPlayer.particleMovement.particleJump.transform.position.z);
+            structsPlayer.particleMovement.particleJump.gameObject.SetActive(true);
+            isJumping = true;
+            SpeedJump = auxSpeedJump;
+        }
+        Jump(alturaMaxima.transform.position);
+    }
+    public void MovementDuck()
+    {
+        Duck(structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
+    }
+    public bool CheckMove(Vector3 PosicionDestino)
+    {
+        Vector3 distaciaObjetivo = transform.position - PosicionDestino;
+        bool mover = false;
+        if (distaciaObjetivo.magnitude > 0f)
+        {
+            mover = true;
+        }
+        return mover;
+    }
+    public void Move(Vector3 direccion)
+    {
+        transform.Translate(direccion * Speed * Time.deltaTime);
+    }
+    public void MoveJamp(Vector3 direccion)
+    {
+        if (direccion == Vector3.up)
+        {
+            transform.Translate(direccion * SpeedJump * Time.deltaTime);
+            SpeedJump = SpeedJump - Time.deltaTime * Resistace;
+        }
+        else if (direccion == Vector3.down)
+        {
+            transform.Translate(direccion * SpeedJump * Time.deltaTime);
+            SpeedJump = SpeedJump + Time.deltaTime * Gravity;
+        }
+    }
+
+    public void MoveLeft(Vector3 cuadrillaDestino)
+    {
+        if (LookingForward)
+        {
+            if (CheckMove(new Vector3(posicionesDeMovimiento[0].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
+            {
+                Move(Vector3.left);
+                if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras)
+                {
+                    eventWise.StartEvent("moverse");
+                }
+                enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAtras;
+            }
+            else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
+            {
+                structsPlayer.dataPlayer.columnaActual--;
+                enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+            }
+        }
+        else if (LookingBack)
+        {
+            if (CheckMove(new Vector3(posicionesDeMovimiento[0].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
+            {
+                Move(-Vector3.left);
+                if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras)
+                {
+                    eventWise.StartEvent("moverse");
+                }
+                enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAtras;
+            }
+            else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
+            {
+                structsPlayer.dataPlayer.columnaActual--;
+                enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+            }
+        }
+    }
+    public void MoveRight(Vector3 cuadrillaDestino)
+    {
+        if (LookingForward)
+        {
+            if (CheckMove(new Vector3(posicionesDeMovimiento[posicionesDeMovimiento.Length-1].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
+            {
+                Move(Vector3.right);
+                if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante)
+                {
+                    eventWise.StartEvent("moverse");
+                }
+                enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
+            }
+            else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
+            {
+                structsPlayer.dataPlayer.columnaActual++;
+                enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+            }
+        }
+        else if (LookingBack)
+        {
+            if (CheckMove(new Vector3(posicionesDeMovimiento[posicionesDeMovimiento.Length - 1].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
+            {
+                if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante)
+                {
+                    eventWise.StartEvent("moverse");
+                }
+                Move(-Vector3.right);
+                enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
+            }
+            else 
+            {
+                structsPlayer.dataPlayer.columnaActual++;
+                enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+            }
+        }
+    }
+    public void Jump(Vector3 alturaMaxima)
+    {
+        if (CheckMove(new Vector3(transform.position.x, alturaMaxima.y, transform.position.z)) && isJumping)
+        {
+            if(enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar)
+            {
+                eventWise.StartEvent("saltar");
+            }
+            enumsPlayers.movimiento = EnumsPlayers.Movimiento.Saltar;
+            MoveJamp(Vector3.up);
+            if (SpeedJump <= 0)
+            {
+                isJumping = false;
+            }
+        }
+        else
+        {
+            isJumping = false;
+            if (CheckMove(new Vector3(transform.position.x, InitialPosition.y, transform.position.z)))
+            {
+                MoveJamp(Vector3.down);
+            }
+            else
+            {
+                eventWise.StartEvent("caer");
+                enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+                SpeedJump = auxSpeedJump;
+            }
+        }
+    }
+    public void Duck(int rangoAgachado)
+    {
+        isDuck = true;
+    }
+    public void Deffence()
+    {
+        if (!isDuck
+            && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+            && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+            && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa
+            && !isJumping)
+        {
+            boxColliderParado.state = BoxColliderController.StateBoxCollider.Defendido;
+        }
+        else if (isDuck 
+            && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+            && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+            && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa
+            && !isJumping)
+        {
+            boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
+        }
+        else if(enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar 
+            || enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoAtaque 
+            || enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa
+            || isJumping)
+        {
+            boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
+        }
+        boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
+        if (player_PvP != null)
+        {
+            if (player_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
+            {
+                if (player_PvP.delayCounterAttackDeffense > 0)
+                {
+                    player_PvP.delayCounterAttackDeffense = player_PvP.delayCounterAttackDeffense - Time.deltaTime;
+                    player_PvP.stateDeffence = Player_PvP.StateDeffence.CounterAttackDeffense;
+                    spritePlayerActual.spriteRenderer.color = Color.yellow;
+                }
+                else
+                {
+                    player_PvP.stateDeffence = Player_PvP.StateDeffence.NormalDeffense;
+                    spritePlayerActual.spriteRenderer.color = Color.white;
+                }
+            }
+        }
+        // A MEDIDA QUE ME DEFIENDO BAJO EL PORCENTAJE A LA BARRA DE DEFENSA
+        if (barraDeEscudo != null)
+        {
+            barraDeEscudo.SubstractPorcentageBar();
+        }
             
 
-        }
-        public bool GetEnableCounterAttack()
-        {
-            return EnableCounterAttack;
-        }
-        public void SetEnableCounterAttack(bool _enableCounterAttack)
-        {
-            EnableCounterAttack = _enableCounterAttack;
-        }
-        public float GetAuxDelayAttack()
-        {
-            return auxDelayAttack;
-        }
-        public float GetAuxDelayCounterAttack()
-        {
-            return auxDelayCounterAttack;
-        }
-        public bool GetIsDuck()
-        {
-            return isDuck;
-        }
-        public void SetIsDuck(bool _isDuck)
-        {
-            isDuck = _isDuck;
-        }
-        public bool GetIsJumping()
-        {
-            return isJumping;
-        }
-        public void SetIsJumping(bool _isJumping)
-        {
-            isJumping = _isJumping;
-        }
-        public float GetAuxSpeedJump()
-        {
-            return auxSpeedJump;
-        }
-        public void SetAuxSpeedJump(float _auxSpeedJump)
-        {
-            auxSpeedJump = _auxSpeedJump;
-        }
-        public void SetControllerJoystick(bool _controllerJoystick)
-        {
-            controllerJoystick = _controllerJoystick;
-        }
-        public bool GetControllerJoystick()
-        {
-            return controllerJoystick;
-        }
-        public void SetEnableSpecialAttack(bool _enableSpecialAttack)
-        {
-            enableSpecialAttack = _enableSpecialAttack;
-        }
-        public void SetXpActual(float _xpActual)
-        {
-            xpActual = _xpActual;
-        }
-        public float GetXpActual()
-        {
-            return xpActual;
-        }
-        public bool GetEnableAttack()
-        {
-            return enableAttack;
-        }
-        public InputManager GetInputManager()
-        {
-            return inputManager;
-        }
-        public bool GetEnableSpecialAttack()
-        {
-            return enableSpecialAttack;
-        }
-        public Player_PvP GetPlayerPvP()
-        {
-            return player_PvP;
-        }
-        public Vector3 GetInitialPosition()
-        {
-            return InitialPosition;
-        }
+    }
+    public bool GetEnableCounterAttack()
+    {
+        return EnableCounterAttack;
+    }
+    public void SetEnableCounterAttack(bool _enableCounterAttack)
+    {
+        EnableCounterAttack = _enableCounterAttack;
+    }
+    public float GetAuxDelayAttack()
+    {
+        return auxDelayAttack;
+    }
+    public float GetAuxDelayCounterAttack()
+    {
+        return auxDelayCounterAttack;
+    }
+    public bool GetIsDuck()
+    {
+        return isDuck;
+    }
+    public void SetIsDuck(bool _isDuck)
+    {
+        isDuck = _isDuck;
+    }
+    public bool GetIsJumping()
+    {
+        return isJumping;
+    }
+    public void SetIsJumping(bool _isJumping)
+    {
+        isJumping = _isJumping;
+    }
+    public float GetAuxSpeedJump()
+    {
+        return auxSpeedJump;
+    }
+    public void SetAuxSpeedJump(float _auxSpeedJump)
+    {
+        auxSpeedJump = _auxSpeedJump;
+    }
+    public void SetControllerJoystick(bool _controllerJoystick)
+    {
+        controllerJoystick = _controllerJoystick;
+    }
+    public bool GetControllerJoystick()
+    {
+        return controllerJoystick;
+    }
+    public void SetEnableSpecialAttack(bool _enableSpecialAttack)
+    {
+        enableSpecialAttack = _enableSpecialAttack;
+    }
+    public void SetXpActual(float _xpActual)
+    {
+        xpActual = _xpActual;
+    }
+    public float GetXpActual()
+    {
+        return xpActual;
+    }
+    public bool GetEnableAttack()
+    {
+        return enableAttack;
+    }
+    public InputManager GetInputManager()
+    {
+        return inputManager;
+    }
+    public bool GetEnableSpecialAttack()
+    {
+        return enableSpecialAttack;
+    }
+    public Player_PvP GetPlayerPvP()
+    {
+        return player_PvP;
+    }
+    public Vector3 GetInitialPosition()
+    {
+        return InitialPosition;
     }
 }

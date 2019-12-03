@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Prototipo_2;
 using UnityEngine.SceneManagement;
+
 public class Grid : MonoBehaviour
 {
     public enum IdPlataforma

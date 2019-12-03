@@ -2,28 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Prototipo_2 { 
-    public class ControladorDeMenuesDePausa : MonoBehaviour
+public class ControladorDeMenuesDePausa : MonoBehaviour
+{
+    public GameObject menuPlayer1;
+    public GameObject menuPlayer2;
+    // Update is called once per frame
+    void Update()
     {
-        public GameObject menuPlayer1;
-        public GameObject menuPlayer2;
-        // Update is called once per frame
-        void Update()
+        CheckMenu();
+    }
+    public void CheckMenu()
+    {
+        if (InputPlayerController.GetInputButtonDown("PauseButton_P1"))
         {
-            CheckMenu();
+            menuPlayer1.SetActive(true);
+            menuPlayer2.SetActive(false);
         }
-        public void CheckMenu()
+        else if(InputPlayerController.GetInputButtonDown("PauseButton_P2"))
         {
-            if (InputPlayerController.GetInputButtonDown("PauseButton_P1"))
-            {
-                menuPlayer1.SetActive(true);
-                menuPlayer2.SetActive(false);
-            }
-            else if(InputPlayerController.GetInputButtonDown("PauseButton_P2"))
-            {
-                menuPlayer1.SetActive(false);
-                menuPlayer2.SetActive(true);
-            }
+            menuPlayer1.SetActive(false);
+            menuPlayer2.SetActive(true);
         }
     }
 }
