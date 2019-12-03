@@ -13,18 +13,8 @@ public class InputManager : MonoBehaviour
     public bool FindPlayersAndPlayers_PvP;
     private bool inPause = false;
 
-    private bool moveHorizontalPlayer1;
-    private bool moveVerticalPlayer1;
-    private bool moveVerticalPlayer2;
-    private bool moveHorizontalPlayer2;
-
-    private bool enableMovementPlayer1;
-    private bool enableMovementPlayer2;
-
     private void Start()
     {
-        enableMovementPlayer1 = true;
-        enableMovementPlayer2 = true;
         if (FindPlayersAndPlayers_PvP)
         {
             player1 = GameObject.Find("Player1").GetComponent<Player>();
@@ -33,10 +23,16 @@ public class InputManager : MonoBehaviour
             player2 = GameObject.Find("Player2").GetComponent<Player>();
             player2_PvP = player2.gameObject.GetComponent<Player_PvP>();
         }
-        moveHorizontalPlayer1 = true;
-        moveVerticalPlayer1 = true;
-        moveHorizontalPlayer2 = true;
-        moveVerticalPlayer2 = true;
+        player1.enableMovementPlayer = true;
+        player1.enableMoveHorizontalPlayer = true;
+        player1.enableMoveVerticalPlayer = true;
+
+        if (player2 != null)
+        {
+            player2.enableMovementPlayer = true;
+            player2.enableMoveHorizontalPlayer = true;
+            player2.enableMoveVerticalPlayer = true;
+        }
     }
 
     void Update()
@@ -45,8 +41,11 @@ public class InputManager : MonoBehaviour
         CheckPauseButton("PauseButton_P2");
         if (Time.timeScale == 1)
         {
-            CheckPlayer("DeffenseButton_P1", ref enableMovementPlayer1,ref moveVerticalPlayer1, player1);
-            CheckPlayer("DeffenseButton_P2",ref enableMovementPlayer2,ref moveVerticalPlayer2, player2);
+            CheckPlayer("DeffenseButton_P1", ref player1.enableMovementPlayer, ref player1.enableMoveVerticalPlayer, player1);
+            if (player2 != null)
+            {
+                CheckPlayer("DeffenseButton_P2", ref player2.enableMovementPlayer, ref player2.enableMoveVerticalPlayer, player2);
+            }
             inPause = false;
         }
     }
@@ -86,29 +85,29 @@ public class InputManager : MonoBehaviour
     {
         if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
         {
-            CheckParabolaAttack("ParabolaAttack_P1", "DeffenseButton_P1", ref enableMovementPlayer1, player);
-            CheckVerticalUp("Vertical", "JumpButton_P1", "Vertical_Analogico", ref moveVerticalPlayer1, player);
+            CheckParabolaAttack("ParabolaAttack_P1", "DeffenseButton_P1", ref player1.enableMovementPlayer, player);
+            CheckVerticalUp("Vertical", "JumpButton_P1", "Vertical_Analogico", ref player1.enableMoveVerticalPlayer, player);
             CheckVerticalDown("Vertical", "Vertical_Analogico", player);
-            CheckVerticalCero("Vertical", "Vertical_Analogico", ref moveVerticalPlayer1, player);
-            CheckHorizontalLeft("Horizontal", "Horizontal_Analogico", ref moveHorizontalPlayer1, player);
-            CheckHorizontalRight("Horizontal", "Horizontal_Analogico", ref moveHorizontalPlayer1, player);
-            CheckHorizontalCero("Horizontal", "Horizontal_Analogico", ref moveHorizontalPlayer1);
-            CheckAttackButton("AttackButton_P1", "DeffenseButton_P1", "Vertical", "Vertical_Analogico" , ref enableMovementPlayer1, player);
+            CheckVerticalCero("Vertical", "Vertical_Analogico", ref player1.enableMoveVerticalPlayer, player);
+            CheckHorizontalLeft("Horizontal", "Horizontal_Analogico", ref player1.enableMoveHorizontalPlayer, player);
+            CheckHorizontalRight("Horizontal", "Horizontal_Analogico", ref player1.enableMoveHorizontalPlayer, player);
+            CheckHorizontalCero("Horizontal", "Horizontal_Analogico", ref player1.enableMoveHorizontalPlayer);
+            CheckAttackButton("AttackButton_P1", "DeffenseButton_P1", "Vertical", "Vertical_Analogico" , ref player1.enableMovementPlayer, player);
             CheckDeffenceButton("AttackButton_P1", "DeffenseButton_P1", player1_PvP, player);
-            CheckSpecialAttackButton("SpecialAttackButton_P1",ref enableMovementPlayer1, player);
+            CheckSpecialAttackButton("SpecialAttackButton_P1",ref player1.enableMovementPlayer, player);
         }
         else if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
         {
-            CheckParabolaAttack("ParabolaAttack_P2", "DeffenseButton_P2", ref enableMovementPlayer2, player);
-            CheckVerticalUp("Vertical_P2", "JumpButton_P2", "Vertical_Analogico_P2", ref moveVerticalPlayer2, player);
+            CheckParabolaAttack("ParabolaAttack_P2", "DeffenseButton_P2", ref player2.enableMovementPlayer, player);
+            CheckVerticalUp("Vertical_P2", "JumpButton_P2", "Vertical_Analogico_P2", ref player2.enableMoveVerticalPlayer, player);
             CheckVerticalDown("Vertical_P2", "Vertical_Analogico_P2", player);
-            CheckVerticalCero("Vertical_P2", "Vertical_Analogico_P2", ref moveVerticalPlayer2, player);
-            CheckHorizontalLeft("Horizontal_P2", "Horizontal_Analogico_P2", ref moveHorizontalPlayer2, player);
-            CheckHorizontalRight("Horizontal_P2", "Horizontal_Analogico_P2", ref moveHorizontalPlayer2, player);
-            CheckHorizontalCero("Horizontal_P2", "Horizontal_Analogico_P2", ref moveHorizontalPlayer2);
-            CheckAttackButton("AttackButton_P2", "DeffenseButton_P2", "Vertical_P2", "Vertical_Analogico_P2", ref enableMovementPlayer2, player);
+            CheckVerticalCero("Vertical_P2", "Vertical_Analogico_P2", ref player2.enableMoveVerticalPlayer, player);
+            CheckHorizontalLeft("Horizontal_P2", "Horizontal_Analogico_P2", ref player2.enableMoveHorizontalPlayer, player);
+            CheckHorizontalRight("Horizontal_P2", "Horizontal_Analogico_P2", ref player2.enableMoveHorizontalPlayer, player);
+            CheckHorizontalCero("Horizontal_P2", "Horizontal_Analogico_P2", ref player2.enableMoveHorizontalPlayer);
+            CheckAttackButton("AttackButton_P2", "DeffenseButton_P2", "Vertical_P2", "Vertical_Analogico_P2", ref player2.enableMovementPlayer, player);
             CheckDeffenceButton("AttackButton_P2", "DeffenseButton_P2", player2_PvP,player);
-            CheckSpecialAttackButton("SpecialAttackButton_P2",ref enableMovementPlayer2, player);
+            CheckSpecialAttackButton("SpecialAttackButton_P2",ref player2.enableMovementPlayer, player);
         }
     }
 
@@ -130,8 +129,8 @@ public class InputManager : MonoBehaviour
             if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
             {
                 CheckSpriteParado("Vertical", "SpecialAttackButton_P1", player);
-                CheckSpriteMoverDerecha("Horizontal", "Horizontal_Analogico", "Vertical", moveHorizontalPlayer1, player);
-                CheckSpriteMoverIzquierda("Horizontal", "Horizontal_Analogico", "Vertical", moveHorizontalPlayer1, player);
+                CheckSpriteMoverDerecha("Horizontal", "Horizontal_Analogico", "Vertical", player1.enableMoveHorizontalPlayer, player);
+                CheckSpriteMoverIzquierda("Horizontal", "Horizontal_Analogico", "Vertical", player1.enableMoveHorizontalPlayer, player);
                 CheckSpritesSalto("Vertical", "Vertical_Analogico", "Horizontal", "AttackButton_P1", "DeffenseButton_P1", "SpecialAttackButton_P1", player);
                 CheckSpritesParado("Horizontal", "AttackButton_P1", "DeffenseButton_P1", player, player1_PvP);
                 CheckSpritesAgachado("Vertical", "Vertical_Analogico", "AttackButton_P1", "DeffenseButton_P1", player);
@@ -139,8 +138,8 @@ public class InputManager : MonoBehaviour
             else if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
             {
                 CheckSpriteParado("Vertical_P2", "SpecialAttackButton_P2", player);
-                CheckSpriteMoverDerecha("Horizontal_P2", "Horizontal_Analogico_P2", "Vertical_P2", moveHorizontalPlayer2, player);
-                CheckSpriteMoverIzquierda("Horizontal_P2", "Horizontal_Analogico_P2", "Vertical_P2", moveHorizontalPlayer2, player);
+                CheckSpriteMoverDerecha("Horizontal_P2", "Horizontal_Analogico_P2", "Vertical_P2", player2.enableMoveHorizontalPlayer, player);
+                CheckSpriteMoverIzquierda("Horizontal_P2", "Horizontal_Analogico_P2", "Vertical_P2", player2.enableMoveHorizontalPlayer, player);
                 CheckSpritesSalto("Vertical_P2", "Vertical_Analogico_P2", "Horizontal_P2", "AttackButton_P2", "DeffenseButton_P2", "SpecialAttackButton_P2", player);
                 CheckSpritesParado("Horizontal_P2", "AttackButton_P2", "DeffenseButton_P2", player, player2_PvP);
                 CheckSpritesAgachado("Vertical_P2", "Vertical_Analogico_P2", "AttackButton_P2", "DeffenseButton_P2", player);
@@ -596,22 +595,5 @@ public class InputManager : MonoBehaviour
                 player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Agachado;
             }
         }
-    }
-
-    public void SetEnableMovementPlayer1(bool enableMovement)
-    {
-        enableMovementPlayer1 = enableMovement;
-    }
-    public void SetEnableMovementPlayer2(bool enableMovement)
-    {
-        enableMovementPlayer2 = enableMovement;
-    }
-    public bool GetEnableMovementPlayer1()
-    {
-        return enableMovementPlayer1;
-    }
-    public bool GetEnableMovementPlayer2()
-    {
-        return enableMovementPlayer2;
     }
 }

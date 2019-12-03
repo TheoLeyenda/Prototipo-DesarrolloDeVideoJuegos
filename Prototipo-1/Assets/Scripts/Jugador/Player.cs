@@ -8,6 +8,17 @@ using System;
 
 public class Player : MonoBehaviour
 {
+    //BOOLEANOS DE MOVIMIENTO
+    [HideInInspector]
+    public bool enableMoveHorizontalPlayer;
+    [HideInInspector]
+    public bool enableMoveVerticalPlayer;
+    [HideInInspector]
+    public bool enableMovementPlayer;
+    //----------------------//
+    //CODIGO DE INPUT
+
+    //-----------------------//
     //DATOS PARA EL MOVIMIENTO
     public GameObject alturaMaxima;
     public GameObject[] posicionesDeMovimiento;
@@ -127,12 +138,9 @@ public class Player : MonoBehaviour
     {
         CheckOutLimit();
         CheckDead();
-        //CheckLifeBar();
         DelayEnableAttack();
         DelayEnableParabolaAttack();
-        //CheckLoadSpecialAttackBar();
         CheckMovementInSpecialAttack();
-        //DrawScore();
         CheckBoxColliders2D();
     }
 
@@ -214,14 +222,7 @@ public class Player : MonoBehaviour
             case EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga:
                 if (structsPlayer.dataAttack.DisparoDeCarga.activeSelf)
                 {
-                    if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-                    {
-                        inputManager.SetEnableMovementPlayer1(false);
-                    }
-                    else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
-                    {
-                        inputManager.SetEnableMovementPlayer2(false);
-                    }
+                    enableMovementPlayer = false;
                 }
                 break;
         }
@@ -247,14 +248,7 @@ public class Player : MonoBehaviour
     {
         if (PD.lifePlayer <= 0)
         {
-            if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-            {
-                inputManager.SetEnableMovementPlayer1(false);
-            }
-            else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
-            {
-                inputManager.SetEnableMovementPlayer2(false);
-            }
+            enableMovementPlayer = false;
 
             if (transform.position.y <= InitialPosition.y)
             {
@@ -279,8 +273,7 @@ public class Player : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "PvP" || SceneManager.GetActiveScene().name == "TiroAlBlanco")
         {
-            inputManager.SetEnableMovementPlayer1(false);
-            inputManager.SetEnableMovementPlayer2(false);
+            enableMovementPlayer = false;
         }
         gm.ResetRoundCombat(true);
     }

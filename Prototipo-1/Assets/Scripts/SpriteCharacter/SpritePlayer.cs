@@ -47,7 +47,7 @@ public class SpritePlayer : SpriteCharacter
         {
             if (player.GetInputManager() != null)
             {
-                if (player.GetInputManager().GetEnableMovementPlayer1())
+                if (player.enableMovementPlayer)
                 {
                     switch (ActualSprite)
                     {
@@ -122,7 +122,7 @@ public class SpritePlayer : SpriteCharacter
         {
             if (player.GetInputManager() != null)
             {
-                if (player.GetInputManager().GetEnableMovementPlayer2())
+                if (player.enableMovementPlayer)
                 {
                     switch (ActualSprite)
                     {
@@ -244,14 +244,7 @@ public class SpritePlayer : SpriteCharacter
     }
     public void EnableMovementPlayer()
     {
-        if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-        {
-            player.GetInputManager().SetEnableMovementPlayer1(true);
-        }
-        else if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
-        {
-            player.GetInputManager().SetEnableMovementPlayer2(true);
-        }
+        player.enableMovementPlayer = true;
     }
     public void SetActualSprite(SpriteActual spriteActual)
     {

@@ -14,16 +14,16 @@ namespace Prototipo_2 {
         {
             if (dataCombatPvP.player1 != null & dataCombatPvP.player2 != null)
             {
-                dataCombatPvP.player1.GetInputManager().SetEnableMovementPlayer1(false);
-                dataCombatPvP.player2.GetInputManager().SetEnableMovementPlayer2(false);
+                dataCombatPvP.player1.enableMovementPlayer = false;
+                dataCombatPvP.player2.enableMovementPlayer = false;
             }
         }
         public void EnableMovementPlayers()
         {
             if(dataCombatPvP.player1 != null & dataCombatPvP.player2 != null)
             {
-                dataCombatPvP.player1.GetInputManager().SetEnableMovementPlayer1(true);
-                dataCombatPvP.player2.GetInputManager().SetEnableMovementPlayer2(true);
+                dataCombatPvP.player1.enableMovementPlayer = true;
+                dataCombatPvP.player2.enableMovementPlayer = true;
             }
         }
     }
