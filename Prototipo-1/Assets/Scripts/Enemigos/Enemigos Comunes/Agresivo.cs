@@ -30,7 +30,10 @@ namespace Prototipo_2
             }
             else
             {
-                spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", false);
+                if (spriteEnemy.GetAnimator() != null)
+                {
+                    spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", false);
+                }
             }
         }
         public override void CheckDelayAttack(bool specialAttack)

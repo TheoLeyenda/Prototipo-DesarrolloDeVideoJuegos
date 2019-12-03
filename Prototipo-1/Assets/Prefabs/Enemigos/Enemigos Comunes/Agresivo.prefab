@@ -97,6 +97,7 @@ MonoBehaviour:
   inEnemy: 1
   inPlayer: 0
   ZonaContraAtaque: 0
+  eventWise: {fileID: 0}
   state: 1
 --- !u!1 &170095904
 GameObject:
@@ -345,6 +346,7 @@ MonoBehaviour:
   inEnemy: 1
   inPlayer: 0
   ZonaContraAtaque: 0
+  eventWise: {fileID: 0}
   state: 1
 --- !u!1 &348040272
 GameObject:
@@ -807,7 +809,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.42, y: 7.79}
+    oldSize: {x: 6.5, y: 7.79}
     newSize: {x: 7.38, y: 9.84}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -828,9 +830,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7279d92b7308dc84cbd9e2b639ca42fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  enemy: {fileID: 425209816627336813}
   spriteRenderer: {fileID: 847702458}
+  ActualSprite: 0
+  delaySpriteRecibirDanio: 0.3
+  delaySpriteContraAtaque: 0.3
+  enemy: {fileID: 425209816627336813}
   Sprites:
   - sprite: {fileID: 21300000, guid: cd2b25e852a979c40ab465b636ca8948, type: 3}
     name: MoverAdelante-Agresivo
@@ -846,9 +850,6 @@ MonoBehaviour:
     name: ParadoDefensa-Agresivo
   - sprite: {fileID: 21300000, guid: 62722066c77c2f748baa72ece3c9a061, type: 3}
     name: Salto-Agresivo
-  ActualSprite: 0
-  delaySpriteRecibirDanio: 0.3
-  delaySpriteContraAtaque: 0.3
 --- !u!95 &847702455
 Animator:
   serializedVersion: 3
@@ -885,6 +886,7 @@ MonoBehaviour:
   inEnemy: 1
   inPlayer: 0
   ZonaContraAtaque: 1
+  eventWise: {fileID: 0}
   state: 0
 --- !u!1 &884802698
 GameObject:
@@ -1178,6 +1180,7 @@ MonoBehaviour:
   inEnemy: 1
   inPlayer: 0
   ZonaContraAtaque: 0
+  eventWise: {fileID: 0}
   state: 1
 --- !u!1 &1323542633
 GameObject:
@@ -1558,12 +1561,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6761e6c71cc000442b8ea7140e5e181f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  barraDeEscudo: {fileID: 2007211373909204089}
+  BARRA_DE_VIDA: {fileID: 7372900761619313045}
+  ImageHP: {fileID: 462553147}
+  ImageCarga: {fileID: 764812816}
   alturaMaxima: {fileID: 3846767524877911411}
   posicionesDeMovimiento:
   - {fileID: 1276273527518798311}
   - {fileID: 14431286686256313}
   - {fileID: 5525214798012453931}
-  barraDeEscudo: {fileID: 2007211373909204089}
+  enableSpecialAttack: 0
   spriteEnemy: {fileID: 847702456}
   enemyPrefab: {fileID: 1127554859473777065}
   gridEnemy: {fileID: 6765684383212966628}
@@ -1571,12 +1578,10 @@ MonoBehaviour:
   structsEnemys: {fileID: 1599146950427968578}
   SpriteRendererEnemigo: {fileID: 847702458}
   specialAttackEnemyController: {fileID: 425209815949839928}
-  BARRA_DE_VIDA: {fileID: 7372900761619313045}
   InPool: 0
   life: 250
   maxLife: 250
-  ImageHP: {fileID: 462553147}
-  ImageCarga: {fileID: 764812816}
+  xpActual: 0
   xpNededSpecialAttack: 30
   xpForHit: 10
   poolParabolaAttack: {fileID: 6195039064853560246}
@@ -3109,6 +3114,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 199
+      objectReference: {fileID: 0}
+    - target: {fileID: 7194419973132307248, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7194419974994112971, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}

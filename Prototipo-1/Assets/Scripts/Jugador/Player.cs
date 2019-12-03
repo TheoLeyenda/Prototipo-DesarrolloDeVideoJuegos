@@ -4,19 +4,61 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-
+using System;
 namespace Prototipo_2
 {
     public class Player : MonoBehaviour
     {
+        /*
+        public GameObject BARRA_DE_VIDA;
+        public GameObject BARRA_DE_CARGA;
+        public TextMeshProUGUI scoreText;
+        
+        public Image ImageHP;
+        public Image ImageCarga;
+        public Button PadArrowUp;
+        public Button PadArrowDown;
+        public Button PadArrowLeft;
+        public Button PadArrowRigth;
+        public void CheckLifeBar()
+        {
+            if (PD.lifePlayer <= PD.maxLifePlayer)
+            {
+                ImageHP.fillAmount = PD.lifePlayer / PD.maxLifePlayer;
+            }
+            else if (PD.lifePlayer > PD.maxLifePlayer)
+            {
+                PD.lifePlayer = PD.maxLifePlayer;
+            }
+            else if (PD.lifePlayer < 0)
+            {
+                PD.lifePlayer = 0;
+            }
+        }
+        public void CheckLoadSpecialAttackBar()
+        {
+            if (xpActual >= xpNededSpecialAttack)
+            {
+                xpActual = xpNededSpecialAttack;
+                enableSpecialAttack = true;
+            }
+            if (xpActual <= xpNededSpecialAttack)
+            {
+                ImageCarga.fillAmount = xpActual / xpNededSpecialAttack;
+            }
+            if (xpActual < 0)
+            {
+                xpActual = 0;
+            }
+        }*/
+
         //DATOS PARA EL MOVIMIENTO
         public GameObject alturaMaxima;
         public GameObject[] posicionesDeMovimiento;
         //-------------------------------------------//
+        public BarraDeEscudo barraDeEscudo;
         public bool resetPlayer;
         public bool resetScore;
-        public BarraDeEscudo barraDeEscudo;
-        public TextMeshProUGUI scoreText;
         public PlayerData PD;
         public Grid gridPlayer;
         private float auxLife;
@@ -25,22 +67,17 @@ namespace Prototipo_2
         [HideInInspector]
         public SpritePlayer spritePlayerActual;
         public EnumsPlayers enumsPlayers;
-        public GameObject BARRA_DE_VIDA;
-        public GameObject BARRA_DE_CARGA;
+
         public GameObject generadorProyectiles;
         public GameObject generadorProyectilesAgachado;
         public GameObject generadorProyectilesParabola;
         public GameObject generadorProyectilesParabolaAgachado;
         private Animator animator;
-        public Image ImageHP;
-        public Image ImageCarga;
-        private float xpActual;
+
+        [HideInInspector]
+        public float xpActual;
         public float xpNededSpecialAttack;
         public float xpForHit;
-        public Button PadArrowUp;
-        public Button PadArrowDown;
-        public Button PadArrowLeft;
-        public Button PadArrowRigth;
         public float SpeedJump;
         public float Speed;
         public float Resistace;
@@ -68,7 +105,8 @@ namespace Prototipo_2
         private float auxDelayAttack;
         [HideInInspector]
         public bool enableAttack;
-        private bool enableSpecialAttack;
+        [HideInInspector]
+        public bool enableSpecialAttack;
         public BoxColliderController boxColliderPiernas;
         public BoxColliderController boxColliderSprite;
         public BoxColliderController boxColliderParado;
@@ -125,7 +163,7 @@ namespace Prototipo_2
                 gm = GameManager.instanceGameManager;
             }
             animator = GetComponent<Animator>();
-            DrawScore();
+            //DrawScore();
 
         }
 
@@ -133,14 +171,15 @@ namespace Prototipo_2
         {
             CheckOutLimit();
             CheckDead();
-            CheckLifeBar();
+            //CheckLifeBar();
             DelayEnableAttack();
             DelayEnableParabolaAttack();
-            CheckLoadSpecialAttackBar();
+            //CheckLoadSpecialAttackBar();
             CheckMovementInSpecialAttack();
-            DrawScore();
+            //DrawScore();
             CheckBoxColliders2D();
         }
+
         public void CheckBoxColliders2D()
         {
             if (!isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.Salto
@@ -211,10 +250,7 @@ namespace Prototipo_2
             }
             
         }
-        public void DrawScore()
-        {
-            scoreText.text = "Puntaje: " + PD.score;
-        }
+        
         public void CheckMovementInSpecialAttack()
         {
             switch (enumsPlayers.specialAttackEquipped)
@@ -249,37 +285,8 @@ namespace Prototipo_2
                 }
             }
         }
-        public void CheckLoadSpecialAttackBar()
-        {
-            if (xpActual >= xpNededSpecialAttack)
-            {
-                xpActual = xpNededSpecialAttack;
-                enableSpecialAttack = true;
-            }
-            if (xpActual <= xpNededSpecialAttack)
-            {
-                ImageCarga.fillAmount = xpActual / xpNededSpecialAttack;
-            }
-            if (xpActual < 0)
-            {
-                xpActual = 0;
-            }
-        }
-        public void CheckLifeBar()
-        {
-            if (PD.lifePlayer <= PD.maxLifePlayer)
-            {
-                ImageHP.fillAmount = PD.lifePlayer / PD.maxLifePlayer;
-            }
-            else if (PD.lifePlayer > PD.maxLifePlayer)
-            {
-                PD.lifePlayer = PD.maxLifePlayer;
-            }
-            else if (PD.lifePlayer < 0)
-            {
-                PD.lifePlayer = 0;
-            }
-        }
+        
+        
         public void CheckDead()
         {
             if (PD.lifePlayer <= 0)
@@ -870,6 +877,7 @@ namespace Prototipo_2
             {
                 barraDeEscudo.SubstractPorcentageBar();
             }
+            
 
         }
         public bool GetEnableCounterAttack()

@@ -17,7 +17,6 @@ namespace Prototipo_2
         public float substractForHit;
         public float delayLoadBar;
         private float auxDelayLoadBar;
-        private float porcentageBar;
         private bool enableDeffence;
         private bool startDelayEnableDeffence;
         [HideInInspector]
@@ -167,6 +166,18 @@ namespace Prototipo_2
         public void SetEnableDeffence(bool _enableDeffence)
         {
             enableDeffence = _enableDeffence;
+        }
+        public void SetPlayer(Player _player)
+        {
+            player = _player;
+        }
+        public void SetEnemy(Enemy _enemy)
+        {
+            enemy = _enemy;
+        }
+        public void SetValueShild(float _porcentage)
+        {
+            ValueShild = _porcentage;
         }
     }
 }

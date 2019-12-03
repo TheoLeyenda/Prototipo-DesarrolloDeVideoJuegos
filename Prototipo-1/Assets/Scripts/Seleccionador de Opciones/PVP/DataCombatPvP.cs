@@ -38,6 +38,8 @@ namespace Prototipo_2 {
             Nulo,
         }
         //LAS LISTAS DE Player1 y Player2 DEBEN SER INICIALIZADAs EN EL MISMO ORDEN QUE EL ENUMERADOR Player_Selected.
+        public UI_Manager uI_Manager;
+
         public List<GameObject> Players1;
         public List<GameObject> Players2;
 
@@ -69,6 +71,8 @@ namespace Prototipo_2 {
         private bool soundEnter;
         void Start()
         {
+            
+
             soundEnter = false;
             fondoWining.SetActive(false);
             fondoEmpate.SetActive(false);
@@ -79,7 +83,11 @@ namespace Prototipo_2 {
             InitDataCombat();
             player1 = GameObject.Find("Player1").GetComponent<Player>();
             player2 = GameObject.Find("Player2").GetComponent<Player>();
-            
+            uI_Manager.players[0] = player1;
+            uI_Manager.players[1] = player2;
+            uI_Manager.InitUI();
+            player1.barraDeEscudo.SetPlayer(player1);
+            player2.barraDeEscudo.SetPlayer(player2);
         }
         public void InitDataCombat()
         {
@@ -197,16 +205,17 @@ namespace Prototipo_2 {
                 prefabWinPlayer2.SetActive(true);
                 spritePlayer1Win.sprite = spriteWining[(int)player1_selected];
                 spritePlayer2Win.sprite = spriteWining[(int)player2_selected];
-                player1.BARRA_DE_CARGA.SetActive(false);
-                player1.BARRA_DE_VIDA.SetActive(false);
-                player2.BARRA_DE_CARGA.SetActive(false);
-                player2.BARRA_DE_VIDA.SetActive(false);
+                uI_Manager.gameObject.SetActive(false);
+                //player1.BARRA_DE_CARGA.SetActive(false);
+                //player1.BARRA_DE_VIDA.SetActive(false);
+                //player2.BARRA_DE_CARGA.SetActive(false);
+                //player2.BARRA_DE_VIDA.SetActive(false);
                 player1.gameObject.SetActive(false);
                 player2.gameObject.SetActive(false);
-                player1.BARRA_DE_CARGA.SetActive(false);
-                player1.BARRA_DE_VIDA.SetActive(false);
-                player2.BARRA_DE_CARGA.SetActive(false);
-                player2.BARRA_DE_VIDA.SetActive(false);
+                //player1.BARRA_DE_CARGA.SetActive(false);
+                //player1.BARRA_DE_VIDA.SetActive(false);
+                //player2.BARRA_DE_CARGA.SetActive(false);
+                //player2.BARRA_DE_VIDA.SetActive(false);
                 player1.gameObject.SetActive(false);
                 player2.gameObject.SetActive(false);
             }
@@ -234,10 +243,11 @@ namespace Prototipo_2 {
                 prefabWinPlayer2.SetActive(false);
                 prefabWinPlayer1.SetActive(true);
                 spritePlayer1Win.sprite = spriteWining[(int)player1_selected];
-                player1.BARRA_DE_CARGA.SetActive(false);
-                player1.BARRA_DE_VIDA.SetActive(false);
-                player2.BARRA_DE_CARGA.SetActive(false);
-                player2.BARRA_DE_VIDA.SetActive(false);
+                uI_Manager.gameObject.SetActive(false);
+                //player1.BARRA_DE_CARGA.SetActive(false);
+                //player1.BARRA_DE_VIDA.SetActive(false);
+                //player2.BARRA_DE_CARGA.SetActive(false);
+                //player2.BARRA_DE_VIDA.SetActive(false);
                 player1.gameObject.SetActive(false);
                 player2.gameObject.SetActive(false);
             }
@@ -266,10 +276,11 @@ namespace Prototipo_2 {
                 prefabWinPlayer2.SetActive(true);
                 prefabWinPlayer1.SetActive(false);
                 spritePlayer2Win.sprite = spriteWining[(int)player2_selected];
-                player1.BARRA_DE_CARGA.SetActive(false);
-                player1.BARRA_DE_VIDA.SetActive(false);
-                player2.BARRA_DE_CARGA.SetActive(false);
-                player2.BARRA_DE_VIDA.SetActive(false);
+                uI_Manager.gameObject.SetActive(false);
+                //player1.BARRA_DE_CARGA.SetActive(false);
+                //player1.BARRA_DE_VIDA.SetActive(false);
+                //player2.BARRA_DE_CARGA.SetActive(false);
+                //player2.BARRA_DE_VIDA.SetActive(false);
                 player1.gameObject.SetActive(false);
                 player2.gameObject.SetActive(false);
             }

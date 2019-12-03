@@ -51,8 +51,14 @@ namespace Prototipo_2
         {
             if (!Disparo.gameObject.activeSelf)
             {
-                spriteEnemy.GetAnimator().SetBool("EnPlenoAtaqueEspecial", false);
-                spriteEnemy.GetAnimator().SetBool("FinalAtaqueEspecial", true);
+                if (spriteEnemy != null)
+                {
+                    if (spriteEnemy.GetAnimator() != null)
+                    {
+                        spriteEnemy.GetAnimator().SetBool("EnPlenoAtaqueEspecial", false);
+                        spriteEnemy.GetAnimator().SetBool("FinalAtaqueEspecial", true);
+                    }
+                }
             }
             else
             {
