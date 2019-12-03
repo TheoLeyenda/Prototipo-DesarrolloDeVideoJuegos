@@ -152,11 +152,12 @@ public class DataCombatPvP : MonoBehaviour
             }
             else if (player1.PD.score > player2.PD.score)
             {
-                CheckWinPlayer1();
+
+                CheckWinPlayer(ref gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP1, prefabWinPlayer1, prefabWinPlayer2, spritePlayer1Win, (int)player1_selected);
             }
             else if (player2.PD.score > player1.PD.score)
             {
-                CheckWinPlayer2();
+                CheckWinPlayer(ref gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP2, prefabWinPlayer2, prefabWinPlayer1, spritePlayer2Win, (int)player2_selected);
             }
         }
     }
@@ -166,12 +167,12 @@ public class DataCombatPvP : MonoBehaviour
         if (player1.PD.lifePlayer <= 0)
         {
             ResetScore();
-            CheckWinPlayer2();
+            CheckWinPlayer(ref gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP2, prefabWinPlayer2, prefabWinPlayer1,spritePlayer2Win, (int)player2_selected);
         }
         else if (player2.PD.lifePlayer <= 0)
         {
             ResetScore();
-            CheckWinPlayer1();
+            CheckWinPlayer(ref gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP1, prefabWinPlayer1, prefabWinPlayer2, spritePlayer1Win, (int)player1_selected);
         }
     }
     public void ResetScore()
@@ -193,7 +194,6 @@ public class DataCombatPvP : MonoBehaviour
         else
         {
             // EVENTO DE EMPATE DEL SONIDO 
-
             menuPausa_P1.SetActive(false);
             menuPausa_P2.SetActive(false);
             FondosNivel[(int)level_selected].SetActive(false);
@@ -203,24 +203,17 @@ public class DataCombatPvP : MonoBehaviour
             spritePlayer1Win.sprite = spriteWining[(int)player1_selected];
             spritePlayer2Win.sprite = spriteWining[(int)player2_selected];
             uI_Manager.gameObject.SetActive(false);
-            //player1.BARRA_DE_CARGA.SetActive(false);
-            //player1.BARRA_DE_VIDA.SetActive(false);
-            //player2.BARRA_DE_CARGA.SetActive(false);
-            //player2.BARRA_DE_VIDA.SetActive(false);
             player1.gameObject.SetActive(false);
             player2.gameObject.SetActive(false);
-            //player1.BARRA_DE_CARGA.SetActive(false);
-            //player1.BARRA_DE_VIDA.SetActive(false);
-            //player2.BARRA_DE_CARGA.SetActive(false);
-            //player2.BARRA_DE_VIDA.SetActive(false);
             player1.gameObject.SetActive(false);
             player2.gameObject.SetActive(false);
         }
     }
-    public void CheckWinPlayer1()
+    public void CheckWinPlayer(ref int countRoundsWinPlayer, GameObject prefabPlayerWin, GameObject prefabPlayerLose, SpriteRenderer spritePlayerWin, int playerSelected)
     {
-        gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP1++;
-        if (gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP1 < gm.structGameManager.gm_dataCombatPvP.countRounds)
+
+        countRoundsWinPlayer++;
+        if (countRoundsWinPlayer < gm.structGameManager.gm_dataCombatPvP.countRounds)
         {
             ReiniciarRonda();
             soundEnter = false;
@@ -237,47 +230,10 @@ public class DataCombatPvP : MonoBehaviour
             menuPausa_P2.SetActive(false);
             FondosNivel[(int)level_selected].SetActive(false);
             fondoWining.SetActive(true);
-            prefabWinPlayer2.SetActive(false);
-            prefabWinPlayer1.SetActive(true);
-            spritePlayer1Win.sprite = spriteWining[(int)player1_selected];
+            prefabPlayerWin.SetActive(true);
+            prefabPlayerLose.SetActive(false);
+            spritePlayerWin.sprite = spriteWining[playerSelected];
             uI_Manager.gameObject.SetActive(false);
-            //player1.BARRA_DE_CARGA.SetActive(false);
-            //player1.BARRA_DE_VIDA.SetActive(false);
-            //player2.BARRA_DE_CARGA.SetActive(false);
-            //player2.BARRA_DE_VIDA.SetActive(false);
-            player1.gameObject.SetActive(false);
-            player2.gameObject.SetActive(false);
-        }
-        gm.structGameManager.gm_dataCombatPvP.rondaActual++;
-    }
-    public void CheckWinPlayer2()
-    {
-        gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP2++;
-        if (gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP2 < gm.structGameManager.gm_dataCombatPvP.countRounds)
-        {
-            ReiniciarRonda();
-            soundEnter = false;
-        }
-        else
-        {
-            if (!soundEnter)
-            {
-                AkSoundEngine.PostEvent("pvp_ganador", eventWisse);
-                soundEnter = true;
-            }
-
-            menuPausa_P1.SetActive(false);
-            menuPausa_P2.SetActive(false);
-            FondosNivel[(int)level_selected].SetActive(false);
-            fondoWining.SetActive(true);
-            prefabWinPlayer2.SetActive(true);
-            prefabWinPlayer1.SetActive(false);
-            spritePlayer2Win.sprite = spriteWining[(int)player2_selected];
-            uI_Manager.gameObject.SetActive(false);
-            //player1.BARRA_DE_CARGA.SetActive(false);
-            //player1.BARRA_DE_VIDA.SetActive(false);
-            //player2.BARRA_DE_CARGA.SetActive(false);
-            //player2.BARRA_DE_VIDA.SetActive(false);
             player1.gameObject.SetActive(false);
             player2.gameObject.SetActive(false);
         }
