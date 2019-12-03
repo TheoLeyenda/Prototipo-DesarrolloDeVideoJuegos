@@ -51,9 +51,7 @@ public class ProyectilInparable : Proyectil
         CheckTimeLife();
         transform.Rotate(new Vector3(0, 0,speedRotation));
     }
-
-    // Update is called once per frame
-    private void OnTriggerStay2D(Collider2D collision)
+    private void CheckCollision(Collider2D collision,Player PlayerDisparador)
     {
         if (collision.tag == "BoxColliderController")
         {
@@ -62,7 +60,6 @@ public class ProyectilInparable : Proyectil
             {
                 return;
             }
-                
 
             if (boxColliderController.enemy != null)
             {
@@ -85,36 +82,30 @@ public class ProyectilInparable : Proyectil
                     boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
                     boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                 }
-                if (PLAYER1 != null)
+                if (PlayerDisparador != null)
                 {
-                    if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1
-                        || boxColliderController.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                    if (boxColliderController != PlayerDisparador.boxColliderAgachado
+                        && boxColliderController != PlayerDisparador.boxColliderParado
+                        && boxColliderController != PlayerDisparador.boxColliderPiernas
+                        && boxColliderController != PlayerDisparador.boxColliderSaltando
+                        && boxColliderController != PlayerDisparador.boxColliderSprite)
                     {
                         //AUMENTO XP PARA EL ATAQUE ESPECIAL
-                        PLAYER1.SetXpActual(PLAYER1.GetXpActual() + PLAYER1.xpForHit);
+                        PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + PlayerDisparador.xpForHit);
                         boxColliderController.player.SetEnableCounterAttack(true);
 
                         boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
                         boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-                                
-                    }
-                }
-                if (PLAYER2 != null)
-                {
-                    if (disparadorDelProyectil == DisparadorDelProyectil.Jugador2 ||
-                    boxColliderController.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1 ||
-                    PLAYER2 != null)
-                    {
-                        //AUMENTO XP PARA EL ATAQUE ESPECIAL
-                        PLAYER2.SetXpActual(PLAYER2.GetXpActual() + PLAYER2.xpForHit);
-                        boxColliderController.player.SetEnableCounterAttack(true);
 
-                        boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
-                        boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-                               
                     }
                 }
             }
         }
+    }
+    // Update is called once per frame
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        CheckCollision(collision,PLAYER1);
+        CheckCollision(collision,PLAYER2);
     }
 }

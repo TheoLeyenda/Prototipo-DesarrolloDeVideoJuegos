@@ -38,7 +38,10 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         CheckPauseButton(player1.inputPauseButton);
-        CheckPauseButton(player2.inputPauseButton);
+        if (player2 != null)
+        {
+            CheckPauseButton(player2.inputPauseButton);
+        }
         if (Time.timeScale == 1)
         {
             CheckPlayer(player1.inputDeffenseButton, ref player1.enableMovementPlayer, ref player1.enableMoveVerticalPlayer, player1, player1_PvP);
