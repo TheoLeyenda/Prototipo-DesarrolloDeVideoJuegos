@@ -35,6 +35,7 @@ namespace Prototipo_2
         }
         public void CheckEnumSprite()
         {
+            
             if (enemy.enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto)
             {
                 if (enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
@@ -87,7 +88,7 @@ namespace Prototipo_2
                         {
                             ActualSprite = SpriteActual.Agachado;
                         }
-                        else if (ActualSprite != SpriteActual.RecibirDanio && ActualSprite != SpriteActual.ContraAtaque)
+                        else if (ActualSprite != SpriteActual.ContraAtaque)
                         {
                             ActualSprite = SpriteActual.Parado;
                         }
@@ -110,9 +111,12 @@ namespace Prototipo_2
                                 PlayAnimation("Parado enemigo defensivo");
                                 break;
                             case SpriteActual.ParadoDefensa:
-                                if (!enemy.barraDeEscudo.nededBarMaxPorcentage)
+                                if (enemy.barraDeEscudo != null)
                                 {
-                                    PlayAnimation("Parado Defensa enemigo defensivo");
+                                    if (!enemy.barraDeEscudo.nededBarMaxPorcentage)
+                                    {
+                                        PlayAnimation("Parado Defensa enemigo defensivo");
+                                    }
                                 }
                                 break;
                             case SpriteActual.Salto:
@@ -140,10 +144,10 @@ namespace Prototipo_2
                                 spriteRenderer.color = Color.white;
                                 PlayAnimation("Moverse Atras enemigo defensivo");
                                 break;
-                            case SpriteActual.RecibirDanio:
+                            /*case SpriteActual.RecibirDanio:
                                 spriteRenderer.color = Color.white;
                                 PlayAnimation("Recibir Danio enemigo defensivo");
-                                break;
+                                break;*/
                             case SpriteActual.ContraAtaque:
                                 if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
                                 {
@@ -178,9 +182,9 @@ namespace Prototipo_2
                             case SpriteActual.MoverAtras:
                                 PlayAnimation("Moverse Atras balanceado");
                                 break;
-                            case SpriteActual.RecibirDanio:
+                            /*case SpriteActual.RecibirDanio:
                                 PlayAnimation("Recibir Danio balanceado");
-                                break;
+                                break;*/
                             case SpriteActual.Parado:
                                 PlayAnimation("Parado balanceado");
                                 break;
@@ -216,9 +220,9 @@ namespace Prototipo_2
                             case SpriteActual.MoverAtras:
                                 PlayAnimation("Moverse Atras enemigo agresivo");
                                 break;
-                            case SpriteActual.RecibirDanio:
+                            /*case SpriteActual.RecibirDanio:
                                 PlayAnimation("Recibir Danio enemigo agresivo");
-                                break;
+                                break;*/
                             case SpriteActual.Parado:
                                 PlayAnimation("Parado enemigo agresivo");
                                 break;

@@ -368,7 +368,7 @@ namespace Prototipo_2
                         {
                             if (enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
                             {
-                                enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.RecibirDanio;
+                                //enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.RecibirDanio;
                                 enemy.life = enemy.life - proyectil.damage;
 
                                 //AUMENTO XP PARA EL ATAQUE ESPECIAL
