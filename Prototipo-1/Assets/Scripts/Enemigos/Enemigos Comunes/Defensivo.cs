@@ -159,65 +159,68 @@ namespace Prototipo_2
         }
         public void CheckInDeffense()
         {
-            if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar 
-                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa
-                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa)
-                && barraDeEscudo.GetValueShild() > barraDeEscudo.porcentageNededForDeffence
-                    && barraDeEscudo.GetEnableDeffence())
+            if (barraDeEscudo != null)
             {
-                inDeffense = true;
-                if (inDeffense)
+                if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa)
+                    && barraDeEscudo.GetValueShild() > barraDeEscudo.porcentageNededForDeffence
+                        && barraDeEscudo.GetEnableDeffence())
+                {
+                    inDeffense = true;
+                    if (inDeffense)
+                    {
+                        delaySelectMovement = 0.1f;
+                    }
+                    if (delayStateCounterAttackDeffense > 0)
+                    {
+                        spriteEnemy.spriteRenderer.color = Color.yellow;
+                        stateDeffence = StateDeffence.CounterAttackDeffense;
+                        delayStateCounterAttackDeffense = delayStateCounterAttackDeffense - Time.deltaTime;
+                    }
+                    else if (delayStateDeffense > 0)
+                    {
+                        delayStateDeffense = delayStateDeffense - Time.deltaTime;
+                        spriteEnemy.spriteRenderer.color = Color.white;
+                        stateDeffence = StateDeffence.NormalDeffense;
+
+                    }
+                    else if (delayStateDeffense <= 0)
+                    {
+                        CheckVulnerable();
+                        if (delayVulnerable <= 0)
+                        {
+                            delayStateCounterAttackDeffense = auxDelayStateCounterAttackDeffense;
+                            inDeffense = false;
+                            delayStateDeffense = auxDelayStateDeffense;
+                            delayVulnerable = auxDelayVulnerable;
+                            delaySelectMovement = 0;
+                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+                        }
+
+                    }
+                }
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo && delayVulnerable > 0 && inDeffense)
                 {
                     delaySelectMovement = 0.1f;
-                }
-                if (delayStateCounterAttackDeffense > 0)
-                {
-                    spriteEnemy.spriteRenderer.color = Color.yellow;
-                    stateDeffence = StateDeffence.CounterAttackDeffense;
-                    delayStateCounterAttackDeffense = delayStateCounterAttackDeffense - Time.deltaTime;
-                }
-                else if (delayStateDeffense > 0)
-                {
-                    delayStateDeffense = delayStateDeffense - Time.deltaTime;
-                    spriteEnemy.spriteRenderer.color = Color.white;
-                    stateDeffence = StateDeffence.NormalDeffense;
-
-                }
-                else if (delayStateDeffense <= 0)
-                {
                     CheckVulnerable();
-                    if (delayVulnerable <= 0)
-                    {
-                        delayStateCounterAttackDeffense = auxDelayStateCounterAttackDeffense;
-                        inDeffense = false;
-                        delayStateDeffense = auxDelayStateDeffense;
-                        delayVulnerable = auxDelayVulnerable;
-                        delaySelectMovement = 0;
-                        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
-                    }
-
                 }
-            }
-            else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo && delayVulnerable > 0 && inDeffense)
-            {
-                delaySelectMovement = 0.1f;
-                CheckVulnerable();
-            }
-            else if(enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
-            {
-                delayStateCounterAttackDeffense = auxDelayStateCounterAttackDeffense;
-                inDeffense = false;
-                delayStateDeffense = auxDelayStateDeffense;
-                delayVulnerable = auxDelayVulnerable;
-                delaySelectMovement = 0;
-                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
-            }
-            if (barraDeEscudo.nededBarMaxPorcentage && barraDeEscudo.ValueShild < barraDeEscudo.MaxValueShild 
-                && (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar 
-                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa
-                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa))
-            {
-                delaySelectMovement = 0.0f;
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                {
+                    delayStateCounterAttackDeffense = auxDelayStateCounterAttackDeffense;
+                    inDeffense = false;
+                    delayStateDeffense = auxDelayStateDeffense;
+                    delayVulnerable = auxDelayVulnerable;
+                    delaySelectMovement = 0;
+                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+                }
+                if (barraDeEscudo.nededBarMaxPorcentage && barraDeEscudo.ValueShild < barraDeEscudo.MaxValueShild
+                    && (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa))
+                {
+                    delaySelectMovement = 0.0f;
+                }
             }
         }
         public void CheckVulnerable()
