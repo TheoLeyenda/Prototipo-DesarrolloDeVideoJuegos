@@ -17,8 +17,18 @@ public class Player : MonoBehaviour
     public bool enableMovementPlayer;
     //----------------------//
     //CODIGO DE INPUT
-
+    public string inputHorizontal;
+    public string inputHorizontal_Analogico;
+    public string inputVertical;
+    public string inputVertical_Analogico;
+    public string inputAttackButton;
+    public string inputDeffenseButton;
+    public string inputSpecialAttackButton;
+    public string inputJumpButton;
+    public string inputParabolaAttack;
+    public string inputPauseButton;
     //-----------------------//
+
     //DATOS PARA EL MOVIMIENTO
     public GameObject alturaMaxima;
     public GameObject[] posicionesDeMovimiento;
