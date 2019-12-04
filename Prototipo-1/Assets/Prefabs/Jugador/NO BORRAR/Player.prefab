@@ -179,7 +179,25 @@ MonoBehaviour:
   delaySpriteRecibirDanio: 0
   delaySpriteContraAtaque: 0
   player: {fileID: 0}
-  Animations: []
+  Animations:
+  - nameSpriteActual: Parado
+    nameAnimation: Parado protagonista
+  - nameSpriteActual: ParadoDefensa
+    nameAnimation: Parado Defensa protagonista
+  - nameSpriteActual: Salto
+    nameAnimation: Salto protagonista
+  - nameSpriteActual: SaltoDefensa
+    nameAnimation: Salto Defensa protagonista
+  - nameSpriteActual: MoverAdelante
+    nameAnimation: Mover Adelante protagonista
+  - nameSpriteActual: MoverAtras
+    nameAnimation: Mover Atras protagonista
+  - nameSpriteActual: RecibirDanio
+    nameAnimation: Recibir Danio protagonista
+  - nameSpriteActual: Agachado
+    nameAnimation: Agachado protagonista
+  - nameSpriteActual: AgachadoDefensa
+    nameAnimation: Agachado Defensa protagonista
 --- !u!1 &3156133879006681115
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,6 +530,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e80ed6d8b9751468846020f2df5d7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableMoveHorizontalPlayer: 0
+  enableMoveVerticalPlayer: 0
+  enableMovementPlayer: 0
+  inputHorizontal: 
+  inputHorizontal_Analogico: 
+  inputVertical: 
+  inputVertical_Analogico: 
+  inputAttackButton: 
+  inputDeffenseButton: 
+  inputSpecialAttackButton: 
+  inputJumpButton: 
+  inputParabolaAttack: 
+  inputPauseButton: 
   alturaMaxima: {fileID: 0}
   posicionesDeMovimiento: []
   barraDeEscudo: {fileID: 0}
@@ -581,6 +612,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoolProyectil
       objectReference: {fileID: 0}
+    - target: {fileID: 8744921956802162880, guid: 124cdede344a9344a98c2efa26021301,
+        type: 3}
+      propertyPath: parentName
+      value: ProyectilesGenerados
+      objectReference: {fileID: 0}
     - target: {fileID: 8744921956802162881, guid: 124cdede344a9344a98c2efa26021301,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -635,11 +671,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8744921956802162880, guid: 124cdede344a9344a98c2efa26021301,
-        type: 3}
-      propertyPath: parentName
-      value: ProyectilesGenerados
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 124cdede344a9344a98c2efa26021301, type: 3}

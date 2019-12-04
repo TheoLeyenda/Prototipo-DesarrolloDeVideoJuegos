@@ -8,15 +8,14 @@ public class SpritePlayer : SpriteCharacter
     public Player player;
         
     [System.Serializable]
-    public class ElementsSprites
+    public class ElementsAnimation
     {
-        public Animation animation;
-        public string name;
-
+        public string nameSpriteActual;
+        public string nameAnimation;
     }
         
-    public List<ElementsSprites> Animations;
-        
+    public List<ElementsAnimation> Animations;
+    
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -29,7 +28,7 @@ public class SpritePlayer : SpriteCharacter
     {
         CheckActualSprite();
     }
-      
+
     public void CheckActualSprite()
     {
         if (ActualSprite == SpriteActual.RecibirDanio || ActualSprite == SpriteActual.ContraAtaque)
@@ -43,167 +42,49 @@ public class SpritePlayer : SpriteCharacter
                 CheckDeleyContraAtaque();
             }
         }
-        if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-        {
-            if (player.GetInputManager() != null)
-            {
-                if (player.enableMovementPlayer)
-                {
-                    switch (ActualSprite)
-                    {
-                        case SpriteActual.Parado:
-                            //if (player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga)
-                            //{
-                                PlayAnimation("Parado protagonista");
-                            //}
-                            break;
-                        case SpriteActual.ParadoDefensa:
-                            PlayAnimation("Parado Defensa protagonista");
-                            break;
-                        case SpriteActual.Salto:
-                            PlayAnimation("Salto protagonista");
-                            break;
-                        case SpriteActual.SaltoDefensa:
-                            PlayAnimation("Salto Defensa protagonista");
-                            break;
-                        case SpriteActual.MoverAdelante:
-                            PlayAnimation("Mover Adelante protagonista");
-                            break;
-                        case SpriteActual.MoverAtras:
-                            PlayAnimation("Mover Atras protagonista");
-                            break;
-                        case SpriteActual.RecibirDanio:
-                            PlayAnimation("Recibir Danio protagonista");
-                            break;
-                        case SpriteActual.Agachado:
-                            PlayAnimation("Agachado protagonista");
-                            break;
-                        case SpriteActual.AgachadoDefensa:
-                            PlayAnimation("Agachado Defensa protagonista");
-                            break;
-                        case SpriteActual.ContraAtaque:
-                            if (player.GetPlayerPvP() != null)
-                            {
-                                if (player.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Defensivo)
-                                {
-                                    if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa 
-                                        || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
-                                    {
-                                        PlayAnimation("Contra Ataque Salto protagonista");
-                                    }
-                                    else if (player.GetIsDuck() || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacheDefensa 
-                                        || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Agacharse)
-                                    {
-                                        PlayAnimation("Contra Ataque Agachado protagonista");
-                                    }
 
-                                    else if (!player.GetIsDuck())
-                                    {
-                                        PlayAnimation("Contra Ataque Parado protagonista");
-                                    }
+        if (player.GetInputManager() != null)
+        {
+            if (player.enableMovementPlayer)
+            {
+                for (int i = 0; i < Animations.Count; i++)
+                {
+                    if (ActualSprite.ToString() == Animations[i].nameSpriteActual
+                        && ActualSprite != SpriteActual.ContraAtaque)
+                    {
+                        PlayAnimation(Animations[i].nameAnimation);
+                    }
+                    else if (ActualSprite == SpriteActual.ContraAtaque)
+                    {
+                        if (player.GetPlayerPvP() != null)
+                        {
+                            if (player.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Defensivo)
+                            {
+                                if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa
+                                    || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
+                                {
+                                    PlayAnimation("Contra Ataque Salto protagonista");
+                                }
+                                else if (player.GetIsDuck() || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacheDefensa
+                                    || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Agacharse)
+                                {
+                                    PlayAnimation("Contra Ataque Agachado protagonista");
+                                }
+
+                                else if (!player.GetIsDuck())
+                                {
+                                    PlayAnimation("Contra Ataque Parado protagonista");
                                 }
                             }
-                            else
-                            {
-                                PlayAnimation("Contra Ataque Parado protagonista");
-                            }
-                            break;
-                        case SpriteActual.ParadoAtaque:
-                            break;
-                        case SpriteActual.AgachadoAtaque:
-                            break;
-                        case SpriteActual.SaltoAtaque:
-                            break;
+                        }
+                        else
+                        {
+                            PlayAnimation("Contra Ataque Parado protagonista");
+                        }
                     }
                 }
             }
         }
-        else if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
-        {
-            if (player.GetInputManager() != null)
-            {
-                if (player.enableMovementPlayer)
-                {
-                    switch (ActualSprite)
-                    {
-                        case SpriteActual.Parado:
-                            //if (player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga)
-                            //{
-                                PlayAnimation("Parado protagonista");
-                            //}
-                            break;
-                        case SpriteActual.ParadoDefensa:
-                            PlayAnimation("Parado Defensa protagonista");
-                            break;
-                        case SpriteActual.Salto:
-                            PlayAnimation("Salto protagonista");
-                            break;
-                        case SpriteActual.SaltoDefensa:
-                            PlayAnimation("Salto Defensa protagonista");
-                            break;
-                        case SpriteActual.MoverAdelante:
-                            PlayAnimation("Mover Adelante protagonista");
-                            break;
-                        case SpriteActual.MoverAtras:
-                            PlayAnimation("Mover Atras protagonista");
-                            break;
-                        case SpriteActual.RecibirDanio:
-                            PlayAnimation("Recibir Danio protagonista");
-                            break;
-                        case SpriteActual.Agachado:
-                            PlayAnimation("Agachado protagonista");
-                            break;
-                        case SpriteActual.AgachadoDefensa:
-                            PlayAnimation("Agachado Defensa protagonista");
-                            break;
-                        case SpriteActual.ContraAtaque:
-                            if (player.GetPlayerPvP() != null)
-                            {
-                                if (player.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Defensivo)
-                                {
-                                    if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa
-                                        || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar)
-                                    {
-                                        PlayAnimation("Contra Ataque Salto protagonista");
-                                    }
-                                    else if (player.GetIsDuck() || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacheDefensa
-                                        || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Agacharse)
-                                    {
-                                        PlayAnimation("Contra Ataque Agachado protagonista");
-                                    }
-
-                                    else if (!player.GetIsDuck())
-                                    {
-                                        PlayAnimation("Contra Ataque Parado protagonista");
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                PlayAnimation("Contra Ataque Parado protagonista");
-                            }
-                            break;
-                        case SpriteActual.ParadoAtaque:
-                            break;
-                        case SpriteActual.AgachadoAtaque:
-                            break;
-                        case SpriteActual.SaltoAtaque:
-                            break;
-                    }
-                }
-            }
-        }
-    }
-    public Animation CheckListAnimations(string nameSprite)
-    {
-        for (int i = 0; i < Animations.Count; i++)
-        {
-            if (nameSprite == Animations[i].name)
-            {
-                return Animations[i].animation;
-            }
-        }
-        return null;
     }
     public override void InPlayAnimationAttack()
     {
