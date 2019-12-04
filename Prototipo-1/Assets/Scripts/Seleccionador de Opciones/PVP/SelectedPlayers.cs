@@ -21,6 +21,17 @@ public class SelectedPlayers : MonoBehaviour
         Protagonista,
         Count,
     }
+
+    [System.Serializable]
+    public class ElementsCharacter
+    {
+        public string nameCharacter;
+        public Characters characterSelected;
+        public DataCombatPvP.Player_Selected player_Selected;
+    }
+
+    public List<ElementsCharacter> elementsCharacters;
+
     //-----------------------------//
     public string nameNextScene;
     public List<string> namePlayersOptions;
@@ -127,7 +138,14 @@ public class SelectedPlayers : MonoBehaviour
     }
     public void DecoratePlayerSelected(SpriteRenderer imagePlayer, CursorMatriz cursorPlayer)
     {
-        switch (grillaDeSeleccion[cursorPlayer.x, cursorPlayer.y])
+        for (int i = 0; i < elementsCharacters.Count; i++)
+        {
+            if (grillaDeSeleccion[cursorPlayer.x, cursorPlayer.y] == elementsCharacters[i].nameCharacter)
+            {
+                imagePlayer.sprite = spritesPlayers[(int)elementsCharacters[i].characterSelected];
+            }
+        }
+        /*switch (grillaDeSeleccion[cursorPlayer.x, cursorPlayer.y])
         {
             case "Balanceado":
                 imagePlayer.sprite = spritesPlayers[(int)Characters.Balanceado];
@@ -141,7 +159,7 @@ public class SelectedPlayers : MonoBehaviour
             case "Protagonista":
                 imagePlayer.sprite = spritesPlayers[(int)Characters.Protagonista];
                 break;
-        }
+        }*/
     }
     public void MoveCursor(string inputHorizontal, string inputVertical, ref bool aviableMoveHorizontal, ref bool aviableMoveVertical, ref CursorMatriz cursorPlayer, ref Cursor CursorSelectorPlayer)
     {
@@ -216,7 +234,15 @@ public class SelectedPlayers : MonoBehaviour
     {
         if (InputPlayerController.GetInputButtonDown(inputSelectButton))
         {
-            switch (grillaDeSeleccion[cursorPlayer.x, cursorPlayer.y])
+            for (int i = 0; i < elementsCharacters.Count; i++)
+            {
+                if (grillaDeSeleccion[cursorPlayer.x, cursorPlayer.y] == elementsCharacters[i].nameCharacter)
+                {
+                    player_Selected = elementsCharacters[i].player_Selected;
+                    cursorPlayer.condirmed = true;
+                }
+            }
+            /*switch (grillaDeSeleccion[cursorPlayer.x, cursorPlayer.y])
             {
                 case "Balanceado":
                     player_Selected = DataCombatPvP.Player_Selected.Balanceado;
@@ -237,7 +263,7 @@ public class SelectedPlayers : MonoBehaviour
                 default:
                     cursorPlayer.condirmed = false;
                     break;
-            }
+            }*/
         }
         if (cursorPlayer1.condirmed && cursorPlayer2.condirmed)
         {
