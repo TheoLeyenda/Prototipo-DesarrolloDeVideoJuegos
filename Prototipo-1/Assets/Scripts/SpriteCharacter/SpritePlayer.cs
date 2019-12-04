@@ -7,14 +7,7 @@ public class SpritePlayer : SpriteCharacter
 {
     public Player player;
         
-    [System.Serializable]
-    public class ElementsAnimation
-    {
-        public string nameSpriteActual;
-        public string nameAnimation;
-    }
-        
-    public List<ElementsAnimation> Animations;
+
     
     private void Start()
     {
@@ -29,7 +22,7 @@ public class SpritePlayer : SpriteCharacter
         CheckActualSprite();
     }
 
-    public void CheckActualSprite()
+    public override void CheckActualSprite()
     {
         if (ActualSprite == SpriteActual.RecibirDanio || ActualSprite == SpriteActual.ContraAtaque)
         {

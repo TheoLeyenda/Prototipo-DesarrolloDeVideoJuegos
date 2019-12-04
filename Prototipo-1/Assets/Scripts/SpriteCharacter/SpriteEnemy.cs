@@ -7,14 +7,6 @@ public class SpriteEnemy : SpriteCharacter
 {
     public Enemy enemy;
 
-    [System.Serializable]
-    public class ElementsSprites
-    {
-        public Sprite sprite;
-        public string name;
-    }
-        
-    public List<ElementsSprites> Sprites;
     private void Start()
     {
         auxDelaySpriteRecibirDanio = delaySpriteRecibirDanio;
@@ -97,149 +89,39 @@ public class SpriteEnemy : SpriteCharacter
         }
     }
         
-    public void CheckActualSprite()
+    public override void CheckActualSprite()
     {
-            if (enemy.enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
+        for (int i = 0; i < Animations.Count; i++)
+        {
+            if (ActualSprite.ToString() == Animations[i].nameSpriteActual
+                       && ActualSprite != SpriteActual.ContraAtaque)
             {
-                switch (enemy.enumsEnemy.typeEnemy) {
-                case EnumsEnemy.TiposDeEnemigo.Defensivo:
-                    switch (ActualSprite)
-                    {
-                        case SpriteActual.Parado:
-                            spriteRenderer.color = Color.white;
-                            PlayAnimation("Parado enemigo defensivo");
-                            break;
-                        case SpriteActual.ParadoDefensa:
-                            if (enemy.barraDeEscudo != null)
-                            {
-                                if (!enemy.barraDeEscudo.nededBarMaxPorcentage)
-                                {
-                                    PlayAnimation("Parado Defensa enemigo defensivo");
-                                }
-                            }
-                            break;
-                        case SpriteActual.Salto:
-                            spriteRenderer.color = Color.white;
-                            PlayAnimation("Salto enemigo defensivo");
-                            break;
-                        case SpriteActual.SaltoDefensa:
-                            PlayAnimation("Salto Defensa enemigo defensivo");
-                            break;
-                        case SpriteActual.Agachado:
-                            spriteRenderer.color = Color.white;
-                            PlayAnimation("Agachado enemigo defensivo");
-                            break;
-                        case SpriteActual.AgachadoDefensa:
-                            PlayAnimation("Agachado Defensa enemigo defensivo");
-                            break;
-                        case SpriteActual.ParadoAtaque:
-                            spriteRenderer.color = Color.white;
-                            break;
-                        case SpriteActual.MoverAdelante:
-                            spriteRenderer.color = Color.white;
-                            PlayAnimation("Moverse Adelante enemigo defensivo");
-                            break;
-                        case SpriteActual.MoverAtras:
-                            spriteRenderer.color = Color.white;
-                            PlayAnimation("Moverse Atras enemigo defensivo");
-                            break;
-                        /*case SpriteActual.RecibirDanio:
-                            spriteRenderer.color = Color.white;
-                            PlayAnimation("Recibir Danio enemigo defensivo");
-                            break;*/
-                        case SpriteActual.ContraAtaque:
-                            if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
-                            {
-                                PlayAnimation("Contra Ataque Salto enemigo defensivo");
-                            }
-                            else if (enemy.GetIsDuck() || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa)
-                            {
-                                PlayAnimation("Contra Ataque Agachado enemigo defensivo");
-                            }
-                            else if (!enemy.GetIsDuck())
-                            {
-                                PlayAnimation("Contra Ataque enemigo defensivo");
-                            }
-
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case EnumsEnemy.TiposDeEnemigo.Balanceado:
-                    switch (ActualSprite)
-                    {
-                        case SpriteActual.Agachado:
-                            PlayAnimation("Agachado balanceado");
-                            break;
-                        case SpriteActual.AgachadoDefensa:
-                            PlayAnimation("Agachado Defensa balanceado");
-                            break;
-                        case SpriteActual.MoverAdelante:
-                            PlayAnimation("Moverse Adelante balanceado");
-                            break;
-                        case SpriteActual.MoverAtras:
-                            PlayAnimation("Moverse Atras balanceado");
-                            break;
-                        /*case SpriteActual.RecibirDanio:
-                            PlayAnimation("Recibir Danio balanceado");
-                            break;*/
-                        case SpriteActual.Parado:
-                            PlayAnimation("Parado balanceado");
-                            break;
-                        case SpriteActual.ParadoDefensa:
-                            PlayAnimation("Parado Defensa balanceado");
-                            break;
-                        case SpriteActual.Salto:
-                            PlayAnimation("Salto balanceado");
-                            break;
-                        case SpriteActual.SaltoDefensa:
-                            PlayAnimation("Salto Defensa balanceado");
-                            break;
-                        case SpriteActual.AgachadoAtaque:
-                            break;
-                        case SpriteActual.ParadoAtaque:
-                            break;
-                        case SpriteActual.SaltoAtaque:
-                            break;
-                    }
-                    break;
-                case EnumsEnemy.TiposDeEnemigo.Agresivo:
-                    switch (ActualSprite)
-                    {
-                        case SpriteActual.Agachado:
-                            PlayAnimation("Agachado enemigo agresivo");
-                            break;
-                        case SpriteActual.AgachadoDefensa:
-                            PlayAnimation("Agachado Defensa enemigo agresivo");
-                            break;
-                        case SpriteActual.MoverAdelante:
-                            PlayAnimation("Moverse Adelante enemigo agresivo");
-                            break;
-                        case SpriteActual.MoverAtras:
-                            PlayAnimation("Moverse Atras enemigo agresivo");
-                            break;
-                        /*case SpriteActual.RecibirDanio:
-                            PlayAnimation("Recibir Danio enemigo agresivo");
-                            break;*/
-                        case SpriteActual.Parado:
-                            PlayAnimation("Parado enemigo agresivo");
-                            break;
-                        case SpriteActual.SaltoDefensa:
-                            PlayAnimation("Salto Defensa enemigo agresivo");
-                            break;
-                        case SpriteActual.ParadoDefensa:
-                            PlayAnimation("Parado Defensa enemigo agresivo");
-                            break;
-                        case SpriteActual.Salto:
-                            PlayAnimation("Salto enemigo agresivo");
-                            break;
-                        case SpriteActual.ParadoAtaque:
-                            break;
-                        case SpriteActual.SaltoAtaque:
-                            break;
-                    }
-                    break;
+                if (ActualSprite != SpriteActual.AgachadoDefensa
+                    && ActualSprite != SpriteActual.ParadoDefensa
+                    && ActualSprite != SpriteActual.SaltoDefensa)
+                {
+                    spriteRenderer.color = Color.white;
+                }
+                if (Animations[i].nameAnimation != "")
+                {
+                    PlayAnimation(Animations[i].nameAnimation);
+                }
+            }
+            else if (ActualSprite == SpriteActual.ContraAtaque 
+                && enemy.enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Defensivo)
+            {
+                if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
+                {
+                    PlayAnimation("Contra Ataque Salto enemigo defensivo");
+                }
+                else if (enemy.GetIsDuck() || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa)
+                {
+                    PlayAnimation("Contra Ataque Agachado enemigo defensivo");
+                }
+                else if (!enemy.GetIsDuck())
+                {
+                    PlayAnimation("Contra Ataque enemigo defensivo");
+                }
             }
         }
     }
@@ -251,19 +133,6 @@ public class SpriteEnemy : SpriteCharacter
         enemy.boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Normal;
         //enemy.boxColliderPiernas.state = BoxColliderController.StateBoxCollider.Normal;
     }
-    public Sprite CheckListSprite(string nameSprite)
-    {
-        for (int i = 0; i < Sprites.Count; i++)
-        {
-            if (nameSprite == Sprites[i].name)
-            {
-                return Sprites[i].sprite;
-            }
-        }
-        return null;
-    }
-
-
     public override void PlayAnimation(string nameAnimation)
     {
         if (enemy.enemyPrefab.activeSelf == true && animator != null)

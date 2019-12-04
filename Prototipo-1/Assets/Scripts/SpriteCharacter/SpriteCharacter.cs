@@ -33,7 +33,15 @@ public class SpriteCharacter : MonoBehaviour
         ContraAtaqueAgachado,
         Count,
     }
-    
+    [System.Serializable]
+    public class ElementsAnimation
+    {
+        public string nameSpriteActual;
+        public string nameAnimation;
+    }
+
+    public List<ElementsAnimation> Animations;
+
     public float GetAuxDelaySpriteRecibirDanio()
     {
         return auxDelaySpriteRecibirDanio;
@@ -70,5 +78,6 @@ public class SpriteCharacter : MonoBehaviour
     {
         return animator;
     }
+    public virtual void CheckActualSprite(){}
     public virtual void InPlayAnimationAttack(){}
 }
