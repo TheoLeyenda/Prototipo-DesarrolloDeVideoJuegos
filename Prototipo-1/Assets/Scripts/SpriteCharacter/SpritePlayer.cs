@@ -6,9 +6,7 @@ using UnityEngine;
 public class SpritePlayer : SpriteCharacter
 {
     public Player player;
-        
 
-    
     private void Start()
     {
         animator = GetComponent<Animator>();
