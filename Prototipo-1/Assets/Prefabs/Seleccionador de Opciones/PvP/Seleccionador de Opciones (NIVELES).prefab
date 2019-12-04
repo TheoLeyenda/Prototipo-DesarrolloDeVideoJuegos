@@ -48,14 +48,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58f2bdf5328b084cad4cce9393d69fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameNextScene: PvP
   nameLevelsOptions:
   - Aula_Anatomia
   - Aula_Historia
   - Aula_Quimica
   - Aula_Programacion
   CursorSelectorPlayer1: {fileID: 0}
-  CursorSelectorPlayer2: {fileID: 0}
   filas: 4
   columnas: 1
   background: {fileID: 0}
@@ -69,3 +67,46 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5809baf1f8ed2014aaeee984b015c0c9, type: 3}
   - {fileID: 0}
   - {fileID: 0}
+  CamvasSeleccionRounds: {fileID: 0}
+  Fondo: {fileID: 0}
+  CuadrillaDeSeleccion: {fileID: 0}
+  PantallaAnterior: {fileID: 0}
+  activateCountRoundsSelection: 0
+  elementsSelectionLevels:
+  - nameLevel: Aula_Anatomia
+    levelSelect: 0
+  - nameLevel: Aula_Historia
+    levelSelect: 1
+  - nameLevel: Aula_EducacionFisica
+    levelSelect: 2
+  - nameLevel: Aula_Arte
+    levelSelect: 3
+  - nameLevel: Aula_Matematica
+    levelSelect: 4
+  - nameLevel: Aula_Quimica
+    levelSelect: 5
+  - nameLevel: Aula_Programacion
+    levelSelect: 6
+  - nameLevel: Aula_TESIS
+    levelSelect: 7
+  - nameLevel: Aula_Cafeteria
+    levelSelect: 8
+  backGroundSelectionLevels:
+  - nameBackgroundActual: Aula_Anatomia
+    backgroundActual: 0
+  - nameBackgroundActual: Aula_Historia
+    backgroundActual: 1
+  - nameBackgroundActual: Aula_EducacionFisica
+    backgroundActual: 2
+  - nameBackgroundActual: Aula_Arte
+    backgroundActual: 3
+  - nameBackgroundActual: Aula_Matematica
+    backgroundActual: 4
+  - nameBackgroundActual: Aula_Quimica
+    backgroundActual: 5
+  - nameBackgroundActual: Aula_Programacion
+    backgroundActual: 6
+  - nameBackgroundActual: Aula_TESIS
+    backgroundActual: 7
+  - nameBackgroundActual: Aula_Cafeteria
+    backgroundActual: 8

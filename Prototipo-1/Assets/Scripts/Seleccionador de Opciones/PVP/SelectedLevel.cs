@@ -44,6 +44,24 @@ public class SelectedLevel : MonoBehaviour
     public GameObject CuadrillaDeSeleccion;
     public GameObject PantallaAnterior;
     public bool activateCountRoundsSelection;
+
+    [System.Serializable]
+    public class ElementsSelectionLevels
+    {
+        public string nameLevel;
+        public DataCombatPvP.Level_Selected levelSelect;
+    }
+
+    public List<ElementsSelectionLevels> elementsSelectionLevels;
+
+    [System.Serializable]
+    public class BackGroundSelectionLevels
+    {
+        public string nameBackgroundActual;
+        public BackgroundLevels backgroundActual;
+    }
+
+    public List<BackGroundSelectionLevels> backGroundSelectionLevels;
     void Start()
     {
         CamvasSeleccionRounds.SetActive(false);
@@ -162,47 +180,13 @@ public class SelectedLevel : MonoBehaviour
     {
         if (InputPlayerController.GetInputButtonDown("SelectButton_P1"))
         {
-            switch (grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y])
+            for (int i = 0; i < elementsSelectionLevels.Count; i++)
             {
-                case "Aula_Anatomia":
-                    gm.structGameManager.gm_dataCombatPvP.level_selected = DataCombatPvP.Level_Selected.Anatomia;
+                if (grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y] == elementsSelectionLevels[i].nameLevel)
+                {
+                    gm.structGameManager.gm_dataCombatPvP.level_selected = elementsSelectionLevels[i].levelSelect;
                     cursorPlayer1.condirmed = true;
-                    break;
-                case "Aula_Historia":
-                    gm.structGameManager.gm_dataCombatPvP.level_selected = DataCombatPvP.Level_Selected.Historia;
-                    cursorPlayer1.condirmed = true;
-                    break;
-                case "Aula_EducacionFisica":
-                    gm.structGameManager.gm_dataCombatPvP.level_selected = DataCombatPvP.Level_Selected.EducacionFisica;
-                    cursorPlayer1.condirmed = true;
-                    break;
-                case "Aula_Arte":
-                    gm.structGameManager.gm_dataCombatPvP.level_selected = DataCombatPvP.Level_Selected.Arte;
-                    cursorPlayer1.condirmed = true;
-                    break;
-                case "Aula_Matematica":
-                    gm.structGameManager.gm_dataCombatPvP.level_selected = DataCombatPvP.Level_Selected.Matematica;
-                    cursorPlayer1.condirmed = true;
-                    break;
-                case "Aula_Quimica":
-                    gm.structGameManager.gm_dataCombatPvP.level_selected = DataCombatPvP.Level_Selected.Quimica;
-                    cursorPlayer1.condirmed = true;
-                    break;
-                case "Aula_Programacion":
-                    gm.structGameManager.gm_dataCombatPvP.level_selected = DataCombatPvP.Level_Selected.Programacion;
-                    cursorPlayer1.condirmed = true;
-                    break;
-                case "Aula_TESIS":
-                    gm.structGameManager.gm_dataCombatPvP.level_selected = DataCombatPvP.Level_Selected.TESIS;
-                    cursorPlayer1.condirmed = true;
-                    break;
-                case "Aula_Cafeteria":
-                    gm.structGameManager.gm_dataCombatPvP.level_selected = DataCombatPvP.Level_Selected.Cafeteria;
-                    cursorPlayer1.condirmed = true;
-                    break;
-                default:
-                    cursorPlayer1.condirmed = false;
-                    break;
+                }
             }
         }
         cursorPlayer2.condirmed = true; 
@@ -237,36 +221,12 @@ public class SelectedLevel : MonoBehaviour
     }
     public void CheckFondo()
     {
-            
-        switch (grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y])
+        for (int i = 0; i < backGroundSelectionLevels.Count; i++)
         {
-            case "Aula_Anatomia":
-                background.sprite = fondos[(int)BackgroundLevels.Anatomia];
-                break;
-            case "Aula_Historia":
-                background.sprite = fondos[(int)BackgroundLevels.Historia];
-                break;
-            case "Aula_EducacionFisica":
-                background.sprite = fondos[(int)BackgroundLevels.EducacionFisica];
-                break;
-            case "Aula_Arte":
-                background.sprite = fondos[(int)BackgroundLevels.Arte];
-                break;
-            case "Aula_Matematica":
-                background.sprite = fondos[(int)BackgroundLevels.Matematica];
-                break;
-            case "Aula_Quimica":
-                background.sprite = fondos[(int)BackgroundLevels.Quimica];
-                break;
-            case "Aula_Programacion":
-                background.sprite = fondos[(int)BackgroundLevels.Programacion];
-                break;
-            case "Aula_TESIS":
-                background.sprite = fondos[(int)BackgroundLevels.TESIS];
-                break;
-            case "Aula_Cafeteria":
-                background.sprite = fondos[(int)BackgroundLevels.Cafeteria];
-                break;
+            if (grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y] == backGroundSelectionLevels[i].nameBackgroundActual)
+            {
+                background.sprite = fondos[(int)backGroundSelectionLevels[i].backgroundActual];
+            }
         }
     }
 }
