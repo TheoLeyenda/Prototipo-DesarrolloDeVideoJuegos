@@ -145,21 +145,6 @@ public class SelectedPlayers : MonoBehaviour
                 imagePlayer.sprite = spritesPlayers[(int)elementsCharacters[i].characterSelected];
             }
         }
-        /*switch (grillaDeSeleccion[cursorPlayer.x, cursorPlayer.y])
-        {
-            case "Balanceado":
-                imagePlayer.sprite = spritesPlayers[(int)Characters.Balanceado];
-                break;
-            case "Agresivo":
-                imagePlayer.sprite = spritesPlayers[(int)Characters.Agresivo];
-                break;
-            case "Defensivo":
-                imagePlayer.sprite = spritesPlayers[(int)Characters.Defensivo];
-                break;
-            case "Protagonista":
-                imagePlayer.sprite = spritesPlayers[(int)Characters.Protagonista];
-                break;
-        }*/
     }
     public void MoveCursor(string inputHorizontal, string inputVertical, ref bool aviableMoveHorizontal, ref bool aviableMoveVertical, ref CursorMatriz cursorPlayer, ref Cursor CursorSelectorPlayer)
     {
@@ -242,28 +227,6 @@ public class SelectedPlayers : MonoBehaviour
                     cursorPlayer.condirmed = true;
                 }
             }
-            /*switch (grillaDeSeleccion[cursorPlayer.x, cursorPlayer.y])
-            {
-                case "Balanceado":
-                    player_Selected = DataCombatPvP.Player_Selected.Balanceado;
-                    cursorPlayer.condirmed = true;
-                    break;
-                case "Agresivo":
-                    player_Selected = DataCombatPvP.Player_Selected.Agresivo;
-                    cursorPlayer.condirmed = true;
-                    break;
-                case "Defensivo":
-                    player_Selected = DataCombatPvP.Player_Selected.Defensivo;
-                    cursorPlayer.condirmed = true;
-                    break;
-                case "Protagonista":
-                    player_Selected = DataCombatPvP.Player_Selected.Protagonista;
-                    cursorPlayer.condirmed = true;
-                    break;
-                default:
-                    cursorPlayer.condirmed = false;
-                    break;
-            }*/
         }
         if (cursorPlayer1.condirmed && cursorPlayer2.condirmed)
         {
