@@ -356,6 +356,7 @@ public class Player : MonoBehaviour
     {
         if (enableAttack)
         {
+            Debug.Log("entre");
             GameObject go = structsPlayer.dataAttack.poolProyectil.GetObject();
             Proyectil proyectil = go.GetComponent<Proyectil>();
             Proyectil.typeProyectil tipoProyectil = Proyectil.typeProyectil.ProyectilAereo;
