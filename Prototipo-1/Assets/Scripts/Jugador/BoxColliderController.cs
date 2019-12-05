@@ -13,6 +13,7 @@ public class BoxColliderController : MonoBehaviour
     private BoxCollider2D boxCollider2D;
     public EventWise eventWise;
     private GameManager gm;
+    private bool enableCounterAttack;
     public enum StateBoxCollider
     {
         Defendido,
@@ -34,6 +35,7 @@ public class BoxColliderController : MonoBehaviour
     }
     private void Start()
     {
+        enableCounterAttack = true;
         GameObject go = GameObject.Find("EventWise");
         eventWise = go.GetComponent<EventWise>();
         if (GameManager.instanceGameManager != null)
@@ -62,15 +64,14 @@ public class BoxColliderController : MonoBehaviour
                         if (player.delayCounterAttack > 0)
                         {
                             player.delayCounterAttack = player.delayCounterAttack - Time.deltaTime;
-                            if (InputPlayerController.GetInputButtonDown(player.inputDeffenseButton) && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage)
+                            if (InputPlayerController.GetInputButtonDown(player.inputDeffenseButton) && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage && enableCounterAttack)
                             {
-                                Debug.Log("PERON");
                                 proyectil.gameObject.SetActive(false);
                                 player.Attack(PlayerCounterAttack);
                                 player.delayCounterAttack = player.GetAuxDelayCounterAttack();
                                 proyectil.timeLife = 0;
                                 proyectil.GetPoolObject().Recycle();
-                                return;
+                                enableCounterAttack = false;
                             }
                         }
                         if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer || (!ZonaContraAtaque || (proyectil.colisionPlayer && notProyectilParabola)))
@@ -113,14 +114,14 @@ public class BoxColliderController : MonoBehaviour
                     {
                         player.delayCounterAttack = player.delayCounterAttack - Time.deltaTime;
 
-                        if (InputPlayerController.GetInputButton(player.inputDeffenseButton) && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage)
+                        if (InputPlayerController.GetInputButton(player.inputDeffenseButton) && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage && enableCounterAttack)
                         {
                             player.Attack(PlayerCounterAttack);
                             player.delayCounterAttack = player.GetAuxDelayCounterAttack();
                             enableDamagePlayer = false;
                             proyectil.timeLife = 0;
                             proyectil.GetPoolObject().Recycle();
-                            return;
+                            enableCounterAttack = false;
                         }
                     }
                     if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer && notProyectilParabola || (!ZonaContraAtaque || (proyectil.colisionPlayer && notProyectilParabola)))
@@ -137,7 +138,6 @@ public class BoxColliderController : MonoBehaviour
                             }
                             eventWise.StartEvent("golpear_p1");
                             proyectil.AnimationHit();
-                            Debug.Log("ENTRE 1");
                         }
 
                     }
@@ -157,7 +157,6 @@ public class BoxColliderController : MonoBehaviour
                             }
                             eventWise.StartEvent("golpear_p1");
                             proyectil.AnimationHit();
-                            Debug.Log("ENTRE 2");
                         }
 
                     }
@@ -387,6 +386,16 @@ public class BoxColliderController : MonoBehaviour
                     CollisionWhitProyectil(collision, proyectil.GetPlayer(), proyectil, Proyectil.DisparadorDelProyectil.Jugador2, notProyectilParabola, notProyectilGaseosa);
                     CollisionWhitProyectil(collision, proyectil.GetPlayer2(), proyectil, Proyectil.DisparadorDelProyectil.Jugador1, notProyectilParabola, notProyectilGaseosa);
                     break;
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (gameObject.activeSelf)
+        {
+            if (collision.tag == "Proyectil")
+            {
+                enableCounterAttack = true;
             }
         }
     }
