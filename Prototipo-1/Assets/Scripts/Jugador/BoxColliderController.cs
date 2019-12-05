@@ -14,6 +14,8 @@ public class BoxColliderController : MonoBehaviour
     public EventWise eventWise;
     private GameManager gm;
     private bool enableCounterAttack;
+    private float delayEnableCounterAttack = 0.05f;
+    private float auxDelayEnableCounterAttack = 0.05f;
     public enum StateBoxCollider
     {
         Defendido,
@@ -24,6 +26,18 @@ public class BoxColliderController : MonoBehaviour
         ColliderSalto,
         ColliderParado,
         ColliderAgachado,
+    }
+    private void Update()
+    {
+        if (delayEnableCounterAttack > 0 && !enableCounterAttack)
+        {
+            delayEnableCounterAttack = delayEnableCounterAttack - Time.deltaTime;
+        }
+        if (delayEnableCounterAttack <= 0)
+        {
+            delayEnableCounterAttack = auxDelayEnableCounterAttack;
+            enableCounterAttack = true;
+        }
     }
     private void OnDisable()
     {
@@ -63,12 +77,10 @@ public class BoxColliderController : MonoBehaviour
                         player.SetEnableCounterAttack(true);
                         if (player.delayCounterAttack > 0)
                         {
-                            player.delayCounterAttack = player.delayCounterAttack - Time.deltaTime;
                             if (InputPlayerController.GetInputButtonDown(player.inputDeffenseButton) && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage && enableCounterAttack)
                             {
                                 proyectil.gameObject.SetActive(false);
                                 player.Attack(PlayerCounterAttack);
-                                player.delayCounterAttack = player.GetAuxDelayCounterAttack();
                                 proyectil.timeLife = 0;
                                 proyectil.GetPoolObject().Recycle();
                                 enableCounterAttack = false;
@@ -96,7 +108,6 @@ public class BoxColliderController : MonoBehaviour
                         else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer || (!ZonaContraAtaque || (proyectil.colisionPlayer && notProyectilParabola)))
                         {
                             proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + proyectil.GetEnemy().xpForHit);
-                            player.delayCounterAttack = player.GetAuxDelayCounterAttack();
                             player.SetEnableCounterAttack(false);
                             player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                             player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
@@ -112,12 +123,9 @@ public class BoxColliderController : MonoBehaviour
                     player.SetEnableCounterAttack(true);
                     if (player.delayCounterAttack > 0)
                     {
-                        player.delayCounterAttack = player.delayCounterAttack - Time.deltaTime;
-
-                        if (InputPlayerController.GetInputButton(player.inputDeffenseButton) && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage && enableCounterAttack)
+                        if (InputPlayerController.GetInputButtonDown(player.inputDeffenseButton) && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage && enableCounterAttack)
                         {
                             player.Attack(PlayerCounterAttack);
-                            player.delayCounterAttack = player.GetAuxDelayCounterAttack();
                             enableDamagePlayer = false;
                             proyectil.timeLife = 0;
                             proyectil.GetPoolObject().Recycle();
@@ -146,7 +154,6 @@ public class BoxColliderController : MonoBehaviour
 
                         if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && PlayerDisparador != null)
                         {
-                            player.delayCounterAttack = player.GetAuxDelayCounterAttack();
                             player.SetEnableCounterAttack(false);
                             player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                             player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
@@ -162,56 +169,29 @@ public class BoxColliderController : MonoBehaviour
                     }
                 }
             }
-            if (player.delayCounterAttack <= 0)
-            {
-                player.delayCounterAttack = player.GetAuxDelayCounterAttack();
-            }
             else if (state == StateBoxCollider.Defendido)
             {
                 Player_PvP player_PvP = player.gameObject.GetComponent<Player_PvP>();
                 float realDamage;
-                if (proyectil.GetPlayer() != null)
+                if (PlayerDisparador != null)
                 {
-                    if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                    //AUMENTO XP PARA EL ATAQUE ESPECIAL
+                    //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
+                    if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && PlayerDisparador != null)
                     {
-                        //AUMENTO XP PARA EL ATAQUE ESPECIAL
-                        //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
-                        if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer() != null)
+                        PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + (PlayerDisparador.xpForHit / 2));
+                        if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
                         {
-                            proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + (proyectil.GetPlayer().xpForHit / 2));
-                            if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
-                            {
-                                proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
-                            }
+                            PlayerDisparador.PD.score = PlayerDisparador.PD.score + (PlayerDisparador.PD.scoreForHit / 2);
                         }
-                        proyectil.damage = proyectil.GetAuxDamage();
-                        player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
-                        eventWise.StartEvent("jugador_1_bloquear");
-                        proyectil.AnimationHit();
                     }
+                    proyectil.damage = proyectil.GetAuxDamage();
+                    player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
+                    eventWise.StartEvent("jugador_1_bloquear");
+                    proyectil.AnimationHit();
                 }
                 if (player_PvP != null)
                 {
-                    if (proyectil.GetPlayer2() != null)
-                    {
-                        if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-                        {
-                            //AUMENTO XP PARA EL ATAQUE ESPECIAL
-                            //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
-                            if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer2() != null)
-                            {
-                                proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + (proyectil.GetPlayer2().xpForHit / 2));
-                                if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
-                                {
-                                    proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + (proyectil.GetPlayer2().PD.scoreForHit / 2);
-                                }
-                            }
-                            proyectil.damage = proyectil.GetAuxDamage();
-                            player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
-                            eventWise.StartEvent("jugador_1_bloquear");
-                            proyectil.AnimationHit();
-                        }
-                    }
                     if (player_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
                     {
                         switch (player_PvP.playerState)
@@ -219,63 +199,31 @@ public class BoxColliderController : MonoBehaviour
                             case Player_PvP.State.Defendido:
                                 if (player.barraDeEscudo != null)
                                 {
-                                    if (player_PvP.playerActual == Player_PvP.Player.player1)
+                                    if (player_PvP.stateDeffence == Player_PvP.StateDeffence.CounterAttackDeffense && enableCounterAttack)
                                     {
-                                        if (player_PvP.stateDeffence == Player_PvP.StateDeffence.CounterAttackDeffense)
-                                        {
-                                            // SI ANDA MAL EL DISPARO COMENTAR LA LINEA DE ABAJO (player.enableAttack = true;)
-                                            player.enableAttack = true;
-                                            player.Attack(Proyectil.DisparadorDelProyectil.Jugador1);
-                                            player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaque;
-                                        }
-                                    }
-                                    else if (player_PvP.playerActual == Player_PvP.Player.player2)
-                                    {
-                                        if (player_PvP.stateDeffence == Player_PvP.StateDeffence.CounterAttackDeffense)
-                                        {
-                                            // SI ANDA MAL EL DISPARO COMENTAR LA LINEA DE ABAJO (player.enableAttack = true;)
-                                            player.enableAttack = true;
-                                            player.Attack(Proyectil.DisparadorDelProyectil.Jugador2);
-                                            player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaque;
-                                        }
+                                        player.enableAttack = true;
+                                        player.Attack(PlayerCounterAttack);
+                                        player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaque;
+                                        //BORRAR LINEA DE ABAJO (enableCounterAttack = false) SI PREFERIMOS QUE AL DEFENDER TIRE DOS PROYECTILES EN VEZ DE UNO
+                                        enableCounterAttack = false;
                                     }
                                     proyectil.damage = proyectil.GetAuxDamage();
                                     player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                                 }
                                 proyectil.GetPoolObject().Recycle();
                                 eventWise.StartEvent("jugador_1_bloquear");
-                                //proyectil.AnimationHit();
                                 break;
                             default:
-                                if (proyectil.GetPlayer() != null)
+                                if (PlayerDisparador != null)
                                 {
-                                    if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                                    //AUMENTO XP PARA EL ATAQUE ESPECIAL
+                                    //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
+                                    if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && PlayerDisparador != null)
                                     {
-                                        //AUMENTO XP PARA EL ATAQUE ESPECIAL
-                                        //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
-                                        if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer() != null)
+                                        PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + (PlayerDisparador.xpForHit / 2));
+                                        if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
                                         {
-                                            proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + (proyectil.GetPlayer().xpForHit / 2));
-                                            if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
-                                            {
-                                                proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
-                                            }
-                                        }
-                                    }
-                                }
-                                else if (proyectil.GetPlayer2() != null)
-                                {
-                                    if (player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
-                                    {
-                                        //AUMENTO XP PARA EL ATAQUE ESPECIAL
-                                        //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
-                                        if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer2() != null)
-                                        {
-                                            proyectil.GetPlayer2().SetXpActual(proyectil.GetPlayer2().GetXpActual() + (proyectil.GetPlayer2().xpForHit / 2));
-                                            if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
-                                            {
-                                                proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + (proyectil.GetPlayer2().PD.scoreForHit / 2);
-                                            }
+                                            PlayerDisparador.PD.score = PlayerDisparador.PD.score + (PlayerDisparador.PD.scoreForHit / 2);
                                         }
                                     }
                                 }
@@ -286,15 +234,16 @@ public class BoxColliderController : MonoBehaviour
                                 break;
                         }
                     }
-                    if (proyectil.GetEnemy() != null)
-                    {
-                        proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + (proyectil.GetEnemy().xpForHit / 2));
-                        proyectil.damage = proyectil.GetAuxDamage();
-                        player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
-                        eventWise.StartEvent("jugador_1_bloquear");
-                        proyectil.AnimationHit();
-                    }
                 }
+                if (proyectil.GetEnemy() != null)
+                {
+                    proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + (proyectil.GetEnemy().xpForHit / 2));
+                    proyectil.damage = proyectil.GetAuxDamage();
+                    player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
+                    eventWise.StartEvent("jugador_1_bloquear");
+                    proyectil.AnimationHit();
+                }
+                
             }
         }
         else if (enemy != null && !inPlayer && inEnemy)
@@ -302,20 +251,19 @@ public class BoxColliderController : MonoBehaviour
             bool enableDamagePlayer = true;
             if (state == StateBoxCollider.Normal)
             {
-                if (proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador1)
+                if (PlayerDisparador != null)
                 {
                     if (enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
                     {
-                        //enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.RecibirDanio;
                         enemy.life = enemy.life - proyectil.damage;
 
                         //AUMENTO XP PARA EL ATAQUE ESPECIAL
-                        if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer() != null)
+                        if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && PlayerDisparador != null)
                         {
-                            proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + proyectil.GetPlayer().xpForHit);
+                            PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + PlayerDisparador.xpForHit);
                             if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
                             {
-                                proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + proyectil.GetPlayer().PD.scoreForHit;
+                                PlayerDisparador.PD.score = PlayerDisparador.PD.score + PlayerDisparador.PD.scoreForHit;
                             }
                         }
                         eventWise.StartEvent("golpear_p1");
@@ -325,16 +273,16 @@ public class BoxColliderController : MonoBehaviour
             }
             else if (state == StateBoxCollider.Defendido)
             {
-                if (proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador1)
+                if (PlayerDisparador != null)
                 {
                     //AUMENTO XP PARA EL ATAQUE ESPECIAL
                     //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
-                    if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetPlayer() != null)
+                    if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && PlayerDisparador != null)
                     {
-                        proyectil.GetPlayer().SetXpActual(proyectil.GetPlayer().GetXpActual() + (proyectil.GetPlayer().xpForHit / 2));
+                        PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + (PlayerDisparador.xpForHit / 2));
                         if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
                         {
-                            proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + (proyectil.GetPlayer().PD.scoreForHit / 2);
+                            PlayerDisparador.PD.score = PlayerDisparador.PD.score + (PlayerDisparador.PD.scoreForHit / 2);
                         }
                     }
 
@@ -386,16 +334,6 @@ public class BoxColliderController : MonoBehaviour
                     CollisionWhitProyectil(collision, proyectil.GetPlayer(), proyectil, Proyectil.DisparadorDelProyectil.Jugador2, notProyectilParabola, notProyectilGaseosa);
                     CollisionWhitProyectil(collision, proyectil.GetPlayer2(), proyectil, Proyectil.DisparadorDelProyectil.Jugador1, notProyectilParabola, notProyectilGaseosa);
                     break;
-            }
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (gameObject.activeSelf)
-        {
-            if (collision.tag == "Proyectil")
-            {
-                enableCounterAttack = true;
             }
         }
     }

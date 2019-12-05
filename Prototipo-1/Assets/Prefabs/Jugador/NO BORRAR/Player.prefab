@@ -178,7 +178,6 @@ MonoBehaviour:
   ActualSprite: 0
   delaySpriteRecibirDanio: 0
   delaySpriteContraAtaque: 0
-  player: {fileID: 0}
   Animations:
   - nameSpriteActual: Parado
     nameAnimation: Parado protagonista
@@ -198,6 +197,7 @@ MonoBehaviour:
     nameAnimation: Agachado protagonista
   - nameSpriteActual: AgachadoDefensa
     nameAnimation: Agachado Defensa protagonista
+  player: {fileID: 0}
 --- !u!1 &3156133879006681115
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,7 +568,7 @@ MonoBehaviour:
   ButtonDeffence: 
   ButtonAttack: 
   ButtonSpecialAttack: 
-  delayCounterAttack: 0
+  delayCounterAttack: 2
   SpecialAttackEnabelEveryMoment: 0
   DoubleSpeed: 0
   LookingForward: 0
@@ -607,16 +607,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9121592579315266116}
     m_Modifications:
-    - target: {fileID: 8744921956802162911, guid: 124cdede344a9344a98c2efa26021301,
-        type: 3}
-      propertyPath: m_Name
-      value: PoolProyectil
-      objectReference: {fileID: 0}
-    - target: {fileID: 8744921956802162880, guid: 124cdede344a9344a98c2efa26021301,
-        type: 3}
-      propertyPath: parentName
-      value: ProyectilesGenerados
-      objectReference: {fileID: 0}
     - target: {fileID: 8744921956802162881, guid: 124cdede344a9344a98c2efa26021301,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -671,6 +661,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8744921956802162911, guid: 124cdede344a9344a98c2efa26021301,
+        type: 3}
+      propertyPath: m_Name
+      value: PoolProyectil
+      objectReference: {fileID: 0}
+    - target: {fileID: 8744921956802162880, guid: 124cdede344a9344a98c2efa26021301,
+        type: 3}
+      propertyPath: parentName
+      value: ProyectilesGenerados
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 124cdede344a9344a98c2efa26021301, type: 3}
