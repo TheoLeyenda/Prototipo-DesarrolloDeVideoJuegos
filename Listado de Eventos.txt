@@ -1,0 +1,125 @@
+Listado de Eventos:
+
+* inicio
+-Apenas inicia el juego.
+
+* inicia_menu
+-Se muestra el menu principal.
+
+* inicio_historia
+-Entrar al modo historia.
+
+* inicio_pvp
+-Entrar al modo pvp.
+
+* inicio_supervivencia
+-Entrar al modo supervivencia.
+
+* inicio_creditos
+-Entrar a los creditos.
+
+* inicio_controles
+-Entrar a los controles.
+
+* iniciar_combate
+-Inicia una pelea en el juego
+
+* iniciar_combate_pvp
+-Inicia una pelea pvp.
+
+* perder
+-Cuando se pierde en cualquier momento (Fuera del pvp)
+
+* pvp_ganador
+-Cuando termina el pvp con la pantalla que muestra al ganador.
+
+* mover_seleccion
+-Cuando se mueve el marcador de seleccion en la pausa o menu principal
+
+* seleccionar
+-Cuando se selecciona una opcion en el menu principal o pausa
+
+* pausa
+-Cualquier momento que se pause la partida
+
+* despausar
+-Cualquier momento que se despause
+
+* volver_al_menu
+- Cuando desde el se vuelve al menu principal (desde pausa, creditos, opciones, etc)
+
+* golpear_p1
+- Cuando el jugador 1 es golpeado
+
+* golpear_p2
+- Cuando el jugador 2 es golpeado
+
+* moverse
+- Cuando un jugador se mueve de izquierda a derecha
+
+* saltar
+- Cuando un jugador salta
+
+* caer
+- Cuando un jugador cae
+
+* tirar_goma
+- 7u7 (Cuando se tira un projectil normal)
+
+* tirar_parabola
+- Cuando se tira un projectil hacia arriba (Incluida la especial de la botella)
+
+* especial_lista
+- Cuando la especial esta lista para tirarse.
+
+* activar_especial
+- Cuando se esta por tirar la especial.
+
+* botella_romper
+- Cuando se rompe la botella de la gaseosa.
+
+* fuego_empieza
+- Cuando empeza una especial relacionada con el fuego.
+
+* fuego_termina
+- Cuando termina una especial relacionada con el fuego.
+
+* patear_pelota
+- Cuando la pelota es pateada.
+
+* perfect
+- Cuando un jugador se marca un perfect (Alto capo)
+
+Switches:
+
+* jugador_1:
+	-personaje_protagonista
+	-personaje_defensivo
+	-personaje_balanceado
+	-personaje_agresivo
+
+* jugador_2:
+	-personaje_protagonista
+	-personaje_defensivo
+	-personaje_balanceado
+	-personaje_agresivo
+	-jefe_1
+
+* stage:
+	-cafeteria
+	-aula_quimica
+	-aula_computacion
+	-aula_biologia
+	-aula_geografia
+	-gimnasio
+	
+Estados:
+
+* jugador_1_bloquear
+	-bloq (si el jugador esta bloqueando)
+	-no_bloq (si el jugador no esta bloqueando)
+
+* jugador_2_bloquear
+	-bloq
+	-no_bloq
+
