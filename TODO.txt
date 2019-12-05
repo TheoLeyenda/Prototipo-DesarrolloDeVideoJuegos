@@ -1,123 +1,141 @@
-﻿TODO
-Yo
-Pasarles cosas de optimizacion.
-Pasarle a Pato el StP
+TODO
 
-Para Todos:
-Para aprovar la parte de programaciòn de la materia deben aplicar en codigo y en proyecto de Unity todo lo aprendido en la materia anterior DV02. Ver las devoluciones de los tps de esa clase junto con los pdfs (ejemplo Clase 04.pdf)
-Conceptos como UI separada de la mecanica del juego; Coding conventions; nombres de variables scripts y metodos claros; etc.
-Todos estos puntos ya vistos seràn fundamentales en la evaluaciòn del proyecto final. 
-Vayan viendolos desde ahora para cualquier duda que vaya surgiendo.
-Script de UI. PREFIJO UI.
-Bugs.
-Audio.
+CRIS
+====
+
+Arreglar el bug del input.
+er de sacar la funcionalidad de los skills del player. O sea que cada skill tenga su propia funcionalidad. (heredando de Skill.cs)
+Tratar de buscarle nombres a las variables confusa que autoexpliquen para que se usan. (ej: Load en el GameManager)
+GameManager::Update() pasar a una corutina.
+Animacion del principio todo en un script referenciado desde diferentes partes.
+
+Eliminar difinitivamente EnemyCollision
 
 RUSO
 ====
-Tirar independent event system a la mierda.
-Fix perdida de focus de la ui. (mouse)
-NullReferenceException: Object reference not set to an instance of an object
-FirstSignSelected.SetSelected () (at Assets/Scripts/UI/FirstSignSelected.cs:20)
-CharacterSelectionManager.Update () (at Assets/Scripts/Managers/CharacterSelectionManager.cs:51)
 
-Menu de Pausa.
-
-Nombres claros de variables.
-Cambiar los bools esos horribles por cosas con un sentido logico.
-
-C# standards
-Ball, usar bitmask para cambiar esas bools de estados.
-simplificar los if else cuando se pueda.
-switch (p1Selected)
+[Flags]
+private enum States
 {
-    case CharacterSelectionManager.Character.nullCharacter:
-        break;
-    case CharacterSelectionManager.Character.raildrive:
-        p1Instance = Instantiate(railPrefab, p1Position.transform);
-        break;
-    case CharacterSelectionManager.Character.magstream:
-        p1Instance = Instantiate(magPrefab, p1Position.transform);
-        break;
-    case CharacterSelectionManager.Character.kunst:
-        p1Instance = Instantiate(kunstPrefab, p1Position.transform);
-        break;
-    case CharacterSelectionManager.Character.knockout:
-        p1Instance = Instantiate(knockoutPrefab, p1Position.transform);
-        break;
-    case CharacterSelectionManager.Character.djinn:
-        p1Instance = Instantiate(djinnPrefab, p1Position.transform);
-        break;
-    default:
-        break;
+	charged = 0,
+	stunned
+	stuck
+	shot
 }
-p1Instance = Instantiate(naves[(int)p1Selected], p1Position.transform);
+
+int states = 0; //  00000000000100010
+
+states |= 1<<charged; // = 00010
+
+states |= 1<<stuck; // = 10000
+
+00000000000100010
+
+if (states & stuck == 0)
+{
+	
+}
 
 
-FRANCO
-======
 
-Interpolar la camara cuando apretas la barra espaciadora. AnimationCurve.
-UIChangeScene Imperativo
-string goToTutorial = PlayerPrefs.GetString("isFirstTimePlaying", "yes"); pasar a Int
-FXManager.Get().LaunchFx("Gem Getted"); // Cuando los fx se complejizan a veces es mejor tener un manager de effects
-Fairy.OnFairyDanger = ChangeIndicatorColor; DANGER.
-mirar un poco las variables estaticas y las referencias cruzadas y ver que se puede hacer.
-unity bake artifacts
+00001 
+|
+10000
+=
+10001
 
-Mariano
-=======
-Desvincular el GameManager del Player.
-Magic numbers remember remove 
-warningAux = Instantiate(warningPositions[rnd], posCenterWarning.transform.position, Quaternion.identity);
-if (GameManager.Get().score == 0 )
+
+00001 
+&
+10000
+=
+00000
+
+
+TODO
+====
+if (player1)
         {
-            if (transform.position.y < generationPoint.position.y-8f)
-            {
-                transform.position = new Vector3(transform.position.x, transform.position.y + 8f, transform.position.z);
-                randomBlock = 3;
-                GameObject go = ObjectPool.instance.GetPooledObject(randomBlock.ToString());
-
-                go.transform.position = transform.position;
-            }
-            
+            p1Instance.GetComponent<Palette>().isPlayer1 = true;
+            p1Instance.transform.position = p1Position.transform.position;
+            p1Light.transform.parent = p1Instance.transform;
+            p1EXAnimator.SetTrigger("RESET");
+            p1EXAnimator.SetInteger("MAX_CHARGES", p1Instance.GetComponent<Palette>().maxCharges);
+            p1EXAnimator.SetInteger("CHARGES", 0);
+            p1Instance.GetComponent<Palette>().UpdateCharges = P1UpdateCharges;
         }
-Encontrar patron y si puede ser desvincularlo del GameManager
-Que los objetos generados tengan un parent en el hierarchy
-Arrows.cs (Encontrar patron) Listar los gameobjects???
+        else
+        {
+            p2Instance.GetComponent<Palette>().isPlayer1 = false;
+            p2Instance.transform.position = p2Position.transform.position;
+            p2Instance.transform.Rotate(Vector3.back, 180.0f);
+            p2Light.transform.parent = p2Instance.transform;
+            p2EXAnimator.SetTrigger("RESET");
+            p2EXAnimator.SetInteger("MAX_CHARGES", p2Instance.GetComponent<Palette>().maxCharges);
+            p2EXAnimator.SetInteger("CHARGES", 0);
+            p2Instance.GetComponent<Palette>().UpdateCharges = P2UpdateCharges;
+        }
+ESTO NOOOOOOOOO!
+Generalizar de alguna manera, posiblemente usando algo asi:
+[Serializable]
+public class PlayerData
+{
+	public Animator EXAnimator;
+	public SpriteRenderer NullBarFull;
+	public KeyCode actionKeyCode;
+}
+public PlayerData[] playersDatas;
+
+ballStartAngle = UnityEngine.Random.value * 360;
+
 
 PATO
 ====
-cambiar las escalas, que no queden los colliders2D con ningun cambio de escala ni siquiera de sus parents.
-DeParent
-		transform.GetChild(0).parent = transform.parent.parent;
+
+Exportar solo a garomo y crear un proyecto nuevo.
+
+Agarrar el CharacterController Original y meterle el nivel a ver que pasa.
+
+Probar estas cosas en diferentes compus.
+
+Principalmente tratar de acotar los problemas. 
+
+Sacar la tortuga de los slopes que queda requete horrible.
+
+Investigar Todas las opciones de Physics 2D ;)
+
 
 THEO
 ====
-Estructura de Proyecto:
-	Scenes
-	Art
-	Scripts
-		UI
-		Etc
-	Prefabs
 
-Las escenas principales autoplayable
-https://github.com/federicoBarra/DVJ02-2019
-Borrar cosas viejas o que no se usen mas.
-Limpiar todo el tema de las grillas. Proxima clase vemos como sacar las que quedan.
-LAS COSAS QUE NO SE USAN SACARLAS.
-Separar UI de gameplay del juego.
-No hacer nunca mas copy/paste en tu vida!
+Ctrl + shift + F //Buscar en todos los archivos del proyecto
+
+Remover en todos lados la diferenciacion entre player01 y player02
+
+Poner como componente el input manager en cada player dejando solo una variable player y playerPvP.  
+
+player1 = Instantiate(Players1[(int)player1_selected]).GetComponent<Player>(); //instancia el gameObject player y le pide el componete Playerdel objeto instanciado para luego guardarlo en "player1" (Remplazar esto en el DataCombatPvP.cs)
+
 ver todos los scripts y encontrar los patrones en el codigo que simplifiquen el codiogo.
-Leer los pdfs de las clases de DVJ02
 
-https://www.youtube.com/watch?v=vu4Rv1SmzwM
+Unificar move left y move right.
+
+Move left y move right son EXACTAMTENTE lo mismo solo que con un menos adelante.
+
+cambioSpriteHabilitado = (((InputPlayerController.GetInputAxis(inputHorizontal) > 0 || InputPlayerController.GetInputAxis(inputHorizontalAnalog) > 0.9f) && InputPlayerController.GetInputAxis(inputVertical) == 0 && moveHorizontalPlayer) || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.MoverAdelante);
+NOOOOO
+Mathf.Abs(InputPlayerController.GetInputAxis(inputHorizontal)) > 0.9
+SIIII
+
+TRatar de no tener lineas de màs de 140 caracteres. Si tiene màs lo màs probable es que haya algo mal o raro. ES ILEGIBLE
 
 
-
-
-
-
-
-
-
+    void Update()
+    {
+        CheckOutLimit();
+        CheckDead(); //NO, checkea si se murio en el momento en que recive daño
+        DelayEnableAttack();
+        DelayEnableParabolaAttack();
+        CheckMovementInSpecialAttack();
+        CheckBoxColliders2D(); //NO, cada accion dice que box collider hay que apagar o prender (ej: cuando salto se prende el de salto y se apagan los demas)
+    }
