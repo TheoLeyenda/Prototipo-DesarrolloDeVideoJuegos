@@ -7,6 +7,7 @@ public class Defensivo : Enemy
 {
     public DisparoDeCarga Disparo;
     float valueAttack;
+    private bool inFuegoEmpieza = false;
     public enum StateDeffence
     {
         Nulo,
@@ -56,11 +57,18 @@ public class Defensivo : Enemy
                 {
                     spriteEnemy.GetAnimator().SetBool("EnPlenoAtaqueEspecial", false);
                     spriteEnemy.GetAnimator().SetBool("FinalAtaqueEspecial", true);
+                    eventWise.StartEvent("fuego_termina");
+                    inFuegoEmpieza = false;
                 }
             }
         }
         else
         {
+            if (!inFuegoEmpieza)
+            {
+                eventWise.StartEvent("fuego_empieza");
+                inFuegoEmpieza = true;
+            }
             spriteEnemy.GetAnimator().SetBool("EnPlenoAtaqueEspecial", true);
         }
     }

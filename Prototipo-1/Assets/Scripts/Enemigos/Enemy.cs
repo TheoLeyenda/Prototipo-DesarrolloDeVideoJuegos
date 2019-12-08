@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
     public bool enableMecanicParabolaAttack;
     [HideInInspector]
     public bool inAttack;
-    private EventWise eventWise;
+    protected EventWise eventWise;
     private bool insound;
 
     [Header("Porcentage: Movimiento")]
@@ -560,7 +560,6 @@ public class Enemy : MonoBehaviour
     }
     public void CheckDead()
     {
-        //Debug.Log(life);
         if (life <= 0 && transform.position.y <= InitialPosition.y)
         {
             spriteEnemy.PlayAnimation("Death");
