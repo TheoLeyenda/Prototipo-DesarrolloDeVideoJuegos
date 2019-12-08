@@ -117,6 +117,8 @@ public class SpritePlayer : SpriteCharacter
     public void EnableMovementPlayer()
     {
         player.enableMovementPlayer = true;
+        player.SetInFuegoEmpieza(false);
+        player.eventWise.StartEvent("fuego_termina");
     }
     public void SetActualSprite(SpriteActual spriteActual)
     {

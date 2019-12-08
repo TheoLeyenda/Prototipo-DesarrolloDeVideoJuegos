@@ -190,6 +190,8 @@ public class DataCombatPvP : MonoBehaviour
         {
             ReiniciarRonda();
             soundEnter = false;
+            player1.eventWise.StartEvent("fuego_termina");
+            player2.eventWise.StartEvent("fuego_termina");
         }
         else
         {
@@ -207,6 +209,8 @@ public class DataCombatPvP : MonoBehaviour
             player2.gameObject.SetActive(false);
             player1.gameObject.SetActive(false);
             player2.gameObject.SetActive(false);
+            player1.eventWise.StartEvent("fuego_termina");
+            player2.eventWise.StartEvent("fuego_termina");
         }
     }
     public void CheckWinPlayer(ref int countRoundsWinPlayer, GameObject prefabPlayerWin, GameObject prefabPlayerLose, SpriteRenderer spritePlayerWin, int playerSelected)
@@ -217,6 +221,8 @@ public class DataCombatPvP : MonoBehaviour
         {
             ReiniciarRonda();
             soundEnter = false;
+            player1.eventWise.StartEvent("fuego_termina");
+            player2.eventWise.StartEvent("fuego_termina");
         }
         else
         {
@@ -236,6 +242,8 @@ public class DataCombatPvP : MonoBehaviour
             uI_Manager.gameObject.SetActive(false);
             player1.gameObject.SetActive(false);
             player2.gameObject.SetActive(false);
+            player1.eventWise.StartEvent("fuego_termina");
+            player2.eventWise.StartEvent("fuego_termina");
         }
         gm.structGameManager.gm_dataCombatPvP.rondaActual++;
     }

@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     public GameObject[] posicionesDeMovimiento;
     //-------------------------------------------//
     public BarraDeEscudo barraDeEscudo;
+    public GameObject PrefabPlayer;
     public bool resetPlayer;
     public bool resetScore;
     public PlayerData PD;
@@ -94,13 +95,18 @@ public class Player : MonoBehaviour
     private Player_PvP player_PvP;
     private bool enableParabolaAttack;
     public bool enableMecanicParabolaAttack;
-    private EventWise eventWise;
+
+    [HideInInspector]
+    public EventWise eventWise;
+    private bool InFuegoEmpieza;
+
     private void Awake()
     {
         player_PvP = GetComponent<Player_PvP>();
     }
     void Start()
     {
+        InFuegoEmpieza = false;
         eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
         enableParabolaAttack = false;
         GameObject go = GameObject.Find(NameInputManager);
@@ -153,7 +159,6 @@ public class Player : MonoBehaviour
         CheckMovementInSpecialAttack();
         CheckBoxColliders2D();
     }
-
     public void CheckBoxColliders2D()
     {
         if (!isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.Salto
@@ -252,8 +257,8 @@ public class Player : MonoBehaviour
             }
         }
     }
-        
-        
+    
+
     public void CheckDead()
     {
         if (PD.lifePlayer <= 0)
@@ -552,6 +557,11 @@ public class Player : MonoBehaviour
                 }
                 break;
             case EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga:
+                if (!InFuegoEmpieza)
+                {
+                    InFuegoEmpieza = true;
+                    eventWise.StartEvent("fuego_empieza");
+                }
                 if (enableSpecialAttack)
                 {
                     if (!isJumping && !isDuck
@@ -918,5 +928,9 @@ public class Player : MonoBehaviour
     public Vector3 GetInitialPosition()
     {
         return InitialPosition;
+    }
+    public void SetInFuegoEmpieza(bool _inFuegoEmpieza)
+    {
+        InFuegoEmpieza = _inFuegoEmpieza;
     }
 }
