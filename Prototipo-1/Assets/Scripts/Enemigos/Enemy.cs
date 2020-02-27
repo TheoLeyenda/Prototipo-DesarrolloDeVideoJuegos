@@ -7,6 +7,8 @@ using System;
 public class Enemy : MonoBehaviour
 {
     //DATOS PARA EL MOVIMIENTO
+    [HideInInspector]
+    public bool enableMovement;
     public GameObject alturaMaxima;
     public GameObject[] posicionesDeMovimiento;
     //-------------------------------------------//
@@ -120,6 +122,7 @@ public class Enemy : MonoBehaviour
     }
     public virtual void Start()
     {
+        enableMovement = true;
         eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
         enableSpecialAttack = false;
         auxSpeedJump = SpeedJump;
@@ -139,15 +142,18 @@ public class Enemy : MonoBehaviour
     }
     public virtual void Update()
     {
-        CheckDeffense();
-        CheckBoxColliders2D();
-        //CheckLifeBar();
-        //CheckLoadSpecialAttackBar();
-        CheckDead();
-        if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
-            && enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto)
+        if (enableMovement)
         {
-            IA();
+            CheckDeffense();
+            CheckBoxColliders2D();
+            //CheckLifeBar();
+            //CheckLoadSpecialAttackBar();
+            CheckDead();
+            if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
+                && enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto)
+            {
+                IA();
+            }
         }
         CheckOutLimit();
     }

@@ -44,10 +44,16 @@ public class InputManager : MonoBehaviour
         }
         if (Time.timeScale == 1)
         {
-            CheckPlayer(player1.inputDeffenseButton, ref player1.enableMovementPlayer, ref player1.enableMoveVerticalPlayer, player1, player1_PvP);
+            if (player1.enableMovement)
+            {
+                CheckPlayer(player1.inputDeffenseButton, ref player1.enableMovementPlayer, ref player1.enableMoveVerticalPlayer, player1, player1_PvP);
+            }
             if (player2 != null)
             {
-                CheckPlayer(player2.inputDeffenseButton, ref player2.enableMovementPlayer, ref player2.enableMoveVerticalPlayer, player2, player2_PvP);
+                if (player2.enableMovement)
+                {
+                    CheckPlayer(player2.inputDeffenseButton, ref player2.enableMovementPlayer, ref player2.enableMoveVerticalPlayer, player2, player2_PvP);
+                }
             }
             inPause = false;
         }
