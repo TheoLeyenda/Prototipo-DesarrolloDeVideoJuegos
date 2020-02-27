@@ -73,7 +73,6 @@ public class Proyectil : MonoBehaviour
     protected bool inAnimation;
     private EventWise eventWise;
     protected bool soundgenerate;
-
     private void Awake()
     {
         soundgenerate = false;
@@ -91,6 +90,11 @@ public class Proyectil : MonoBehaviour
     {
         trailRenderer.enabled = false;
         soundgenerate = false;
+        SetColorProyectil(Color.white);
+    }
+    public void SetColorProyectil(Color color)
+    {
+        spriteRenderer.color = color;
     }
     private void Start()
     {

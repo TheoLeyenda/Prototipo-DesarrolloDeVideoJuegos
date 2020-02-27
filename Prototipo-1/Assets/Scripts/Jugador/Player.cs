@@ -96,6 +96,7 @@ public class Player : MonoBehaviour
     private bool enableParabolaAttack;
     public bool enableMecanicParabolaAttack;
 
+    public Color colorShoot;
     [HideInInspector]
     public EventWise eventWise;
     private bool InFuegoEmpieza;
@@ -292,6 +293,31 @@ public class Player : MonoBehaviour
         }
         gm.ResetRoundCombat(true);
     }
+    
+    public void DelayEnableAttack()
+    {
+        if (delayAttack > 0)
+        {
+            delayAttack = delayAttack - Time.deltaTime;
+            enableAttack = false;
+        }
+        else
+        {
+            enableAttack = true;
+        }
+    }
+    public void DelayEnableParabolaAttack()
+    {
+        if (delayParabolaAttack > 0)
+        {
+            delayParabolaAttack = delayParabolaAttack - Time.deltaTime;
+            enableParabolaAttack = false;
+        }
+        else
+        {
+            enableParabolaAttack = true;
+        }
+    }
     public void AttackDown(Proyectil.DisparadorDelProyectil disparador)
     {
         if (enableAttack)
@@ -328,33 +354,10 @@ public class Player : MonoBehaviour
                 proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
             }
             proyectil.disparadorDelProyectil = disparador;
+            proyectil.SetColorProyectil(colorShoot);
             proyectil.On(tipoProyectil);
             proyectil.ShootForwardDown();
             delayAttack = auxDelayAttack;
-        }
-    }
-    public void DelayEnableAttack()
-    {
-        if (delayAttack > 0)
-        {
-            delayAttack = delayAttack - Time.deltaTime;
-            enableAttack = false;
-        }
-        else
-        {
-            enableAttack = true;
-        }
-    }
-    public void DelayEnableParabolaAttack()
-    {
-        if (delayParabolaAttack > 0)
-        {
-            delayParabolaAttack = delayParabolaAttack - Time.deltaTime;
-            enableParabolaAttack = false;
-        }
-        else
-        {
-            enableParabolaAttack = true;
         }
     }
     public void Attack(Proyectil.DisparadorDelProyectil disparador)
@@ -404,6 +407,7 @@ public class Player : MonoBehaviour
             }
             proyectil.On(tipoProyectil);
             proyectil.disparadorDelProyectil = disparador;
+            proyectil.SetColorProyectil(colorShoot);
             proyectil.ShootForward();
             delayAttack = auxDelayAttack;
         }
@@ -451,6 +455,7 @@ public class Player : MonoBehaviour
             }
             proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
             proyectil.OnParabola();
+            proyectil.SetColorProyectil(colorShoot);
             enableParabolaAttack = false;
             delayParabolaAttack = auxDelayParabolaAttack;
         }
