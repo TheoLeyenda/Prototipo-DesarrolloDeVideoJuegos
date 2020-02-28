@@ -258,6 +258,7 @@ public class Proyectil : MonoBehaviour
     {
         if (animator != null)
         {
+            SetColorProyectil(Color.white);
             trailRenderer.Clear();
             inAnimation = true;
             rg2D.velocity = Vector3.zero;

@@ -2,15 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 //CODIGO PARA VERSIONAR
-namespace Prototipo_2 {
-    public class OnFinishAnimation : MonoBehaviour
+public class OnFinishAnimation : MonoBehaviour
+{
+    public DataCombatPvP dataCombatPvP;
+    private Player player;
+    private Enemy enemy;
+    private void Update()
     {
-        public DataCombatPvP dataCombatPvP;
-        public void DisableObject()
+        if (dataCombatPvP == null && player == null && enemy == null)
         {
-            gameObject.SetActive(false);
+            player = FindObjectOfType<Player>();
+            enemy = FindObjectOfType<Enemy>();
         }
-        public void DisableMovementPlayers()
+    }
+    public void DisableObject()
+    {
+        gameObject.SetActive(false);
+    }
+    public void DisableMovementPlayers()
+    {
+        if (dataCombatPvP != null)
         {
             if (dataCombatPvP.player1 != null & dataCombatPvP.player2 != null)
             {
@@ -18,13 +29,26 @@ namespace Prototipo_2 {
                 dataCombatPvP.player2.enableMovementPlayer = false;
             }
         }
-        public void EnableMovementPlayers()
+        else if (player != null && enemy != null)
         {
-            if(dataCombatPvP.player1 != null & dataCombatPvP.player2 != null)
+            player.enableMovementPlayer = false;
+            enemy.enableMovement = false;
+        }
+    }
+    public void EnableMovementPlayers()
+    {
+        if (dataCombatPvP != null)
+        {
+            if (dataCombatPvP.player1 != null & dataCombatPvP.player2 != null)
             {
                 dataCombatPvP.player1.enableMovementPlayer = true;
                 dataCombatPvP.player2.enableMovementPlayer = true;
             }
+        }
+        else if (player != null && enemy != null)
+        {
+            player.enableMovementPlayer = true;
+            enemy.enableMovement = true;
         }
     }
 }

@@ -37,6 +37,7 @@ public class ProfesorLautaro : Enemy
             {
                 proyectil.damage = proyectil.damageCounterAttack;
             }
+            proyectil.SetColorProyectil(colorShoot);
         }
         if (!GetIsDuck() && !specialAttack)
         {
@@ -75,7 +76,6 @@ public class ProfesorLautaro : Enemy
         if (!specialAttack)
         {
             proyectil.On(tipoProyectil);
-
             if (!shootDown)
             {
                 proyectil.ShootForward();

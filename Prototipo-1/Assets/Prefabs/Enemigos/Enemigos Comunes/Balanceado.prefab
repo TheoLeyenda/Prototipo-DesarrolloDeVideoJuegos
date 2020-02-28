@@ -467,6 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eea905aa73066de469d574039d5cc15c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableMovement: 0
   alturaMaxima: {fileID: 193925271446768918}
   posicionesDeMovimiento:
   - {fileID: 2766543526281554306}
@@ -502,6 +503,7 @@ MonoBehaviour:
   Resistace: 22
   Gravity: 35
   delayAttackJumping: 0.5
+  colorShoot: {r: 1, g: 0.29803923, b: 0.29803923, a: 1}
   colliderSprites: {fileID: 8936571031010982473}
   InitialPosition: {x: 0, y: 0, z: 0}
   pointOfDeath: {x: 0, y: 0, z: 0}
@@ -1388,6 +1390,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4068828010732992973}
     m_Modifications:
+    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
     - target: {fileID: 2688081505215426912, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_Name
@@ -1548,21 +1565,6 @@ PrefabInstance:
       propertyPath: plataformas.Array.data[5]
       value: 
       objectReference: {fileID: 1096729380706974478}
-    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
     - target: {fileID: 4830216970014270298, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_TagString
@@ -2168,6 +2170,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6602513850568851150}
     m_Modifications:
+    - target: {fileID: 4664205932121916671, guid: 9021a4b2ca0a7e2489001dca1d9ce961,
+        type: 3}
+      propertyPath: parentName
+      value: ProyectilesGenerados
+      objectReference: {fileID: 0}
     - target: {fileID: 4664205932121916640, guid: 9021a4b2ca0a7e2489001dca1d9ce961,
         type: 3}
       propertyPath: m_Name
@@ -2227,11 +2234,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4664205932121916671, guid: 9021a4b2ca0a7e2489001dca1d9ce961,
-        type: 3}
-      propertyPath: parentName
-      value: ProyectilesGenerados
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9021a4b2ca0a7e2489001dca1d9ce961, type: 3}

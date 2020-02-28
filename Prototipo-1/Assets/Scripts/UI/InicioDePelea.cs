@@ -6,8 +6,14 @@ using TMPro;
 
 public class InicioDePelea : MonoBehaviour
 {
-    public TextMeshProUGUI textRondaActual;
-    public TextMeshProUGUI textInicioDeRonda;
+    public enum TypeCountdown
+    {
+        Rounds,
+        RedyFight,
+    }
+    public TypeCountdown typeCountdown;
+    public TextMeshProUGUI text1;
+    public TextMeshProUGUI text2;
     private bool OneEjecution;
     private GameManager gm;
     [HideInInspector]
@@ -16,8 +22,8 @@ public class InicioDePelea : MonoBehaviour
     {
         DisableAllText = false;
         OneEjecution = true;
-        textRondaActual.gameObject.SetActive(false);
-        textInicioDeRonda.gameObject.SetActive(false);
+        text1.gameObject.SetActive(false);
+        text2.gameObject.SetActive(false);
     }
     private void Update()
     {
@@ -28,14 +34,22 @@ public class InicioDePelea : MonoBehaviour
         if (GameManager.instanceGameManager != null && OneEjecution)
         {
             gm = GameManager.instanceGameManager;
-            textRondaActual.gameObject.SetActive(true);
-            textRondaActual.text = "ROUND " + (gm.structGameManager.gm_dataCombatPvP.rondaActual + 1);
-            textInicioDeRonda.text = "FIGHT";
+            text1.gameObject.SetActive(true);
+            if (typeCountdown == TypeCountdown.Rounds)
+            {
+                text1.text = "ROUND " + (gm.structGameManager.gm_dataCombatPvP.rondaActual + 1);
+                text2.text = "FIGHT";
+            }
+            else if (typeCountdown == TypeCountdown.RedyFight)
+            {
+                text1.text = "¿READY?";
+                text2.text = "FIGHT";
+            }
             OneEjecution = false;
         }
-        if (!OneEjecution && !textRondaActual.gameObject.activeSelf && !DisableAllText)
+        if (!OneEjecution && !text1.gameObject.activeSelf && !DisableAllText)
         {
-            textInicioDeRonda.gameObject.SetActive(true);
+            text2.gameObject.SetActive(true);
             DisableAllText = true;
         }
     }

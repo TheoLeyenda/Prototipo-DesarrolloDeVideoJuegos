@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     public GameObject marcoTexto;
     public GameObject imageJugadorHablando;
     public GameObject imageEnemigoHablando;
+    public GameObject CamvasInicioPelea;
     public TextMeshProUGUI textDialog;
     public List<Dialogos> dialogos;
     private GameManager gm;
@@ -85,6 +86,8 @@ public class LevelManager : MonoBehaviour
             }
             inDialog = false;
             DisableChat();
+
+            CamvasInicioPelea.SetActive(true);
         }
     }
     public void NextId()

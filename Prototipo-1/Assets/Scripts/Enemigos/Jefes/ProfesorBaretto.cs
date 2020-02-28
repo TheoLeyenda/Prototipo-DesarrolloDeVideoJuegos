@@ -37,6 +37,7 @@ public class ProfesorBaretto : Enemy
             {
                 proyectil.damage = proyectil.damageCounterAttack;
             }
+            proyectil.SetColorProyectil(colorShoot);
         }
         if (!GetIsDuck() && !specialAttack)
         {

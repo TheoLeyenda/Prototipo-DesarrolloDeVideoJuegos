@@ -60,6 +60,7 @@ public class Enemy : MonoBehaviour
     public float Gravity;
     public float delayAttackJumping;
     private bool isJamping;
+    public Color colorShoot;
     public Collider2D colliderSprites;
     [HideInInspector]
     public Vector3 InitialPosition;
@@ -921,6 +922,7 @@ public class Enemy : MonoBehaviour
             proyectil.SetDobleDamage(false);
             proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
             proyectil.SetEnemy(this);
+            proyectil.SetColorProyectil(colorShoot);
             if (!GetIsDuck())
             {
                 proyectil.TypeRoot = 1;

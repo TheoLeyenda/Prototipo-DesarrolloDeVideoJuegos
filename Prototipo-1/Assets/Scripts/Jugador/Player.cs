@@ -10,8 +10,6 @@ public class Player : MonoBehaviour
 {
     //BOOLEANOS DE MOVIMIENTO
     [HideInInspector]
-    public bool enableMovement;
-    [HideInInspector]
     public bool enableMoveHorizontalPlayer;
     [HideInInspector]
     public bool enableMoveVerticalPlayer;
@@ -109,7 +107,6 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
-        enableMovement = true;
         InFuegoEmpieza = false;
         eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
         enableParabolaAttack = false;
@@ -198,7 +195,7 @@ public class Player : MonoBehaviour
                 {
                     if (boxColliderPiernas != null)
                     {
-                    boxColliderPiernas.GetBoxCollider2D().enabled = true;
+                        boxColliderPiernas.GetBoxCollider2D().enabled = true;
                     }
                 }
                 else
