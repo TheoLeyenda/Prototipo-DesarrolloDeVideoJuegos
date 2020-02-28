@@ -123,7 +123,6 @@ public class Enemy : MonoBehaviour
     }
     public virtual void Start()
     {
-        enableMovement = true;
         eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
         enableSpecialAttack = false;
         auxSpeedJump = SpeedJump;

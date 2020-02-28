@@ -47,6 +47,7 @@ public class GeneradorDeEnemigos : MonoBehaviour
     public TypeGeneration typeGeneration;
     public GeneratorForGameMode GeneradorDelModoDeJuego;
     public bool generarJefes;
+    private int countEnemysGenerate = 0;
     private void Awake()
     {
     }
@@ -102,9 +103,20 @@ public class GeneradorDeEnemigos : MonoBehaviour
         GenerateEnemy();
         if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Supervivencia)
         {
-            enemigoActual.pointOfCombat = pointOfCombat.transform.position;
-            enemigoActual.pointOfDeath = pointOfInit.transform.position;
-            enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+            if (countEnemysGenerate == 1)
+            {
+                enemigoActual.enemyPrefab.transform.position = pointOfCombat.transform.position;
+                enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+                enemigoActual.enableMovement = false;
+                Debug.Log("ENTRE");
+            }
+            else
+            {
+                enemigoActual.pointOfCombat = pointOfCombat.transform.position;
+                enemigoActual.pointOfDeath = pointOfInit.transform.position;
+                enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+                enemigoActual.enableMovement = true;
+            }
         }
         else if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
         {
@@ -112,12 +124,14 @@ public class GeneradorDeEnemigos : MonoBehaviour
             {
                 enemigoActual.enemyPrefab.transform.position = pointOfCombat.transform.position;
                 enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+                enemigoActual.enableMovement = false;
             }
             else
             {
                 enemigoActual.pointOfCombat = pointOfCombat.transform.position;
                 enemigoActual.pointOfDeath = pointOfInit.transform.position;
                 enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+                enemigoActual.enableMovement = true;
             }
         }
     }
@@ -148,6 +162,7 @@ public class GeneradorDeEnemigos : MonoBehaviour
                     enemigoActual.ResetEnemy();
                 }
                 enemy.OnEnemy();
+                countEnemysGenerate++;
                 break;
             case EnumsGameManager.ModosDeJuego.Historia:
                 if (idListEnemy < ListEnemyGenerate.Count)

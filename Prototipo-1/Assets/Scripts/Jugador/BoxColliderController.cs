@@ -316,7 +316,6 @@ public class BoxColliderController : MonoBehaviour
                         }
                     }
                     eventWise.StartEvent("jugador_1_bloquear");
-                    proyectil.SetColorProyectil(Color.white);
                     proyectil.AnimationHit();
                 }
             }
