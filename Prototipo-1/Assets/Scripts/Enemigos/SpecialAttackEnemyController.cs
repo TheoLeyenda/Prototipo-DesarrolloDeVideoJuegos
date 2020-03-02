@@ -7,10 +7,14 @@ public class SpecialAttackEnemyController : MonoBehaviour
 {
     // Start is called before the first frame update
     public Pool poolObjectSpecialAttack;
-    public void SpecialAttack(bool doubleDamage, bool isDuck, GameObject generadorProyectilesParabola, GameObject generadorProyectilesParabolaAgachado, EnumsEnemy enumsEnemy, StructsEnemys structsEnemys, int randomMax, int randomMin)
+    public void SpecialAttack(Enemy enemy, bool doubleDamage, bool isDuck, GameObject generadorProyectilesParabola, GameObject generadorProyectilesParabolaAgachado, EnumsEnemy enumsEnemy, StructsEnemys structsEnemys, int randomMax, int randomMin)
     {
         GameObject go = poolObjectSpecialAttack.GetObject();
         ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
+        if (enemy.enableColorShootSpecialAttack)
+        {
+            proyectil.SetColorProyectil(enemy.colorShoot);
+        }
         proyectil.SetDobleDamage(doubleDamage);
         proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
         if (doubleDamage)

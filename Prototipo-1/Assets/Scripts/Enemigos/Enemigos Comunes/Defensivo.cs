@@ -31,6 +31,10 @@ public class Defensivo : Enemy
         auxDelayVulnerable = delayVulnerable;
         auxDelayStateCounterAttackDeffense = delayStateCounterAttackDeffense;
         inDeffense = false;
+        if (enableColorShootSpecialAttack)
+        {
+            Disparo.GetComponent<SpriteRenderer>().color = colorShoot;
+        }
     }
         
     public override void Update()
@@ -324,6 +328,7 @@ public class Defensivo : Enemy
                 proyectil.SetEnemy(gameObject.GetComponent<Enemy>());
                 proyectil.SetDobleDamage(_doubleDamage);
                 proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
+                proyectil.SetColorProyectil(colorShoot);
                 if (_doubleDamage)
                 {
                     proyectil.damage = proyectil.damageCounterAttack;

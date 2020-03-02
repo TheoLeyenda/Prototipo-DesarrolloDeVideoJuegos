@@ -169,6 +169,10 @@ public class Agresivo : Enemy
             tipoProyectil = Proyectil.typeProyectil.Nulo;
             go = poolProyectilImparable.GetObject();
             proyectilInparable = go.GetComponent<ProyectilInparable>();
+            if (enableColorShootSpecialAttack)
+            {
+                proyectilInparable.SetColorProyectil(colorShoot);
+            }
             proyectilInparable.SetEnemy(gameObject.GetComponent<Enemy>());
             proyectilInparable.SetDobleDamage(_doubleDamage);
             proyectilInparable.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;

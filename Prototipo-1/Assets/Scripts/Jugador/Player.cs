@@ -8,6 +8,7 @@ using System;
 
 public class Player : MonoBehaviour
 {
+    public string namePlayer;
     //BOOLEANOS DE MOVIMIENTO
     [HideInInspector]
     public bool enableMovement;

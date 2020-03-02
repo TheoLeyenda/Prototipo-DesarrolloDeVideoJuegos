@@ -6,6 +6,8 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
+    public string nameEnemy;
+    public bool enableColorShootSpecialAttack;
     //DATOS PARA EL MOVIMIENTO
     [HideInInspector]
     public bool enableMovement;
@@ -868,14 +870,14 @@ public class Enemy : MonoBehaviour
         {
             if (generador != null)
             {
-                specialAttackEnemyController.SpecialAttack(doubleDamage, isDuck, generador, generador, enumsEnemy, structsEnemys, maxRandomRootShoot, minRandomRootShoot);
+                specialAttackEnemyController.SpecialAttack(this,doubleDamage, isDuck, generador, generador, enumsEnemy, structsEnemys, maxRandomRootShoot, minRandomRootShoot);
             }
         }
         else
         {
             if (generador != null)
             {
-                specialAttackEnemyController.SpecialAttack(doubleDamage, isDuck, generador, generador, enumsEnemy, structsEnemys, maxRandomRootShoot, minRandomRootShoot);
+                specialAttackEnemyController.SpecialAttack(this,doubleDamage, isDuck, generador, generador, enumsEnemy, structsEnemys, maxRandomRootShoot, minRandomRootShoot);
             }
         }
             

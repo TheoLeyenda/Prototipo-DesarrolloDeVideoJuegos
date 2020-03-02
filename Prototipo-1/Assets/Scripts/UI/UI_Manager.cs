@@ -14,6 +14,8 @@ public class UI_Manager : MonoBehaviour
     [System.Serializable]
     public struct playerHUD
     {
+        //public string NamePlayer;
+        public TextMeshProUGUI textNamePlayer;
         public GameObject BARRA_DE_VIDA;
         public GameObject BARRA_DE_CARGA;
         public TextMeshProUGUI scoreText;
@@ -65,6 +67,8 @@ public class UI_Manager : MonoBehaviour
     [System.Serializable]
     public struct EnemyHUD
     {
+        //public string NameEnemy;
+        public TextMeshProUGUI textNameEnemy;
         public BarraDeEscudo barraDeEscudo;
         public GameObject BARRA_DE_VIDA;
         public Image ImageHP;
@@ -110,7 +114,7 @@ public class UI_Manager : MonoBehaviour
     [Header("PlayerIzquierda HUD")]
     public playerHUD PlayerIzquierdaHUD;
 
-    [Header("PlayerIzquierda HUD")]
+    [Header("PlayerDerecha HUD")]
     public playerHUD PlayerDerechaHUD;
 
     [Header("Enemy HUD")]
@@ -141,6 +145,7 @@ public class UI_Manager : MonoBehaviour
                     {
                         players[i].barraDeEscudo = PlayerIzquierdaHUD.barraDeEscudo;
                         players[i].barraDeEscudo.SetPlayer(players[i]);
+                        PlayerIzquierdaHUD.textNamePlayer.text = players[i].namePlayer;
                     }
 
                         
@@ -151,6 +156,7 @@ public class UI_Manager : MonoBehaviour
                     {
                         players[i].barraDeEscudo = PlayerDerechaHUD.barraDeEscudo;
                         players[i].barraDeEscudo.SetPlayer(players[i]);
+                        PlayerDerechaHUD.textNamePlayer.text = players[i].namePlayer;
                     }
                 }
             }
@@ -182,6 +188,7 @@ public class UI_Manager : MonoBehaviour
                         enemyHUD.barraDeEscudo.SetValueShild(enemyHUD.barraDeEscudo.MaxValueShild);
                         enemy.barraDeEscudo = enemyHUD.barraDeEscudo;
                         enemy.life = enemy.maxLife;
+                        enemyHUD.textNameEnemy.text = enemy.nameEnemy;
                     }
                 }
             }

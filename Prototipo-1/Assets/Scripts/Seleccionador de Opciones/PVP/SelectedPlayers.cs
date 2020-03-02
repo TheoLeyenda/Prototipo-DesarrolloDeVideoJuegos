@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class SelectedPlayers : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class SelectedPlayers : MonoBehaviour
     public List<ElementsCharacter> elementsCharacters;
 
     //-----------------------------//
+    public TextMeshProUGUI namePlayer1;
+    public TextMeshProUGUI namePlayer2;
     public string nameNextScene;
     public List<string> namePlayersOptions;
     public Cursor CursorSelectorPlayer1;
@@ -52,6 +55,8 @@ public class SelectedPlayers : MonoBehaviour
     private bool aviableMoveVerticalP2;
 
     //VARIABLES PARA EL CHIMI DECORATIVO//
+    //public List<Vector3> positionsNameCharacters;
+    //private Vector3[,] positionNameCharacter;
     public SpriteRenderer imagePlayer1;
     public GameObject vs;
     public SpriteRenderer imagePlayer2;
@@ -63,6 +68,7 @@ public class SelectedPlayers : MonoBehaviour
     //----------------------------------//
     private void Start()
     {
+        
         aviableMoveHorizontalP1 = true;
         aviableMoveVerticalP1 = true;
         if (GameManager.instanceGameManager != null)
@@ -79,6 +85,7 @@ public class SelectedPlayers : MonoBehaviour
         if (filas > 0 && columnas > 0)
         {
             grillaDeSeleccion = new string[filas, columnas];
+            //positionNameCharacter = new Vector3[filas, columnas];
             if (grillaDeSeleccion != null)
             {
                 int i = columnas - 1;
@@ -91,6 +98,7 @@ public class SelectedPlayers : MonoBehaviour
                             if (idOption < namePlayersOptions.Count)
                             {
                                 grillaDeSeleccion[j, i] = namePlayersOptions[idOption];
+                                //positionNameCharacter[j, i] = positionsNameCharacters[idOption];
                             }
                             idOption++;
                         }
@@ -104,6 +112,7 @@ public class SelectedPlayers : MonoBehaviour
                         if (idOption < namePlayersOptions.Count)
                         {
                             grillaDeSeleccion[j, i] = namePlayersOptions[idOption];
+                            //positionNameCharacter[j, i] = positionsNameCharacters[idOption];
                         }
                         idOption++;
                     }
@@ -111,6 +120,7 @@ public class SelectedPlayers : MonoBehaviour
             }
         }
         idOption = 0;
+        CheckNamePlayersSelect();
     }
     private void Update()
     {
@@ -122,6 +132,13 @@ public class SelectedPlayers : MonoBehaviour
         DecoratePlayerSelected(imagePlayer2, cursorPlayer2);
         CheckPositionCursor();
         CheckCursorSelected();
+    }
+    public void CheckNamePlayersSelect()
+    {
+        namePlayer1.text = grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y];
+        namePlayer2.text = grillaDeSeleccion[cursorPlayer2.x, cursorPlayer2.y];
+        //namePlayer1.rectTransform.localPosition = positionNameCharacter[cursorPlayer1.x, cursorPlayer1.y];
+        //namePlayer2.rectTransform.localPosition = positionNameCharacter[cursorPlayer2.x, cursorPlayer2.y];
     }
     public void CheckPositionCursor()
     {
@@ -160,6 +177,7 @@ public class SelectedPlayers : MonoBehaviour
                         cursorPlayer.x++;
                         CursorSelectorPlayer.MoveRight();
                         aviableMoveHorizontal = false;
+                        CheckNamePlayersSelect();
                     }
                 }
                 else if (InputPlayerController.GetInputAxis(inputHorizontal) < 0 && cursorPlayer.x > 0)
@@ -169,6 +187,7 @@ public class SelectedPlayers : MonoBehaviour
                         cursorPlayer.x--;
                         CursorSelectorPlayer.MoveLeft();
                         aviableMoveHorizontal = false;
+                        CheckNamePlayersSelect();
                     }
                 }
             }
@@ -181,6 +200,7 @@ public class SelectedPlayers : MonoBehaviour
                         cursorPlayer.y--;
                         CursorSelectorPlayer.MoveUp();
                         aviableMoveVertical = false;
+                        CheckNamePlayersSelect();
                     }
                 }
                 else if (InputPlayerController.GetInputAxis(inputVertical) < 0 && cursorPlayer.y < columnas - 1)
@@ -190,6 +210,7 @@ public class SelectedPlayers : MonoBehaviour
                         cursorPlayer.y++;
                         CursorSelectorPlayer.MoveDown();
                         aviableMoveVertical = false;
+                        CheckNamePlayersSelect();
                     }
                 }
             }

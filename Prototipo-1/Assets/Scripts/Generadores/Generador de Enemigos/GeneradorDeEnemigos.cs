@@ -108,7 +108,7 @@ public class GeneradorDeEnemigos : MonoBehaviour
                 enemigoActual.enemyPrefab.transform.position = pointOfCombat.transform.position;
                 enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
                 enemigoActual.enableMovement = false;
-                Debug.Log("ENTRE");
+                //Debug.Log("ENTRE");
             }
             else
             {
