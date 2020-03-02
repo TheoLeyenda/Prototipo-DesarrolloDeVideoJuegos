@@ -42,7 +42,9 @@ public class InicioDePelea : MonoBehaviour
             }
             else if (typeCountdown == TypeCountdown.RedyFight)
             {
-                text1.text = "¿READY?";
+                //text1.text = "¿READY?";
+                //text1.text = "READY?";
+                text1.text = "READY ?";
                 text2.text = "FIGHT";
             }
             OneEjecution = false;
