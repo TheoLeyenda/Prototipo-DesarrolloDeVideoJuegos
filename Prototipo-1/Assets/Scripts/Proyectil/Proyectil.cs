@@ -35,12 +35,15 @@ public class Proyectil : MonoBehaviour
         ProyectilParabola,
         AtaqueEspecial,
     }
+    public bool completeColorStela = true;
     public string nameAnimationHit;
     public SpriteRenderer spriteRenderer;
     public List<Sprite> propsDisparoAereo;
     public List<Sprite> propsDisparoNormal;
     public List<Sprite> propsDisparoBajo;
-    [HideInInspector]
+    public List<Sprite> propsDisparoAereoBlanco;
+    public List<Sprite> propsDisparoNormalBlanco;
+    public List<Sprite> propsDisparoBajoBlanco;
     public typeProyectil tipoDeProyectil;
     public float speed;
     public float timeLife;
@@ -144,7 +147,7 @@ public class Proyectil : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-    public void On(typeProyectil _tipoDeProyectil)
+    public void On(typeProyectil _tipoDeProyectil,bool WhiteProyectile)
     {
         trailRenderer.enabled = true;
         if (circleCollider2D != null)
@@ -154,8 +157,7 @@ public class Proyectil : MonoBehaviour
         if (animator != null)
         {
             animator.enabled = false;
-        }
-           
+        }   
         tipoDeProyectil = _tipoDeProyectil;
         int subIndiceSprite;
         if (propsDisparoAereo.Count > 0 && propsDisparoBajo.Count > 0 && propsDisparoNormal.Count > 0)
@@ -163,16 +165,40 @@ public class Proyectil : MonoBehaviour
             switch (tipoDeProyectil)
             {
                 case typeProyectil.ProyectilAereo:
-                    subIndiceSprite = Random.Range(0, propsDisparoAereo.Count);
-                    spriteRenderer.sprite = propsDisparoAereo[subIndiceSprite];
+                    if (!WhiteProyectile)
+                    {
+                        subIndiceSprite = Random.Range(0, propsDisparoAereo.Count);
+                        spriteRenderer.sprite = propsDisparoAereo[subIndiceSprite];
+                    }
+                    else
+                    {
+                        subIndiceSprite = Random.Range(0, propsDisparoAereoBlanco.Count);
+                        spriteRenderer.sprite = propsDisparoAereoBlanco[subIndiceSprite];
+                    }
                     break;
                 case typeProyectil.ProyectilNormal:
-                    subIndiceSprite = Random.Range(0, propsDisparoNormal.Count);
-                    spriteRenderer.sprite = propsDisparoNormal[subIndiceSprite];
+                    if (!WhiteProyectile)
+                    {
+                        subIndiceSprite = Random.Range(0, propsDisparoNormal.Count);
+                        spriteRenderer.sprite = propsDisparoNormal[subIndiceSprite];
+                    }
+                    else
+                    {
+                        subIndiceSprite = Random.Range(0, propsDisparoNormalBlanco.Count);
+                        spriteRenderer.sprite = propsDisparoNormalBlanco[subIndiceSprite];
+                    }
                     break;
                 case typeProyectil.ProyectilBajo:
-                    subIndiceSprite = Random.Range(0, propsDisparoBajo.Count);
-                    spriteRenderer.sprite = propsDisparoBajo[subIndiceSprite];
+                    if (!WhiteProyectile)
+                    {
+                        subIndiceSprite = Random.Range(0, propsDisparoBajo.Count);
+                        spriteRenderer.sprite = propsDisparoBajo[subIndiceSprite];
+                    }
+                    else
+                    {
+                        subIndiceSprite = Random.Range(0, propsDisparoBajoBlanco.Count);
+                        spriteRenderer.sprite = propsDisparoBajoBlanco[subIndiceSprite];
+                    }
                     break;
             }
         }
@@ -284,5 +310,17 @@ public class Proyectil : MonoBehaviour
         {
             Dead();
         }
+    }
+    public void SetColorStela(Color color)
+    {
+        if (tipoDeProyectil != typeProyectil.AtaqueEspecial)
+        {
+            trailRenderer.startColor = color;
+            if (completeColorStela)
+            {
+                trailRenderer.endColor = color;
+            }
+        }
+        
     }
 }

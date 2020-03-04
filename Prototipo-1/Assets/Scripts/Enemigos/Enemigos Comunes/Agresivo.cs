@@ -142,7 +142,21 @@ public class Agresivo : Enemy
             {
                 proyectil.damage = proyectil.damageCounterAttack;
             }
-            proyectil.SetColorProyectil(colorShoot);
+            switch (applyColorShoot)
+            {
+                case ApplyColorShoot.None:
+                    break;
+                case ApplyColorShoot.Proyectil:
+                    proyectil.SetColorProyectil(colorShoot);
+                    break;
+                case ApplyColorShoot.Stela:
+                    proyectil.SetColorStela(colorShoot);
+                    break;
+                case ApplyColorShoot.StelaAndProyectil:
+                    proyectil.SetColorProyectil(colorShoot);
+                    proyectil.SetColorStela(colorShoot);
+                    break;
+            }
         }
         if (!GetIsDuck() && !specialAttack)
         {
@@ -171,7 +185,21 @@ public class Agresivo : Enemy
             proyectilInparable = go.GetComponent<ProyectilInparable>();
             if (enableColorShootSpecialAttack)
             {
-                proyectilInparable.SetColorProyectil(colorShoot);
+                switch (applyColorShoot)
+                {
+                    case ApplyColorShoot.None:
+                        break;
+                    case ApplyColorShoot.Proyectil:
+                        proyectil.SetColorProyectil(colorShoot);
+                        break;
+                    case ApplyColorShoot.Stela:
+                        proyectil.SetColorStela(colorShoot);
+                        break;
+                    case ApplyColorShoot.StelaAndProyectil:
+                        proyectil.SetColorProyectil(colorShoot);
+                        proyectil.SetColorStela(colorShoot);
+                        break;
+                }
             }
             proyectilInparable.SetEnemy(gameObject.GetComponent<Enemy>());
             proyectilInparable.SetDobleDamage(_doubleDamage);
@@ -187,7 +215,14 @@ public class Agresivo : Enemy
         }
         if (!specialAttack)
         {
-            proyectil.On(tipoProyectil);
+            if (applyColorShoot == ApplyColorShoot.None || applyColorShoot == ApplyColorShoot.Stela)
+            {
+                proyectil.On(tipoProyectil, false);
+            }
+            else
+            {
+                proyectil.On(tipoProyectil, true);
+            }
 
             if (!shootDown)
             {

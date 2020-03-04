@@ -6,6 +6,16 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
+    public ApplyColorShoot applyColorShoot; 
+    public enum ApplyColorShoot
+    {
+        Stela,
+        Proyectil,
+        StelaAndProyectil,
+        None,
+    }
+    public Color colorShoot;
+
     public string nameEnemy;
     public bool enableColorShootSpecialAttack;
     //DATOS PARA EL MOVIMIENTO
@@ -62,7 +72,6 @@ public class Enemy : MonoBehaviour
     public float Gravity;
     public float delayAttackJumping;
     private bool isJamping;
-    public Color colorShoot;
     public Collider2D colliderSprites;
     [HideInInspector]
     public Vector3 InitialPosition;
@@ -923,7 +932,22 @@ public class Enemy : MonoBehaviour
             proyectil.SetDobleDamage(false);
             proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
             proyectil.SetEnemy(this);
-            proyectil.SetColorProyectil(colorShoot);
+            switch (applyColorShoot)
+            {
+                case ApplyColorShoot.None:
+                    break;
+                case ApplyColorShoot.Proyectil:
+                    proyectil.SetColorProyectil(colorShoot);
+                    break;
+                case ApplyColorShoot.Stela:
+                    proyectil.SetColorStela(colorShoot);
+                    break;
+                case ApplyColorShoot.StelaAndProyectil:
+                    proyectil.SetColorProyectil(colorShoot);
+                    proyectil.SetColorStela(colorShoot);
+                    break;
+            }
+            
             if (!GetIsDuck())
             {
                 proyectil.TypeRoot = 1;
@@ -944,7 +968,7 @@ public class Enemy : MonoBehaviour
                     break;
             }
             proyectil.rutaParabola_AtaqueEnemigo = structsEnemys.ruta;
-            proyectil.OnParabola();
+            proyectil.OnParabola(this,null, Proyectil.typeProyectil.Nulo);
         }
     }
     public bool CheckMove(Vector3 PosicionDestino)

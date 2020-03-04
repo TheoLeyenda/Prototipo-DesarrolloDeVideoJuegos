@@ -54,7 +54,18 @@ public class GranadaGaseosa : ProyectilParabola
                 spriteRenderer.sprite = propsProyectilGaseosa[random];
             }
         }
-        OnParabola();
+        if (ENEMY != null)
+        {
+            OnParabola(ENEMY, null, typeProyectil.AtaqueEspecial);
+        }
+        else if (PLAYER1 != null)
+        {
+            OnParabola(null, PLAYER1, typeProyectil.AtaqueEspecial);
+        }
+        else if (PLAYER2 != null)
+        {
+            OnParabola(null, PLAYER2, typeProyectil.AtaqueEspecial);
+        }
     }
     public override void Sonido()
     {

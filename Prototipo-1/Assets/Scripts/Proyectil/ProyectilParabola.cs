@@ -35,8 +35,19 @@ public class ProyectilParabola : Proyectil
         inAnimation = false;
         spriteRenderer.sprite = spriteProyectilParabola;
         timeLife = auxTimeLife;
-        OnParabola();
-            
+        if (ENEMY != null)
+        {
+            OnParabola(ENEMY, null, typeProyectil.AtaqueEspecial);
+        }
+        else if (PLAYER1 != null)
+        {
+            OnParabola(null, PLAYER1, typeProyectil.AtaqueEspecial);
+        }
+        else if (PLAYER2 != null)
+        {
+            OnParabola(null, PLAYER2, typeProyectil.AtaqueEspecial);
+        }
+
     }
     public override void Sonido()
     {
@@ -81,11 +92,36 @@ public class ProyectilParabola : Proyectil
     {
         transform.Translate(direccion * speed * Time.deltaTime);
     }
-    public void OnParabola()
+    public void OnParabola(Enemy e, Player p, Proyectil.typeProyectil tipoProyectil)
     {
         // SE SELECIONA LA PARABOLA CORRESPONDIENTE DEPENDIENDO A DONDE APUNTO EL JUGADOR / ENEMIGO.
         // FALTARIA CREAR LAS PARABOLAS Y HACER EL GENERADOR DE PELOTAS CON PARABOLA Y PROBARLO.
-        On(typeProyectil.Nulo);
+        if (parabolaController != null)
+        {
+            parabolaController.Speed = speed;
+        }
+        if (e != null)
+        {
+            if (e.applyColorShoot == Enemy.ApplyColorShoot.None || e.applyColorShoot == Enemy.ApplyColorShoot.Stela)
+            {
+                On(tipoProyectil, false);
+            }
+            else
+            {
+                On(tipoProyectil, true);
+            }
+        }
+        else if (p != null)
+        {
+            if (p.applyColorShoot == Player.ApplyColorShoot.None || p.applyColorShoot == Player.ApplyColorShoot.Stela)
+            {
+                On(tipoProyectil, false);
+            }
+            else
+            {
+                On(tipoProyectil, true);
+            }
+        }
         if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1 || disparadorDelProyectil == DisparadorDelProyectil.Jugador2)
         {
             rutaParabola_AtaqueJugador.SetActive(true);
@@ -115,10 +151,6 @@ public class ProyectilParabola : Proyectil
             }
             parabolaController.OnParabola();
         }       
-        if (parabolaController != null)
-        {
-            parabolaController.Speed = speed;
-        }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {

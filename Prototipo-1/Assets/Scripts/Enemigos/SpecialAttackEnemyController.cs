@@ -47,7 +47,7 @@ public class SpecialAttackEnemyController : MonoBehaviour
                     proyectil.rutaParabolaAgachado_AtaqueEnemigo = generadorProyectilesParabolaAgachado.GetComponent<StructGenerateProyectilParabolaJefe>().Ruta_1;
                     break;
             }
-            proyectil.OnParabola();
+            proyectil.OnParabola(enemy,null,Proyectil.typeProyectil.AtaqueEspecial);
         }
         else if(enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Jefe)
         {
@@ -83,7 +83,7 @@ public class SpecialAttackEnemyController : MonoBehaviour
                     }
                     break;
             }
-            proyectil.OnParabola();
+            proyectil.OnParabola(enemy, null, Proyectil.typeProyectil.AtaqueEspecial);
         }
     }
 }

@@ -31,10 +31,6 @@ public class Defensivo : Enemy
         auxDelayVulnerable = delayVulnerable;
         auxDelayStateCounterAttackDeffense = delayStateCounterAttackDeffense;
         inDeffense = false;
-        if (enableColorShootSpecialAttack)
-        {
-            Disparo.GetComponent<SpriteRenderer>().color = colorShoot;
-        }
     }
         
     public override void Update()
@@ -269,7 +265,21 @@ public class Defensivo : Enemy
             {
                 proyectil.damage = proyectil.damageCounterAttack;
             }
-            proyectil.SetColorProyectil(colorShoot);
+            switch (applyColorShoot)
+            {
+                case ApplyColorShoot.None:
+                    break;
+                case ApplyColorShoot.Proyectil:
+                    proyectil.SetColorProyectil(colorShoot);
+                    break;
+                case ApplyColorShoot.Stela:
+                    proyectil.SetColorStela(colorShoot);
+                    break;
+                case ApplyColorShoot.StelaAndProyectil:
+                    proyectil.SetColorProyectil(colorShoot);
+                    proyectil.SetColorStela(colorShoot);
+                    break;
+            }
         }
         if (!GetIsDuck() && !specialAttack 
             && ProyectilRecibido.posicionDisparo != Proyectil.PosicionDisparo.PosicionBaja)
@@ -295,7 +305,14 @@ public class Defensivo : Enemy
             
         if (!specialAttack)
         {
-            proyectil.On(tipoProyectil);
+            if (applyColorShoot == ApplyColorShoot.None || applyColorShoot == ApplyColorShoot.Stela)
+            {
+                proyectil.On(tipoProyectil, false);
+            }
+            else
+            {
+                proyectil.On(tipoProyectil, true);
+            }
 
             if (!shootDown)
             {
@@ -328,7 +345,21 @@ public class Defensivo : Enemy
                 proyectil.SetEnemy(gameObject.GetComponent<Enemy>());
                 proyectil.SetDobleDamage(_doubleDamage);
                 proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
-                proyectil.SetColorProyectil(colorShoot);
+                switch (applyColorShoot)
+                {
+                    case ApplyColorShoot.None:
+                        break;
+                    case ApplyColorShoot.Proyectil:
+                        proyectil.SetColorProyectil(colorShoot);
+                        break;
+                    case ApplyColorShoot.Stela:
+                        proyectil.SetColorStela(colorShoot);
+                        break;
+                    case ApplyColorShoot.StelaAndProyectil:
+                        proyectil.SetColorProyectil(colorShoot);
+                        proyectil.SetColorStela(colorShoot);
+                        break;
+                }
                 if (_doubleDamage)
                 {
                     proyectil.damage = proyectil.damageCounterAttack;
@@ -355,7 +386,14 @@ public class Defensivo : Enemy
             }
             if (!specialAttack)
             {
-                proyectil.On(tipoProyectil);
+                if (applyColorShoot == ApplyColorShoot.None || applyColorShoot == ApplyColorShoot.Stela)
+                {
+                    proyectil.On(tipoProyectil, false);
+                }
+                else
+                {
+                    proyectil.On(tipoProyectil, true);
+                }
 
                 if (!shootDown)
                 {

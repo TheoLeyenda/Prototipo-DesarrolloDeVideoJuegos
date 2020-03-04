@@ -8,6 +8,16 @@ using System;
 
 public class Player : MonoBehaviour
 {
+    public ApplyColorShoot applyColorShoot;
+    public enum ApplyColorShoot
+    {
+        Stela,
+        Proyectil,
+        StelaAndProyectil,
+        None,
+    }
+    public Color colorShoot;
+
     public string namePlayer;
     //BOOLEANOS DE MOVIMIENTO
     [HideInInspector]
@@ -99,7 +109,6 @@ public class Player : MonoBehaviour
     private bool enableParabolaAttack;
     public bool enableMecanicParabolaAttack;
 
-    public Color colorShoot;
     [HideInInspector]
     public EventWise eventWise;
     private bool InFuegoEmpieza;
@@ -110,11 +119,12 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
+        delayParabolaAttack = 0;
         enableMovementPlayer = false;
         enableMovement = false;
         InFuegoEmpieza = false;
         eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
-        enableParabolaAttack = false;
+        enableParabolaAttack = true;
         GameObject go = GameObject.Find(NameInputManager);
         inputManager = go.GetComponent<InputManager>();
         xpActual = 0;
@@ -362,8 +372,29 @@ public class Player : MonoBehaviour
                 proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
             }
             proyectil.disparadorDelProyectil = disparador;
-            proyectil.SetColorProyectil(colorShoot);
-            proyectil.On(tipoProyectil);
+            switch (applyColorShoot)
+            {
+                case ApplyColorShoot.None:
+                    break;
+                case ApplyColorShoot.Proyectil:
+                    proyectil.SetColorProyectil(colorShoot);
+                    break;
+                case ApplyColorShoot.Stela:
+                    proyectil.SetColorStela(colorShoot);
+                    break;
+                case ApplyColorShoot.StelaAndProyectil:
+                    proyectil.SetColorProyectil(colorShoot);
+                    proyectil.SetColorStela(colorShoot);
+                    break;
+            }
+            if (applyColorShoot == ApplyColorShoot.None || applyColorShoot == ApplyColorShoot.Stela)
+            {
+                proyectil.On(tipoProyectil, false);
+            }
+            else
+            {
+                proyectil.On(tipoProyectil, true);
+            }
             proyectil.ShootForwardDown();
             delayAttack = auxDelayAttack;
         }
@@ -413,9 +444,30 @@ public class Player : MonoBehaviour
                 go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
                 proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
             }
-            proyectil.On(tipoProyectil);
+            if (applyColorShoot == ApplyColorShoot.None || applyColorShoot == ApplyColorShoot.Stela)
+            {
+                proyectil.On(tipoProyectil, false);
+            }
+            else
+            {
+                proyectil.On(tipoProyectil, true);
+            }
             proyectil.disparadorDelProyectil = disparador;
-            proyectil.SetColorProyectil(colorShoot);
+            switch (applyColorShoot)
+            {
+                case ApplyColorShoot.None:
+                    break;
+                case ApplyColorShoot.Proyectil:
+                    proyectil.SetColorProyectil(colorShoot);
+                    break;
+                case ApplyColorShoot.Stela:
+                    proyectil.SetColorStela(colorShoot);
+                    break;
+                case ApplyColorShoot.StelaAndProyectil:
+                    proyectil.SetColorProyectil(colorShoot);
+                    proyectil.SetColorStela(colorShoot);
+                    break;
+            }
             proyectil.ShootForward();
             delayAttack = auxDelayAttack;
         }
@@ -424,6 +476,8 @@ public class Player : MonoBehaviour
     //ATAQUE EN PARABOLA.
     public void ParabolaAttack(Proyectil.DisparadorDelProyectil disparador)
     {
+        //Debug.Log("EnableParabolaAttack: "+enableParabolaAttack);
+        //Debug.Log("EnableMecanicParabolaAttack: " + enableMecanicParabolaAttack);
         if (enableParabolaAttack && enableMecanicParabolaAttack)
         {
             GameObject go = structsPlayer.dataAttack.poolProyectilParabola.GetObject();
@@ -462,8 +516,22 @@ public class Player : MonoBehaviour
                     break;
             }
             proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
-            proyectil.OnParabola();
-            proyectil.SetColorProyectil(colorShoot);
+            proyectil.OnParabola(null,this, Proyectil.typeProyectil.Nulo);
+            switch (applyColorShoot)
+            {
+                case ApplyColorShoot.None:
+                    break;
+                case ApplyColorShoot.Proyectil:
+                    proyectil.SetColorProyectil(colorShoot);
+                    break;
+                case ApplyColorShoot.Stela:
+                    proyectil.SetColorStela(colorShoot);
+                    break;
+                case ApplyColorShoot.StelaAndProyectil:
+                    proyectil.SetColorProyectil(colorShoot);
+                    proyectil.SetColorStela(colorShoot);
+                    break;
+            }
             enableParabolaAttack = false;
             delayParabolaAttack = auxDelayParabolaAttack;
         }
@@ -477,6 +545,14 @@ public class Player : MonoBehaviour
                 {
                     GameObject go = structsPlayer.dataAttack.poolProyectilParabola.GetObject();
                     ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
+                    switch (applyColorShoot)
+                    {
+                        case ApplyColorShoot.None:
+                            break;
+                        case ApplyColorShoot.Stela:
+                            proyectil.SetColorStela(colorShoot);
+                            break;
+                    }
                     proyectil.SetDobleDamage(doubleDamage);
                     proyectil.disparadorDelProyectil = disparador;
                     if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
@@ -511,7 +587,7 @@ public class Player : MonoBehaviour
                             break;
                     }
                     proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
-                    proyectil.OnParabola();
+                    proyectil.OnParabola(null,this,Proyectil.typeProyectil.AtaqueEspecial);
                     enableSpecialAttack = false;
                     xpActual = 0;
                 }
@@ -521,8 +597,17 @@ public class Player : MonoBehaviour
                 {
                     GameObject go = structsPlayer.dataAttack.poolGranadaGaseosa.GetObject();
                     ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
+                    switch (applyColorShoot)
+                    {
+                        case ApplyColorShoot.None:
+                            break;
+                        case ApplyColorShoot.Stela:
+                            proyectil.SetColorStela(colorShoot);
+                            break;
+                    }
                     proyectil.SetDobleDamage(doubleDamage);
                     proyectil.disparadorDelProyectil = disparador;
+
                     switch (player_PvP.playerSelected)
                     {
                         case Player_PvP.PlayerSelected.Protagonista:
@@ -564,7 +649,7 @@ public class Player : MonoBehaviour
                             break;
                     }
                     proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
-                    proyectil.OnParabola();
+                    proyectil.OnParabola(null, this, Proyectil.typeProyectil.AtaqueEspecial);
                     enableSpecialAttack = false;
                     xpActual = 0;
                 }
@@ -599,6 +684,14 @@ public class Player : MonoBehaviour
                         GameObject go = structsPlayer.dataAttack.poolProyectilImparable.GetObject();
                         ProyectilInparable proyectilInparable = go.GetComponent<ProyectilInparable>();
                         proyectilInparable.SetEnemy(gameObject.GetComponent<Enemy>());
+                        switch (applyColorShoot)
+                        {
+                            case ApplyColorShoot.None:
+                                break;
+                            case ApplyColorShoot.Stela:
+                                proyectilInparable.SetColorStela(colorShoot);
+                                break;
+                        }
                         proyectilInparable.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
                         if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
                         {
