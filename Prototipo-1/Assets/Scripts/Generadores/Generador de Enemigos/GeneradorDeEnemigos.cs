@@ -139,6 +139,7 @@ public class GeneradorDeEnemigos : MonoBehaviour
     {
         GameObject go = null;
         Enemy enemy = null;
+        Pool pool = null;
         switch (gm.enumsGameManager.modoDeJuego)
         {
             case EnumsGameManager.ModosDeJuego.Supervivencia:
@@ -146,13 +147,16 @@ public class GeneradorDeEnemigos : MonoBehaviour
                 {
                     randomEnemyGenerate = Random.Range(0, ListBossGenerate.Count);
                     go = ListBossGenerate[randomEnemyGenerate].poolBoss.GetObject();
+                    pool = ListBossGenerate[randomEnemyGenerate].poolBoss;
                 }
                 else
                 {
                     randomEnemyGenerate = Random.Range(0, ListEnemyGenerate.Count);
                     go = ListEnemyGenerate[randomEnemyGenerate].poolEnemy.GetObject();
+                    pool = ListEnemyGenerate[randomEnemyGenerate].poolEnemy;
                 }
                 enemy = go.GetComponentInChildren<Enemy>();
+                enemy.pool = pool;
                 go.transform.position = Generador.transform.position;
                 go.transform.rotation = Generador.transform.rotation;
                 if (enemy != null)
@@ -168,9 +172,11 @@ public class GeneradorDeEnemigos : MonoBehaviour
                 if (idListEnemy < ListEnemyGenerate.Count)
                 {
                     go = ListEnemyGenerate[idListEnemy].poolEnemy.GetObject();
+                    pool = ListEnemyGenerate[idListEnemy].poolEnemy;
                     if (go != null)
                     {
                         enemy = go.GetComponentInChildren<Enemy>();
+                        enemy.pool = pool;
                         go.transform.position = Generador.transform.position;
                         go.transform.rotation = Generador.transform.rotation;
                         if (enemy != null)

@@ -28,5 +28,11 @@ public class EventWise : MonoBehaviour
     {
         AkSoundEngine.PostEvent(nameEvent, gameObject);
     }
+    public void RestartWise()
+    {
+        //AkSoundEngine.ClearPreparedEvents();
+        AkSoundEngine.ResetListenersToDefault(gameObject);
+        AkSoundEngine.ClearPreparedEvents();
+    }
     
 }

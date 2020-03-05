@@ -37,7 +37,8 @@ public class Enemy : MonoBehaviour
     private float auxLife;
     private Animator animator;
     public bool InPool;
-    private PoolObject poolObjectEnemy;
+    public Pool pool;
+    //private PoolObject poolObjectEnemy;
     public float life;
     public float maxLife;
     [HideInInspector]
@@ -131,6 +132,7 @@ public class Enemy : MonoBehaviour
         life = maxLife;
         delaySelectMovement = 0.2f;
         enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
+        //poolObjectEnemy = GetComponent<PoolObject>();
     }
     public virtual void Start()
     {
@@ -141,7 +143,7 @@ public class Enemy : MonoBehaviour
         auxDelayAttack = delayAttack;
         delaySelectMovement = 0.5f;
         auxLife = life;
-        poolObjectEnemy = GetComponent<PoolObject>();
+        //poolObjectEnemy = GetComponent<PoolObject>();
         animator = GetComponent<Animator>();
         if (GameManager.instanceGameManager != null)
         {
@@ -214,7 +216,7 @@ public class Enemy : MonoBehaviour
         boxColliderControllerAgachado.GetBoxCollider2D().enabled = false;
         boxColliderControllerSaltando.GetBoxCollider2D().enabled = false;
         enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
-        poolObjectEnemy = GetComponent<PoolObject>();
+        //poolObjectEnemy = GetComponent<PoolObject>();
         if (GameManager.instanceGameManager != null)
         {
             gm = GameManager.instanceGameManager;
@@ -544,7 +546,8 @@ public class Enemy : MonoBehaviour
                         gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
                         gm.ResetRoundCombat(false);
                         ResetEnemy();
-                        poolObjectEnemy.Recycle();
+                        //poolObjectEnemy.Recycle();
+                        pool.Recycle(enemyPrefab);
                         xpActual = 0;
                     }
                     break;
@@ -557,7 +560,8 @@ public class Enemy : MonoBehaviour
                         gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
                         gm.ResetRoundCombat(false);
                         ResetEnemy();
-                        poolObjectEnemy.Recycle();
+                        //poolObjectEnemy.Recycle();
+                        pool.Recycle(enemyPrefab);
                         xpActual = 0;
                     }
                     break;

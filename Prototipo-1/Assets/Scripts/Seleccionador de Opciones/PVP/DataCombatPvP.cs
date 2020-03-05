@@ -152,7 +152,6 @@ public class DataCombatPvP : MonoBehaviour
             }
             else if (player1.PD.score > player2.PD.score)
             {
-
                 CheckWinPlayer(ref gm.structGameManager.gm_dataCombatPvP.countRoundsWiningP1, prefabWinPlayer1, prefabWinPlayer2, spritePlayer1Win, (int)player1_selected);
             }
             else if (player2.PD.score > player1.PD.score)
@@ -215,7 +214,6 @@ public class DataCombatPvP : MonoBehaviour
     }
     public void CheckWinPlayer(ref int countRoundsWinPlayer, GameObject prefabPlayerWin, GameObject prefabPlayerLose, SpriteRenderer spritePlayerWin, int playerSelected)
     {
-
         countRoundsWinPlayer++;
         if (countRoundsWinPlayer < gm.structGameManager.gm_dataCombatPvP.countRounds)
         {

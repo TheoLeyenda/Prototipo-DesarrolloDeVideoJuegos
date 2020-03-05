@@ -391,18 +391,19 @@ public class InputManager : MonoBehaviour
         {
             if (InputPlayerController.GetInputButtonDown(inputSpecialAttackButton))
             {
-                if (player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.ProyectilImparable)
+                if (player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.ProyectilImparable 
+                    && player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga)
                 {
                     if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar
                         || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoAtaque
                         || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa)
                     {
-                        player.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL SALTANDO
+                        player.spritePlayerActual.PlayAnimation("Ataque Especial Salto protagonista");//ANIMACION DE ATAQUE ESPECIAL SALTANDO
                         enableMovementPlayer = false;
                     }
                     else if (player.GetIsDuck())
                     {
-                        player.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL AGACHADO
+                        player.spritePlayerActual.PlayAnimation("Ataque Especial Agachado protagonista");//ANIMACION DE ATAQUE ESPECIAL AGACHADO
                         enableMovementPlayer = false;
                     }
                     else

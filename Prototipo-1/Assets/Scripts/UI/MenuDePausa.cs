@@ -19,6 +19,7 @@ public class MenuDePausa : MonoBehaviour
     public LevelManager levelManager;
     private GameManager gm;
     private MenuActual menuActual;
+    private bool soundPause = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,16 +49,23 @@ public class MenuDePausa : MonoBehaviour
             CheckInPause();
         }
     }
+    public void SoundDespausar()
+    {
+        eventwise.StartEvent("despausar");
+    }
     public void Reanudar()
     {
         Time.timeScale = 1;
         UnityEngine.Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         eventwise.StartEvent("despausar");
+        soundPause = false;
     }
     public void ReiniciarNivel()
     {
         DisableMenues();
         gm.playerData_P1.score = gm.playerData_P1.auxScore;
+        eventwise.StartEvent("seleccionar");
         if (gm.playerData_P1.score == gm.playerData_P1.auxScore)
         {
             if (levelManager != null)
@@ -85,11 +93,17 @@ public class MenuDePausa : MonoBehaviour
             else if (Time.timeScale == 0)
             {
                 MenuPausa.gameObject.SetActive(true);
+                if (!soundPause)
+                {
+                    eventwise.StartEvent("pausa");
+                    soundPause = true;
+                }
             }
         }
     }
     public void DisableMenues()
     {
+        eventwise.StartEvent("seleccionar");
         Time.timeScale = 1;
         MenuPausa.SetActive(false);
         MenuOpciones.SetActive(false);
@@ -97,6 +111,7 @@ public class MenuDePausa : MonoBehaviour
     }
     public void OnMenuPausa()
     {
+        eventwise.StartEvent("seleccionar");
         MenuPausa.SetActive(true);
         MenuOpciones.SetActive(false);
         MenuControles.SetActive(false);
@@ -104,6 +119,7 @@ public class MenuDePausa : MonoBehaviour
     }
     public void OnMenuOpciones()
     {
+        eventwise.StartEvent("seleccionar");
         MenuPausa.SetActive(false);
         MenuOpciones.SetActive(true);
         MenuControles.SetActive(false);
@@ -111,6 +127,7 @@ public class MenuDePausa : MonoBehaviour
     }
     public void OnMenuControles()
     {
+        eventwise.StartEvent("seleccionar");
         MenuPausa.SetActive(false);
         MenuOpciones.SetActive(false);
         MenuControles.SetActive(true);

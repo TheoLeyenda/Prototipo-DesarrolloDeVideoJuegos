@@ -15,6 +15,7 @@ public class Balanceado : Enemy
     {
         base.Update();
         CheckSpecialAttack();
+        //Debug.Log(enumsEnemy.GetMovement());
     }
     public override void CheckDelayAttack(bool specialAttack)
     {
@@ -78,21 +79,24 @@ public class Balanceado : Enemy
                     switch (enumsEnemy.GetMovement())
                     {
                         case EnumsEnemy.Movimiento.AtaqueEspecial:
-                            spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", true);
+                            //spriteEnemy.GetAnimator().Play("Ataque Especial enemigo balanceado");
+                            spriteEnemy.GetAnimator().SetTrigger("AtaqueEspecial");
                             spriteEnemy.spriteRenderer.color = Color.white;
                             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
                             SetEnableSpecialAttack(false);
                             inAttack = true;
                             break;
                         case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
-                            spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", true);
+                            spriteEnemy.GetAnimator().Play("Ataque Especial Agachado Balanceado");
+                            //spriteEnemy.GetAnimator().SetTrigger("AtaqueEspecialAgachado");
                             spriteEnemy.spriteRenderer.color = Color.white;
                             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecialAgachado);
                             SetEnableSpecialAttack(false);
                             inAttack = true;
                             break;
                         case EnumsEnemy.Movimiento.AtaqueEspecialSalto:
-                            spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", true);
+                            spriteEnemy.GetAnimator().Play("Ataque Especial Salto Balanceado");
+                            //spriteEnemy.GetAnimator().SetTrigger("AtaqueEspecial");
                             spriteEnemy.spriteRenderer.color = Color.white;
                             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecialSalto);
                             SetEnableSpecialAttack(false);

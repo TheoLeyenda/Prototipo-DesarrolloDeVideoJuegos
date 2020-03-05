@@ -23,6 +23,11 @@ public class SpriteEnemy : SpriteCharacter
     public void Update()
     {
         CheckEnumSprite();
+        if (!enemy.enemyPrefab.activeSelf)
+        {
+            animator.Play("Idle");
+            DisableSpecialAttack();
+        }
     }
     public void CheckEnumSprite()
     {
@@ -88,7 +93,6 @@ public class SpriteEnemy : SpriteCharacter
             }
         }
     }
-        
     public override void CheckActualSprite()
     {
         for (int i = 0; i < Animations.Count; i++)
@@ -137,6 +141,7 @@ public class SpriteEnemy : SpriteCharacter
     {
         if (enemy.enemyPrefab.activeSelf == true && animator != null)
         {
+            //Debug.Log(nameAnimation);
             animator.Play(nameAnimation);
         }
     }
@@ -155,8 +160,20 @@ public class SpriteEnemy : SpriteCharacter
     }
     public void DisableSpecialAttack()
     {
-        enemy.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
-        enemy.SetDelaySelectMovement(0.1f);
+        //Debug.Log("ENTRE A LA FUNCION");
+        if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar
+            || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
+            || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
+            || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
+        {
+            enemy.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
+        }
+        else
+        {
+            //Debug.Log("ENTRE");
+            enemy.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+            enemy.SetDelaySelectMovement(0.1f);
+        }
     }
     public void AttackEnemy()
     {

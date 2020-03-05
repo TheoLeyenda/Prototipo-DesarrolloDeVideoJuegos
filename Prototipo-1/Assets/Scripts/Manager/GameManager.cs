@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         UnityEngine.Cursor.visible = false;
-        if (SceneManager.GetActiveScene().name == "MENU" 
+        if (SceneManager.GetActiveScene().name == "MENU"
             || SceneManager.GetActiveScene().name == "SelectPlayerScene")
         {
             CanvasGameOver.SetActive(false);
