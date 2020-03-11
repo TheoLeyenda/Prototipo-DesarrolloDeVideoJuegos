@@ -66,6 +66,7 @@ public class MenuDePausa : MonoBehaviour
         DisableMenues();
         gm.playerData_P1.score = gm.playerData_P1.auxScore;
         eventwise.StartEvent("seleccionar");
+        eventwise.StartEvent("reiniciar");
         if (gm.playerData_P1.score == gm.playerData_P1.auxScore)
         {
             if (levelManager != null)

@@ -24,6 +24,7 @@ public class Balanceado : Enemy
             delayAttack = delayAttack - Time.deltaTime;
             if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
             {
+                //Debug.Log("ENTRE AL SALTO");
                 spriteEnemy.PlayAnimation("Salto balanceado");
             }
         }
