@@ -17,6 +17,20 @@ public class Agresivo : Enemy
     {
         base.Update();
         CheckSpecialAttack();
+        CheckIdle();
+    }
+    public void CheckIdle()
+    {
+        if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque)
+        {
+            if (spriteEnemy != null)
+            {
+                if (spriteEnemy.GetAnimator() != null)
+                {
+                    spriteEnemy.GetAnimator().SetBool("Idle", true);
+                }
+            }
+        }
     }
     public void CheckSpecialAttack()
     {
@@ -78,6 +92,7 @@ public class Agresivo : Enemy
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
                 {
                     spriteEnemy.GetAnimator().Play("Ataque Agachado enemigo agresivo");
+                    spriteEnemy.GetAnimator().SetBool("Idle", false);
                     inAttack = true;
                 }
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
@@ -108,6 +123,7 @@ public class Agresivo : Enemy
                 {
                         
                     spriteEnemy.PlayAnimation("Ataque Parabola enemigo agresivo");
+                    spriteEnemy.GetAnimator().SetTrigger("AtaqueParabolaEA");
                     inAttack = true;
                 }
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && delayAttack <= 0)
@@ -118,6 +134,7 @@ public class Agresivo : Enemy
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && delayAttack <= 0)
                 {
                     spriteEnemy.PlayAnimation("Ataque Parabola Agachado enemigo agresivo");
+                    spriteEnemy.GetAnimator().SetBool("Idle", false);
                     inAttack = true;
                 }
                 //spriteEnemy.RestartDelayAttackEnemy();
