@@ -6,7 +6,8 @@ using UnityEngine;
 public class SpriteEnemy : SpriteCharacter
 {
     public Enemy enemy;
-
+    //[HideInInspector]
+    //public bool disableSpecialAttack = false;
     private void Start()
     {
         auxDelaySpriteRecibirDanio = delaySpriteRecibirDanio;
@@ -19,6 +20,15 @@ public class SpriteEnemy : SpriteCharacter
         auxDelaySpriteRecibirDanio = delaySpriteRecibirDanio;
         auxDelaySpriteContraAtaque = delaySpriteContraAtaque;
         ActualSprite = SpriteActual.Parado;
+        DisableSpecialAttack();
+        /*if (enemy.enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Defensivo)
+        {
+            if (animator != null)
+            {
+                animator.SetBool("EnPlenoAtaqueEspecial", true);
+                animator.SetBool("FinalAtaqueEspecial", false);
+            }
+        }*/
     }
     public void Update()
     {
@@ -29,6 +39,10 @@ public class SpriteEnemy : SpriteCharacter
             DisableSpecialAttack();
         }
     }
+    /*public void DisableSpecialAttackDefensivo()
+    {
+        disableSpecialAttack = true;
+    }*/
     public void CheckEnumSprite()
     {
             

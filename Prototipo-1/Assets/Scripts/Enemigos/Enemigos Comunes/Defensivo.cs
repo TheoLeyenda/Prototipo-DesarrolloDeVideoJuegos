@@ -22,6 +22,7 @@ public class Defensivo : Enemy
     private float auxDelayVulnerable;
     private float auxDelayStateCounterAttackDeffense;
     private bool inDeffense;
+    [HideInInspector]
     private StateDeffence stateDeffence;
     public override void Start()
     {
@@ -32,12 +33,14 @@ public class Defensivo : Enemy
         auxDelayStateCounterAttackDeffense = delayStateCounterAttackDeffense;
         inDeffense = false;
     }
-        
+    
     public override void Update()
     {
         if (life <= 0)
         {
             Disparo.gameObject.SetActive(false);
+            //spriteEnemy.disableSpecialAttack = false;
+
         }
         base.Update();
         CheckInDeffense();
@@ -55,7 +58,7 @@ public class Defensivo : Enemy
             {
                 if (spriteEnemy.GetAnimator() != null)
                 {
-                    spriteEnemy.GetAnimator().SetBool("EnPlenoAtaqueEspecial", false);
+                    //spriteEnemy.GetAnimator().SetBool("EnPlenoAtaqueEspecial", false);
                     spriteEnemy.GetAnimator().SetBool("FinalAtaqueEspecial", true);
                     eventWise.StartEvent("fuego_termina");
                     inFuegoEmpieza = false;
@@ -69,7 +72,9 @@ public class Defensivo : Enemy
                 eventWise.StartEvent("fuego_empieza");
                 inFuegoEmpieza = true;
             }
-            spriteEnemy.GetAnimator().SetBool("EnPlenoAtaqueEspecial", true);
+            //spriteEnemy.GetAnimator().SetBool("EnPlenoAtaqueEspecial", true);
+            spriteEnemy.GetAnimator().SetBool("FinalAtaqueEspecial", false);
+            //spriteEnemy.disableSpecialAttack = false;
         }
     }
     public override void CheckDelayAttack(bool specialAttack)
