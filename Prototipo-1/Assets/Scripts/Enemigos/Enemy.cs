@@ -162,7 +162,7 @@ public class Enemy : MonoBehaviour
     {
         if (life <= 0)
         {
-            Debug.Log("ENTRE");
+            //Debug.Log("ENTRE");
             SpeedJump = auxSpeedJump;
         }
     }
@@ -1008,11 +1008,11 @@ public class Enemy : MonoBehaviour
     }
     public void MoveJamp(Vector3 direccion)
     {
-        Debug.Log("ENTRE AL MOVIMIENTO");
-        if (Input.GetKey(KeyCode.X))
+        //Debug.Log("ENTRE AL MOVIMIENTO");
+        /*if (Input.GetKey(KeyCode.X))
         {
             life = 0;
-        }
+        }*/
         if (direccion == Vector3.up)
         {
             transform.Translate(direccion * SpeedJump * Time.deltaTime);
