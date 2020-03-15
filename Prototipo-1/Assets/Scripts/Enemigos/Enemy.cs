@@ -132,7 +132,12 @@ public class Enemy : MonoBehaviour
         life = maxLife;
         delaySelectMovement = 0.2f;
         enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
+        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
         //poolObjectEnemy = GetComponent<PoolObject>();
+    }
+    private void OnDisable()
+    {
+        ResetSpeedJump();
     }
     public virtual void Start()
     {
@@ -153,8 +158,17 @@ public class Enemy : MonoBehaviour
         CheckInitialCharacter();
         enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
     }
+    public void ResetSpeedJump()
+    {
+        if (life <= 0)
+        {
+            Debug.Log("ENTRE");
+            SpeedJump = auxSpeedJump;
+        }
+    }
     public virtual void Update()
     {
+        ResetSpeedJump();
         if (enableMovement)
         {
             CheckDeffense();
@@ -901,8 +915,12 @@ public class Enemy : MonoBehaviour
     }
     public void Jump(Vector3 alturaMaxima)
     {
+        //Debug.Log(isJamping);
+        //Debug.Log("CheckMove: "+CheckMove(new Vector3(transform.position.x, alturaMaxima.y, transform.position.z)));// esto es false
+        //Debug.Log("isJumping: " + isJamping);
         if (CheckMove(new Vector3(transform.position.x, alturaMaxima.y, transform.position.z)) && isJamping)
         {
+            //Debug.Log("ENTRE");
             if (transform.position.y <= InitialPosition.y)
             {
                 eventWise.StartEvent("saltar");
@@ -922,7 +940,6 @@ public class Enemy : MonoBehaviour
             }
             if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
             {
-                    
                 Deffence();
             }
         }
@@ -991,6 +1008,11 @@ public class Enemy : MonoBehaviour
     }
     public void MoveJamp(Vector3 direccion)
     {
+        Debug.Log("ENTRE AL MOVIMIENTO");
+        if (Input.GetKey(KeyCode.X))
+        {
+            life = 0;
+        }
         if (direccion == Vector3.up)
         {
             transform.Translate(direccion * SpeedJump * Time.deltaTime);
