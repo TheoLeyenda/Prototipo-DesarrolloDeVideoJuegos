@@ -177,6 +177,11 @@ public class Player : MonoBehaviour
             CheckMovementInSpecialAttack();
             CheckBoxColliders2D();
         }
+        /*if (Input.GetKey(KeyCode.Space))
+        {
+            xpActual = xpNededSpecialAttack;
+            PD.lifePlayer = PD.maxLifePlayer;
+        }*/
     }
     public void CheckBoxColliders2D()
     {

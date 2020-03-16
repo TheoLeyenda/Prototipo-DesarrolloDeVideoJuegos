@@ -43,6 +43,7 @@ public class Gaseosa : MonoBehaviour
                 return;
             }
             player.PD.lifePlayer = player.PD.lifePlayer - damage;
+            Debug.Log("Colisiono con el enemigo ahre");
         }
         if (collision.tag == "Enemy")
         {
@@ -52,6 +53,7 @@ public class Gaseosa : MonoBehaviour
                 return;
             }
             enemy.life = enemy.life - (damage/2);
+            
         }
     }
     public void PlaySegundaAnimacion()
