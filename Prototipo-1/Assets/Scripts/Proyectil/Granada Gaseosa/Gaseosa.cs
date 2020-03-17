@@ -43,7 +43,7 @@ public class Gaseosa : MonoBehaviour
                 return;
             }
             player.PD.lifePlayer = player.PD.lifePlayer - damage;
-            Debug.Log("Colisiono con el enemigo ahre");
+            //Debug.Log("Colisiono con el enemigo ahre");
         }
         if (collision.tag == "Enemy")
         {
