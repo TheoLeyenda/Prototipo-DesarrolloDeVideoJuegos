@@ -111,11 +111,12 @@ public class GeneradorDeEnemigos : MonoBehaviour
                 //Debug.Log("ENTRE");
             }
             else
-            {
+            { 
                 enemigoActual.pointOfCombat = pointOfCombat.transform.position;
                 enemigoActual.pointOfDeath = pointOfInit.transform.position;
                 enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
                 enemigoActual.enableMovement = true;
+                enemigoActual.SetDelaySelectMovement(1);
             }
         }
         else if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
@@ -131,6 +132,7 @@ public class GeneradorDeEnemigos : MonoBehaviour
                 enemigoActual.pointOfCombat = pointOfCombat.transform.position;
                 enemigoActual.pointOfDeath = pointOfInit.transform.position;
                 enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+                enemigoActual.SetDelaySelectMovement(1);
                 enemigoActual.enableMovement = true;
             }
         }
@@ -165,6 +167,7 @@ public class GeneradorDeEnemigos : MonoBehaviour
                     enemigoActual.InitialPosition  = Generador.transform.position;
                     enemigoActual.ResetEnemy();
                 }
+                enemigoActual.xpActual = 0;
                 enemy.OnEnemy();
                 countEnemysGenerate++;
                 break;
@@ -185,6 +188,7 @@ public class GeneradorDeEnemigos : MonoBehaviour
                             enemigoActual.InitialPosition = Generador.transform.position;
                             enemigoActual.ResetEnemy();
                         }
+                        enemigoActual.xpActual = 0;
                         enemy.OnEnemy();
                         if (idListEnemy == 0)
                         {

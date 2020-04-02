@@ -78,7 +78,10 @@ public class Agresivo : Enemy
                 || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
                 || !enableMecanicParabolaAttack)
             {
-                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
+                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
+                    && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp()
+                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque
+                    && !GetIsDuck())
                 {
                     spriteEnemy.GetAnimator().Play("Ataque enemigo agresivo");
                     inAttack = true;
@@ -89,7 +92,7 @@ public class Agresivo : Enemy
                     spriteEnemy.GetAnimator().Play("Ataque Salto enemigo agresivo");
                     inAttack = true;
                 }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && GetIsDuck() && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
                 {
                     spriteEnemy.GetAnimator().Play("Ataque Agachado enemigo agresivo");
                     spriteEnemy.GetAnimator().SetBool("Idle", false);

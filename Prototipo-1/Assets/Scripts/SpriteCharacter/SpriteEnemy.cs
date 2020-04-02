@@ -6,6 +6,8 @@ using UnityEngine;
 public class SpriteEnemy : SpriteCharacter
 {
     public Enemy enemy;
+    [HideInInspector]
+    public string nameActual;
     //[HideInInspector]
     //public bool disableSpecialAttack = false;
     private void Start()
@@ -70,7 +72,7 @@ public class SpriteEnemy : SpriteCharacter
                     {
                         ActualSprite = SpriteActual.SaltoDefensa;
                     }
-                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.MoverAdelante)
+                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.MoverAdelante || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.MoveToPointCombat)
                     {
                         ActualSprite = SpriteActual.MoverAdelante;
                     }
@@ -123,6 +125,7 @@ public class SpriteEnemy : SpriteCharacter
                 if (Animations[i].nameAnimation != "")
                 {
                     PlayAnimation(Animations[i].nameAnimation);
+                    nameActual = Animations[i].nameSpriteActual;
                 }
             }
             else if (ActualSprite == SpriteActual.ContraAtaque 

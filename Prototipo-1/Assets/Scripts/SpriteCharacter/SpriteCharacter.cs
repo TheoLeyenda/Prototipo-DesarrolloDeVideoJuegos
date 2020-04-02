@@ -39,6 +39,7 @@ public class SpriteCharacter : MonoBehaviour
         public string nameSpriteActual;
         public string nameAnimation;
     }
+    public SpriteCharacter() { }
 
     public List<ElementsAnimation> Animations;
 

@@ -127,8 +127,12 @@ public class Enemy : MonoBehaviour
     public int CantCasillasOcupadas_X;
     public int CantCasillasOcupadas_Y;
     public int ColumnaActual;
+
+    private float tolerableStillTime;
+    private float auxTolerableStillTime;
     private void OnEnable()
     {
+        //Debug.Log("ENTRE");
         life = maxLife;
         delaySelectMovement = 0.2f;
         enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
@@ -138,9 +142,12 @@ public class Enemy : MonoBehaviour
     private void OnDisable()
     {
         ResetSpeedJump();
+        enemyPrefab.transform.position = new Vector3(500, 500, 500);
     }
     public virtual void Start()
     {
+        tolerableStillTime = maxRandomDelayMovement + 0.1f;
+        auxTolerableStillTime = maxRandomDelayMovement + 0.1f;
         eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
         enableSpecialAttack = false;
         auxSpeedJump = SpeedJump;
@@ -169,8 +176,11 @@ public class Enemy : MonoBehaviour
     public virtual void Update()
     {
         ResetSpeedJump();
+        //Debug.Log(enumsEnemy.GetMovement());
+        //Debug.Log("Enable Movement: " + enableMovement);
+        //Debug.Log("Delay Movimiento: " + delaySelectMovement);
         if (enableMovement)
-        {
+        { 
             CheckDeffense();
             CheckBoxColliders2D();
             //CheckLifeBar();
@@ -180,6 +190,26 @@ public class Enemy : MonoBehaviour
                 && enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto)
             {
                 IA();
+            }
+
+            if ((spriteEnemy.nameActual == "Parado" || spriteEnemy.nameActual == "parado") && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
+            {
+                if (tolerableStillTime <= 0)
+                {
+                    tolerableStillTime = auxTolerableStillTime;
+                    delaySelectMovement = 0;
+                    //enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+                    enableMovement = true;
+                    IA();
+                }
+                else if(tolerableStillTime > 0)
+                {
+                    tolerableStillTime = tolerableStillTime - Time.deltaTime;
+                }
+            }
+            else
+            {
+                tolerableStillTime = auxTolerableStillTime;
             }
         }
         CheckOutLimit();
@@ -230,22 +260,38 @@ public class Enemy : MonoBehaviour
         boxColliderControllerAgachado.GetBoxCollider2D().enabled = false;
         boxColliderControllerSaltando.GetBoxCollider2D().enabled = false;
         enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
+        tolerableStillTime = auxTolerableStillTime;
         //poolObjectEnemy = GetComponent<PoolObject>();
         if (GameManager.instanceGameManager != null)
         {
             gm = GameManager.instanceGameManager;
         }
         CheckInitialCharacter();
-        delaySelectMovement = 0;
-        spriteEnemy.ActualSprite = SpriteCharacter.SpriteActual.Parado;
+        //spriteEnemy.ActualSprite = SpriteCharacter.SpriteActual.Parado;
+        xpActual = 0;
     }
     public void IA()
     {
-        if (transform.position.y > InitialPosition.y)
+        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.MoveToPointCombat)
+        {
+            delaySelectMovement = 10;
+            CheckMovement();
+            return;
+        }
+        if (transform.position.y > InitialPosition.y && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
         {
             delaySelectMovement = 0.1f;
+            //Debug.Log("ESTOY ENTRANDO");
+            if(enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
+            {
+                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
+                isJamping = true;
+                Jump(alturaMaxima.transform.position);
+                isDeffended = false;
+            }
         }
-        if (life > 0 && enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto)
+       
+        if (life > 0 && enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
         {
             if (delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque))
             {
@@ -310,7 +356,9 @@ public class Enemy : MonoBehaviour
     public void CheckComportamiento()
     {
         EnumsEnemy.Movimiento movimiento = EnumsEnemy.Movimiento.Nulo;
-        if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
+        if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat 
+            && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath 
+            && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
         {
             if (activateComportamiento)
             {
@@ -393,7 +441,14 @@ public class Enemy : MonoBehaviour
         {
             movimiento = enumsEnemy.GetMovement();
         }
-        delaySelectMovement = UnityEngine.Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
+        if (movimiento == EnumsEnemy.Movimiento.MoveToPointCombat)
+        {
+            delaySelectMovement = 10;
+        }
+        else
+        {
+            delaySelectMovement = UnityEngine.Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
+        }
         enumsEnemy.SetMovement(movimiento);
         if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto)
         {
@@ -635,6 +690,8 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
+        //Debug.Log(isDuck);
+        
         switch (enumsEnemy.GetMovement())
         {
             case EnumsEnemy.Movimiento.AtacarEnElLugar:
@@ -737,7 +794,7 @@ public class Enemy : MonoBehaviour
                 MoveToPoint(pointOfDeath);
                 break;
         }
-        if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque)
+        if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacheDefensa && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Agacharse)
         {
             colliderSprites.enabled = true;
             isDuck = false;
@@ -1063,5 +1120,9 @@ public class Enemy : MonoBehaviour
     public void SetEnableSpecialAttack(bool _enableSpecialAttack)
     {
         enableSpecialAttack = _enableSpecialAttack;
+    }
+    public void SetIsDuck(bool _isDuck)
+    {
+        isDuck = _isDuck;
     }
 }

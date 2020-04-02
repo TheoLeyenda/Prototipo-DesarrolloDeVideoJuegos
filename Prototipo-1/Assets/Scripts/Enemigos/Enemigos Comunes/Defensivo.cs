@@ -106,11 +106,15 @@ public class Defensivo : Enemy
                 || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
                 || !enableMecanicParabolaAttack)
             {
-                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
+                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar 
+                    && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp() 
+                    && enumsEnemy.GetMovement() !=  EnumsEnemy.Movimiento.AgacharseAtaque
+                    && !GetIsDuck())
                 {
                     spriteEnemy.spriteRenderer.color = Color.white;
                     spriteEnemy.GetAnimator().Play("Ataque enemigo defensivo");
                     inAttack = true;
+                    SetIsDuck(false);
                 }
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
@@ -118,12 +122,14 @@ public class Defensivo : Enemy
                     spriteEnemy.spriteRenderer.color = Color.white;
                     spriteEnemy.GetAnimator().Play("Ataque Salto enemigo defensivo");
                     inAttack = true;
+                    SetIsDuck(false);
                 }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && GetIsDuck() && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
                 {
                     spriteEnemy.spriteRenderer.color = Color.white;
                     spriteEnemy.GetAnimator().Play("Ataque Agachado enemigo defensivo");
                     inAttack = true;
+                    SetIsDuck(true);
                 }
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
@@ -153,18 +159,21 @@ public class Defensivo : Enemy
                     spriteEnemy.spriteRenderer.color = Color.white;
                     spriteEnemy.PlayAnimation("Ataque Parabola enemigo defensivo");
                     inAttack = true;
+                    SetIsDuck(false);
                 }
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && delayAttack <= 0)
                 {
                     spriteEnemy.spriteRenderer.color = Color.white;
                     spriteEnemy.PlayAnimation("Ataque Parabola Salto enemigo defensivo");
                     inAttack = true;
+                    SetIsDuck(false);
                 }
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && delayAttack <= 0)
                 {
                     spriteEnemy.spriteRenderer.color = Color.white;
                     spriteEnemy.PlayAnimation("Ataque Parabola Agachado enemigo defensivo");
                     inAttack = true;
+                    SetIsDuck(true);
                 }
             }
         }
@@ -370,7 +379,7 @@ public class Defensivo : Enemy
                     proyectil.damage = proyectil.damageCounterAttack;
                 }
             }
-            if (!GetIsDuck() && !specialAttack)
+            if (!GetIsDuck() && !specialAttack && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque)
             {
                 tipoProyectil = Proyectil.typeProyectil.ProyectilNormal;
                 if (jampAttack)
@@ -382,7 +391,7 @@ public class Defensivo : Enemy
                 go.transform.position = generadoresProyectiles.transform.position;
                 proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
             }
-            else if (!specialAttack && GetIsDuck())
+            else if (!specialAttack && GetIsDuck() || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
             {
                 tipoProyectil = Proyectil.typeProyectil.ProyectilBajo;
                 go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
