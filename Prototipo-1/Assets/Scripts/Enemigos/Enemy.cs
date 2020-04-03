@@ -130,24 +130,28 @@ public class Enemy : MonoBehaviour
 
     private float tolerableStillTime;
     private float auxTolerableStillTime;
+
+    private bool inCombatPosition;
+
     private void OnEnable()
     {
         //Debug.Log("ENTRE");
         life = maxLife;
         delaySelectMovement = 0.2f;
         enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
-        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+        //enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
         //poolObjectEnemy = GetComponent<PoolObject>();
     }
     private void OnDisable()
     {
         ResetSpeedJump();
         enemyPrefab.transform.position = new Vector3(500, 500, 500);
+        inCombatPosition = false;
     }
     public virtual void Start()
     {
-        tolerableStillTime = maxRandomDelayMovement + 0.1f;
-        auxTolerableStillTime = maxRandomDelayMovement + 0.1f;
+        tolerableStillTime = maxRandomDelayMovement;
+        auxTolerableStillTime = maxRandomDelayMovement;
         eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
         enableSpecialAttack = false;
         auxSpeedJump = SpeedJump;
@@ -176,9 +180,15 @@ public class Enemy : MonoBehaviour
     public virtual void Update()
     {
         ResetSpeedJump();
-        //Debug.Log(enumsEnemy.GetMovement());
-        //Debug.Log("Enable Movement: " + enableMovement);
-        //Debug.Log("Delay Movimiento: " + delaySelectMovement);
+        if (Input.GetKey(KeyCode.T))
+        {
+            Debug.Log(enumsEnemy.GetMovement());
+            Debug.Log("Enable Movement: " + enableMovement);
+            Debug.Log("Delay Movimiento: " + delaySelectMovement);
+            Debug.Log("SpriteEnemy:"+ spriteEnemy.nameActual);
+            Debug.Log(inCombatPosition);
+            Debug.Log(enumsEnemy.GetStateEnemy());
+        }
         if (enableMovement)
         { 
             CheckDeffense();
@@ -186,31 +196,35 @@ public class Enemy : MonoBehaviour
             //CheckLifeBar();
             //CheckLoadSpecialAttackBar();
             CheckDead();
-            if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
-                && enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto)
-            {
-                IA();
-            }
-
-            if ((spriteEnemy.nameActual == "Parado" || spriteEnemy.nameActual == "parado") && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
+            /*if ((spriteEnemy.nameActual == "Parado" || spriteEnemy.nameActual == "parado" || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+            && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial && inCombatPosition && !isJamping
+            && SpeedJump >= GetAuxSpeedJamp() && !isDuck)
             {
                 if (tolerableStillTime <= 0)
                 {
                     tolerableStillTime = auxTolerableStillTime;
-                    delaySelectMovement = 0;
+                    //delaySelectMovement = 0;
                     //enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
                     enableMovement = true;
+                    CheckComportamiento();
                     IA();
                 }
-                else if(tolerableStillTime > 0)
+                else if (tolerableStillTime > 0)
                 {
                     tolerableStillTime = tolerableStillTime - Time.deltaTime;
                 }
+            }
+            else*/ if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
+                && enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto)
+            {
+                IA();
+                tolerableStillTime = auxTolerableStillTime;
             }
             else
             {
                 tolerableStillTime = auxTolerableStillTime;
             }
+            
         }
         CheckOutLimit();
     }
@@ -225,7 +239,7 @@ public class Enemy : MonoBehaviour
     }
     public void CheckOutLimit()
     {
-        if (enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto)
+        if (enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto && inCombatPosition)
         {
             if (transform.position.y <= InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar && !isJamping
                 || transform.position.y <= InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && !isJamping
@@ -278,7 +292,7 @@ public class Enemy : MonoBehaviour
             CheckMovement();
             return;
         }
-        if (transform.position.y > InitialPosition.y && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
+        if (transform.position.y > InitialPosition.y && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && inCombatPosition)
         {
             delaySelectMovement = 0.1f;
             //Debug.Log("ESTOY ENTRANDO");
@@ -358,10 +372,15 @@ public class Enemy : MonoBehaviour
         EnumsEnemy.Movimiento movimiento = EnumsEnemy.Movimiento.Nulo;
         if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat 
             && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath 
-            && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
+            && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp()
+            && inCombatPosition)
         {
             if (activateComportamiento)
             {
+                if (Input.GetKey(KeyCode.T))
+                {
+                    Debug.Log("ENTRE AL ASIGNADOR DE COMPORTAMIENTO");
+                }
                 float opcionMovement = UnityEngine.Random.Range(MinRangeRandom, MaxRangeRandom);
 
                 if (opcionMovement < MovePorcentage)
@@ -600,6 +619,7 @@ public class Enemy : MonoBehaviour
                 ResetEnemy();
                 enemyPrefab.gameObject.SetActive(false);
                 xpActual = 0;
+                inCombatPosition = false;
             }
         }
         else if (InPool)
@@ -618,6 +638,7 @@ public class Enemy : MonoBehaviour
                         //poolObjectEnemy.Recycle();
                         pool.Recycle(enemyPrefab);
                         xpActual = 0;
+                        inCombatPosition = false;
                     }
                     break;
                 case EnumsGameManager.ModosDeJuego.Historia:
@@ -632,6 +653,7 @@ public class Enemy : MonoBehaviour
                         //poolObjectEnemy.Recycle();
                         pool.Recycle(enemyPrefab);
                         xpActual = 0;
+                        inCombatPosition = false;
                     }
                     break;
                 case EnumsGameManager.ModosDeJuego.Nulo:
@@ -643,6 +665,7 @@ public class Enemy : MonoBehaviour
                         ResetEnemy();
                         enemyPrefab.gameObject.SetActive(false);
                         xpActual = 0;
+                        inCombatPosition = false;
                     }
                     break;
             }
@@ -652,6 +675,7 @@ public class Enemy : MonoBehaviour
     {
         if (life <= 0 && transform.position.y <= InitialPosition.y)
         {
+            inCombatPosition = false;
             spriteEnemy.PlayAnimation("Death");
             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
@@ -659,7 +683,7 @@ public class Enemy : MonoBehaviour
     }
     public void CheckMovement()
     {
-        if (barraDeEscudo != null)
+        if (barraDeEscudo != null && inCombatPosition && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
         {
             if ((enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar
             && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacheDefensa
@@ -1124,5 +1148,12 @@ public class Enemy : MonoBehaviour
     public void SetIsDuck(bool _isDuck)
     {
         isDuck = _isDuck;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "pointOfCombat")
+        {
+            inCombatPosition = true;
+        }
     }
 }
