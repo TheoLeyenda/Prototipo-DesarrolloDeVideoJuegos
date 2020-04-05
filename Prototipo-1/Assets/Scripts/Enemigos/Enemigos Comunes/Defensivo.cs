@@ -131,10 +131,10 @@ public class Defensivo : Enemy
                     inAttack = true;
                     SetIsDuck(true);
                 }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
+                else if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo) && transform.position.y <= InitialPosition.y)
                 {
                     switch (enumsEnemy.GetMovement())
                     {
@@ -344,7 +344,7 @@ public class Defensivo : Enemy
         GameObject go = null;
         Proyectil proyectil = null;
         Proyectil.typeProyectil tipoProyectil = Proyectil.typeProyectil.Nulo;
-        if (specialAttack)
+        if (specialAttack && transform.position.y <= InitialPosition.y)
         {
             Disparo.gameObject.SetActive(true);
             spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", false);
