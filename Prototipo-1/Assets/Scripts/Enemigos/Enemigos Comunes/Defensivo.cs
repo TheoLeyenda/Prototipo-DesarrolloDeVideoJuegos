@@ -42,6 +42,12 @@ public class Defensivo : Enemy
             //spriteEnemy.disableSpecialAttack = false;
 
         }
+        //Esto es para testear borrar luego.
+        if (Input.GetKey(KeyCode.Space))
+        {
+            xpActual = xpNededSpecialAttack;
+        }
+        //----------------------------------
         base.Update();
         CheckInDeffense();
         if (Disparo.gameObject.activeSelf)
@@ -49,6 +55,17 @@ public class Defensivo : Enemy
             delaySelectMovement = 0.1f;
         }
         CheckInSpecialAttack();
+        if (transform.position.y > InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
+        {
+            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+            SpeedJump = -1f;
+            CheckMovement();
+            delaySelectMovement = 0.7f;
+        }
+        /*if(transform.position.y > InitialPosition.y + 1 && !GetIsJamping())
+        {
+            xpActual = xpNededSpecialAttack;
+        }*/
     }
     public void CheckInSpecialAttack()
     {
@@ -349,6 +366,13 @@ public class Defensivo : Enemy
             Disparo.gameObject.SetActive(true);
             spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", false);
             enumsEnemy.SetMovement( EnumsEnemy.Movimiento.AtaqueEspecial);
+        }
+        else if(transform.position.y > InitialPosition.y)
+        {
+            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+            SpeedJump = -1f;
+            CheckMovement();
+            delaySelectMovement = 0.7f;
         }
         if (!Disparo.gameObject.activeSelf)
         {

@@ -138,6 +138,7 @@ public class Enemy : MonoBehaviour
         //Debug.Log("ENTRE");
         life = maxLife;
         delaySelectMovement = 0.2f;
+        isJamping = false;
         enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
         //enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
         //poolObjectEnemy = GetComponent<PoolObject>();
@@ -147,6 +148,7 @@ public class Enemy : MonoBehaviour
         ResetSpeedJump();
         enemyPrefab.transform.position = new Vector3(500, 500, 500);
         inCombatPosition = false;
+        isJamping = false;
     }
     public virtual void Start()
     {
@@ -180,6 +182,7 @@ public class Enemy : MonoBehaviour
     public virtual void Update()
     {
         ResetSpeedJump();
+        //Esto es para testear borrar luego
         if (Input.GetKey(KeyCode.T))
         {
             Debug.Log(enumsEnemy.GetMovement());
@@ -189,6 +192,8 @@ public class Enemy : MonoBehaviour
             Debug.Log(inCombatPosition);
             Debug.Log(enumsEnemy.GetStateEnemy());
         }
+        //-----------------------------------
+
         if (enableMovement)
         { 
             CheckDeffense();

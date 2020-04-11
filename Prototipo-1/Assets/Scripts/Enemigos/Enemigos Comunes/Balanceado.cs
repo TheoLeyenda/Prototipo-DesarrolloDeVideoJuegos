@@ -15,6 +15,11 @@ public class Balanceado : Enemy
     {
         base.Update();
         CheckSpecialAttack();
+        if(delaySelectMovement <= 0 && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+        {
+            CheckComportamiento();
+            CheckMovement();
+        }
         //Debug.Log(enumsEnemy.GetMovement());
     }
     public override void CheckDelayAttack(bool specialAttack)

@@ -157,6 +157,7 @@ public class ScreenManager : MonoBehaviour
     {
         if (eventWise != null)
         {
+            eventWise.StartEvent("fuego_termina");
             eventWise.StartEvent("volver_al_menu");
         }
         gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Nulo;
