@@ -1,163 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!61 &2422800598577150037
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8808850738521480100}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.00092796795, y: 0.007023953}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.050198313, y: 0.12299423}
-  m_EdgeRadius: 0
---- !u!114 &34985687061080399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8808850738521480100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 250d3277527bb20448c80e70c370d163, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ruta: {fileID: 6744862063344450536}
-  rutaAgachado: {fileID: 6744862064433355464}
-  countRoot: 0
-  initialRoot: 0
-  particleMovement:
-    timeLifeParticleJamp: 0.3
-    auxTimeLifeParticleJamp: 0.3
-    particleJump: {fileID: 4680112323352867241}
---- !u!114 &1866994702155065978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8808850738521480100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8313a607506ddd418c842a3793172ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeBoss: 9
-  typeEnemy: 5
---- !u!114 &1417405671898620725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8808850738521480100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67da4d649f6349349a55bdb2e776b3ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolObjectSpecialAttack: {fileID: 0}
---- !u!114 &780478050191980682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8808850738521480100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a97dbfded11872d489f95826cb44eb96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  applyColorShoot: 0
-  colorShoot: {r: 1, g: 0.29803923, b: 0.29803923, a: 1}
-  nameEnemy: Myra
-  enableColorShootSpecialAttack: 0
-  enableMovement: 0
-  alturaMaxima: {fileID: 2535370798983309438}
-  posicionesDeMovimiento:
-  - {fileID: 575115925723352298}
-  - {fileID: 1620805260564046260}
-  - {fileID: 6548380593436277030}
-  barraDeEscudo: {fileID: 0}
-  enableSpecialAttack: 0
-  spriteEnemy: {fileID: 6744862065073495840}
-  enemyPrefab: {fileID: 1866994702988090532}
-  gridEnemy: {fileID: 5452046021746376681}
-  enumsEnemy: {fileID: 1866994702155065978}
-  structsEnemys: {fileID: 34985687061080399}
-  SpriteRendererEnemigo: {fileID: 6744862065073495842}
-  specialAttackEnemyController: {fileID: 1417405671898620725}
-  InPool: 1
-  pool: {fileID: 0}
-  life: 300
-  maxLife: 300
-  xpActual: 0
-  xpNededSpecialAttack: 50
-  xpForHit: 10
-  poolParabolaAttack: {fileID: 8907688198051747312}
-  poolObjectAttack: {fileID: 3936140864642745937}
-  generadoresProyectiles: {fileID: 6744862063357417974}
-  generadorProyectilesAgachado: {fileID: 6744862063263473393}
-  generadorProyectilParabola: {fileID: 6744862063609448456}
-  generadorProyectilParabolaAgachado: {fileID: 6744862064612989938}
-  maxRandomDelayMovement: 1.5
-  minRandomDelayMovement: 1
-  delayAttack: 0.35
-  anguloAtaqueSalto: 180
-  Speed: 20
-  SpeedJump: 12
-  Resistace: 22
-  Gravity: 35
-  delayAttackJumping: 0.35
-  colliderSprites: {fileID: 6744862065073495841}
-  InitialPosition: {x: 0, y: 0, z: 0}
-  pointOfDeath: {x: 0, y: 0, z: 0}
-  pointOfCombat: {x: 0, y: 0, z: 0}
-  damageCounterAttack: 1
-  activateComportamiento: 1
-  boxColliderPiernas: {fileID: 2422800598306374939}
-  boxColliderSprite: {fileID: 2422800598539683707}
-  boxColliderControllerAgachado: {fileID: 2422800598513572433}
-  boxColliderControllerParado: {fileID: 2422800597731055384}
-  boxColliderControllerSaltando: {fileID: 2422800598492342758}
-  enableMecanicParabolaAttack: 1
-  inAttack: 0
-  MovePorcentage: 25
-  JumpPorcentage: 25
-  DuckPorcentage: 25
-  IdlePorcentage: 25
-  MoveForwardPorcentage: 50
-  MoveBackPorcentage: 50
-  AttackJumpPorcentage: 60
-  DefenceJumpPorcentage: 30
-  SimpleJumpPorcentage: 10
-  AttackDuckPorcentage: 80
-  DefenceDuckPorcentage: 10
-  SimpleDuckPorcentage: 10
-  AttackPorcentage: 50
-  DeffensePorcentage: 50
-  AttackSpecialPorcentage: 100
-  parabolaAttack: 70
-  CantCasillasOcupadas_X: 1
-  CantCasillasOcupadas_Y: 2
-  ColumnaActual: 1
 --- !u!1 &1866994702988090532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,21 +935,21 @@ MonoBehaviour:
   delaySpriteContraAtaque: 0.3
   Animations:
   - nameSpriteActual: Agachado
-    nameAnimation: Agachado famosa
+    nameAnimation: Agachado gotica
   - nameSpriteActual: AgachadoDefensa
-    nameAnimation: Agachado Defensa famosa
+    nameAnimation: Agachado Defensa gotica
   - nameSpriteActual: MoverAdelante
-    nameAnimation: Moverse Adelante famosa
+    nameAnimation: Moverse Adelante gotica
   - nameSpriteActual: MoverAtras
-    nameAnimation: Moverse Atras famosa
+    nameAnimation: Moverse Atras gotica
   - nameSpriteActual: ParadoDefensa
-    nameAnimation: Parado Defensa famosa
+    nameAnimation: Parado Defensa gotica
   - nameSpriteActual: Salto
-    nameAnimation: Salto famosa
+    nameAnimation: Salto gotica
   - nameSpriteActual: SaltoDefensa
-    nameAnimation: Salto Defensa famosa
+    nameAnimation: Salto Defensa gotica
   - nameSpriteActual: Parado
-    nameAnimation: Parado famosa
+    nameAnimation: Parado gotica
   enemy: {fileID: 780478050191980682}
   nameActual: 
 --- !u!95 &6744862065073495855
@@ -1208,6 +1050,164 @@ Transform:
   m_Father: {fileID: 6744862063344450537}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &2422800598577150037
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8808850738521480100}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.00092796795, y: 0.007023953}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.050198313, y: 0.12299423}
+  m_EdgeRadius: 0
+--- !u!114 &34985687061080399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8808850738521480100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 250d3277527bb20448c80e70c370d163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ruta: {fileID: 6744862063344450536}
+  rutaAgachado: {fileID: 6744862064433355464}
+  countRoot: 0
+  initialRoot: 0
+  particleMovement:
+    timeLifeParticleJamp: 0.3
+    auxTimeLifeParticleJamp: 0.3
+    particleJump: {fileID: 4680112323352867241}
+--- !u!114 &780478050191980682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8808850738521480100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97dbfded11872d489f95826cb44eb96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  applyColorShoot: 0
+  colorShoot: {r: 1, g: 0.29803923, b: 0.29803923, a: 1}
+  nameEnemy: Myra
+  enableColorShootSpecialAttack: 0
+  enableMovement: 0
+  alturaMaxima: {fileID: 2535370798983309438}
+  posicionesDeMovimiento:
+  - {fileID: 575115925723352298}
+  - {fileID: 1620805260564046260}
+  - {fileID: 6548380593436277030}
+  barraDeEscudo: {fileID: 0}
+  enableSpecialAttack: 0
+  spriteEnemy: {fileID: 6744862065073495840}
+  enemyPrefab: {fileID: 1866994702988090532}
+  gridEnemy: {fileID: 5452046021746376681}
+  enumsEnemy: {fileID: 1866994702155065978}
+  structsEnemys: {fileID: 34985687061080399}
+  SpriteRendererEnemigo: {fileID: 6744862065073495842}
+  specialAttackEnemyController: {fileID: 1417405671898620725}
+  InPool: 1
+  pool: {fileID: 0}
+  life: 300
+  maxLife: 300
+  xpActual: 0
+  xpNededSpecialAttack: 50
+  xpForHit: 10
+  poolParabolaAttack: {fileID: 8907688198051747312}
+  poolObjectAttack: {fileID: 3936140864642745937}
+  generadoresProyectiles: {fileID: 6744862063357417974}
+  generadorProyectilesAgachado: {fileID: 6744862063263473393}
+  generadorProyectilParabola: {fileID: 6744862063609448456}
+  generadorProyectilParabolaAgachado: {fileID: 6744862064612989938}
+  maxRandomDelayMovement: 1.5
+  minRandomDelayMovement: 1
+  delayAttack: 0.35
+  anguloAtaqueSalto: 180
+  Speed: 20
+  SpeedJump: 12
+  Resistace: 22
+  Gravity: 35
+  delayAttackJumping: 0.35
+  colliderSprites: {fileID: 6744862065073495841}
+  InitialPosition: {x: 0, y: 0, z: 0}
+  pointOfDeath: {x: 0, y: 0, z: 0}
+  pointOfCombat: {x: 0, y: 0, z: 0}
+  damageCounterAttack: 1
+  activateComportamiento: 1
+  boxColliderPiernas: {fileID: 2422800598306374939}
+  boxColliderSprite: {fileID: 2422800598539683707}
+  boxColliderControllerAgachado: {fileID: 2422800598513572433}
+  boxColliderControllerParado: {fileID: 2422800597731055384}
+  boxColliderControllerSaltando: {fileID: 2422800598492342758}
+  enableMecanicParabolaAttack: 1
+  inAttack: 0
+  MovePorcentage: 25
+  JumpPorcentage: 25
+  DuckPorcentage: 25
+  IdlePorcentage: 25
+  MoveForwardPorcentage: 50
+  MoveBackPorcentage: 50
+  AttackJumpPorcentage: 60
+  DefenceJumpPorcentage: 30
+  SimpleJumpPorcentage: 10
+  AttackDuckPorcentage: 80
+  DefenceDuckPorcentage: 10
+  SimpleDuckPorcentage: 10
+  AttackPorcentage: 50
+  DeffensePorcentage: 50
+  AttackSpecialPorcentage: 100
+  parabolaAttack: 70
+  CantCasillasOcupadas_X: 1
+  CantCasillasOcupadas_Y: 2
+  ColumnaActual: 1
+--- !u!114 &1417405671898620725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8808850738521480100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67da4d649f6349349a55bdb2e776b3ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolObjectSpecialAttack: {fileID: 0}
+--- !u!114 &1866994702155065978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8808850738521480100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8313a607506ddd418c842a3793172ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeBoss: 9
+  typeEnemy: 5
 --- !u!1001 &1866994702155065975
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1309,15 +1309,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75438edaff39ea94592a8d0f5a22a436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &8808850738521480100 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7194419974994112979, guid: 61245c1a77e7ad847b3751885e027da7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1866994702155065975}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8808850738521480102 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7194419974994112977, guid: 61245c1a77e7ad847b3751885e027da7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1866994702155065975}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8808850738521480100 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7194419974994112979, guid: 61245c1a77e7ad847b3751885e027da7,
     type: 3}
   m_PrefabInstance: {fileID: 1866994702155065975}
   m_PrefabAsset: {fileID: 0}
@@ -1818,18 +1818,6 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
---- !u!114 &3361895071368076902 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3985470214078776346, guid: b929ac675e510d440a80e8c74d8c4990,
-    type: 3}
-  m_PrefabInstance: {fileID: 1866994703037569660}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 985212834189895035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd9454f7ba9260f488539ef15ab36e62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &985212834189895035 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1460512151194861319, guid: b929ac675e510d440a80e8c74d8c4990,
@@ -1890,6 +1878,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1866994703037569660}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &985212834841392456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1460512150504566580, guid: b929ac675e510d440a80e8c74d8c4990,
+    type: 3}
+  m_PrefabInstance: {fileID: 1866994703037569660}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1761000822715620619 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 115036547655763831, guid: b929ac675e510d440a80e8c74d8c4990,
@@ -1914,15 +1908,27 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1866994703037569660}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1620805260564046260 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
+    type: 3}
+  m_PrefabInstance: {fileID: 1866994703037569660}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8982969973660218160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7296128619017103692, guid: b929ac675e510d440a80e8c74d8c4990,
     type: 3}
   m_PrefabInstance: {fileID: 1866994703037569660}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1620805260564046260 stripped
+--- !u!1 &575115925723352298 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
+  m_CorrespondingSourceObject: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
+    type: 3}
+  m_PrefabInstance: {fileID: 1866994703037569660}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2535370798983309438 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
     type: 3}
   m_PrefabInstance: {fileID: 1866994703037569660}
   m_PrefabAsset: {fileID: 0}
@@ -1938,24 +1944,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6174d52913e16f42a2a8cdfa2ba4130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2535370798983309438 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
-    type: 3}
-  m_PrefabInstance: {fileID: 1866994703037569660}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &985212834841392456 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1460512150504566580, guid: b929ac675e510d440a80e8c74d8c4990,
-    type: 3}
-  m_PrefabInstance: {fileID: 1866994703037569660}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &575115925723352298 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
-    type: 3}
-  m_PrefabInstance: {fileID: 1866994703037569660}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8938180108118282367 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7341481717939390979, guid: b929ac675e510d440a80e8c74d8c4990,
@@ -1963,6 +1951,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1866994703037569660}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 985212834841392456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd9454f7ba9260f488539ef15ab36e62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3361895071368076902 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3985470214078776346, guid: b929ac675e510d440a80e8c74d8c4990,
+    type: 3}
+  m_PrefabInstance: {fileID: 1866994703037569660}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985212834189895035}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd9454f7ba9260f488539ef15ab36e62, type: 3}
@@ -2057,15 +2057,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5121f7090fa8f6746a3f91c06f29e2b8, type: 3}
---- !u!4 &4680112323352867244 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7020158619969980302, guid: 5121f7090fa8f6746a3f91c06f29e2b8,
-    type: 3}
-  m_PrefabInstance: {fileID: 2422800597579544098}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4680112323352867241 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7020158619969980299, guid: 5121f7090fa8f6746a3f91c06f29e2b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2422800597579544098}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4680112323352867244 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7020158619969980302, guid: 5121f7090fa8f6746a3f91c06f29e2b8,
     type: 3}
   m_PrefabInstance: {fileID: 2422800597579544098}
   m_PrefabAsset: {fileID: 0}

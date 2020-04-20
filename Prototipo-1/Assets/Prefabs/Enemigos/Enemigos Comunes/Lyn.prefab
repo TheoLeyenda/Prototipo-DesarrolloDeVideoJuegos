@@ -455,39 +455,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.050198313, y: 0.12299423}
   m_EdgeRadius: 0
---- !u!114 &4575277617229851452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4989353555656366551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 250d3277527bb20448c80e70c370d163, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ruta: {fileID: 7104566689087306139}
-  rutaAgachado: {fileID: 7104566690179356859}
-  countRoot: 0
-  initialRoot: 0
-  particleMovement:
-    timeLifeParticleJamp: 0.3
-    auxTimeLifeParticleJamp: 0.3
-    particleJump: {fileID: 9219419086744220634}
---- !u!114 &3218190812971819334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4989353555656366551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67da4d649f6349349a55bdb2e776b3ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolObjectSpecialAttack: {fileID: 0}
 --- !u!114 &2804062817849010185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,6 +469,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeBoss: 9
   typeEnemy: 6
+--- !u!114 &3218190812971819334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4989353555656366551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67da4d649f6349349a55bdb2e776b3ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolObjectSpecialAttack: {fileID: 0}
 --- !u!114 &4540452562221417077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -587,6 +567,26 @@ MonoBehaviour:
   CantCasillasOcupadas_X: 1
   CantCasillasOcupadas_Y: 2
   ColumnaActual: 1
+--- !u!114 &4575277617229851452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4989353555656366551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 250d3277527bb20448c80e70c370d163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ruta: {fileID: 7104566689087306139}
+  rutaAgachado: {fileID: 7104566690179356859}
+  countRoot: 0
+  initialRoot: 0
+  particleMovement:
+    timeLifeParticleJamp: 0.3
+    auxTimeLifeParticleJamp: 0.3
+    particleJump: {fileID: 9219419086744220634}
 --- !u!1 &7104566688672881794
 GameObject:
   m_ObjectHideFlags: 0
@@ -1153,21 +1153,21 @@ MonoBehaviour:
   delaySpriteContraAtaque: 0.3
   Animations:
   - nameSpriteActual: Agachado
-    nameAnimation: Agachado famosa
+    nameAnimation: Agachado tomboy
   - nameSpriteActual: AgachadoDefensa
-    nameAnimation: Agachado Defensa famosa
+    nameAnimation: Agachado Defensa tomboy
   - nameSpriteActual: MoverAdelante
-    nameAnimation: Moverse Adelante famosa
+    nameAnimation: Moverse Adelante tomboy
   - nameSpriteActual: MoverAtras
-    nameAnimation: Moverse Atras famosa
+    nameAnimation: Moverse Atras tomboy
   - nameSpriteActual: ParadoDefensa
-    nameAnimation: Parado Defensa famosa
+    nameAnimation: Parado Defensa tomboy
   - nameSpriteActual: Salto
-    nameAnimation: Salto famosa
+    nameAnimation: Salto tomboy
   - nameSpriteActual: SaltoDefensa
-    nameAnimation: Salto Defensa famosa
+    nameAnimation: Salto Defensa tomboy
   - nameSpriteActual: Parado
-    nameAnimation: Parado famosa
+    nameAnimation: Parado tomboy
   enemy: {fileID: 4540452562221417077}
   nameActual: 
 --- !u!95 &7104566690747178332
