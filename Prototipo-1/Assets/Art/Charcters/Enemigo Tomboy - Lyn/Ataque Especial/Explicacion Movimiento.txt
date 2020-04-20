@@ -1,0 +1,12 @@
+Lyn hace un globo de chicle y lo explota, lanzando un proyectil veloz que al impactar al enemigo, este no podra saltar 
+o moverse entre casillas por 4 segundos. 
+
+Explicación detallada:
+
+El movimiento especial dispara un proyectil con la misma velocidad del proyectil especial del enemigo Agresivo (pelota).
+A diferencia de este, el proyectil se mueve por las casillas del medio. El proyectil es disparado en el frame F5, en el cual
+Lyn esta explotando el globo de chicle. 
+El jugador que impacte contra este proyectil se le cancelarán temporalmente su habilidad de Saltar y Moverse entre casillas.
+Se podría ver de dibujar un ícono o hasta un sprite de chicle en el piso para indicar visualmente que el ataque tuvo efecto.
+4 segundos despues de recibir el golpe, se reactivan las habilidades de salto y movimiento. 4 segundos son los que se me 
+ocurrieron, se puede discutir.

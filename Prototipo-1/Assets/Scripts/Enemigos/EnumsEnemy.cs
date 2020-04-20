@@ -13,7 +13,7 @@ public class EnumsEnemy : MonoBehaviour
         Defensivo,
         Famosa,
         Gotica,
-        AlumnoFemenino, //El enemigo femenino comun
+        Tomboy, //El enemigo femenino comun
         Count
     }
     public enum TiposDeJefe
