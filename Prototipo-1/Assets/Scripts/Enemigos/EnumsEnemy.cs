@@ -11,6 +11,9 @@ public class EnumsEnemy : MonoBehaviour
         Balanceado,
         Agresivo,
         Defensivo,
+        Famosa,
+        Gotica,
+        AlumnoFemenino, //El enemigo femenino comun
         Count
     }
     public enum TiposDeJefe
