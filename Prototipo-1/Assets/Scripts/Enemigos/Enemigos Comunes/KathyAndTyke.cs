@@ -6,7 +6,6 @@ public class KathyAndTyke : Enemy
 {
     // Start is called before the first frame update
     public ProyectilLimo limo_gameObject;
-    float valueAttack;
 
     public override void Start()
     {

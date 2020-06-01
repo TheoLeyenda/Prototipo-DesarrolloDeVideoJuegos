@@ -6,7 +6,6 @@ using UnityEngine;
 public class Defensivo : Enemy
 {
     public DisparoDeCarga Disparo;
-    float valueAttack;
     private bool inFuegoEmpieza = false;
     public enum StateDeffence
     {

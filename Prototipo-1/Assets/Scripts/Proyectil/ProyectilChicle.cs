@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class ProyectilInparable : Proyectil
+public class ProyectilChicle : Proyectil
 {
-    public List<Sprite> propsProyectilImparable;
-    public float speedRotation;
-    //public SpriteRenderer spriteRenderer;
-    private EventWise eventWise;
     // Start is called before the first frame update
-    public virtual void Start()
+    public float speedRotation;
+    public float timeEffectStuned;
+    void Start()
     {
-        soundgenerate = false;
+        tipoDeProyectil = Proyectil.typeProyectil.AtaqueEspecial;
+        //soundgenerate = false;
         ShootForward();
         timeLife = auxTimeLife;
         if (GameManager.instanceGameManager != null)
@@ -20,27 +18,11 @@ public class ProyectilInparable : Proyectil
             gm = GameManager.instanceGameManager;
         }
     }
-    private void OnDisable()
+
+    // Update is called once per frame
+    void Update()
     {
-        soundgenerate = false;
-    }
-    private void OnEnable()
-    {
-        timeLife = auxTimeLife;
-        //tipoProyectil = Proyectil.typeProyectil.AtaqueEspecial;
-        int random = Random.Range(0, propsProyectilImparable.Count);
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.sprite = propsProyectilImparable[random];
-        }
-    }
-    public override void Sonido()
-    {
-        eventWise.StartEvent("patear_pelota");
-    }
-    public virtual void Update()
-    {
-        if (eventWise == null)
+        /*if (eventWise == null)
         {
             eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
         }
@@ -48,11 +30,15 @@ public class ProyectilInparable : Proyectil
         {
             soundgenerate = true;
             Sonido();
-        }
+        }*/
         CheckTimeLife();
-        transform.Rotate(new Vector3(0, 0,speedRotation));
+        transform.Rotate(new Vector3(0, 0, speedRotation));
     }
-    protected void CheckCollision(Collider2D collision,Player PlayerDisparador)
+    private void OnDisable()
+    {
+        timeLife = auxTimeLife;
+    }
+    protected void CheckCollision(Collider2D collision, Player PlayerDisparador)
     {
         if (collision.tag == "BoxColliderController")
         {
@@ -68,7 +54,7 @@ public class ProyectilInparable : Proyectil
                 {
                     if (boxColliderController.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && boxColliderController.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
                     {
-                        boxColliderController.enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.RecibirDanio;
+                        boxColliderController.enemy.enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.Atrapado);
                         boxColliderController.enemy.life = boxColliderController.enemy.life - damage;
                     }
                 }
@@ -80,6 +66,7 @@ public class ProyectilInparable : Proyectil
                 {
                     boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
                     boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                    boxColliderController.player.enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.Atrapado;
                 }
                 if (PlayerDisparador != null)
                 {
@@ -93,6 +80,7 @@ public class ProyectilInparable : Proyectil
 
                         boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
                         boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                        boxColliderController.player.enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.Atrapado;
 
                     }
                 }
@@ -102,7 +90,7 @@ public class ProyectilInparable : Proyectil
     // Update is called once per frame
     private void OnTriggerStay2D(Collider2D collision)
     {
-        CheckCollision(collision,PLAYER1);
-        CheckCollision(collision,PLAYER2);
+        CheckCollision(collision, PLAYER1);
+        CheckCollision(collision, PLAYER2);
     }
 }

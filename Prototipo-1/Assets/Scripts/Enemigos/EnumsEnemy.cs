@@ -53,6 +53,7 @@ public class EnumsEnemy : MonoBehaviour
     public enum EstadoEnemigo
     {
         vivo,
+        Atrapado,
         muerto,
         Count,
     }

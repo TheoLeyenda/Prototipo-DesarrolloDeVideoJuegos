@@ -90,7 +90,11 @@ public class BoxColliderController : MonoBehaviour
                         {
                             if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetEnemy() != null)
                             {
-                                proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + proyectil.GetEnemy().xpForHit);
+                                if (Proyectil.typeProyectil.AtaqueEspecial != proyectil.tipoDeProyectil)
+                                {
+                                    Debug.Log("ENTRE");
+                                    proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + proyectil.GetEnemy().xpForHit);
+                                }
                                 player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                             }
                             player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
@@ -107,7 +111,10 @@ public class BoxColliderController : MonoBehaviour
                         }
                         else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer || (!ZonaContraAtaque || (proyectil.colisionPlayer && notProyectilParabola)))
                         {
-                            proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + proyectil.GetEnemy().xpForHit);
+                            if (Proyectil.typeProyectil.AtaqueEspecial != proyectil.tipoDeProyectil)
+                            {
+                                proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + proyectil.GetEnemy().xpForHit);
+                            }
                             player.SetEnableCounterAttack(false);
                             player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                             player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
@@ -139,7 +146,10 @@ public class BoxColliderController : MonoBehaviour
                         {
                             player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                             player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-                            PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + PlayerDisparador.xpForHit);
+                            if (Proyectil.typeProyectil.AtaqueEspecial != proyectil.tipoDeProyectil)
+                            {
+                                PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + PlayerDisparador.xpForHit);
+                            }
                             if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
                             {
                                 PlayerDisparador.PD.score = PlayerDisparador.PD.score + PlayerDisparador.PD.scoreForHit;
@@ -157,7 +167,10 @@ public class BoxColliderController : MonoBehaviour
                             player.SetEnableCounterAttack(false);
                             player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                             player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-                            PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + PlayerDisparador.xpForHit);
+                            if (Proyectil.typeProyectil.AtaqueEspecial != proyectil.tipoDeProyectil)
+                            {
+                                PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + PlayerDisparador.xpForHit);
+                            }
                             if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
                             {
                                 PlayerDisparador.PD.score = PlayerDisparador.PD.score + PlayerDisparador.PD.scoreForHit;
@@ -179,7 +192,10 @@ public class BoxColliderController : MonoBehaviour
                     //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
                     if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && PlayerDisparador != null)
                     {
-                        PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + (PlayerDisparador.xpForHit / 2));
+                        if (Proyectil.typeProyectil.AtaqueEspecial != proyectil.tipoDeProyectil)
+                        {
+                            PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + (PlayerDisparador.xpForHit / 2));
+                        }
                         if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
                         {
                             PlayerDisparador.PD.score = PlayerDisparador.PD.score + (PlayerDisparador.PD.scoreForHit / 2);
@@ -220,7 +236,10 @@ public class BoxColliderController : MonoBehaviour
                                     //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
                                     if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && PlayerDisparador != null)
                                     {
-                                        PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + (PlayerDisparador.xpForHit / 2));
+                                        if (Proyectil.typeProyectil.AtaqueEspecial != proyectil.tipoDeProyectil)
+                                        {
+                                            PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + (PlayerDisparador.xpForHit / 2));
+                                        }
                                         if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
                                         {
                                             PlayerDisparador.PD.score = PlayerDisparador.PD.score + (PlayerDisparador.PD.scoreForHit / 2);
@@ -237,7 +256,10 @@ public class BoxColliderController : MonoBehaviour
                 }
                 if (proyectil.GetEnemy() != null)
                 {
-                    proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + (proyectil.GetEnemy().xpForHit / 2));
+                    if (Proyectil.typeProyectil.AtaqueEspecial != proyectil.tipoDeProyectil)
+                    {
+                        proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + (proyectil.GetEnemy().xpForHit / 2));
+                    }
                     proyectil.damage = proyectil.GetAuxDamage();
                     player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                     eventWise.StartEvent("jugador_1_bloquear");
@@ -260,7 +282,10 @@ public class BoxColliderController : MonoBehaviour
                         //AUMENTO XP PARA EL ATAQUE ESPECIAL
                         if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && PlayerDisparador != null)
                         {
-                            PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + PlayerDisparador.xpForHit);
+                            if (Proyectil.typeProyectil.AtaqueEspecial != proyectil.tipoDeProyectil)
+                            {
+                                PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + PlayerDisparador.xpForHit);
+                            }
                             if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
                             {
                                 PlayerDisparador.PD.score = PlayerDisparador.PD.score + PlayerDisparador.PD.scoreForHit;
@@ -279,7 +304,10 @@ public class BoxColliderController : MonoBehaviour
                     //SI SE DEFIENDE CARGA LA MITAD DE LA BARRA DEL ATAQUE ESPECIAL.
                     if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && PlayerDisparador != null)
                     {
-                        PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + (PlayerDisparador.xpForHit / 2));
+                        if (Proyectil.typeProyectil.AtaqueEspecial != proyectil.tipoDeProyectil)
+                        {
+                            PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + (PlayerDisparador.xpForHit / 2));
+                        }
                         if (gm.structGameManager.gm_dataCombatPvP.pointsForHit)
                         {
                             PlayerDisparador.PD.score = PlayerDisparador.PD.score + (PlayerDisparador.PD.scoreForHit / 2);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class SpecialAttackEnemyController : MonoBehaviour
+public class SpecialAttackParabolaEnemyController : MonoBehaviour
 {
     // Start is called before the first frame update
     public Pool poolObjectSpecialAttack;

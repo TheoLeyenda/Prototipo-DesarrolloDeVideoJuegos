@@ -17,7 +17,6 @@ public class Player : MonoBehaviour
         None,
     }
     public Color colorShoot;
-
     public string namePlayer;
     //BOOLEANOS DE MOVIMIENTO
     [HideInInspector]
@@ -108,6 +107,8 @@ public class Player : MonoBehaviour
     private Player_PvP player_PvP;
     private bool enableParabolaAttack;
     public bool enableMecanicParabolaAttack;
+    [HideInInspector]
+    public float timeStuned = 0;
 
     [HideInInspector]
     public EventWise eventWise;
@@ -174,6 +175,8 @@ public class Player : MonoBehaviour
 
         CheckOutLimit();
         CheckDead();
+        CheckState();
+
         if (enableMovement)
         {
             DelayEnableAttack();
@@ -186,6 +189,39 @@ public class Player : MonoBehaviour
             xpActual = xpNededSpecialAttack;
             PD.lifePlayer = PD.maxLifePlayer;
         }*/
+    }
+    public void CheckState()
+    {
+        switch (enumsPlayers.estadoJugador)
+        {
+            case EnumsPlayers.EstadoJugador.Atrapado:
+                CheckStune(timeStuned);
+                break;
+        }
+    }
+
+    public void CheckStune(float timeStuned)
+    {
+        if (timeStuned > 0)
+        {
+            timeStuned = timeStuned - Time.deltaTime;
+            //hacer que el color del player se vea azul;
+            enableMovement = false;
+        }
+        else if (timeStuned <= 0)
+        {
+            //hacer que el color del player se vea blanco;
+            enableMovement = true;
+            if (PD.lifePlayer > 0)
+            {
+                enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.vivo;
+            }
+            else
+            {
+                enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.muerto;
+            }
+
+        }
     }
     public void CheckBoxColliders2D()
     {

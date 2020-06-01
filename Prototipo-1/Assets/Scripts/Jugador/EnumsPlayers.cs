@@ -23,6 +23,7 @@ public class EnumsPlayers : MonoBehaviour
     public enum EstadoJugador
     {
         vivo,
+        Atrapado,
         muerto,
         Count,
     }

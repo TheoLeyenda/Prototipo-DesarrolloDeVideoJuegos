@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Balanceado : Enemy
 {
-    float valueAttack;
     public override void Start()
     {
         base.Start();
@@ -88,7 +87,6 @@ public class Balanceado : Enemy
                     switch (enumsEnemy.GetMovement())
                     {
                         case EnumsEnemy.Movimiento.AtaqueEspecial:
-                            //spriteEnemy.GetAnimator().Play("Ataque Especial enemigo balanceado");
                             spriteEnemy.GetAnimator().SetTrigger("AtaqueEspecial");
                             spriteEnemy.spriteRenderer.color = Color.white;
                             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
@@ -97,7 +95,6 @@ public class Balanceado : Enemy
                             break;
                         case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
                             spriteEnemy.GetAnimator().Play("Ataque Especial Agachado Balanceado");
-                            //spriteEnemy.GetAnimator().SetTrigger("AtaqueEspecialAgachado");
                             spriteEnemy.spriteRenderer.color = Color.white;
                             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecialAgachado);
                             SetEnableSpecialAttack(false);
@@ -105,7 +102,6 @@ public class Balanceado : Enemy
                             break;
                         case EnumsEnemy.Movimiento.AtaqueEspecialSalto:
                             spriteEnemy.GetAnimator().Play("Ataque Especial Salto Balanceado");
-                            //spriteEnemy.GetAnimator().SetTrigger("AtaqueEspecial");
                             spriteEnemy.spriteRenderer.color = Color.white;
                             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecialSalto);
                             SetEnableSpecialAttack(false);
@@ -193,8 +189,8 @@ public class Balanceado : Enemy
         if (specialAttack)
         {
             //CAMBIAR ESTE NULO POR EL ATAQUE ESPECIAL CORRESPONDIENTE (Ya sea ProyectilParabola o AtaqueEspecial
-                
-            tipoProyectil = Proyectil.typeProyectil.Nulo;
+
+            tipoProyectil = Proyectil.typeProyectil.AtaqueEspecial;
             if (!GetIsDuck())
             {
                 CheckSpecialAttackEnemyController(0, 0, generadorProyectilParabola);

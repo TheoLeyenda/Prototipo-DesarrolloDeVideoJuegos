@@ -6,7 +6,6 @@ public class Agresivo : Enemy
 {
     public GameObject GeneradorAtaqueEspecial;
     public Pool poolProyectilImparable;
-    float valueAttack;
     public override void Start()
     {
         base.Start();
@@ -199,8 +198,7 @@ public class Agresivo : Enemy
         }
         if (specialAttack)
         {
-            //CAMBIAR ESTE NULO POR EL ATAQUE ESPECIAL CORRESPONDIENTE (Ya sea ProyectilParabola o AtaqueEspecial
-            tipoProyectil = Proyectil.typeProyectil.Nulo;
+            tipoProyectil = Proyectil.typeProyectil.AtaqueEspecial;
             go = poolProyectilImparable.GetObject();
             proyectilInparable = go.GetComponent<ProyectilInparable>();
             if (enableColorShootSpecialAttack)
@@ -231,6 +229,7 @@ public class Agresivo : Enemy
             }
             go.transform.position = GeneradorAtaqueEspecial.transform.position;
             go.transform.rotation = GeneradorAtaqueEspecial.transform.rotation;
+            proyectilInparable.tipoDeProyectil = tipoProyectil;
             proyectilInparable.ShootForward();
         }
         if (!specialAttack)

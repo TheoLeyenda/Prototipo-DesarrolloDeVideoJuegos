@@ -93,6 +93,7 @@ public class MenuDePausa : MonoBehaviour
             }
             else if (Time.timeScale == 0)
             {
+                
                 MenuPausa.gameObject.SetActive(true);
                 if (!soundPause)
                 {

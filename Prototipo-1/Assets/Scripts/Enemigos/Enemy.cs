@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
     public EnumsEnemy enumsEnemy;
     public StructsEnemys structsEnemys;
     public SpriteRenderer SpriteRendererEnemigo;
-    public SpecialAttackEnemyController specialAttackEnemyController;
+    public SpecialAttackParabolaEnemyController specialAttackParabolaEnemyController;
     private float auxLife;
     private Animator animator;
     public bool InPool;
@@ -95,6 +95,8 @@ public class Enemy : MonoBehaviour
     protected EventWise eventWise;
     private bool insound;
 
+    protected float valueAttack;
+
     [Header("Porcentage: Movimiento")]
     public float MovePorcentage;
     public float JumpPorcentage;
@@ -133,7 +135,8 @@ public class Enemy : MonoBehaviour
     private float tolerableStillTime;
     private float auxTolerableStillTime;
 
-    
+    [HideInInspector]
+    public float timeStuned = 0;
 
     private void OnEnable()
     {
@@ -195,37 +198,16 @@ public class Enemy : MonoBehaviour
             Debug.Log(enumsEnemy.GetStateEnemy());
         }*/
         //-----------------------------------
+        CheckState();
+        CheckDead();
 
         if (enableMovement)
         {
-            //Debug.Log(enumsEnemy.GetStateEnemy());
-            //Debug.Log(enableMovement);
-            //Debug.Log(delaySelectMovement);
      
             CheckDeffense();
             CheckBoxColliders2D();
-            //CheckLifeBar();
-            //CheckLoadSpecialAttackBar();
-            CheckDead();
-            /*if ((spriteEnemy.nameActual == "Parado" || spriteEnemy.nameActual == "parado" || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
-            && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial && inCombatPosition && !isJamping
-            && SpeedJump >= GetAuxSpeedJamp() && !isDuck)
-            {
-                if (tolerableStillTime <= 0)
-                {
-                    tolerableStillTime = auxTolerableStillTime;
-                    //delaySelectMovement = 0;
-                    //enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
-                    enableMovement = true;
-                    CheckComportamiento();
-                    IA();
-                }
-                else if (tolerableStillTime > 0)
-                {
-                    tolerableStillTime = tolerableStillTime - Time.deltaTime;
-                }
-            }
-            else*/ if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
+
+            if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
                 && enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto)
             {
                 IA();
@@ -240,6 +222,40 @@ public class Enemy : MonoBehaviour
         CheckOutLimit();
     }
     public Enemy() { }
+
+    public void CheckState()
+    {
+        switch (enumsEnemy.GetStateEnemy())
+        {
+            case EnumsEnemy.EstadoEnemigo.Atrapado:
+                CheckStune(timeStuned);
+                break;
+        }
+    }
+
+    public void CheckStune(float timeStuned)
+    {
+        if (timeStuned > 0)
+        {
+            timeStuned = timeStuned - Time.deltaTime;
+            //hacer que el color del enemigo se vea azul;
+            enableMovement = false;
+        }
+        else if (timeStuned <= 0)
+        {
+            enableMovement = true;
+            //hacer que el color del enemigo se vea blanco;
+            if (life > 0)
+            {
+                enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
+            }
+            else
+            {
+                enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
+            }
+
+        }
+    }
 
     public void CheckInitialCharacter()
     {
@@ -998,14 +1014,14 @@ public class Enemy : MonoBehaviour
         {
             if (generador != null)
             {
-                specialAttackEnemyController.SpecialAttack(this,doubleDamage, isDuck, generador, generador, enumsEnemy, structsEnemys, maxRandomRootShoot, minRandomRootShoot);
+                specialAttackParabolaEnemyController.SpecialAttack(this,doubleDamage, isDuck, generador, generador, enumsEnemy, structsEnemys, maxRandomRootShoot, minRandomRootShoot);
             }
         }
         else
         {
             if (generador != null)
             {
-                specialAttackEnemyController.SpecialAttack(this,doubleDamage, isDuck, generador, generador, enumsEnemy, structsEnemys, maxRandomRootShoot, minRandomRootShoot);
+                specialAttackParabolaEnemyController.SpecialAttack(this,doubleDamage, isDuck, generador, generador, enumsEnemy, structsEnemys, maxRandomRootShoot, minRandomRootShoot);
             }
         }
             
