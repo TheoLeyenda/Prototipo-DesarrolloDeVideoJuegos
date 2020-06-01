@@ -157,6 +157,7 @@ public class Enemy : MonoBehaviour
     }
     public virtual void Start()
     {
+        specialAttackParabolaEnemyController = GetComponent<SpecialAttackParabolaEnemyController>();
         tolerableStillTime = maxRandomDelayMovement;
         auxTolerableStillTime = maxRandomDelayMovement;
         eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();

@@ -92,7 +92,6 @@ public class BoxColliderController : MonoBehaviour
                             {
                                 if (Proyectil.typeProyectil.AtaqueEspecial != proyectil.tipoDeProyectil)
                                 {
-                                    Debug.Log("ENTRE");
                                     proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + proyectil.GetEnemy().xpForHit);
                                 }
                                 player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;

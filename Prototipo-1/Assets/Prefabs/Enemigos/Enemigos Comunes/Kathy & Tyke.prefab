@@ -2489,9 +2489,9 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!1 &5120407919139851475
 GameObject:
@@ -8421,7 +8421,7 @@ MonoBehaviour:
   enumsEnemy: {fileID: 1386041527520957182}
   structsEnemys: {fileID: 768035169043026379}
   SpriteRendererEnemigo: {fileID: 6291037100013266854}
-  specialAttackEnemyController: {fileID: 1837312878639225777}
+  specialAttackParabolaEnemyController: {fileID: 0}
   InPool: 1
   pool: {fileID: 0}
   life: 400
@@ -8476,6 +8476,7 @@ MonoBehaviour:
   CantCasillasOcupadas_X: 1
   CantCasillasOcupadas_Y: 2
   ColumnaActual: 1
+  timeStuned: 0
   limo_gameObject: {fileID: 3119680523987810192}
 --- !u!1 &8163521573060275563
 GameObject:
