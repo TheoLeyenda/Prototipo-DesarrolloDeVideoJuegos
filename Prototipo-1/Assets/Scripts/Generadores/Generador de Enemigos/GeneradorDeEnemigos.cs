@@ -111,7 +111,10 @@ public class GeneradorDeEnemigos : MonoBehaviour
                 //Debug.Log("ENTRE");
             }
             else
-            { 
+            {
+                enemigoActual.enemyPrefab.transform.position = Generador.transform.position;
+                //enemigoActual.gridEnemy.gameObject.transform.position = new Vector3(0, enemigoActual.gridEnemy.gameObject.transform.position.y, 0);
+                enemigoActual.transform.localPosition = new Vector3(0, enemigoActual.transform.localPosition.y, 0);
                 enemigoActual.pointOfCombat = pointOfCombat.transform.position;
                 enemigoActual.pointOfDeath = pointOfInit.transform.position;
                 enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
@@ -129,6 +132,9 @@ public class GeneradorDeEnemigos : MonoBehaviour
             }
             else
             {
+                enemigoActual.enemyPrefab.transform.position = Generador.transform.position;
+                //enemigoActual.gridEnemy.gameObject.transform.position = new Vector3(0, enemigoActual.gridEnemy.gameObject.transform.position.y, 0);
+                enemigoActual.transform.localPosition = new Vector3(0, enemigoActual.transform.localPosition.y, 0);
                 enemigoActual.pointOfCombat = pointOfCombat.transform.position;
                 enemigoActual.pointOfDeath = pointOfInit.transform.position;
                 enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
@@ -154,6 +160,7 @@ public class GeneradorDeEnemigos : MonoBehaviour
                 else
                 {
                     randomEnemyGenerate = Random.Range(0, ListEnemyGenerate.Count);
+                    //randomEnemyGenerate = ListEnemyGenerate.Count - 1;
                     go = ListEnemyGenerate[randomEnemyGenerate].poolEnemy.GetObject();
                     pool = ListEnemyGenerate[randomEnemyGenerate].poolEnemy;
                 }
@@ -164,7 +171,9 @@ public class GeneradorDeEnemigos : MonoBehaviour
                 if (enemy != null)
                 {
                     enemigoActual = enemy;
-                    enemigoActual.InitialPosition  = Generador.transform.position;
+                    enemigoActual.enemyPrefab.transform.position = Generador.transform.position;
+                    enemigoActual.InitialPosition = enemigoActual.transform.position;
+                    //Debug.Log(enemigoActual.InitialPosition);
                     enemigoActual.ResetEnemy();
                 }
                 enemigoActual.xpActual = 0;
@@ -185,7 +194,8 @@ public class GeneradorDeEnemigos : MonoBehaviour
                         if (enemy != null)
                         {
                             enemigoActual = enemy;
-                            enemigoActual.InitialPosition = Generador.transform.position;
+                            enemigoActual.enemyPrefab.transform.position = Generador.transform.position;
+                            enemigoActual.InitialPosition = enemigoActual.transform.position;
                             enemigoActual.ResetEnemy();
                         }
                         enemigoActual.xpActual = 0;

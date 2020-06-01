@@ -169,7 +169,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         //Sacar esto al terminar de testear
-        PD.lifePlayer = PD.maxLifePlayer;
+        //PD.lifePlayer = PD.maxLifePlayer;
         //--------------------------------
 
         CheckOutLimit();

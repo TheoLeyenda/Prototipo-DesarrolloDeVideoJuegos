@@ -43,10 +43,10 @@ public class Defensivo : Enemy
 
         }
         //Esto es para testear borrar luego.
-        if (Input.GetKey(KeyCode.Space))
-        {
-            xpActual = xpNededSpecialAttack;
-        }
+        //if (Input.GetKey(KeyCode.Space))
+        //{
+           // xpActual = xpNededSpecialAttack;
+        //}
         //----------------------------------
         base.Update();
         CheckInDeffense();

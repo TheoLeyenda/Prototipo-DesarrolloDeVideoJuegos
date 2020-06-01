@@ -7,10 +7,10 @@ public class ProyectilInparable : Proyectil
 {
     public List<Sprite> propsProyectilImparable;
     public float speedRotation;
-    public SpriteRenderer spriteRenderer;
+    //public SpriteRenderer spriteRenderer;
     private EventWise eventWise;
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         soundgenerate = false;
         ShootForward();
@@ -37,7 +37,7 @@ public class ProyectilInparable : Proyectil
     {
         eventWise.StartEvent("patear_pelota");
     }
-    private void Update()
+    public virtual void Update()
     {
         if (eventWise == null)
         {
@@ -51,7 +51,7 @@ public class ProyectilInparable : Proyectil
         CheckTimeLife();
         transform.Rotate(new Vector3(0, 0,speedRotation));
     }
-    private void CheckCollision(Collider2D collision,Player PlayerDisparador)
+    protected void CheckCollision(Collider2D collision,Player PlayerDisparador)
     {
         if (collision.tag == "BoxColliderController")
         {

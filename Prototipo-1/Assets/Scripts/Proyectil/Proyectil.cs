@@ -35,6 +35,7 @@ public class Proyectil : MonoBehaviour
         ProyectilParabola,
         AtaqueEspecial,
     }
+    public bool deadForTimeOnly;
     public bool completeColorStela = true;
     public string nameAnimationHit;
     public SpriteRenderer spriteRenderer;
@@ -91,7 +92,10 @@ public class Proyectil : MonoBehaviour
     }
     private void OnDisable()
     {
-        trailRenderer.enabled = false;
+        if (trailRenderer != null)
+        {
+            trailRenderer.enabled = false;
+        }
         soundgenerate = false;
         SetColorProyectil(Color.white);
     }
@@ -117,7 +121,10 @@ public class Proyectil : MonoBehaviour
         {
             circleCollider2D.enabled = true;
         }
-        trailRenderer.enabled = true;
+        if (trailRenderer != null)
+        {
+            trailRenderer.enabled = true;
+        }
     }
     public virtual void Sonido()
     {
@@ -140,7 +147,10 @@ public class Proyectil : MonoBehaviour
     {
         if (poolObject != null && poolObject.gameObject.activeSelf)
         {
-            trailRenderer.Clear();
+            if (trailRenderer != null)
+            {
+                trailRenderer.Clear();
+            }
             damage = auxDamage;
             dobleDamage = false;
             poolObject.Recycle();
@@ -149,7 +159,10 @@ public class Proyectil : MonoBehaviour
     }
     public void On(typeProyectil _tipoDeProyectil,bool WhiteProyectile)
     {
-        trailRenderer.enabled = true;
+        if (trailRenderer != null)
+        {
+            trailRenderer.enabled = true;
+        }
         if (circleCollider2D != null)
         {
             circleCollider2D.enabled = true;
@@ -220,28 +233,44 @@ public class Proyectil : MonoBehaviour
         }
         else if (timeLife <= 0)
         {
-            trailRenderer.Clear();
+            if (trailRenderer != null)
+            {
+                trailRenderer.Clear();
+            }
             damage = auxDamage;
             dobleDamage = false;
             if (poolObject != null)
             {
                 poolObject.Recycle();
             }
+            else
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
     public void ShootForward()
     {
-        trailRenderer.enabled = true;
+        if (trailRenderer != null)
+        {
+            trailRenderer.enabled = true;
+        }
         rg2D.AddForce(transform.right * speed, ForceMode2D.Force);
     }
     public void ShootForwardUp()
     {
-        trailRenderer.enabled = true;
+        if (trailRenderer != null)
+        {
+            trailRenderer.enabled = true;
+        }
         rg2D.AddRelativeForce(vectorForwardUp.right * speed);
     }
     public void ShootForwardDown()
     {
-        trailRenderer.enabled = true;
+        if (trailRenderer != null)
+        {
+            trailRenderer.enabled = true;
+        }
         rg2D.AddRelativeForce(vectorForwardDown.right * speed, ForceMode2D.Force);
     }
     public PoolObject GetPoolObject()
@@ -285,7 +314,10 @@ public class Proyectil : MonoBehaviour
         if (animator != null)
         {
             SetColorProyectil(Color.white);
-            trailRenderer.Clear();
+            if (trailRenderer != null)
+            {
+                trailRenderer.Clear();
+            }
             inAnimation = true;
             rg2D.velocity = Vector3.zero;
             animator.enabled = true;
@@ -306,7 +338,7 @@ public class Proyectil : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "limite")
+        if (collision.tag == "limite" && !deadForTimeOnly)
         {
             Dead();
         }
@@ -315,10 +347,13 @@ public class Proyectil : MonoBehaviour
     {
         if (tipoDeProyectil != typeProyectil.AtaqueEspecial)
         {
-            trailRenderer.startColor = color;
-            if (completeColorStela)
+            if (trailRenderer != null)
             {
-                trailRenderer.endColor = color;
+                trailRenderer.startColor = color;
+                if (completeColorStela)
+                {
+                    trailRenderer.endColor = color;
+                }
             }
         }
         

@@ -19,8 +19,10 @@ public class Enemy : MonoBehaviour
     public string nameEnemy;
     public bool enableColorShootSpecialAttack;
     //DATOS PARA EL MOVIMIENTO
-    [HideInInspector]
+    //[HideInInspector]
     public bool enableMovement;
+    [SerializeField]
+    private bool inCombatPosition;
     public GameObject alturaMaxima;
     public GameObject[] posicionesDeMovimiento;
     //-------------------------------------------//
@@ -131,7 +133,7 @@ public class Enemy : MonoBehaviour
     private float tolerableStillTime;
     private float auxTolerableStillTime;
 
-    private bool inCombatPosition;
+    
 
     private void OnEnable()
     {
@@ -183,19 +185,23 @@ public class Enemy : MonoBehaviour
     {
         ResetSpeedJump();
         //Esto es para testear borrar luego
-        if (Input.GetKey(KeyCode.T))
-        {
+        /*if (Input.GetKey(KeyCode.T))
+        /{
             Debug.Log(enumsEnemy.GetMovement());
             Debug.Log("Enable Movement: " + enableMovement);
             Debug.Log("Delay Movimiento: " + delaySelectMovement);
             Debug.Log("SpriteEnemy:"+ spriteEnemy.nameActual);
             Debug.Log(inCombatPosition);
             Debug.Log(enumsEnemy.GetStateEnemy());
-        }
+        }*/
         //-----------------------------------
 
         if (enableMovement)
-        { 
+        {
+            //Debug.Log(enumsEnemy.GetStateEnemy());
+            //Debug.Log(enableMovement);
+            //Debug.Log(delaySelectMovement);
+     
             CheckDeffense();
             CheckBoxColliders2D();
             //CheckLifeBar();
@@ -291,12 +297,19 @@ public class Enemy : MonoBehaviour
     }
     public void IA()
     {
+        //Debug.Log("ENTRE A IA");
+        //Debug.Log(enumsEnemy.GetMovement());
+
+
         if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.MoveToPointCombat)
         {
+            //Debug.Log("ESTOY ENTRANDO ACA CONCHAETUMADRE XD");
             delaySelectMovement = 10;
             CheckMovement();
             return;
         }
+        //Debug.Log("IP: "+InitialPosition.y);
+        //Debug.Log("TY:" + transform.position.y);
         if (transform.position.y > InitialPosition.y && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && inCombatPosition)
         {
             delaySelectMovement = 0.1f;
@@ -312,6 +325,8 @@ public class Enemy : MonoBehaviour
        
         if (life > 0 && enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
         {
+            //Debug.Log("ESTOY ENTRANDO ACA");
+            //Debug.Log(delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque));
             if (delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque))
             {
                 if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
@@ -374,6 +389,8 @@ public class Enemy : MonoBehaviour
     }
     public void CheckComportamiento()
     {
+        //Debug.Log("ENTRE AL COMPORTAMIENTO");
+        //Debug.Log("inCombatPosition: "+inCombatPosition);
         EnumsEnemy.Movimiento movimiento = EnumsEnemy.Movimiento.Nulo;
         if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat 
             && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath 
@@ -382,10 +399,6 @@ public class Enemy : MonoBehaviour
         {
             if (activateComportamiento)
             {
-                if (Input.GetKey(KeyCode.T))
-                {
-                    Debug.Log("ENTRE AL ASIGNADOR DE COMPORTAMIENTO");
-                }
                 float opcionMovement = UnityEngine.Random.Range(MinRangeRandom, MaxRangeRandom);
 
                 if (opcionMovement < MovePorcentage)
@@ -591,20 +604,22 @@ public class Enemy : MonoBehaviour
     }
     public void MoveToPoint(Vector3 pointCombat)
     {
-        if (CheckMove(pointCombat))
+        if (CheckMove(new Vector3(pointCombat.x, transform.position.y, transform.position.z)))
         {
+            //Debug.Log("ME MUEVOOOO");
             delaySelectMovement = 999;
-            if (pointCombat.x < transform.position.x)
+            if (pointCombat.x < enemyPrefab.transform.position.x)
             {
                 enemyPrefab.transform.Translate(Vector3.left * Speed * Time.deltaTime);
             }
-            else if (pointCombat.x > transform.position.x)
+            else if (pointCombat.x > enemyPrefab.transform.position.x)
             {
                 enemyPrefab.transform.Translate(Vector3.right * Speed * Time.deltaTime);
             }
         }
         else
         {
+            //Debug.Log("EN POSICION");
             life = maxLife;
             delaySelectMovement = 0;
             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
@@ -1082,6 +1097,8 @@ public class Enemy : MonoBehaviour
     {
         Vector3 distaciaObjetivo = transform.position - PosicionDestino;
         bool mover = false;
+        //Debug.Log(distaciaObjetivo.magnitude + "/ 0.2f");
+        //Debug.Log(enumsEnemy.GetMovement());
         if (distaciaObjetivo.magnitude > 0.2f)
         {
             mover = true;
@@ -1158,6 +1175,7 @@ public class Enemy : MonoBehaviour
     {
         if(collision.tag == "pointOfCombat")
         {
+            //Debug.Log("ENTRE");
             inCombatPosition = true;
         }
     }
