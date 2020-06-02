@@ -91,6 +91,7 @@ public class Lyn : Enemy
                     enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
                     SetEnableSpecialAttack(false);
                     inAttack = true;
+                    xpActual = 0;
                 }
             }
             else if (valueAttack < parabolaAttack)

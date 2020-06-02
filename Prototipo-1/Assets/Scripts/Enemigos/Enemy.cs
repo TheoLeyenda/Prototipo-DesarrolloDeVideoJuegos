@@ -595,7 +595,7 @@ public class Enemy : MonoBehaviour
                 enableSpecialAttack = false;
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
                 AnimationAttack();
-                xpActual = 0;
+                //xpActual = 0;
             }
             else if (enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Balanceado)
             {
@@ -614,7 +614,7 @@ public class Enemy : MonoBehaviour
                     enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
                 }
                 AnimationAttack();
-                xpActual = 0;
+                //xpActual = 0;
 
             }
         }

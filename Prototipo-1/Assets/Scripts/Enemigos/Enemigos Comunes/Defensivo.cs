@@ -159,6 +159,7 @@ public class Defensivo : Enemy
                             spriteEnemy.spriteRenderer.color = Color.white;
                             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
                             inAttack = true;
+                            xpActual = 0;
                             break;
                         case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
                             break;

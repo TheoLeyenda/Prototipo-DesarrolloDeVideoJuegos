@@ -48,6 +48,7 @@ public class Balanceado : Enemy
     }
     public override void AnimationAttack()
     {
+        bool inSpecialAttack = (xpActual >= xpNededSpecialAttack);
         if (enemyPrefab.activeSelf == true)
         {
             if (!inAttack)
@@ -63,18 +64,18 @@ public class Balanceado : Enemy
                 if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
                     && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp()
                     && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque
-                    && !GetIsDuck())
+                    && !GetIsDuck() && !inSpecialAttack)
                 {
                     spriteEnemy.GetAnimator().Play("Ataque enemigo balanceado");
                     inAttack = true;
                 }
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo && !inSpecialAttack)
                 {
                     spriteEnemy.GetAnimator().Play("Ataque Salto enemigo balanceado");
                     inAttack = true;
                 }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && GetIsDuck() && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && GetIsDuck() && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp() && !inSpecialAttack)
                 {
                     spriteEnemy.GetAnimator().Play("Ataque Agachado enemigo balanceado");
                     inAttack = true;
@@ -82,7 +83,8 @@ public class Balanceado : Enemy
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo 
+                    || inSpecialAttack)
                 {
                     switch (enumsEnemy.GetMovement())
                     {
@@ -92,6 +94,7 @@ public class Balanceado : Enemy
                             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
                             SetEnableSpecialAttack(false);
                             inAttack = true;
+                            xpActual = 0;
                             break;
                         case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
                             spriteEnemy.GetAnimator().Play("Ataque Especial Agachado Balanceado");
@@ -99,13 +102,16 @@ public class Balanceado : Enemy
                             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecialAgachado);
                             SetEnableSpecialAttack(false);
                             inAttack = true;
+                            xpActual = 0;
                             break;
                         case EnumsEnemy.Movimiento.AtaqueEspecialSalto:
-                            spriteEnemy.GetAnimator().Play("Ataque Especial Salto Balanceado");
+                            /*spriteEnemy.GetAnimator().SetTrigger("AtaqueParabolaSalto");
                             spriteEnemy.spriteRenderer.color = Color.white;
                             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecialSalto);
                             SetEnableSpecialAttack(false);
                             inAttack = true;
+                            //xpActual = 0;*/
+                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
                             break;
                     }
                 }

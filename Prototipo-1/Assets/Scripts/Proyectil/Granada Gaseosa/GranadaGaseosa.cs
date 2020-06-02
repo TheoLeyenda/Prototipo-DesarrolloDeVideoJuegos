@@ -291,7 +291,6 @@ public class GranadaGaseosa : ProyectilParabola
                 CreateGaseosas(2);
 
             }
-                    
         }  
     }
 }

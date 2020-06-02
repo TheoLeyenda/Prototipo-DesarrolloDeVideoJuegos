@@ -51,8 +51,7 @@ public class Proyectil : MonoBehaviour
     public float auxTimeLife;
     public float damageCounterAttack;
     public float damage;
-    [SerializeField]
-    private float auxDamage;
+    public float auxDamage;
     public Rigidbody2D rg2D;
     public Transform vectorForward;
     public Transform vectorForwardUp;
@@ -215,7 +214,7 @@ public class Proyectil : MonoBehaviour
                     break;
             }
         }
-            
+          
         if (!dobleDamage)
         {
             damage = auxDamage;

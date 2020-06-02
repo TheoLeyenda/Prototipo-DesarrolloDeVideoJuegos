@@ -45,6 +45,8 @@ public class Player : MonoBehaviour
     public GameObject alturaMaxima;
     public GameObject[] posicionesDeMovimiento;
     //-------------------------------------------//
+    public float DamageAttack;
+    public float DamageParabolaAttack;
     public BarraDeEscudo barraDeEscudo;
     public GameObject PrefabPlayer;
     public bool resetPlayer;
@@ -400,6 +402,11 @@ public class Player : MonoBehaviour
                     break;
             }
             proyectil.SetDobleDamage(doubleDamage);
+            if (DamageAttack > 0)
+            {
+                proyectil.damage = DamageAttack;
+                proyectil.auxDamage = DamageAttack;
+            }
             if (doubleDamage)
             {
                 proyectil.damage = proyectil.damage * 2;
@@ -463,6 +470,11 @@ public class Player : MonoBehaviour
                     break;
             }
             proyectil.SetDobleDamage(doubleDamage);
+            if (DamageAttack > 0)
+            {
+                proyectil.damage = DamageAttack;
+                proyectil.auxDamage = DamageAttack;
+            }
             if (doubleDamage)
             {
                 proyectil.damage = proyectil.damage * 2;
@@ -536,6 +548,11 @@ public class Player : MonoBehaviour
             else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
             {
                 proyectil.SetPlayer2(this);
+            }
+            if (DamageParabolaAttack > 0)
+            {
+                proyectil.damage = DamageParabolaAttack;
+                proyectil.auxDamage = DamageParabolaAttack;
             }
             if (doubleDamage)
             {
@@ -728,7 +745,7 @@ public class Player : MonoBehaviour
                     {
                         GameObject go = structsPlayer.dataAttack.poolProyectilImparable.GetObject();
                         ProyectilInparable proyectilInparable = go.GetComponent<ProyectilInparable>();
-                        proyectilInparable.SetEnemy(gameObject.GetComponent<Enemy>());
+                        proyectilInparable.SetEnemy(null);
                         switch (applyColorShoot)
                         {
                             case ApplyColorShoot.None:
@@ -737,15 +754,18 @@ public class Player : MonoBehaviour
                                 proyectilInparable.SetColorStela(colorShoot);
                                 break;
                         }
-                        proyectilInparable.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
+                        //proyectilInparable.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
                         if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
                         {
                             proyectilInparable.SetPlayer(gameObject.GetComponent<Player>());
+                            proyectilInparable.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Jugador1;
                         }
                         else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
                         {
                             proyectilInparable.SetPlayer2(gameObject.GetComponent<Player>());
+                            proyectilInparable.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Jugador2;
                         }
+                        proyectilInparable.tipoDeProyectil = Proyectil.typeProyectil.AtaqueEspecial;
                         go.transform.position = generadorProyectilesAgachado.transform.position;
                         go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
                         proyectilInparable.ShootForward();
