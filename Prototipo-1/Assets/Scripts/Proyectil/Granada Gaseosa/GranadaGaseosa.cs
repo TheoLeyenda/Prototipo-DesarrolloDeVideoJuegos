@@ -85,17 +85,18 @@ public class GranadaGaseosa : ProyectilParabola
             float x = 0;
             if (cantProyectiles == 1)
             {
-                if (distanceOfLeftFloor.magnitude < 1.4f)
+                
+                if (distanceOfLeftFloor.magnitude <= 1.55f)
                 {
                     cuadrillasAbajo.Add(grid[0]);
                     x = refPlataformas.plataformas[idPlataforma].plataformaIzquierda.transform.position.x;
                 }
-                else if (distanceOfCenterFloor.magnitude < 1.4f)
+                else if (distanceOfCenterFloor.magnitude <= 1.55f)
                 {
                     cuadrillasAbajo.Add(grid[1]);
                     x = refPlataformas.plataformas[idPlataforma].plataformaCentral.transform.position.x;
                 }
-                else if (distanceOfRightFloor.magnitude < 1.4f)
+                else if (distanceOfRightFloor.magnitude < 1.55f)
                 {
                     cuadrillasAbajo.Add(grid[2]);
                     x = refPlataformas.plataformas[idPlataforma].plataformaDerecha.transform.position.x;
@@ -114,16 +115,18 @@ public class GranadaGaseosa : ProyectilParabola
                 if (grid != null)
                 {
                     //Debug.Log("ENTRE");
-                    if (distanceOfLeftFloor.magnitude < 1.4f)
+                    if (distanceOfLeftFloor.magnitude < 1.55f)
                     {
+                        Debug.Log("ENTRE 1");
                         cuadrillasAbajo.Add(grid[1]);
                         cuadrillasAbajo.Add(grid[0]);
                         arr[0] = refPlataformas.plataformas[idPlataforma].plataformaIzquierda.transform.position.x;
                         arr[1] = refPlataformas.plataformas[idPlataforma].plataformaCentral.transform.position.x;
                         //Debug.Log("JAJA XD");
                     }
-                    else if (distanceOfCenterFloor.magnitude < 1.4f)
+                    else if (distanceOfCenterFloor.magnitude < 1.55f)
                     {
+                        Debug.Log("ENTRE 2");
                         num = (int)Random.Range(0, 100);
                         //Debug.Log(num);
                         arr[0] = refPlataformas.plataformas[idPlataforma].plataformaCentral.transform.position.x;
@@ -142,8 +145,9 @@ public class GranadaGaseosa : ProyectilParabola
                             
                         //Debug.Log("JAJA XD");
                     }
-                    else if (distanceOfRightFloor.magnitude < 1.4f)
+                    else if (distanceOfRightFloor.magnitude < 1.55f)
                     {
+                        Debug.Log("ENTRE 3");
                         cuadrillasAbajo.Add(grid[1]);
                         cuadrillasAbajo.Add(grid[2]);
                         arr[0] = refPlataformas.plataformas[idPlataforma].plataformaDerecha.transform.position.x;
@@ -186,7 +190,7 @@ public class GranadaGaseosa : ProyectilParabola
             }
             eventWise.StartEvent("botella_romper");
             gameObject.SetActive(false);
-            timeLife = 0;
+            timeLife = 0f;
             GetPoolObject().Recycle();
         }
     }
@@ -237,11 +241,14 @@ public class GranadaGaseosa : ProyectilParabola
     {
         if (collision.tag == "Piso")
         {
-                
+            //ENTRA AUNQUE NO GENERE GASEOSA
+            //Debug.Log("MUERTE");
+            //ENTRA AUNQUE NO GENERE GASEOSA
+
+
             GameObject cuadrilla = collision.gameObject;
             Piso piso = collision.GetComponent<Piso>();
             // DEPENDIENDO DE QUIEN DISPARO ES LA CANTIDAD DE BALAS QUE SE GENERARAN.
-            //Debug.Log("ENTRE");
             CheckGrid(piso);
             if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
             {
