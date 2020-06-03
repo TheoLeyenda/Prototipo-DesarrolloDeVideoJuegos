@@ -189,8 +189,9 @@ public class Lyn : Enemy
                 proyectilChicle.SetEnemy(gameObject.GetComponent<Enemy>());
                 proyectilChicle.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
                 go.transform.position = GeneradorProyectilChicle.transform.position;
-                go.transform.rotation = GeneradorProyectilChicle.transform.rotation;
+                go.transform.eulerAngles = new Vector3(GeneradorProyectilChicle.transform.rotation.x, transform.rotation.y, GeneradorProyectilChicle.transform.rotation.z);
                 proyectilChicle.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
+                proyectilChicle.timeEffectStuned = timeEffectChicle;
                 proyectilChicle.ShootForward();
             }
         }

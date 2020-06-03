@@ -58,7 +58,7 @@ public class Proyectil : MonoBehaviour
     public Transform vectorForwardDown;
     public Pool pool;
     protected bool dobleDamage;
-    private PoolObject poolObject;
+    protected PoolObject poolObject;
     protected Player PLAYER1;
     protected Player PLAYER2;
     protected Enemy ENEMY;
@@ -248,7 +248,7 @@ public class Proyectil : MonoBehaviour
             }
         }
     }
-    public void ShootForward()
+    public virtual void ShootForward()
     {
         if (trailRenderer != null)
         {

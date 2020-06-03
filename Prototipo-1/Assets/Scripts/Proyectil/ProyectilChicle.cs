@@ -9,6 +9,7 @@ public class ProyectilChicle : Proyectil
     public float timeEffectStuned;
     void Start()
     {
+
         tipoDeProyectil = Proyectil.typeProyectil.AtaqueEspecial;
         //soundgenerate = false;
         ShootForward();
@@ -18,7 +19,14 @@ public class ProyectilChicle : Proyectil
             gm = GameManager.instanceGameManager;
         }
     }
-
+    public override void ShootForward()
+    {
+        if (trailRenderer != null)
+        {
+            trailRenderer.enabled = true;
+        }
+        rg2D.AddForce(-transform.right * speed, ForceMode2D.Force);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -38,6 +46,22 @@ public class ProyectilChicle : Proyectil
     {
         timeLife = auxTimeLife;
     }
+    private void OnEnable()
+    {
+        animator.enabled = true;
+    }
+    public void DisableObject()
+    {
+        timeLife = 0;
+        if (poolObject != null)
+        {
+            poolObject.Recycle();
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+    }
     protected void CheckCollision(Collider2D collision, Player PlayerDisparador)
     {
         if (collision.tag == "BoxColliderController")
@@ -55,7 +79,10 @@ public class ProyectilChicle : Proyectil
                     if (boxColliderController.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && boxColliderController.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
                     {
                         boxColliderController.enemy.enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.Atrapado);
+                        boxColliderController.enemy.timeStuned = timeEffectStuned;
                         boxColliderController.enemy.life = boxColliderController.enemy.life - damage;
+                        animator.Play(nameAnimationHit);
+                        rg2D.velocity = Vector2.zero;
                     }
                 }
             }
@@ -67,6 +94,9 @@ public class ProyectilChicle : Proyectil
                     boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
                     boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                     boxColliderController.player.enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.Atrapado;
+                    boxColliderController.player.timeStuned = timeEffectStuned;
+                    animator.Play(nameAnimationHit);
+                    rg2D.velocity = Vector2.zero;
                 }
                 if (PlayerDisparador != null)
                 {
@@ -81,14 +111,17 @@ public class ProyectilChicle : Proyectil
                         boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
                         boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                         boxColliderController.player.enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.Atrapado;
-
+                        boxColliderController.player.timeStuned = timeEffectStuned;
+                        animator.Play(nameAnimationHit);
+                        rg2D.velocity = Vector2.zero;
                     }
                 }
             }
+
         }
     }
     // Update is called once per frame
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         CheckCollision(collision, PLAYER1);
         CheckCollision(collision, PLAYER2);

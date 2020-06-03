@@ -197,12 +197,13 @@ public class Player : MonoBehaviour
         switch (enumsPlayers.estadoJugador)
         {
             case EnumsPlayers.EstadoJugador.Atrapado:
-                CheckStune(timeStuned);
+                CheckStune();
+                inputManager.CheckSpritePlayer(this, player_PvP);
                 break;
         }
     }
 
-    public void CheckStune(float timeStuned)
+    public void CheckStune()
     {
         if (timeStuned > 0)
         {
