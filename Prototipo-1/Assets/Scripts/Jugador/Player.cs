@@ -208,11 +208,13 @@ public class Player : MonoBehaviour
         {
             timeStuned = timeStuned - Time.deltaTime;
             //hacer que el color del player se vea azul;
+            spritePlayerActual.spriteRenderer.color = Color.cyan;
             enableMovement = false;
         }
         else if (timeStuned <= 0)
         {
             //hacer que el color del player se vea blanco;
+            spritePlayerActual.spriteRenderer.color = Color.white;
             enableMovement = true;
             if (PD.lifePlayer > 0)
             {

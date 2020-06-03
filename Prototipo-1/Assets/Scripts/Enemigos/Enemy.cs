@@ -240,12 +240,14 @@ public class Enemy : MonoBehaviour
         {
             timeStuned = timeStuned - Time.deltaTime;
             //hacer que el color del enemigo se vea azul;
+            spriteEnemy.spriteRenderer.color = Color.cyan;
             enableMovement = false;
         }
         else if (timeStuned <= 0)
         {
             enableMovement = true;
             //hacer que el color del enemigo se vea blanco;
+            spriteEnemy.spriteRenderer.color = Color.white;
             if (life > 0)
             {
                 enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);

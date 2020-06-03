@@ -1,12 +1,18 @@
-﻿using System.Collections;
+﻿
+
+
+// ARREGLAR EL BUG DE QUE CUANDO TIRA EL ATAQUE ESPECIAL EN EL AIRE O AGACHADO SE BUGEA
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Lyn : Enemy
 {
     // Start is called before the first frame update
+    [Header("Datos del Ataque Especial")]
     public Pool PoolProyectilChicle;
     public float timeEffectChicle;
+    public GameObject GeneradorProyectilChicle;
 
     public override void Start()
     {
@@ -40,15 +46,6 @@ public class Lyn : Enemy
             AnimationAttack();
         }
     }
-    public void CheckSpecialAttack()
-    {
-        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
-            || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
-            || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
-        {
-            delaySelectMovement = 0.1f;
-        }
-    }
     public override void AnimationAttack()
     {
         if (enemyPrefab.activeSelf == true)
@@ -57,10 +54,9 @@ public class Lyn : Enemy
             {
                 valueAttack = Random.Range(0, 100);
             }
-            if (valueAttack >= parabolaAttack ||
-               enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
-            || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
-            || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
+            if (valueAttack >= parabolaAttack || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
                 || !enableMecanicParabolaAttack)
             {
                 if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
@@ -68,52 +64,64 @@ public class Lyn : Enemy
                     && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque
                     && !GetIsDuck())
                 {
-                    spriteEnemy.GetAnimator().Play("Ataque enemigo tomboy");
+                    spriteEnemy.GetAnimator().Play("Ataque Parado tomboy");
                     inAttack = true;
+                    SetIsDuck(false);
                 }
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
                 {
-                    spriteEnemy.GetAnimator().Play("Ataque Salto enemigo tomboy");
+                    spriteEnemy.GetAnimator().Play("Ataque Salto tomboy");
                     inAttack = true;
+                    SetIsDuck(false);
                 }
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && GetIsDuck() && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
                 {
-                    spriteEnemy.GetAnimator().Play("Ataque Agachado enemigo tomboy");
+                    spriteEnemy.GetAnimator().Play("Ataque Agachado tomboy");
                     inAttack = true;
+                    SetIsDuck(true);
                 }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto 
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado 
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial 
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                else if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo) && transform.position.y <= InitialPosition.y)
                 {
-                    spriteEnemy.GetAnimator().SetTrigger("AtaqueEspecial");
-                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
-                    SetEnableSpecialAttack(false);
-                    inAttack = true;
-                    xpActual = 0;
+                    switch (enumsEnemy.GetMovement())
+                    {
+                        case EnumsEnemy.Movimiento.AtaqueEspecial:
+                            spriteEnemy.GetAnimator().Play("Ataque Especial tomboy");
+                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
+                            inAttack = true;
+                            xpActual = 0;
+                            break;
+                        case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
+                            break;
+                        case EnumsEnemy.Movimiento.AtaqueEspecialSalto:
+                            break;
+                    }
                 }
             }
             else if (valueAttack < parabolaAttack)
             {
-                //ParabolaAttack();
                 if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
                     && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp() && delayAttack <= 0)
                 {
-                    spriteEnemy.PlayAnimation("Ataque Parabola enemigo tomboy");
+                    spriteEnemy.PlayAnimation("Ataque Parado Parabola tomboy");
                     inAttack = true;
+                    SetIsDuck(false);
                 }
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && delayAttack <= 0)
                 {
-                    spriteEnemy.PlayAnimation("Ataque Parabola Salto enemigo tomboy");
+                    spriteEnemy.PlayAnimation("Ataque Salto Parabola tomboy");
                     inAttack = true;
+                    SetIsDuck(false);
                 }
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && delayAttack <= 0)
                 {
-                    spriteEnemy.PlayAnimation("Ataque Parabola Agachado enemigo tomboy");
+                    spriteEnemy.PlayAnimation("Ataque Agachado Parabola tomboy");
                     inAttack = true;
+                    SetIsDuck(true);
                 }
-                //spriteEnemy.RestartDelayAttackEnemy();
             }
         }
     }
@@ -180,8 +188,8 @@ public class Lyn : Enemy
                 proyectilChicle = go.GetComponent<ProyectilChicle>();
                 proyectilChicle.SetEnemy(gameObject.GetComponent<Enemy>());
                 proyectilChicle.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
-                go.transform.position = generadoresProyectiles.transform.position;
-                go.transform.rotation = generadoresProyectiles.transform.rotation;
+                go.transform.position = GeneradorProyectilChicle.transform.position;
+                go.transform.rotation = GeneradorProyectilChicle.transform.rotation;
                 proyectilChicle.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
                 proyectilChicle.ShootForward();
             }
