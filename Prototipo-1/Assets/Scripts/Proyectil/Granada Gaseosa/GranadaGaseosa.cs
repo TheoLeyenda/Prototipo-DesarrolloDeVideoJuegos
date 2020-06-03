@@ -117,7 +117,7 @@ public class GranadaGaseosa : ProyectilParabola
                     //Debug.Log("ENTRE");
                     if (distanceOfLeftFloor.magnitude < 1.55f)
                     {
-                        Debug.Log("ENTRE 1");
+                        //Debug.Log("ENTRE 1");
                         cuadrillasAbajo.Add(grid[1]);
                         cuadrillasAbajo.Add(grid[0]);
                         arr[0] = refPlataformas.plataformas[idPlataforma].plataformaIzquierda.transform.position.x;
@@ -126,7 +126,7 @@ public class GranadaGaseosa : ProyectilParabola
                     }
                     else if (distanceOfCenterFloor.magnitude < 1.55f)
                     {
-                        Debug.Log("ENTRE 2");
+                        //Debug.Log("ENTRE 2");
                         num = (int)Random.Range(0, 100);
                         //Debug.Log(num);
                         arr[0] = refPlataformas.plataformas[idPlataforma].plataformaCentral.transform.position.x;
@@ -147,7 +147,7 @@ public class GranadaGaseosa : ProyectilParabola
                     }
                     else if (distanceOfRightFloor.magnitude < 1.55f)
                     {
-                        Debug.Log("ENTRE 3");
+                        //Debug.Log("ENTRE 3");
                         cuadrillasAbajo.Add(grid[1]);
                         cuadrillasAbajo.Add(grid[2]);
                         arr[0] = refPlataformas.plataformas[idPlataforma].plataformaDerecha.transform.position.x;
