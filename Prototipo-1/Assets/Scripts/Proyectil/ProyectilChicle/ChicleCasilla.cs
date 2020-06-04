@@ -74,6 +74,7 @@ public class ChicleCasilla : MonoBehaviour
             {
                 return;
             }
+            player.transform.position = new Vector3(transform.position.x, player.transform.position.y, player.transform.position.z);
         }
         if (collision.tag == "Enemy")
         {
@@ -82,6 +83,7 @@ public class ChicleCasilla : MonoBehaviour
             {
                 return;
             }
+            enemy.transform.position = new Vector3(transform.position.x, enemy.transform.position.y, enemy.transform.position.z);
         }
     }
 }

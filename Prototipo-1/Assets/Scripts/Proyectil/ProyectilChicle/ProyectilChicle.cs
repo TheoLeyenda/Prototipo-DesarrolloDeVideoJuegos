@@ -5,9 +5,10 @@ using UnityEngine;
 public class ProyectilChicle : Proyectil
 {
     // Start is called before the first frame update
-    public float checkMagnitude = 1.55f;
+    public float checkMagnitude = 2f;
     public float timeEffectStuned;
     public Pool poolChicleCasilla;
+    public float speedDown = 1.5f;
     private Grid refPlataformas;
     private GameObject[] grid;
     private int idPlataforma;
@@ -33,7 +34,7 @@ public class ProyectilChicle : Proyectil
         float _speed = speed;
         if (collisionWhitBoxColliderController)
         {
-            _speed = speed * 2;
+            _speed = speed * speedDown;
             collisionWhitBoxColliderController = false;
         }
         if (trailRenderer != null)
@@ -171,8 +172,9 @@ public class ProyectilChicle : Proyectil
     {
         if (collision.tag == "BoxColliderController")
         {
-            collisionWhitBoxColliderController = true;
             BoxColliderController boxColliderController = collision.GetComponent<BoxColliderController>();
+            collisionWhitBoxColliderController = true;
+            
             if (boxColliderController.enemy == null && boxColliderController.player == null || boxColliderController.enemy != null && boxColliderController.player != null)
             {
                 return;
