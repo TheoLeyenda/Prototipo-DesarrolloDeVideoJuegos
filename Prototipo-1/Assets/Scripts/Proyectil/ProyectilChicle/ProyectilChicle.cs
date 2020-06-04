@@ -15,6 +15,7 @@ public class ProyectilChicle : Proyectil
     List<GameObject> cuadrillasAbajo = new List<GameObject>();
     private Player player;
     private Enemy enemy;
+    private bool collisionWhitBoxColliderController;
     void Start()
     {
 
@@ -29,11 +30,17 @@ public class ProyectilChicle : Proyectil
     }
     public override void ShootForward()
     {
+        float _speed = speed;
+        if (collisionWhitBoxColliderController)
+        {
+            _speed = speed * 2;
+            collisionWhitBoxColliderController = false;
+        }
         if (trailRenderer != null)
         {
             trailRenderer.enabled = true;
         }
-        rg2D.AddForce(-transform.right * speed, ForceMode2D.Force);
+        rg2D.AddForce(-transform.right * _speed, ForceMode2D.Force);
     }
     // Update is called once per frame
     void Update()
@@ -164,6 +171,7 @@ public class ProyectilChicle : Proyectil
     {
         if (collision.tag == "BoxColliderController")
         {
+            collisionWhitBoxColliderController = true;
             BoxColliderController boxColliderController = collision.GetComponent<BoxColliderController>();
             if (boxColliderController.enemy == null && boxColliderController.player == null || boxColliderController.enemy != null && boxColliderController.player != null)
             {

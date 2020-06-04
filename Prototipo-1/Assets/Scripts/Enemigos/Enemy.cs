@@ -138,6 +138,10 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public float timeStuned = 0;
 
+    public static event Action<Enemy, string> OnModifireState;
+    public static event Action<Enemy, string> OnDisableModifireState;
+    public static event Action<Enemy> OnDie;
+
     private void OnEnable()
     {
         //Debug.Log("ENTRE");
@@ -229,7 +233,12 @@ public class Enemy : MonoBehaviour
         switch (enumsEnemy.GetStateEnemy())
         {
             case EnumsEnemy.EstadoEnemigo.Atrapado:
+                if(OnModifireState != null)
+                {
+                    OnModifireState(this, "Atrapado Chicle");
+                }
                 CheckStune(timeStuned);
+
                 break;
         }
     }
@@ -255,6 +264,10 @@ public class Enemy : MonoBehaviour
             else
             {
                 enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
+            }
+            if (OnDisableModifireState != null)
+            {
+                OnDisableModifireState(this, "Atrapado Chicle");
             }
 
         }
@@ -648,6 +661,13 @@ public class Enemy : MonoBehaviour
     //INTERACTUA CON GAME MANAGER
     public void Dead()
     {
+        if(life <= 0)
+        {
+            if (OnDie != null)
+            {
+                OnDie(this);
+            }
+        }
         if (!InPool)
         {
             if (life <= 0)

@@ -116,6 +116,10 @@ public class Player : MonoBehaviour
     public EventWise eventWise;
     private bool InFuegoEmpieza;
 
+    public static event Action<Player, string> OnModifireState;
+    public static event Action<Player, string> OnDisableModifireState;
+    public static event Action<Player> OnDie;
+
     private void Awake()
     {
         player_PvP = GetComponent<Player_PvP>();
@@ -197,6 +201,10 @@ public class Player : MonoBehaviour
         switch (enumsPlayers.estadoJugador)
         {
             case EnumsPlayers.EstadoJugador.Atrapado:
+                if (OnModifireState != null)
+                {
+                    OnModifireState(this, "Atrapado Chicle");
+                }
                 CheckStune();
                 inputManager.CheckSpritePlayer(this, player_PvP);
                 break;
@@ -224,6 +232,10 @@ public class Player : MonoBehaviour
             else
             {
                 enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.muerto;
+            }
+            if (OnDisableModifireState != null)
+            {
+                OnDisableModifireState(this, "Atrapado Chicle");
             }
 
         }
@@ -341,6 +353,10 @@ public class Player : MonoBehaviour
             else if (transform.position.y > InitialPosition.y)
             {
                 spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.Salto;
+            }
+            if(OnDie != null)
+            {
+                OnDie(this);
             }
         }
     }

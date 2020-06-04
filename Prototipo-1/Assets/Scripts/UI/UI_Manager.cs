@@ -15,6 +15,7 @@ public class UI_Manager : MonoBehaviour
     public struct playerHUD
     {
         //public string NamePlayer;
+        public GeneradorLogosEstado generadorLogosEstado;
         public TextMeshProUGUI textNamePlayer;
         public GameObject BARRA_DE_VIDA;
         public GameObject BARRA_DE_CARGA;
