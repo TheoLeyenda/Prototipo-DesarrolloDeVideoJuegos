@@ -176,9 +176,14 @@ public class Player : MonoBehaviour
     void Update()
     {
         //Sacar esto al terminar de testear
-        PD.lifePlayer = PD.maxLifePlayer;
+        //PD.lifePlayer = PD.maxLifePlayer;
+        
+        if (Input.GetKey(KeyCode.Space))
+        {
+            xpActual = xpNededSpecialAttack;
+            PD.lifePlayer = PD.maxLifePlayer;
+        }
         //--------------------------------
-
         CheckOutLimit();
         CheckDead();
         CheckState();
@@ -190,11 +195,7 @@ public class Player : MonoBehaviour
             CheckMovementInSpecialAttack();
             CheckBoxColliders2D();
         }
-        /*if (Input.GetKey(KeyCode.Space))
-        {
-            xpActual = xpNededSpecialAttack;
-            PD.lifePlayer = PD.maxLifePlayer;
-        }*/
+        
     }
     public void CheckState()
     {

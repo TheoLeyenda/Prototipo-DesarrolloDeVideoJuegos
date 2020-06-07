@@ -9,13 +9,28 @@ public class DisparoDeCarga : MonoBehaviour
     public float timeLife;
     public float auxTimeLife;
     public float damage;
+    private float auxDamage;
+
+    public ParticleSystem particleSystem;
+    public ParticleSystem.MainModule mainModule;
+    private float auxStartSpeedParticleSystem;
+    private GameObject objectCollisionPartycleSystem;
     // Update is called once per frame
-    void Update()
+    private void Start()
+    {
+        auxDamage = damage;
+        if(particleSystem != null)
+        {
+            mainModule = particleSystem.main;
+            auxStartSpeedParticleSystem = mainModule.startSpeedMultiplier;
+        }
+    }
+    protected virtual void Update()
     {
         CheckTimeLife();
     }
         
-    public void CheckTimeLife()
+    public virtual void CheckTimeLife()
     {
         if (timeLife > 0)
         {
@@ -38,6 +53,26 @@ public class DisparoDeCarga : MonoBehaviour
             }
             boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
         }
-            
+        if(collision.tag == "MagicBust")
+        {
+            objectCollisionPartycleSystem = collision.gameObject;
+            Vector3 Distance = objectCollisionPartycleSystem.transform.position - collision.transform.position;
+            damage = 0;
+            if(particleSystem != null)
+            {
+                mainModule.startSpeedMultiplier = Distance.x / 2;
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "MagicBust")
+        {
+            damage = auxDamage;
+            if(particleSystem != null)
+            {
+                mainModule.startSpeedMultiplier = auxStartSpeedParticleSystem;
+            }
+        }
     }
 }

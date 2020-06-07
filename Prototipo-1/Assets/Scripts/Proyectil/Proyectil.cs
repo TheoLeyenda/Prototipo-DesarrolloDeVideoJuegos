@@ -37,7 +37,7 @@ public class Proyectil : MonoBehaviour
     }
     public bool deadForTimeOnly;
     public bool completeColorStela = true;
-    public string nameAnimationHit;
+    public string nameAnimationHit = "Empty";
     public SpriteRenderer spriteRenderer;
     public List<Sprite> propsDisparoAereo;
     public List<Sprite> propsDisparoNormal;
@@ -238,6 +238,7 @@ public class Proyectil : MonoBehaviour
             }
             damage = auxDamage;
             dobleDamage = false;
+            AnimationHit();
             if (poolObject != null)
             {
                 poolObject.Recycle();
@@ -246,6 +247,7 @@ public class Proyectil : MonoBehaviour
             {
                 gameObject.SetActive(false);
             }
+            
         }
     }
     public virtual void ShootForward()
@@ -324,7 +326,7 @@ public class Proyectil : MonoBehaviour
             {
                 circleCollider2D.enabled = false;
             }
-            if (gameObject.activeSelf && animator.gameObject.activeSelf)
+            if (gameObject.activeSelf && animator.gameObject.activeSelf && nameAnimationHit != "Empty")
             {
                 animator.Play(nameAnimationHit);
             }

@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     //[HideInInspector]
     public bool enableMovement;
     [SerializeField]
-    private bool inCombatPosition;
+    protected bool inCombatPosition;
     public GameObject alturaMaxima;
     public GameObject[] posicionesDeMovimiento;
     //-------------------------------------------//
@@ -145,6 +145,7 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         //Debug.Log("ENTRE");
+        xpActual = 0;
         life = maxLife;
         delaySelectMovement = 0.2f;
         isJamping = false;

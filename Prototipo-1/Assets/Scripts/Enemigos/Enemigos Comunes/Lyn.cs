@@ -30,11 +30,6 @@ public class Lyn : Enemy
             CheckMovement();
         }
 
-        //BORRAR LUEGO ES SOLO PARA TESTEAR
-        if (Input.GetKey(KeyCode.Space))
-        {
-            xpActual = xpNededSpecialAttack;
-        }
     }
     public override void CheckDelayAttack(bool specialAttack)
     {

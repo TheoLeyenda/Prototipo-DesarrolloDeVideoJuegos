@@ -32,7 +32,7 @@ public class Defensivo : Enemy
         auxDelayStateCounterAttackDeffense = delayStateCounterAttackDeffense;
         inDeffense = false;
     }
-    
+
     public override void Update()
     {
         if (life <= 0)
@@ -42,10 +42,10 @@ public class Defensivo : Enemy
 
         }
         //Esto es para testear borrar luego.
-        //if (Input.GetKey(KeyCode.Space))
-        //{
-           // xpActual = xpNededSpecialAttack;
-        //}
+        if (Input.GetKey(KeyCode.Space))
+        {
+            xpActual = xpNededSpecialAttack;
+        }
         //----------------------------------
         base.Update();
         CheckInDeffense();
@@ -122,9 +122,9 @@ public class Defensivo : Enemy
                 || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
                 || !enableMecanicParabolaAttack)
             {
-                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar 
-                    && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp() 
-                    && enumsEnemy.GetMovement() !=  EnumsEnemy.Movimiento.AgacharseAtaque
+                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
+                    && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp()
+                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque
                     && !GetIsDuck())
                 {
                     spriteEnemy.spriteRenderer.color = Color.white;
@@ -279,7 +279,7 @@ public class Defensivo : Enemy
             }
         }
     }
-    public override void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage,Proyectil ProyectilRecibido)
+    public override void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage, Proyectil ProyectilRecibido)
     {
         bool shootDown = false;
         GameObject go = null;
@@ -312,7 +312,7 @@ public class Defensivo : Enemy
                     break;
             }
         }
-        if (!GetIsDuck() && !specialAttack 
+        if (!GetIsDuck() && !specialAttack
             && ProyectilRecibido.posicionDisparo != Proyectil.PosicionDisparo.PosicionBaja)
         {
             tipoProyectil = Proyectil.typeProyectil.ProyectilNormal;
@@ -333,7 +333,7 @@ public class Defensivo : Enemy
             go.transform.position = generadorProyectilesAgachado.transform.position;
             proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
         }
-            
+
         if (!specialAttack)
         {
             if (applyColorShoot == ApplyColorShoot.None || applyColorShoot == ApplyColorShoot.Stela)
@@ -365,9 +365,9 @@ public class Defensivo : Enemy
         {
             Disparo.gameObject.SetActive(true);
             spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", false);
-            enumsEnemy.SetMovement( EnumsEnemy.Movimiento.AtaqueEspecial);
+            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
         }
-        else if(transform.position.y > InitialPosition.y)
+        else if (transform.position.y > InitialPosition.y)
         {
             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
             SpeedJump = -1f;

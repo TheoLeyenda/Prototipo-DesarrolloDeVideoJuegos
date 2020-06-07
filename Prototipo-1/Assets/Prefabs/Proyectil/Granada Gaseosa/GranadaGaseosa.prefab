@@ -45,9 +45,10 @@ GameObject:
   - component: {fileID: 3214800171908601292}
   - component: {fileID: 5347520700725556}
   - component: {fileID: -8474218129516937928}
+  - component: {fileID: 1306676474711057852}
   m_Layer: 0
   m_Name: GranadaGaseosa
-  m_TagString: Untagged
+  m_TagString: ProyectilGaseosa
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -289,8 +290,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b24c16bb528108546a2b0ae3eba6663e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deadForTimeOnly: 0
   completeColorStela: 1
-  nameAnimationHit: 
+  nameAnimationHit: Hit_Proyectil
   spriteRenderer: {fileID: 1838973913409184378}
   propsDisparoAereo: []
   propsDisparoNormal: []
@@ -313,7 +315,7 @@ MonoBehaviour:
   disparadorDelProyectil: 0
   trailRenderer: {fileID: 3214800171908601292}
   posicionDisparo: 0
-  animator: {fileID: 0}
+  animator: {fileID: 1306676474711057852}
   initialPosition: {fileID: 0}
   colisionPlayer: 0
   rutaParabola_AtaqueJugador: {fileID: 0}
@@ -327,6 +329,25 @@ MonoBehaviour:
   propLata: {fileID: 21300000, guid: 49487b3ea2e81b34c8fdc451af4580f7, type: 3}
   propBotella: {fileID: 21300000, guid: ce2e75a08965e98479339970cbe377c2, type: 3}
   propsProyectilGaseosa: []
+--- !u!95 &1306676474711057852
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3880064559695748603}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6ee918dc9c5775b4da1616c3199330db, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4582409173489260129
 GameObject:
   m_ObjectHideFlags: 0
