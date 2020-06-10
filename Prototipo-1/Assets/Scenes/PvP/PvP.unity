@@ -465,12 +465,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1c362bff47396c4e8d379734aa3d9ed, type: 3}
---- !u!212 &555836538 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 366038256, guid: 8e1421a60cf0dd747a33b1113a15bb20,
-    type: 3}
-  m_PrefabInstance: {fileID: 27714209}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &634119834
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,11 +1048,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DataCombatPvP
       objectReference: {fileID: 0}
-    - target: {fileID: 5296688052684432413, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5296688052684432415, guid: e8928e77982af45438c66e3ccf001ec8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1116,128 +1105,44 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
         type: 3}
-      propertyPath: Players1.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: levels.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: Players2.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: FondosNivel.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: spriteWining.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: fondoNivel
+      propertyPath: uI_Manager
       value: 
-      objectReference: {fileID: 555836538}
+      objectReference: {fileID: 1955346939}
     - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
         type: 3}
-      propertyPath: Players1.Array.data[0]
+      propertyPath: fondoWining
       value: 
-      objectReference: {fileID: 2767252570226957292, guid: 641b60f2dabde21418ed5ef0c478527e,
-        type: 3}
+      objectReference: {fileID: 1372033650}
     - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
         type: 3}
-      propertyPath: Players1.Array.data[1]
+      propertyPath: fondoEmpate
       value: 
-      objectReference: {fileID: 1575790983220844323, guid: a5e206fcaa1e1c046be321f633f094dc,
-        type: 3}
+      objectReference: {fileID: 7098935484273691037}
     - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
         type: 3}
-      propertyPath: Players1.Array.data[2]
+      propertyPath: prefabWinPlayer1
       value: 
-      objectReference: {fileID: 1907001247088111312, guid: bb5da515eb2764949974f6ef2eec4e6c,
-        type: 3}
+      objectReference: {fileID: 1922142580}
     - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
         type: 3}
-      propertyPath: Players1.Array.data[3]
+      propertyPath: prefabWinPlayer2
       value: 
-      objectReference: {fileID: 8457048596727678919, guid: 88062b5ec537309449bf64dbdc50d08e,
-        type: 3}
+      objectReference: {fileID: 1961429064}
     - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
         type: 3}
-      propertyPath: levels.Array.data[0]
+      propertyPath: eventWisse
       value: 
-      objectReference: {fileID: 21300000, guid: a6928ccab481a364583f6a9d9fcb9702,
-        type: 3}
+      objectReference: {fileID: 2044667311}
     - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
         type: 3}
-      propertyPath: levels.Array.data[1]
+      propertyPath: spritePlayer1Win
       value: 
-      objectReference: {fileID: 21300000, guid: b8d40c9abfb618e4fb3592b955bf8de9,
-        type: 3}
+      objectReference: {fileID: 1922142582}
     - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
         type: 3}
-      propertyPath: levels.Array.data[5]
+      propertyPath: spritePlayer2Win
       value: 
-      objectReference: {fileID: 21300000, guid: 639fa3ebd81fa9344847608d37f6bc7d,
-        type: 3}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: levels.Array.data[6]
-      value: 
-      objectReference: {fileID: 21300000, guid: 85ddbe23b38f0ea4bb3cbde0d14d44ab,
-        type: 3}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: Players2.Array.data[0]
-      value: 
-      objectReference: {fileID: 2310775481983531557, guid: 3f5af699e35d18e45bc1cdd162ff6434,
-        type: 3}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: Players2.Array.data[2]
-      value: 
-      objectReference: {fileID: 7596183422208736243, guid: 404c3a4911877ec41a8b04dab8930241,
-        type: 3}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: Players2.Array.data[1]
-      value: 
-      objectReference: {fileID: 5228879684087920211, guid: 80fb492c67954da45add46e4a5053f1e,
-        type: 3}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: Players2.Array.data[3]
-      value: 
-      objectReference: {fileID: 8328635847705496454, guid: 9b1b08ee30ce8044d8ae744f4c9ad2ab,
-        type: 3}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: player1_selected
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: player2_selected
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: levels.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: 9ee02ed76babe6a4b9d73b35c7ce5b3e,
-        type: 3}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: levels.Array.data[8]
-      value: 
-      objectReference: {fileID: 21300000, guid: d4d2dfd71ea7cfe4da3678fac03f9ed0,
-        type: 3}
+      objectReference: {fileID: 1961429066}
     - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
         type: 3}
       propertyPath: FondosNivel.Array.data[0]
@@ -1255,16 +1160,6 @@ PrefabInstance:
       objectReference: {fileID: 418879774}
     - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
         type: 3}
-      propertyPath: FondosNivel.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: FondosNivel.Array.data[4]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
       propertyPath: FondosNivel.Array.data[5]
       value: 
       objectReference: {fileID: 7714600605856745365}
@@ -1275,83 +1170,9 @@ PrefabInstance:
       objectReference: {fileID: 7337870959002025078}
     - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
         type: 3}
-      propertyPath: FondosNivel.Array.data[7]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
       propertyPath: FondosNivel.Array.data[8]
       value: 
       objectReference: {fileID: 1372276832522696489}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: fondoWining
-      value: 
-      objectReference: {fileID: 1372033650}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: prefabWinPlayer1
-      value: 
-      objectReference: {fileID: 1922142580}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: spritePlayer1Win
-      value: 
-      objectReference: {fileID: 1922142582}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: prefabWinPlayer2
-      value: 
-      objectReference: {fileID: 1961429064}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: spritePlayer2Win
-      value: 
-      objectReference: {fileID: 1961429066}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: spriteWining.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: f0c5bbf34df1c804bb87eea8bef459f5,
-        type: 3}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: spriteWining.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: c76ab9828b9c9984fab2e2e5860b648d,
-        type: 3}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: spriteWining.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: 7da92649e631b5d4288fb7f7b8895f70,
-        type: 3}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: spriteWining.Array.data[3]
-      value: 
-      objectReference: {fileID: 21300000, guid: 8fc664db182a3cd4fb95e3c386905888,
-        type: 3}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: resetScorePlayers
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: fondoEmpate
-      value: 
-      objectReference: {fileID: 7098935484273691037}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: auxDelayFinishRound
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: delayFinishRound
-      value: 0.6
-      objectReference: {fileID: 0}
     - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
         type: 3}
       propertyPath: menuPausa_P1
@@ -1364,43 +1185,15 @@ PrefabInstance:
       objectReference: {fileID: 1022739497982692042}
     - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
         type: 3}
-      propertyPath: eventWisse
-      value: 
-      objectReference: {fileID: 2044667311}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: uI_Manager
-      value: 
-      objectReference: {fileID: 1955346939}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: Players1.Array.data[4]
-      value: 
-      objectReference: {fileID: 1505974669096557543, guid: 568693cad5f2d354eae042f0c34b2489,
-        type: 3}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: Players2.Array.data[4]
-      value: 
-      objectReference: {fileID: 2845396092847870817, guid: df67c1ccb26a68f4bbd58c2b867d7c5a,
-        type: 3}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
-      propertyPath: spriteWining.Array.data[4]
-      value: 
-      objectReference: {fileID: 21300000, guid: 34e6d197de8ba3048a43b711835d332e,
-        type: 3}
-    - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
-        type: 3}
       propertyPath: spriteWining.Array.data[5]
       value: 
-      objectReference: {fileID: 21300000, guid: f0c5bbf34df1c804bb87eea8bef459f5,
+      objectReference: {fileID: 21300000, guid: c76ab9828b9c9984fab2e2e5860b648d,
         type: 3}
     - target: {fileID: 5296688052684432414, guid: e8928e77982af45438c66e3ccf001ec8,
         type: 3}
       propertyPath: spriteWining.Array.data[6]
       value: 
-      objectReference: {fileID: 21300000, guid: c76ab9828b9c9984fab2e2e5860b648d,
+      objectReference: {fileID: 21300000, guid: 7da92649e631b5d4288fb7f7b8895f70,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8928e77982af45438c66e3ccf001ec8, type: 3}

@@ -119,9 +119,13 @@ public class SelectedLevel : MonoBehaviour
 
     void Update()
     {
-        MoveCursor();
-        CheckSelectCursor();
-        CheckFondo();
+        if (!cursorPlayer1.condirmed)
+        {
+            MoveCursor();
+            CheckSelectCursor();
+            CheckFondo();
+        }
+        //Debug.Log(grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y]);
     }
     public void MoveCursor()
     {
@@ -192,6 +196,7 @@ public class SelectedLevel : MonoBehaviour
         cursorPlayer2.condirmed = true; 
         if (cursorPlayer1.condirmed && cursorPlayer2.condirmed)
         {
+            
             if (activateCountRoundsSelection)
             {
                 CamvasSeleccionRounds.SetActive(true);
