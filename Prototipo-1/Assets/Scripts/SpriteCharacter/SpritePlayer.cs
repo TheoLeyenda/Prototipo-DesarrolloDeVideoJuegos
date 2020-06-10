@@ -117,8 +117,15 @@ public class SpritePlayer : SpriteCharacter
     public void EnableMovementPlayer()
     {
         player.enableMovementPlayer = true;
-        player.SetInFuegoEmpieza(false);
-        player.eventWise.StartEvent("fuego_termina");
+        if (player.enumsPlayers.specialAttackEquipped == EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga)
+        {
+            player.SetInFuegoEmpieza(false);
+            player.eventWise.StartEvent("fuego_termina");
+        }
+        else if(player.enumsPlayers.specialAttackEquipped == EnumsPlayers.SpecialAttackEquipped.Limusina)
+        {
+            
+        }
     }
     public void SetActualSprite(SpriteActual spriteActual)
     {

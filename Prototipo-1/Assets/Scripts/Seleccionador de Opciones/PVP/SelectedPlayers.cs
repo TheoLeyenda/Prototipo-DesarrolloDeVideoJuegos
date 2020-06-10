@@ -12,6 +12,9 @@ public class SelectedPlayers : MonoBehaviour
         public int x;
         public int y;
         public bool condirmed;
+
+        public EnumsPlayers.NumberPlayer numberPlayer;
+        public int index;
     }
     //ENUM PARA EL CHIMI DECORATIVO//
     public enum Characters
@@ -20,7 +23,12 @@ public class SelectedPlayers : MonoBehaviour
         Agresivo,
         Defensivo,
         Protagonista,
+        Famosa,
+        //Tomboy,
+        //Gotica,
+        RandomPlayer,
         Count,
+        Nulo,
     }
 
     [System.Serializable]
@@ -29,11 +37,14 @@ public class SelectedPlayers : MonoBehaviour
         public string nameCharacter;
         public Characters characterSelected;
         public DataCombatPvP.Player_Selected player_Selected;
+        public Vector3 position;
+        public int x , y;
     }
 
     public List<ElementsCharacter> elementsCharacters;
 
     //-----------------------------//
+    public bool enableRandomCharacter;
     public TextMeshProUGUI namePlayer1;
     public TextMeshProUGUI namePlayer2;
     public string nameNextScene;
@@ -55,8 +66,6 @@ public class SelectedPlayers : MonoBehaviour
     private bool aviableMoveVerticalP2;
 
     //VARIABLES PARA EL CHIMI DECORATIVO//
-    //public List<Vector3> positionsNameCharacters;
-    //private Vector3[,] positionNameCharacter;
     public SpriteRenderer imagePlayer1;
     public GameObject vs;
     public SpriteRenderer imagePlayer2;
@@ -66,11 +75,13 @@ public class SelectedPlayers : MonoBehaviour
     public SpriteRenderer spriteCursor1;
     public SpriteRenderer spriteCursor2;
     //----------------------------------//
+
+    // HACER QUE SE PUEDAN ELEGIR LOS TRES ENEMIGOS NUEVOS Y PONER UNA CASILLA MAS QUE PERMITA ELEGIR A UN JUGADOR DE FORMA ALEATORIA.
     private void Start()
     {
-        
         aviableMoveHorizontalP1 = true;
         aviableMoveVerticalP1 = true;
+        elementsCharacters[elementsCharacters.Count - 1].nameCharacter = "RandomPlayer";
         if (GameManager.instanceGameManager != null)
         {
             gm = GameManager.instanceGameManager;
@@ -79,9 +90,12 @@ public class SelectedPlayers : MonoBehaviour
 
         cursorPlayer1.x = 1;
         cursorPlayer1.y = columnas - 1;
+        cursorPlayer1.numberPlayer = EnumsPlayers.NumberPlayer.player1;
 
         cursorPlayer2.x = 2;
         cursorPlayer2.y = columnas - 1;
+        cursorPlayer2.numberPlayer = EnumsPlayers.NumberPlayer.player2;
+
         if (filas > 0 && columnas > 0)
         {
             grillaDeSeleccion = new string[filas, columnas];
@@ -91,18 +105,22 @@ public class SelectedPlayers : MonoBehaviour
                 int i = columnas - 1;
                 if (i > 0)
                 {
-                    while (i > 0)
+                    i = 0;
+                    while (i < columnas)
                     {
                         for (int j = 0; j < filas; j++)
                         {
                             if (idOption < namePlayersOptions.Count)
                             {
                                 grillaDeSeleccion[j, i] = namePlayersOptions[idOption];
+                                elementsCharacters[idOption].x = j;
+                                elementsCharacters[idOption].y = i;
                                 //positionNameCharacter[j, i] = positionsNameCharacters[idOption];
+                                //Debug.Log("[" + j + "," + i + "]: " + grillaDeSeleccion[j, i]);
                             }
                             idOption++;
                         }
-                        i--;
+                        i++;
                     }
                 }
                 else
@@ -112,6 +130,8 @@ public class SelectedPlayers : MonoBehaviour
                         if (idOption < namePlayersOptions.Count)
                         {
                             grillaDeSeleccion[j, i] = namePlayersOptions[idOption];
+                            elementsCharacters[idOption].x = j;
+                            elementsCharacters[idOption].y = i;
                             //positionNameCharacter[j, i] = positionsNameCharacters[idOption];
                         }
                         idOption++;
@@ -122,14 +142,15 @@ public class SelectedPlayers : MonoBehaviour
         idOption = 0;
         CheckNamePlayersSelect();
     }
+    
     private void Update()
     {
         MoveCursor("Horizontal", "Vertical", ref aviableMoveHorizontalP1,ref aviableMoveVerticalP1,ref cursorPlayer1,ref CursorSelectorPlayer1);
         MoveCursor("Horizontal_P2", "Vertical_P2", ref aviableMoveHorizontalP2, ref aviableMoveVerticalP2,ref cursorPlayer2,ref CursorSelectorPlayer2);
-        CheckSelectCursor("SelectButton_P1", ref cursorPlayer1, ref gm.structGameManager.gm_dataCombatPvP.player1_selected);
-        CheckSelectCursor("SelectButton_P2", ref cursorPlayer2, ref gm.structGameManager.gm_dataCombatPvP.player2_selected);
-        DecoratePlayerSelected(imagePlayer1, cursorPlayer1);
-        DecoratePlayerSelected(imagePlayer2, cursorPlayer2);
+        CheckSelectCursor("SelectButton_P1", ref cursorPlayer1, ref gm.structGameManager.gm_dataCombatPvP.player1_selected,ref CursorSelectorPlayer1,ref imagePlayer1);
+        CheckSelectCursor("SelectButton_P2", ref cursorPlayer2, ref gm.structGameManager.gm_dataCombatPvP.player2_selected,ref CursorSelectorPlayer2, ref imagePlayer2);
+        DecoratePlayerSelected(imagePlayer1,ref cursorPlayer1);
+        DecoratePlayerSelected(imagePlayer2,ref cursorPlayer2);
         CheckPositionCursor();
         CheckCursorSelected();
     }
@@ -153,14 +174,26 @@ public class SelectedPlayers : MonoBehaviour
             CursorGrandePlayer1.SetActive(false);
         }
     }
-    public void DecoratePlayerSelected(SpriteRenderer imagePlayer, CursorMatriz cursorPlayer)
+    public void DecoratePlayerSelected(SpriteRenderer imagePlayer,ref CursorMatriz cursorPlayer)
     {
         for (int i = 0; i < elementsCharacters.Count; i++)
         {
             if (grillaDeSeleccion[cursorPlayer.x, cursorPlayer.y] == elementsCharacters[i].nameCharacter)
             {
+                if (cursorPlayer.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                {
+                    if (elementsCharacters[i].nameCharacter == "RandomPlayer")
+                    {
+                        imagePlayer.transform.eulerAngles = new Vector3(1.374f, 0, 11.159f);
+                    }
+                    else
+                    {
+                        imagePlayer.transform.eulerAngles = new Vector3(1.374f, 180, -11.054f);
+                    }
+                }
                 imagePlayer.sprite = spritesPlayers[(int)elementsCharacters[i].characterSelected];
             }
+            
         }
     }
     public void MoveCursor(string inputHorizontal, string inputVertical, ref bool aviableMoveHorizontal, ref bool aviableMoveVertical, ref CursorMatriz cursorPlayer, ref Cursor CursorSelectorPlayer)
@@ -236,15 +269,23 @@ public class SelectedPlayers : MonoBehaviour
             spriteCursor2.color = Color.yellow;
         }
     }
-    public void CheckSelectCursor(string inputSelectButton, ref CursorMatriz cursorPlayer,ref DataCombatPvP.Player_Selected player_Selected)
+    public void CheckSelectCursor(string inputSelectButton, ref CursorMatriz cursorPlayer,ref DataCombatPvP.Player_Selected player_Selected, ref Cursor cursor, ref SpriteRenderer imagePlayer)
     {
         if (InputPlayerController.GetInputButtonDown(inputSelectButton))
         {
             for (int i = 0; i < elementsCharacters.Count; i++)
             {
-                if (grillaDeSeleccion[cursorPlayer.x, cursorPlayer.y] == elementsCharacters[i].nameCharacter)
+                if (grillaDeSeleccion[cursorPlayer.x, cursorPlayer.y] != "RandomPlayer")
                 {
-                    player_Selected = elementsCharacters[i].player_Selected;
+                    if (grillaDeSeleccion[cursorPlayer.x, cursorPlayer.y] == elementsCharacters[i].nameCharacter)
+                    {
+                        player_Selected = elementsCharacters[i].player_Selected;
+                        cursorPlayer.condirmed = true;
+                    }
+                }
+                else
+                {
+                    SelectRandomPlayer(ref cursor, ref player_Selected,ref imagePlayer,ref cursorPlayer);
                     cursorPlayer.condirmed = true;
                 }
             }
@@ -253,5 +294,22 @@ public class SelectedPlayers : MonoBehaviour
         {
             SceneManager.LoadScene(nameNextScene);
         }
+    }
+    public void SelectRandomPlayer(ref Cursor cursorPlayer, ref DataCombatPvP.Player_Selected player_Selected, ref SpriteRenderer imagePlayer, ref CursorMatriz cursor)
+    {
+        int index;
+        do
+        {
+            index = Random.Range(0, namePlayersOptions.Count);
+        } while (namePlayersOptions[index] == "RandomPlayer");
+        cursor.index = index;
+
+        player_Selected = elementsCharacters[index].player_Selected;
+
+        cursor.x = elementsCharacters[index].x;
+        cursor.y = elementsCharacters[index].y;
+
+        DecoratePlayerSelected(imagePlayer,ref cursor);
+        cursorPlayer.transform.localPosition = elementsCharacters[index].position;
     }
 }

@@ -175,6 +175,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        //Debug.Log(enumsPlayers.numberPlayer+": " + enableMovement);
+        //Debug.Log(enumsPlayers.numberPlayer + ": " +  enableMovementPlayer);
         //Sacar esto al terminar de testear
         //PD.lifePlayer = PD.maxLifePlayer;
         
@@ -187,6 +189,7 @@ public class Player : MonoBehaviour
         CheckOutLimit();
         CheckDead();
         CheckState();
+        CheckInSpecialAttack();
 
         if (enableMovement)
         {
@@ -196,6 +199,19 @@ public class Player : MonoBehaviour
             CheckBoxColliders2D();
         }
         
+    }
+
+    public void CheckInSpecialAttack()
+    {
+        switch (enumsPlayers.specialAttackEquipped)
+        {
+            case EnumsPlayers.SpecialAttackEquipped.Limusina:
+                if (!enableMovement && !structsPlayer.dataAttack.Limusina.gameObject.activeSelf)
+                {
+                    spritePlayerActual.GetAnimator().SetBool("FinalAtaqueEspecial", true);
+                }
+                break;
+        }
     }
     public void CheckState()
     {
@@ -322,6 +338,18 @@ public class Player : MonoBehaviour
                     enableMovementPlayer = false;
                 }
                 break;
+            case EnumsPlayers.SpecialAttackEquipped.Limusina:
+                if (structsPlayer.dataAttack.DisparoDeCarga.activeSelf)
+                {
+                    enableMovementPlayer = false;
+                }
+                break;
+            case EnumsPlayers.SpecialAttackEquipped.MagicBust:
+                if (structsPlayer.dataAttack.DisparoDeCarga.activeSelf)
+                {
+                    enableMovementPlayer = false;
+                }
+                break;
         }
     }
     public void ResetPlayer()
@@ -343,7 +371,7 @@ public class Player : MonoBehaviour
 
     public void CheckDead()
     {
-        if (PD.lifePlayer <= 0)
+        if (PD.lifePlayer <= 0 && transform.position.y <= InitialPosition.y && !isJumping)
         {
             enableMovementPlayer = false;
 
@@ -378,7 +406,6 @@ public class Player : MonoBehaviour
         }
         gm.ResetRoundCombat(true);
     }
-    
     public void DelayEnableAttack()
     {
         if (delayAttack > 0)
@@ -793,6 +820,35 @@ public class Player : MonoBehaviour
                         xpActual = 0;
                     }
                 }
+                break;
+            case EnumsPlayers.SpecialAttackEquipped.Limusina:
+                if (enableSpecialAttack)
+                {
+                    if (!isJumping && !isDuck
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+                    {
+                        structsPlayer.dataAttack.Limusina.SetPlayer(this);
+                        structsPlayer.dataAttack.Limusina.gameObject.SetActive(true);
+                        if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                        {
+                            structsPlayer.dataAttack.Limusina.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Jugador1;
+                            structsPlayer.dataAttack.Limusina.SetPlayer(this);
+                        }
+                        else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                        {
+                            structsPlayer.dataAttack.Limusina.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Jugador2;
+                            structsPlayer.dataAttack.Limusina.SetPlayer2(this);
+                        }
+                        enableSpecialAttack = false;
+                        xpActual = 0;
+                    }
+                }
+                break;
+            case EnumsPlayers.SpecialAttackEquipped.ProyectilChicle:
+                break;
+            case EnumsPlayers.SpecialAttackEquipped.MagicBust:
                 break;
         }
     }

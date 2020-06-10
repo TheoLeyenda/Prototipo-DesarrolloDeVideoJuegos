@@ -11,6 +11,9 @@ public class Player_PvP : MonoBehaviour
         Balanceado,
         Agresivo,
         Defensivo,
+        Famosa,
+        Tomboy,
+        Gotica,
     }
     public PlayerSelected playerSelected;
     public enum State

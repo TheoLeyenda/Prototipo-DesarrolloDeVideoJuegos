@@ -7,7 +7,7 @@ public class ProyectilLimo : ProyectilInparable
     // Start is called before the first frame update
 
     public GameObject SpawnPosition;
-
+    private int crash = 3;
 
     public override void Start()
     {
@@ -17,30 +17,34 @@ public class ProyectilLimo : ProyectilInparable
     {
         timeLife = auxTimeLife;
         transform.position = SpawnPosition.transform.position;
-        
+        crash = 3;
     }
     // Update is called once per frame
     public override void Update()
     {
         rg2D.AddForce(-transform.right * speed, ForceMode2D.Force);
         CheckTimeLife();
-        if(timeLife <= 0)
-        {
-            GetEnemy().spriteEnemy.GetAnimator().SetBool("FinalAtaqueEspecial", true);
-        }
-        else if(timeLife > 0 && GetEnemy().spriteEnemy.GetAnimator().GetBool("FinalAtaqueEspecial"))
-        {
-            GetEnemy().spriteEnemy.GetAnimator().SetBool("FinalAtaqueEspecial", false);
-        }
     }
 
     public override void Sonido()
     {
         
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "limite")
+        {
+            crash--;
+            if (crash <= 0)
+            {
+                timeLife = -0.1f;
+            }
+            //gameObject.SetActive(false);
+        }
+    }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        CheckCollision(collision, PLAYER1);
-        CheckCollision(collision, PLAYER2);
+        CheckCollision(collision, PLAYER1,false);
+        CheckCollision(collision, PLAYER2,false);
     }
 }

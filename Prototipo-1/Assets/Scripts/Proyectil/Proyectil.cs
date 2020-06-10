@@ -100,7 +100,10 @@ public class Proyectil : MonoBehaviour
     }
     public void SetColorProyectil(Color color)
     {
-        spriteRenderer.color = color;
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = color;
+        }
     }
     private void Start()
     {
@@ -330,7 +333,10 @@ public class Proyectil : MonoBehaviour
             {
                 animator.Play(nameAnimationHit);
             }
-            trailRenderer.enabled = false;
+            if (trailRenderer != null)
+            {
+                trailRenderer.enabled = false;
+            }
         }
         else
         {

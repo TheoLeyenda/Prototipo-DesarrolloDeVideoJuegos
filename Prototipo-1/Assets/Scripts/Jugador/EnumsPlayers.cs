@@ -39,6 +39,9 @@ public class EnumsPlayers : MonoBehaviour
         DisparoDeCarga,
         GranadaGaseosa,
         ProyectilImparable,
+        MagicBust,
+        Limusina,
+        ProyectilChicle,
         Default
     }
     public SpecialAttackEquipped specialAttackEquipped;

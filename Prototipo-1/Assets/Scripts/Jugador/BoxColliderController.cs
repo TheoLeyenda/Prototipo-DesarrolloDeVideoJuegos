@@ -62,7 +62,7 @@ public class BoxColliderController : MonoBehaviour
     {
         return boxCollider2D;
     }
-    public void CollisionWhitProyectil(Collider2D collision, Player PlayerDisparador, Proyectil proyectil, Proyectil.DisparadorDelProyectil PlayerCounterAttack, bool notProyectilParabola, bool notProyectilGaseosa)
+    public void CollisionWhitProyectil(Collider2D collision, Player PlayerDisparador, Proyectil proyectil, Proyectil.DisparadorDelProyectil PlayerCounterAttack, bool notProyectilParabola, bool notProyectilGaseosa, bool enableAnimationHit)
     {
         if (player != null && PlayerDisparador != player && !inEnemy && inPlayer)
         {
@@ -96,16 +96,25 @@ public class BoxColliderController : MonoBehaviour
                                 }
                                 player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                             }
-                            player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                            if (proyectil.GetComponent<ProyectilLimo>() == null)
+                            {
+                                player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                            }
                             if (!ZonaContraAtaque)
                             {
                                 eventWise.StartEvent("golpear_p1");
-                                proyectil.AnimationHit();
+                                if (enableAnimationHit)
+                                {
+                                    proyectil.AnimationHit();
+                                }
                             }
                             if (proyectil.colisionPlayer)
                             {
                                 eventWise.StartEvent("golpear_p1");
-                                proyectil.AnimationHit();
+                                if (enableAnimationHit)
+                                {
+                                    proyectil.AnimationHit();
+                                }
                             }
                         }
                         else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer || (!ZonaContraAtaque || (proyectil.colisionPlayer && notProyectilParabola)))
@@ -116,9 +125,15 @@ public class BoxColliderController : MonoBehaviour
                             }
                             player.SetEnableCounterAttack(false);
                             player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
-                            player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                            if (proyectil.GetComponent<ProyectilLimo>() == null)
+                            {
+                                player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                            }
                             eventWise.StartEvent("golpear_p1");
-                            proyectil.AnimationHit();
+                            if (enableAnimationHit)
+                            {
+                                proyectil.AnimationHit();
+                            }
                         }
                     }
 
@@ -144,7 +159,10 @@ public class BoxColliderController : MonoBehaviour
                         if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && PlayerDisparador != null)
                         {
                             player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
-                            player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                            if (proyectil.GetComponent<ProyectilLimo>() == null)
+                            {
+                                player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                            }
                             if (Proyectil.typeProyectil.AtaqueEspecial != proyectil.tipoDeProyectil)
                             {
                                 PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + PlayerDisparador.xpForHit);
@@ -154,7 +172,10 @@ public class BoxColliderController : MonoBehaviour
                                 PlayerDisparador.PD.score = PlayerDisparador.PD.score + PlayerDisparador.PD.scoreForHit;
                             }
                             eventWise.StartEvent("golpear_p1");
-                            proyectil.AnimationHit();
+                            if (enableAnimationHit)
+                            {
+                                proyectil.AnimationHit();
+                            }
                         }
 
                     }
@@ -165,7 +186,10 @@ public class BoxColliderController : MonoBehaviour
                         {
                             player.SetEnableCounterAttack(false);
                             player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
-                            player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                            if (proyectil.GetComponent<ProyectilLimo>() == null)
+                            {
+                                player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                            }
                             if (Proyectil.typeProyectil.AtaqueEspecial != proyectil.tipoDeProyectil)
                             {
                                 PlayerDisparador.SetXpActual(PlayerDisparador.GetXpActual() + PlayerDisparador.xpForHit);
@@ -175,7 +199,10 @@ public class BoxColliderController : MonoBehaviour
                                 PlayerDisparador.PD.score = PlayerDisparador.PD.score + PlayerDisparador.PD.scoreForHit;
                             }
                             eventWise.StartEvent("golpear_p1");
-                            proyectil.AnimationHit();
+                            if (enableAnimationHit)
+                            {
+                                proyectil.AnimationHit();
+                            }
                         }
 
                     }
@@ -203,7 +230,10 @@ public class BoxColliderController : MonoBehaviour
                     proyectil.damage = proyectil.GetAuxDamage();
                     player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                     eventWise.StartEvent("jugador_1_bloquear");
-                    proyectil.AnimationHit();
+                    if (enableAnimationHit)
+                    {
+                        proyectil.AnimationHit();
+                    }
                 }
                 if (player_PvP != null)
                 {
@@ -248,7 +278,10 @@ public class BoxColliderController : MonoBehaviour
                                 proyectil.damage = proyectil.GetAuxDamage();
                                 player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                                 eventWise.StartEvent("jugador_1_bloquear");
-                                proyectil.AnimationHit();
+                                if (enableAnimationHit)
+                                {
+                                    proyectil.AnimationHit();
+                                }
                                 break;
                         }
                     }
@@ -262,7 +295,10 @@ public class BoxColliderController : MonoBehaviour
                     proyectil.damage = proyectil.GetAuxDamage();
                     player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                     eventWise.StartEvent("jugador_1_bloquear");
-                    proyectil.AnimationHit();
+                    if (enableAnimationHit)
+                    {
+                        proyectil.AnimationHit();
+                    }
                 }
                 
             }
@@ -291,7 +327,10 @@ public class BoxColliderController : MonoBehaviour
                             }
                         }
                         eventWise.StartEvent("golpear_p1");
-                        proyectil.AnimationHit();
+                        if (enableAnimationHit)
+                        {
+                            proyectil.AnimationHit();
+                        }
                     }
                 }
             }
@@ -343,7 +382,10 @@ public class BoxColliderController : MonoBehaviour
                         }
                     }
                     eventWise.StartEvent("jugador_1_bloquear");
-                    proyectil.AnimationHit();
+                    if (enableAnimationHit)
+                    {
+                        proyectil.AnimationHit();
+                    }
                 }
             }
         }
@@ -358,8 +400,9 @@ public class BoxColliderController : MonoBehaviour
                     Proyectil proyectil = collision.GetComponent<Proyectil>();
                     bool notProyectilParabola = proyectil.GetComponent<ProyectilParabola>() == null;
                     bool notProyectilGaseosa = proyectil.GetComponent<GranadaGaseosa>() == null;
-                    CollisionWhitProyectil(collision, proyectil.GetPlayer(), proyectil, Proyectil.DisparadorDelProyectil.Jugador2, notProyectilParabola, notProyectilGaseosa);
-                    CollisionWhitProyectil(collision, proyectil.GetPlayer2(), proyectil, Proyectil.DisparadorDelProyectil.Jugador1, notProyectilParabola, notProyectilGaseosa);
+                    bool enableAnimationHit = proyectil.GetComponent<ProyectilInparable>() == null;
+                    CollisionWhitProyectil(collision, proyectil.GetPlayer(), proyectil, Proyectil.DisparadorDelProyectil.Jugador2, notProyectilParabola, notProyectilGaseosa, enableAnimationHit);
+                    CollisionWhitProyectil(collision, proyectil.GetPlayer2(), proyectil, Proyectil.DisparadorDelProyectil.Jugador1, notProyectilParabola, notProyectilGaseosa, enableAnimationHit);
                     break;
             }
         }

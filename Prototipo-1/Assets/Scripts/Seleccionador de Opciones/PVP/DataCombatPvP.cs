@@ -19,6 +19,9 @@ public class DataCombatPvP : MonoBehaviour
         Agresivo,
         Defensivo,
         Protagonista,
+        Famosa,
+        //Tomboy,
+        //Gotica,
         Count,
         Nulo,
     }
@@ -104,12 +107,15 @@ public class DataCombatPvP : MonoBehaviour
         {
             FondosNivel[(int)level_selected].SetActive(true);
         }
+        //Debug.Log(player1_selected);
+        //Debug.Log(player2_selected);
+        //Debug.Log(level_selected);
     }
     private void Update()
     {
         if (player1 != null && player2 != null)
         {
-            if ((player1.PD.lifePlayer <= 0 || player2.PD.lifePlayer <= 0))
+            if (player1.PD.lifePlayer <= 0 && player1.transform.position.y <= player1.GetInitialPosition().y || player2.PD.lifePlayer <= 0 && player2.transform.position.y <= player2.GetInitialPosition().y) 
             {
                 startDelayFinishRound = true;
             }

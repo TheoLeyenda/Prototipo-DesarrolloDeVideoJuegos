@@ -50,10 +50,18 @@ public class ProyectilInparable : Proyectil
             Sonido();
         }
         CheckTimeLife();
-        transform.Rotate(new Vector3(0, 0,speedRotation));
+        if (rg2D.velocity.x != 0)
+        {
+            transform.Rotate(new Vector3(0, 0, speedRotation));
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(0, 0, 0);
+        }
     }
-    protected void CheckCollision(Collider2D collision,Player PlayerDisparador)
+    protected void CheckCollision(Collider2D collision,Player PlayerDisparador, bool applySpriteRecibirDanio)
     {
+
         if (collision.tag == "BoxColliderController")
         {
             BoxColliderController boxColliderController = collision.GetComponent<BoxColliderController>();
@@ -68,7 +76,10 @@ public class ProyectilInparable : Proyectil
                 {
                     if (boxColliderController.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && boxColliderController.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
                     {
-                        boxColliderController.enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.RecibirDanio;
+                        if (applySpriteRecibirDanio)
+                        {
+                            boxColliderController.enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.RecibirDanio;
+                        }
                         boxColliderController.enemy.life = boxColliderController.enemy.life - damage;
                     }
                 }
@@ -79,7 +90,10 @@ public class ProyectilInparable : Proyectil
                 if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
                 {
                     boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
-                    boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                    if (applySpriteRecibirDanio)
+                    {
+                        boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                    }
                 }
                 if (PlayerDisparador != null)
                 {
@@ -92,8 +106,10 @@ public class ProyectilInparable : Proyectil
                         boxColliderController.player.SetEnableCounterAttack(true);
 
                         boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
-                        boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-
+                        if (applySpriteRecibirDanio)
+                        {
+                            boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                        }
                     }
                 }
             }
@@ -102,7 +118,8 @@ public class ProyectilInparable : Proyectil
     // Update is called once per frame
     private void OnTriggerStay2D(Collider2D collision)
     {
-        CheckCollision(collision,PLAYER1);
-        CheckCollision(collision,PLAYER2);
+        CheckCollision(collision,PLAYER1,true);
+        CheckCollision(collision,PLAYER2,true);
     }
+    
 }

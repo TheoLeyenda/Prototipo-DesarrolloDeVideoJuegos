@@ -27,6 +27,10 @@ public class StructsPlayer : MonoBehaviour
         public Pool poolProyectilImparable;
         public GameObject DisparoDeCarga;
         public Pool poolGranadaGaseosa;
+        public ProyectilLimo Limusina;
+        public ProyectilMagicBust MagicBust;
+        public Pool poolProyectilChicle;
+        public GameObject GeneradorProyectilChicle;
     }
     [System.Serializable]
     public struct ParticleMovement
