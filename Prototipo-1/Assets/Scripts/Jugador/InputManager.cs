@@ -418,7 +418,11 @@ public class InputManager : MonoBehaviour
                 {
                     if (player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
                         && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-                        && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+                        && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa 
+                        && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Agacharse
+                        && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.AgacharseAtaque
+                        && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.AgacheDefensa
+                        && !player.GetIsDuck())
                     {
                         player.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL SALTANDO
                         enableMovementPlayer = false;
