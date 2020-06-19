@@ -87,7 +87,7 @@ public class ProyectilChicle : Proyectil
             gameObject.SetActive(false);
         }
     }
-    public void CreateChicleCasilla(int cantProyectiles)
+    public void CreateChicleCasilla(int cantProyectiles, Player p, Enemy e)
     {
         if (cuadrillaColision != null)
         {
@@ -100,21 +100,37 @@ public class ProyectilChicle : Proyectil
             float x = 0;
             if (cantProyectiles == 1)
             {
-
-                if (distanceOfLeftFloor.magnitude <= checkMagnitude)
+                if (p != null)
                 {
-                    cuadrillasAbajo.Add(grid[0]);
-                    x = refPlataformas.plataformas[idPlataforma].plataformaIzquierda.transform.position.x;
+                    cuadrillasAbajo.Add(grid[p.structsPlayer.dataPlayer.columnaActual]);
+                    switch (p.structsPlayer.dataPlayer.columnaActual)
+                    {
+                        case 0:
+                            x = refPlataformas.plataformas[idPlataforma].plataformaIzquierda.transform.position.x;
+                            break;
+                        case 1:
+                            x = refPlataformas.plataformas[idPlataforma].plataformaCentral.transform.position.x;
+                            break;
+                        case 2:
+                            x = refPlataformas.plataformas[idPlataforma].plataformaDerecha.transform.position.x;
+                            break;
+                    }
                 }
-                else if (distanceOfCenterFloor.magnitude <= checkMagnitude)
+                else if (e != null)
                 {
-                    cuadrillasAbajo.Add(grid[1]);
-                    x = refPlataformas.plataformas[idPlataforma].plataformaCentral.transform.position.x;
-                }
-                else if (distanceOfRightFloor.magnitude < checkMagnitude)
-                {
-                    cuadrillasAbajo.Add(grid[2]);
-                    x = refPlataformas.plataformas[idPlataforma].plataformaDerecha.transform.position.x;
+                    cuadrillasAbajo.Add(grid[e.structsEnemys.dataEnemy.columnaActual]);
+                    switch (e.structsEnemys.dataEnemy.columnaActual)
+                    {
+                        case 0:
+                            x = refPlataformas.plataformas[idPlataforma].plataformaIzquierda.transform.position.x;
+                            break;
+                        case 1:
+                            x = refPlataformas.plataformas[idPlataforma].plataformaCentral.transform.position.x;
+                            break;
+                        case 2:
+                            x = refPlataformas.plataformas[idPlataforma].plataformaDerecha.transform.position.x;
+                            break;
+                    }
                 }
                 for (int i = 0; i < cuadrillasAbajo.Count; i++)
                 {
@@ -250,7 +266,8 @@ public class ProyectilChicle : Proyectil
                 //Debug.Log(PLAYER1);
                 if (PLAYER1 != null)
                 {
-                    CreateChicleCasilla(1);
+                    CreateChicleCasilla(1, piso.player, null);
+                    CreateChicleCasilla(1, null, piso.enemy);
                 }
 
             }
@@ -260,13 +277,13 @@ public class ProyectilChicle : Proyectil
                 cuadrillaColision = cuadrilla;
                 if (PLAYER2 != null)
                 {
-                    CreateChicleCasilla(1);
+                    CreateChicleCasilla(1, piso.player, null);
                 }
             }
             else if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
             {
                 cuadrillaColision = cuadrilla;
-                CreateChicleCasilla(1);
+                CreateChicleCasilla(1, piso.player, null);
 
             }
         }
