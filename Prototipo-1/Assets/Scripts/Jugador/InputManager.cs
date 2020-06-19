@@ -392,7 +392,9 @@ public class InputManager : MonoBehaviour
             if (InputPlayerController.GetInputButtonDown(inputSpecialAttackButton))
             {
                 if (player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.ProyectilImparable 
-                    && player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga)
+                    && player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga
+                    && player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.ProyectilChicle
+                    && player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.Limusina)
                 {
                     if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar
                         || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoAtaque
@@ -421,9 +423,16 @@ public class InputManager : MonoBehaviour
                         player.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL SALTANDO
                         enableMovementPlayer = false;
                     }
-                    else
+                    else if(player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Agacharse
+                        && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.AgacharseAtaque
+                        && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.AgacheDefensa
+                        && !player.GetIsDuck())
                     {
                         player.spritePlayerActual.PlayAnimation("Salto protagonista");
+                    }
+                    else
+                    {
+                        player.spritePlayerActual.PlayAnimation("Agachado protagonista");
                     }
                 }
             }

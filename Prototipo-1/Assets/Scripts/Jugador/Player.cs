@@ -852,7 +852,10 @@ public class Player : MonoBehaviour
                     if (!isJumping && !isDuck
                     && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
                     && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Agacharse
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.AgacharseAtaque
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.AgacheDefensa)
                     {
                         GameObject go = structsPlayer.dataAttack.poolProyectilChicle.GetObject();
                         ProyectilChicle proyectilChicle = go.GetComponent<ProyectilChicle>();
@@ -882,6 +885,10 @@ public class Player : MonoBehaviour
                         proyectilChicle.ShootForward();
                         enableSpecialAttack = false;
                         xpActual = 0;
+                    }
+                    else
+                    {
+                        enableSpecialAttack = true;
                     }
                 }
                 break;
