@@ -847,6 +847,43 @@ public class Player : MonoBehaviour
                 }
                 break;
             case EnumsPlayers.SpecialAttackEquipped.ProyectilChicle:
+                if (enableSpecialAttack)
+                {
+                    if (!isJumping && !isDuck
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+                    {
+                        GameObject go = structsPlayer.dataAttack.poolProyectilChicle.GetObject();
+                        ProyectilChicle proyectilChicle = go.GetComponent<ProyectilChicle>();
+                        proyectilChicle.SetEnemy(null);
+                        switch (applyColorShoot)
+                        {
+                            case ApplyColorShoot.None:
+                                break;
+                            case ApplyColorShoot.Stela:
+                                proyectilChicle.SetColorStela(colorShoot);
+                                break;
+                        }
+                        //proyectilInparable.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
+                        if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
+                        {
+                            proyectilChicle.SetPlayer(gameObject.GetComponent<Player>());
+                            proyectilChicle.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Jugador1;
+                        }
+                        else if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
+                        {
+                            proyectilChicle.SetPlayer2(gameObject.GetComponent<Player>());
+                            proyectilChicle.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Jugador2;
+                        }
+                        proyectilChicle.tipoDeProyectil = Proyectil.typeProyectil.AtaqueEspecial;
+                        go.transform.position = structsPlayer.dataAttack.GeneradorProyectilChicle.transform.position;
+                        go.transform.rotation = structsPlayer.dataAttack.GeneradorProyectilChicle.transform.rotation;
+                        proyectilChicle.ShootForward();
+                        enableSpecialAttack = false;
+                        xpActual = 0;
+                    }
+                }
                 break;
             case EnumsPlayers.SpecialAttackEquipped.MagicBust:
                 break;

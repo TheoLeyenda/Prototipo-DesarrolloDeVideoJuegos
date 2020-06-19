@@ -24,7 +24,7 @@ public class SelectedPlayers : MonoBehaviour
         Defensivo,
         Protagonista,
         Famosa,
-        //Tomboy,
+        Tomboy,
         //Gotica,
         RandomPlayer,
         Count,
