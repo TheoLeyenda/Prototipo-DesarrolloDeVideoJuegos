@@ -25,6 +25,13 @@ public class ChicleCasilla : MonoBehaviour
     void Update()
     {
         CheckEffect();
+        if (player != null)
+        {
+            if (!player.gameObject.activeSelf)
+            {
+                gameObject.SetActive(false);
+            }
+        }
     }
     public void CheckEffect()
     {
@@ -76,6 +83,8 @@ public class ChicleCasilla : MonoBehaviour
             if (!targetAssigned)
             {
                 player = collision.GetComponent<Player>();
+                //Debug.Log(collision.name);
+                //Debug.Log(player); 
             }
             if (player == null)
             {

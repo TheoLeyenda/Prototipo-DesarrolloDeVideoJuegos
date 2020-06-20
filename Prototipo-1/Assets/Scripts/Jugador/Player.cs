@@ -259,9 +259,9 @@ public class Player : MonoBehaviour
     }
     public void CheckBoxColliders2D()
     {
-        if (!isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.Salto
-            || !isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.SaltoAtaque
-            || !isDuck && spritePlayerActual.ActualSprite != SpritePlayer.SpriteActual.SaltoDefensa)
+        if (!isDuck && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+             && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+             && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
         {
                 boxColliderAgachado.GetBoxCollider2D().enabled = false;
                 boxColliderParado.GetBoxCollider2D().enabled = true;
