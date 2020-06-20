@@ -305,7 +305,6 @@ public class SelectedPlayers : MonoBehaviour
         cursor.index = index;
 
         player_Selected = elementsCharacters[index].player_Selected;
-
         cursor.x = elementsCharacters[index].x;
         cursor.y = elementsCharacters[index].y;
 
