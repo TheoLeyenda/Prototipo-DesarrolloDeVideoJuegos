@@ -15,10 +15,12 @@ public class ChicleCasilla : MonoBehaviour
 
     private bool inStunedEffect;
 
+    private bool targetAssigned;
     // Update is called once per frame
     private void OnDisable()
     {
         inStunedEffect = false;
+        targetAssigned = false;
     }
     void Update()
     {
@@ -40,6 +42,7 @@ public class ChicleCasilla : MonoBehaviour
                 player.timeStuned = timeStuned;
                 player.enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.Atrapado;
                 inStunedEffect = true;
+                targetAssigned = true;
             }
 
             if (player.timeStuned <= 0)
@@ -58,6 +61,7 @@ public class ChicleCasilla : MonoBehaviour
                 enemy.timeStuned = timeStuned;
                 enemy.enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.Atrapado);
                 inStunedEffect = true;
+                targetAssigned = true;
             }
             if (enemy.timeStuned <= 0)
             {
@@ -69,7 +73,10 @@ public class ChicleCasilla : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            player = collision.GetComponent<Player>();
+            if (!targetAssigned)
+            {
+                player = collision.GetComponent<Player>();
+            }
             if (player == null)
             {
                 return;
@@ -78,7 +85,10 @@ public class ChicleCasilla : MonoBehaviour
         }
         if (collision.tag == "Enemy")
         {
-            enemy = collision.GetComponent<Enemy>();
+            if (!targetAssigned)
+            {
+                enemy = collision.GetComponent<Enemy>();
+            }
             if (enemy == null)
             {
                 return;
