@@ -62,6 +62,12 @@ public class ProyectilMagicBust : DisparoDeCarga
             //ProyectilLimo proyectilLimo = collision.GetComponent<ProyectilLimo>();
             //ProyectilChicle proyectilChicle = collision.GetComponent<ProyectilChicle>();
             //Debug.Log("Entre colision con proyectil");
+            GranadaGaseosa granadaGaseosa = collision.GetComponent<GranadaGaseosa>();
+            if (granadaGaseosa != null)
+            {
+                granadaGaseosa.timeLife = 0f;
+                granadaGaseosa.GetPoolObject().Recycle();
+            }
             if (proyectil.animator != null)
             {
                 proyectil.AnimationHit();

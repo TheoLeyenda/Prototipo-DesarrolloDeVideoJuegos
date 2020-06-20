@@ -26,6 +26,7 @@ public class GranadaGaseosa : ProyectilParabola
     }
     private void OnDisable()
     {
+        inAnimation = false;
         soundgenerate = false;
     }
     // Update is called once per frame
@@ -45,6 +46,7 @@ public class GranadaGaseosa : ProyectilParabola
     }
     private void OnEnable()
     {
+        inAnimation = false;
         timeLife = auxTimeLife;
         int random = Random.Range(0, propsProyectilGaseosa.Count);
         if (spriteRenderer != null)

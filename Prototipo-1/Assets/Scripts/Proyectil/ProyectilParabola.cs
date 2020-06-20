@@ -29,6 +29,7 @@ public class ProyectilParabola : Proyectil
     private void OnDisable()
     {
         soundgenerate = false;
+        inAnimation = false;
     }
     private void OnEnable()
     {
