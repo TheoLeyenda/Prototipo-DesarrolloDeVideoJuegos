@@ -11,7 +11,12 @@ public class ProyectilLimo : ProyectilInparable
 
     public override void Start()
     {
-        base.Start();
+        soundgenerate = false;
+        timeLife = auxTimeLife;
+        if (GameManager.instanceGameManager != null)
+        {
+            gm = GameManager.instanceGameManager;
+        }
     }
     private void OnDisable()
     {
@@ -22,7 +27,12 @@ public class ProyectilLimo : ProyectilInparable
     // Update is called once per frame
     public override void Update()
     {
-        rg2D.AddForce(-transform.right * speed, ForceMode2D.Force);
+        float normalizedSpeed = speed * Time.deltaTime;
+        if (normalizedSpeed < 0)
+        {
+            normalizedSpeed = normalizedSpeed * -1;
+        }
+        rg2D.AddForce(-transform.right * (speed * Time.deltaTime), ForceMode2D.Force);
         CheckTimeLife();
     }
 
