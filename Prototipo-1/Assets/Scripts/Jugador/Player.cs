@@ -175,16 +175,12 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(enumsPlayers.numberPlayer+": " + enableMovement);
-        //Debug.Log(enumsPlayers.numberPlayer + ": " +  enableMovementPlayer);
-        //Sacar esto al terminar de testear
-        //PD.lifePlayer = PD.maxLifePlayer;
-        
-        if (Input.GetKey(KeyCode.Space))
-        {
+        //BORRAR LUEGO DE TESTEAR
+        //if (Input.GetKey(KeyCode.Space))
+        //{
             xpActual = xpNededSpecialAttack;
             PD.lifePlayer = PD.maxLifePlayer;
-        }
+        //}
         //--------------------------------
         CheckOutLimit();
         CheckDead();
