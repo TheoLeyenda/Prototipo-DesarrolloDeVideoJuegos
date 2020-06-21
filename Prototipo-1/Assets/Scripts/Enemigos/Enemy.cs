@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour
     public float xpForHit;
     public Pool poolParabolaAttack;
     public Pool poolObjectAttack;
-    private Rigidbody2D rg2D;
+    protected Rigidbody2D rg2D;
     private GameManager gm;
     public GameObject generadoresProyectiles;
     public GameObject generadorProyectilesAgachado;

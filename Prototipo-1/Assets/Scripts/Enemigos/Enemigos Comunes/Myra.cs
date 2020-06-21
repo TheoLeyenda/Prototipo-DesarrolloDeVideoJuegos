@@ -19,6 +19,10 @@ public class Myra : Enemy
         ProyectilMagicBust.timeLife = 0;
         ProyectilMagicBust.gameObject.SetActive(false);
     }
+    private void OnEnable()
+    {
+        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+    }
     // Update is called once per frame
     public override void Update()
     {
@@ -29,6 +33,10 @@ public class Myra : Enemy
         {
             CheckComportamiento();
             CheckMovement();
+        }
+        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.MoveToPointCombat)
+        {
+            delaySelectMovement = 0.1f;
         }
 
     }

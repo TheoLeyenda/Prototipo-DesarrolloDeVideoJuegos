@@ -61,10 +61,15 @@ public class Defensivo : Enemy
             CheckMovement();
             delaySelectMovement = 0.7f;
         }
-        /*if(transform.position.y > InitialPosition.y + 1 && !GetIsJamping())
+        if(transform.position.y > InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
         {
-            xpActual = xpNededSpecialAttack;
-        }*/
+            delaySelectMovement = 0.1f;
+            Move(Vector3.down);
+        }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            Debug.Log(enumsEnemy.GetMovement());
+        }
     }
     public void CheckInSpecialAttack()
     {

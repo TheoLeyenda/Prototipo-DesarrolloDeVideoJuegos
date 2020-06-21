@@ -178,7 +178,7 @@ public class Player : MonoBehaviour
         //BORRAR LUEGO DE TESTEAR
         //if (Input.GetKey(KeyCode.Space))
         //{
-            xpActual = xpNededSpecialAttack;
+            //xpActual = xpNededSpecialAttack;
             PD.lifePlayer = PD.maxLifePlayer;
         //}
         //--------------------------------

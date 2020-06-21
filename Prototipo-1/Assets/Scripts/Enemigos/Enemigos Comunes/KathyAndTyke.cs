@@ -7,21 +7,26 @@ public class KathyAndTyke : Enemy
     // Start is called before the first frame update
     public ProyectilLimo limo_gameObject;
 
+    public bool CounchDefense = true;
+
     public override void Start()
     {
         base.Start();
     }
-
+    private void OnEnable()
+    {
+        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+    }
     // Update is called once per frame
     public override void Update()
     {
         //BORRAR ESTO DESPUES DE TESTEAR
-        if (Input.GetKey(KeyCode.Space))
+        /*if (Input.GetKey(KeyCode.Space))
         {
             xpActual = xpNededSpecialAttack;
             Debug.Log(enumsEnemy.GetMovement());
             Debug.Log(GetIsDuck());
-        }
+        }*/
         //----------------------------------//
         base.Update();
         /*if (transform.position.y > InitialPosition.y && spriteEnemy.spriteRenderer.sprite.name == "KT - Stand")
@@ -34,6 +39,10 @@ public class KathyAndTyke : Enemy
             delaySelectMovement = 0.1f;
         }
         CheckInSpecialAttack();
+        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.MoveToPointCombat)
+        {
+            delaySelectMovement = 0.1f;
+        }
         if (transform.position.y > InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
         {
             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
@@ -135,10 +144,10 @@ public class KathyAndTyke : Enemy
                         xpActual = 0;
                         //Debug.Log("LA RE CALCADA CONCHA DE TU MADRE");
                         CheckMovement();
-                            if (Input.GetKey(KeyCode.Space))
+                            /*if (Input.GetKey(KeyCode.Space))
                             {
                                 Debug.Log("ENTRO AL NORMAL");
-                            }
+                            }*/
                             break;
                     }
                 }
@@ -154,23 +163,33 @@ public class KathyAndTyke : Enemy
                     {
                         delaySelectMovement = 0.1f;
                     }
-                    if (Input.GetKey(KeyCode.Space))
+                    /*if (Input.GetKey(KeyCode.Space))
                     {
                         Debug.Log("ENTRO AL SALTANDO");
-                    }
+                    }*/
                 }
                 else if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado 
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
                     && (spriteEnemy.spriteRenderer.name == "KT - Crouch"
-                    || spriteEnemy.spriteRenderer.sprite.name == "KT - Crouch Def"))
+                    || spriteEnemy.spriteRenderer.sprite.name == "KT - Crouch Def"
+                    || spriteEnemy.spriteRenderer.sprite.name == "F1 KT-Couch"))
                 {
-                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Agacharse);
+                    if (CounchDefense)
+                    {
+                        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AgacheDefensa);
+                        spriteEnemy.GetAnimator().Play("Agachado Defensa famosa");
+                    }
+                    else
+                    {
+                        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Agacharse);
+                        spriteEnemy.GetAnimator().Play("Agachado famosa");
+                    }
                     CheckMovement();
                     SetIsDuck(true);
-                    if (Input.GetKey(KeyCode.Space))
+                    /*if (Input.GetKey(KeyCode.Space))
                     {
                         Debug.Log("ENTRO AL AGACHADO");
-                    }
+                    }*/
                 }
                 else if (valueAttack < parabolaAttack)
                 {

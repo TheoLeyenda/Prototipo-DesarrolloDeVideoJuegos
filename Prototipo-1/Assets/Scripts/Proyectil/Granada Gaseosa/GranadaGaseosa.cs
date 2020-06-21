@@ -17,6 +17,8 @@ public class GranadaGaseosa : ProyectilParabola
     public List<Sprite> propsProyectilGaseosa;
     private EventWise eventWise;
 
+    private float rangeMagnitude = 1.6f;
+
     private void Start()
     {
         soundgenerate = false;
@@ -88,17 +90,17 @@ public class GranadaGaseosa : ProyectilParabola
             if (cantProyectiles == 1)
             {
                 
-                if (distanceOfLeftFloor.magnitude <= 1.55f)
+                if (distanceOfLeftFloor.magnitude <= rangeMagnitude)
                 {
                     cuadrillasAbajo.Add(grid[0]);
                     x = refPlataformas.plataformas[idPlataforma].plataformaIzquierda.transform.position.x;
                 }
-                else if (distanceOfCenterFloor.magnitude <= 1.55f)
+                else if (distanceOfCenterFloor.magnitude <= rangeMagnitude)
                 {
                     cuadrillasAbajo.Add(grid[1]);
                     x = refPlataformas.plataformas[idPlataforma].plataformaCentral.transform.position.x;
                 }
-                else if (distanceOfRightFloor.magnitude < 1.55f)
+                else if (distanceOfRightFloor.magnitude < rangeMagnitude)
                 {
                     cuadrillasAbajo.Add(grid[2]);
                     x = refPlataformas.plataformas[idPlataforma].plataformaDerecha.transform.position.x;
@@ -117,7 +119,7 @@ public class GranadaGaseosa : ProyectilParabola
                 if (grid != null)
                 {
                     //Debug.Log("ENTRE");
-                    if (distanceOfLeftFloor.magnitude < 1.55f)
+                    if (distanceOfLeftFloor.magnitude < rangeMagnitude)
                     {
                         //Debug.Log("ENTRE 1");
                         cuadrillasAbajo.Add(grid[1]);
@@ -126,7 +128,7 @@ public class GranadaGaseosa : ProyectilParabola
                         arr[1] = refPlataformas.plataformas[idPlataforma].plataformaCentral.transform.position.x;
                         //Debug.Log("JAJA XD");
                     }
-                    else if (distanceOfCenterFloor.magnitude < 1.55f)
+                    else if (distanceOfCenterFloor.magnitude < rangeMagnitude)
                     {
                         //Debug.Log("ENTRE 2");
                         num = (int)Random.Range(0, 100);
@@ -147,7 +149,7 @@ public class GranadaGaseosa : ProyectilParabola
                             
                         //Debug.Log("JAJA XD");
                     }
-                    else if (distanceOfRightFloor.magnitude < 1.55f)
+                    else if (distanceOfRightFloor.magnitude < rangeMagnitude)
                     {
                         //Debug.Log("ENTRE 3");
                         cuadrillasAbajo.Add(grid[1]);
