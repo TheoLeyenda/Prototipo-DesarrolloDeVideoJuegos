@@ -65,6 +65,7 @@ public class Defensivo : Enemy
         {
             delaySelectMovement = 0.1f;
             Move(Vector3.down);
+            spriteEnemy.GetAnimator().Play("Salto enemigo defensivo");
         }
         if (Input.GetKey(KeyCode.Space))
         {
