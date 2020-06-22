@@ -21,12 +21,18 @@ public class KathyAndTyke : Enemy
     public override void Update()
     {
         //BORRAR ESTO DESPUES DE TESTEAR
-        /*if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             xpActual = xpNededSpecialAttack;
             Debug.Log(enumsEnemy.GetMovement());
             Debug.Log(GetIsDuck());
-        }*/
+        }
+        if (Input.GetKey(KeyCode.N))
+        {
+            Debug.Log(enumsEnemy.GetMovement());
+            //Debug.Log(valueAttack);
+            //Debug.Log(delayAttack);
+        }
         //----------------------------------//
         base.Update();
         /*if (transform.position.y > InitialPosition.y && spriteEnemy.spriteRenderer.sprite.name == "KT - Stand")
@@ -49,6 +55,12 @@ public class KathyAndTyke : Enemy
             SpeedJump = -1f;
             CheckMovement();
             delaySelectMovement = 0.7f;
+        }
+        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial && xpActual < xpNededSpecialAttack)
+        {
+            delaySelectMovement = 0;
+            CheckMovement();
+
         }
     }
 
@@ -97,29 +109,34 @@ public class KathyAndTyke : Enemy
             {
                 valueAttack = Random.Range(0, 100);
             }
-            if (valueAttack >= parabolaAttack || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
-                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
-                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
-                || !enableMecanicParabolaAttack)
+            if(valueAttack >= parabolaAttack)
             {
-                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
+                /*if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
+                    || !enableMecanicParabolaAttack)
+                {*/
+                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+                {
+                    //Debug.Log("ATAQUE SALTO");
+                    spriteEnemy.GetAnimator().Play("Ataque salto famosa");
+                    inAttack = true;
+                    SetIsDuck(false);
+                }
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
                     && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp()
                     && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque
                     && !GetIsDuck())
                 {
+                    //Debug.Log("ATAQUE PARADO");
                     spriteEnemy.GetAnimator().Play("Ataque parado famosa");
-                    inAttack = true;
-                    SetIsDuck(false);
-                }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
-                {
-                    spriteEnemy.GetAnimator().Play("Ataque salto famosa");
                     inAttack = true;
                     SetIsDuck(false);
                 }
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && GetIsDuck() && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
                 {
+                    //Debug.Log("ATAQUE AGACHADO");
                     spriteEnemy.GetAnimator().Play("Ataque agachado famosa");
                     inAttack = true;
                     SetIsDuck(true);
@@ -129,30 +146,28 @@ public class KathyAndTyke : Enemy
                     enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
                     spriteEnemy.PlayAnimation("Salto famosa");
                 }*/
-                else if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial) 
+                else if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
                     && transform.position.y <= InitialPosition.y && !GetIsDuck()
                     && spriteEnemy.spriteRenderer.sprite.name != "KT - Crouch Def" && spriteEnemy.spriteRenderer.name != "KT - Crouch"
                     && spriteEnemy.spriteRenderer.sprite.name != "KT - Jump" && spriteEnemy.spriteRenderer.sprite.name != "KT - Jump Def"
-                    && SpeedJump >= GetAuxSpeedJamp())
+                    && SpeedJump >= GetAuxSpeedJamp()
+                    && spriteEnemy.spriteRenderer.sprite.name != "F1 KT-Couch")
                 {
                     switch (enumsEnemy.GetMovement())
                     {
                         case EnumsEnemy.Movimiento.AtaqueEspecial:
-                        spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", true);
-                        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
-                        inAttack = true;
-                        xpActual = 0;
-                        //Debug.Log("LA RE CALCADA CONCHA DE TU MADRE");
-                        CheckMovement();
-                            /*if (Input.GetKey(KeyCode.Space))
-                            {
-                                Debug.Log("ENTRO AL NORMAL");
-                            }*/
+                            spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", true);
+                            spriteEnemy.GetAnimator().Play("PreparandoAtaqueEspecial");
+                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
+                            inAttack = true;
+                            xpActual = 0;
+                            CheckMovement();
+                            Debug.Log("ENTRO AL ESPECIAL PARADO");
                             break;
                     }
                 }
-                else if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto 
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial 
+                else if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
                     && transform.position.y > InitialPosition.y)
                 {
@@ -163,12 +178,9 @@ public class KathyAndTyke : Enemy
                     {
                         delaySelectMovement = 0.1f;
                     }
-                    /*if (Input.GetKey(KeyCode.Space))
-                    {
-                        Debug.Log("ENTRO AL SALTANDO");
-                    }*/
+                    //Debug.Log("ENTRO AL SALTANDO");
                 }
-                else if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado 
+                else if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
                     && (spriteEnemy.spriteRenderer.name == "KT - Crouch"
                     || spriteEnemy.spriteRenderer.sprite.name == "KT - Crouch Def"
@@ -178,40 +190,71 @@ public class KathyAndTyke : Enemy
                     {
                         enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AgacheDefensa);
                         spriteEnemy.GetAnimator().Play("Agachado Defensa famosa");
+                        delaySelectMovement = 0.5f;
+
                     }
                     else
                     {
                         enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Agacharse);
                         spriteEnemy.GetAnimator().Play("Agachado famosa");
+                        delaySelectMovement = 0.5f;
                     }
                     CheckMovement();
                     SetIsDuck(true);
-                    /*if (Input.GetKey(KeyCode.Space))
-                    {
-                        Debug.Log("ENTRO AL AGACHADO");
-                    }*/
+                    //Debug.Log("ENTRO AL AGACHADO");
+
                 }
-                else if (valueAttack < parabolaAttack)
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
                 {
-                    if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
-                        && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp() && delayAttack <= 0)
-                    {
-                        spriteEnemy.PlayAnimation("Ataque Parabola parado famosa");
-                        inAttack = true;
-                        SetIsDuck(false);
-                    }
-                    else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && delayAttack <= 0)
-                    {
-                        spriteEnemy.PlayAnimation("Ataque Parabola salto famosa");
-                        inAttack = true;
-                        SetIsDuck(false);
-                    }
-                    else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && delayAttack <= 0)
-                    {
-                        spriteEnemy.PlayAnimation("Ataque Parabola agachado famosa");
-                        inAttack = true;
-                        SetIsDuck(true);
-                    }
+                    spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", true);
+                    spriteEnemy.GetAnimator().Play("PreparandoAtaqueEspecial");
+                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
+                    inAttack = true;
+                    xpActual = 0;
+                    CheckMovement();
+                    Debug.Log("ENTRO AL ESPECIAL ELSE IF");
+                }
+                
+                
+            }
+            else if (valueAttack < parabolaAttack)
+            {
+                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && delayAttack <= 0)
+                {
+                    //Debug.Log("ATAQUE PARABOLA SALTO");
+                    spriteEnemy.PlayAnimation("Ataque Parabola salto famosa");
+                    inAttack = true;
+                    SetIsDuck(false);
+                }
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
+                    && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp() && delayAttack <= 0)
+                {
+                    //Debug.Log("ATAQUE PARABOLA NORMAL");
+                    spriteEnemy.PlayAnimation("Ataque Parabola parado famosa");
+                    inAttack = true;
+                    SetIsDuck(false);
+                }
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && delayAttack <= 0)
+                {
+                    //Debug.Log("ATAQUE PARABOLA AGACHADO");
+                    spriteEnemy.PlayAnimation("Ataque Parabola agachado famosa");
+                    inAttack = true;
+                    SetIsDuck(true);
+                }
+                else if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
+                    && transform.position.y <= InitialPosition.y && !GetIsDuck()
+                    && spriteEnemy.spriteRenderer.sprite.name != "KT - Crouch Def" && spriteEnemy.spriteRenderer.name != "KT - Crouch"
+                    && spriteEnemy.spriteRenderer.sprite.name != "KT - Jump" && spriteEnemy.spriteRenderer.sprite.name != "KT - Jump Def"
+                    && SpeedJump >= GetAuxSpeedJamp()
+                    && spriteEnemy.spriteRenderer.sprite.name != "F1 KT-Couch")
+                {
+                    spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", true);
+                    spriteEnemy.GetAnimator().Play("PreparandoAtaqueEspecial");    
+                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
+                    inAttack = true;
+                    xpActual = 0;
+                    CheckMovement();
+                    Debug.Log("ENTRO AL ESPECIAL PARABOLA");
                 }
             }
         }

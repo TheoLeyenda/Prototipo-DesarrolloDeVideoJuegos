@@ -1585,13 +1585,13 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3119680522371982043}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.021657165, y: -0.04461993}
+  m_Offset: {x: 0.021657165, y: -0.054564003}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1602,7 +1602,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.08500195, y: 0.08311338}
+  m_Size: {x: 0.08500195, y: 0.06322523}
   m_EdgeRadius: 0
 --- !u!114 &3119680522371982037
 MonoBehaviour:
@@ -8463,21 +8463,22 @@ MonoBehaviour:
   IdlePorcentage: 25
   MoveForwardPorcentage: 50
   MoveBackPorcentage: 50
-  AttackJumpPorcentage: 50
-  DefenceJumpPorcentage: 20
-  SimpleJumpPorcentage: 30
-  AttackDuckPorcentage: 20
+  AttackJumpPorcentage: 65
+  DefenceJumpPorcentage: 25
+  SimpleJumpPorcentage: 10
+  AttackDuckPorcentage: 35
   DefenceDuckPorcentage: 60
-  SimpleDuckPorcentage: 20
-  AttackPorcentage: 80
-  DeffensePorcentage: 20
+  SimpleDuckPorcentage: 5
+  AttackPorcentage: 60
+  DeffensePorcentage: 40
   AttackSpecialPorcentage: 100
-  parabolaAttack: 60
+  parabolaAttack: 45
   CantCasillasOcupadas_X: 1
   CantCasillasOcupadas_Y: 2
   ColumnaActual: 1
   timeStuned: 0
   limo_gameObject: {fileID: 3119680523987810192}
+  CounchDefense: 1
 --- !u!1 &8163521573060275563
 GameObject:
   m_ObjectHideFlags: 0
