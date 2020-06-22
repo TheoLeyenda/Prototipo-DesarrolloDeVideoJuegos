@@ -162,7 +162,7 @@ public class KathyAndTyke : Enemy
                             inAttack = true;
                             xpActual = 0;
                             CheckMovement();
-                            Debug.Log("ENTRO AL ESPECIAL PARADO");
+                            //Debug.Log("ENTRO AL ESPECIAL PARADO");
                             break;
                     }
                 }
@@ -212,7 +212,7 @@ public class KathyAndTyke : Enemy
                     inAttack = true;
                     xpActual = 0;
                     CheckMovement();
-                    Debug.Log("ENTRO AL ESPECIAL ELSE IF");
+                    //Debug.Log("ENTRO AL ESPECIAL ELSE IF");
                 }
                 
                 
@@ -254,7 +254,7 @@ public class KathyAndTyke : Enemy
                     inAttack = true;
                     xpActual = 0;
                     CheckMovement();
-                    Debug.Log("ENTRO AL ESPECIAL PARABOLA");
+                    //Debug.Log("ENTRO AL ESPECIAL PARABOLA");
                 }
             }
         }
