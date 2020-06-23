@@ -32,7 +32,7 @@ public class Defensivo : Enemy
         auxDelayStateCounterAttackDeffense = delayStateCounterAttackDeffense;
         inDeffense = false;
     }
-
+    
     public override void Update()
     {
         if (life <= 0)
@@ -42,10 +42,10 @@ public class Defensivo : Enemy
 
         }
         //Esto es para testear borrar luego.
-        /*if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             xpActual = xpNededSpecialAttack;
-        }*/
+        }
         //----------------------------------
         base.Update();
         CheckInDeffense();
@@ -56,20 +56,37 @@ public class Defensivo : Enemy
         CheckInSpecialAttack();
         if (transform.position.y > InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
         {
-            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
             SpeedJump = -1f;
             CheckMovement();
             delaySelectMovement = 0.7f;
+            //spriteEnemy.GetAnimator().Play("Salto enemigo defensivo");
         }
         if(transform.position.y > InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
         {
             delaySelectMovement = 0.1f;
-            Move(Vector3.down);
-            spriteEnemy.GetAnimator().Play("Salto enemigo defensivo");
+            Move(Vector3.down,4);
+            //spriteEnemy.GetAnimator().Play("Salto enemigo defensivo");
         }
+        //PARA QUE EL ENEMIGO DEFENSIVO NO SE QUEDE QUIETO TESTEAR
+        if (transform.position.y <= InitialPosition.y && enableMovement && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo 
+            && !GetIsDeffended() && !GetIsJamping() && !GetIsDuck() && delayStateDeffense >= auxDelayStateDeffense 
+            && delayVulnerable >= auxDelayVulnerable)
+        {
+            Debug.Log("ENTRE");
+            SpeedJump = GetAuxSpeedJamp();
+            SetIsJumping(false);
+            transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);
+            CheckComportamiento();
+            CheckMovement();
+            
+        }
+        //--------------------------------------------------------
         if (Input.GetKey(KeyCode.Space))
         {
             Debug.Log(enumsEnemy.GetMovement());
+            Debug.Log(enableMovement);
+            Debug.Log(transform.position.y <= InitialPosition.y);
         }
     }
     public void CheckInSpecialAttack()

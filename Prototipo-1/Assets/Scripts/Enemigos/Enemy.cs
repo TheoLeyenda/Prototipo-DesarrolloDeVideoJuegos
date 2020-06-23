@@ -1149,6 +1149,10 @@ public class Enemy : MonoBehaviour
     {
         transform.Translate(direccion * Speed * Time.deltaTime);
     }
+    public void Move(Vector3 direccion, int substractSpeed)
+    {
+        transform.Translate(direccion * Speed/substractSpeed * Time.deltaTime);
+    }
     public void MoveJamp(Vector3 direccion)
     {
         //Debug.Log("ENTRE AL MOVIMIENTO");
@@ -1210,6 +1214,10 @@ public class Enemy : MonoBehaviour
     public void SetIsDuck(bool _isDuck)
     {
         isDuck = _isDuck;
+    }
+    public void SetIsJumping(bool _isJumping)
+    {
+        isJamping = _isJumping;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

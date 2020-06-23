@@ -159,8 +159,8 @@ public class GeneradorDeEnemigos : MonoBehaviour
                 }
                 else
                 {
-                    randomEnemyGenerate = Random.Range(0, ListEnemyGenerate.Count);
-                    //randomEnemyGenerate = ListEnemyGenerate.Count - 3;
+                    //randomEnemyGenerate = Random.Range(0, ListEnemyGenerate.Count);
+                    randomEnemyGenerate = ListEnemyGenerate.Count - 4;
                     go = ListEnemyGenerate[randomEnemyGenerate].poolEnemy.GetObject();
                     pool = ListEnemyGenerate[randomEnemyGenerate].poolEnemy;
                 }
