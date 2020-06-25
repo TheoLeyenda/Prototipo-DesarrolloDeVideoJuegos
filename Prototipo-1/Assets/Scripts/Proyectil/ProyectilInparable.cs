@@ -23,6 +23,8 @@ public class ProyectilInparable : Proyectil
     private void OnDisable()
     {
         soundgenerate = false;
+        rg2D.velocity = Vector3.zero;
+        rg2D.angularVelocity = 0f;
     }
     private void OnEnable()
     {
