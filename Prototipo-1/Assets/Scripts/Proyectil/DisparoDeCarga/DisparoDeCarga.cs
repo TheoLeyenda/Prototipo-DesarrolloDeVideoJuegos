@@ -15,6 +15,7 @@ public class DisparoDeCarga : MonoBehaviour
     public ParticleSystem.MainModule mainModule;
     private float auxStartSpeedParticleSystem;
     private GameObject objectCollisionPartycleSystem;
+    private float proximity = 2f;
     // Update is called once per frame
     private void Start()
     {
@@ -60,7 +61,8 @@ public class DisparoDeCarga : MonoBehaviour
             damage = 0;
             if(particleSystem != null)
             {
-                mainModule.startSpeedMultiplier = Distance.x / 2;
+                mainModule.startLifetime = 0.65f;
+                mainModule.startSpeedMultiplier = Distance.x + proximity;
             }
         }
     }
@@ -71,6 +73,7 @@ public class DisparoDeCarga : MonoBehaviour
             damage = auxDamage;
             if(particleSystem != null)
             {
+                mainModule.startLifetime = 2.1f;
                 mainModule.startSpeedMultiplier = auxStartSpeedParticleSystem;
             }
         }
