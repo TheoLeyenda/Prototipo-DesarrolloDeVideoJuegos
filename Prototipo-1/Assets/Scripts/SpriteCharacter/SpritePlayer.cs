@@ -122,9 +122,12 @@ public class SpritePlayer : SpriteCharacter
             player.SetInFuegoEmpieza(false);
             player.eventWise.StartEvent("fuego_termina");
         }
-        else if(player.enumsPlayers.specialAttackEquipped == EnumsPlayers.SpecialAttackEquipped.Limusina)
+        else if (player.enumsPlayers.specialAttackEquipped == EnumsPlayers.SpecialAttackEquipped.Limusina)
         {
-            
+
+        }
+        else if (player.enumsPlayers.specialAttackEquipped == EnumsPlayers.SpecialAttackEquipped.MagicBust) 
+        {
         }
     }
     public void SetActualSprite(SpriteActual spriteActual)

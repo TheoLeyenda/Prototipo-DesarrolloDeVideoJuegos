@@ -73,7 +73,7 @@ public class Defensivo : Enemy
             && !GetIsDeffended() && !GetIsJamping() && !GetIsDuck() && delayStateDeffense >= auxDelayStateDeffense 
             && delayVulnerable >= auxDelayVulnerable)
         {
-            Debug.Log("ENTRE");
+            //Debug.Log("ENTRE");
             SpeedJump = GetAuxSpeedJamp();
             SetIsJumping(false);
             transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);

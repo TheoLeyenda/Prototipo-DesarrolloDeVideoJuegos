@@ -25,7 +25,7 @@ public class SelectedPlayers : MonoBehaviour
         Protagonista,
         Famosa,
         Tomboy,
-        //Gotica,
+        Gotica,
         RandomPlayer,
         Count,
         Nulo,
@@ -64,6 +64,7 @@ public class SelectedPlayers : MonoBehaviour
     private bool aviableMoveVerticalP1;
     private bool aviableMoveHorizontalP2;
     private bool aviableMoveVerticalP2;
+    public string nameRandomPlayer = "Random Player";
 
     //VARIABLES PARA EL CHIMI DECORATIVO//
     public SpriteRenderer imagePlayer1;
@@ -81,7 +82,7 @@ public class SelectedPlayers : MonoBehaviour
     {
         aviableMoveHorizontalP1 = true;
         aviableMoveVerticalP1 = true;
-        elementsCharacters[elementsCharacters.Count - 1].nameCharacter = "RandomPlayer";
+        elementsCharacters[elementsCharacters.Count - 1].nameCharacter = nameRandomPlayer;
         if (GameManager.instanceGameManager != null)
         {
             gm = GameManager.instanceGameManager;
@@ -182,7 +183,7 @@ public class SelectedPlayers : MonoBehaviour
             {
                 if (cursorPlayer.numberPlayer == EnumsPlayers.NumberPlayer.player2)
                 {
-                    if (elementsCharacters[i].nameCharacter == "RandomPlayer")
+                    if (elementsCharacters[i].nameCharacter == nameRandomPlayer)
                     {
                         imagePlayer.transform.eulerAngles = new Vector3(1.374f, 0, 11.159f);
                     }
@@ -275,7 +276,7 @@ public class SelectedPlayers : MonoBehaviour
         {
             for (int i = 0; i < elementsCharacters.Count; i++)
             {
-                if (grillaDeSeleccion[cursorPlayer.x, cursorPlayer.y] != "RandomPlayer")
+                if (grillaDeSeleccion[cursorPlayer.x, cursorPlayer.y] != nameRandomPlayer)
                 {
                     if (grillaDeSeleccion[cursorPlayer.x, cursorPlayer.y] == elementsCharacters[i].nameCharacter)
                     {
@@ -301,7 +302,7 @@ public class SelectedPlayers : MonoBehaviour
         do
         {
             index = Random.Range(0, namePlayersOptions.Count);
-        } while (namePlayersOptions[index] == "RandomPlayer");
+        } while (namePlayersOptions[index] == nameRandomPlayer);
         cursor.index = index;
 
         player_Selected = elementsCharacters[index].player_Selected;

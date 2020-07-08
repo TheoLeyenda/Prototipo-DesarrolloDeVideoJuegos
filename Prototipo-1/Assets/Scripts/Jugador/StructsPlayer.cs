@@ -28,9 +28,12 @@ public class StructsPlayer : MonoBehaviour
         public GameObject DisparoDeCarga;
         public Pool poolGranadaGaseosa;
         public ProyectilLimo Limusina;
-        public ProyectilMagicBust MagicBust;
+        public ProyectilMagicBust ProyectilMagicBust;
         public Pool poolProyectilChicle;
         public GameObject GeneradorProyectilChicle;
+        public GameObject GeneradorMagicBust;
+        public float timeSpecialAttackMagicBust;
+        public bool inMagicBustAttack;
     }
     [System.Serializable]
     public struct ParticleMovement

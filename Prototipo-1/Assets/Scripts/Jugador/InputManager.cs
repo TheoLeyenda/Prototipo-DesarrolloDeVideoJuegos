@@ -394,7 +394,8 @@ public class InputManager : MonoBehaviour
                 if (player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.ProyectilImparable 
                     && player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga
                     && player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.ProyectilChicle
-                    && player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.Limusina)
+                    && player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.Limusina
+                    && player.enumsPlayers.specialAttackEquipped != EnumsPlayers.SpecialAttackEquipped.MagicBust)
                 {
                     if (player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar
                         || player.enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoAtaque

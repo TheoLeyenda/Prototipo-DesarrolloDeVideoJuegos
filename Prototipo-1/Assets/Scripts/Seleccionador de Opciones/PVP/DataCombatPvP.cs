@@ -21,7 +21,7 @@ public class DataCombatPvP : MonoBehaviour
         Protagonista,
         Famosa,
         Tomboy,
-        //Gotica,
+        Gotica,
         Count,
         Nulo,
     }

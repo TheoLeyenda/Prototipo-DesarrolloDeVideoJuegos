@@ -179,7 +179,7 @@ public class Player : MonoBehaviour
         //if (Input.GetKey(KeyCode.Space))
         //{
             //xpActual = xpNededSpecialAttack;
-            PD.lifePlayer = PD.maxLifePlayer;
+            //PD.lifePlayer = PD.maxLifePlayer;
         //}
         //--------------------------------
         CheckOutLimit();
@@ -194,7 +194,6 @@ public class Player : MonoBehaviour
             CheckMovementInSpecialAttack();
             CheckBoxColliders2D();
         }
-        
     }
 
     public void CheckInSpecialAttack()
@@ -205,6 +204,17 @@ public class Player : MonoBehaviour
                 if (!enableMovement && !structsPlayer.dataAttack.Limusina.gameObject.activeSelf)
                 {
                     spritePlayerActual.GetAnimator().SetBool("FinalAtaqueEspecial", true);
+                }
+                break;
+            case EnumsPlayers.SpecialAttackEquipped.MagicBust:
+                if (!structsPlayer.dataAttack.ProyectilMagicBust.gameObject.activeSelf) 
+                {
+                    if (structsPlayer.dataAttack.inMagicBustAttack) 
+                    {
+                        //FINAL SONIDO DEL DISPARO DE MYRA EN LOOP
+                        spritePlayerActual.GetAnimator().Play("FinalAtaqueEspecial");
+                        structsPlayer.dataAttack.inMagicBustAttack = false;
+                    }
                 }
                 break;
         }
@@ -335,13 +345,13 @@ public class Player : MonoBehaviour
                 }
                 break;
             case EnumsPlayers.SpecialAttackEquipped.Limusina:
-                if (structsPlayer.dataAttack.DisparoDeCarga.activeSelf)
+                if (structsPlayer.dataAttack.Limusina.gameObject.activeSelf)
                 {
                     enableMovementPlayer = false;
                 }
                 break;
             case EnumsPlayers.SpecialAttackEquipped.MagicBust:
-                if (structsPlayer.dataAttack.DisparoDeCarga.activeSelf)
+                if (structsPlayer.dataAttack.ProyectilMagicBust.gameObject.activeSelf)
                 {
                     enableMovementPlayer = false;
                 }
@@ -692,7 +702,7 @@ public class Player : MonoBehaviour
                             break;
                     }
                     proyectil.rutaParabola_AtaqueJugador = structsPlayer.ruta;
-                    proyectil.OnParabola(null,this,Proyectil.typeProyectil.AtaqueEspecial);
+                    proyectil.OnParabola(null, this, Proyectil.typeProyectil.AtaqueEspecial);
                     enableSpecialAttack = false;
                     xpActual = 0;
                 }
@@ -848,10 +858,7 @@ public class Player : MonoBehaviour
                     if (!isJumping && !isDuck
                     && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
                     && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Agacharse
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.AgacharseAtaque
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.AgacheDefensa)
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
                     {
                         GameObject go = structsPlayer.dataAttack.poolProyectilChicle.GetObject();
                         ProyectilChicle proyectilChicle = go.GetComponent<ProyectilChicle>();
@@ -889,6 +896,43 @@ public class Player : MonoBehaviour
                 }
                 break;
             case EnumsPlayers.SpecialAttackEquipped.MagicBust:
+                if (enableSpecialAttack)
+                {
+                    if (!isJumping && !isDuck
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Agacharse
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.AgacharseAtaque
+                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.AgacheDefensa)
+                    {
+                        /*
+                         ProyectilMagicBust.transform.position = GeneradorProyectilMagicBust.transform.position;
+                        ProyectilMagicBust.transform.rotation = GeneradorProyectilMagicBust.transform.rotation;
+                        if(timeSpecialAttack > 0)
+                        { 
+                            ProyectilMagicBust.timeLife = timeSpecialAttack;
+                            ProyectilMagicBust.auxTimeLife = timeSpecialAttack;
+                        }
+                        ProyectilMagicBust.gameObject.SetActive(true);
+                        */
+                        structsPlayer.dataAttack.ProyectilMagicBust.transform.position = structsPlayer.dataAttack.GeneradorMagicBust.transform.position;
+                        structsPlayer.dataAttack.ProyectilMagicBust.transform.rotation = structsPlayer.dataAttack.GeneradorMagicBust.transform.rotation;
+                        if (structsPlayer.dataAttack.timeSpecialAttackMagicBust > 0)
+                        {
+                            structsPlayer.dataAttack.ProyectilMagicBust.timeLife = structsPlayer.dataAttack.timeSpecialAttackMagicBust;
+                            structsPlayer.dataAttack.ProyectilMagicBust.auxTimeLife = structsPlayer.dataAttack.timeSpecialAttackMagicBust;
+                        }
+                        structsPlayer.dataAttack.ProyectilMagicBust.gameObject.SetActive(true);
+                        if (!structsPlayer.dataAttack.inMagicBustAttack)
+                        {
+                            //INICIO SONIDO DEL DISPARO DE MYRA EN LOOP
+                            structsPlayer.dataAttack.inMagicBustAttack = true;
+                        }
+                        enableSpecialAttack = false;
+                        xpActual = 0;
+                    }
+                }
                 break;
         }
     }
