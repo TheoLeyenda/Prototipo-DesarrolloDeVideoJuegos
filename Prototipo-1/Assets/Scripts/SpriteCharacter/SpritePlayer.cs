@@ -17,7 +17,8 @@ public class SpritePlayer : SpriteCharacter
         
     public void Update()
     {
-        CheckActualSprite();
+        if(!player.myVictory)
+            CheckActualSprite();
     }
 
     public override void CheckActualSprite()

@@ -21,6 +21,11 @@ public class Lyn : Enemy
     private void OnEnable()
     {
         enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+        Player.OnDie += AnimationVictory;
+    }
+    private void OnDisable()
+    {
+        Player.OnDie -= AnimationVictory;
     }
     // Update is called once per frame
     public override void Update()

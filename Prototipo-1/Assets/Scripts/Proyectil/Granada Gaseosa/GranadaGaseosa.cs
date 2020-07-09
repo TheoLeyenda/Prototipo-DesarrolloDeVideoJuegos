@@ -17,7 +17,7 @@ public class GranadaGaseosa : ProyectilParabola
     public List<Sprite> propsProyectilGaseosa;
     private EventWise eventWise;
 
-    private float rangeMagnitude = 1.6f;
+    private float rangeMagnitude = 1.66f;
 
     private void Start()
     {

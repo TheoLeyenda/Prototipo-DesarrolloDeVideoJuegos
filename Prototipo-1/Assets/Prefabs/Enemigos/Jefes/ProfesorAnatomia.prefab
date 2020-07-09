@@ -947,7 +947,6 @@ GameObject:
   - component: {fileID: 2531832292111907131}
   - component: {fileID: 2531832292111907143}
   - component: {fileID: 2531832292111907142}
-  - component: {fileID: 2531832292111907129}
   - component: {fileID: 2531832292111907128}
   - component: {fileID: 1450382849}
   m_Layer: 0
@@ -1050,24 +1049,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.804572, y: 9.84}
   m_EdgeRadius: 0
---- !u!114 &2531832292111907129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2531832292111907130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7279d92b7308dc84cbd9e2b639ca42fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 2531832292111907143}
-  ActualSprite: 0
-  delaySpriteRecibirDanio: 0
-  delaySpriteContraAtaque: 0
-  Animations: []
-  enemy: {fileID: 2531832291478649058}
 --- !u!95 &2531832292111907128
 Animator:
   serializedVersion: 3
@@ -1514,6 +1495,7 @@ MonoBehaviour:
   nameEnemy: 
   enableColorShootSpecialAttack: 0
   enableMovement: 0
+  inCombatPosition: 0
   alturaMaxima: {fileID: 1603447084531973527}
   posicionesDeMovimiento:
   - {fileID: 3644779946566260995}
@@ -1521,14 +1503,15 @@ MonoBehaviour:
   - {fileID: 8038751181233794255}
   barraDeEscudo: {fileID: 0}
   enableSpecialAttack: 0
-  spriteEnemy: {fileID: 2531832292111907129}
+  spriteEnemy: {fileID: 0}
   enemyPrefab: {fileID: 3208534520697555277}
   gridEnemy: {fileID: 9135105544399596032}
   enumsEnemy: {fileID: 3208534522070613907}
   structsEnemys: {fileID: 3824593626665204902}
   SpriteRendererEnemigo: {fileID: 2531832292111907143}
-  specialAttackEnemyController: {fileID: 2793434760028993244}
+  specialAttackParabolaEnemyController: {fileID: 0}
   InPool: 1
+  pool: {fileID: 0}
   life: 500
   maxLife: 500
   xpActual: 0
@@ -1562,6 +1545,7 @@ MonoBehaviour:
   boxColliderControllerSaltando: {fileID: 1922578228}
   enableMecanicParabolaAttack: 1
   inAttack: 0
+  myVictory: 0
   MovePorcentage: 0
   JumpPorcentage: 0
   DuckPorcentage: 0
@@ -1581,6 +1565,7 @@ MonoBehaviour:
   CantCasillasOcupadas_X: 2
   CantCasillasOcupadas_Y: 3
   ColumnaActual: 1
+  timeStuned: 0
 --- !u!114 &2793434760028993244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1640,21 +1625,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grid
       objectReference: {fileID: 0}
-    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
     - target: {fileID: 7296128619017103692, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1710,10 +1680,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4830216970014270298, guid: b929ac675e510d440a80e8c74d8c4990,
+    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_TagString
       value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 7155523229613856932, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.08220261
+      objectReference: {fileID: 0}
+    - target: {fileID: 7155523229613856932, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.08566023
       objectReference: {fileID: 0}
     - target: {fileID: 5927136447379350933, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
@@ -1785,27 +1775,28 @@ PrefabInstance:
       propertyPath: plataformas.Array.data[5]
       value: 
       objectReference: {fileID: 2001917304759274383}
-    - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: enemy
-      value: 
-      objectReference: {fileID: 2531832291478649058}
+    - target: {fileID: 4830216970014270298, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
     - target: {fileID: 4070331649406560279, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: enemy
       value: 
       objectReference: {fileID: 2531832291478649058}
-    - target: {fileID: 7155523229613856932, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -0.08220261
-      objectReference: {fileID: 0}
-    - target: {fileID: 7155523229613856932, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.08566023
-      objectReference: {fileID: 0}
+    - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 2531832291478649058}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+--- !u!1 &2526982439044428893 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
+    type: 3}
+  m_PrefabInstance: {fileID: 3208534520885317525}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3644779946566260995 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
@@ -1842,9 +1833,9 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3208534520885317525}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2526982439044428893 stripped
+--- !u!1 &8038751181233794255 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
+  m_CorrespondingSourceObject: {fileID: 4830216970014270298, guid: b929ac675e510d440a80e8c74d8c4990,
     type: 3}
   m_PrefabInstance: {fileID: 3208534520885317525}
   m_PrefabAsset: {fileID: 0}
@@ -1950,12 +1941,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3208534520885317525}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8038751181233794255 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4830216970014270298, guid: b929ac675e510d440a80e8c74d8c4990,
-    type: 3}
-  m_PrefabInstance: {fileID: 3208534520885317525}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3208534522070613918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2033,15 +2018,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7194419974994112971, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7194419974994112974, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
       propertyPath: m_GravityScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7194419974994112971, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61245c1a77e7ad847b3751885e027da7, type: 3}

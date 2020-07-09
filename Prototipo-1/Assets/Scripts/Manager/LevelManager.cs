@@ -18,18 +18,32 @@ public class LevelManager : MonoBehaviour
     private GameManager gm;
     public bool InitDialog;
     public int ObjectiveOfPassLevel;
+    public float delayPassLevel = 2f;
+    private float auxDelayPassLevel;
     private int Level;
     private bool inDialog;
     private int idDialogo;
+    public bool inSurvival;
+    private bool goToGameOver;
 
+    
     [System.Serializable]
     public class Dialogos
     {
         public string habladorActual;
         public string dialogoPersonaje;
     }
+    private void OnEnable()
+    {
+        Player.OnDie += EnableGameOver;
+    }
+    private void OnDisable()
+    {
+        Player.OnDie -= EnableGameOver;
+    }
     private void Start()
     {
+        auxDelayPassLevel = delayPassLevel;
         if (InitDialog)
         {
             inDialog = true;
@@ -40,12 +54,23 @@ public class LevelManager : MonoBehaviour
         }
         Level = 1;
         ObjectiveOfPassLevel = 1;
-        CheckDiagolos();
+        if (InitDialog)
+        {
+            CheckDiagolos();
+        }
     }
     void Update()
     {
         CheckDiagolos();
-        CheckPassLevel();
+        if (inSurvival)
+        {
+            CheckPassGameOver();
+        }
+        else
+        {
+            CheckPassGameOver();
+            CheckPassLevel();
+        }
         if (InputPlayerController.GetInputButtonDown("SelectButton_P1"))
         {
             NextId();
@@ -58,6 +83,33 @@ public class LevelManager : MonoBehaviour
             NextLevel();
             gm.playerData_P1.auxScore = gm.playerData_P1.score;
             ObjectiveOfPassLevel = 1;
+        }
+    }
+    public void EnableGameOver(Player p) 
+    {
+        goToGameOver = true;
+    }
+    public void CheckPassGameOver()
+    {
+        if (goToGameOver)
+        {
+            if (delayPassLevel <= 0)
+            {
+                goToGameOver = false;
+                delayPassLevel = auxDelayPassLevel;
+                if (SceneManager.GetActiveScene().name == "Supervivencia")
+                {
+                    gm.GameOver("GameOverSupervivencia");
+                }
+                else if (SceneManager.GetActiveScene().name != "PvP" && SceneManager.GetActiveScene().name != "TiroAlBlanco")
+                {
+                    gm.GameOver("GameOverHistoria");
+                }
+            }
+            else
+            {
+                delayPassLevel = delayPassLevel - Time.deltaTime;
+            }
         }
     }
     public void CheckDiagolos()
@@ -86,8 +138,10 @@ public class LevelManager : MonoBehaviour
             }
             inDialog = false;
             DisableChat();
-
-            CamvasInicioPelea.SetActive(true);
+            if (CamvasInicioPelea != null)
+            {
+                CamvasInicioPelea.SetActive(true);
+            }
         }
     }
     public void NextId()
@@ -104,13 +158,21 @@ public class LevelManager : MonoBehaviour
     }
     public void NextLevel()
     {
-        if (!NivelFinal)
+        if (delayPassLevel <= 0)
         {
-            gm.screenManager.LoadLevel(gm.screenManager.GetIdListLevel() + 1);
+            delayPassLevel = auxDelayPassLevel;
+            if (!NivelFinal)
+            {
+                gm.screenManager.LoadLevel(gm.screenManager.GetIdListLevel() + 1);
+            }
+            else
+            {
+                gm.GameOver(NameFinishSceneStoryMode);
+            }
         }
-        else
+        else 
         {
-            gm.GameOver(NameFinishSceneStoryMode);
+            delayPassLevel = delayPassLevel - Time.deltaTime;
         }
     }
     public bool GetInDialog()

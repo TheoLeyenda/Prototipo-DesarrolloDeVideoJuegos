@@ -34,11 +34,14 @@ public class SpriteEnemy : SpriteCharacter
     }
     public void Update()
     {
-        CheckEnumSprite();
-        if (!enemy.enemyPrefab.activeSelf)
+        if (!enemy.myVictory)
         {
-            animator.Play("Idle");
-            DisableSpecialAttack();
+            CheckEnumSprite();
+            if (!enemy.enemyPrefab.activeSelf)
+            {
+                animator.Play("Idle");
+                DisableSpecialAttack();
+            }
         }
     }
     /*public void DisableSpecialAttackDefensivo()
@@ -156,9 +159,8 @@ public class SpriteEnemy : SpriteCharacter
     }
     public override void PlayAnimation(string nameAnimation)
     {
-        if (enemy.enemyPrefab.activeSelf == true && animator != null)
+        if (enemy.enemyPrefab.activeSelf == true && animator != null && !enemy.myVictory)
         {
-            //Debug.Log(nameAnimation);
             animator.Play(nameAnimation);
         }
     }

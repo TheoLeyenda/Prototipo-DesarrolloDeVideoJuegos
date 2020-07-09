@@ -94,7 +94,8 @@ public class Enemy : MonoBehaviour
     public bool inAttack;
     protected EventWise eventWise;
     private bool insound;
-
+    [HideInInspector]
+    public bool myVictory = false;
     protected float valueAttack;
 
     [Header("Porcentage: Movimiento")]
@@ -149,16 +150,20 @@ public class Enemy : MonoBehaviour
         life = maxLife;
         delaySelectMovement = 0.2f;
         isJamping = false;
+        myVictory = false;
         enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
+        Player.OnDie += AnimationVictory;
         //enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
         //poolObjectEnemy = GetComponent<PoolObject>();
     }
     private void OnDisable()
     {
+        Player.OnDie -= AnimationVictory;
         ResetSpeedJump();
         enemyPrefab.transform.position = new Vector3(500, 500, 500);
         inCombatPosition = false;
         isJamping = false;
+        myVictory = false;
     }
     public virtual void Start()
     {
@@ -181,6 +186,17 @@ public class Enemy : MonoBehaviour
         rg2D = GetComponent<Rigidbody2D>();
         CheckInitialCharacter();
         enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
+    }
+    public void AnimationVictory(Player p) 
+    {
+        //Debug.Log("ENTRE");
+        if (transform.position.y <= InitialPosition.y && enumsEnemy.typeBoss == EnumsEnemy.TiposDeJefe.Nulo)
+        {
+            //Debug.Log("ENTRE");
+            spriteEnemy.GetAnimator().Play("Victory");
+            enableMovement = false;
+            myVictory = true;
+        }
     }
     public void ResetSpeedJump()
     {
@@ -341,40 +357,43 @@ public class Enemy : MonoBehaviour
             CheckMovement();
             return;
         }
-        //Debug.Log("IP: "+InitialPosition.y);
-        //Debug.Log("TY:" + transform.position.y);
-        if (transform.position.y > InitialPosition.y && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && inCombatPosition)
+        if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
         {
-            delaySelectMovement = 0.1f;
-            //Debug.Log("ESTOY ENTRANDO");
-            if(enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
+            //Debug.Log("IP: "+InitialPosition.y);
+            //Debug.Log("TY:" + transform.position.y);
+            if (transform.position.y > InitialPosition.y && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && inCombatPosition)
             {
-                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
-                isJamping = true;
-                Jump(alturaMaxima.transform.position);
-                isDeffended = false;
-            }
-        }
-       
-        if (life > 0 && enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
-        {
-            //Debug.Log("ESTOY ENTRANDO ACA");
-            //Debug.Log(delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque));
-            if (delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque))
-            {
-                if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
-                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialAgachado
-                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto
-                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAdelante
-                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAtras)
+                delaySelectMovement = 0.1f;
+                //Debug.Log("ESTOY ENTRANDO");
+                if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
                 {
-                    CheckComportamiento();
+                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
+                    isJamping = true;
+                    Jump(alturaMaxima.transform.position);
+                    isDeffended = false;
                 }
             }
-            if (delaySelectMovement > 0)
+
+            if (life > 0 && enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
             {
-                CheckMovement();
-                delaySelectMovement = delaySelectMovement - Time.deltaTime;
+                //Debug.Log("ESTOY ENTRANDO ACA");
+                //Debug.Log(delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque));
+                if (delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque))
+                {
+                    if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
+                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialAgachado
+                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto
+                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAdelante
+                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAtras)
+                    {
+                        CheckComportamiento();
+                    }
+                }
+                if (delaySelectMovement > 0)
+                {
+                    CheckMovement();
+                    delaySelectMovement = delaySelectMovement - Time.deltaTime;
+                }
             }
         }
     }
@@ -527,12 +546,6 @@ public class Enemy : MonoBehaviour
         if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar)
         {
             isDeffended = false;
-        }
-
-        //SACAR LA CONDICION QUE SEA IGUAL AL JEFE CUANDO ESTE TENGA UN COMPORTAMIENTO
-        if (enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Jefe || !activateComportamiento)
-        {
-            DefaultBehavior();
         }
     }
     public EnumsEnemy.Movimiento CheckSpecialAttack(EnumsEnemy.Movimiento _movimiento)
@@ -736,7 +749,10 @@ public class Enemy : MonoBehaviour
         if (life <= 0 && transform.position.y <= InitialPosition.y)
         {
             inCombatPosition = false;
-            spriteEnemy.PlayAnimation("Death");
+            if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
+            {
+                spriteEnemy.PlayAnimation("Death");
+            }
             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
             enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
         }
@@ -871,7 +887,8 @@ public class Enemy : MonoBehaviour
             case EnumsEnemy.Movimiento.MoveToPointCombat:
                 isDeffended = false;
                 MoveToPoint(pointOfCombat);
-                spriteEnemy.ActualSprite = SpriteCharacter.SpriteActual.MoverAdelante;
+                if(enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
+                    spriteEnemy.ActualSprite = SpriteCharacter.SpriteActual.MoverAdelante;
                 break;
             case EnumsEnemy.Movimiento.MoveToPointDeath:
                 isDeffended = false;

@@ -15,6 +15,11 @@ public class ProfesorAnatomia : Enemy
     public override void Update()
     {
         base.Update();
+        if (life <= 0) 
+        {
+            gameObject.SetActive(false);
+            Dead();
+        }
     }
     public override void AnimationAttack(){ }
     public override void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage)
@@ -24,7 +29,10 @@ public class ProfesorAnatomia : Enemy
         Proyectil proyectil = null;
         Proyectil.typeProyectil tipoProyectil = Proyectil.typeProyectil.Nulo;
 
-        if (!specialAttack)
+
+
+
+        /*if (!specialAttack)
         {
             go = poolObjectAttack.GetObject();
             proyectil = go.GetComponent<Proyectil>();
@@ -105,5 +113,6 @@ public class ProfesorAnatomia : Enemy
                 proyectil.ShootForwardDown();
             }
         }
+        */
     }
 }

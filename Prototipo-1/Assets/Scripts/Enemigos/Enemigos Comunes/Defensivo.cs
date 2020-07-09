@@ -35,7 +35,7 @@ public class Defensivo : Enemy
     
     public override void Update()
     {
-        if (life <= 0)
+        if (life <= 0 || myVictory)
         {
             Disparo.gameObject.SetActive(false);
             //spriteEnemy.disableSpecialAttack = false;

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System;
+using Boo.Lang.Environments;
 
 public class Player : MonoBehaviour
 {
@@ -111,7 +112,8 @@ public class Player : MonoBehaviour
     public bool enableMecanicParabolaAttack;
     [HideInInspector]
     public float timeStuned = 0;
-
+    [HideInInspector]
+    public bool myVictory = false;
     [HideInInspector]
     public EventWise eventWise;
     private bool InFuegoEmpieza;
@@ -119,11 +121,22 @@ public class Player : MonoBehaviour
     public static event Action<Player, string> OnModifireState;
     public static event Action<Player, string> OnDisableModifireState;
     public static event Action<Player> OnDie;
-
+    private void OnEnable()
+    {
+        Player.OnDie += AnimationVictory;
+        Enemy.OnDie += AnimationVictory;
+    }
+    private void OnDisable()
+    {
+        Player.OnDie -= AnimationVictory;
+        Enemy.OnDie -= AnimationVictory;
+        myVictory = false;
+    }
     private void Awake()
     {
         player_PvP = GetComponent<Player_PvP>();
     }
+
     void Start()
     {
         delayParabolaAttack = 0;
@@ -193,6 +206,26 @@ public class Player : MonoBehaviour
             DelayEnableParabolaAttack();
             CheckMovementInSpecialAttack();
             CheckBoxColliders2D();
+        }
+    }
+
+    public void AnimationVictory(Player p)
+    {
+        if (p.PD.lifePlayer <= 0 && p != this)
+        {
+            spritePlayerActual.GetAnimator().Play("Victory");
+            enableMovement = false;
+            myVictory = true;
+        }
+        //spriteEnemy.GetAnimator().SetBool("Idle", false);
+    }
+    public void AnimationVictory(Enemy e) 
+    {
+        if (e.enumsEnemy.typeBoss != EnumsEnemy.TiposDeJefe.Nulo && SceneManager.GetActiveScene().name != "Supervivencia") 
+        {
+            spritePlayerActual.GetAnimator().Play("Victory");
+            enableMovement = false;
+            myVictory = true;
         }
     }
 
@@ -398,15 +431,8 @@ public class Player : MonoBehaviour
     public void Dead()
     {
         enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.muerto;
-        if (SceneManager.GetActiveScene().name == "Supervivencia")
-        {
-            gm.GameOver("GameOverSupervivencia");
-        }
-        else if (SceneManager.GetActiveScene().name != "PvP" && SceneManager.GetActiveScene().name != "TiroAlBlanco")
-        {
-            gm.GameOver("GameOverHistoria");
-        }
-        else if (SceneManager.GetActiveScene().name == "PvP" || SceneManager.GetActiveScene().name == "TiroAlBlanco")
+       
+        if (SceneManager.GetActiveScene().name == "PvP" || SceneManager.GetActiveScene().name == "TiroAlBlanco")
         {
             enableMovementPlayer = false;
         }

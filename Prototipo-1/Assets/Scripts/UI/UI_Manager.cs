@@ -179,17 +179,21 @@ public class UI_Manager : MonoBehaviour
         {
             if (enemy == null || !enemy.enemyPrefab.activeSelf)
             {
-                Enemy e = GameObject.Find("Enemigo").GetComponent<Enemy>();
-                if (e != null)
+                GameObject goEnemy = GameObject.Find("Enemigo");
+                if (goEnemy != null)
                 {
-                    if (e.gameObject.activeSelf)
+                    Enemy e = goEnemy.GetComponent<Enemy>();
+                    if (e != null)
                     {
-                        enemy = e;
-                        enemyHUD.barraDeEscudo.SetEnemy(enemy);
-                        enemyHUD.barraDeEscudo.SetValueShild(enemyHUD.barraDeEscudo.MaxValueShild);
-                        enemy.barraDeEscudo = enemyHUD.barraDeEscudo;
-                        enemy.life = enemy.maxLife;
-                        enemyHUD.textNameEnemy.text = enemy.nameEnemy;
+                        if (e.gameObject.activeSelf)
+                        {
+                            enemy = e;
+                            enemyHUD.barraDeEscudo.SetEnemy(enemy);
+                            enemyHUD.barraDeEscudo.SetValueShild(enemyHUD.barraDeEscudo.MaxValueShild);
+                            enemy.barraDeEscudo = enemyHUD.barraDeEscudo;
+                            enemy.life = enemy.maxLife;
+                            enemyHUD.textNameEnemy.text = enemy.nameEnemy;
+                        }
                     }
                 }
             }

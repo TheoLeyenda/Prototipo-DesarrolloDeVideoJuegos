@@ -16,12 +16,18 @@ public class KathyAndTyke : Enemy
     private void OnEnable()
     {
         enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+        Player.OnDie += AnimationVictory;
     }
+    private void OnDisable() 
+    {
+        Player.OnDie -= AnimationVictory;
+    }
+
     // Update is called once per frame
     public override void Update()
     {
         //BORRAR ESTO DESPUES DE TESTEAR
-        if (Input.GetKey(KeyCode.Space))
+        /*if (Input.GetKey(KeyCode.Space))
         {
             xpActual = xpNededSpecialAttack;
             Debug.Log(enumsEnemy.GetMovement());
@@ -32,7 +38,7 @@ public class KathyAndTyke : Enemy
             Debug.Log(enumsEnemy.GetMovement());
             //Debug.Log(valueAttack);
             //Debug.Log(delayAttack);
-        }
+        }*/
         //----------------------------------//
         base.Update();
         /*if (transform.position.y > InitialPosition.y && spriteEnemy.spriteRenderer.sprite.name == "KT - Stand")

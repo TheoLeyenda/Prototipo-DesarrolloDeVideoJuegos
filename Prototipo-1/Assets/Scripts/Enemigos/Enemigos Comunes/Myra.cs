@@ -18,10 +18,12 @@ public class Myra : Enemy
         xpActual = 0;
         ProyectilMagicBust.timeLife = 0;
         ProyectilMagicBust.gameObject.SetActive(false);
+        Player.OnDie -= AnimationVictory;
     }
     private void OnEnable()
     {
         enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+        Player.OnDie += AnimationVictory;
     }
     // Update is called once per frame
     public override void Update()
