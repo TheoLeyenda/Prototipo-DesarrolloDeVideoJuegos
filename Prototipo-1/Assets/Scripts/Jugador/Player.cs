@@ -195,6 +195,11 @@ public class Player : MonoBehaviour
             //PD.lifePlayer = PD.maxLifePlayer;
         //}
         //--------------------------------
+        if (myVictory)
+        {
+            structsPlayer.dataAttack.DisparoDeCarga.SetActive(false);
+            eventWise.StartEvent("fuego_termina");
+        }
         CheckOutLimit();
         CheckDead();
         CheckState();

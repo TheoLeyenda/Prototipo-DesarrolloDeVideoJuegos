@@ -71,6 +71,7 @@ public class DataCombatPvP : MonoBehaviour
     public float delayFinishRound;
     public float auxDelayFinishRound;
     private bool soundEnter;
+    public bool restartMusic = true;
     void Start()
     {
         soundEnter = false;
@@ -253,6 +254,10 @@ public class DataCombatPvP : MonoBehaviour
     }
     public void ReiniciarRonda()
     {
+        if (restartMusic)
+        {
+            player1.eventWise.StartEvent("volver_al_menu");
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     // ESTE SCRIPT DEBE TOMAR LA DEDICION CORRESPONDIENTE EN CUANTO AL NIVEL ELEJIDO Y PERSONAJE ELEJIDO DEPENDIENDO DE LA INFO QUE LE PASE EL
