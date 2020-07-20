@@ -58,10 +58,6 @@ public class SpriteBoss_ProfesorAnatomia : SpriteBossController
     {
         puntoDebilProfesorAnatomia.enabled = true;
     }
-    public void CounterAttack()
-    {
-        profesorAnatomia.CounterAttack();
-    }
     public void SetOffsetAndSizeCollider2D() 
     {
         puntoDebilProfesorAnatomia.size = size;
@@ -74,5 +70,18 @@ public class SpriteBoss_ProfesorAnatomia : SpriteBossController
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.GetComponent<Proyectil>() != null 
+            && profesorAnatomia.fsmProfesorAnatomia.GetCurrentState() == (int)ProfesorAnatomia.EstadoProfesorAnatomia.MasiveAttack) 
+        {
+            Proyectil proyectil = collision.GetComponent<Proyectil>();
+            if ((proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador1
+                || proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador2)
+                && proyectil.tipoDeProyectil != Proyectil.typeProyectil.AtaqueEspecial) 
+            {
+                PlayAnimation("CounterAttack");
+                profesorAnatomia.CounterAttack(proyectil);
+                proyectil.AnimationHit();
+            }
+        }
     }
 }

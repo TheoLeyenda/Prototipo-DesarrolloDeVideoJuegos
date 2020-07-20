@@ -122,6 +122,8 @@ public class ProfesorAnatomia : Enemy
     private void OnEnable()
     {
         Grid.OnSettingTitileo += SetTargetGrid;
+        InitialPosition = new Vector3(5.17f, -3.42f, 0f);
+        transform.position = new Vector3(transform.position.x, -3.42f, 0f);
     }
     private void OnDisable()
     {
@@ -145,6 +147,10 @@ public class ProfesorAnatomia : Enemy
     // Update is called once per frame
     public override void Update()
     {
+        if (inCombatPosition)
+        {
+            transform.position = InitialPosition;
+        }
         base.Update();
         switch (fsmProfesorAnatomia.GetCurrentState())
         {
@@ -449,13 +455,25 @@ public class ProfesorAnatomia : Enemy
     {
         xpActual = xpActual + Time.deltaTime * speedChargeSpecialAttack;
     }
-    public void CounterAttack() 
+    public void CounterAttack(Proyectil proyectil) 
     {
-        
+        if (proyectil.posicionDisparo == Proyectil.PosicionDisparo.PosicionMedia
+            || proyectil.posicionDisparo == Proyectil.PosicionDisparo.PosicionAlta)
+        {
+            Attack(false);
+        }
+        else if (proyectil.posicionDisparo == Proyectil.PosicionDisparo.PosicionBaja)
+        {
+            Attack(true);
+        }
+        else 
+        {
+            Attack(false);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        
     }
 
 }

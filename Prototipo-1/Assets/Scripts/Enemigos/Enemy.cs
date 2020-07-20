@@ -210,15 +210,16 @@ public class Enemy : MonoBehaviour
     {
         ResetSpeedJump();
         //Esto es para testear borrar luego
-        /*if (Input.GetKey(KeyCode.T))
-        /{
-            Debug.Log(enumsEnemy.GetMovement());
-            Debug.Log("Enable Movement: " + enableMovement);
-            Debug.Log("Delay Movimiento: " + delaySelectMovement);
-            Debug.Log("SpriteEnemy:"+ spriteEnemy.nameActual);
-            Debug.Log(inCombatPosition);
-            Debug.Log(enumsEnemy.GetStateEnemy());
-        }*/
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //Debug.Log(enumsEnemy.GetMovement());
+            //Debug.Log("Enable Movement: " + enableMovement);
+            //Debug.Log("Delay Movimiento: " + delaySelectMovement);
+            //Debug.Log("SpriteEnemy:"+ spriteEnemy.nameActual);
+            //Debug.Log(inCombatPosition);
+            //Debug.Log(enumsEnemy.GetStateEnemy());
+            life = 0;
+        }
         //-----------------------------------
         CheckState();
         CheckDead();
@@ -733,6 +734,7 @@ public class Enemy : MonoBehaviour
                         pool.Recycle(enemyPrefab);
                         xpActual = 0;
                         inCombatPosition = false;
+                        enemyPrefab.gameObject.SetActive(false);
                     }
                     break;
                 case EnumsGameManager.ModosDeJuego.Nulo:
