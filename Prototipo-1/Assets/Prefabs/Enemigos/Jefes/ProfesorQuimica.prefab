@@ -1539,6 +1539,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   applyColorShoot: 0
   colorShoot: {r: 1, g: 1, b: 1, a: 1}
+  EnableChargerSpecialAttackForHit: 1
   nameEnemy: 
   enableColorShootSpecialAttack: 0
   enableMovement: 0
@@ -1789,6 +1790,11 @@ PrefabInstance:
       propertyPath: enemy
       value: 
       objectReference: {fileID: 5198877482019129891}
+    - target: {fileID: 1460512152298850783, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
 --- !u!1 &322837976637699079 stripped

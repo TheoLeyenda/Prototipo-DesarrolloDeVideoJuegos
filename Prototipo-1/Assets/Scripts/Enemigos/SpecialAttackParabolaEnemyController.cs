@@ -7,16 +7,38 @@ public class SpecialAttackParabolaEnemyController : MonoBehaviour
 {
     // Start is called before the first frame update
     public Pool poolObjectSpecialAttack;
+    public Enemy.ApplyColorShoot applyColorShoot = Enemy.ApplyColorShoot.None;
+    public Color colorShoot;
+
     public void SpecialAttack(Enemy enemy, bool doubleDamage, bool isDuck, GameObject generadorProyectilesParabola, GameObject generadorProyectilesParabolaAgachado, EnumsEnemy enumsEnemy, StructsEnemys structsEnemys, int randomMax, int randomMin)
     {
         GameObject go = poolObjectSpecialAttack.GetObject();
         ProyectilParabola proyectil = go.GetComponent<ProyectilParabola>();
+        switch (applyColorShoot)
+        {
+            case Enemy.ApplyColorShoot.None:
+                break;
+            case Enemy.ApplyColorShoot.Proyectil:
+                proyectil.SetColorProyectil(colorShoot);
+                break;
+            case Enemy.ApplyColorShoot.Stela:
+                proyectil.SetColorStela(colorShoot);
+                break;
+            case Enemy.ApplyColorShoot.StelaAndProyectil:
+                proyectil.SetColorProyectil(colorShoot);
+                proyectil.SetColorStela(colorShoot);
+                break;
+        }
         if (enemy.enableColorShootSpecialAttack)
         {
             proyectil.SetColorProyectil(enemy.colorShoot);
         }
         proyectil.SetDobleDamage(doubleDamage);
         proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
+        if (enemy.enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Jefe)
+        {
+            proyectil.SetEnemy(enemy);
+        }
         if (doubleDamage)
         {
             proyectil.damage = proyectil.damage * 2;
@@ -52,6 +74,7 @@ public class SpecialAttackParabolaEnemyController : MonoBehaviour
         else if(enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Jefe)
         {
             int random = Random.Range(randomMin, randomMax);
+
             switch (proyectil.TypeRoot)
             {
                 case 1:
@@ -83,7 +106,7 @@ public class SpecialAttackParabolaEnemyController : MonoBehaviour
                     }
                     break;
             }
-            proyectil.OnParabola(enemy, null, Proyectil.typeProyectil.AtaqueEspecial);
+            proyectil.OnParabola(enemy, null, Proyectil.typeProyectil.Nulo);
         }
     }
 }

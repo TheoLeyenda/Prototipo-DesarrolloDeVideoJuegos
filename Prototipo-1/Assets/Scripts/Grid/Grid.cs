@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,6 +28,9 @@ public class Grid : MonoBehaviour
     public int baseGrild = 2;
     private GameManager gm;
     public Plataformas[] plataformas;
+    public bool inBoss;
+
+    public static event Action<Grid, Vector3> OnSettingTitileo;
     private void Awake()
     {
         if (GameManager.instanceGameManager != null)
@@ -37,6 +42,82 @@ public class Grid : MonoBehaviour
     {
         ActivatePlataforma();
         
+    }
+    private void OnEnable()
+    {
+        ProfesorAnatomia.OnInitTrowSpecialAttackTerremoto += TitiledGrid;
+    }
+    private void OnDisable()
+    {
+        ProfesorAnatomia.OnInitTrowSpecialAttackTerremoto -= TitiledGrid;
+    }
+    public void TitiledGrid(ProfesorAnatomia profesorAnatomia, float delayTitileo, int numCasilla,bool AllCasillas)
+    {
+        if (!inBoss)
+        {
+            if (profesorAnatomia != null)
+            {
+                Plataformas currentPlataforma = null;
+                Vector3 cuadrillaPosition = Vector3.zero;
+                Cuadrilla cuadrilla = null;
+                float substractVector = 2.5f;
+                for (int i = 0; i < plataformas.Length; i++)
+                {
+                    if (plataformas[i].gameObject.activeSelf)
+                    {
+                        currentPlataforma = plataformas[i];
+                    }
+                }
+                if (!AllCasillas)
+                {
+                    switch (numCasilla)
+                    {
+                        case 1:
+                            cuadrillaPosition = currentPlataforma.plataformaIzquierda.transform.position;
+                            cuadrilla = currentPlataforma.cuadrillaPlataformaIzquierda;
+                            cuadrilla.SetDelayTitileo(delayTitileo);
+                            break;
+                        case 2:
+                            cuadrillaPosition = currentPlataforma.plataformaCentral.transform.position;
+                            cuadrilla = currentPlataforma.cuadrillaPlataformaCentral;
+                            cuadrilla.SetDelayTitileo(delayTitileo);
+                            break;
+                        case 3:
+                            cuadrillaPosition = currentPlataforma.plataformaDerecha.transform.position;
+                            cuadrilla = currentPlataforma.cuadrillaPlataformaDerecha;
+                            cuadrilla.SetDelayTitileo(delayTitileo);
+                            break;
+                    }
+                    if (OnSettingTitileo != null)
+                    {
+                        OnSettingTitileo(this, cuadrilla.transform.position + new Vector3(0, -substractVector, 0));
+                        //profesorAnatomia.GeneratorSpecialAttack.transform.position = cuadrilla.transform.position;
+                        //Debug.Log("ENTRE");
+                    }
+                }
+                else
+                {
+                    cuadrillaPosition = currentPlataforma.plataformaIzquierda.transform.position;
+                    cuadrilla = currentPlataforma.cuadrillaPlataformaIzquierda;
+                    cuadrilla.SetDelayTitileo(delayTitileo);
+
+                    cuadrillaPosition = currentPlataforma.plataformaCentral.transform.position;
+                    cuadrilla = currentPlataforma.cuadrillaPlataformaCentral;
+                    cuadrilla.SetDelayTitileo(delayTitileo);
+
+                    cuadrillaPosition = currentPlataforma.plataformaDerecha.transform.position;
+                    cuadrilla = currentPlataforma.cuadrillaPlataformaDerecha;
+                    cuadrilla.SetDelayTitileo(delayTitileo);
+
+                    if (OnSettingTitileo != null)
+                    {
+                        OnSettingTitileo(this, currentPlataforma.transform.position + new Vector3(0, -substractVector, 0));
+                        //profesorAnatomia.GeneratorSpecialAttack.transform.position = cuadrilla.transform.position;
+                        //Debug.Log("ENTRE");
+                    }
+                }
+            }
+        }
     }
     public void ActivatePlataforma()
     {

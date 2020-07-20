@@ -192,7 +192,7 @@ public class Player : MonoBehaviour
         //if (Input.GetKey(KeyCode.Space))
         //{
             //xpActual = xpNededSpecialAttack;
-            //PD.lifePlayer = PD.maxLifePlayer;
+            PD.lifePlayer = PD.maxLifePlayer;
         //}
         //--------------------------------
         if (myVictory)

@@ -66,17 +66,21 @@ public class BoxColliderController : MonoBehaviour
     {
         if (player != null && PlayerDisparador != player && !inEnemy && inPlayer)
         {
+            
             bool enableDamagePlayer = true;
             if (state == StateBoxCollider.Normal)
             {
+                //Debug.Log("ENTRE");
                 if (proyectil.GetEnemy() != null)
                 {
-
+                    Enemy enemy = proyectil.GetEnemy();
+                    //Debug.Log("ENTRE");
                     if (proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Enemigo)
                     {
                         player.SetEnableCounterAttack(true);
                         if (player.delayCounterAttack > 0)
                         {
+                            //Debug.Log("ENTRE");
                             if (InputPlayerController.GetInputButtonDown(player.inputDeffenseButton) && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage && enableCounterAttack)
                             {
                                 proyectil.gameObject.SetActive(false);
@@ -88,11 +92,13 @@ public class BoxColliderController : MonoBehaviour
                         }
                         if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer || (!ZonaContraAtaque || (proyectil.colisionPlayer && notProyectilParabola)))
                         {
-                            if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && proyectil.GetEnemy() != null)
+                            //Debug.Log("ENTRE");
+                            if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && enemy != null)
                             {
-                                if (Proyectil.typeProyectil.AtaqueEspecial != proyectil.tipoDeProyectil)
+                                if (Proyectil.typeProyectil.AtaqueEspecial != proyectil.tipoDeProyectil
+                                    && enemy.EnableChargerSpecialAttackForHit)
                                 {
-                                    proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + proyectil.GetEnemy().xpForHit);
+                                    enemy.SetXpActual(enemy.GetXpActual() + enemy.xpForHit);
                                 }
                                 player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
                             }
@@ -119,9 +125,11 @@ public class BoxColliderController : MonoBehaviour
                         }
                         else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer || (!ZonaContraAtaque || (proyectil.colisionPlayer && notProyectilParabola)))
                         {
-                            if (Proyectil.typeProyectil.AtaqueEspecial != proyectil.tipoDeProyectil)
+                            //Debug.Log("ENTRE");
+                            if (Proyectil.typeProyectil.AtaqueEspecial != proyectil.tipoDeProyectil
+                                && enemy.EnableChargerSpecialAttackForHit)
                             {
-                                proyectil.GetEnemy().SetXpActual(proyectil.GetEnemy().GetXpActual() + proyectil.GetEnemy().xpForHit);
+                                enemy.SetXpActual(enemy.GetXpActual() + enemy.xpForHit);
                             }
                             player.SetEnableCounterAttack(false);
                             player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;

@@ -59,7 +59,7 @@ public class ProyectilMagicBust : DisparoDeCarga
             Proyectil proyectil = collision.GetComponent<Proyectil>();
             //GranadaGaseosa proyectilParabola = collision.GetComponent<GranadaGaseosa>();
             //ProyectilInparable proyectilImparabe = collision.GetComponent<ProyectilInparable>();
-            //ProyectilLimo proyectilLimo = collision.GetComponent<ProyectilLimo>();
+            ProyectilLimo proyectilLimo = collision.GetComponent<ProyectilLimo>();
             //ProyectilChicle proyectilChicle = collision.GetComponent<ProyectilChicle>();
             //Debug.Log("Entre colision con proyectil");
             GranadaGaseosa granadaGaseosa = collision.GetComponent<GranadaGaseosa>();
@@ -72,6 +72,10 @@ public class ProyectilMagicBust : DisparoDeCarga
             {
                 proyectil.AnimationHit();
             }
+            else if (proyectilLimo != null)
+            {
+                proyectilLimo.AnimationHit();
+            }
             /*else if(proyectilParabola != null)
             {
                 //Debug.Log("Entre AnimacioHit");
@@ -81,10 +85,7 @@ public class ProyectilMagicBust : DisparoDeCarga
             {
                 proyectilImparabe.AnimationHit();
             }
-            else if(proyectilLimo != null)
-            {
-                proyectilLimo.AnimationHit();
-            }
+
             else if(proyectilChicle != null)
             {
                 proyectilChicle.AnimationHit();

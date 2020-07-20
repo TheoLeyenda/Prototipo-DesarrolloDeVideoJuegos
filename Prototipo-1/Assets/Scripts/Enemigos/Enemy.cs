@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
         None,
     }
     public Color colorShoot;
-
+    public bool EnableChargerSpecialAttackForHit = true;
     public string nameEnemy;
     public bool enableColorShootSpecialAttack;
     //DATOS PARA EL MOVIMIENTO
@@ -330,9 +330,12 @@ public class Enemy : MonoBehaviour
     }
     public void OnEnemy()
     {
-        boxColliderControllerParado.GetBoxCollider2D().enabled = true;
-        boxColliderControllerAgachado.GetBoxCollider2D().enabled = false;
-        boxColliderControllerSaltando.GetBoxCollider2D().enabled = false;
+        if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
+        {
+            boxColliderControllerParado.GetBoxCollider2D().enabled = true;
+            boxColliderControllerAgachado.GetBoxCollider2D().enabled = false;
+            boxColliderControllerSaltando.GetBoxCollider2D().enabled = false;
+        }
         enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
         tolerableStillTime = auxTolerableStillTime;
         //poolObjectEnemy = GetComponent<PoolObject>();
@@ -399,44 +402,47 @@ public class Enemy : MonoBehaviour
     }
     public void CheckBoxColliders2D()
     {
-        if (isDuck || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Agacharse
-            || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque
-            || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa
-            || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado)
+        if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
         {
-            if (boxColliderPiernas != null)
+            if (isDuck || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Agacharse
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado)
             {
-                boxColliderPiernas.GetBoxCollider2D().enabled = false;
+                if (boxColliderPiernas != null)
+                {
+                    boxColliderPiernas.GetBoxCollider2D().enabled = false;
+                }
+                boxColliderControllerAgachado.GetBoxCollider2D().enabled = true;
+                boxColliderControllerParado.GetBoxCollider2D().enabled = false;
+                boxColliderControllerSaltando.GetBoxCollider2D().enabled = false;
             }
-            boxColliderControllerAgachado.GetBoxCollider2D().enabled = true;
-            boxColliderControllerParado.GetBoxCollider2D().enabled = false;
-            boxColliderControllerSaltando.GetBoxCollider2D().enabled = false;
-        }
-        else if (isJamping || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar
-            || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
-            || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa
-            || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto)
-        {
-            if (boxColliderPiernas != null)
+            else if (isJamping || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto)
             {
-                boxColliderPiernas.GetBoxCollider2D().enabled = false;
+                if (boxColliderPiernas != null)
+                {
+                    boxColliderPiernas.GetBoxCollider2D().enabled = false;
+                }
+                boxColliderControllerAgachado.GetBoxCollider2D().enabled = false;
+                boxColliderControllerParado.GetBoxCollider2D().enabled = false;
+                boxColliderControllerSaltando.GetBoxCollider2D().enabled = true;
             }
-            boxColliderControllerAgachado.GetBoxCollider2D().enabled = false;
-            boxColliderControllerParado.GetBoxCollider2D().enabled = false;
-            boxColliderControllerSaltando.GetBoxCollider2D().enabled = true;
-        }
-        else if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar
-            || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque
-            || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa
-            || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto)
-        {
-            if (boxColliderPiernas != null)
+            else if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar
+                || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque
+                || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa
+                || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto)
             {
-                boxColliderPiernas.GetBoxCollider2D().enabled = true;
+                if (boxColliderPiernas != null)
+                {
+                    boxColliderPiernas.GetBoxCollider2D().enabled = true;
+                }
+                boxColliderControllerAgachado.GetBoxCollider2D().enabled = false;
+                boxColliderControllerParado.GetBoxCollider2D().enabled = true;
+                boxColliderControllerSaltando.GetBoxCollider2D().enabled = false;
             }
-            boxColliderControllerAgachado.GetBoxCollider2D().enabled = false;
-            boxColliderControllerParado.GetBoxCollider2D().enabled = true;
-            boxColliderControllerSaltando.GetBoxCollider2D().enabled = false;
         }
     }
     public void CheckComportamiento()
