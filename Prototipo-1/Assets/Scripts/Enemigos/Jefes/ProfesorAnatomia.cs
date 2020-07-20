@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,6 +56,11 @@ public class ProfesorAnatomia : Enemy
     [Header("Porcentage Seleccion Special Attack")]
     public float porcentageSpecialAttack_1;
     public float porcentageSpecialAttack_2;
+
+    [Header("Effects - CameraShake")]
+    public CameraShake cameraShake;
+    float durationCameraShake = 0.45f;
+    float magnitudeCameraShake = 0.4f;
 
     public static event Action<ProfesorAnatomia, float, int,bool> OnInitTrowSpecialAttackTerremoto;
 
@@ -294,10 +300,12 @@ public class ProfesorAnatomia : Enemy
     }
     public void SpecialAttack_Terremoto()
     {
+        
         ObjectTerremoto.transform.position = GeneratorSpecialAttack.transform.position;
         ObjectTerremoto.damage = DamageTerremoto;
         ObjectTerremoto.timeLife = timeLifeTerremoto;
         ObjectTerremoto.gameObject.SetActive(true);
+        StartCoroutine(cameraShake.Shake(durationCameraShake, magnitudeCameraShake));
     }
     public void BossAttack()
     {
