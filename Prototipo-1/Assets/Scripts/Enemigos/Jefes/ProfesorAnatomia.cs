@@ -62,10 +62,14 @@ public class ProfesorAnatomia : Enemy
     float durationCameraShake = 0.45f;
     float magnitudeCameraShake = 0.4f;
 
-    public static event Action<ProfesorAnatomia, float, int,bool> OnInitTrowSpecialAttackTerremoto;
+    public static event Action<ProfesorAnatomia, float, int,bool,bool> OnInitTrowSpecialAttack;
 
     [HideInInspector]
     public bool initBraggert = false;
+    [HideInInspector]
+    public bool enableSetRandomSpecialAttack = true;
+
+    private float porcentageThrowSpecialAttack;
     public enum EstadoProfesorAnatomia
     {
         Idle,
@@ -197,11 +201,14 @@ public class ProfesorAnatomia : Enemy
     public void ThrowSpecialAttack()
     {
         //ARMAR LAS ANIMACIONES
-        float porcentage = UnityEngine.Random.Range(0, 100);
-        //SACAR LUEGO
-        //porcentage = 10;
-        //-------------//
-        if (porcentage <= porcentageSpecialAttack_1)
+        if (enableSetRandomSpecialAttack)
+        {
+            porcentageThrowSpecialAttack = UnityEngine.Random.Range(0, 120);
+            Debug.Log(porcentageThrowSpecialAttack);
+            enableSetRandomSpecialAttack = false;
+        }
+
+        if (porcentageThrowSpecialAttack < porcentageSpecialAttack_1)
         {
             //Ataque especial 1
             if (countRepetitionSpecialAttack >= 0)
@@ -218,6 +225,7 @@ public class ProfesorAnatomia : Enemy
                 fsmProfesorAnatomia.SendEvent((int)EventosProfesorAnatomia.FinishSpecialAttack);
                 NextSpecialAttack = true;
                 countRepetitionSpecialAttack = auxCountRepetitionSpecialAttack;
+                enableSetRandomSpecialAttack = true;
             }
         }
         else
@@ -271,18 +279,18 @@ public class ProfesorAnatomia : Enemy
     public void InitSpecialAttack_PunietazoDeFuria() 
     {
         int numberCasilla = UnityEngine.Random.Range(1, 4);
-        if (OnInitTrowSpecialAttackTerremoto != null)
+        if (OnInitTrowSpecialAttack != null)
         {
-            OnInitTrowSpecialAttackTerremoto(this, delayAttackPunietazoDeFuria, numberCasilla,false);
+            OnInitTrowSpecialAttack(this, delayAttackPunietazoDeFuria, numberCasilla,false, false);
         }
         xpActual = 0;
     }
     public void InitSpecialAttack_Terremoto()
     {
         int numberCasilla = 3;
-        if (OnInitTrowSpecialAttackTerremoto != null)
+        if (OnInitTrowSpecialAttack != null)
         {
-            OnInitTrowSpecialAttackTerremoto(this, delayAttackPunietazoDeFuria, numberCasilla, true);
+            OnInitTrowSpecialAttack(this, delayAttackPunietazoDeFuria, numberCasilla, true, true);
         }
         xpActual = 0;
     }
@@ -311,9 +319,6 @@ public class ProfesorAnatomia : Enemy
     {
 
         float porcentage = UnityEngine.Random.Range(0, 100);
-        //SACAR LUEGO
-        //porcentage = 99;
-        //-------------//
         if (porcentage <= PorcentageHorizontalAttack)
         {
             //ENTRO AL HORIZONTAL ATTACK

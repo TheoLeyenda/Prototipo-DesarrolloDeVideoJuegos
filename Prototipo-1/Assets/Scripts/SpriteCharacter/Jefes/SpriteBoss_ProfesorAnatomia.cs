@@ -23,8 +23,8 @@ public class SpriteBoss_ProfesorAnatomia : SpriteBossController
     {
         profesorAnatomia.fsmProfesorAnatomia.SendEvent((int)ProfesorAnatomia.EventosProfesorAnatomia.FinishSpecialAttack);
         profesorAnatomia.initBraggert = true;
-
-        Debug.Log("ENTRE");
+        profesorAnatomia.enableSetRandomSpecialAttack = true;
+        //Debug.Log("ENTRE");
     }
     public void InitSpecialAttack_PunietazoDeFuria()
     {

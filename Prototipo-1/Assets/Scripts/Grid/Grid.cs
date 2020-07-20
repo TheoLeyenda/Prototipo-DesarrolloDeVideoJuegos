@@ -45,13 +45,13 @@ public class Grid : MonoBehaviour
     }
     private void OnEnable()
     {
-        ProfesorAnatomia.OnInitTrowSpecialAttackTerremoto += TitiledGrid;
+        ProfesorAnatomia.OnInitTrowSpecialAttack += TitiledGrid;
     }
     private void OnDisable()
     {
-        ProfesorAnatomia.OnInitTrowSpecialAttackTerremoto -= TitiledGrid;
+        ProfesorAnatomia.OnInitTrowSpecialAttack -= TitiledGrid;
     }
-    public void TitiledGrid(ProfesorAnatomia profesorAnatomia, float delayTitileo, int numCasilla,bool AllCasillas)
+    public void TitiledGrid(ProfesorAnatomia profesorAnatomia, float delayTitileo, int numCasilla,bool AllCasillas, bool substractPosition)
     {
         if (!inBoss)
         {
@@ -90,7 +90,14 @@ public class Grid : MonoBehaviour
                     }
                     if (OnSettingTitileo != null)
                     {
-                        OnSettingTitileo(this, cuadrilla.transform.position + new Vector3(0, -substractVector, 0));
+                        if (substractPosition)
+                        {
+                            OnSettingTitileo(this, cuadrilla.transform.position + new Vector3(0, -substractVector, 0));
+                        }
+                        else 
+                        {
+                            OnSettingTitileo(this, cuadrilla.transform.position);
+                        }
                         //profesorAnatomia.GeneratorSpecialAttack.transform.position = cuadrilla.transform.position;
                         //Debug.Log("ENTRE");
                     }
@@ -114,6 +121,10 @@ public class Grid : MonoBehaviour
                         OnSettingTitileo(this, currentPlataforma.transform.position + new Vector3(0, -substractVector, 0));
                         //profesorAnatomia.GeneratorSpecialAttack.transform.position = cuadrilla.transform.position;
                         //Debug.Log("ENTRE");
+                    }
+                    else 
+                    {
+                        OnSettingTitileo(this, cuadrilla.transform.position);
                     }
                 }
             }
