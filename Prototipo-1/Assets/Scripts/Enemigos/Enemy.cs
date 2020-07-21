@@ -138,6 +138,7 @@ public class Enemy : MonoBehaviour
     private float tolerableStillTime;
     private float auxTolerableStillTime;
 
+    private bool weitVictory;
     [HideInInspector]
     public float timeStuned = 0;
 
@@ -153,6 +154,7 @@ public class Enemy : MonoBehaviour
         delaySelectMovement = 0.2f;
         isJamping = false;
         myVictory = false;
+        weitVictory = false;
         enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
         Player.OnDie += AnimationVictory;
         //enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
@@ -166,9 +168,11 @@ public class Enemy : MonoBehaviour
         inCombatPosition = false;
         isJamping = false;
         myVictory = false;
+        weitVictory = false;
     }
     public virtual void Start()
     {
+        weitVictory = false;
         specialAttackParabolaEnemyController = GetComponent<SpecialAttackParabolaEnemyController>();
         tolerableStillTime = maxRandomDelayMovement;
         auxTolerableStillTime = maxRandomDelayMovement;
@@ -199,6 +203,10 @@ public class Enemy : MonoBehaviour
             enableMovement = false;
             myVictory = true;
         }
+        else if(enumsEnemy.typeBoss == EnumsEnemy.TiposDeJefe.Nulo)
+        {
+            weitVictory = true;
+        }
     }
     public void ResetSpeedJump()
     {
@@ -210,6 +218,13 @@ public class Enemy : MonoBehaviour
     }
     public virtual void Update()
     {
+        if (weitVictory && transform.position.y <= InitialPosition.y) 
+        {
+            spriteEnemy.GetAnimator().Play("Victory");
+            enableMovement = false;
+            myVictory = true;
+            weitVictory = false;
+        }
         ResetSpeedJump();
         //Esto es para testear borrar luego
         if (Input.GetKeyDown(KeyCode.Space))

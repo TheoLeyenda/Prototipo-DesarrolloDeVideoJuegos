@@ -198,11 +198,15 @@ public class Player : MonoBehaviour
             weitVictory = false;
         }
         //BORRAR LUEGO DE TESTEAR
-        //if (Input.GetKey(KeyCode.Space))
-        //{
+        if (Input.GetKey(KeyCode.Space))
+        {
             //xpActual = xpNededSpecialAttack;
             PD.lifePlayer = PD.maxLifePlayer;
-        //}
+        }
+        else if (Input.GetKey(KeyCode.F)) 
+        {
+            PD.lifePlayer = 0;
+        }
         //--------------------------------
         if (myVictory)
         {
