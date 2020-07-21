@@ -216,7 +216,7 @@ public class Player : MonoBehaviour
 
     public void AnimationVictory(Player p)
     {
-        if (p.PD.lifePlayer <= 0 && p != this)
+        if (p.PD.lifePlayer <= 0 && p != this && transform.position.y <= InitialPosition.y)
         {
             spritePlayerActual.GetAnimator().Play("Victory");
             enableMovement = false;
@@ -226,7 +226,8 @@ public class Player : MonoBehaviour
     }
     public void AnimationVictory(Enemy e) 
     {
-        if (e.enumsEnemy.typeBoss != EnumsEnemy.TiposDeJefe.Nulo && SceneManager.GetActiveScene().name != "Supervivencia") 
+        if (e.enumsEnemy.typeBoss != EnumsEnemy.TiposDeJefe.Nulo && SceneManager.GetActiveScene().name != "Supervivencia" 
+            && transform.position.y <= InitialPosition.y) 
         {
             spritePlayerActual.GetAnimator().Play("Victory");
             enableMovement = false;
