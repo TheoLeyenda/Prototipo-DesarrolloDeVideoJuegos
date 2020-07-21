@@ -122,8 +122,8 @@ public class ProfesorAnatomia : Enemy
     private void OnEnable()
     {
         Grid.OnSettingTitileo += SetTargetGrid;
-        InitialPosition = new Vector3(5.17f, -3.42f, 0f);
-        transform.position = new Vector3(transform.position.x, -3.42f, 0f);
+        //InitialPosition = new Vector3(5.17f, -3.42f, 0f);
+        enemyPrefab.transform.position = new Vector3(transform.position.x, -3.42f, 0f);
     }
     private void OnDisable()
     {
@@ -141,7 +141,7 @@ public class ProfesorAnatomia : Enemy
         {
             speedChargeSpecialAttack = 1;
         }
-
+        enemyPrefab.transform.position = new Vector3(transform.position.x, -3.42f, 0f);
     }
 
     // Update is called once per frame
@@ -149,7 +149,7 @@ public class ProfesorAnatomia : Enemy
     {
         if (inCombatPosition)
         {
-            transform.position = InitialPosition;
+            enemyPrefab.transform.position = new Vector3(5.17f, -3.42f, 0f);
         }
         base.Update();
         switch (fsmProfesorAnatomia.GetCurrentState())
@@ -473,7 +473,17 @@ public class ProfesorAnatomia : Enemy
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.GetComponent<Proyectil>() != null)
+        {
+            Proyectil proyectil = collision.GetComponent<Proyectil>();
+            if ((proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador1
+                    || proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador2)
+                    && proyectil.tipoDeProyectil != Proyectil.typeProyectil.AtaqueEspecial)
+            {
+                life = life - proyectil.damage;
+                proyectil.AnimationHit();
+            }
+        }
     }
 
 }
