@@ -226,7 +226,7 @@ public class Enemy : MonoBehaviour
             weitVictory = false;
         }
         ResetSpeedJump();
-        //Esto es para testear borrar luego
+        //BORRAR LUEGO DE TESTEO
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //Debug.Log(enumsEnemy.GetMovement());

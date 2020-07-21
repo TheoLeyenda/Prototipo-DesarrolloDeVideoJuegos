@@ -151,6 +151,12 @@ public class ProfesorAnatomia : Enemy
     // Update is called once per frame
     public override void Update()
     {
+        //BORRAR LUEGO DE TESTEO
+        //if (Input.GetKeyDown(KeyCode.F)) 
+        //{
+           // xpActual = xpNededSpecialAttack;
+        //}
+        //-----------------
         if (!Idied)
         {
             if (inCombatPosition)
@@ -217,6 +223,7 @@ public class ProfesorAnatomia : Enemy
         if (enableSetRandomSpecialAttack)
         {
             porcentageThrowSpecialAttack = UnityEngine.Random.Range(0, 120);
+            //porcentageThrowSpecialAttack = 100;
             Debug.Log(porcentageThrowSpecialAttack);
             enableSetRandomSpecialAttack = false;
         }
