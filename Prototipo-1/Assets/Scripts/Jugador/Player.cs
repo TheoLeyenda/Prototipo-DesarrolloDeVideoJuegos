@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public EventWise eventWise;
     private bool InFuegoEmpieza;
-
+    private bool weitVictory;
     public static event Action<Player, string> OnModifireState;
     public static event Action<Player, string> OnDisableModifireState;
     public static event Action<Player> OnDie;
@@ -131,6 +131,7 @@ public class Player : MonoBehaviour
         Player.OnDie -= AnimationVictory;
         Enemy.OnDie -= AnimationVictory;
         myVictory = false;
+        weitVictory = false;
     }
     private void Awake()
     {
@@ -139,6 +140,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        weitVictory = false;
         delayParabolaAttack = 0;
         enableMovementPlayer = false;
         enableMovement = false;
@@ -188,6 +190,13 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (weitVictory && transform.position.y <= InitialPosition.y) 
+        {
+            spritePlayerActual.GetAnimator().Play("Victory");
+            enableMovement = false;
+            myVictory = true;
+            weitVictory = false;
+        }
         //BORRAR LUEGO DE TESTEAR
         //if (Input.GetKey(KeyCode.Space))
         //{
@@ -222,16 +231,24 @@ public class Player : MonoBehaviour
             enableMovement = false;
             myVictory = true;
         }
+        else if(p.PD.lifePlayer <= 0 && p != this)
+        {
+            weitVictory = true;
+        }
         //spriteEnemy.GetAnimator().SetBool("Idle", false);
     }
     public void AnimationVictory(Enemy e) 
     {
-        if (e.enumsEnemy.typeBoss != EnumsEnemy.TiposDeJefe.Nulo && SceneManager.GetActiveScene().name != "Supervivencia" 
-            && transform.position.y <= InitialPosition.y) 
+        if (e.enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Jefe && SceneManager.GetActiveScene().name != "Supervivencia"
+            && transform.position.y <= InitialPosition.y)
         {
             spritePlayerActual.GetAnimator().Play("Victory");
             enableMovement = false;
             myVictory = true;
+        }
+        else if(e.enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Jefe && SceneManager.GetActiveScene().name != "Supervivencia")
+        {
+            weitVictory = true;
         }
     }
 

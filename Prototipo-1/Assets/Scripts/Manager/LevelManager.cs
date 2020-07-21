@@ -18,7 +18,7 @@ public class LevelManager : MonoBehaviour
     private GameManager gm;
     public bool InitDialog;
     public int ObjectiveOfPassLevel;
-    public float delayPassLevel = 2f;
+    public float delayPassLevel = 4f;
     private float auxDelayPassLevel;
     private int Level;
     private bool inDialog;
