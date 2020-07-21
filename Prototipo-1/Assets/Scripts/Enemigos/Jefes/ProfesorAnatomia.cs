@@ -69,6 +69,7 @@ public class ProfesorAnatomia : Enemy
     [HideInInspector]
     public bool enableSetRandomSpecialAttack = true;
 
+    private bool Idied = false;
     private float porcentageThrowSpecialAttack;
     public enum EstadoProfesorAnatomia
     {
@@ -124,13 +125,16 @@ public class ProfesorAnatomia : Enemy
         Grid.OnSettingTitileo += SetTargetGrid;
         //InitialPosition = new Vector3(5.17f, -3.42f, 0f);
         enemyPrefab.transform.position = new Vector3(transform.position.x, -3.42f, 0f);
+        Idied = false;
     }
     private void OnDisable()
     {
         Grid.OnSettingTitileo -= SetTargetGrid;
+        Idied = false;
     }
     public override void Start()
     {
+        Idied = false;
         NextSpecialAttack = true;
         auxDelayBraggart = delayBraggart;
         auxDelayFinishBraggart = delayFinishBraggart;
@@ -147,38 +151,41 @@ public class ProfesorAnatomia : Enemy
     // Update is called once per frame
     public override void Update()
     {
-        if (inCombatPosition)
+        if (!Idied)
         {
-            enemyPrefab.transform.position = new Vector3(5.17f, -3.42f, 0f);
-        }
-        base.Update();
-        switch (fsmProfesorAnatomia.GetCurrentState())
-        {
-            case (int)EstadoProfesorAnatomia.Idle:
-                Idle();
-                break;
-            case (int)EstadoProfesorAnatomia.MasiveAttack:
-                MasiveAttack();
-                break;
-            case (int)EstadoProfesorAnatomia.ThrowSpecialAttack:
-                ThrowSpecialAttack();
-                break;
-            case (int)EstadoProfesorAnatomia.Braggart:
-                Braggart();
-                break;
-            case (int)EstadoProfesorAnatomia.Death:
-                Death();
-                break;
-        }
+            if (inCombatPosition)
+            {
+                enemyPrefab.transform.position = new Vector3(5.17f, -3.42f, 0f);
+            }
+            base.Update();
+            switch (fsmProfesorAnatomia.GetCurrentState())
+            {
+                case (int)EstadoProfesorAnatomia.Idle:
+                    Idle();
+                    break;
+                case (int)EstadoProfesorAnatomia.MasiveAttack:
+                    MasiveAttack();
+                    break;
+                case (int)EstadoProfesorAnatomia.ThrowSpecialAttack:
+                    ThrowSpecialAttack();
+                    break;
+                case (int)EstadoProfesorAnatomia.Braggart:
+                    Braggart();
+                    break;
+                case (int)EstadoProfesorAnatomia.Death:
+                    Death();
+                    break;
+            }
 
-        if (fsmProfesorAnatomia.GetCurrentState() != (int)EstadoProfesorAnatomia.Braggart || ChargeInBraggartState)
-        {
-            ChargeSpecialAttack();
-        }
+            if (fsmProfesorAnatomia.GetCurrentState() != (int)EstadoProfesorAnatomia.Braggart || ChargeInBraggartState)
+            {
+                ChargeSpecialAttack();
+            }
 
-        if (life <= 0)
-        {
-            fsmProfesorAnatomia.SendEvent((int)EventosProfesorAnatomia.LifeOut);
+            if (life <= 0)
+            {
+                fsmProfesorAnatomia.SendEvent((int)EventosProfesorAnatomia.LifeOut);
+            }
         }
     }
 
@@ -274,6 +281,7 @@ public class ProfesorAnatomia : Enemy
     public void Death()
     {
         spriteBoss_ProfesorAnatomia.PlayAnimation(NameAnimations[(int)MyAnimations.Death]);
+        Idied = true;
     }
     public void SetTargetGrid(Grid g, Vector3 target)
     {

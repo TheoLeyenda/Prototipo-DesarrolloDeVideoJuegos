@@ -48,11 +48,14 @@ public class GeneradorDeEnemigos : MonoBehaviour
     public GeneratorForGameMode GeneradorDelModoDeJuego;
     public bool generarJefes;
     private int countEnemysGenerate = 0;
+    private bool generatedBoss;
     private void Awake()
     {
+        generatedBoss = false;
     }
     private void Start()
     {
+        generatedBoss = false;
         idListEnemy = 0;
         if (GameManager.instanceGameManager != null)
         {
@@ -78,6 +81,10 @@ public class GeneradorDeEnemigos : MonoBehaviour
                 levelManager.ObjectiveOfPassLevel = ListEnemyGenerate.Count;
             }
         }
+    }
+    private void OnDisable()
+    {
+        generatedBoss = false;
     }
     private void Update()
     {
@@ -124,22 +131,29 @@ public class GeneradorDeEnemigos : MonoBehaviour
         }
         else if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
         {
-            if (idListEnemy == 1)
+            if (!generatedBoss)
             {
-                enemigoActual.enemyPrefab.transform.position = pointOfCombat.transform.position;
-                enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
-                enemigoActual.enableMovement = false;
-            }
-            else
-            {
-                enemigoActual.enemyPrefab.transform.position = Generador.transform.position;
-                //enemigoActual.gridEnemy.gameObject.transform.position = new Vector3(0, enemigoActual.gridEnemy.gameObject.transform.position.y, 0);
-                enemigoActual.transform.localPosition = new Vector3(0, enemigoActual.transform.localPosition.y, 0);
-                enemigoActual.pointOfCombat = pointOfCombat.transform.position;
-                enemigoActual.pointOfDeath = pointOfInit.transform.position;
-                enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
-                enemigoActual.SetDelaySelectMovement(1);
-                enemigoActual.enableMovement = true;
+                if (idListEnemy == 1)
+                {
+                    enemigoActual.enemyPrefab.transform.position = pointOfCombat.transform.position;
+                    enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+                    enemigoActual.enableMovement = false;
+                }
+                else
+                {
+                    enemigoActual.enemyPrefab.transform.position = Generador.transform.position;
+                    //enemigoActual.gridEnemy.gameObject.transform.position = new Vector3(0, enemigoActual.gridEnemy.gameObject.transform.position.y, 0);
+                    enemigoActual.transform.localPosition = new Vector3(0, enemigoActual.transform.localPosition.y, 0);
+                    enemigoActual.pointOfCombat = pointOfCombat.transform.position;
+                    enemigoActual.pointOfDeath = pointOfInit.transform.position;
+                    enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+                    enemigoActual.SetDelaySelectMovement(1);
+                    enemigoActual.enableMovement = true;
+                    if (enemigoActual.enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Jefe) 
+                    {
+                        generatedBoss = true;
+                    }
+                }
             }
         }
     }

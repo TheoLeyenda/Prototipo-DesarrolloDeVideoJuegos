@@ -82,12 +82,12 @@ public class Defensivo : Enemy
             
         }
         //--------------------------------------------------------
-        if (Input.GetKey(KeyCode.Space))
-        {
-            Debug.Log(enumsEnemy.GetMovement());
-            Debug.Log(enableMovement);
-            Debug.Log(transform.position.y <= InitialPosition.y);
-        }
+        //if (Input.GetKey(KeyCode.Space))
+        //{
+            //Debug.Log(enumsEnemy.GetMovement());
+            //Debug.Log(enableMovement);
+            //Debug.Log(transform.position.y <= InitialPosition.y);
+        //}
     }
     public void CheckInSpecialAttack()
     {

@@ -98,6 +98,8 @@ public class Enemy : MonoBehaviour
     public bool myVictory = false;
     protected float valueAttack;
 
+    public bool DontRestart;
+
     [Header("Porcentage: Movimiento")]
     public float MovePorcentage;
     public float JumpPorcentage;
@@ -709,7 +711,7 @@ public class Enemy : MonoBehaviour
                 case EnumsGameManager.ModosDeJuego.Supervivencia:
                     if (life <= 0)
                     {
-                        life = auxLife;
+                        //life = auxLife;
                         gm.generateEnemy = true;
                         gm.countEnemysDead++;
                         gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
@@ -724,7 +726,7 @@ public class Enemy : MonoBehaviour
                 case EnumsGameManager.ModosDeJuego.Historia:
                     if (life <= 0)
                     {
-                        life = auxLife;
+                        //life = auxLife;
                         gm.generateEnemy = true;
                         gm.countEnemysDead++;
                         gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
@@ -1009,10 +1011,13 @@ public class Enemy : MonoBehaviour
     }
     public void ResetEnemy()
     {
-        life = maxLife;
-        xpActual = 0;
-        transform.position = InitialPosition;
-        enemyPrefab.transform.position = InitialPosition;
+        if (!DontRestart)
+        {
+            life = maxLife;
+            xpActual = 0;
+            transform.position = InitialPosition;
+            enemyPrefab.transform.position = InitialPosition;
+        }
     }
     public void MoveLeft(Vector3 cuadrillaDestino)
     {
