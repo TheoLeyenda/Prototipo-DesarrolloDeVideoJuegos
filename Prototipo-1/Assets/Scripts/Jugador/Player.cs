@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
         StelaAndProyectil,
         None,
     }
+    public Sprite myHeadSprite;
     public Color colorShoot;
     public string namePlayer;
     //BOOLEANOS DE MOVIMIENTO

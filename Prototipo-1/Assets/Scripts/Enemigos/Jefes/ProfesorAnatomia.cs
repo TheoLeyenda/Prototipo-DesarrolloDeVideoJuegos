@@ -63,12 +63,13 @@ public class ProfesorAnatomia : Enemy
     float magnitudeCameraShake = 0.4f;
 
     public static event Action<ProfesorAnatomia, float, int,bool,bool> OnInitTrowSpecialAttack;
-
+    public static event Action<ProfesorAnatomia> InCombatPoint;
     [HideInInspector]
     public bool initBraggert = false;
     [HideInInspector]
     public bool enableSetRandomSpecialAttack = true;
 
+    private bool OnProfesorAnatomia;
     private bool Idied = false;
     private float porcentageThrowSpecialAttack;
     public enum EstadoProfesorAnatomia
@@ -131,10 +132,12 @@ public class ProfesorAnatomia : Enemy
     {
         Grid.OnSettingTitileo -= SetTargetGrid;
         Idied = false;
+        OnProfesorAnatomia = false;
     }
     public override void Start()
     {
         Idied = false;
+        OnProfesorAnatomia = false;
         NextSpecialAttack = true;
         auxDelayBraggart = delayBraggart;
         auxDelayFinishBraggart = delayFinishBraggart;
@@ -161,6 +164,11 @@ public class ProfesorAnatomia : Enemy
         {
             if (inCombatPosition)
             {
+                if (!OnProfesorAnatomia && InCombatPoint != null) 
+                {
+                    InCombatPoint(this);
+                    OnProfesorAnatomia = true;
+                }
                 enemyPrefab.transform.position = new Vector3(5.17f, -3.42f, 0f);
             }
             base.Update();

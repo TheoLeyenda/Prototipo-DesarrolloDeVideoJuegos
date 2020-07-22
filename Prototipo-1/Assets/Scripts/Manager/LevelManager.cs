@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
     public GameObject imageEnemigoHablando;
     public GameObject CamvasInicioPelea;
     public TextMeshProUGUI textDialog;
-    public List<Dialogos> dialogos;
+    public List<Dialogos> DialogoInicial;
     private GameManager gm;
     public bool InitDialog;
     public int ObjectiveOfPassLevel;
@@ -114,21 +114,21 @@ public class LevelManager : MonoBehaviour
     }
     public void CheckDiagolos()
     {
-        if (idDialogo < dialogos.Count && inDialog)
+        if (idDialogo < DialogoInicial.Count && inDialog)
         {
             Time.timeScale = 0;
             inDialog = true;
-            if (dialogos[idDialogo].habladorActual == "Jugador")
+            if (DialogoInicial[idDialogo].habladorActual == "Jugador")
             {
                 imageJugadorHablando.SetActive(true);
                 imageEnemigoHablando.SetActive(false);
             }
-            else if (dialogos[idDialogo].habladorActual == "Enemigo")
+            else if (DialogoInicial[idDialogo].habladorActual == "Enemigo")
             {
                 imageJugadorHablando.SetActive(false);
                 imageEnemigoHablando.SetActive(true);
             }
-            textDialog.text = dialogos[idDialogo].dialogoPersonaje;
+            textDialog.text = DialogoInicial[idDialogo].dialogoPersonaje;
         }
         else
         {

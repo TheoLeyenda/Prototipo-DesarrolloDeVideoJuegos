@@ -596,4 +596,12 @@ public class InputManager : MonoBehaviour
             }
         }
     }
+    public bool GetInPause() 
+    {
+        return inPause;
+    }
+    public void SetInPause(bool _inPause) 
+    {
+        inPause = _inPause;
+    }
 }

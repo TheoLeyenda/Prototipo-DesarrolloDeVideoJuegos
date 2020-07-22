@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
         StelaAndProyectil,
         None,
     }
+    public Sprite myHeadSprite;
     public Color colorShoot;
     public bool EnableChargerSpecialAttackForHit = true;
     public string nameEnemy;

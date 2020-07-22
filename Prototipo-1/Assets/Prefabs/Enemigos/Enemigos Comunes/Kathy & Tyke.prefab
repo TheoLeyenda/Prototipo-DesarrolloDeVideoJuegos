@@ -2504,6 +2504,7 @@ MonoBehaviour:
   - {fileID: 2488968595925289267}
   - {fileID: 5453975420285352432}
   - {fileID: 2626453348184319714}
+  inBoss: 0
 --- !u!1 &4238214569579401869
 GameObject:
   m_ObjectHideFlags: 0
@@ -9020,6 +9021,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolObjectSpecialAttack: {fileID: 0}
+  applyColorShoot: 3
+  colorShoot: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &3119680522468236778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9033,6 +9036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   applyColorShoot: 0
+  myHeadSprite: {fileID: 21300000, guid: 62e92e8c6136aad4f8bc061937492f5e, type: 3}
   colorShoot: {r: 1, g: 0.29803923, b: 0.29803923, a: 1}
   EnableChargerSpecialAttackForHit: 1
   nameEnemy: Kathy & Tyke
@@ -9089,6 +9093,7 @@ MonoBehaviour:
   enableMecanicParabolaAttack: 1
   inAttack: 0
   myVictory: 0
+  DontRestart: 0
   MovePorcentage: 25
   JumpPorcentage: 25
   DuckPorcentage: 25
