@@ -155,10 +155,14 @@ public class DialogueController : MonoBehaviour
             ID_Dialog++;
             if (ID_Dialog < dialogos[indexDialog].Count)
             {
+                inputManager.SetInPause(true);
+                inputManager.CheckInPause();
                 CheckDialog(ID_Dialog);
             }
             else 
             {
+                inputManager.SetInPause(false);
+                inputManager.CheckInPause();
                 indexDialog++;
                 ID_Dialog = 0;
                 gameObject.SetActive(false);
