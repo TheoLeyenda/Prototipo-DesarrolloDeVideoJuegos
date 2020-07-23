@@ -8,6 +8,10 @@ using System.Threading;
 public class DialogueController : MonoBehaviour
 {
     // Start is called before the first frame update
+
+
+    //REEMPLAZAR LA PAUSA DEL ImputManager con el enableMovemet = false del player y el enemy.
+    
     [System.Serializable]
     public class Dialogos
     {
@@ -27,6 +31,8 @@ public class DialogueController : MonoBehaviour
         public bool startAnimation;
         public string nameAnimation;
     }
+    //public LevelManager levelManager;
+    public GameObject CamvasInicioPelea;
     public Enemy enemyAsignedDialog;
     public GameObject MarcoDialogo;
     public TextMeshProUGUI textDialog;
@@ -39,38 +45,72 @@ public class DialogueController : MonoBehaviour
     public int indexDialog = 0;
     public int ID_Dialog = 0;
     private GameManager gm;
-    void Start()
+    public DataCombatPvP dataCombatPvP;
+    void Awake()
     {
+        int initIndex = 0;
+        dialogos = new List<List<Dialogos>>();
         auxDialogue = new List<Dialogos>();
         inputManager = GameObject.Find("InputManagerController").GetComponent<InputManager>();
         if (GameManager.instanceGameManager != null)
         {
             gm = GameManager.instanceGameManager;
         }
-        for (int i = 0; i < dialogue.Count; i++) 
+        //Debug.Log(dialogue.Count);
+        for (int i = 0; i < dialogue.Count; i++)
         {
-
             auxDialogue.Add(dialogue[i]);
-
-            if (dialogue[i].finishDialog) 
+        }
+        List<Dialogos> dialog = new List<Dialogos>();
+        bool finish = false;
+        while (!finish)
+        {
+            bool asignedList = false;
+            int j = initIndex;
+            while (j < auxDialogue.Count)
             {
-                dialogos.Add(auxDialogue);
-                auxDialogue.Clear();
+                if (!auxDialogue[j].finishDialog)
+                {
+                    dialog.Add(auxDialogue[j]);
+                }
+                else if(!asignedList)
+                {
+                    initIndex = j;
+                    dialog.Add(auxDialogue[j]);
+                    dialogos.Add(dialog);
+                    asignedList = true;
+                    j = auxDialogue.Count;
+                    if (initIndex >= auxDialogue.Count - 1)
+                    {
+                        finish = true;
+                    }
+                }
+                j++;
             }
+            
         }
     }
     private void OnEnable()
     {
-        if (indexDialog < dialogos.Count)
+        imageHabladorActual.gameObject.SetActive(true);
+        if (dialogos != null)
         {
-            OpenDialog();
-            CheckDialog(indexDialog);
-        }
-        else 
-        {
-            gameObject.SetActive(false);
+            if (indexDialog < dialogos.Count)
+            {
+                OpenDialog();
+                CheckDialog(ID_Dialog);
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
+    //private void OnDisable()
+    //{
+        //inputManager.SetInPause(false);
+        //inputManager.CheckInPause();
+    //}
     public void OpenDialog() 
     {
         /*if (dialogue[i].characterDialog == Dialogos.CharacterDialog.Player && inputManager != null)
@@ -103,23 +143,38 @@ public class DialogueController : MonoBehaviour
                 }
             }
         }
-       
 
         if (inputManager != null)
         {
-            inputManager.SetInPause(true);
-            inputManager.CheckInPause();
+            if (dataCombatPvP != null)
+            {
+                if (dataCombatPvP.player1 != null & dataCombatPvP.player2 != null)
+                {
+                    dataCombatPvP.player1.enableMovementPlayer = false;
+                    dataCombatPvP.player1.enableMovement = false;
+                    dataCombatPvP.player2.enableMovementPlayer = false;
+                    dataCombatPvP.player2.enableMovement = false;
+                }
+            }
+            else if (inputManager.player1 != null && enemyAsignedDialog != null)
+            {
+                inputManager.player1.enableMovementPlayer = false;
+                inputManager.player1.enableMovement = false;
+                enemyAsignedDialog.enableMovement = false;
+            }
+
             MarcoDialogo.SetActive(true);
         }
         else 
         {
             Debug.Log("inputManager null");
         }
-
-        
     }
     public void CheckDialog(int ID_Dialog) 
     {
+        //Debug.Log(dialogos.Count);
+        //Debug.Log(dialogos[0].Count);
+
         if (dialogos[indexDialog][ID_Dialog].player != null)
         {
             SpritePlayer spritePlayer = dialogos[indexDialog][ID_Dialog].player.spritePlayerActual;
@@ -155,16 +210,17 @@ public class DialogueController : MonoBehaviour
             ID_Dialog++;
             if (ID_Dialog < dialogos[indexDialog].Count)
             {
-                inputManager.SetInPause(true);
-                inputManager.CheckInPause();
                 CheckDialog(ID_Dialog);
             }
             else 
             {
-                inputManager.SetInPause(false);
-                inputManager.CheckInPause();
                 indexDialog++;
                 ID_Dialog = 0;
+                MarcoDialogo.SetActive(false);
+                if (CamvasInicioPelea != null)
+                {
+                    CamvasInicioPelea.SetActive(true);
+                }
                 gameObject.SetActive(false);
             }
         }

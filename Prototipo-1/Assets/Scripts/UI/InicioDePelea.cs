@@ -20,6 +20,14 @@ public class InicioDePelea : MonoBehaviour
     public bool DisableAllText;
     private void Start()
     {
+        Init();
+    }
+    private void OnEnable()
+    {
+        Init();   
+    }
+    public void Init()
+    {
         DisableAllText = false;
         OneEjecution = true;
         text1.gameObject.SetActive(false);

@@ -133,6 +133,7 @@ public class ProfesorAnatomia : Enemy
         Grid.OnSettingTitileo -= SetTargetGrid;
         Idied = false;
         OnProfesorAnatomia = false;
+        enableMovement = true;
     }
     public override void Start()
     {
@@ -157,48 +158,48 @@ public class ProfesorAnatomia : Enemy
         //BORRAR LUEGO DE TESTEO
         //if (Input.GetKeyDown(KeyCode.F)) 
         //{
-           // xpActual = xpNededSpecialAttack;
+        // xpActual = xpNededSpecialAttack;
         //}
         //-----------------
-        if (!Idied)
+        if (enableMovement)
         {
-            if (inCombatPosition)
+            if (!Idied)
             {
-                if (!OnProfesorAnatomia && InCombatPoint != null) 
+                base.Update();
+                switch (fsmProfesorAnatomia.GetCurrentState())
                 {
-                    InCombatPoint(this);
-                    OnProfesorAnatomia = true;
+                    case (int)EstadoProfesorAnatomia.Idle:
+                        Idle();
+                        break;
+                    case (int)EstadoProfesorAnatomia.MasiveAttack:
+                        if (!OnProfesorAnatomia && InCombatPoint != null && enemyPrefab.transform.position.x <= 5.355f)
+                        {
+                            Debug.Log("ENTRE AL COMBATE");
+                            InCombatPoint(this);
+                            OnProfesorAnatomia = true;
+                        }
+                        MasiveAttack();
+                        break;
+                    case (int)EstadoProfesorAnatomia.ThrowSpecialAttack:
+                        ThrowSpecialAttack();
+                        break;
+                    case (int)EstadoProfesorAnatomia.Braggart:
+                        Braggart();
+                        break;
+                    case (int)EstadoProfesorAnatomia.Death:
+                        Death();
+                        break;
                 }
-                enemyPrefab.transform.position = new Vector3(5.17f, -3.42f, 0f);
-            }
-            base.Update();
-            switch (fsmProfesorAnatomia.GetCurrentState())
-            {
-                case (int)EstadoProfesorAnatomia.Idle:
-                    Idle();
-                    break;
-                case (int)EstadoProfesorAnatomia.MasiveAttack:
-                    MasiveAttack();
-                    break;
-                case (int)EstadoProfesorAnatomia.ThrowSpecialAttack:
-                    ThrowSpecialAttack();
-                    break;
-                case (int)EstadoProfesorAnatomia.Braggart:
-                    Braggart();
-                    break;
-                case (int)EstadoProfesorAnatomia.Death:
-                    Death();
-                    break;
-            }
 
-            if (fsmProfesorAnatomia.GetCurrentState() != (int)EstadoProfesorAnatomia.Braggart || ChargeInBraggartState)
-            {
-                ChargeSpecialAttack();
-            }
+                if (fsmProfesorAnatomia.GetCurrentState() != (int)EstadoProfesorAnatomia.Braggart || ChargeInBraggartState)
+                {
+                    ChargeSpecialAttack();
+                }
 
-            if (life <= 0)
-            {
-                fsmProfesorAnatomia.SendEvent((int)EventosProfesorAnatomia.LifeOut);
+                if (life <= 0)
+                {
+                    fsmProfesorAnatomia.SendEvent((int)EventosProfesorAnatomia.LifeOut);
+                }
             }
         }
     }

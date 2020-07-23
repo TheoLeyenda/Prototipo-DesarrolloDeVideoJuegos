@@ -928,13 +928,16 @@ public class Enemy : MonoBehaviour
         }
         if (barraDeEscudo != null)
         {
-            if (spriteEnemy.ActualSprite != SpriteEnemy.SpriteActual.AgachadoDefensa
-                && spriteEnemy.ActualSprite != SpriteEnemy.SpriteActual.ParadoDefensa
-                && spriteEnemy.ActualSprite != SpriteEnemy.SpriteActual.SaltoDefensa
-                && barraDeEscudo.GetValueShild() > barraDeEscudo.porcentageNededForDeffence
-                    && barraDeEscudo.GetEnableDeffence())
+            if (spriteEnemy != null)
             {
-                isDeffended = false;
+                if (spriteEnemy.ActualSprite != SpriteEnemy.SpriteActual.AgachadoDefensa
+                    && spriteEnemy.ActualSprite != SpriteEnemy.SpriteActual.ParadoDefensa
+                    && spriteEnemy.ActualSprite != SpriteEnemy.SpriteActual.SaltoDefensa
+                    && barraDeEscudo.GetValueShild() > barraDeEscudo.porcentageNededForDeffence
+                        && barraDeEscudo.GetEnableDeffence())
+                {
+                    isDeffended = false;
+                }
             }
         }
     }

@@ -126,7 +126,7 @@ public class GeneradorDeEnemigos : MonoBehaviour
                 enemigoActual.pointOfDeath = pointOfInit.transform.position;
                 enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
                 enemigoActual.enableMovement = true;
-                enemigoActual.SetDelaySelectMovement(1);
+                enemigoActual.SetDelaySelectMovement(1.4f);
             }
         }
         else if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
@@ -147,7 +147,7 @@ public class GeneradorDeEnemigos : MonoBehaviour
                     enemigoActual.pointOfCombat = pointOfCombat.transform.position;
                     enemigoActual.pointOfDeath = pointOfInit.transform.position;
                     enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
-                    enemigoActual.SetDelaySelectMovement(1);
+                    enemigoActual.SetDelaySelectMovement(1.4f);
                     enemigoActual.enableMovement = true;
                     if (enemigoActual.enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Jefe) 
                     {

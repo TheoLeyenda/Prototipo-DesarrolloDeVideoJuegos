@@ -6,6 +6,7 @@ public class ActivatorDialogueManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public DialogueController dialogueController;
+    private bool activatedProfesorAnatomia;
     private void OnEnable()
     {
         ProfesorAnatomia.InCombatPoint += ActivateDialogue;
@@ -16,7 +17,11 @@ public class ActivatorDialogueManager : MonoBehaviour
     }
     public void ActivateDialogue(ProfesorAnatomia profesorAnatomia) 
     {
-        dialogueController.enemyAsignedDialog = profesorAnatomia;
-        dialogueController.gameObject.SetActive(true);
+        if (!activatedProfesorAnatomia)
+        {
+            dialogueController.enemyAsignedDialog = profesorAnatomia;
+            dialogueController.gameObject.SetActive(true);
+            activatedProfesorAnatomia = true;
+        }
     }
 }

@@ -10,13 +10,15 @@ public class LevelManager : MonoBehaviour
     public bool NivelFinal;
     public string NameFinishSceneStoryMode;
     public GameObject marcoTexto;
-    public GameObject imageJugadorHablando;
-    public GameObject imageEnemigoHablando;
+    public Image imageHabladorActual;
+    //public GameObject imageEnemigoHablando;
     public GameObject CamvasInicioPelea;
     public TextMeshProUGUI textDialog;
+    public TextMeshProUGUI textHabladorActual;
     public List<Dialogos> DialogoInicial;
     private GameManager gm;
     public bool InitDialog;
+    [HideInInspector]
     public int ObjectiveOfPassLevel;
     public float delayPassLevel = 4f;
     private float auxDelayPassLevel;
@@ -25,13 +27,15 @@ public class LevelManager : MonoBehaviour
     private int idDialogo;
     public bool inSurvival;
     private bool goToGameOver;
-
+    private bool disableOnlyOnce = false;
     
     [System.Serializable]
     public class Dialogos
     {
+        public string nombreHabladorActual;
         public string habladorActual;
         public string dialogoPersonaje;
+        public Sprite spriteHabladorActual;
     }
     private void OnEnable()
     {
@@ -118,16 +122,8 @@ public class LevelManager : MonoBehaviour
         {
             Time.timeScale = 0;
             inDialog = true;
-            if (DialogoInicial[idDialogo].habladorActual == "Jugador")
-            {
-                imageJugadorHablando.SetActive(true);
-                imageEnemigoHablando.SetActive(false);
-            }
-            else if (DialogoInicial[idDialogo].habladorActual == "Enemigo")
-            {
-                imageJugadorHablando.SetActive(false);
-                imageEnemigoHablando.SetActive(true);
-            }
+            imageHabladorActual.sprite = DialogoInicial[idDialogo].spriteHabladorActual;
+            textHabladorActual.text = DialogoInicial[idDialogo].nombreHabladorActual;
             textDialog.text = DialogoInicial[idDialogo].dialogoPersonaje;
         }
         else
@@ -137,11 +133,16 @@ public class LevelManager : MonoBehaviour
                 Time.timeScale = 1;
             }
             inDialog = false;
-            DisableChat();
-            if (CamvasInicioPelea != null)
+            if (!disableOnlyOnce)
             {
-                CamvasInicioPelea.SetActive(true);
+                disableOnlyOnce = true;
+                DisableChat();
+                if (CamvasInicioPelea != null)
+                {
+                    CamvasInicioPelea.SetActive(true);
+                }
             }
+           
         }
     }
     public void NextId()
@@ -152,9 +153,6 @@ public class LevelManager : MonoBehaviour
     { 
             idDialogo = 0;
             marcoTexto.SetActive(false);
-            imageEnemigoHablando.SetActive(false);
-            imageJugadorHablando.SetActive(false);
-            textDialog.gameObject.SetActive(false);
     }
     public void NextLevel()
     {
