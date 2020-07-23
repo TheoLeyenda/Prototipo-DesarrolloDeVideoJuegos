@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &642552408
 RectTransform:
   m_ObjectHideFlags: 0
@@ -289,7 +289,7 @@ PrefabInstance:
     - target: {fileID: 4034354385740324829, guid: 120e41381a7f5ad4fbe8917269fb9bc5,
         type: 3}
       propertyPath: m_margin.x
-      value: -295.26868
+      value: -358.07162
       objectReference: {fileID: 0}
     - target: {fileID: 4034354385145616011, guid: 120e41381a7f5ad4fbe8917269fb9bc5,
         type: 3}
@@ -434,6 +434,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 940903582768955792}
     m_Modifications:
+    - target: {fileID: 7783762763244865312, guid: 3b9b4a990a63e17489955ce5ee46fa8b,
+        type: 3}
+      propertyPath: m_Name
+      value: MenuPausa
+      objectReference: {fileID: 0}
+    - target: {fileID: 6992885347913534948, guid: 3b9b4a990a63e17489955ce5ee46fa8b,
+        type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 940903582768955795}
     - target: {fileID: 7783762763244865315, guid: 3b9b4a990a63e17489955ce5ee46fa8b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -539,21 +549,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7783762763244865312, guid: 3b9b4a990a63e17489955ce5ee46fa8b,
-        type: 3}
-      propertyPath: m_Name
-      value: MenuPausa
-      objectReference: {fileID: 0}
     - target: {fileID: 529208890287286699, guid: 3b9b4a990a63e17489955ce5ee46fa8b,
         type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6992885347913534948, guid: 3b9b4a990a63e17489955ce5ee46fa8b,
-        type: 3}
-      propertyPath: levelManager
-      value: 
-      objectReference: {fileID: 940903582768955795}
     - target: {fileID: 6992885348349673996, guid: 3b9b4a990a63e17489955ce5ee46fa8b,
         type: 3}
       propertyPath: m_textInfo.characterCount

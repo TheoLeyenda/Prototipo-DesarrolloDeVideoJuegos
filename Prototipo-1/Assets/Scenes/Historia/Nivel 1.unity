@@ -1555,12 +1555,12 @@ PrefabInstance:
     - target: {fileID: 3811351365647941485, guid: 5f29476637f0beb4ab252ffb3f6fd293,
         type: 3}
       propertyPath: m_margin.z
-      value: -130.28593
+      value: -133.18591
       objectReference: {fileID: 0}
     - target: {fileID: 3811351365647941485, guid: 5f29476637f0beb4ab252ffb3f6fd293,
         type: 3}
       propertyPath: m_margin.x
-      value: -315.8168
+      value: -357.86664
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f29476637f0beb4ab252ffb3f6fd293, type: 3}
@@ -1879,7 +1879,7 @@ PrefabInstance:
     - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
         type: 3}
       propertyPath: dialogue.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
         type: 3}
@@ -1909,44 +1909,44 @@ PrefabInstance:
     - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
         type: 3}
       propertyPath: dialogue.Array.data[0].nameHabladorActual
-      value: AKI
+      value: 'AKI:'
       objectReference: {fileID: 0}
     - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
         type: 3}
       propertyPath: dialogue.Array.data[1].dialogoPersonaje
       value: "Oh\u2026 \xBFte estas acercando? \xBFEn vez de huir y recursar, te acercas
-        a m\xED? No sos m\xE1s que otro alumno desesperado por terminar su trabajo
-        antes de que sea tarde."
+        a m\xED?"
       objectReference: {fileID: 0}
     - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
         type: 3}
       propertyPath: dialogue.Array.data[1].nameHabladorActual
-      value: RIO
+      value: 'RIO:'
       objectReference: {fileID: 0}
     - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
         type: 3}
       propertyPath: dialogue.Array.data[2].dialogoPersonaje
-      value: No puedo derrotarte y aprobar tu materia sin acercarme.
+      value: "No sos m\xE1s que otro alumno desesperado por terminar su trabajo antes
+        de que sea tarde."
       objectReference: {fileID: 0}
     - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
         type: 3}
       propertyPath: dialogue.Array.data[2].nameHabladorActual
-      value: AKI
+      value: 'RIO:'
       objectReference: {fileID: 0}
     - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
         type: 3}
       propertyPath: dialogue.Array.data[3].nameHabladorActual
-      value: RIO
+      value: 'AKI:'
       objectReference: {fileID: 0}
     - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
         type: 3}
       propertyPath: dialogue.Array.data[3].dialogoPersonaje
-      value: "Ja\u2026. entonces ac\xE9rcate lo m\xE1s que quieras."
+      value: No puedo derrotarte y aprobar tu materia sin acercarme.
       objectReference: {fileID: 0}
     - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
         type: 3}
       propertyPath: dialogue.Array.data[3].finishDialog
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
         type: 3}
@@ -1956,7 +1956,7 @@ PrefabInstance:
     - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
         type: 3}
       propertyPath: dialogue.Array.data[3].characterDialog
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
         type: 3}
@@ -1968,6 +1968,31 @@ PrefabInstance:
       propertyPath: CamvasInicioPelea
       value: 
       objectReference: {fileID: 1495710488}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[4].characterDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[4].nameHabladorActual
+      value: 'RIO:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[4].dialogoPersonaje
+      value: "Ja\u2026. entonces ac\xE9rcate lo m\xE1s que quieras."
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[4].finishDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[2].characterDialog
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd, type: 3}
 --- !u!1001 &6290780387074464706

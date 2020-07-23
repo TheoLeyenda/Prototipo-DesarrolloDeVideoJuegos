@@ -36,7 +36,7 @@ public class DialogueController : MonoBehaviour
     public Enemy enemyAsignedDialog;
     public GameObject MarcoDialogo;
     public TextMeshProUGUI textDialog;
-    public TextMeshProUGUI textName;
+    //public TextMeshProUGUI textName;
     public Image imageHabladorActual;
     private InputManager inputManager;
     public List<Dialogos> dialogue;
@@ -197,8 +197,7 @@ public class DialogueController : MonoBehaviour
         }
 
         imageHabladorActual.sprite = dialogos[indexDialog][ID_Dialog].spriteHabladorActual;
-        textName.text = dialogos[indexDialog][ID_Dialog].nameHabladorActual;
-        textDialog.text = dialogos[indexDialog][ID_Dialog].dialogoPersonaje;
+        textDialog.text = dialogos[indexDialog][ID_Dialog].nameHabladorActual+" " +dialogos[indexDialog][ID_Dialog].dialogoPersonaje;
 
     }
     // Update is called once per frame

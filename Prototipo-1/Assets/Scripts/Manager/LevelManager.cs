@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
     //public GameObject imageEnemigoHablando;
     public GameObject CamvasInicioPelea;
     public TextMeshProUGUI textDialog;
-    public TextMeshProUGUI textHabladorActual;
+    //public TextMeshProUGUI textHabladorActual;
     public List<Dialogos> DialogoInicial;
     private GameManager gm;
     public bool InitDialog;
@@ -123,8 +123,8 @@ public class LevelManager : MonoBehaviour
             Time.timeScale = 0;
             inDialog = true;
             imageHabladorActual.sprite = DialogoInicial[idDialogo].spriteHabladorActual;
-            textHabladorActual.text = DialogoInicial[idDialogo].nombreHabladorActual;
-            textDialog.text = DialogoInicial[idDialogo].dialogoPersonaje;
+            //textHabladorActual.text = " "; ;
+            textDialog.text = DialogoInicial[idDialogo].nombreHabladorActual + " " + DialogoInicial[idDialogo].dialogoPersonaje;
         }
         else
         {
