@@ -226,6 +226,10 @@ public class Player : MonoBehaviour
             CheckMovementInSpecialAttack();
             CheckBoxColliders2D();
         }
+        else if (transform.position.y > InitialPosition.y && !enableMovement)
+        {
+            spritePlayerActual.GetAnimator().Play("Salto protagonista");
+        }
     }
 
     public void AnimationVictory(Player p)
