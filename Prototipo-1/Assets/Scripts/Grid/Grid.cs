@@ -29,8 +29,9 @@ public class Grid : MonoBehaviour
     private GameManager gm;
     public Plataformas[] plataformas;
     public bool inBoss;
-
+    List<Cuadrilla> cuadrillas = new List<Cuadrilla>();
     public static event Action<Grid, Vector3> OnSettingTitileo;
+    public static event Action<Grid, List<Vector3>> OnSettingTitileo_2;
     private void Awake()
     {
         if (GameManager.instanceGameManager != null)
@@ -51,11 +52,11 @@ public class Grid : MonoBehaviour
     {
         ProfesorAnatomia.OnInitTrowSpecialAttack -= TitiledGrid;
     }
-    public void TitiledGrid(ProfesorAnatomia profesorAnatomia, float delayTitileo, int numCasilla,bool AllCasillas, bool substractPosition)
+    public void TitiledGrid(Enemy enemy, float delayTitileo, int numCasilla, bool AllCasillas, bool substractPosition)
     {
         if (!inBoss)
         {
-            if (profesorAnatomia != null)
+            if (enemy != null)
             {
                 Plataformas currentPlataforma = null;
                 Vector3 cuadrillaPosition = Vector3.zero;
@@ -94,7 +95,7 @@ public class Grid : MonoBehaviour
                         {
                             OnSettingTitileo(this, cuadrilla.transform.position + new Vector3(0, -substractVector, 0));
                         }
-                        else 
+                        else
                         {
                             OnSettingTitileo(this, cuadrilla.transform.position);
                         }
@@ -122,11 +123,111 @@ public class Grid : MonoBehaviour
                         //profesorAnatomia.GeneratorSpecialAttack.transform.position = cuadrilla.transform.position;
                         //Debug.Log("ENTRE");
                     }
-                    else 
+                    else
                     {
                         OnSettingTitileo(this, cuadrilla.transform.position);
                     }
                 }
+            }
+        }
+    }
+    public void TitiledGrid(Enemy enemy, float delayTitileo, int countCasillas)
+    {
+        Plataformas currentPlataforma = null;
+        List<Vector3> cuadrillaPositions = new List<Vector3>();
+        Cuadrilla cuadrilla = null;
+        for (int i = 0; i < plataformas.Length; i++)
+        {
+            if (plataformas[i].gameObject.activeSelf)
+            {
+                currentPlataforma = plataformas[i];
+            }
+        }
+
+        bool finishSelectCasillas = false;
+        int countIntentos = 10;
+        int totalCasillas = 3;
+        cuadrillaPositions.Clear();
+        cuadrillas.Add(currentPlataforma.cuadrillaPlataformaCentral);
+        cuadrillas.Add(currentPlataforma.cuadrillaPlataformaDerecha);
+        cuadrillas.Add(currentPlataforma.cuadrillaPlataformaIzquierda);
+        if (countCasillas >= 3)
+        {
+            countCasillas = 2;
+        }
+        if (!inBoss)
+        {
+            if (enemy != null)
+            {
+                while (!finishSelectCasillas)
+                {
+                    int selectCasilla = UnityEngine.Random.Range(0, totalCasillas);
+                    switch (selectCasilla)
+                    {
+                        case 1:
+                            cuadrilla = currentPlataforma.cuadrillaPlataformaIzquierda;
+                            if (!cuadrilla.CasillaSelected)
+                            {
+                                cuadrillaPositions.Add(currentPlataforma.plataformaIzquierda.transform.position);
+                                cuadrilla.SetDelayTitileo(delayTitileo);
+                                cuadrilla.CasillaSelected = true;
+                                countCasillas--;
+                            }
+                            break;
+                        case 2:
+                            cuadrilla = currentPlataforma.cuadrillaPlataformaCentral;
+                            if (!cuadrilla.CasillaSelected)
+                            {
+                                cuadrillaPositions.Add(currentPlataforma.plataformaCentral.transform.position);
+                                cuadrilla.SetDelayTitileo(delayTitileo);
+                                cuadrilla.CasillaSelected = true;
+                                countCasillas--;
+                            }
+                            break;
+                        case 3:
+                            cuadrilla = currentPlataforma.cuadrillaPlataformaDerecha;
+                            if (!cuadrilla.CasillaSelected)
+                            {
+                                cuadrillaPositions.Add(currentPlataforma.plataformaDerecha.transform.position);
+                                cuadrilla.SetDelayTitileo(delayTitileo);
+                                cuadrilla.CasillaSelected = true;
+                                countCasillas--;
+                            }
+                            break;
+                    }
+                    if (countCasillas <= 0)
+                    {
+                        finishSelectCasillas = true;
+                    }
+                    countIntentos--;
+                    if (countIntentos <= 0)
+                    {
+                        while (!finishSelectCasillas)
+                        {
+                            for (int i = 0; i < cuadrillas.Count; i++)
+                            {
+                                if (!cuadrillas[i].CasillaSelected)
+                                {
+                                    cuadrillaPositions.Add(cuadrillas[i].transform.position);
+                                    countCasillas--;
+                                    cuadrillas[i].CasillaSelected = true;
+                                }
+                            }
+                            if (countCasillas <= 0)
+                            {
+                                finishSelectCasillas = true;
+                            }
+                        }
+                    }
+                }
+               
+                OnSettingTitileo_2(this, cuadrillaPositions);
+                for (int i = 0; i < cuadrillas.Count; i++)
+                {
+                    cuadrillas[i].CasillaSelected = false;
+                }
+                
+
             }
         }
     }

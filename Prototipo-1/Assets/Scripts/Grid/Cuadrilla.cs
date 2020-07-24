@@ -6,9 +6,12 @@ public class Cuadrilla : MonoBehaviour
 {
     private float delayTitileo;
     public Animator animator;
+    [HideInInspector]
+    public bool CasillaSelected;
     // Update is called once per frame
     void Start() 
     {
+        CasillaSelected = false;
         animator = GetComponent<Animator>();
     }
     void Update()

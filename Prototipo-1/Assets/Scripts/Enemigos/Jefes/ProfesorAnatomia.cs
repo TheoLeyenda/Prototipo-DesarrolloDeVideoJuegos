@@ -62,7 +62,7 @@ public class ProfesorAnatomia : Enemy
     float durationCameraShake = 0.45f;
     float magnitudeCameraShake = 0.4f;
 
-    public static event Action<ProfesorAnatomia, float, int,bool,bool> OnInitTrowSpecialAttack;
+    public static event Action<Enemy, float, int,bool,bool> OnInitTrowSpecialAttack;
     public static event Action<ProfesorAnatomia> InCombatPoint;
     [HideInInspector]
     public bool initBraggert = false;
@@ -506,6 +506,7 @@ public class ProfesorAnatomia : Enemy
             {
                 life = life - proyectil.damage;
                 proyectil.AnimationHit();
+                spriteBoss_ProfesorAnatomia.PlayAnimation("RecibirDanio");
             }
         }
     }

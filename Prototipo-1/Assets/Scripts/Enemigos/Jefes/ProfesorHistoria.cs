@@ -1,111 +1,364 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ProfesorHistoria : Enemy
 {
+    //HACER EL ATAQUE ESPECIAL DEL LIBRO DE EDISON BASANDOME EN LOS ATAQUES ESPECIALES DEL PROFESOR DE ANATOMIA.
     // Start is called before the first frame update
+    public enum MyAnimations
+    {
+        Idle,
+        InicioMasiveAttack,
+        MasiveAttack,
+        FinalMasiveAttack,
+        LibroEdison,
+        InicioDebateInjusto,
+        DebateInjusto,
+        FinalDebateInjusto,
+        Death,
+        RecibirDanio,
+        Count,
+    }
+
+    [Header("Config Profesor Historia")]
+    public float speedChargeSpecialAttack = 1;
+    public List<string> NameAnimations;
+    public bool ChargeInSpecialAttack;
+    public SpriteBoss_ProfesorHistoria spriteBoss_ProfesorHistoria;
+    private bool initMasiveAttack_Lanzado;
+    public Pool poolLibrosAttack;
+    [HideInInspector]
+    public bool specialAttackLibroEdison_Lanzado;
+    [HideInInspector]
+    public bool specialAttackDebateInjusto_Lanzado;
+    [HideInInspector]
+    public bool NextSpecialAttack;
+
+    [Header("Config Special Attack LIBRO EDISON")]
+    public int DamageRayoEdison;
+    public float DelayTitileoCasillaLibroEdison;
+    public int countThrowSpecialAttackLibroEdison;
+    public int auxCountThrowSpecialAttackLibroEdison;
+    public Pool poolSpecialAttackLibroEdison;
+    public int countCasillasAfectadas = 2;
+    public List<GameObject> GeneratorsSpecialAttackLibroEdison;
+
+    [Header("Config Special Attack DEBTATE INJUSTO")]
+    public int DamageDebateInjusto;
+    public float TimeLifeDebateInjusto;
+    public float AuxTimeLifeDebateInjusto;
+    public DisparoDeCarga ProyectilDebateInjusto;
+    public GameObject GeneradorDebateInjusto;
+
+    [Header("Porcentage Direccion Attack")]
+    public float porcentageUpDirection;
+    public float porcentageForwardDirection;
+    public float porcentageDownDirection;
+
+    [Header("Vectores de Direccion")]
+    public GameObject UpVector;
+    public GameObject ForwardVector;
+    public GameObject DownVector;
+
+    [HideInInspector]
+    public FSM fsmProfesorAnatomia;
+    private bool Idied = false;
+
+    public static event Action<Enemy, float, int> OnInitTrowSpecialAttack;
+    public static event Action<ProfesorHistoria> InCombatPoint;
+
+    public enum EstadoProfesorHistoria
+    {
+        Idle,
+        MasiveAttack,
+        FirstSpecialAttackLibroDeEdison,
+        SecondSpecialAttackDebateInjusto,
+        Death,
+        Count
+    }
+    //HAGO UN ENUM DE Eventos
+    public enum EventosProfesorHistoria
+    {
+        StartMasiveAttack,
+        SpecialAttackBarInMiddleCharge,
+        SpecialAttackBarCompleteCharge,
+        LifeOut,
+        Count
+    }
+    private void OnEnable()
+    {
+        NextSpecialAttack = true;
+        specialAttackLibroEdison_Lanzado = false;
+        specialAttackDebateInjusto_Lanzado = false;
+        Idied = false;
+        Grid.OnSettingTitileo_2 += SetTargetGrid;
+    }
+    private void OnDisable()
+    {
+        NextSpecialAttack = true;
+        specialAttackLibroEdison_Lanzado = false;
+        specialAttackDebateInjusto_Lanzado = false;
+        Idied = false;
+        Grid.OnSettingTitileo_2 -= SetTargetGrid;
+    }
+    private void Awake()
+    {
+        /*
+        PATRÓN: Aparece detrás de una cortina de humo y comienza el diálogo.
+        -Empieza el combate y el profesor tirara libros en direcciones al azar (diagonal arriba, centro diagonal abajo) 
+        Hacer un random de tres vectores de dirección.
+        -A medida que avanza el tiempo se carga su barra de ataque especial cuando esta llega a la mitad tira 
+        su ataque especial de Libro de Edison, al llegar al 100% tira su ataque especial de Debate Injusto este se expandirá 
+        en forma de cono haciendo daño por segundo al jugador si lo toca y afectando a las casillas trasera 
+        y media también afecta el alto y bajo de la casilla trasera y el medio de la casilla media dejando como única 
+        casilla de escape la casilla de adelante agachado(titilaran las dos ultimas casillas al mandar este ataque)
+        -Luego hace un gesto de furioso y Grita “PEQUEÑA PULGA IGNORANTE” y vuelve al primer patron de ataque.
+       */
+        fsmProfesorAnatomia = new FSM((int)EstadoProfesorHistoria.Count, (int)EventosProfesorHistoria.Count, 
+            (int)EstadoProfesorHistoria.Idle);
+
+        fsmProfesorAnatomia.SetRelations((int)EstadoProfesorHistoria.Idle, (int)EstadoProfesorHistoria.MasiveAttack, 
+            (int)EventosProfesorHistoria.StartMasiveAttack);
+
+        fsmProfesorAnatomia.SetRelations((int)EstadoProfesorHistoria.MasiveAttack, (int)EstadoProfesorHistoria.FirstSpecialAttackLibroDeEdison, 
+            (int)EventosProfesorHistoria.SpecialAttackBarInMiddleCharge);
+
+        fsmProfesorAnatomia.SetRelations((int)EstadoProfesorHistoria.FirstSpecialAttackLibroDeEdison, (int)EstadoProfesorHistoria.MasiveAttack, 
+            (int)EventosProfesorHistoria.StartMasiveAttack);
+
+        fsmProfesorAnatomia.SetRelations((int)EstadoProfesorHistoria.MasiveAttack, (int)EstadoProfesorHistoria.SecondSpecialAttackDebateInjusto,
+            (int)EventosProfesorHistoria.SpecialAttackBarCompleteCharge);
+
+        fsmProfesorAnatomia.SetRelations((int)EstadoProfesorHistoria.SecondSpecialAttackDebateInjusto, (int)EstadoProfesorHistoria.MasiveAttack,
+            (int)EventosProfesorHistoria.StartMasiveAttack);
+
+        fsmProfesorAnatomia.SetRelations((int)EstadoProfesorHistoria.Idle, (int)EstadoProfesorHistoria.Death,
+            (int)EventosProfesorHistoria.LifeOut);
+
+        fsmProfesorAnatomia.SetRelations((int)EstadoProfesorHistoria.MasiveAttack, (int)EstadoProfesorHistoria.Death,
+            (int)EventosProfesorHistoria.LifeOut);
+
+        fsmProfesorAnatomia.SetRelations((int)EstadoProfesorHistoria.FirstSpecialAttackLibroDeEdison, (int)EstadoProfesorHistoria.Death,
+            (int)EventosProfesorHistoria.LifeOut);
+
+        fsmProfesorAnatomia.SetRelations((int)EstadoProfesorHistoria.SecondSpecialAttackDebateInjusto, (int)EstadoProfesorHistoria.Death,
+            (int)EventosProfesorHistoria.LifeOut);
+        
+    }
     public override void Start()
     {
+        NextSpecialAttack = true;
         base.Start();
     }
 
     // Update is called once per frame
     public override void Update()
     {
-        base.Update();
-    }
-    public override void AnimationAttack()
-    {
+        if (enableMovement)
+        {
+            if (!Idied)
+            {
+                base.Update();
+                switch (fsmProfesorAnatomia.GetCurrentState())
+                {
+                    case (int)EstadoProfesorHistoria.Idle:
+                        Idle();
+                        break;
+                    case (int)EstadoProfesorHistoria.MasiveAttack:
+                        InitMasiveAttack();
+                        break;
+                    case (int)EstadoProfesorHistoria.FirstSpecialAttackLibroDeEdison:
+                        if (NextSpecialAttack && countThrowSpecialAttackLibroEdison > 0)
+                        {
+                            NextSpecialAttack = false;
+                            spriteBoss_ProfesorHistoria.PlayAnimation(NameAnimations[(int)MyAnimations.LibroEdison]);
+                            countThrowSpecialAttackLibroEdison--;
+                        }
+                        else if(countThrowSpecialAttackLibroEdison <= 0)
+                        {
+                            countThrowSpecialAttackLibroEdison = auxCountThrowSpecialAttackLibroEdison;
+                            fsmProfesorAnatomia.SendEvent((int)EventosProfesorHistoria.StartMasiveAttack);
+                            NextSpecialAttack = true;
+                            initMasiveAttack_Lanzado = false;
+                        }
+                        break;
+                    case (int)EstadoProfesorHistoria.SecondSpecialAttackDebateInjusto:
+                        if (!specialAttackDebateInjusto_Lanzado)
+                        {
+                            spriteBoss_ProfesorHistoria.PlayAnimation(NameAnimations[(int)MyAnimations.InicioDebateInjusto]);
+                            specialAttackDebateInjusto_Lanzado = true;
+                        }
+                        initMasiveAttack_Lanzado = false;
+                        break;
+                    case (int)EstadoProfesorHistoria.Death:
+                        initMasiveAttack_Lanzado = false;
+                        if (!Idied)
+                        {
+                            Idied = true;
+                            spriteBoss_ProfesorHistoria.PlayAnimation(NameAnimations[(int)MyAnimations.Death]);
+                        }
+                        break;
+                }
 
+                if ((fsmProfesorAnatomia.GetCurrentState() != (int)EstadoProfesorHistoria.FirstSpecialAttackLibroDeEdison 
+                    && fsmProfesorAnatomia.GetCurrentState() != (int)EstadoProfesorHistoria.SecondSpecialAttackDebateInjusto)
+                    || ChargeInSpecialAttack)
+                {
+                    ChargeSpecialAttack();
+                }
+                CheckThrowSpecialAttack();
+
+                if (life <= 0)
+                {
+                    fsmProfesorAnatomia.SendEvent((int)EventosProfesorHistoria.LifeOut);
+                }
+            }
+        }
     }
-    public override void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage)
+
+    public void Idle()
     {
-        bool shootDown = false;
+        initMasiveAttack_Lanzado = false;
+        fsmProfesorAnatomia.SendEvent((int)EventosProfesorHistoria.StartMasiveAttack);
+    }
+    public void InitMasiveAttack()
+    {
+        if (!initMasiveAttack_Lanzado)
+        {
+            initMasiveAttack_Lanzado = true;
+            spriteBoss_ProfesorHistoria.PlayAnimation(NameAnimations[(int)MyAnimations.InicioMasiveAttack]);
+        }
+    }
+    public void MasiveAttack()
+    {
+        float DirecctionSelector = UnityEngine.Random.Range(0, 100);
         GameObject go = null;
         Proyectil proyectil = null;
-        Proyectil.typeProyectil tipoProyectil = Proyectil.typeProyectil.Nulo;
 
-        if (!specialAttack)
+        go = poolLibrosAttack.GetObject();
+        proyectil = go.GetComponent<Proyectil>();
+        proyectil.SetEnemy(gameObject.GetComponent<Enemy>());
+        proyectil.SetDobleDamage(false);
+        proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
+        switch (applyColorShoot)
         {
-            go = poolObjectAttack.GetObject();
-            proyectil = go.GetComponent<Proyectil>();
-            proyectil.SetEnemy(gameObject.GetComponent<Enemy>());
-            proyectil.SetDobleDamage(_doubleDamage);
-            proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
-            if (_doubleDamage)
-            {
-                proyectil.damage = proyectil.damageCounterAttack;
-            }
-            switch (applyColorShoot)
-            {
-                case ApplyColorShoot.None:
-                    break;
-                case ApplyColorShoot.Proyectil:
-                    proyectil.SetColorProyectil(colorShoot);
-                    break;
-                case ApplyColorShoot.Stela:
-                    proyectil.SetColorStela(colorShoot);
-                    break;
-                case ApplyColorShoot.StelaAndProyectil:
-                    proyectil.SetColorProyectil(colorShoot);
-                    proyectil.SetColorStela(colorShoot);
-                    break;
-            }
+            case ApplyColorShoot.None:
+                break;
+            case ApplyColorShoot.Proyectil:
+                proyectil.SetColorProyectil(colorShoot);
+                break;
+            case ApplyColorShoot.Stela:
+                proyectil.SetColorStela(colorShoot);
+                break;
+            case ApplyColorShoot.StelaAndProyectil:
+                proyectil.SetColorProyectil(colorShoot);
+                proyectil.SetColorStela(colorShoot);
+                break;
         }
-        if (!GetIsDuck() && !specialAttack)
+        if (applyColorShoot == ApplyColorShoot.None || applyColorShoot == ApplyColorShoot.Stela)
         {
-            tipoProyectil = Proyectil.typeProyectil.ProyectilNormal;
-            if (jampAttack)
-            {
-                tipoProyectil = Proyectil.typeProyectil.ProyectilAereo;
-                shootDown = true;
-            }
-            go.transform.rotation = generadoresProyectiles.transform.rotation;
-            go.transform.position = generadoresProyectiles.transform.position;
-            proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
+            proyectil.On(Proyectil.typeProyectil.Nulo, false);
         }
-        else if (!specialAttack && GetIsDuck())
+        else
         {
-            tipoProyectil = Proyectil.typeProyectil.ProyectilBajo;
-            go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
-            go.transform.position = generadorProyectilesAgachado.transform.position;
+            proyectil.On(Proyectil.typeProyectil.Nulo, true);
+        }
+
+
+        if (DirecctionSelector < porcentageDownDirection)
+        {
+            //DOWN SHOOT.
             proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
+            go.transform.rotation = DownVector.transform.rotation;
+            go.transform.position = DownVector.transform.position;
         }
-        if (specialAttack)
+        else if (DirecctionSelector >= porcentageDownDirection && DirecctionSelector < porcentageDownDirection + porcentageForwardDirection)
         {
-            //CAMBIAR ESTE NULO POR EL ATAQUE ESPECIAL CORRESPONDIENTE (Ya sea ProyectilParabola o AtaqueEspecial
-            tipoProyectil = Proyectil.typeProyectil.Nulo;
-            int maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
-            int minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
-            if (!GetIsDuck())
-            {
-                CheckSpecialAttackEnemyController(minRutas, maxRutas, generadorProyectilParabola);
-            }
-            else
-            {
-                CheckSpecialAttackEnemyController(minRutas, maxRutas, generadorProyectilParabolaAgachado);
-            }
+            //FORWARD SHOOT.
+            proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
+            go.transform.rotation = ForwardVector.transform.rotation;
+            go.transform.position = ForwardVector.transform.position;
         }
-        if (!specialAttack)
+        else if(DirecctionSelector >= porcentageDownDirection + porcentageForwardDirection)
         {
-            if (applyColorShoot == ApplyColorShoot.None || applyColorShoot == ApplyColorShoot.Stela)
-            {
-                proyectil.On(tipoProyectil, false);
-            }
-            else
-            {
-                proyectil.On(tipoProyectil, true);
-            }
+            //UP SHOOT.
+            proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionAlta;
+            go.transform.rotation = UpVector.transform.rotation;
+            go.transform.position = UpVector.transform.position;
+        }
 
-            if (!shootDown)
+        proyectil.ShootForward();
+    }
+    public void ChargeSpecialAttack()
+    {
+        xpActual = xpActual + Time.deltaTime * speedChargeSpecialAttack;
+    }
+
+    public void CheckThrowSpecialAttack()
+    {
+        if (xpActual >= xpNededSpecialAttack / 2 && !specialAttackLibroEdison_Lanzado)
+        {
+            specialAttackLibroEdison_Lanzado = true;
+            fsmProfesorAnatomia.SendEvent((int)EventosProfesorHistoria.SpecialAttackBarInMiddleCharge);
+        }
+        else if (xpActual >= xpNededSpecialAttack && !specialAttackDebateInjusto_Lanzado)
+        {
+            specialAttackDebateInjusto_Lanzado = true;
+            fsmProfesorAnatomia.SendEvent((int)EventosProfesorHistoria.SpecialAttackBarCompleteCharge);
+            xpActual = 0;
+        }
+    }
+    //------------------------ PRIMER ATAQUE ESPECIAL ---------------------//
+    public void InitSpecialAttack_LibroEdison()
+    {
+        if (OnInitTrowSpecialAttack != null)
+        {
+            OnInitTrowSpecialAttack(this, DelayTitileoCasillaLibroEdison, countCasillasAfectadas);
+        }
+        xpActual = 0;
+    }
+    public void SetTargetGrid(Grid g, List<Vector3> targets)
+    {
+        if (g != null)
+        {
+            if (targets.Count >= GeneratorsSpecialAttackLibroEdison.Count)
             {
-                proyectil.ShootForward();
+                GeneratorsSpecialAttackLibroEdison[0].transform.position = new Vector3(targets[0].x, GeneratorsSpecialAttackLibroEdison[0].transform.position.y, targets[0].z);
+                GeneratorsSpecialAttackLibroEdison[1].transform.position = new Vector3(targets[1].x, GeneratorsSpecialAttackLibroEdison[1].transform.position.y, targets[1].z);
             }
             else
             {
-                proyectil.ShootForwardDown();
+                Debug.Log("Targets insuficientes");
             }
         }
     }
+    public void SpecialAttack_LibroEdison()
+    {
+        GameObject go_1 = poolSpecialAttackLibroEdison.GetObject();
+        GameObject go_2 = poolSpecialAttackLibroEdison.GetObject();
+        if (go_1 != null && go_2 != null)
+        {
+            go_1.transform.position = GeneratorsSpecialAttackLibroEdison[0].transform.position;
+            go_2.transform.position = GeneratorsSpecialAttackLibroEdison[1].transform.position;
+            RayoEdison rayoEdison_1 = go_1.GetComponent<RayoEdison>();
+            RayoEdison rayoEdison_2 = go_2.GetComponent<RayoEdison>();
+            rayoEdison_1.damage = DamageRayoEdison;
+            rayoEdison_2.damage = DamageRayoEdison;
+            rayoEdison_1.RayoEdisonAnimation();
+            rayoEdison_2.RayoEdisonAnimation();
+        }
+    }
+    //------------------------ PRIMER ATAQUE ESPECIAL ---------------------//
+
+    //------------------------ SEGUNDO ATAQUE ESPECIAL ---------------------//
+    public void SpecialAttack_DebateInjusto()
+    {
+        ProyectilDebateInjusto.timeLife = TimeLifeDebateInjusto;
+        ProyectilDebateInjusto.auxTimeLife = AuxTimeLifeDebateInjusto;
+        ProyectilDebateInjusto.damage = DamageDebateInjusto;
+        ProyectilDebateInjusto.transform.position = GeneradorDebateInjusto.transform.position;
+    }
+    //------------------------ SEGUNDO ATAQUE ESPECIAL ---------------------//
 }
