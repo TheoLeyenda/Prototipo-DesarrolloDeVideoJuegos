@@ -235,10 +235,10 @@ public class ProfesorHistoria : Enemy
     {
         float DirecctionSelector = UnityEngine.Random.Range(0, 100);
         GameObject go = null;
-        Proyectil proyectil = null;
+        ProyectilLibro proyectil = null;
 
         go = poolLibrosAttack.GetObject();
-        proyectil = go.GetComponent<Proyectil>();
+        proyectil = go.GetComponent<ProyectilLibro>();
         proyectil.SetEnemy(gameObject.GetComponent<Enemy>());
         proyectil.SetDobleDamage(false);
         proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
