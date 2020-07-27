@@ -73,8 +73,8 @@ public class Grid : MonoBehaviour
                     }
                 }
                 cuadrillas.Clear();
-                cuadrillas.Add(currentPlataforma.cuadrillaPlataformaCentral);
                 cuadrillas.Add(currentPlataforma.cuadrillaPlataformaDerecha);
+                cuadrillas.Add(currentPlataforma.cuadrillaPlataformaCentral);
                 cuadrillas.Add(currentPlataforma.cuadrillaPlataformaIzquierda);
                 for (int i = 0; i < indexCasillas.Length; i++) 
                 {
