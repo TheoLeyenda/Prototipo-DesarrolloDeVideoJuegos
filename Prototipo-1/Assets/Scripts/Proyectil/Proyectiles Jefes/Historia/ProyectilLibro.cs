@@ -10,6 +10,13 @@ public class ProyectilLibro : Proyectil
     private int IdLibro;
     public bool librosColoridos;
     public BoxCollider2D boxCollider2D;
+    public float delayCounterAttack = 0.1f;
+    private float auxDelayCounterAttack = 0.1f;
+
+    private void Start()
+    {
+        auxDelayCounterAttack = delayCounterAttack;
+    }
     private void OnEnable()
     {
         OnProyectilLibro();
@@ -18,6 +25,7 @@ public class ProyectilLibro : Proyectil
         {
             trailRenderer.enabled = true;
         }
+        delayCounterAttack = auxDelayCounterAttack;
     }
     private void OnDisable()
     {
@@ -46,9 +54,9 @@ public class ProyectilLibro : Proyectil
         }
         
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "limite") 
+        if (collision.tag == "limite")
         {
             boxCollider2D.enabled = false;
             trailRenderer.Clear();
@@ -57,35 +65,59 @@ public class ProyectilLibro : Proyectil
         }
         if (collision.tag == "BoxColliderController")
         {
+            bool enableDamagePlayer = true;
             Player p = null;
             BoxColliderController boxColliderController = collision.GetComponent<BoxColliderController>();
             if (boxColliderController.player == null)
             {
                 return;
             }
-            else 
+            else
             {
                 p = boxColliderController.player;
             }
-            if (InputPlayerController.GetInputButtonDown(p.inputDeffenseButton) && p.barraDeEscudo.GetEnableDeffence() && !p.barraDeEscudo.nededBarMaxPorcentage)
+            delayCounterAttack = delayCounterAttack - Time.deltaTime;
+            //p.delayCounterAttack = p.delayCounterAttack - Time.deltaTime;
+            if (boxColliderController.state != BoxColliderController.StateBoxCollider.Defendido)
             {
-                gameObject.SetActive(false);
-                p.Attack(DisparadorDelProyectil.Enemigo);
-                timeLife = 0;
-                GetPoolObject().Recycle();
+                if (p.delayCounterAttack > 0)
+                {
+                    if (InputPlayerController.GetInputButtonDown(p.inputDeffenseButton) && p.barraDeEscudo.GetEnableDeffence() && !p.barraDeEscudo.nededBarMaxPorcentage)
+                    {
+                        gameObject.SetActive(false);
+                        p.Attack(DisparadorDelProyectil.Jugador1);
+                        timeLife = 0;
+                        GetPoolObject().Recycle();
+                        p.delayCounterAttack = p.GetAuxDelayCounterAttack();
+                        enableDamagePlayer = false;
+                        delayCounterAttack = auxDelayCounterAttack;
+                    }
+                }
+                if (((p.delayCounterAttack <= 0 && timeLife <= 0 || !boxColliderController.ZonaContraAtaque)
+                    || (p.delayCounterAttack <= 0 && timeLife > 0  || !boxColliderController.ZonaContraAtaque)) 
+                    && enableDamagePlayer && delayCounterAttack <= 0)
+                {
+                    p.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
+                    p.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                    boxCollider2D.enabled = false;
+                    trailRenderer.Clear();
+                    AnimationHit();
+                    p.delayCounterAttack = p.GetAuxDelayCounterAttack();
+                    delayCounterAttack = auxDelayCounterAttack;
+                }
+
             }
-            else if (boxColliderController.state != BoxColliderController.StateBoxCollider.Defendido)
-            {
-                p.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
-                p.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-            }
-            else 
+            else
             {
                 p.barraDeEscudo.SubstractPorcentageBar(p.barraDeEscudo.substractForHit);
+                boxCollider2D.enabled = false;
+                trailRenderer.Clear();
+                AnimationHit();
+                p.delayCounterAttack = p.GetAuxDelayCounterAttack();
+                delayCounterAttack = auxDelayCounterAttack;
             }
-            boxCollider2D.enabled = false;
-            trailRenderer.Clear();
-            AnimationHit();
+           
         }
+        
     }
 }

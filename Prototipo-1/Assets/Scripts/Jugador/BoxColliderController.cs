@@ -13,9 +13,12 @@ public class BoxColliderController : MonoBehaviour
     private BoxCollider2D boxCollider2D;
     public EventWise eventWise;
     private GameManager gm;
-    private bool enableCounterAttack;
-    private float delayEnableCounterAttack = 0.05f;
-    private float auxDelayEnableCounterAttack = 0.05f;
+    [HideInInspector]
+    public bool enableCounterAttack;
+    [HideInInspector]
+    public float delayEnableCounterAttack = 0.05f;
+    [HideInInspector]
+    public float auxDelayEnableCounterAttack = 0.05f;
     public enum StateBoxCollider
     {
         Defendido,

@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
         None,
     }
     public Sprite myHeadSprite;
+    public Sprite spritePayerDie;
     public Color colorShoot;
     public string namePlayer;
     //BOOLEANOS DE MOVIMIENTO
@@ -88,7 +89,7 @@ public class Player : MonoBehaviour
     public string ButtonSpecialAttack;
     public float delayCounterAttack;
     public bool SpecialAttackEnabelEveryMoment;
-    private float auxDelayCounterAttack;
+    private float auxDelayCounterAttack = 0.4f;
     private bool controllerJoystick;
     public bool DoubleSpeed;
     public bool LookingForward;
@@ -202,7 +203,7 @@ public class Player : MonoBehaviour
         //if (Input.GetKey(KeyCode.F))
         //{
             //xpActual = xpNededSpecialAttack;
-            PD.lifePlayer = PD.maxLifePlayer;
+            //PD.lifePlayer = PD.maxLifePlayer;
         //}
         if (Input.GetKey(KeyCode.F)) 
         {
@@ -230,6 +231,7 @@ public class Player : MonoBehaviour
         {
             spritePlayerActual.GetAnimator().Play("Salto protagonista");
         }
+
     }
 
     public void AnimationVictory(Player p)
@@ -444,9 +446,7 @@ public class Player : MonoBehaviour
     {
         if (PD.lifePlayer <= 0 && transform.position.y <= InitialPosition.y && !isJumping)
         {
-            enableMovementPlayer = false;
-
-            if (transform.position.y <= InitialPosition.y)
+            if (transform.position.y <= InitialPosition.y && enableMovementPlayer)
             {
                 spritePlayerActual.PlayAnimation("Death");
             }
@@ -458,6 +458,9 @@ public class Player : MonoBehaviour
             {
                 OnDie(this);
             }
+            spritePlayerActual.spriteRenderer.sprite = spritePayerDie;
+            enableMovementPlayer = false;
+            enableMovement = false;
         }
     }
     public void Dead()

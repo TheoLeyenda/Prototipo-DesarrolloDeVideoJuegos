@@ -17,7 +17,7 @@ public class SpritePlayer : SpriteCharacter
         
     public void Update()
     {
-        if(!player.myVictory)
+        if(!player.myVictory && player.PD.lifePlayer > 0)
             CheckActualSprite();
     }
 
