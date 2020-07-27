@@ -41,6 +41,7 @@ public class SpriteBoss_ProfesorHistoria : SpriteBossController
         animator.SetBool(profesorHistoria.NameAnimations[(int)ProfesorHistoria.MyAnimations.FinalDebateInjusto], false);
         profesorHistoria.specialAttackDebateInjusto_Lanzado = false;
         profesorHistoria.specialAttackLibroEdison_Lanzado = false;
+        profesorHistoria.fsmProfesorHistoria.SendEvent((int)ProfesorHistoria.EventosProfesorHistoria.StartMasiveAttack);
     }
     public void MassiveAttack() 
     {
