@@ -67,7 +67,14 @@ public class ProyectilLibro : Proyectil
             {
                 p = boxColliderController.player;
             }
-            if (boxColliderController.state != BoxColliderController.StateBoxCollider.Defendido)
+            if (InputPlayerController.GetInputButtonDown(p.inputDeffenseButton) && p.barraDeEscudo.GetEnableDeffence() && !p.barraDeEscudo.nededBarMaxPorcentage)
+            {
+                gameObject.SetActive(false);
+                p.Attack(DisparadorDelProyectil.Enemigo);
+                timeLife = 0;
+                GetPoolObject().Recycle();
+            }
+            else if (boxColliderController.state != BoxColliderController.StateBoxCollider.Defendido)
             {
                 p.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
                 p.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
