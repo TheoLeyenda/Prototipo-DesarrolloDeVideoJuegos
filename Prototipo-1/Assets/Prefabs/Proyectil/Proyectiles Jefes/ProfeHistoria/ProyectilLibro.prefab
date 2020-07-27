@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 2417063672511138636}
   m_Layer: 0
   m_Name: ProyectilLibro
-  m_TagString: Proyectil
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -289,9 +289,9 @@ MonoBehaviour:
   speed: 650
   timeLife: 10
   auxTimeLife: 10
-  damageCounterAttack: 50
-  damage: 25
-  auxDamage: 25
+  damageCounterAttack: 200
+  damage: 100
+  auxDamage: 100
   rg2D: {fileID: 2780204401200600695}
   vectorForward: {fileID: 2742194915532298585}
   vectorForwardUp: {fileID: 2027898793419473202}
@@ -308,6 +308,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7ef7edfaab62d4d45acebbea0345a5b2, type: 3}
   - {fileID: 21300000, guid: 36a0353004a943445998e9a997e4e18e, type: 3}
   librosColoridos: 1
+  boxCollider2D: {fileID: 2417063672511138636}
 --- !u!61 &2417063672511138636
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -318,7 +319,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.013994932, y: 0.0046651363}

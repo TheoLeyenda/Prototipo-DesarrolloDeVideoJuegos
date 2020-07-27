@@ -30,6 +30,8 @@ public class Grid : MonoBehaviour
     public Plataformas[] plataformas;
     public bool inBoss;
     List<Cuadrilla> cuadrillas = new List<Cuadrilla>();
+    [HideInInspector]
+    List<Vector3> cuadrillaPositions = new List<Vector3>();
     public static event Action<Grid, Vector3> OnSettingTitileo;
     public static event Action<Grid, List<Vector3>> OnSettingTitileo_2;
     private void Awake()
@@ -47,10 +49,39 @@ public class Grid : MonoBehaviour
     private void OnEnable()
     {
         ProfesorAnatomia.OnInitTrowSpecialAttack += TitiledGrid;
+        ProfesorHistoria.OnInitTrowSpecialAttackLibroEdison += TitiledGrid;
+        ProfesorHistoria.OnInitTrowSpecialAttackDebateInjusto += TitiledGrid;
     }
     private void OnDisable()
     {
         ProfesorAnatomia.OnInitTrowSpecialAttack -= TitiledGrid;
+        ProfesorHistoria.OnInitTrowSpecialAttackLibroEdison -= TitiledGrid;
+        ProfesorHistoria.OnInitTrowSpecialAttackDebateInjusto -= TitiledGrid;
+    }
+    public void TitiledGrid(Enemy enemy, float delayTitileo, int[] indexCasillas) 
+    {
+        if (!inBoss) 
+        {
+            if (enemy != null) 
+            {
+                Plataformas currentPlataforma = null;
+                for (int i = 0; i < plataformas.Length; i++)
+                {
+                    if (plataformas[i].gameObject.activeSelf)
+                    {
+                        currentPlataforma = plataformas[i];
+                    }
+                }
+                cuadrillas.Clear();
+                cuadrillas.Add(currentPlataforma.cuadrillaPlataformaCentral);
+                cuadrillas.Add(currentPlataforma.cuadrillaPlataformaDerecha);
+                cuadrillas.Add(currentPlataforma.cuadrillaPlataformaIzquierda);
+                for (int i = 0; i < indexCasillas.Length; i++) 
+                {
+                    cuadrillas[indexCasillas[i]].SetDelayTitileo(delayTitileo);
+                }
+            }
+        }
     }
     public void TitiledGrid(Enemy enemy, float delayTitileo, int numCasilla, bool AllCasillas, bool substractPosition)
     {
@@ -134,7 +165,7 @@ public class Grid : MonoBehaviour
     public void TitiledGrid(Enemy enemy, float delayTitileo, int countCasillas)
     {
         Plataformas currentPlataforma = null;
-        List<Vector3> cuadrillaPositions = new List<Vector3>();
+        
         Cuadrilla cuadrilla = null;
         for (int i = 0; i < plataformas.Length; i++)
         {
@@ -147,6 +178,7 @@ public class Grid : MonoBehaviour
         bool finishSelectCasillas = false;
         int countIntentos = 10;
         int totalCasillas = 3;
+        cuadrillas.Clear();
         cuadrillaPositions.Clear();
         cuadrillas.Add(currentPlataforma.cuadrillaPlataformaCentral);
         cuadrillas.Add(currentPlataforma.cuadrillaPlataformaDerecha);
@@ -226,8 +258,6 @@ public class Grid : MonoBehaviour
                 {
                     cuadrillas[i].CasillaSelected = false;
                 }
-                
-
             }
         }
     }

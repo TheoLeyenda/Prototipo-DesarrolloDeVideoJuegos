@@ -9,13 +9,28 @@ public class ProyectilLibro : Proyectil
     public List<Sprite> spriteLibros;
     private int IdLibro;
     public bool librosColoridos;
+    public BoxCollider2D boxCollider2D;
     private void OnEnable()
     {
         OnProyectilLibro();
+        boxCollider2D.enabled = true;
+        if (trailRenderer != null)
+        {
+            trailRenderer.enabled = true;
+        }
     }
     private void OnDisable()
     {
+        if (trailRenderer != null)
+        {
+            trailRenderer.enabled = false;
+        }
+        if (trailRenderer != null)
+        {
+            trailRenderer.Clear();
+        }
         spriteRenderer.color = Color.white;
+        boxCollider2D.enabled = true; 
     }
     public void OnProyectilLibro()
     {
@@ -30,5 +45,40 @@ public class ProyectilLibro : Proyectil
             spriteRenderer.color = new Color(R, G, B);
         }
         
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "limite") 
+        {
+            boxCollider2D.enabled = false;
+            trailRenderer.Clear();
+            poolObject.Recycle();
+            gameObject.SetActive(false);
+        }
+        if (collision.tag == "BoxColliderController")
+        {
+            Player p = null;
+            BoxColliderController boxColliderController = collision.GetComponent<BoxColliderController>();
+            if (boxColliderController.player == null)
+            {
+                return;
+            }
+            else 
+            {
+                p = boxColliderController.player;
+            }
+            if (boxColliderController.state != BoxColliderController.StateBoxCollider.Defendido)
+            {
+                p.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
+                p.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+            }
+            else 
+            {
+                p.barraDeEscudo.SubstractPorcentageBar(p.barraDeEscudo.substractForHit);
+            }
+            boxCollider2D.enabled = false;
+            trailRenderer.Clear();
+            AnimationHit();
+        }
     }
 }

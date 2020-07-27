@@ -93,8 +93,13 @@ public class Proyectil : MonoBehaviour
     {
         if (trailRenderer != null)
         {
+            trailRenderer.Clear();
+        }
+        if (trailRenderer != null)
+        {
             trailRenderer.enabled = false;
         }
+
         soundgenerate = false;
         SetColorProyectil(Color.white);
     }

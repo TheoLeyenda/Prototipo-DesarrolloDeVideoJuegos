@@ -174,9 +174,13 @@ public class ProfesorAnatomia : Enemy
                     case (int)EstadoProfesorAnatomia.MasiveAttack:
                         if (!OnProfesorAnatomia && InCombatPoint != null && enemyPrefab.transform.position.x <= 5.355f)
                         {
-                            Debug.Log("ENTRE AL COMBATE");
-                            InCombatPoint(this);
-                            OnProfesorAnatomia = true;
+                            //Debug.Log("ENTRE AL COMBATE");
+                            if (!OnProfesorAnatomia)
+                            {
+                                OnProfesorAnatomia = true;
+                                InCombatPoint(this);
+                            }
+                            
                         }
                         MasiveAttack();
                         break;
@@ -506,7 +510,10 @@ public class ProfesorAnatomia : Enemy
             {
                 life = life - proyectil.damage;
                 proyectil.AnimationHit();
-                spriteBoss_ProfesorAnatomia.PlayAnimation("RecibirDanio");
+                if (fsmProfesorAnatomia.GetCurrentState() == (int)EstadoProfesorAnatomia.MasiveAttack)
+                {
+                    spriteBoss_ProfesorAnatomia.PlayAnimation("RecibirDanio");
+                }
             }
         }
     }

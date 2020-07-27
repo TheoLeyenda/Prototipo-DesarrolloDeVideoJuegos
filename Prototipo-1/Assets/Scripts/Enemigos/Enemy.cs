@@ -911,6 +911,7 @@ public class Enemy : MonoBehaviour
                 Jump(alturaMaxima.transform.position);
                 break;
             case EnumsEnemy.Movimiento.MoveToPointCombat:
+                //Debug.Log("ENTRE AL MOVIMIENTO");
                 isDeffended = false;
                 MoveToPoint(pointOfCombat);
                 if(enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)

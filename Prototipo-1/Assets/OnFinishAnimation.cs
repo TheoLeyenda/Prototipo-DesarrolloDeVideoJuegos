@@ -41,7 +41,7 @@ public class OnFinishAnimation : MonoBehaviour
         }
         if (!disableMovementCharacters)
         {
-            Debug.Log("ENTRA CONCHUDO");
+            //Debug.Log("ENTRA CONCHUDO");
             DisableMovementPlayers();
             disableMovementCharacters = true;
         }
