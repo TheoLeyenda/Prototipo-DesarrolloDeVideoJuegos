@@ -163,12 +163,6 @@ public class ProfesorHistoria : Enemy
     // Update is called once per frame
     public override void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L)) 
-        {
-            Debug.Log("Estado actual: "+fsmProfesorHistoria.GetCurrentState());
-            Debug.Log("Masiv AttackState:" + (int)EstadoProfesorHistoria.MasiveAttack);
-            Debug.Log(spriteBoss_ProfesorHistoria.animator.GetBool(NameAnimations[(int)MyAnimations.MasiveAttack]));
-        }
         if (enableMovement)
         {
             if (!Idied)
@@ -394,6 +388,7 @@ public class ProfesorHistoria : Enemy
         ProyectilDebateInjusto.auxTimeLife = AuxTimeLifeDebateInjusto;
         ProyectilDebateInjusto.damage = DamageDebateInjusto;
         ProyectilDebateInjusto.transform.position = GeneradorDebateInjusto.transform.position;
+        ProyectilDebateInjusto.gameObject.SetActive(true);
     }
     //------------------------ SEGUNDO ATAQUE ESPECIAL ---------------------//
 
