@@ -207,7 +207,7 @@ public class Player : MonoBehaviour
         //}
         if (Input.GetKey(KeyCode.F)) 
         {
-            PD.lifePlayer = 0;
+            PD.lifePlayer = PD.maxLifePlayer;
         }
         //--------------------------------
         if (myVictory)

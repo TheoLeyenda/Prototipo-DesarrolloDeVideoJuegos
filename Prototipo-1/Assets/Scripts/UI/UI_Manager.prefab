@@ -294,7 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -709,7 +709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1234,7 +1234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1468,7 +1468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1543,7 +1543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1830,7 +1830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1906,7 +1906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1983,7 +1983,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2143,7 +2143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2746,7 +2746,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3050,7 +3050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3125,7 +3125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3386,7 +3386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3640,7 +3640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3963,6 +3963,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.0835981
       objectReference: {fileID: 0}
+    - target: {fileID: 4640201930352985950, guid: a2364e49969073e4284bcaf6dc774191,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242506903990086637, guid: a2364e49969073e4284bcaf6dc774191,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2364e49969073e4284bcaf6dc774191, type: 3}
 --- !u!114 &1747636943402891680 stripped
@@ -3990,11 +4000,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3506229375574717211}
     m_Modifications:
-    - target: {fileID: 3006040467536426297, guid: 74cb0cad388e0164080489e1d1851f06,
-        type: 3}
-      propertyPath: m_Name
-      value: GeneradorDeLogosDeVictorias
-      objectReference: {fileID: 0}
     - target: {fileID: 538455561199656681, guid: 74cb0cad388e0164080489e1d1851f06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4100,6 +4105,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3006040467536426297, guid: 74cb0cad388e0164080489e1d1851f06,
+        type: 3}
+      propertyPath: m_Name
+      value: GeneradorDeLogosDeVictorias
+      objectReference: {fileID: 0}
     - target: {fileID: 6395628483328494864, guid: 74cb0cad388e0164080489e1d1851f06,
         type: 3}
       propertyPath: m_Name
@@ -4142,11 +4152,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7190117896837247178}
     m_Modifications:
-    - target: {fileID: 2875353543593848923, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Sacaputa
-      objectReference: {fileID: 0}
     - target: {fileID: 2875353543593848924, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4267,6 +4272,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.8516554
       objectReference: {fileID: 0}
+    - target: {fileID: 2875353543593848923, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Sacaputa
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 503cdc5f796277f4a8e7cbef0e962fa7, type: 3}
 --- !u!224 &2898565126556140723 stripped
@@ -4282,11 +4292,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9103477496345619056}
     m_Modifications:
-    - target: {fileID: 6499932318683607145, guid: 60b638fb95902fc4083c49ed257ff1d7,
-        type: 3}
-      propertyPath: m_Name
-      value: GeneradorLogoEstado
-      objectReference: {fileID: 0}
     - target: {fileID: 6499932318683607142, guid: 60b638fb95902fc4083c49ed257ff1d7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4392,6 +4397,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6499932318683607145, guid: 60b638fb95902fc4083c49ed257ff1d7,
+        type: 3}
+      propertyPath: m_Name
+      value: GeneradorLogoEstado
+      objectReference: {fileID: 0}
     - target: {fileID: 6499932318683607143, guid: 60b638fb95902fc4083c49ed257ff1d7,
         type: 3}
       propertyPath: DisableLogoSprite
@@ -4429,11 +4439,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7456676783379395291}
     m_Modifications:
-    - target: {fileID: 2875353543593848923, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Sacaputa
-      objectReference: {fileID: 0}
     - target: {fileID: 2875353543593848924, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4554,6 +4559,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.8516554
       objectReference: {fileID: 0}
+    - target: {fileID: 2875353543593848923, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Sacaputa
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 503cdc5f796277f4a8e7cbef0e962fa7, type: 3}
 --- !u!224 &1235326584177607906 stripped
@@ -4569,11 +4579,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9091700727736770819}
     m_Modifications:
-    - target: {fileID: 2875353543593848923, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Sacaputa
-      objectReference: {fileID: 0}
     - target: {fileID: 2875353543593848924, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4694,6 +4699,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.8516554
       objectReference: {fileID: 0}
+    - target: {fileID: 2875353543593848923, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Sacaputa
+      objectReference: {fileID: 0}
     - target: {fileID: 2875353543593848925, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
         type: 3}
       propertyPath: m_Color.a
@@ -4719,11 +4729,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7190117896837247178}
     m_Modifications:
-    - target: {fileID: 8298082084421844102, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
-        type: 3}
-      propertyPath: m_Name
-      value: Goma
-      objectReference: {fileID: 0}
     - target: {fileID: 8298082084421844101, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4834,6 +4839,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.8516555
       objectReference: {fileID: 0}
+    - target: {fileID: 8298082084421844102, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
+        type: 3}
+      propertyPath: m_Name
+      value: Goma
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298082084421844100, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58ce7bde3a26a0b43b74e2f4a4af04de, type: 3}
 --- !u!224 &469636896152029246 stripped
@@ -4849,11 +4864,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7456676783379395291}
     m_Modifications:
-    - target: {fileID: 8298082084421844102, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
-        type: 3}
-      propertyPath: m_Name
-      value: Goma
-      objectReference: {fileID: 0}
     - target: {fileID: 8298082084421844101, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4974,6 +4984,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.8516555
       objectReference: {fileID: 0}
+    - target: {fileID: 8298082084421844102, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
+        type: 3}
+      propertyPath: m_Name
+      value: Goma
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298082084421844100, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58ce7bde3a26a0b43b74e2f4a4af04de, type: 3}
 --- !u!224 &736796079105128677 stripped
@@ -4989,11 +5009,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9103477494433327584}
     m_Modifications:
-    - target: {fileID: 6499932318683607145, guid: 60b638fb95902fc4083c49ed257ff1d7,
-        type: 3}
-      propertyPath: m_Name
-      value: GeneradorLogoEstado
-      objectReference: {fileID: 0}
     - target: {fileID: 6499932318683607142, guid: 60b638fb95902fc4083c49ed257ff1d7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5099,6 +5114,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6499932318683607145, guid: 60b638fb95902fc4083c49ed257ff1d7,
+        type: 3}
+      propertyPath: m_Name
+      value: GeneradorLogoEstado
+      objectReference: {fileID: 0}
     - target: {fileID: 6499932318683607143, guid: 60b638fb95902fc4083c49ed257ff1d7,
         type: 3}
       propertyPath: DisableLogoSprite
@@ -5136,11 +5156,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9103477495123633318}
     m_Modifications:
-    - target: {fileID: 8298082084421844102, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
-        type: 3}
-      propertyPath: m_Name
-      value: Goma
-      objectReference: {fileID: 0}
     - target: {fileID: 8298082084421844101, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5261,6 +5276,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.8516555
       objectReference: {fileID: 0}
+    - target: {fileID: 8298082084421844102, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
+        type: 3}
+      propertyPath: m_Name
+      value: Goma
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298082084421844100, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58ce7bde3a26a0b43b74e2f4a4af04de, type: 3}
 --- !u!224 &972418238771707417 stripped
@@ -5351,6 +5376,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.083598
       objectReference: {fileID: 0}
+    - target: {fileID: 4640201930352985950, guid: a2364e49969073e4284bcaf6dc774191,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242506903990086637, guid: a2364e49969073e4284bcaf6dc774191,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2364e49969073e4284bcaf6dc774191, type: 3}
 --- !u!114 &7317505592079084195 stripped
@@ -5378,11 +5413,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9103477495123633318}
     m_Modifications:
-    - target: {fileID: 2875353543593848923, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Sacaputa
-      objectReference: {fileID: 0}
     - target: {fileID: 2875353543593848924, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5503,6 +5533,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.8516554
       objectReference: {fileID: 0}
+    - target: {fileID: 2875353543593848923, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Sacaputa
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 503cdc5f796277f4a8e7cbef0e962fa7, type: 3}
 --- !u!224 &6463019907208997342 stripped
@@ -5518,11 +5553,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9103477495940893929}
     m_Modifications:
-    - target: {fileID: 8298082084421844102, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
-        type: 3}
-      propertyPath: m_Name
-      value: Goma
-      objectReference: {fileID: 0}
     - target: {fileID: 8298082084421844101, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5633,6 +5663,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.8516555
       objectReference: {fileID: 0}
+    - target: {fileID: 8298082084421844102, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
+        type: 3}
+      propertyPath: m_Name
+      value: Goma
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298082084421844100, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58ce7bde3a26a0b43b74e2f4a4af04de, type: 3}
 --- !u!224 &972418238849651003 stripped
@@ -5648,11 +5688,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9103477494977274558}
     m_Modifications:
-    - target: {fileID: 2875353543593848923, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Sacaputa
-      objectReference: {fileID: 0}
     - target: {fileID: 2875353543593848924, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5773,6 +5808,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.8516554
       objectReference: {fileID: 0}
+    - target: {fileID: 2875353543593848923, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Sacaputa
+      objectReference: {fileID: 0}
     - target: {fileID: 2875353543593848925, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
         type: 3}
       propertyPath: m_Sprite
@@ -5794,11 +5834,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9103477494393068447}
     m_Modifications:
-    - target: {fileID: 2875353543593848923, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Sacaputa
-      objectReference: {fileID: 0}
     - target: {fileID: 2875353543593848924, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5919,6 +5954,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.8516554
       objectReference: {fileID: 0}
+    - target: {fileID: 2875353543593848923, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Sacaputa
+      objectReference: {fileID: 0}
     - target: {fileID: 2875353543593848925, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
         type: 3}
       propertyPath: m_Color.a
@@ -5945,11 +5985,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9103477494977274558}
     m_Modifications:
-    - target: {fileID: 8298082084421844102, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
-        type: 3}
-      propertyPath: m_Name
-      value: Goma
-      objectReference: {fileID: 0}
     - target: {fileID: 8298082084421844101, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6060,6 +6095,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.8516555
       objectReference: {fileID: 0}
+    - target: {fileID: 8298082084421844102, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
+        type: 3}
+      propertyPath: m_Name
+      value: Goma
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298082084421844100, guid: 58ce7bde3a26a0b43b74e2f4a4af04de,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58ce7bde3a26a0b43b74e2f4a4af04de, type: 3}
 --- !u!224 &972418237317241853 stripped
@@ -6150,6 +6195,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.0835981
       objectReference: {fileID: 0}
+    - target: {fileID: 4640201930352985950, guid: a2364e49969073e4284bcaf6dc774191,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242506903990086637, guid: a2364e49969073e4284bcaf6dc774191,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2364e49969073e4284bcaf6dc774191, type: 3}
 --- !u!4 &2213628109109077150 stripped
@@ -6177,11 +6232,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3506229375574717211}
     m_Modifications:
-    - target: {fileID: 6499932318683607145, guid: 60b638fb95902fc4083c49ed257ff1d7,
-        type: 3}
-      propertyPath: m_Name
-      value: GeneradorLogoEstado
-      objectReference: {fileID: 0}
     - target: {fileID: 6499932318683607142, guid: 60b638fb95902fc4083c49ed257ff1d7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6287,6 +6337,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6499932318683607145, guid: 60b638fb95902fc4083c49ed257ff1d7,
+        type: 3}
+      propertyPath: m_Name
+      value: GeneradorLogoEstado
+      objectReference: {fileID: 0}
     - target: {fileID: 6499932318683607143, guid: 60b638fb95902fc4083c49ed257ff1d7,
         type: 3}
       propertyPath: DistanceBetweenLogos
@@ -6324,11 +6379,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9103477496345619056}
     m_Modifications:
-    - target: {fileID: 3006040467536426297, guid: 74cb0cad388e0164080489e1d1851f06,
-        type: 3}
-      propertyPath: m_Name
-      value: GeneradorDeLogosDeVictorias
-      objectReference: {fileID: 0}
     - target: {fileID: 538455561199656681, guid: 74cb0cad388e0164080489e1d1851f06,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6434,6 +6484,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3006040467536426297, guid: 74cb0cad388e0164080489e1d1851f06,
+        type: 3}
+      propertyPath: m_Name
+      value: GeneradorDeLogosDeVictorias
+      objectReference: {fileID: 0}
     - target: {fileID: 6395628483328494864, guid: 74cb0cad388e0164080489e1d1851f06,
         type: 3}
       propertyPath: m_Name
@@ -6481,11 +6536,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9103477495940893929}
     m_Modifications:
-    - target: {fileID: 2875353543593848923, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Sacaputa
-      objectReference: {fileID: 0}
     - target: {fileID: 2875353543593848924, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6605,6 +6655,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.8516554
+      objectReference: {fileID: 0}
+    - target: {fileID: 2875353543593848923, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Sacaputa
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 503cdc5f796277f4a8e7cbef0e962fa7, type: 3}
@@ -6621,11 +6676,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9103477495814645803}
     m_Modifications:
-    - target: {fileID: 2875353543593848923, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Sacaputa
-      objectReference: {fileID: 0}
     - target: {fileID: 2875353543593848924, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6745,6 +6795,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.8516554
+      objectReference: {fileID: 0}
+    - target: {fileID: 2875353543593848923, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Sacaputa
       objectReference: {fileID: 0}
     - target: {fileID: 2875353543593848925, guid: 503cdc5f796277f4a8e7cbef0e962fa7,
         type: 3}

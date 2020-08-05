@@ -185,13 +185,13 @@ public class ProfesorHistoria : Enemy
                         }
                         break;
                     case (int)EstadoProfesorHistoria.FirstSpecialAttackLibroDeEdison:
-                        if (NextSpecialAttack && countThrowSpecialAttackLibroEdison > 0)
+                        if (NextSpecialAttack && countThrowSpecialAttackLibroEdison >= 0)
                         {
                             NextSpecialAttack = false;
                             spriteBoss_ProfesorHistoria.PlayAnimation(NameAnimations[(int)MyAnimations.LibroEdison]);
                             countThrowSpecialAttackLibroEdison--;
                         }
-                        else if (countThrowSpecialAttackLibroEdison <= 0)
+                        else if (countThrowSpecialAttackLibroEdison < 0)
                         {
                             countThrowSpecialAttackLibroEdison = auxCountThrowSpecialAttackLibroEdison;
                             spriteBoss_ProfesorHistoria.animator.SetBool(NameAnimations[(int)ProfesorHistoria.MyAnimations.FinalMasiveAttack], false);
@@ -394,9 +394,9 @@ public class ProfesorHistoria : Enemy
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Proyectil>() != null)
+        Proyectil proyectil = collision.GetComponent<Proyectil>();
+        if (proyectil != null)
         {
-            Proyectil proyectil = collision.GetComponent<Proyectil>();
             if ((proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador1
                     || proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador2)
                     && proyectil.tipoDeProyectil != Proyectil.typeProyectil.AtaqueEspecial)

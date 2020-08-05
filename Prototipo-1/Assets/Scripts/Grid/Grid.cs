@@ -196,7 +196,7 @@ public class Grid : MonoBehaviour
                     int selectCasilla = UnityEngine.Random.Range(0, totalCasillas);
                     switch (selectCasilla)
                     {
-                        case 1:
+                        case 0:
                             cuadrilla = currentPlataforma.cuadrillaPlataformaIzquierda;
                             if (!cuadrilla.CasillaSelected)
                             {
@@ -206,7 +206,7 @@ public class Grid : MonoBehaviour
                                 countCasillas--;
                             }
                             break;
-                        case 2:
+                        case 1:
                             cuadrilla = currentPlataforma.cuadrillaPlataformaCentral;
                             if (!cuadrilla.CasillaSelected)
                             {
@@ -216,7 +216,7 @@ public class Grid : MonoBehaviour
                                 countCasillas--;
                             }
                             break;
-                        case 3:
+                        case 2:
                             cuadrilla = currentPlataforma.cuadrillaPlataformaDerecha;
                             if (!cuadrilla.CasillaSelected)
                             {
