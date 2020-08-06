@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 public class ProfesorEducacionFisica : Enemy
 {
     // Start is called before the first frame update
+    public static event Action<ProfesorEducacionFisica> InCombatPoint;
+    public static event Action<ProfesorEducacionFisica> FinishLevel;
+    private bool OnProfesorEducacionFisica;
+    public float delayFinishLevel = 0;
     public override void Start()
     {
         base.Start();
@@ -14,98 +19,32 @@ public class ProfesorEducacionFisica : Enemy
     // Update is called once per frame
     public override void Update()
     {
-        base.Update();
-    }
-    public override void AnimationAttack()
-    {
+        if (enemyPrefab.transform.position.x > 5.355f || !OnProfesorEducacionFisica)
+        {
+            base.Update();
+        }
 
-    }
-    public override void Attack(bool jampAttack, bool specialAttack, bool _doubleDamage)
-    {
-        bool shootDown = false;
-        GameObject go = null;
-        Proyectil proyectil = null;
-        Proyectil.typeProyectil tipoProyectil = Proyectil.typeProyectil.Nulo;
-
-        if (!specialAttack)
+        if (InCombatPoint != null && enemyPrefab.transform.position.x <= 5.355f)
         {
-            go = poolObjectAttack.GetObject();
-            proyectil = go.GetComponent<Proyectil>();
-            proyectil.SetEnemy(gameObject.GetComponent<Enemy>());
-            proyectil.SetDobleDamage(_doubleDamage);
-            proyectil.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
-            if (_doubleDamage)
+            //Debug.Log("ENTRE AL COMBATE");
+            if (!OnProfesorEducacionFisica)
             {
-                proyectil.damage = proyectil.damageCounterAttack;
-            }
-            switch (applyColorShoot)
-            {
-                case ApplyColorShoot.None:
-                    break;
-                case ApplyColorShoot.Proyectil:
-                    proyectil.SetColorProyectil(colorShoot);
-                    break;
-                case ApplyColorShoot.Stela:
-                    proyectil.SetColorStela(colorShoot);
-                    break;
-                case ApplyColorShoot.StelaAndProyectil:
-                    proyectil.SetColorProyectil(colorShoot);
-                    proyectil.SetColorStela(colorShoot);
-                    break;
+                OnProfesorEducacionFisica = true;
+                InCombatPoint(this);
             }
         }
-        if (!GetIsDuck() && !specialAttack)
+        if (OnProfesorEducacionFisica && enableMovement)
         {
-            tipoProyectil = Proyectil.typeProyectil.ProyectilNormal;
-            if (jampAttack)
+            if (delayFinishLevel > 0)
             {
-                tipoProyectil = Proyectil.typeProyectil.ProyectilAereo;
-                shootDown = true;
-            }
-            go.transform.rotation = generadoresProyectiles.transform.rotation;
-            go.transform.position = generadoresProyectiles.transform.position;
-            proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
-        }
-        else if (!specialAttack && GetIsDuck())
-        {
-            tipoProyectil = Proyectil.typeProyectil.ProyectilBajo;
-            go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
-            go.transform.position = generadorProyectilesAgachado.transform.position;
-            proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionBaja;
-        }
-        if (specialAttack)
-        {
-            //CAMBIAR ESTE NULO POR EL ATAQUE ESPECIAL CORRESPONDIENTE (Ya sea ProyectilParabola o AtaqueEspecial
-            tipoProyectil = Proyectil.typeProyectil.Nulo;
-            int maxRutas = 3;//cantidad total de rutas posibles que seguira la bala al ser disparada.
-            int minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
-            if (!GetIsDuck())
-            {
-                CheckSpecialAttackEnemyController(minRutas, maxRutas, generadorProyectilParabola);
+                delayFinishLevel = delayFinishLevel - Time.deltaTime;
             }
             else
             {
-                CheckSpecialAttackEnemyController(minRutas, maxRutas, generadorProyectilParabolaAgachado);
-            }
-        }
-        if (!specialAttack)
-        {
-            if (applyColorShoot == ApplyColorShoot.None || applyColorShoot == ApplyColorShoot.Stela)
-            {
-                proyectil.On(tipoProyectil, false);
-            }
-            else
-            {
-                proyectil.On(tipoProyectil, true);
-            }
-
-            if (!shootDown)
-            {
-                proyectil.ShootForward();
-            }
-            else
-            {
-                proyectil.ShootForwardDown();
+                if (FinishLevel != null)
+                {
+                    FinishLevel(this);
+                }
             }
         }
     }

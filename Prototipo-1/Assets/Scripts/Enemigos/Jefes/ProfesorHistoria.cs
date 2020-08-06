@@ -163,6 +163,7 @@ public class ProfesorHistoria : Enemy
     // Update is called once per frame
     public override void Update()
     {
+       
         if (enableMovement)
         {
             if (!Idied)
@@ -242,7 +243,7 @@ public class ProfesorHistoria : Enemy
     }
     public void InitMasiveAttack()
     {
-        if (!initMasiveAttack_Lanzado)
+        if (!initMasiveAttack_Lanzado && enableMovement)
         {
             //Debug.Log("ENTRE");
             initMasiveAttack_Lanzado = true;

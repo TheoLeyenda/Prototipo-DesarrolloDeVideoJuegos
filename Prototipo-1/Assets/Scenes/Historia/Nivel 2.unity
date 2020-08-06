@@ -199,6 +199,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
         type: 3}
+      propertyPath: dialogue.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
       propertyPath: MarcoDialogo
       value: 
       objectReference: {fileID: 1478779902}
@@ -222,6 +227,58 @@ PrefabInstance:
       propertyPath: CamvasInicioPelea
       value: 
       objectReference: {fileID: 536661664}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[0].dialogoPersonaje
+      value: mmm... Veo que regresaste.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[0].characterDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[1].dialogoPersonaje
+      value: '...Profesor Leyenda.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[2].dialogoPersonaje
+      value: "La historia se repetir\xE1, jovenzuelo. No tienes chances de aprobar
+        mi materia."
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[2].characterDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[3].dialogoPersonaje
+      value: "Veo que tus lentes est\xE1n viejos. \xA1Soy un alumno nuevo! Esta materia
+        ya no me intimida, especialmente con vos y tu peluca."
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[4].dialogoPersonaje
+      value: "Como te atreves\u2026 \xA1Te voy a dejar plano como la tierra!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[4].characterDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[5].dialogoPersonaje
+      value: "\u2026\u2026..\xBF\xA1c\xF3mo llegaste a ser profesor de historia?!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[5].finishDialog
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd, type: 3}
 --- !u!1001 &407275437
@@ -2005,11 +2062,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7714600605642671213, guid: da3d8e9c01ec9884a8a72a8a48dc852f,
-        type: 3}
-      propertyPath: m_Name
-      value: FondoHistoria
-      objectReference: {fileID: 0}
     - target: {fileID: 7714600605642671212, guid: da3d8e9c01ec9884a8a72a8a48dc852f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2064,6 +2116,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714600605642671213, guid: da3d8e9c01ec9884a8a72a8a48dc852f,
+        type: 3}
+      propertyPath: m_Name
+      value: FondoHistoria
       objectReference: {fileID: 0}
     - target: {fileID: 7714600605959765440, guid: da3d8e9c01ec9884a8a72a8a48dc852f,
         type: 3}

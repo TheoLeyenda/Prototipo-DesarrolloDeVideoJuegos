@@ -28,14 +28,27 @@ public class LevelManager : MonoBehaviour
     public bool inSurvival;
     private bool goToGameOver;
     private bool disableOnlyOnce = false;
-    
+
+    private Player hablador_Player;
+    private Enemy hablador_Enemy;
     [System.Serializable]
     public class Dialogos
     {
+        [HideInInspector]
         public string nombreHabladorActual;
         public string habladorActual;
         public string dialogoPersonaje;
         public Sprite spriteHabladorActual;
+        public enum CharacterDialog
+        {
+            Player,
+            Enemy,
+        }
+        public CharacterDialog characterDialog;
+        [HideInInspector]
+        public Player p;
+        [HideInInspector]
+        public Enemy e;
     }
     private void OnEnable()
     {
@@ -47,6 +60,7 @@ public class LevelManager : MonoBehaviour
     }
     private void Start()
     {
+
         auxDelayPassLevel = delayPassLevel;
         if (InitDialog)
         {
@@ -58,13 +72,42 @@ public class LevelManager : MonoBehaviour
         }
         Level = 1;
         ObjectiveOfPassLevel = 1;
-        if (InitDialog)
-        {
-            CheckDiagolos();
-        }
+        
+
     }
     void Update()
     {
+        if (hablador_Enemy == null || hablador_Player == null && InitDialog)
+        {
+            GameObject enemy_go = GameObject.Find("Enemigo");
+            GameObject player_go = GameObject.Find("Player1");
+            if (enemy_go != null)
+            {
+                hablador_Enemy = enemy_go.GetComponent<Enemy>();
+            }
+            if (player_go != null)
+            {
+                hablador_Player = player_go.GetComponent<Player>();
+            }
+        }
+        if (InitDialog && hablador_Enemy != null && hablador_Player != null)
+        {
+            for (int i = 0; i < DialogoInicial.Count; i++)
+            {
+                if (DialogoInicial[i].characterDialog == Dialogos.CharacterDialog.Player)
+                {
+                    DialogoInicial[i].p = hablador_Player;
+                    DialogoInicial[i].nombreHabladorActual = DialogoInicial[i].p.namePlayer;
+                }
+                else
+                {
+                    DialogoInicial[i].e = hablador_Enemy;
+                    DialogoInicial[i].nombreHabladorActual = DialogoInicial[i].e.nameEnemy;
+                }
+            }
+            CheckDiagolos();
+            InitDialog = false;
+        }
         CheckDiagolos();
         if (inSurvival)
         {
@@ -124,7 +167,7 @@ public class LevelManager : MonoBehaviour
             inDialog = true;
             imageHabladorActual.sprite = DialogoInicial[idDialogo].spriteHabladorActual;
             //textHabladorActual.text = " "; ;
-            textDialog.text = DialogoInicial[idDialogo].nombreHabladorActual + " " + DialogoInicial[idDialogo].dialogoPersonaje;
+            textDialog.text = DialogoInicial[idDialogo].nombreHabladorActual + ": " + DialogoInicial[idDialogo].dialogoPersonaje;
         }
         else
         {

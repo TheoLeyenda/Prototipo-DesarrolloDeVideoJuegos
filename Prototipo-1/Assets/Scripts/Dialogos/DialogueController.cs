@@ -23,10 +23,13 @@ public class DialogueController : MonoBehaviour
         public CharacterDialog characterDialog;
         [HideInInspector]
         public Sprite spriteHabladorActual;
+        [HideInInspector]
         public string nameHabladorActual;
         public string dialogoPersonaje;
         public bool finishDialog;
+        [HideInInspector]
         public Enemy enemy;
+        [HideInInspector]
         public Player player;
         public bool startAnimation;
         public string nameAnimation;
@@ -132,10 +135,12 @@ public class DialogueController : MonoBehaviour
                 if (dialogos[i][j].characterDialog == Dialogos.CharacterDialog.Player && inputManager != null)
                 {
                     dialogos[i][j].player = inputManager.player1;
+                    dialogos[i][j].nameHabladorActual = dialogos[i][j].player.namePlayer;
                 }
                 else if (dialogos[i][j].characterDialog == Dialogos.CharacterDialog.Enemy && inputManager != null)
                 {
                     dialogos[i][j].enemy = enemyAsignedDialog;
+                    dialogos[i][j].nameHabladorActual = dialogos[i][j].enemy.nameEnemy;
                 }
                 else if (inputManager == null)
                 {
@@ -197,7 +202,7 @@ public class DialogueController : MonoBehaviour
         }
 
         imageHabladorActual.sprite = dialogos[indexDialog][ID_Dialog].spriteHabladorActual;
-        textDialog.text = dialogos[indexDialog][ID_Dialog].nameHabladorActual+" " +dialogos[indexDialog][ID_Dialog].dialogoPersonaje;
+        textDialog.text = dialogos[indexDialog][ID_Dialog].nameHabladorActual+": " +dialogos[indexDialog][ID_Dialog].dialogoPersonaje;
 
     }
     // Update is called once per frame
@@ -219,6 +224,14 @@ public class DialogueController : MonoBehaviour
                 if (CamvasInicioPelea != null)
                 {
                     CamvasInicioPelea.SetActive(true);
+                }
+                else
+                {
+                    enemyAsignedDialog.enableMovement = true;
+                    //inputManager.player1.enableMovement = true;
+                    inputManager.player1.enableMovementPlayer = true;
+
+
                 }
                 gameObject.SetActive(false);
             }

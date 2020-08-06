@@ -98,6 +98,9 @@ MonoBehaviour:
   inPlayer: 0
   ZonaContraAtaque: 0
   eventWise: {fileID: 0}
+  enableCounterAttack: 0
+  delayEnableCounterAttack: 0.05
+  auxDelayEnableCounterAttack: 0.05
   state: 1
 --- !u!1 &899676735
 GameObject:
@@ -197,6 +200,9 @@ MonoBehaviour:
   inPlayer: 0
   ZonaContraAtaque: 0
   eventWise: {fileID: 0}
+  enableCounterAttack: 0
+  delayEnableCounterAttack: 0.05
+  auxDelayEnableCounterAttack: 0.05
   state: 1
 --- !u!1 &1632205729
 GameObject:
@@ -296,6 +302,9 @@ MonoBehaviour:
   inPlayer: 0
   ZonaContraAtaque: 0
   eventWise: {fileID: 0}
+  enableCounterAttack: 0
+  delayEnableCounterAttack: 0.05
+  auxDelayEnableCounterAttack: 0.05
   state: 1
 --- !u!1 &1547418678573186533
 GameObject:
@@ -322,7 +331,7 @@ Transform:
   m_GameObject: {fileID: 1547418678573186533}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.17, y: -3.18, z: 0}
-  m_LocalScale: {x: 30, y: 30, z: 1}
+  m_LocalScale: {x: 28, y: 28, z: 1}
   m_Children:
   - {fileID: 8086361858917323377}
   - {fileID: 8551842904053529319}
@@ -1403,7 +1412,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 35a4bd155c4735b47bc8e17003e4ef37, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8883f5c75e6e28149a2b06bb76b13a06, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1431,7 +1440,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 7.34, y: 9.83}
+    oldSize: {x: 9.28, y: 9.97}
     newSize: {x: 7.34, y: 9.83}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1477,6 +1486,9 @@ MonoBehaviour:
   inPlayer: 0
   ZonaContraAtaque: 0
   eventWise: {fileID: 0}
+  enableCounterAttack: 0
+  delayEnableCounterAttack: 0.05
+  auxDelayEnableCounterAttack: 0.05
   state: 0
 --- !u!114 &931444199569688590
 MonoBehaviour:
@@ -1543,7 +1555,7 @@ MonoBehaviour:
   myHeadSprite: {fileID: 0}
   colorShoot: {r: 1, g: 1, b: 1, a: 1}
   EnableChargerSpecialAttackForHit: 1
-  nameEnemy: 
+  nameEnemy: BOLT
   enableColorShootSpecialAttack: 0
   enableMovement: 0
   inCombatPosition: 0
@@ -1618,6 +1630,7 @@ MonoBehaviour:
   CantCasillasOcupadas_Y: 3
   ColumnaActual: 1
   timeStuned: 0
+  delayFinishLevel: 1
 --- !u!1001 &1547418677671988022
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1695,15 +1708,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7194419974994112971, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7194419974994112974, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
       propertyPath: m_GravityScale
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7194419974994112971, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61245c1a77e7ad847b3751885e027da7, type: 3}
@@ -1738,6 +1751,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1547418678573186532}
     m_Modifications:
+    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
     - target: {fileID: 2688081505215426912, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_Name
@@ -1878,27 +1906,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Cuadrilla
       objectReference: {fileID: 0}
-    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
+    - target: {fileID: 4070331649406560279, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 1460512152298850783, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
       propertyPath: enemy
       value: 
       objectReference: {fileID: 7476920347204172026}
@@ -1912,8 +1921,12 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.08566023
       objectReference: {fileID: 0}
-    - target: {fileID: 4070331649406560279, guid: b929ac675e510d440a80e8c74d8c4990,
+    - target: {fileID: 1460512152298850783, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
       propertyPath: enemy
       value: 
       objectReference: {fileID: 7476920347204172026}

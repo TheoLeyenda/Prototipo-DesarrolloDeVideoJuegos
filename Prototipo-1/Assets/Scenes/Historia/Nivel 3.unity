@@ -518,7 +518,7 @@ PrefabInstance:
       propertyPath: eventwise
       value: 
       objectReference: {fileID: 495737475}
-    - target: {fileID: 898642214, guid: 5f29476637f0beb4ab252ffb3f6fd293, type: 3}
+    - target: {fileID: 1509002363, guid: 5f29476637f0beb4ab252ffb3f6fd293, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -526,7 +526,7 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1509002363, guid: 5f29476637f0beb4ab252ffb3f6fd293, type: 3}
+    - target: {fileID: 898642214, guid: 5f29476637f0beb4ab252ffb3f6fd293, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -836,7 +836,7 @@ PrefabInstance:
     - target: {fileID: 5282363892035419077, guid: e3ca365c1fb4ed349bf1d31e807a8e84,
         type: 3}
       propertyPath: ListEnemyGenerate.Array.data[6].typeBoss
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5282363892035419077, guid: e3ca365c1fb4ed349bf1d31e807a8e84,
         type: 3}
@@ -903,7 +903,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &471931323 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9088660322086896314, guid: e3ca365c1fb4ed349bf1d31e807a8e84,
+  m_CorrespondingSourceObject: {fileID: 6867719535962219312, guid: e3ca365c1fb4ed349bf1d31e807a8e84,
     type: 3}
   m_PrefabInstance: {fileID: 471931319}
   m_PrefabAsset: {fileID: 0}
@@ -1250,6 +1250,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
         type: 3}
+      propertyPath: dialogue.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
       propertyPath: MarcoDialogo
       value: 
       objectReference: {fileID: 432785985}
@@ -1271,6 +1276,84 @@ PrefabInstance:
     - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
         type: 3}
       propertyPath: finishPauseInDisableObject
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[0].characterDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[0].nameHabladorActual
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[0].dialogoPersonaje
+      value: "Ey, Felicidades por llegar hasta ac\xE1, has logrado vencer a tus adversarios
+        y completar el demo del modo historia."
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[1].dialogoPersonaje
+      value: "Normalmente nos deber\xEDamos moler a golpes pero viste como es la cosa..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[2].dialogoPersonaje
+      value: Un dia quieres matar a tus alumnos y al otro solamente quieres jubilarte.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[3].dialogoPersonaje
+      value: 'En fin toma una estrellita en la frente y felicidades por terminar la
+        demo. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[4].dialogoPersonaje
+      value: "Eres Libre de jugar los modos \u201CSupervivencia\u201D y \u201CMultijugador\u201D,
+        si aun no los has jugado. "
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[4].finishDialog
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[5].dialogoPersonaje
+      value: 'FELICITACIONES! '
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[5].characterDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[4].characterDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[3].characterDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[2].characterDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[1].characterDialog
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239635447833852876, guid: de07ec7c0d09fde4e8865a2ea2ef6cfd,
+        type: 3}
+      propertyPath: dialogue.Array.data[5].finishDialog
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1941,6 +2024,85 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d64e937492203d4492704a42d4a0b01, type: 3}
+--- !u!1001 &3748278749199681387
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3748278749588157047, guid: 7f445a0c71ef1f941a5ba687c79246ed,
+        type: 3}
+      propertyPath: m_Name
+      value: FinishLevelController
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748278749588157045, guid: 7f445a0c71ef1f941a5ba687c79246ed,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.20170945
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748278749588157045, guid: 7f445a0c71ef1f941a5ba687c79246ed,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5580982
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748278749588157045, guid: 7f445a0c71ef1f941a5ba687c79246ed,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748278749588157045, guid: 7f445a0c71ef1f941a5ba687c79246ed,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748278749588157045, guid: 7f445a0c71ef1f941a5ba687c79246ed,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748278749588157045, guid: 7f445a0c71ef1f941a5ba687c79246ed,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748278749588157045, guid: 7f445a0c71ef1f941a5ba687c79246ed,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748278749588157045, guid: 7f445a0c71ef1f941a5ba687c79246ed,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748278749588157045, guid: 7f445a0c71ef1f941a5ba687c79246ed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748278749588157045, guid: 7f445a0c71ef1f941a5ba687c79246ed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748278749588157045, guid: 7f445a0c71ef1f941a5ba687c79246ed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748278749588157046, guid: 7f445a0c71ef1f941a5ba687c79246ed,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 696607611}
+    - target: {fileID: 3748278749588157046, guid: 7f445a0c71ef1f941a5ba687c79246ed,
+        type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 432785981}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7f445a0c71ef1f941a5ba687c79246ed, type: 3}
 --- !u!1001 &4508332320611832042
 PrefabInstance:
   m_ObjectHideFlags: 0

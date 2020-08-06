@@ -119,10 +119,12 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public EventWise eventWise;
     private bool InFuegoEmpieza;
-    private bool weitVictory;
+    [HideInInspector]
+    public bool weitVictory;
     public static event Action<Player, string> OnModifireState;
     public static event Action<Player, string> OnDisableModifireState;
     public static event Action<Player> OnDie;
+
     private void OnEnable()
     {
         Player.OnDie += AnimationVictory;
@@ -189,7 +191,6 @@ public class Player : MonoBehaviour
         //DrawScore();
 
     }
-
     void Update()
     {
         if (weitVictory && transform.position.y <= InitialPosition.y) 
