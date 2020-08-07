@@ -158,10 +158,10 @@ public class ProfesorAnatomia : Enemy
     public override void Update()
     {
         //BORRAR LUEGO DE TESTEO
-        //if (Input.GetKeyDown(KeyCode.F)) 
-        //{
-        // xpActual = xpNededSpecialAttack;
-        //}
+        if (Input.GetKeyDown(KeyCode.F)) 
+        {
+        xpActual = xpNededSpecialAttack;
+        }
         //-----------------
         if (enableMovement)
         {
@@ -238,7 +238,7 @@ public class ProfesorAnatomia : Enemy
         if (enableSetRandomSpecialAttack)
         {
             porcentageThrowSpecialAttack = UnityEngine.Random.Range(0, 120);
-            //porcentageThrowSpecialAttack = 100;
+            porcentageThrowSpecialAttack = 100;
             enableSetRandomSpecialAttack = false;
         }
 

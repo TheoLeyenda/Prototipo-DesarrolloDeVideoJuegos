@@ -14,7 +14,7 @@ public class AnatomiaPunch : MonoBehaviour
     }
     public void DisableMe() 
     {
-        Debug.Log("ENTRE AL DESTRUIR PUÑO");
+        //Debug.Log("ENTRE AL DESTRUIR PUÑO");
         if (pool != null)
         {
             pool.Recycle(gameObject);

@@ -8,16 +8,30 @@ public class ObjectTerremoto : MonoBehaviour
     // Start is called before the first frame update
     public int damage;
     public float timeLife;
+    public bool disableByTime = false;
+    public Animator animator;
+    public string nameAnimaton;
+    private void OnEnable()
+    {
+        animator.Play(nameAnimaton);
+    }
     private void Update()
     {
-        if (timeLife > 0)
+        if (disableByTime)
         {
-            timeLife = timeLife - Time.deltaTime;
+            if (timeLife > 0)
+            {
+                timeLife = timeLife - Time.deltaTime;
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
         }
-        else 
-        {
-            gameObject.SetActive(false);
-        }
+    }
+    public void DisableMe()
+    {
+        gameObject.SetActive(false);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
