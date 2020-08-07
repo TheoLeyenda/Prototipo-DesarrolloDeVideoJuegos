@@ -128,6 +128,9 @@ MonoBehaviour:
   inPlayer: 0
   ZonaContraAtaque: 0
   eventWise: {fileID: 0}
+  enableCounterAttack: 0
+  delayEnableCounterAttack: 0.05
+  auxDelayEnableCounterAttack: 0.05
   state: 1
 --- !u!1 &1268085393
 GameObject:
@@ -271,6 +274,9 @@ MonoBehaviour:
   inPlayer: 0
   ZonaContraAtaque: 0
   eventWise: {fileID: 0}
+  enableCounterAttack: 0
+  delayEnableCounterAttack: 0.05
+  auxDelayEnableCounterAttack: 0.05
   state: 1
 --- !u!1 &1922578226
 GameObject:
@@ -370,6 +376,9 @@ MonoBehaviour:
   inPlayer: 0
   ZonaContraAtaque: 0
   eventWise: {fileID: 0}
+  enableCounterAttack: 0
+  delayEnableCounterAttack: 0.05
+  auxDelayEnableCounterAttack: 0.05
   state: 1
 --- !u!1 &2531832291283338692
 GameObject:
@@ -1161,6 +1170,9 @@ MonoBehaviour:
   inPlayer: 0
   ZonaContraAtaque: 0
   eventWise: {fileID: 0}
+  enableCounterAttack: 0
+  delayEnableCounterAttack: 0.05
+  auxDelayEnableCounterAttack: 0.05
   state: 0
 --- !u!114 &879448681
 MonoBehaviour:
@@ -1614,6 +1626,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   applyColorShoot: 0
   myHeadSprite: {fileID: 21300000, guid: de8d1ce917fd30c41a057bbae923c774, type: 3}
+  fraseVictoria: Reprobaste mi materia debilucho, vuelve cuando tengas un cuerpo perfecto
+    como el mio...
   colorShoot: {r: 1, g: 0.9780377, b: 0, a: 1}
   EnableChargerSpecialAttackForHit: 1
   nameEnemy: RIO
@@ -2083,7 +2097,7 @@ PrefabInstance:
       propertyPath: inBoss
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
+    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_TagString
       value: Cuadrilla
@@ -2093,7 +2107,7 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Cuadrilla
       objectReference: {fileID: 0}
-    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
+    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_TagString
       value: Cuadrilla
@@ -2103,12 +2117,12 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Cuadrilla
       objectReference: {fileID: 0}
-    - target: {fileID: 4070331649406560279, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
+    - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
       propertyPath: enemy
       value: 
       objectReference: {fileID: 2531832291478649058}
-    - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+    - target: {fileID: 4070331649406560279, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
       propertyPath: enemy
       value: 
       objectReference: {fileID: 2531832291478649058}

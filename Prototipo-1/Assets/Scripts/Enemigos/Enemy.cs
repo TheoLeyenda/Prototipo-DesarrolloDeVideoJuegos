@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
         None,
     }
     public Sprite myHeadSprite;
+    public string fraseVictoria;
     public Color colorShoot;
     public bool EnableChargerSpecialAttackForHit = true;
     public string nameEnemy;
@@ -146,8 +147,9 @@ public class Enemy : MonoBehaviour
     public static event Action<Enemy, string> OnModifireState;
     public static event Action<Enemy, string> OnDisableModifireState;
     public static event Action<Enemy> OnDie;
+    public static event Action<Enemy, string, string, Sprite> OnVictory;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         //Debug.Log("ENTRE");
         xpActual = 0;
@@ -161,7 +163,7 @@ public class Enemy : MonoBehaviour
         //enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
         //poolObjectEnemy = GetComponent<PoolObject>();
     }
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         Player.OnDie -= AnimationVictory;
         ResetSpeedJump();
@@ -197,16 +199,21 @@ public class Enemy : MonoBehaviour
     public void AnimationVictory(Player p) 
     {
         //Debug.Log("ENTRE");
-        if (transform.position.y <= InitialPosition.y && enumsEnemy.typeBoss == EnumsEnemy.TiposDeJefe.Nulo)
+        if (transform.position.y <= InitialPosition.y)
         {
             //Debug.Log("ENTRE");
-            spriteEnemy.GetAnimator().Play("Victory");
+            if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
+            {
+                spriteEnemy.GetAnimator().Play("Victory");
+            }
             enableMovement = false;
             myVictory = true;
-        }
-        else if(enumsEnemy.typeBoss == EnumsEnemy.TiposDeJefe.Nulo)
-        {
-            weitVictory = true;
+            //Debug.Log("SOY GLORIOSO");
+            if (OnVictory != null)
+            {
+                Debug.Log("SOY GLORIOSO");
+                OnVictory(this, fraseVictoria, nameEnemy, myHeadSprite);
+            }
         }
     }
     public void ResetSpeedJump()
@@ -221,7 +228,10 @@ public class Enemy : MonoBehaviour
     {
         if (weitVictory && transform.position.y <= InitialPosition.y) 
         {
-            spriteEnemy.GetAnimator().Play("Victory");
+            if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
+            {
+                spriteEnemy.GetAnimator().Play("Victory");
+            }
             enableMovement = false;
             myVictory = true;
             weitVictory = false;

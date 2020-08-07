@@ -91,8 +91,9 @@ public class ProfesorHistoria : Enemy
         LifeOut,
         Count
     }
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         OnProfesorHistoria = false;
         NextSpecialAttack = true;
         specialAttackLibroEdison_Lanzado = false;
@@ -100,8 +101,9 @@ public class ProfesorHistoria : Enemy
         Idied = false;
         Grid.OnSettingTitileo_2 += SetTargetGrid;
     }
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         OnProfesorHistoria = false;
         NextSpecialAttack = true;
         specialAttackLibroEdison_Lanzado = false;

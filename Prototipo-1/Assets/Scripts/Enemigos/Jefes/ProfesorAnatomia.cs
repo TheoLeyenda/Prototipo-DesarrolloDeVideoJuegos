@@ -121,15 +121,17 @@ public class ProfesorAnatomia : Enemy
         fsmProfesorAnatomia.SetRelations((int)EstadoProfesorAnatomia.Braggart, (int)EstadoProfesorAnatomia.Death, (int)EventosProfesorAnatomia.LifeOut);
 
     }
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         Grid.OnSettingTitileo += SetTargetGrid;
         //InitialPosition = new Vector3(5.17f, -3.42f, 0f);
         enemyPrefab.transform.position = new Vector3(transform.position.x, -3.42f, 0f);
         Idied = false;
     }
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         Grid.OnSettingTitileo -= SetTargetGrid;
         Idied = false;
         OnProfesorAnatomia = false;
@@ -237,7 +239,6 @@ public class ProfesorAnatomia : Enemy
         {
             porcentageThrowSpecialAttack = UnityEngine.Random.Range(0, 120);
             //porcentageThrowSpecialAttack = 100;
-            Debug.Log(porcentageThrowSpecialAttack);
             enableSetRandomSpecialAttack = false;
         }
 

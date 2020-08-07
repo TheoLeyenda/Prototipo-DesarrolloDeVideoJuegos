@@ -35,6 +35,7 @@ public class DialogueController : MonoBehaviour
         public string nameAnimation;
     }
     //public LevelManager levelManager;
+    public bool enableDialogVictory = true;
     public GameObject CamvasInicioPelea;
     public Enemy enemyAsignedDialog;
     public GameObject MarcoDialogo;
@@ -49,71 +50,93 @@ public class DialogueController : MonoBehaviour
     public int ID_Dialog = 0;
     private GameManager gm;
     public DataCombatPvP dataCombatPvP;
+    [HideInInspector]
+    public bool OpenDialogInEnableObject = true;
     void Awake()
     {
-        int initIndex = 0;
-        dialogos = new List<List<Dialogos>>();
-        auxDialogue = new List<Dialogos>();
-        inputManager = GameObject.Find("InputManagerController").GetComponent<InputManager>();
-        if (GameManager.instanceGameManager != null)
+        if (dialogue.Count > 0)
         {
-            gm = GameManager.instanceGameManager;
-        }
-        //Debug.Log(dialogue.Count);
-        for (int i = 0; i < dialogue.Count; i++)
-        {
-            auxDialogue.Add(dialogue[i]);
-        }
-        List<Dialogos> dialog = new List<Dialogos>();
-        bool finish = false;
-        while (!finish)
-        {
-            bool asignedList = false;
-            int j = initIndex;
-            while (j < auxDialogue.Count)
+            int initIndex = 0;
+            dialogos = new List<List<Dialogos>>();
+            auxDialogue = new List<Dialogos>();
+            inputManager = GameObject.Find("InputManagerController").GetComponent<InputManager>();
+            if (GameManager.instanceGameManager != null)
             {
-                if (!auxDialogue[j].finishDialog)
-                {
-                    dialog.Add(auxDialogue[j]);
-                }
-                else if(!asignedList)
-                {
-                    initIndex = j;
-                    dialog.Add(auxDialogue[j]);
-                    dialogos.Add(dialog);
-                    asignedList = true;
-                    j = auxDialogue.Count;
-                    if (initIndex >= auxDialogue.Count - 1)
-                    {
-                        finish = true;
-                    }
-                }
-                j++;
+                gm = GameManager.instanceGameManager;
             }
-            
+            //Debug.Log(dialogue.Count);
+            for (int i = 0; i < dialogue.Count; i++)
+            {
+                auxDialogue.Add(dialogue[i]);
+            }
+            List<Dialogos> dialog = new List<Dialogos>();
+            bool finish = false;
+            while (!finish)
+            {
+                bool asignedList = false;
+                int j = initIndex;
+                while (j < auxDialogue.Count)
+                {
+                    if (!auxDialogue[j].finishDialog)
+                    {
+                        dialog.Add(auxDialogue[j]);
+                    }
+                    else if (!asignedList)
+                    {
+                        initIndex = j;
+                        dialog.Add(auxDialogue[j]);
+                        dialogos.Add(dialog);
+                        asignedList = true;
+                        j = auxDialogue.Count;
+                        if (initIndex >= auxDialogue.Count - 1)
+                        {
+                            finish = true;
+                        }
+                    }
+                    j++;
+                }
+
+            }
         }
     }
     private void OnEnable()
     {
         imageHabladorActual.gameObject.SetActive(true);
-        if (dialogos != null)
+        if (OpenDialogInEnableObject)
         {
-            if (indexDialog < dialogos.Count)
+            if (dialogos != null)
             {
-                OpenDialog();
-                CheckDialog(ID_Dialog);
-            }
-            else
-            {
-                gameObject.SetActive(false);
+                if (indexDialog < dialogos.Count)
+                {
+                    OpenDialog();
+                    CheckDialog(ID_Dialog);
+                }
+                else
+                {
+                    gameObject.SetActive(false);
+                }
             }
         }
     }
+    private void OnDisable()
+    {
+        OpenDialogInEnableObject = true;
+    }
     //private void OnDisable()
     //{
-        //inputManager.SetInPause(false);
-        //inputManager.CheckInPause();
+    //inputManager.SetInPause(false);
+    //inputManager.CheckInPause();
     //}
+    public void DialogVictoryEnemy(Enemy enemy,string fraseVictoria,string nameEnemy,Sprite headSprite)
+    {
+        if (enableDialogVictory && fraseVictoria != " " && nameEnemy != " " && !MarcoDialogo.activeSelf)
+        {
+            Debug.Log("DENTRO DE FUNCION");
+            MarcoDialogo.SetActive(true);
+            imageHabladorActual.sprite = headSprite;
+            textDialog.text = nameEnemy + ": " + fraseVictoria;
+        }
+    }
     public void OpenDialog() 
     {
         /*if (dialogue[i].characterDialog == Dialogos.CharacterDialog.Player && inputManager != null)
@@ -208,7 +231,7 @@ public class DialogueController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InputPlayerController.GetInputButtonDown("SelectButton_P1"))
+        if (InputPlayerController.GetInputButtonDown("SelectButton_P1") && OpenDialogInEnableObject)
         {
             
             ID_Dialog++;

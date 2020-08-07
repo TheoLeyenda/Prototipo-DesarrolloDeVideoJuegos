@@ -9,17 +9,31 @@ public class ActivatorDialogueManager : MonoBehaviour
     private bool activatedProfesorAnatomia;
     private bool activatedProfesorHistoria;
     private bool activatedProfesorEducacionFisica;
+    private bool winingEnemy;
     private void OnEnable()
     {
         ProfesorAnatomia.InCombatPoint += ActivateDialogue;
         ProfesorHistoria.InCombatPoint += ActivateDialogue;
         ProfesorEducacionFisica.InCombatPoint += ActivateDialogue;
+        Enemy.OnVictory += ActivateDialogue;
     }
     private void OnDisable()
     {
         ProfesorAnatomia.InCombatPoint -= ActivateDialogue;
         ProfesorHistoria.InCombatPoint -= ActivateDialogue;
         ProfesorEducacionFisica.InCombatPoint -= ActivateDialogue;
+        Enemy.OnVictory += ActivateDialogue;
+    }
+    public void ActivateDialogue(Enemy enemy, string fraseVictoria, string nameEnemy, Sprite headSprite)
+    {
+        if (!winingEnemy && dialogueController != null && dialogueController.gameObject != null)
+        {
+            Debug.Log("ENTRE AL PUNTERO A FUNCION");
+            dialogueController.OpenDialogInEnableObject = false;
+            dialogueController.gameObject.SetActive(true);
+            dialogueController.DialogVictoryEnemy(enemy, fraseVictoria, nameEnemy, headSprite);
+            winingEnemy = true;
+        }
     }
     public void ActivateDialogue(ProfesorAnatomia profesorAnatomia) 
     {

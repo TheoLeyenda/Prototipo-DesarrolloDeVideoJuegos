@@ -19,6 +19,7 @@ public class ProfesorEducacionFisica : Enemy
     // Update is called once per frame
     public override void Update()
     {
+        life = maxLife;
         if (enemyPrefab.transform.position.x > 5.355f || !OnProfesorEducacionFisica)
         {
             base.Update();
