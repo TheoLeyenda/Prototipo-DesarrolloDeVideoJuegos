@@ -232,7 +232,7 @@ public class Player : MonoBehaviour
             CheckMovementInSpecialAttack();
             CheckBoxColliders2D();
         }
-        else if (transform.position.y > InitialPosition.y && !enableMovement)
+        if (transform.position.y > InitialPosition.y && (!enableMovement || PD.lifePlayer <= 0))
         {
             spritePlayerActual.GetAnimator().Play("Salto protagonista");
         }
