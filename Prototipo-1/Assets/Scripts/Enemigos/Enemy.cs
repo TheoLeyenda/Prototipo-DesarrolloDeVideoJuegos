@@ -211,7 +211,7 @@ public class Enemy : MonoBehaviour
             //Debug.Log("SOY GLORIOSO");
             if (OnVictory != null)
             {
-                Debug.Log("SOY GLORIOSO");
+                //Debug.Log("SOY GLORIOSO");
                 OnVictory(this, fraseVictoria, nameEnemy, myHeadSprite);
             }
         }

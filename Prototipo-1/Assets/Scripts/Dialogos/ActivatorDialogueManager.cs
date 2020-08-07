@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ActivatorDialogueManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class ActivatorDialogueManager : MonoBehaviour
     private bool activatedProfesorHistoria;
     private bool activatedProfesorEducacionFisica;
     private bool winingEnemy;
+    public static event Action<ActivatorDialogueManager> OnDialogueVictoryEnemyActivated;
     private void OnEnable()
     {
         ProfesorAnatomia.InCombatPoint += ActivateDialogue;
@@ -28,11 +30,15 @@ public class ActivatorDialogueManager : MonoBehaviour
     {
         if (!winingEnemy && dialogueController != null && dialogueController.gameObject != null)
         {
-            Debug.Log("ENTRE AL PUNTERO A FUNCION");
+            //Debug.Log("ENTRE AL PUNTERO A FUNCION");
             dialogueController.OpenDialogInEnableObject = false;
             dialogueController.gameObject.SetActive(true);
             dialogueController.DialogVictoryEnemy(enemy, fraseVictoria, nameEnemy, headSprite);
             winingEnemy = true;
+            if (OnDialogueVictoryEnemyActivated != null)
+            {
+                OnDialogueVictoryEnemyActivated(this);
+            }
         }
     }
     public void ActivateDialogue(ProfesorAnatomia profesorAnatomia) 

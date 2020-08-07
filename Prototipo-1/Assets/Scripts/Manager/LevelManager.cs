@@ -7,6 +7,13 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    public enum WaysToLevelUp
+    {
+        ByButton,
+        ByTime,
+        Count,
+    }
+    public WaysToLevelUp waysToLevelUp = WaysToLevelUp.ByTime;
     public bool NivelFinal;
     public string NameFinishSceneStoryMode;
     public GameObject marcoTexto;
@@ -28,6 +35,7 @@ public class LevelManager : MonoBehaviour
     public bool inSurvival;
     private bool goToGameOver;
     private bool disableOnlyOnce = false;
+    
 
     private Player hablador_Player;
     private Enemy hablador_Enemy;
@@ -53,10 +61,13 @@ public class LevelManager : MonoBehaviour
     private void OnEnable()
     {
         Player.OnDie += EnableGameOver;
+        ActivatorDialogueManager.OnDialogueVictoryEnemyActivated += SwitchWaysToLevelUp;
     }
     private void OnDisable()
     {
         Player.OnDie -= EnableGameOver;
+        ActivatorDialogueManager.OnDialogueVictoryEnemyActivated -= SwitchWaysToLevelUp;
+        waysToLevelUp = WaysToLevelUp.ByTime;
     }
     private void Start()
     {
@@ -75,6 +86,7 @@ public class LevelManager : MonoBehaviour
         
 
     }
+    
     void Update()
     {
         if (hablador_Enemy == null || hablador_Player == null && InitDialog)
@@ -123,6 +135,11 @@ public class LevelManager : MonoBehaviour
             NextId();
         }
     }
+    public void SwitchWaysToLevelUp(ActivatorDialogueManager activatorDialogueManager)
+    {
+        waysToLevelUp = WaysToLevelUp.ByButton;
+        delayPassLevel = auxDelayPassLevel;
+    }
     public void CheckPassLevel()
     {
         if (ObjectiveOfPassLevel <= 0)
@@ -140,23 +157,42 @@ public class LevelManager : MonoBehaviour
     {
         if (goToGameOver)
         {
-            if (delayPassLevel <= 0)
+            goToGameOver = false;
+            switch (waysToLevelUp) 
             {
-                goToGameOver = false;
-                delayPassLevel = auxDelayPassLevel;
-                if (SceneManager.GetActiveScene().name == "Supervivencia")
-                {
-                    gm.GameOver("GameOverSupervivencia");
-                }
-                else if (SceneManager.GetActiveScene().name != "PvP" && SceneManager.GetActiveScene().name != "TiroAlBlanco")
-                {
-                    gm.GameOver("GameOverHistoria");
-                }
+                case WaysToLevelUp.ByTime:
+                    if (delayPassLevel <= 0)
+                    {
+                        delayPassLevel = auxDelayPassLevel;
+                        if (SceneManager.GetActiveScene().name == "Supervivencia")
+                        {
+                            gm.GameOver("GameOverSupervivencia");
+                        }
+                        else if (SceneManager.GetActiveScene().name != "PvP" && SceneManager.GetActiveScene().name != "TiroAlBlanco")
+                        {
+                            gm.GameOver("GameOverHistoria");
+                        }
+                    }
+                    else
+                    {
+                        delayPassLevel = delayPassLevel - Time.deltaTime;
+                    }
+                    break;
+                case WaysToLevelUp.ByButton:
+                    if (InputPlayerController.GetInputButtonDown("SelectButton_P1"))
+                    {
+                        if (SceneManager.GetActiveScene().name == "Supervivencia")
+                        {
+                            gm.GameOver("GameOverSupervivencia");
+                        }
+                        else if (SceneManager.GetActiveScene().name != "PvP" && SceneManager.GetActiveScene().name != "TiroAlBlanco")
+                        {
+                            gm.GameOver("GameOverHistoria");
+                        }
+                    }
+                    break;
             }
-            else
-            {
-                delayPassLevel = delayPassLevel - Time.deltaTime;
-            }
+            
         }
     }
     public void CheckDiagolos()
@@ -199,21 +235,39 @@ public class LevelManager : MonoBehaviour
     }
     public void NextLevel()
     {
-        if (delayPassLevel <= 0)
+        switch (waysToLevelUp)
         {
-            delayPassLevel = auxDelayPassLevel;
-            if (!NivelFinal)
-            {
-                gm.screenManager.LoadLevel(gm.screenManager.GetIdListLevel() + 1);
-            }
-            else
-            {
-                gm.GameOver(NameFinishSceneStoryMode);
-            }
-        }
-        else 
-        {
-            delayPassLevel = delayPassLevel - Time.deltaTime;
+            case WaysToLevelUp.ByTime:
+                if (delayPassLevel <= 0)
+                {
+                    delayPassLevel = auxDelayPassLevel;
+                    if (!NivelFinal)
+                    {
+                        gm.screenManager.LoadLevel(gm.screenManager.GetIdListLevel() + 1);
+                    }
+                    else
+                    {
+                        gm.GameOver(NameFinishSceneStoryMode);
+                    }
+                }
+                else
+                {
+                    delayPassLevel = delayPassLevel - Time.deltaTime;
+                }
+                break;
+            case WaysToLevelUp.ByButton:
+                if (InputPlayerController.GetInputButtonDown("SelectButton_P1"))
+                {
+                    if (!NivelFinal)
+                    {
+                        gm.screenManager.LoadLevel(gm.screenManager.GetIdListLevel() + 1);
+                    }
+                    else
+                    {
+                        gm.GameOver(NameFinishSceneStoryMode);
+                    }
+                }
+                break;
         }
     }
     public bool GetInDialog()

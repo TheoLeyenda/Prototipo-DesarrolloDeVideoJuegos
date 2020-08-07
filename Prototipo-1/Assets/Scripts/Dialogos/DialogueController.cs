@@ -131,7 +131,7 @@ public class DialogueController : MonoBehaviour
     {
         if (enableDialogVictory && fraseVictoria != " " && nameEnemy != " " && !MarcoDialogo.activeSelf)
         {
-            Debug.Log("DENTRO DE FUNCION");
+            //Debug.Log("DENTRO DE FUNCION");
             MarcoDialogo.SetActive(true);
             imageHabladorActual.sprite = headSprite;
             textDialog.text = nameEnemy + ": " + fraseVictoria;
