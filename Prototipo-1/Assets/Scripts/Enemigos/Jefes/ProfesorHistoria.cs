@@ -165,7 +165,12 @@ public class ProfesorHistoria : Enemy
     // Update is called once per frame
     public override void Update()
     {
-       
+        //BORRAR LUEGO DE TESTEO
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            xpActual = xpNededSpecialAttack;
+        }
+        //-----------------
         if (enableMovement)
         {
             if (!Idied)
