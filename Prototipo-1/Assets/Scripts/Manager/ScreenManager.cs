@@ -12,22 +12,20 @@ public class ScreenManager : MonoBehaviour
     [HideInInspector]
     public EventWise eventWise;
     private int idListaNiveles;
+    private GameData gameData;
 
     private void Start()
     {
         idListaNiveles = -1;
-        if (GameManager.instanceGameManager != null)
-        {
-            gm = GameManager.instanceGameManager;
-        }
-           
-    }
         
+        gm = GameManager.instanceGameManager;
+        gameData = GameData.instaceGameData;
+    }
     public void Multijugador()
     {
         SceneManager.LoadScene("Multijugador");
         //SceneManager.LoadScene("Ejemplo", LoadSceneMode.Additive);
-            
+           
     }
     public void TiroAlBlanco()
     {
@@ -43,6 +41,10 @@ public class ScreenManager : MonoBehaviour
                 SceneManager.LoadScene("SelectPlayerScene");
             }
         }
+    }
+    public void LoadScene(string name)
+    {
+        SceneManager.LoadScene(name);
     }
     public void Controles()
     {
@@ -72,6 +74,20 @@ public class ScreenManager : MonoBehaviour
             if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
             {
                 SceneManager.LoadScene("Nivel " + numerLevel);
+            }
+        }
+    }
+    public void LoadLevel()
+    {
+        if (gm != null)
+        {
+            gm.totalCountEnemysDead = gm.totalCountEnemysDead + gm.auxCountEnemysDead;
+            gm.countEnemysDead = gm.auxCountEnemysDead;
+            gm.auxCountEnemysDead = 0;
+            gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Historia;
+            if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
+            {
+                SceneManager.LoadScene("Nivel " + (int)(gameData.currentLevel + 1));
             }
         }
     }
@@ -105,12 +121,15 @@ public class ScreenManager : MonoBehaviour
     public void CheckMainCameraInScreen()
     {
         //Debug.Log(gm.restartLevel);
+        if (ListaNiveles.Count <= 0) return;
+        if (fondo != null) return;
+
         if (idListaNiveles < ListaNiveles.Count)
         {
             if ((gm != null && SceneManager.GetActiveScene().name != "MENU" && SceneManager.GetActiveScene().name != "Supervivencia"
                 && SceneManager.GetActiveScene().name != "SampleScene" && SceneManager.GetActiveScene().name != "GameOver"
                 && SceneManager.GetActiveScene().name != "SelectLevel" && SceneManager.GetActiveScene().name != "SelectPlayerScene"
-                && SceneManager.GetActiveScene().name != "PvP"))
+                && SceneManager.GetActiveScene().name != "PvP" && SceneManager.GetActiveScene().name != "SelectedPowerUp"))
             {
                 if (fondo == null)
                 {
@@ -176,6 +195,7 @@ public class ScreenManager : MonoBehaviour
     {
         if (gm != null)
         {
+            //Debug.Log(idListaNiveles + gameObject.name);
             if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
             {
                 Historia();
@@ -192,6 +212,10 @@ public class ScreenManager : MonoBehaviour
     public int GetIdListLevel()
     {
         return idListaNiveles + 1;
+    }
+    public int GetCurrentIdListLevel()
+    {
+        return idListaNiveles;
     }
     public void SetIdListLevel(int id)
     {

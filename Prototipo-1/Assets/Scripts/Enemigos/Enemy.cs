@@ -20,8 +20,11 @@ public class Enemy : MonoBehaviour
     public bool EnableChargerSpecialAttackForHit = true;
     public string nameEnemy;
     public bool enableColorShootSpecialAttack;
+
+    [HideInInspector]
+    public bool enableCounterAttack = true;
+
     //DATOS PARA EL MOVIMIENTO
-    //[HideInInspector]
     public bool enableMovement;
     [SerializeField]
     protected bool inCombatPosition;

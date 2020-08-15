@@ -35,7 +35,7 @@ public class LevelManager : MonoBehaviour
     public bool inSurvival;
     private bool goToGameOver;
     private bool disableOnlyOnce = false;
-    
+    private GameData gameData;
 
     private Player hablador_Player;
     private Enemy hablador_Enemy;
@@ -71,7 +71,7 @@ public class LevelManager : MonoBehaviour
     }
     private void Start()
     {
-
+        gameData = GameData.instaceGameData;
         auxDelayPassLevel = delayPassLevel;
         if (InitDialog)
         {
@@ -243,7 +243,9 @@ public class LevelManager : MonoBehaviour
                     delayPassLevel = auxDelayPassLevel;
                     if (!NivelFinal)
                     {
-                        gm.screenManager.LoadLevel(gm.screenManager.GetIdListLevel() + 1);
+                        //gm.screenManager.LoadLevel(gm.screenManager.GetIdListLevel() + 1);
+                        gameData.currentLevel++;
+                        gm.screenManager.LoadScene("SelectedPowerUp");
                     }
                     else
                     {
@@ -260,7 +262,9 @@ public class LevelManager : MonoBehaviour
                 {
                     if (!NivelFinal)
                     {
-                        gm.screenManager.LoadLevel(gm.screenManager.GetIdListLevel() + 1);
+                        //gm.screenManager.LoadLevel(gm.screenManager.GetIdListLevel() + 1);
+                        gameData.currentLevel++;
+                        gm.screenManager.LoadScene("SelectedPowerUp");
                     }
                     else
                     {

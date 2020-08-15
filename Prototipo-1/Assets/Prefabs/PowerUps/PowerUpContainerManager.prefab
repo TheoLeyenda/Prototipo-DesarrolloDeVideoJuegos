@@ -1,0 +1,504 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4229297387854612455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4229297387854612454}
+  - component: {fileID: 4229297387854612453}
+  m_Layer: 0
+  m_Name: PowerUp_NadaDeContraAtaques
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4229297387854612454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229297387854612455}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4229297389601691620}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4229297387854612453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229297387854612455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7cebfa12af570b48afec85046c78acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeCheckCollision: 0
+  userPowerUp: 0
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  namePowerUp: PowerUp_NadaDeContraAtaques
+  delayEffect: 20
+--- !u!1 &4229297387944645778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4229297387944645777}
+  - component: {fileID: 4229297387944645776}
+  m_Layer: 0
+  m_Name: PowerUp_DoblePuntuacion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4229297387944645777
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229297387944645778}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4229297389601691620}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4229297387944645776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229297387944645778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e043053bb7fb6d540b8d92da90e11e86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeCheckCollision: 0
+  userPowerUp: 0
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  namePowerUp: PowerUp_DoblePuntuacion
+  delayEffect: 15
+--- !u!1 &4229297387979818324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4229297387979818330}
+  - component: {fileID: 4229297387979818331}
+  m_Layer: 0
+  m_Name: PowerUp_VidaExtra
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4229297387979818330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229297387979818324}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4229297389601691620}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4229297387979818331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229297387979818324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24f68f5b6feae44e896164a5f7b81a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeCheckCollision: 0
+  userPowerUp: 0
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  namePowerUp: PowerUp_VidaExtra
+  delayEffect: 0
+  recoverHealth: 100
+--- !u!1 &4229297387995191216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4229297387995191223}
+  - component: {fileID: 4229297387995191222}
+  m_Layer: 0
+  m_Name: "PowerUp_QuietoAh\xED"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4229297387995191223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229297387995191216}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4229297389601691620}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4229297387995191222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229297387995191216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d84ca0803d8c7a43a666d90ebf449c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeCheckCollision: 0
+  userPowerUp: 0
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  namePowerUp: "PowerUp_QuietoAh\xED"
+  delayEffect: 5
+  disableAttack: 1
+--- !u!1 &4229297388096866577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4229297388096866576}
+  - component: {fileID: 4229297388096866583}
+  m_Layer: 0
+  m_Name: PowerUp_SuperVelocidad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4229297388096866576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229297388096866577}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4229297389601691620}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4229297388096866583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229297388096866577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db5628db0eeac804d8e68f8400fd1190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeCheckCollision: 0
+  userPowerUp: 0
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  namePowerUp: PowerUp_SuperVelocidad
+  delayEffect: 10
+  useMegaJump: 1
+  NewSpeed: 30
+  NewSpeedJump: 75
+  NewResitance: 15
+  NewGravity: 15
+--- !u!1 &4229297388511702254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4229297388511702253}
+  - component: {fileID: 4229297388511702252}
+  m_Layer: 0
+  m_Name: PowerUp_Blindaje
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4229297388511702253
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229297388511702254}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4229297389601691620}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4229297388511702252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229297388511702254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4739af47e4f34934ea4bc8474374a7c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeCheckCollision: 0
+  userPowerUp: 0
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  namePowerUp: PowerUp_Blindaje
+  delayEffect: 0
+--- !u!1 &4229297388959551391
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4229297388959551390}
+  - component: {fileID: 4229297388959551389}
+  m_Layer: 0
+  m_Name: PowerUp_AtaqueMasivo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4229297388959551390
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229297388959551391}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4229297389601691620}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4229297388959551389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229297388959551391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0256de734391958479e12a759595e170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeCheckCollision: 0
+  userPowerUp: 0
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  namePowerUp: PowerUp_AtaqueMasivo
+  delayEffect: 7
+--- !u!1 &4229297388972234074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4229297388972234073}
+  - component: {fileID: 4229297388972234072}
+  m_Layer: 0
+  m_Name: PowerUp_Invulnerhabilidad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4229297388972234073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229297388972234074}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4229297389601691620}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4229297388972234072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229297388972234074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6a85acefa94e5343b9664b5d961091d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeCheckCollision: 0
+  userPowerUp: 0
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  namePowerUp: PowerUp_Invulnerabilidad
+  delayEffect: 10
+--- !u!1 &4229297389601691622
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4229297389601691620}
+  - component: {fileID: 4229297389601691621}
+  m_Layer: 0
+  m_Name: PowerUpContainerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4229297389601691620
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229297389601691622}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1049.4421, y: 697.2313, z: -445.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4229297388959551390}
+  - {fileID: 4229297388511702253}
+  - {fileID: 4229297387944645777}
+  - {fileID: 4229297388972234073}
+  - {fileID: 4229297387854612454}
+  - {fileID: 4229297387995191223}
+  - {fileID: 4229297388096866576}
+  - {fileID: 4229297387979818330}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4229297389601691621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229297389601691622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acee47b13fe93434ca63f36c9fbe613a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpContainerContent:
+  - namePowerUp: PowerUp_AtaqueMasivo
+    powerUp: {fileID: 4229297388959551389}
+    countPowerUps: 0
+    maxCountPowerUps: 3
+    currentPowerUp: 0
+  - namePowerUp: PowerUp_Blindaje
+    powerUp: {fileID: 4229297388511702252}
+    countPowerUps: 0
+    maxCountPowerUps: 2
+    currentPowerUp: 0
+  - namePowerUp: PowerUp_DoblePuntuacion
+    powerUp: {fileID: 4229297387944645776}
+    countPowerUps: 0
+    maxCountPowerUps: 5
+    currentPowerUp: 0
+  - namePowerUp: PowerUp_Invulnerabilidad
+    powerUp: {fileID: 4229297388972234072}
+    countPowerUps: 0
+    maxCountPowerUps: 3
+    currentPowerUp: 0
+  - namePowerUp: PowerUp_NadaDeContraAtaques
+    powerUp: {fileID: 4229297387854612453}
+    countPowerUps: 0
+    maxCountPowerUps: 5
+    currentPowerUp: 0
+  - namePowerUp: PowerUp_NadaDeSaltos
+    powerUp: {fileID: 0}
+    countPowerUps: 0
+    maxCountPowerUps: 5
+    currentPowerUp: 0
+  - namePowerUp: PowerUp_QuietoAhi
+    powerUp: {fileID: 4229297387995191222}
+    countPowerUps: 0
+    maxCountPowerUps: 1
+    currentPowerUp: 0
+  - namePowerUp: PowerUp_SuperVelocidad
+    powerUp: {fileID: 4229297388096866583}
+    countPowerUps: 0
+    maxCountPowerUps: 3
+    currentPowerUp: 0
+  - namePowerUp: PowerUp_VidaExtra
+    powerUp: {fileID: 4229297387979818331}
+    countPowerUps: 0
+    maxCountPowerUps: 5
+    currentPowerUp: 0
+  - namePowerUp: None
+    powerUp: {fileID: 0}
+    countPowerUps: 0
+    maxCountPowerUps: 0
+    currentPowerUp: 0
+  userContainer: 0

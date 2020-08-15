@@ -18,6 +18,7 @@ public class MenuDePausa : MonoBehaviour
     public GameObject MenuControles;
     public LevelManager levelManager;
     private GameManager gm;
+    private GameData gd;
     private MenuActual menuActual;
     private bool soundPause = false;
     // Start is called before the first frame update
@@ -28,6 +29,7 @@ public class MenuDePausa : MonoBehaviour
         {
             gm = GameManager.instanceGameManager;
         }
+        gd = GameData.instaceGameData;
         MenuPausa.SetActive(false);
     }
     private void OnEnable()
@@ -67,6 +69,10 @@ public class MenuDePausa : MonoBehaviour
         gm.playerData_P1.score = gm.playerData_P1.auxScore;
         eventwise.StartEvent("seleccionar");
         eventwise.StartEvent("reiniciar");
+        if (gd != null)
+        {
+            gd.LoadAuxData();
+        }
         if (gm.playerData_P1.score == gm.playerData_P1.auxScore)
         {
             if (levelManager != null)
