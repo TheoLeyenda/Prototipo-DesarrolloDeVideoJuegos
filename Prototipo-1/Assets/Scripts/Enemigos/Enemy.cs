@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     public bool enableColorShootSpecialAttack;
 
     [HideInInspector]
-    public bool enableCounterAttack = true;
+    public bool enableDeffence = true;
 
     //DATOS PARA EL MOVIMIENTO
     public bool enableMovement;
@@ -154,7 +154,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        //Debug.Log("ENTRE");
+        enableDeffence = true;
         xpActual = 0;
         life = maxLife;
         delaySelectMovement = 0.2f;
@@ -163,11 +163,10 @@ public class Enemy : MonoBehaviour
         weitVictory = false;
         enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
         Player.OnDie += AnimationVictory;
-        //enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
-        //poolObjectEnemy = GetComponent<PoolObject>();
     }
     protected virtual void OnDisable()
     {
+        enableDeffence = true;
         Player.OnDie -= AnimationVictory;
         ResetSpeedJump();
         enemyPrefab.transform.position = new Vector3(500, 500, 500);
@@ -798,7 +797,8 @@ public class Enemy : MonoBehaviour
     }
     public void CheckMovement()
     {
-        if (barraDeEscudo != null && inCombatPosition && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
+        
+        if (enableDeffence && barraDeEscudo != null && inCombatPosition && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
         {
             if ((enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar
             && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacheDefensa
@@ -829,8 +829,35 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
+        if (!enableDeffence && transform.position.y <= InitialPosition.y
+            && !isJamping && SpeedJump >= GetAuxSpeedJamp()
+            && (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar
+            || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa))
+        {
+            float delay = 0.1f;
+            while (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa)
+            {
+                CheckComportamiento();
+                if (delay <= 0)
+                {
+                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtacarEnElLugar);
+                }
+                else
+                {
+                    delay = delay - Time.deltaTime;
+                }
+            }
+        }
+        if (!enableDeffence)
+        {
+            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
+            {
+                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
+            }
+        }
         //Debug.Log(isDuck);
-        
+
         switch (enumsEnemy.GetMovement())
         {
             case EnumsEnemy.Movimiento.AtacarEnElLugar:

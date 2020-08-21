@@ -33,12 +33,19 @@ public class PowerUp : MonoBehaviour
         PowerUp_VidaExtra.DisablePowerUp += DisablePowerUpEffect;
         PowerUp_SuperVelocidad.DisablePowerUp += DisablePowerUpEffect;
         PowerUp_QuietoAhi.DisablePowerUp += DisablePowerUpEffect;
+        PowerUp_NadaDeDefensa.DisablePowerUp += DisablePowerUpEffect;
+        Enemy.OnDie += CheckDeadTarget;
+        Player.OnDie += CheckDeadTarget;
     }
     private void OnDisable()
     {
+        OnDisablePowerUpEffect(this);
         PowerUp_VidaExtra.DisablePowerUp -= DisablePowerUpEffect;
         PowerUp_SuperVelocidad.DisablePowerUp -= DisablePowerUpEffect;
         PowerUp_QuietoAhi.DisablePowerUp -= DisablePowerUpEffect;
+        PowerUp_NadaDeDefensa.DisablePowerUp -= DisablePowerUpEffect;
+        Enemy.OnDie -= CheckDeadTarget;
+        Player.OnDie -= CheckDeadTarget;
     }
     public void DisablePowerUpEffect(PowerUp powerUp)
     {
@@ -55,6 +62,21 @@ public class PowerUp : MonoBehaviour
     {
         //Animacion de powerUp al ser adquirido.
     }
+    public virtual void CheckDeadTarget(Enemy e)
+    {
+        if(enemy == e)
+        {
+            OnDisablePowerUpEffect(this);
+        }
+    }
+    public virtual void CheckDeadTarget(Player p)
+    {
+        if (player == p)
+        {
+            OnDisablePowerUpEffect(this);
+        }
+    }
+    public virtual void DisableEffect() { }
     public virtual void ActivatedPowerUp() { }
     private void OnTriggerEnter2D(Collider2D collision)
     {

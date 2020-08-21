@@ -193,6 +193,11 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+        if (Input.GetKey(KeyCode.V))
+        {
+            Debug.Log(enableMovement);
+            Debug.Log(Speed);
+        }
         if (weitVictory && transform.position.y <= InitialPosition.y) 
         {
             spritePlayerActual.GetAnimator().Play("Victory");

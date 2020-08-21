@@ -15,6 +15,23 @@ public class PowerUp_SuperVelocidad : PowerUp
     private float auxGravity;
     private bool enableEffect = false;
 
+    private void OnEnable()
+    {
+        if (player != null)
+        {
+            auxSpeed = player.Speed;
+            auxSpeedJump = player.SpeedJump;
+            auxGravity = player.Gravity;
+            auxResitance = player.Resistace;
+        }
+        if (enemy != null)
+        {
+            auxSpeed = enemy.Speed;
+            auxSpeedJump = enemy.SpeedJump;
+            auxGravity = enemy.Gravity;
+            auxResitance = enemy.Resistace;
+        }
+    }
     public void Update()
     {
         if (enableEffect)
@@ -78,6 +95,28 @@ public class PowerUp_SuperVelocidad : PowerUp
                 enableAddStats = false;
             }
         }
+    }
+    public override void CheckDeadTarget(Enemy e)
+    {
+        if (enableEffect)
+        {
+            base.CheckDeadTarget(e);
+            if (e == enemy)
+                DisableEffect();
+        }
+    }
+    public override void CheckDeadTarget(Player p)
+    {
+        if (enableEffect)
+        {
+            base.CheckDeadTarget(p);
+            if (p == player)
+                DisableEffect();
+        }
+    }
+    public override void DisableEffect()
+    {
+        DisablePowerUpEffect();
     }
     public void DisablePowerUpEffect()
     {

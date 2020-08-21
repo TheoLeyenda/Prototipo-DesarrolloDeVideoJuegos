@@ -486,18 +486,34 @@ public class ProfesorAnatomia : Enemy
     }
     public void CounterAttack(Proyectil proyectil) 
     {
-        if (proyectil.posicionDisparo == Proyectil.PosicionDisparo.PosicionMedia
-            || proyectil.posicionDisparo == Proyectil.PosicionDisparo.PosicionAlta)
+        if (barraDeEscudo.GetEnableDeffence())
         {
-            Attack(false);
+            if (proyectil.posicionDisparo == Proyectil.PosicionDisparo.PosicionMedia
+                || proyectil.posicionDisparo == Proyectil.PosicionDisparo.PosicionAlta)
+            {
+                Attack(false);
+            }
+            else if (proyectil.posicionDisparo == Proyectil.PosicionDisparo.PosicionBaja)
+            {
+                Attack(true);
+            }
+            else
+            {
+                Attack(false);
+            }
         }
-        else if (proyectil.posicionDisparo == Proyectil.PosicionDisparo.PosicionBaja)
+        else
         {
-            Attack(true);
+            TakeDamage(proyectil);
         }
-        else 
+    }
+    public void TakeDamage(Proyectil proyectil)
+    {
+        life = life - proyectil.damage;
+        proyectil.AnimationHit();
+        if (fsmProfesorAnatomia.GetCurrentState() == (int)EstadoProfesorAnatomia.MasiveAttack)
         {
-            Attack(false);
+            spriteBoss_ProfesorAnatomia.PlayAnimation("RecibirDanio");
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -509,12 +525,7 @@ public class ProfesorAnatomia : Enemy
                     || proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador2)
                     && proyectil.tipoDeProyectil != Proyectil.typeProyectil.AtaqueEspecial)
             {
-                life = life - proyectil.damage;
-                proyectil.AnimationHit();
-                if (fsmProfesorAnatomia.GetCurrentState() == (int)EstadoProfesorAnatomia.MasiveAttack)
-                {
-                    spriteBoss_ProfesorAnatomia.PlayAnimation("RecibirDanio");
-                }
+                TakeDamage(proyectil);
             }
         }
     }

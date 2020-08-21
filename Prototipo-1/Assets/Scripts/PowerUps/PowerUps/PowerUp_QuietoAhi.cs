@@ -40,17 +40,11 @@ public class PowerUp_QuietoAhi : PowerUp
             }
             else
             {
-                if (OnDisableEffectPowerUp_QuietoAhi != null)
-                {
-                    OnDisableEffectPowerUp_QuietoAhi(this);
-                }
                 if (DisablePowerUp != null)
                 {
                     DisablePowerUp(this);
                 }
-                delayEffect = auxDelayEffect;
-                enableEffect = false;
-                savingData = true;
+                DisableEffect();
                 //Debug.Log("Desactive el efecto");
             }
         }
@@ -66,6 +60,37 @@ public class PowerUp_QuietoAhi : PowerUp
             OnEffectPowerUp(this);
         }
     }
+    public override void CheckDeadTarget(Enemy e)
+    {
+        if (enableEffect)
+        {
+            base.CheckDeadTarget(e);
+            if (DisablePowerUp != null)
+                DisablePowerUp(this);
+            DisableEffect();
+        }
+    }
+    public override void CheckDeadTarget(Player p)
+    {
+        if (enableEffect)
+        {
+            base.CheckDeadTarget(p);
+            if (DisablePowerUp != null)
+                DisablePowerUp(this);
+            DisableEffect();
+        }
+    }
+    public override void DisableEffect()
+    {
+        if (OnDisableEffectPowerUp_QuietoAhi != null)
+        {
+            OnDisableEffectPowerUp_QuietoAhi(this);
+        }
+        delayEffect = auxDelayEffect;
+        enableEffect = false;
+        savingData = true;
+    }
+
     public void SetAuxSpeed(float _auxSpeed) => auxSpeed = _auxSpeed;
     public float GetAuxSpeed() { return auxSpeed; }
 
