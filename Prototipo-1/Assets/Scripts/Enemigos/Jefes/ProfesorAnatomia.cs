@@ -486,7 +486,7 @@ public class ProfesorAnatomia : Enemy
     }
     public void CounterAttack(Proyectil proyectil) 
     {
-        if (barraDeEscudo.GetEnableDeffence())
+        if (enableDeffence)
         {
             if (proyectil.posicionDisparo == Proyectil.PosicionDisparo.PosicionMedia
                 || proyectil.posicionDisparo == Proyectil.PosicionDisparo.PosicionAlta)
