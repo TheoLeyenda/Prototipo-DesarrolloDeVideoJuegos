@@ -13,4 +13,12 @@ public class PlayerData : ScriptableObject
     public float auxScore;
     public float scoreForHit;
     public float scoreForEnemyDead;
+    public float auxScoreForHit;
+    public float auxScoreForEnemyDead;
+
+    public void ResetScoreValue()
+    {
+        scoreForHit = auxScoreForHit;
+        scoreForEnemyDead = auxScoreForEnemyDead;
+    }
 }

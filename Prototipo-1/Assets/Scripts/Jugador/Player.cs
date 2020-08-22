@@ -127,11 +127,13 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
+        PD.ResetScoreValue();
         Player.OnDie += AnimationVictory;
         Enemy.OnDie += AnimationVictory;
     }
     private void OnDisable()
     {
+        PD.ResetScoreValue();
         Player.OnDie -= AnimationVictory;
         Enemy.OnDie -= AnimationVictory;
         myVictory = false;
@@ -144,6 +146,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        PD.ResetScoreValue();
         weitVictory = false;
         delayParabolaAttack = 0;
         enableMovementPlayer = false;

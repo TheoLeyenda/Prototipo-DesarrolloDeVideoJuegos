@@ -40,14 +40,14 @@ public class PowerUp_NadaDeDefensa : PowerUp
     {
         if (enableEffect)
         {
-            Debug.Log("JAJA");
+            //Debug.Log("JAJA");
             base.CheckDeadTarget(e);
             if (DisablePowerUp != null)
                 DisablePowerUp(this);
             DisableEffect();
             if (barraDeEscudo != null)
             {
-                Debug.Log("TREMENDO SETEO DE ESCUDO");
+                //Debug.Log("TREMENDO SETEO DE ESCUDO");
                 barraDeEscudo.SetEnableDeffence(true);
                 barraDeEscudo.SetValueShild(barraDeEscudo.MaxValueShild);
             }
