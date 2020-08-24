@@ -8,6 +8,7 @@ public class SelectSpriteListPowerUp : MonoBehaviour
     // Start is called before the first frame update
 
     public List<Sprite> sprites;
+    public List<string> namesPowerUps;
     public Image image;
     private int indexSprite;
     public Color disableColorText;
@@ -15,6 +16,8 @@ public class SelectSpriteListPowerUp : MonoBehaviour
     public TextMeshProUGUI textNext;
     public TextMeshProUGUI textPrev;
     public TextMeshProUGUI textCount;
+    public TextMeshProUGUI textNamePowerUp;
+    public Color colorTextPowerUp;
     private GameData gameData;
     void Start()
     {
@@ -24,6 +27,9 @@ public class SelectSpriteListPowerUp : MonoBehaviour
         {
             image.sprite = sprites[indexSprite];
             textCount.text = ""+gameData.dataPlayerPowerUp[indexSprite].countPowerUp;
+            textNamePowerUp.text = namesPowerUps[indexSprite];
+            colorTextPowerUp = Color.blue;
+            textNamePowerUp.color = colorTextPowerUp;
         }
 
         if (indexSprite <= 0)
@@ -43,15 +49,19 @@ public class SelectSpriteListPowerUp : MonoBehaviour
             image.sprite = sprites[indexSprite];
             textPrev.color = Color.white;
             textNext.color = Color.white;
+            colorTextPowerUp = Color.blue;
             if (indexSprite >= sprites.Count - 1)
             {
                 textNext.color = disableColorText;
+                colorTextPowerUp = Color.red;
             }
             textCount.text = "" + gameData.dataPlayerPowerUp[indexSprite].countPowerUp;
             if (indexSprite == sprites.Count - 1)
             {
                 textCount.text = " ";
             }
+            textNamePowerUp.text = namesPowerUps[indexSprite];
+            textNamePowerUp.color = colorTextPowerUp;
         }
     }
     public void PrevSprite()
@@ -62,11 +72,14 @@ public class SelectSpriteListPowerUp : MonoBehaviour
             image.sprite = sprites[indexSprite];
             textPrev.color = Color.white;
             textNext.color = Color.white;
+            colorTextPowerUp = Color.blue;
             if (indexSprite <= 0)
             {
                 textPrev.color = disableColorText;
             }
             textCount.text = "" + gameData.dataPlayerPowerUp[indexSprite].countPowerUp;
+            textNamePowerUp.text = namesPowerUps[indexSprite];
+            textNamePowerUp.color = colorTextPowerUp;
         }
     }
 }

@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4229297389601691620}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4229297387854612453
 MonoBehaviour:
@@ -79,7 +79,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4229297389601691620}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4229297387944645776
 MonoBehaviour:
@@ -128,7 +128,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4229297389601691620}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4229297387979818331
 MonoBehaviour:
@@ -178,7 +178,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4229297389601691620}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4229297387995191222
 MonoBehaviour:
@@ -228,7 +228,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4229297389601691620}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4229297388096866583
 MonoBehaviour:
@@ -282,7 +282,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4229297389601691620}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4229297388511702252
 MonoBehaviour:
@@ -302,55 +302,8 @@ MonoBehaviour:
   enemy: {fileID: 0}
   namePowerUp: PowerUp_Blindaje
   delayEffect: 0
---- !u!1 &4229297388959551391
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4229297388959551390}
-  - component: {fileID: 4229297388959551389}
-  m_Layer: 0
-  m_Name: PowerUp_AtaqueMasivo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4229297388959551390
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4229297388959551391}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4229297389601691620}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4229297388959551389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4229297388959551391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0256de734391958479e12a759595e170, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typeCheckCollision: 0
-  userPowerUp: 0
-  player: {fileID: 0}
-  enemy: {fileID: 0}
-  namePowerUp: PowerUp_AtaqueMasivo
-  delayEffect: 7
+  valueShild: 500
+  enablePowerUp: 0
 --- !u!1 &4229297388972234074
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,7 +333,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4229297389601691620}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4229297388972234072
 MonoBehaviour:
@@ -428,7 +381,6 @@ Transform:
   m_LocalPosition: {x: 1049.4421, y: 697.2313, z: -445.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4229297388959551390}
   - {fileID: 4229297388511702253}
   - {fileID: 4229297387944645777}
   - {fileID: 4229297388972234073}
@@ -452,11 +404,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUpContainerContent:
-  - namePowerUp: PowerUp_AtaqueMasivo
-    powerUp: {fileID: 4229297388959551389}
-    countPowerUps: 0
-    maxCountPowerUps: 3
-    currentPowerUp: 0
   - namePowerUp: PowerUp_Blindaje
     powerUp: {fileID: 4229297388511702252}
     countPowerUps: 0
@@ -472,7 +419,7 @@ MonoBehaviour:
     countPowerUps: 0
     maxCountPowerUps: 3
     currentPowerUp: 0
-  - namePowerUp: PowerUp_NadaDeContraAtaques
+  - namePowerUp: PowerUp_NadaDeDefensa
     powerUp: {fileID: 4229297387854612453}
     countPowerUps: 0
     maxCountPowerUps: 5
