@@ -36,6 +36,7 @@ public class PowerUp : MonoBehaviour
         PowerUp_NadaDeDefensa.DisablePowerUp += DisablePowerUpEffect;
         PowerUp_Invulnerhabilidad.DisablePowerUp += DisablePowerUpEffect;
         PowerUp_DoblePuntuacion.DisablePowerUp += DisablePowerUpEffect;
+        PowerUp_Blindaje.DisablePowerUp += DisablePowerUpEffect;
         Enemy.OnDie += CheckDeadTarget;
         Player.OnDie += CheckDeadTarget;
     }
@@ -48,6 +49,7 @@ public class PowerUp : MonoBehaviour
         PowerUp_NadaDeDefensa.DisablePowerUp -= DisablePowerUpEffect;
         PowerUp_Invulnerhabilidad.DisablePowerUp -= DisablePowerUpEffect;
         PowerUp_DoblePuntuacion.DisablePowerUp -= DisablePowerUpEffect;
+        PowerUp_Blindaje.DisablePowerUp -= DisablePowerUpEffect;
         Enemy.OnDie -= CheckDeadTarget;
         Player.OnDie -= CheckDeadTarget;
     }

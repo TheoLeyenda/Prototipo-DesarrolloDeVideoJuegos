@@ -30,12 +30,20 @@ public class AnatomiaPunch : MonoBehaviour
         if (collision.tag == "BoxColliderController")
         {
             BoxColliderController boxColliderController = collision.GetComponent<BoxColliderController>();
-            if (boxColliderController.player == null)
+            Player p = boxColliderController.player;
+            if (p == null)
             {
                 return;
             }
-            boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
-            boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+            if (p.PD.Blindaje <= 0)
+            {
+                p.PD.lifePlayer = p.PD.lifePlayer - damage;
+            }
+            else
+            {
+                p.PD.Blindaje = p.PD.Blindaje - damage / 2;
+            }
+            p.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
         }
     }
 }

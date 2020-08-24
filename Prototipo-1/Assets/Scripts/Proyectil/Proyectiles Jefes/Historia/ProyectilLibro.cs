@@ -97,7 +97,14 @@ public class ProyectilLibro : Proyectil
                     || (p.delayCounterAttack <= 0 && timeLife > 0  || !boxColliderController.ZonaContraAtaque)) 
                     && enableDamagePlayer && delayCounterAttack <= 0)
                 {
-                    p.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
+                    if (p.PD.Blindaje <= 0)
+                    {
+                        p.PD.lifePlayer = p.PD.lifePlayer - damage;
+                    }
+                    else
+                    {
+                        p.PD.Blindaje = p.PD.Blindaje - damage / 2;
+                    }
                     p.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                     boxCollider2D.enabled = false;
                     trailRenderer.Clear();

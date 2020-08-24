@@ -11,6 +11,14 @@ public class UI_Manager : MonoBehaviour
     public GameObject camvasPlayerIzquierda;
     public GameObject camvasPlayerDerecha;
     public GameObject camvasEnemy;
+    private void OnEnable()
+    {
+        PowerUp_Blindaje.OnEffectPowerUp_Blindaje += ActivateBlindajeBar;
+    }
+    private void OnDisable()
+    {
+        PowerUp_Blindaje.OnEffectPowerUp_Blindaje -= ActivateBlindajeBar;
+    }
     [System.Serializable]
     public struct playerHUD
     {
@@ -21,6 +29,7 @@ public class UI_Manager : MonoBehaviour
         public GameObject BARRA_DE_CARGA;
         public TextMeshProUGUI scoreText;
         public BarraDeEscudo barraDeEscudo;
+        public Image ImageBlindaje;
         public Image ImageHP;
         public Image ImageCarga;
         public Button PadArrowUp;
@@ -28,19 +37,19 @@ public class UI_Manager : MonoBehaviour
         public Button PadArrowLeft;
         public Button PadArrowRigth;
 
-        public void CheckLifeBar(PlayerData PD)
+        public void CheckValueBar(ref float value, ref float maxValue, Image image)
         {
-            if (PD.lifePlayer <= PD.maxLifePlayer)
+            if (value <= maxValue)
             {
-                ImageHP.fillAmount = PD.lifePlayer / PD.maxLifePlayer;
+                image.fillAmount = value / maxValue;
             }
-            else if (PD.lifePlayer > PD.maxLifePlayer)
+            else if (value > maxValue)
             {
-                PD.lifePlayer = PD.maxLifePlayer;
+                value = maxValue;
             }
-            else if (PD.lifePlayer < 0)
+            else if (value < 0)
             {
-                PD.lifePlayer = 0;
+                value = 0;
             }
         }
         public void CheckLoadSpecialAttackBar(Player p)
@@ -63,6 +72,7 @@ public class UI_Manager : MonoBehaviour
         {
             scoreText.text = "Puntaje: " + PD.score;
         }
+
     }
 
     [System.Serializable]
@@ -74,20 +84,20 @@ public class UI_Manager : MonoBehaviour
         public GameObject BARRA_DE_VIDA;
         public Image ImageHP;
         public Image ImageCarga;
-
-        public void CheckLifeBar(Enemy _enemy)
+        public Image ImageBlindaje;
+        public void CheckValueBar(ref float value, ref float maxValue, Image image)
         {
-            if (_enemy.life <= _enemy.maxLife)
+            if (value <= maxValue)
             {
-                ImageHP.fillAmount = _enemy.life / _enemy.maxLife;
+                image.fillAmount = value / maxValue;
             }
-            else if (_enemy.life > _enemy.maxLife)
+            else if (value > maxValue)
             {
-                _enemy.life = _enemy.maxLife;
+                value = maxValue;
             }
-            else if (_enemy.life < 0)
+            else if (value < 0)
             {
-                _enemy.life = 0;
+                value = 0;
             }
         }
         public void CheckLoadSpecialAttackBar(Enemy _enemy)
@@ -145,6 +155,7 @@ public class UI_Manager : MonoBehaviour
                     if (players[i] != null)
                     {
                         players[i].barraDeEscudo = PlayerIzquierdaHUD.barraDeEscudo;
+                        PlayerIzquierdaHUD.ImageBlindaje.gameObject.SetActive(false);
                         players[i].barraDeEscudo.SetPlayer(players[i]);
                         PlayerIzquierdaHUD.textNamePlayer.text = players[i].namePlayer;
                     }
@@ -156,12 +167,14 @@ public class UI_Manager : MonoBehaviour
                     if (players[i] != null)
                     {
                         players[i].barraDeEscudo = PlayerDerechaHUD.barraDeEscudo;
+                        PlayerDerechaHUD.ImageBlindaje.gameObject.SetActive(false);
                         players[i].barraDeEscudo.SetPlayer(players[i]);
                         PlayerDerechaHUD.textNamePlayer.text = players[i].namePlayer;
                     }
                 }
             }
         }
+        enemyHUD.ImageBlindaje.gameObject.SetActive(false);
     }
         
     private void Start()
@@ -200,6 +213,29 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
+    public void ActivateBlindajeBar(PowerUp_Blindaje powerUp_Blindaje)
+    {
+        float value = powerUp_Blindaje.valueShild;
+        if (powerUp_Blindaje.player != null)
+        {
+            switch (powerUp_Blindaje.player.enumsPlayers.numberPlayer)
+            {
+                case EnumsPlayers.NumberPlayer.player1:
+                    PlayerIzquierdaHUD.ImageBlindaje.gameObject.SetActive(true);
+                    PlayerIzquierdaHUD.CheckValueBar(ref value, ref value, PlayerIzquierdaHUD.ImageBlindaje);
+                    break;
+                case EnumsPlayers.NumberPlayer.player2:
+                    PlayerDerechaHUD.ImageBlindaje.gameObject.SetActive(true);
+                    PlayerDerechaHUD.CheckValueBar(ref value, ref value, PlayerDerechaHUD.ImageBlindaje);
+                    break;
+            }
+        }
+        else if (powerUp_Blindaje.enemy != null)
+        {
+            enemyHUD.ImageBlindaje.gameObject.SetActive(true);
+            enemyHUD.CheckValueBar(ref value, ref value, enemyHUD.ImageBlindaje);
+        }
+    }
     public void DisableCamvasEnemy()
     {
         camvasEnemy.SetActive(false);
@@ -217,9 +253,17 @@ public class UI_Manager : MonoBehaviour
             {
                 if (players[i] != null)
                 {
-                    PlayerIzquierdaHUD.CheckLifeBar(players[i].PD);
+                    PlayerIzquierdaHUD.CheckValueBar(ref players[i].PD.lifePlayer,ref players[i].PD.maxLifePlayer, PlayerIzquierdaHUD.ImageHP);
                     PlayerIzquierdaHUD.CheckLoadSpecialAttackBar(players[i]);
                     PlayerIzquierdaHUD.DrawScore(players[i].PD);
+                    if (PlayerIzquierdaHUD.ImageBlindaje.gameObject.activeSelf)
+                    {
+                        PlayerIzquierdaHUD.CheckValueBar(ref players[i].PD.Blindaje, ref players[i].PD.MaxBlindaje, PlayerIzquierdaHUD.ImageBlindaje);
+                    }
+                    if (players[i].PD.Blindaje <= 0)
+                    {
+                        PlayerIzquierdaHUD.ImageBlindaje.gameObject.SetActive(false);
+                    }
                 }
 
             }
@@ -227,17 +271,33 @@ public class UI_Manager : MonoBehaviour
             {
                 if (players[i] != null)
                 {
-                    PlayerDerechaHUD.CheckLifeBar(players[i].PD);
+                    PlayerDerechaHUD.CheckValueBar(ref players[i].PD.lifePlayer, ref players[i].PD.maxLifePlayer, PlayerDerechaHUD.ImageHP);
                     PlayerDerechaHUD.CheckLoadSpecialAttackBar(players[i]);
                     PlayerDerechaHUD.DrawScore(players[i].PD);
+                    if (PlayerDerechaHUD.ImageBlindaje.gameObject.activeSelf)
+                    {
+                        PlayerDerechaHUD.CheckValueBar(ref players[i].PD.Blindaje, ref players[i].PD.MaxBlindaje, PlayerDerechaHUD.ImageBlindaje);
+                    }
+                    if (players[i].PD.Blindaje <= 0)
+                    {
+                        PlayerDerechaHUD.ImageBlindaje.gameObject.SetActive(false);
+                    }
                 }
             }
         }
         if (enemy != null)
         {
             enemyHUD.barraDeEscudo.CheckImageFillAmaut();
-            enemyHUD.CheckLifeBar(enemy);
+            enemyHUD.CheckValueBar(ref enemy.life,ref enemy.maxLife, enemyHUD.ImageHP);
             enemyHUD.CheckLoadSpecialAttackBar(enemy);
+            if (enemyHUD.ImageBlindaje.gameObject.activeSelf)
+            {
+                enemyHUD.CheckValueBar(ref enemy.Blindaje, ref enemy.MaxBlindaje, enemyHUD.ImageBlindaje);
+            }
+            if (enemy.Blindaje <= 0)
+            {
+                enemyHUD.ImageBlindaje.gameObject.SetActive(false);
+            }
         }
     }
 }

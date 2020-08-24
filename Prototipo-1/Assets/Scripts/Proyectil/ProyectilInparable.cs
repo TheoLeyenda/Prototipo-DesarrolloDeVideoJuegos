@@ -67,34 +67,50 @@ public class ProyectilInparable : Proyectil
         if (collision.tag == "BoxColliderController")
         {
             BoxColliderController boxColliderController = collision.GetComponent<BoxColliderController>();
-            if (boxColliderController.enemy == null && boxColliderController.player == null || boxColliderController.enemy != null && boxColliderController.player != null)
+            Enemy e = boxColliderController.enemy;
+            Player p = boxColliderController.player;
+            if (e == null && p == null || e != null && p != null)
             {
                 return;
             }
 
-            if (boxColliderController.enemy != null)
+            if (e != null)
             {
                 if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
                 {
-                    if (boxColliderController.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && boxColliderController.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
+                    if (e.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && e.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
                     {
                         if (applySpriteRecibirDanio)
                         {
-                            boxColliderController.enemy.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.RecibirDanio;
+                            e.spriteEnemy.ActualSprite = SpriteEnemy.SpriteActual.RecibirDanio;
                         }
-                        boxColliderController.enemy.life = boxColliderController.enemy.life - damage;
+                        if (e.Blindaje <= 0)
+                        {
+                            e.life = e.life - damage;
+                        }
+                        else
+                        {
+                            e.Blindaje = e.Blindaje - damage / 2;
+                        }
                     }
                 }
             }
-            if (boxColliderController.player != null)
+            if (p != null)
             {
 
                 if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
                 {
-                    boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
+                    if (p.PD.Blindaje <= 0)
+                    {
+                        p.PD.lifePlayer = p.PD.lifePlayer - damage;
+                    }
+                    else
+                    {
+                        p.PD.Blindaje = p.PD.Blindaje - damage / 2;
+                    }
                     if (applySpriteRecibirDanio)
                     {
-                        boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                        p.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                     }
                 }
                 if (PlayerDisparador != null)
@@ -105,12 +121,18 @@ public class ProyectilInparable : Proyectil
                         && boxColliderController != PlayerDisparador.boxColliderSaltando
                         && boxColliderController != PlayerDisparador.boxColliderSprite)
                     {
-                        boxColliderController.player.SetEnableCounterAttack(true);
-
-                        boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
+                        p.SetEnableCounterAttack(true);
+                        if (p.PD.Blindaje <= 0)
+                        {
+                            p.PD.lifePlayer = p.PD.lifePlayer - damage;
+                        }
+                        else
+                        {
+                            p.PD.Blindaje = p.PD.Blindaje - damage / 2;
+                        }
                         if (applySpriteRecibirDanio)
                         {
-                            boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+                            p.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                         }
                     }
                 }

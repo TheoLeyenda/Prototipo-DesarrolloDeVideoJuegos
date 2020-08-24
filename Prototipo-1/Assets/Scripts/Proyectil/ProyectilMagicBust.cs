@@ -48,11 +48,30 @@ public class ProyectilMagicBust : DisparoDeCarga
         if (collision.tag == "BoxColliderController" && enableDamage)
         {
             BoxColliderController boxColliderController = collision.GetComponent<BoxColliderController>();
-            if (boxColliderController.player == null)
+            Player p = boxColliderController.player;
+            Enemy e = boxColliderController.enemy;
+            if (p != null)
             {
-                return;
+                if (p.PD.Blindaje <= 0)
+                {
+                    p.PD.lifePlayer = p.PD.lifePlayer - damage;
+                }
+                else
+                {
+                    p.PD.Blindaje = p.PD.Blindaje - damage / 2;
+                }
             }
-            boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
+            else if (e != null)
+            {
+                if (e.Blindaje <= 0)
+                {
+                    e.life = e.life - damage;
+                }
+                else
+                {
+                    e.Blindaje = e.Blindaje - damage / 2;
+                }
+            }
         }
         if((collision.tag == "Proyectil" || collision.tag == "ProyectilGaseosa") && DestroyProjectileEnemy)
         {

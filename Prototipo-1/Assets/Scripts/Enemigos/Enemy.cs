@@ -35,6 +35,10 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public bool enableSpecialAttack;
     public SpriteEnemy spriteEnemy;
+    [HideInInspector]
+    public float Blindaje;
+    [HideInInspector]
+    public float MaxBlindaje;
     public GameObject enemyPrefab;
     public Grid gridEnemy;
     public EnumsEnemy enumsEnemy;

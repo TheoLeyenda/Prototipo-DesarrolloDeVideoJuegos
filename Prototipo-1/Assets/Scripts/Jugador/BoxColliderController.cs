@@ -103,7 +103,15 @@ public class BoxColliderController : MonoBehaviour
                                 {
                                     enemy.SetXpActual(enemy.GetXpActual() + enemy.xpForHit);
                                 }
-                                player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
+
+                                if (player.PD.Blindaje <= 0)
+                                {
+                                    player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
+                                }
+                                else
+                                {
+                                    player.PD.Blindaje = player.PD.Blindaje - proyectil.damage / 2;
+                                }
                             }
                             if (proyectil.GetComponent<ProyectilLimo>() == null)
                             {
@@ -135,7 +143,14 @@ public class BoxColliderController : MonoBehaviour
                                 enemy.SetXpActual(enemy.GetXpActual() + enemy.xpForHit);
                             }
                             player.SetEnableCounterAttack(false);
-                            player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
+                            if (player.PD.Blindaje <= 0)
+                            {
+                                player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
+                            }
+                            else
+                            {
+                                player.PD.Blindaje = player.PD.Blindaje - proyectil.damage / 2;
+                            }
                             if (proyectil.GetComponent<ProyectilLimo>() == null)
                             {
                                 player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
@@ -169,7 +184,15 @@ public class BoxColliderController : MonoBehaviour
 
                         if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && PlayerDisparador != null)
                         {
-                            player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
+                            if (player.PD.Blindaje <= 0)
+                            {
+                                player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
+                            }
+                            else
+                            {
+                                player.PD.Blindaje = player.PD.Blindaje - proyectil.damage / 2;
+                            }
+
                             if (proyectil.GetComponent<ProyectilLimo>() == null)
                             {
                                 player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
@@ -196,7 +219,14 @@ public class BoxColliderController : MonoBehaviour
                         if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && PlayerDisparador != null)
                         {
                             player.SetEnableCounterAttack(false);
-                            player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
+                            if (player.PD.Blindaje <= 0)
+                            {
+                                player.PD.lifePlayer = player.PD.lifePlayer - proyectil.damage;
+                            }
+                            else
+                            {
+                                player.PD.Blindaje = player.PD.Blindaje - proyectil.damage / 2;
+                            }
                             if (proyectil.GetComponent<ProyectilLimo>() == null)
                             {
                                 player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
@@ -323,7 +353,14 @@ public class BoxColliderController : MonoBehaviour
                 {
                     if (enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
                     {
-                        enemy.life = enemy.life - proyectil.damage;
+                        if (enemy.Blindaje <= 0)
+                        {
+                            enemy.life = enemy.life - proyectil.damage;
+                        }
+                        else
+                        {
+                            enemy.Blindaje = enemy.Blindaje - proyectil.damage / 2;
+                        }
 
                         //AUMENTO XP PARA EL ATAQUE ESPECIAL
                         if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && PlayerDisparador != null)

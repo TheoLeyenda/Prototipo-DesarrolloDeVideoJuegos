@@ -190,42 +190,50 @@ public class ProyectilChicle : Proyectil
         {
             BoxColliderController boxColliderController = collision.GetComponent<BoxColliderController>();
             collisionWhitBoxColliderController = true;
+            Enemy e = boxColliderController.enemy;
+            Player p = boxColliderController.player;
             
-            if (boxColliderController.enemy == null && boxColliderController.player == null || boxColliderController.enemy != null && boxColliderController.player != null)
+            if (e == null && p == null || e != null && p != null)
             {
                 return;
             }
 
-            if (boxColliderController.enemy != null)
+            if (e != null)
             {
                 if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
                 {
-                    if (boxColliderController.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && boxColliderController.enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
+                    if (e.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && e.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
                     {
-                        boxColliderController.enemy.life = boxColliderController.enemy.life - damage;
-                        //enemy = boxColliderController.enemy;
-                        //boxColliderController.enemy.enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.Atrapado);
-                        //boxColliderController.enemy.timeStuned = timeEffectStuned;
-                        //animator.Play(nameAnimationHit);
-                        //rg2D.velocity = Vector2.zero;
+                        if (e.Blindaje <= 0)
+                        {
+                            e.life = e.life - damage;
+                        }
+                        else
+                        {
+                            e.Blindaje = e.Blindaje - damage / 2;
+                        }
+
                         transform.eulerAngles = new Vector3(0,0, 90);
                         rg2D.velocity = Vector2.zero;
                         ShootForward();
                     }
                 }
             }
-            if (boxColliderController.player != null)
+            if (p != null)
             {
 
                 if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
                 {
-                    boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
-                    boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-                    //player = boxColliderController.player;
-                    //boxColliderController.player.enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.Atrapado;
-                    //boxColliderController.player.timeStuned = timeEffectStuned;
-                    //animator.Play(nameAnimationHit);
-                    //rg2D.velocity = Vector2.zero;
+                    if (p.PD.Blindaje <= 0)
+                    {
+                        p.PD.lifePlayer = p.PD.lifePlayer - damage;
+                    }
+                    else
+                    {
+                        p.PD.Blindaje = p.PD.Blindaje - damage / 2;
+                    }
+                    p.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
+
                     transform.eulerAngles = new Vector3(0, 0, 90);
                     rg2D.velocity = Vector2.zero;
                     ShootForward();
@@ -238,15 +246,17 @@ public class ProyectilChicle : Proyectil
                         && boxColliderController != PlayerDisparador.boxColliderSaltando
                         && boxColliderController != PlayerDisparador.boxColliderSprite)
                     {
-                        boxColliderController.player.SetEnableCounterAttack(true);
+                        p.SetEnableCounterAttack(true);
+                        if (p.PD.Blindaje <= 0)
+                        {
+                            p.PD.lifePlayer = p.PD.lifePlayer - damage;
+                        }
+                        else
+                        {
+                            p.PD.Blindaje = p.PD.Blindaje - damage / 2;
+                        }
+                        p.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
 
-                        boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
-                        boxColliderController.player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
-                        //player = boxColliderController.player;
-                        //boxColliderController.player.enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.Atrapado;
-                        //boxColliderController.player.timeStuned = timeEffectStuned;
-                        //animator.Play(nameAnimationHit);
-                        //rg2D.velocity = Vector2.zero;
                         transform.eulerAngles = new Vector3(0, 0, 90);
                         rg2D.velocity = Vector2.zero;
                         ShootForward();

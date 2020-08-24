@@ -42,7 +42,14 @@ public class Gaseosa : MonoBehaviour
             {
                 return;
             }
-            player.PD.lifePlayer = player.PD.lifePlayer - damage;
+            if (player.PD.Blindaje <= 0)
+            {
+                player.PD.lifePlayer = player.PD.lifePlayer - damage;
+            }
+            else
+            {
+                player.PD.Blindaje = player.PD.Blindaje - damage / 2;
+            }
             //Debug.Log("Colisiono con el enemigo ahre");
         }
         if (collision.tag == "Enemy")
@@ -52,7 +59,14 @@ public class Gaseosa : MonoBehaviour
             {
                 return;
             }
-            enemy.life = enemy.life - (damage/2);
+            if (enemy.Blindaje <= 0)
+            {
+                enemy.life = enemy.life - (damage / 2);
+            }
+            else
+            {
+                enemy.Blindaje = enemy.Blindaje - (damage / 2) / 2;
+            }
             
         }
     }
