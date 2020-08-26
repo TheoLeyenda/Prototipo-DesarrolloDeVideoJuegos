@@ -141,7 +141,7 @@ public class PowerUpDisplayController : MonoBehaviour
         else if (currentPowerUp.enableEffect && currentPowerUp.typePowerUp == PowerUp.TypePowerUp.PowerUpDisable)
         {
             scrollbarPowerUp.size = 1;
-            Debug.Log("CUACK");
+            //Debug.Log("CUACK");
         }
         else if (prevPowerUp.enableEffect && prevPowerUp.typePowerUp == PowerUp.TypePowerUp.PowerUpDisable)
         {
