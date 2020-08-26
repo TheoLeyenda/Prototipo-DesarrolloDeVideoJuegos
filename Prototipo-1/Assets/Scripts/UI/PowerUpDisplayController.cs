@@ -72,7 +72,7 @@ public class PowerUpDisplayController : MonoBehaviour
                 {
                     imageCurrentPowerUp.sprite = spritesPowerUps[powerUpContainerManager.currentIndexPowerUp];
                     textCountPowerUp.text = "" + powerUpContainerManager.powerUpContainerContent[powerUpContainerManager.currentIndexPowerUp].countPowerUps;
-                    //Debug.Log("ACTUALICE CORRECTAMENTE");
+                    Debug.Log("ACTUALICE CORRECTAMENTE");
                 }
                 else
                 {
@@ -141,6 +141,7 @@ public class PowerUpDisplayController : MonoBehaviour
         else if (currentPowerUp.enableEffect && currentPowerUp.typePowerUp == PowerUp.TypePowerUp.PowerUpDisable)
         {
             scrollbarPowerUp.size = 1;
+            Debug.Log("CUACK");
         }
         else if (prevPowerUp.enableEffect && prevPowerUp.typePowerUp == PowerUp.TypePowerUp.PowerUpDisable)
         {

@@ -135,11 +135,13 @@ public class PowerUpContainerManager : MonoBehaviour
                     if (powerUpContainerContent[index].countPowerUps <= 0)
                     {
                         powerUpContainerContent[index].currentPowerUp = false;
+                        bool powerUpAsigned = false;
                         for (int j = 0; j < powerUpContainerContent.Count; j++)
                         {
                             if (powerUpContainerContent[j].countPowerUps > 0)
                             {
                                 //Debug.Log("ASIGNO EL NUEVO POWER UP");
+                                powerUpAsigned = true;
                                 powerUpContainerContent[j].currentPowerUp = true;
                                 gameData.indexCurrentPowerUp = j;
                                 currentIndexPowerUp = j;
@@ -148,6 +150,14 @@ public class PowerUpContainerManager : MonoBehaviour
                                 {
                                     OnNextPowerUpAsigned(this);
                                 }
+                            }
+                        }
+                        if (!powerUpAsigned)
+                        {
+                            currentIndexPowerUp = powerUpContainerContent.Count - 1;
+                            if (OnNextPowerUpAsigned != null)
+                            {
+                                OnNextPowerUpAsigned(this);
                             }
                         }
                     }

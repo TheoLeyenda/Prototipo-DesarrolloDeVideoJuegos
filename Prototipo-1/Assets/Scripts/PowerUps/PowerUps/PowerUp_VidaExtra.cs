@@ -15,8 +15,8 @@ public class PowerUp_VidaExtra : PowerUp, IDHealth<int>
     public override void ActivatedPowerUp()
     {
         base.ActivatedPowerUp();
-        GiveHealth(recoverHealth);
         enableEffect = true;
+        GiveHealth(recoverHealth);
     }
     public void GiveHealth(int _health)
     {
