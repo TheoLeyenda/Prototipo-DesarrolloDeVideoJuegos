@@ -214,10 +214,10 @@ public class Player : MonoBehaviour
             //xpActual = xpNededSpecialAttack;
             //PD.lifePlayer = PD.maxLifePlayer;
         //}
-        if (Input.GetKey(KeyCode.F)) 
-        {
+        //if (Input.GetKey(KeyCode.F)) 
+        //{
             PD.lifePlayer = PD.maxLifePlayer;
-        }
+        //}
         if (Input.GetKey(KeyCode.M))
         {
             PD.lifePlayer = 0;

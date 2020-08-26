@@ -59,6 +59,7 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
     }
     public void EffectPowerUp_QuietoAhi(PowerUp_QuietoAhi powerUp_QuietoAhí)
     {
+        //Debug.Log("HIJO DE REMIL PUTA");
         if (playerReference != null)
         {
             if (powerUp_QuietoAhí.player == playerReference ||
@@ -86,39 +87,45 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
     }
     public void DisableEffectPowerUp_QuietoAhi(PowerUp_QuietoAhi powerUp_QuietoAhí)
     {
-        if (playerReference != null && powerUp_QuietoAhí.player != null)
+        if (powerUp_QuietoAhí.enableEffect)
         {
-            if (powerUp_QuietoAhí.player == playerReference ||
-                powerUp_QuietoAhí.player.enumsPlayers.numberPlayer == playerReference.enumsPlayers.numberPlayer)
-                return;
-        }
-
-        if (powerUp_QuietoAhí.player != null && enemyReference != null)
-        {
-            if (powerUp_QuietoAhí.disableAttack)
+            //Debug.Log("HIJO DE REMIL PUTA");
+            if (playerReference != null && powerUp_QuietoAhí.player != null)
             {
-                enemyReference.delayAttack = powerUp_QuietoAhí.GetAuxDelayAttack();
+                if (powerUp_QuietoAhí.player == playerReference ||
+                    powerUp_QuietoAhí.player.enumsPlayers.numberPlayer == playerReference.enumsPlayers.numberPlayer)
+                    return;
             }
-            enemyReference.Speed = powerUp_QuietoAhí.GetAuxSpeed();
-            enemyReference.SpeedJump = powerUp_QuietoAhí.GetAuxSpeedJump();
-            enemyReference.Resistace = powerUp_QuietoAhí.GetAuxResistence();
-            enemyReference.Gravity = powerUp_QuietoAhí.GetAuxGravity();
+
+            if (powerUp_QuietoAhí.player != null && enemyReference != null)
+            {
+                if (powerUp_QuietoAhí.disableAttack)
+                {
+                    enemyReference.delayAttack = powerUp_QuietoAhí.GetAuxDelayAttack();
+                }
+                enemyReference.Speed = powerUp_QuietoAhí.GetAuxSpeed();
+                enemyReference.SpeedJump = powerUp_QuietoAhí.GetAuxSpeedJump();
+                enemyReference.Resistace = powerUp_QuietoAhí.GetAuxResistence();
+                enemyReference.Gravity = powerUp_QuietoAhí.GetAuxGravity();
+            }
+            else if ((powerUp_QuietoAhí.player != null && playerReference != null) ||
+                 (powerUp_QuietoAhí.enemy != null && playerReference != null))
+            {
+
+                if (powerUp_QuietoAhí.disableAttack)
+                {
+                    playerReference.delayAttack = powerUp_QuietoAhí.GetDelayAttack();
+                }
+
+                playerReference.Speed = powerUp_QuietoAhí.GetAuxSpeed();
+                playerReference.SpeedJump = powerUp_QuietoAhí.GetAuxSpeedJump();
+                playerReference.Resistace = powerUp_QuietoAhí.GetAuxResistence();
+                playerReference.Gravity = powerUp_QuietoAhí.GetAuxGravity();
+
+            }
+            powerUp_QuietoAhí.enableEffect = false;
         }
-        else if ((powerUp_QuietoAhí.player != null && playerReference != null) || 
-             (powerUp_QuietoAhí.enemy != null && playerReference != null))
-        {
-
-             if (powerUp_QuietoAhí.disableAttack)
-             {
-                 playerReference.delayAttack = powerUp_QuietoAhí.GetDelayAttack();
-             }
-
-             playerReference.Speed = powerUp_QuietoAhí.GetAuxSpeed();
-             playerReference.SpeedJump = powerUp_QuietoAhí.GetAuxSpeedJump();
-             playerReference.Resistace = powerUp_QuietoAhí.GetAuxResistence();
-             playerReference.Gravity = powerUp_QuietoAhí.GetAuxGravity();
-
-        }
+        
     }
 
     public void SettingPowerUp_NadaDeDefensa(PowerUp_NadaDeDefensa powerUp_NadaDeDefensa)
@@ -142,10 +149,11 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
     }
     public void DisableEffectPowerUp_NadaDeDefensa(PowerUp_NadaDeDefensa powerUp_NadaDeDefensa)
     {
-        if (enemyReference == null)
+        if (enemyReference == null || !powerUp_NadaDeDefensa.enableEffect)
             return;
 
         enemyReference.enableDeffence = true;
+        powerUp_NadaDeDefensa.enableEffect = false;
     }
 
 }

@@ -7,6 +7,11 @@ public class PowerUp_VidaExtra : PowerUp, IDHealth<int>
     // Start is called before the first frame update
     public int recoverHealth;
     public static event Action<PowerUp> DisablePowerUp;
+    protected override void Start()
+    {
+        typePowerUp = TypePowerUp.PowerUpDisable;
+        base.Start();
+    }
     public override void ActivatedPowerUp()
     {
         base.ActivatedPowerUp();

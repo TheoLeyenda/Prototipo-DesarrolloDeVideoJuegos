@@ -139,7 +139,7 @@ public class PowerUpContainerManager : MonoBehaviour
                         {
                             if (powerUpContainerContent[j].countPowerUps > 0)
                             {
-                                Debug.Log("ASIGNO EL NUEVO POWER UP");
+                                //Debug.Log("ASIGNO EL NUEVO POWER UP");
                                 powerUpContainerContent[j].currentPowerUp = true;
                                 gameData.indexCurrentPowerUp = j;
                                 currentIndexPowerUp = j;
@@ -152,9 +152,13 @@ public class PowerUpContainerManager : MonoBehaviour
                         }
                     }
                 }
+                if (OnRefreshDataPowerUpUI != null)
+                {
+                    OnRefreshDataPowerUpUI(this);
+                }
             }
         }
-        if (OnRefreshDataPowerUpUI != null)
+        else if (OnRefreshDataPowerUpUI != null)
         {
             OnRefreshDataPowerUpUI(this);
         }
@@ -167,6 +171,8 @@ public class PowerUpContainerManager : MonoBehaviour
         for (int i = 0; i < powerUpContainerContent.Count; i++)
         {
             powerUpContainerContent[i].currentPowerUp = false;
+            if(powerUpContainerContent[i].powerUp != null)
+                powerUpContainerContent[i].powerUp.enableEffect = false;
         }
     }
     public void AddCountPowerUpWhitGameData(PowerUp powerUp)

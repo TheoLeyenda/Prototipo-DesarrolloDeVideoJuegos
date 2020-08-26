@@ -13,7 +13,11 @@ public class PowerUp_SuperVelocidad : PowerUp
     private float auxResitance;
     public float NewGravity;
     private float auxGravity;
-
+    protected override void Start()
+    {
+        typePowerUp = TypePowerUp.PowerUpDelay;
+        base.Start();
+    }
     private void OnEnable()
     {
         if (player != null)
@@ -42,7 +46,7 @@ public class PowerUp_SuperVelocidad : PowerUp
             }
             else
             {
-                DisablePowerUpEffect();
+                DisableEffect();
             }
         }
     }

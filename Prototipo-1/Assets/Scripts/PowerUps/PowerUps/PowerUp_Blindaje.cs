@@ -9,6 +9,11 @@ public class PowerUp_Blindaje : PowerUp
     public static event Action<PowerUp_Blindaje> OnEffectPowerUp_Blindaje;
     public float valueShild = 500;
     private float auxLife;
+    protected override void Start()
+    {
+        typePowerUp = TypePowerUp.PowerUpDisable;
+        base.Start();
+    }
     public override void ActivatedPowerUp()
     {
         enableEffect = true;

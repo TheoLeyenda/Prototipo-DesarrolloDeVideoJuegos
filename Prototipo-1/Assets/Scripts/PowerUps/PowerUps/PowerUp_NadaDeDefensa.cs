@@ -11,6 +11,11 @@ public class PowerUp_NadaDeDefensa : PowerUp
     private BarraDeEscudo barraDeEscudo;
     private bool setingData = false;
     public bool disableEffectInDeathPlayer = false;
+    protected override void Start()
+    {
+        typePowerUp = TypePowerUp.PowerUpDelay;
+        base.Start();
+    }
     private void Update()
     {
         if (enableEffect)
@@ -28,9 +33,6 @@ public class PowerUp_NadaDeDefensa : PowerUp
             }
             else
             {
-                if (DisablePowerUp != null)
-                    DisablePowerUp(this);
-
                 DisableEffect();
             }
         }
@@ -41,8 +43,6 @@ public class PowerUp_NadaDeDefensa : PowerUp
         {
             //Debug.Log("JAJA");
             base.CheckDeadTarget(e);
-            if (DisablePowerUp != null)
-                DisablePowerUp(this);
             DisableEffect();
             if (barraDeEscudo != null)
             {
@@ -57,20 +57,21 @@ public class PowerUp_NadaDeDefensa : PowerUp
         if (enableEffect && disableEffectInDeathPlayer)
         {
             base.CheckDeadTarget(p);
-            if (DisablePowerUp != null)
-                DisablePowerUp(this);
             DisableEffect();
         }
     }
     public override void DisableEffect()
     {
+        if (DisablePowerUp != null)
+            DisablePowerUp(this);
+
         DisableEffectPowerUp_NadaDeDefensa();
 
         if (OnDisablePowerUp_NadaDeDefensa != null)
             OnDisablePowerUp_NadaDeDefensa(this);
-
+        //en el OnDisablePowerUp_NadaDeDefensa(this) hago que enableEffect = false;
         delayEffect = auxDelayEffect;
-        enableEffect = false;
+        
     }
     public void SetBarraDeEscudo(BarraDeEscudo _barraDeEscudo)
     {
@@ -92,8 +93,8 @@ public class PowerUp_NadaDeDefensa : PowerUp
             barraDeEscudo.SetEnableDeffence(false);
             barraDeEscudo.SetValueShild(0);
         }
-        else
-            Debug.Log("barraDeEscudo is null");
+        //else
+            //Debug.Log("barraDeEscudo is null");
     }
     public void DisableEffectPowerUp_NadaDeDefensa()
     {
@@ -102,8 +103,8 @@ public class PowerUp_NadaDeDefensa : PowerUp
             barraDeEscudo.SetEnableDeffence(true);
             //barraDeEscudo = null;
         }
-        else
-            Debug.Log("barraDeEscudo is null");
+        //else
+            //Debug.Log("barraDeEscudo is null");
     }
 
 }

@@ -18,11 +18,17 @@ public class PowerUp_QuietoAhi : PowerUp
     private float auxGravity;
     private float auxDelayAttack;
     private float delayAttack = 100000;
-
+    protected override void Start()
+    {
+        typePowerUp = TypePowerUp.PowerUpDelay;
+        base.Start();
+        enableEffect = false;
+    }
     private void Update()
     {
         if (enableEffect)
         {
+            Debug.Log("ENTRE AL POWER_UP");
             if (savingData)
             {
                 if (OnSavingDataPowerUp_QuietoAhi != null)
@@ -35,14 +41,12 @@ public class PowerUp_QuietoAhi : PowerUp
             if (delayEffect > 0)
             {
                 ThrowEffect();
+                Debug.Log("ESTOY ACTIVADO CULEAOOOO");
                 delayEffect = delayEffect - Time.deltaTime;
             }
             else
             {
-                if (DisablePowerUp != null)
-                {
-                    DisablePowerUp(this);
-                }
+                Debug.Log("DESACTIVE EL POWERUP");
                 DisableEffect();
                 //Debug.Log("Desactive el efecto");
             }
@@ -81,12 +85,16 @@ public class PowerUp_QuietoAhi : PowerUp
     }
     public override void DisableEffect()
     {
+        if (DisablePowerUp != null)
+        {
+            DisablePowerUp(this);
+        }
         if (OnDisableEffectPowerUp_QuietoAhi != null)
         {
             OnDisableEffectPowerUp_QuietoAhi(this);
+            //Deshabilito la variable enableEffect dentro de OnDisableEffectPowerUp_QuietoAhi
         }
         delayEffect = auxDelayEffect;
-        enableEffect = false;
         savingData = true;
     }
 

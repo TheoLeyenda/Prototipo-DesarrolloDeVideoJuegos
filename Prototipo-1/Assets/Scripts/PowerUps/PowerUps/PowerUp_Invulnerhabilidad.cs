@@ -7,7 +7,11 @@ public class PowerUp_Invulnerhabilidad : PowerUp
 {
     private float currentLife;
     public static event Action<PowerUp> DisablePowerUp;
-
+    protected override void Start()
+    {
+        typePowerUp = TypePowerUp.PowerUpDelay;
+        base.Start();
+    }
     private void Update()
     {
         if (enableEffect)
@@ -26,13 +30,7 @@ public class PowerUp_Invulnerhabilidad : PowerUp
             }
             else
             {
-                if (DisablePowerUp != null)
-                {
-                    DisablePowerUp(this);
-                }
-                delayEffect = auxDelayEffect;
-                enableEffect = false;
-                currentLife = 0;
+                DisableEffect();
             }
         }
     }
@@ -48,5 +46,16 @@ public class PowerUp_Invulnerhabilidad : PowerUp
             currentLife = enemy.life;
         }
         enableEffect = true;
+    }
+    public override void DisableEffect()
+    {
+        base.DisableEffect();
+        if (DisablePowerUp != null)
+        {
+            DisablePowerUp(this);
+        }
+        delayEffect = auxDelayEffect;
+        enableEffect = false;
+        currentLife = 0;
     }
 }

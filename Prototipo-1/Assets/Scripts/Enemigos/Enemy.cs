@@ -151,6 +151,7 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public float timeStuned = 0;
 
+    private float auxSpeed;
     public static event Action<Enemy, string> OnModifireState;
     public static event Action<Enemy, string> OnDisableModifireState;
     public static event Action<Enemy> OnDie;
@@ -181,6 +182,7 @@ public class Enemy : MonoBehaviour
     }
     public virtual void Start()
     {
+        auxSpeed = Speed;
         weitVictory = false;
         specialAttackParabolaEnemyController = GetComponent<SpecialAttackParabolaEnemyController>();
         tolerableStillTime = maxRandomDelayMovement;
@@ -244,16 +246,19 @@ public class Enemy : MonoBehaviour
         }
         ResetSpeedJump();
         //BORRAR LUEGO DE TESTEO
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             //Debug.Log(enumsEnemy.GetMovement());
             //Debug.Log("Enable Movement: " + enableMovement);
+            //Debug.Log("Speed:" + Speed);
+            //Debug.Log("SpeedJump:" + SpeedJump);
             //Debug.Log("Delay Movimiento: " + delaySelectMovement);
             //Debug.Log("SpriteEnemy:"+ spriteEnemy.nameActual);
             //Debug.Log(inCombatPosition);
             //Debug.Log(enumsEnemy.GetStateEnemy());
             life = 0;
         }
+        
         //-----------------------------------
         CheckState();
         CheckDead();

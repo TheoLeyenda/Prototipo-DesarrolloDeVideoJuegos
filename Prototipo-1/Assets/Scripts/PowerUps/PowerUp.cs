@@ -11,6 +11,13 @@ public class PowerUp : MonoBehaviour
         CollisionPlayer,
         CollisionProyectile,
     }
+    public enum TypePowerUp
+    {
+        PowerUpDelay,
+        PowerUpDisable,
+    }
+    [HideInInspector]
+    public TypePowerUp typePowerUp;
     public TypeCheckCollision typeCheckCollision;
     [HideInInspector]
     public ThrowPowerUpController.UserPowerUpController userPowerUp;
@@ -25,7 +32,7 @@ public class PowerUp : MonoBehaviour
     public static event Action<PowerUp> OnCollisionWhitPlayer;
     public static event Action<PowerUp> OnCollisionWhitProyectil;
 
-    private void Start()
+    protected virtual void Start()
     {
         auxDelayEffect = delayEffect;
     }
