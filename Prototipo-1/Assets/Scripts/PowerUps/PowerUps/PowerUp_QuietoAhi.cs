@@ -11,7 +11,6 @@ public class PowerUp_QuietoAhi : PowerUp
     public static event Action<PowerUp_QuietoAhi> OnSavingDataPowerUp_QuietoAhi;
     //public TargetEffect targetEffect;
     public bool disableAttack = false;
-    private bool enableEffect = false;
     private bool savingData = true;
     private float auxSpeed;
     private float auxSpeedJump;

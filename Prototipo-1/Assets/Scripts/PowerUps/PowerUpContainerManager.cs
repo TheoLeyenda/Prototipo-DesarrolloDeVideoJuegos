@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class PowerUpContainerManager : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -14,14 +14,19 @@ public class PowerUpContainerManager : MonoBehaviour
         public int maxCountPowerUps;
         public bool currentPowerUp;
     }
-    private bool enableShootPowerUp = true;
+    [HideInInspector]
+    public bool enableShootPowerUp = true;
     private float delayEnableShootPowerUp = 0.1f;
     private float auxDelayEnableShootPowerUp = 0.1f;
     private bool enableDelay;
     private GameData gameData;
     public List<Container> powerUpContainerContent;
     public ThrowPowerUpController.UserPowerUpController userContainer;
+    public static event Action<PowerUpContainerManager> OnRefreshDataPowerUpUI;
+    public static event Action<PowerUpContainerManager> OnNextPowerUpAsigned;
     private GameManager gm;
+    [HideInInspector]
+    public int currentIndexPowerUp;
     private void Awake()
     {
         gameData = GameData.instaceGameData;
@@ -50,6 +55,7 @@ public class PowerUpContainerManager : MonoBehaviour
     {
         if (gameData == null) return;
         DeselectAllPowerUps();
+        currentIndexPowerUp = powerUpContainerContent.Count - 1;
         for (int i = 0; i < gameData.dataPlayerPowerUp.Length; i++)
         {
             if (i < powerUpContainerContent.Count && powerUpContainerContent[i].powerUp != null)
@@ -58,14 +64,14 @@ public class PowerUpContainerManager : MonoBehaviour
                 powerUpContainerContent[i].maxCountPowerUps = gameData.dataPlayerPowerUp[i].maxCountPowerUps;
                 powerUpContainerContent[i].powerUp.userPowerUp = userContainer;
             }
-            //else
-            //{
-                //Debug.Log("No entre XD");
-            //}
         }
-        if (gameData.indexCurrentPowerUp < powerUpContainerContent.Count && gameData.indexCurrentPowerUp >= 0)
+        if (powerUpContainerContent[gameData.indexCurrentPowerUp].powerUp.player != null)
         {
-            powerUpContainerContent[gameData.indexCurrentPowerUp].currentPowerUp = true;
+            if (gameData.indexCurrentPowerUp < powerUpContainerContent.Count && gameData.indexCurrentPowerUp >= 0)
+            {
+                powerUpContainerContent[gameData.indexCurrentPowerUp].currentPowerUp = true;
+                currentIndexPowerUp = gameData.indexCurrentPowerUp;
+            }
         }
     }
     private void Update()
@@ -86,8 +92,11 @@ public class PowerUpContainerManager : MonoBehaviour
     }
     public void ThrowPowerUp(int index)
     {
+        
         if (gameData.indexCurrentPowerUp < 0 || gameData.indexCurrentPowerUp >= powerUpContainerContent.Count)
             return;
+
+        currentIndexPowerUp = index;
 
         if (powerUpContainerContent[index].namePowerUp != "None")
         {
@@ -116,28 +125,41 @@ public class PowerUpContainerManager : MonoBehaviour
                 powerUpContainerContent[index].countPowerUps--;
                 enableShootPowerUp = false;
                 //Debug.Log("POWER UP LANZADO");
-                if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia 
-                    || gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Supervivencia)
+                if (p != null)
                 {
-                    gameData.dataPlayerPowerUp[index].countPowerUp--;
-                }
-                if (powerUpContainerContent[index].countPowerUps <= 0)
-                {
-                    powerUpContainerContent[index].currentPowerUp = false;
-                    for (int j = 0; j < powerUpContainerContent.Count; j++)
+                    if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia
+                        || gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Supervivencia)
                     {
-                        if (powerUpContainerContent[j].countPowerUps > 0)
+                        gameData.dataPlayerPowerUp[index].countPowerUp--;
+                    }
+                    if (powerUpContainerContent[index].countPowerUps <= 0)
+                    {
+                        powerUpContainerContent[index].currentPowerUp = false;
+                        for (int j = 0; j < powerUpContainerContent.Count; j++)
                         {
-                            Debug.Log("ASIGNO EL NUEVO POWER UP");
-                            powerUpContainerContent[j].currentPowerUp = true;
-                            gameData.indexCurrentPowerUp = j;
-                            j = powerUpContainerContent.Count;
+                            if (powerUpContainerContent[j].countPowerUps > 0)
+                            {
+                                Debug.Log("ASIGNO EL NUEVO POWER UP");
+                                powerUpContainerContent[j].currentPowerUp = true;
+                                gameData.indexCurrentPowerUp = j;
+                                currentIndexPowerUp = j;
+                                j = powerUpContainerContent.Count;
+                                if (OnNextPowerUpAsigned != null)
+                                {
+                                    OnNextPowerUpAsigned(this);
+                                }
+                            }
                         }
                     }
                 }
             }
         }
-        
+        if (OnRefreshDataPowerUpUI != null)
+        {
+            OnRefreshDataPowerUpUI(this);
+        }
+
+
     }
     
     public void DeselectAllPowerUps()

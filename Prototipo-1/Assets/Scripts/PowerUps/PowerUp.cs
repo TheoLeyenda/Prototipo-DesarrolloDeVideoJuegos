@@ -19,6 +19,8 @@ public class PowerUp : MonoBehaviour
     public string namePowerUp;
     public float delayEffect;
     protected float auxDelayEffect;
+    [HideInInspector]
+    public bool enableEffect = false;
     public static event Action<PowerUp> OnDisablePowerUpEffect;
     public static event Action<PowerUp> OnCollisionWhitPlayer;
     public static event Action<PowerUp> OnCollisionWhitProyectil;
@@ -122,5 +124,9 @@ public class PowerUp : MonoBehaviour
                 
                 break;
         }
+    }
+    public float GetAuxDelayEffect()
+    {
+        return auxDelayEffect;
     }
 }

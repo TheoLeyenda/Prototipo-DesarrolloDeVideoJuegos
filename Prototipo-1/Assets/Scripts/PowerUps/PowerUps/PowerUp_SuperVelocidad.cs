@@ -13,7 +13,6 @@ public class PowerUp_SuperVelocidad : PowerUp
     private float auxResitance;
     public float NewGravity;
     private float auxGravity;
-    private bool enableEffect = false;
 
     private void OnEnable()
     {

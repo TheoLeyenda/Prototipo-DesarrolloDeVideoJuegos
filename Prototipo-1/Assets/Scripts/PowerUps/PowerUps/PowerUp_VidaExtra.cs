@@ -11,6 +11,7 @@ public class PowerUp_VidaExtra : PowerUp, IDHealth<int>
     {
         base.ActivatedPowerUp();
         GiveHealth(recoverHealth);
+        enableEffect = true;
     }
     public void GiveHealth(int _health)
     {
@@ -40,5 +41,6 @@ public class PowerUp_VidaExtra : PowerUp, IDHealth<int>
         {
             DisablePowerUp(this);
         }
+        enableEffect = false;
     }
 }

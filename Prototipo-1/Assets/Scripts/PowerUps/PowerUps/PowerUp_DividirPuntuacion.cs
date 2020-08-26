@@ -5,7 +5,6 @@ using System;
 
 public class PowerUp_DividirPuntuacion : PowerUp
 {
-    private bool enableEffect = false;
     private float auxScoreForHit = 0;
     private float auxScoreForKill = 0;
     public static event Action<PowerUp> DisablePowerUp;

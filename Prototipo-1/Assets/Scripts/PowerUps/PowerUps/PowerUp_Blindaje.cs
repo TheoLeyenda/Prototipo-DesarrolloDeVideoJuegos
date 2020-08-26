@@ -8,11 +8,10 @@ public class PowerUp_Blindaje : PowerUp
     public static event Action<PowerUp> DisablePowerUp;
     public static event Action<PowerUp_Blindaje> OnEffectPowerUp_Blindaje;
     public float valueShild = 500;
-    public bool enablePowerUp = false;
     private float auxLife;
     public override void ActivatedPowerUp()
     {
-        enablePowerUp = true;
+        enableEffect = true;
         if (player != null)
         {
             player.PD.Blindaje = valueShild;
@@ -32,7 +31,7 @@ public class PowerUp_Blindaje : PowerUp
     }
     private void Update()
     {
-        if (enablePowerUp)
+        if (enableEffect)
         {
             if (player != null)
             {
@@ -40,11 +39,11 @@ public class PowerUp_Blindaje : PowerUp
                 if (player.PD.Blindaje <= 0)
                 {
                     player.PD.Blindaje = 0;
+                    enableEffect = false;
                     if (DisablePowerUp != null)
                     {
                         DisablePowerUp(this);
                     }
-                    enablePowerUp = false;
                 }
             }
             else if (enemy != null)
@@ -53,11 +52,11 @@ public class PowerUp_Blindaje : PowerUp
                 if (enemy.Blindaje <= 0)
                 {
                     enemy.Blindaje = 0;
+                    enableEffect = false;
                     if (DisablePowerUp != null)
                     {
                         DisablePowerUp(this);
                     }
-                    enablePowerUp = false;
                 }
             }
         }

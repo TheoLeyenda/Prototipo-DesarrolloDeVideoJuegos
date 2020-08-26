@@ -9,7 +9,6 @@ public class PowerUp_NadaDeDefensa : PowerUp
     public static event Action<PowerUp_NadaDeDefensa> OnSettingsPowerUp;
     public static event Action<PowerUp_NadaDeDefensa> OnDisablePowerUp_NadaDeDefensa;
     private BarraDeEscudo barraDeEscudo;
-    private bool enableEffect = false;
     private bool setingData = false;
     public bool disableEffectInDeathPlayer = false;
     private void Update()

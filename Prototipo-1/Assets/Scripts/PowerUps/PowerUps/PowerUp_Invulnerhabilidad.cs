@@ -6,7 +6,6 @@ using System;
 public class PowerUp_Invulnerhabilidad : PowerUp
 {
     private float currentLife;
-    private bool enableEffect;
     public static event Action<PowerUp> DisablePowerUp;
 
     private void Update()

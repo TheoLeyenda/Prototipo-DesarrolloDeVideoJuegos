@@ -11,6 +11,18 @@ public class UI_Manager : MonoBehaviour
     public GameObject camvasPlayerIzquierda;
     public GameObject camvasPlayerDerecha;
     public GameObject camvasEnemy;
+    public static UI_Manager instanceUI_Manager;
+    private void Awake()
+    {
+        if (instanceUI_Manager == null)
+        {
+            instanceUI_Manager = this;
+        }
+        else if (instanceUI_Manager != null)
+        {
+            Destroy(gameObject);
+        }
+    }
     private void OnEnable()
     {
         PowerUp_Blindaje.OnEffectPowerUp_Blindaje += ActivateBlindajeBar;
@@ -18,6 +30,10 @@ public class UI_Manager : MonoBehaviour
     private void OnDisable()
     {
         PowerUp_Blindaje.OnEffectPowerUp_Blindaje -= ActivateBlindajeBar;
+    }
+    private void OnDestroy()
+    {
+        instanceUI_Manager = null;
     }
     [System.Serializable]
     public struct playerHUD
@@ -32,6 +48,9 @@ public class UI_Manager : MonoBehaviour
         public Image ImageBlindaje;
         public Image ImageHP;
         public Image ImageCarga;
+        public Scrollbar scrollbarPowerUp;
+        public Image imageCurrentPowerUp;
+        public TextMeshProUGUI textCountPowerUp;
         public Button PadArrowUp;
         public Button PadArrowDown;
         public Button PadArrowLeft;
@@ -85,6 +104,10 @@ public class UI_Manager : MonoBehaviour
         public Image ImageHP;
         public Image ImageCarga;
         public Image ImageBlindaje;
+        public Scrollbar scrollbarPowerUp;
+        public Image imageCurrentPowerUp;
+        public TextMeshProUGUI textCountPowerUp;
+
         public void CheckValueBar(ref float value, ref float maxValue, Image image)
         {
             if (value <= maxValue)
