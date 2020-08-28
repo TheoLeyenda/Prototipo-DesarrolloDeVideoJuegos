@@ -66,13 +66,20 @@ public class PowerUpDisplayController : MonoBehaviour
     {
         if (_powerUpContainerManager == powerUpContainerManager)
         {
-            if (prevPowerUp != null)
+            if (powerUpContainerManager.currentIndexPowerUp >= powerUpContainerManager.powerUpContainerContent.Count - 1)
+            {
+                int index = powerUpContainerManager.powerUpContainerContent.Count - 1;
+                prevPowerUp = powerUpContainerManager.powerUpContainerContent[index].powerUp;
+                imageCurrentPowerUp.sprite = spritesPowerUps[spritesPowerUps.Count - 1];
+                textCountPowerUp.text = "" + powerUpContainerManager.powerUpContainerContent[index].countPowerUps;
+            }
+            else if (prevPowerUp != null)
             {
                 if (prevPowerUp.typePowerUp == PowerUp.TypePowerUp.PowerUpDisable || !prevPowerUp.enableEffect)
                 {
                     imageCurrentPowerUp.sprite = spritesPowerUps[powerUpContainerManager.currentIndexPowerUp];
                     textCountPowerUp.text = "" + powerUpContainerManager.powerUpContainerContent[powerUpContainerManager.currentIndexPowerUp].countPowerUps;
-                    Debug.Log("ACTUALICE CORRECTAMENTE");
+                    //Debug.Log("ACTUALICE CORRECTAMENTE");
                 }
                 else
                 {
@@ -106,7 +113,8 @@ public class PowerUpDisplayController : MonoBehaviour
         }
         PowerUp currentPowerUp = powerUpContainerManager.powerUpContainerContent[powerUpContainerManager.currentIndexPowerUp].powerUp;
         if (scrollbarPowerUp == null
-            || currentPowerUp == null) return;
+            || currentPowerUp == null
+            || prevPowerUp == null) return;
 
         if (currentPowerUp.enableEffect && currentPowerUp.delayEffect > 0)
         {
