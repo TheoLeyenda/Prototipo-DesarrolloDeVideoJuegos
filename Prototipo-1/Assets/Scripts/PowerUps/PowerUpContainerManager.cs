@@ -31,6 +31,12 @@ public class PowerUpContainerManager : MonoBehaviour
     {
         gameData = GameData.instaceGameData;
         gm = GameManager.instanceGameManager;
+        for (int i = 0; i < powerUpContainerContent.Count; i++)
+        {
+            if(powerUpContainerContent[i].powerUp != null)
+                powerUpContainerContent[i].namePowerUp = powerUpContainerContent[i].powerUp.namePowerUp;
+        }
+
     }
     private void OnEnable()
     {

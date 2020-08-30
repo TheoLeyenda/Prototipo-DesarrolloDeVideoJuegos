@@ -248,7 +248,7 @@ public class Enemy : MonoBehaviour
         //BORRAR LUEGO DE TESTEO
         if (Input.GetKey(KeyCode.Space))
         {
-            //Debug.Log(enumsEnemy.GetMovement());
+            Debug.Log(enumsEnemy.GetMovement());
             //Debug.Log("Enable Movement: " + enableMovement);
             //Debug.Log("Speed:" + Speed);
             //Debug.Log("SpeedJump:" + SpeedJump);
@@ -256,7 +256,7 @@ public class Enemy : MonoBehaviour
             //Debug.Log("SpriteEnemy:"+ spriteEnemy.nameActual);
             //Debug.Log(inCombatPosition);
             //Debug.Log(enumsEnemy.GetStateEnemy());
-            life = 0;
+            //life = 0;
         }
         
         //-----------------------------------
@@ -1158,9 +1158,9 @@ public class Enemy : MonoBehaviour
         //Debug.Log(isJamping);
         //Debug.Log("CheckMove: "+CheckMove(new Vector3(transform.position.x, alturaMaxima.y, transform.position.z)));// esto es false
         //Debug.Log("isJumping: " + isJamping);
-        if (CheckMove(new Vector3(transform.position.x, alturaMaxima.y, transform.position.z)) && isJamping)
+        if (CheckMove(new Vector3(transform.position.x, alturaMaxima.y + 20, transform.position.z)) && isJamping)
         {
-            //Debug.Log("ENTRE");
+            Debug.Log("ENTRE");
             if (transform.position.y <= InitialPosition.y)
             {
                 eventWise.StartEvent("saltar");
@@ -1169,6 +1169,7 @@ public class Enemy : MonoBehaviour
             {
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
             }
+            //Debug.Log("SALTO");
             MoveJamp(Vector3.up);
             if (SpeedJump <= 0)
             {
@@ -1182,6 +1183,10 @@ public class Enemy : MonoBehaviour
             {
                 Deffence();
             }
+        }
+        else
+        {
+            MoveJamp(Vector3.down);
         }
     }
     public void ParabolaAttack()
@@ -1259,6 +1264,7 @@ public class Enemy : MonoBehaviour
         {
             life = 0;
         }*/
+        //Debug.Log("ENTRE");
         if (direccion == Vector3.up)
         {
             transform.Translate(direccion * SpeedJump * Time.deltaTime);

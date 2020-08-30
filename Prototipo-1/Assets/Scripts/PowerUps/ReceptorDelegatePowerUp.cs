@@ -130,7 +130,7 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
 
     public void SettingPowerUp_NadaDeDefensa(PowerUp_NadaDeDefensa powerUp_NadaDeDefensa)
     {
-        if (playerReference != null)
+        if (playerReference != null && powerUp_NadaDeDefensa.player != null)
         {
             if (powerUp_NadaDeDefensa.player == playerReference ||
                 powerUp_NadaDeDefensa.player.enumsPlayers.numberPlayer == playerReference.enumsPlayers.numberPlayer)

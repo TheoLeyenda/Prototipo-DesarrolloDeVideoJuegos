@@ -1,0 +1,538 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5899924726615211924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5899924726615211926}
+  - component: {fileID: 4008852066803963357}
+  - component: {fileID: 5594763890789635760}
+  m_Layer: 0
+  m_Name: PowerUpContainerManager_IA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5899924726615211926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899924726615211924}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1049.4421, y: 697.2313, z: -445.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5899924727706240159}
+  - {fileID: 5899924728271797475}
+  - {fileID: 5899924726975708459}
+  - {fileID: 5899924728089194388}
+  - {fileID: 5899924728221777861}
+  - {fileID: 5899924727845298530}
+  - {fileID: 5899924728231308584}
+  - {fileID: 4625885643840523364}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4008852066803963357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899924726615211924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ed9ad2cde0ad848938ee258454db96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spritesPowerUps:
+  - {fileID: 21300000, guid: 4bb43d8d8a716c14ab60cf5f5d941cc2, type: 3}
+  - {fileID: 21300000, guid: fbf9d4243a3addf48a7af87667f6e158, type: 3}
+  - {fileID: 21300000, guid: 8928f3850adc47241910103b316e22ef, type: 3}
+  - {fileID: 21300000, guid: c5e0bc171bf67c8408f4edacb7e42fdb, type: 3}
+  - {fileID: 21300000, guid: 3e4221fb24a133547b990e9f96be8119, type: 3}
+  - {fileID: 21300000, guid: e7761af8a1b067d4f86bea4b99f8d26a, type: 3}
+  - {fileID: 21300000, guid: 4bf4c43bd9037ce4d921b9cfadd6f1b4, type: 3}
+  powerUpContainerManager_IA: {fileID: 5594763890789635760}
+--- !u!114 &5594763890789635760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899924726615211924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6643fec1355a30246a2b68497ef2ba04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableShootPowerUp: 1
+  powerUpContainerContent:
+  - namePowerUp: 
+    powerUp: {fileID: 5899924727706240158}
+    countPowerUps: 0
+    maxCountPowerUps: 2
+    currentPowerUp: 0
+  - namePowerUp: 
+    powerUp: {fileID: 5899924726975708458}
+    countPowerUps: 0
+    maxCountPowerUps: 3
+    currentPowerUp: 0
+  - namePowerUp: 
+    powerUp: {fileID: 5899924728089194391}
+    countPowerUps: 0
+    maxCountPowerUps: 5
+    currentPowerUp: 0
+  - namePowerUp: 
+    powerUp: {fileID: 5899924728221777860}
+    countPowerUps: 0
+    maxCountPowerUps: 1
+    currentPowerUp: 0
+  - namePowerUp: 
+    powerUp: {fileID: 5899924727845298533}
+    countPowerUps: 0
+    maxCountPowerUps: 3
+    currentPowerUp: 0
+  - namePowerUp: 
+    powerUp: {fileID: 5899924728231308585}
+    countPowerUps: 0
+    maxCountPowerUps: 5
+    currentPowerUp: 0
+  - namePowerUp: 
+    powerUp: {fileID: 0}
+    countPowerUps: 0
+    maxCountPowerUps: 0
+    currentPowerUp: 0
+  userContainer: 2
+  currentIndexPowerUp: 0
+  minPowerUpGenerar: 2
+  maxPowerUpGenerar: 7
+  intentosDeAsignacion: 15
+  userEnemy: {fileID: 0}
+  minDelayThrowPowerUp: 7
+  maxDelayThrowPowerUp: 18
+  delayThrowPowerUp: 0
+--- !u!1 &5899924726975708456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5899924726975708459}
+  - component: {fileID: 5899924726975708458}
+  m_Layer: 0
+  m_Name: PowerUp_Invulnerhabilidad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5899924726975708459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899924726975708456}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5899924726615211926}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5899924726975708458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899924726975708456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6a85acefa94e5343b9664b5d961091d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typePowerUp: 0
+  typeCheckCollision: 0
+  userPowerUp: 0
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  namePowerUp: PowerUp_Invulnerabilidad
+  delayEffect: 10
+  enableEffect: 0
+--- !u!1 &5899924727706240156
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5899924727706240159}
+  - component: {fileID: 5899924727706240158}
+  m_Layer: 0
+  m_Name: PowerUp_Blindaje
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5899924727706240159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899924727706240156}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5899924726615211926}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5899924727706240158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899924727706240156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4739af47e4f34934ea4bc8474374a7c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typePowerUp: 0
+  typeCheckCollision: 0
+  userPowerUp: 0
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  namePowerUp: PowerUp_Blindaje
+  delayEffect: 0
+  enableEffect: 0
+  valueShild: 500
+--- !u!1 &5899924727845298531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5899924727845298530}
+  - component: {fileID: 5899924727845298533}
+  m_Layer: 0
+  m_Name: PowerUp_SuperVelocidad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5899924727845298530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899924727845298531}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5899924726615211926}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5899924727845298533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899924727845298531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db5628db0eeac804d8e68f8400fd1190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typePowerUp: 0
+  typeCheckCollision: 0
+  userPowerUp: 0
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  namePowerUp: PowerUp_SuperVelocidad
+  delayEffect: 10
+  enableEffect: 0
+  useMegaJump: 1
+  NewSpeed: 30
+  NewSpeedJump: 20
+  NewResitance: 30
+  NewGravity: 25
+--- !u!1 &5899924728089194389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5899924728089194388}
+  - component: {fileID: 5899924728089194391}
+  m_Layer: 0
+  m_Name: PowerUp_NadaDeDefensa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5899924728089194388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899924728089194389}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5899924726615211926}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5899924728089194391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899924728089194389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7cebfa12af570b48afec85046c78acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typePowerUp: 0
+  typeCheckCollision: 0
+  userPowerUp: 0
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  namePowerUp: PowerUp_NadaDeDefensa
+  delayEffect: 20
+  enableEffect: 0
+  disableEffectInDeathPlayer: 0
+--- !u!1 &5899924728221777858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5899924728221777861}
+  - component: {fileID: 5899924728221777860}
+  m_Layer: 0
+  m_Name: "PowerUp_QuietoAh\xED"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5899924728221777861
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899924728221777858}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5899924726615211926}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5899924728221777860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899924728221777858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d84ca0803d8c7a43a666d90ebf449c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typePowerUp: 0
+  typeCheckCollision: 0
+  userPowerUp: 0
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  namePowerUp: "PowerUp_QuietoAh\xED"
+  delayEffect: 5
+  enableEffect: 0
+  disableAttack: 1
+--- !u!1 &5899924728231308582
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5899924728231308584}
+  - component: {fileID: 5899924728231308585}
+  m_Layer: 0
+  m_Name: PowerUp_VidaExtra
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5899924728231308584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899924728231308582}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5899924726615211926}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5899924728231308585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899924728231308582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24f68f5b6feae44e896164a5f7b81a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typePowerUp: 0
+  typeCheckCollision: 0
+  userPowerUp: 0
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  namePowerUp: PowerUp_VidaExtra
+  delayEffect: 0
+  enableEffect: 0
+  recoverHealth: 100
+--- !u!1 &5899924728271797472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5899924728271797475}
+  - component: {fileID: 5899924728271797474}
+  m_Layer: 0
+  m_Name: PowerUp_DoblePuntuacion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5899924728271797475
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899924728271797472}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5899924726615211926}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5899924728271797474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899924728271797472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e043053bb7fb6d540b8d92da90e11e86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typePowerUp: 0
+  typeCheckCollision: 0
+  userPowerUp: 0
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  namePowerUp: PowerUp_DoblePuntuacion
+  delayEffect: 30
+  enableEffect: 0
+--- !u!1 &6598581435256958173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4625885643840523364}
+  - component: {fileID: 6381674174961981910}
+  m_Layer: 0
+  m_Name: PowerUp_DividirPuntaje
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4625885643840523364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6598581435256958173}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5899924726615211926}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6381674174961981910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6598581435256958173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0256de734391958479e12a759595e170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typePowerUp: 0
+  typeCheckCollision: 0
+  userPowerUp: 0
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  namePowerUp: 
+  delayEffect: 10
+  enableEffect: 0

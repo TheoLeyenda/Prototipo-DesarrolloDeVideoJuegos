@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -30,11 +29,6 @@ public class PowerUpDisplayController : MonoBehaviour
 
         switch (powerUpContainerManager.userContainer)
         {
-            case ThrowPowerUpController.UserPowerUpController.Enemy:
-                scrollbarPowerUp = ui_Manager.enemyHUD.scrollbarPowerUp;
-                imageCurrentPowerUp = ui_Manager.enemyHUD.imageCurrentPowerUp;
-                textCountPowerUp = ui_Manager.enemyHUD.textCountPowerUp;
-                break;
             case ThrowPowerUpController.UserPowerUpController.Player1:
                 scrollbarPowerUp = ui_Manager.PlayerIzquierdaHUD.scrollbarPowerUp;
                 imageCurrentPowerUp = ui_Manager.PlayerIzquierdaHUD.imageCurrentPowerUp;

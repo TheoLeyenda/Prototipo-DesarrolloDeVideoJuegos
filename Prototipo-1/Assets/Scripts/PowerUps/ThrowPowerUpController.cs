@@ -43,10 +43,6 @@ public class ThrowPowerUpController : MonoBehaviour
                 powerUpContainerManager.ThrowPowerUp(gameData.indexCurrentPowerUp);
             }
         }
-        else if (dataUser.userPowerUpController == UserPowerUpController.Enemy)
-        {
-            //powerUpContainerManager.ThrowPowerUp(gameData.indexCurrentPowerUp);
-        }
     }
     
 }
