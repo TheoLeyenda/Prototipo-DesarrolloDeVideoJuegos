@@ -59,17 +59,23 @@ public class SelectorOfPowerUpContainer : MonoBehaviour
     {
         if (gameData.dataPlayerPowerUp.Length <= 0) return;
 
-        //Debug.Log("indexFinal:" + indexPowerUpContainerContent);
-        //if (gameData.dataPlayerPowerUp[indexPowerUpContainerContent].countPowerUp > 0)
-        //{
-            gameData.indexCurrentPowerUp = indexPowerUpContainerContent;
-            //Debug.Log("gameData.indexCurrentPowerUp:" + gameData.indexCurrentPowerUp);
-        //}
-        //else
-        //{
-            //gameData.indexCurrentPowerUp = -1;
-            //Debug.Log("gameData.indexCurrentPowerUp:" + gameData.indexCurrentPowerUp);
-        //}
+        gameData.indexCurrentPowerUp = indexPowerUpContainerContent;
+        if (powerUpContainerManager.powerUpContainerContent[indexPowerUpContainerContent].countPowerUps <= 0)
+        {
+            bool asignedPowerUp = false;
+            for (int i = 0; i < powerUpContainerManager.powerUpContainerContent.Count; i++)
+            {
+                if (powerUpContainerManager.powerUpContainerContent[i].countPowerUps > 0)
+                {
+                    gameData.indexCurrentPowerUp = i;
+                    asignedPowerUp = true;
+                }
+            }
+            if (!asignedPowerUp)
+            {
+                gameData.indexCurrentPowerUp = powerUpContainerManager.powerUpContainerContent.Count - 1;
+            }
+        }
     }
     
 }
