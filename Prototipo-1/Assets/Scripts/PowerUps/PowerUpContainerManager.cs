@@ -138,35 +138,7 @@ public class PowerUpContainerManager : MonoBehaviour
                     {
                         gameData.dataPlayerPowerUp[index].countPowerUp--;
                     }
-                    if (powerUpContainerContent[index].countPowerUps <= 0)
-                    {
-                        powerUpContainerContent[index].currentPowerUp = false;
-                        bool powerUpAsigned = false;
-                        for (int j = 0; j < powerUpContainerContent.Count; j++)
-                        {
-                            if (powerUpContainerContent[j].countPowerUps > 0)
-                            {
-                                //Debug.Log("ASIGNO EL NUEVO POWER UP");
-                                powerUpAsigned = true;
-                                powerUpContainerContent[j].currentPowerUp = true;
-                                gameData.indexCurrentPowerUp = j;
-                                currentIndexPowerUp = j;
-                                j = powerUpContainerContent.Count;
-                                if (OnNextPowerUpAsigned != null)
-                                {
-                                    OnNextPowerUpAsigned(this);
-                                }
-                            }
-                        }
-                        if (!powerUpAsigned)
-                        {
-                            currentIndexPowerUp = powerUpContainerContent.Count - 1;
-                            if (OnNextPowerUpAsigned != null)
-                            {
-                                OnNextPowerUpAsigned(this);
-                            }
-                        }
-                    }
+                    CheckNextPowerUpAssigned();
                 }
                 if (OnRefreshDataPowerUpUI != null)
                 {
@@ -178,10 +150,44 @@ public class PowerUpContainerManager : MonoBehaviour
         {
             OnRefreshDataPowerUpUI(this);
         }
-
-
     }
-    
+
+    public void CheckNextPowerUpAssigned()
+    {
+        bool powerUpAsigned = false;
+        if (powerUpContainerContent[currentIndexPowerUp].countPowerUps > 0) return;
+
+        powerUpContainerContent[currentIndexPowerUp].currentPowerUp = false;
+        if (currentIndexPowerUp == powerUpContainerContent.Count - 1)
+        {
+            currentIndexPowerUp = 0;
+        }
+        for (int j = currentIndexPowerUp; j < powerUpContainerContent.Count; j++)
+        {
+            if (powerUpContainerContent[j].countPowerUps > 0)
+            {
+                //Debug.Log("ASIGNO EL NUEVO POWER UP");
+                powerUpAsigned = true;
+                powerUpContainerContent[j].currentPowerUp = true;
+                gameData.indexCurrentPowerUp = j;
+                currentIndexPowerUp = j;
+                j = powerUpContainerContent.Count;
+                if (OnNextPowerUpAsigned != null)
+                {
+                    OnNextPowerUpAsigned(this);
+                }
+            }
+        }
+        if (!powerUpAsigned)
+        {
+            currentIndexPowerUp = powerUpContainerContent.Count - 1;
+            if (OnNextPowerUpAsigned != null)
+            {
+                OnNextPowerUpAsigned(this);
+            }
+        }
+    }
+
     public void DeselectAllPowerUps()
     {
         for (int i = 0; i < powerUpContainerContent.Count; i++)
