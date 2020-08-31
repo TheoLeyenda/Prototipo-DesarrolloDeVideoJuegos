@@ -6,34 +6,22 @@ public class PowerUp_SuperVelocidad : PowerUp
     public bool useMegaJump = true;
     public float NewSpeed = 24;
     private float auxSpeed;
-    private bool enableAddStats = true;
     public float NewSpeedJump;
     private float auxSpeedJump;
     public float NewResitance;
     private float auxResitance;
     public float NewGravity;
     private float auxGravity;
+    private bool settingAuxData = false;
     protected override void Start()
     {
         typePowerUp = TypePowerUp.PowerUpDelay;
         base.Start();
+        SetAuxSpeed();
     }
     private void OnEnable()
     {
-        if (player != null)
-        {
-            auxSpeed = player.Speed;
-            auxSpeedJump = player.SpeedJump;
-            auxGravity = player.Gravity;
-            auxResitance = player.Resistace;
-        }
-        if (enemy != null)
-        {
-            auxSpeed = enemy.Speed;
-            auxSpeedJump = enemy.SpeedJump;
-            auxGravity = enemy.Gravity;
-            auxResitance = enemy.Resistace;
-        }
+        SetAuxSpeed();
     }
     public void Update()
     {
@@ -54,48 +42,58 @@ public class PowerUp_SuperVelocidad : PowerUp
     {
         enableEffect = true;
     }
+    public void SetAuxSpeed()
+    {
+        if (player != null)
+        {
+            auxSpeed = player.Speed;
+            if (useMegaJump)
+            {
+                auxSpeedJump = player.SpeedJump;
+                auxGravity = player.Gravity;
+                auxResitance = player.Resistace;
+            }
+        }
+        else if (enemy != null)
+        {
+            auxSpeed = enemy.Speed;
+            if (useMegaJump)
+            {
+                auxSpeedJump = enemy.SpeedJump;
+                auxGravity = enemy.Gravity;
+                auxResitance = enemy.Resistace;
+            }
+        }
+    }
     public void SetNewSpeed()
     {
-        if (!enableAddStats) return;
-
         if (player != null)
         {
             if (player.transform.position.y <= player.GetInitialPosition().y)
             {
-                auxSpeed = player.Speed;
                 player.Speed = NewSpeed;
 
                 if (useMegaJump)
                 {
-                    auxSpeedJump = player.SpeedJump;
-                    auxGravity = player.Gravity;
-                    auxResitance = player.Resistace;
-
                     player.SpeedJump = NewSpeedJump;
                     player.Gravity = NewGravity;
                     player.Resistace = NewResitance;
                 }
-                enableAddStats = false;
+
             }
         }
         else if (enemy != null)
         {
             if (enemy.transform.position.y <= enemy.InitialPosition.y)
             {
-                auxSpeed = enemy.Speed;
                 enemy.Speed = NewSpeed;
 
                 if (useMegaJump)
                 {
-                    auxSpeedJump = enemy.SpeedJump;
-                    auxGravity = enemy.Gravity;
-                    auxResitance = enemy.Resistace;
-
                     enemy.SpeedJump = NewSpeedJump;
                     enemy.Gravity = NewGravity;
                     enemy.Resistace = NewResitance;
                 }
-                enableAddStats = false;
             }
         }
     }
@@ -120,11 +118,10 @@ public class PowerUp_SuperVelocidad : PowerUp
     public override void DisableEffect()
     {
         DisablePowerUpEffect();
+        settingAuxData = false;
     }
     public void DisablePowerUpEffect()
     {
-        if (enableAddStats) return;
-
         if (player != null)
         {
             if (player.transform.position.y <= player.GetInitialPosition().y)
@@ -135,8 +132,11 @@ public class PowerUp_SuperVelocidad : PowerUp
                 player.Resistace = auxResitance;
 
                 enableEffect = false;
-                enableAddStats = true;
                 delayEffect = auxDelayEffect;
+                if (DisablePowerUp != null)
+                {
+                    DisablePowerUp(this);
+                }
             }
         }
         else if (enemy != null)
@@ -149,14 +149,12 @@ public class PowerUp_SuperVelocidad : PowerUp
                 enemy.Resistace = auxResitance;
 
                 enableEffect = false;
-                enableAddStats = true;
                 delayEffect = auxDelayEffect;
+                if (DisablePowerUp != null)
+                {
+                    DisablePowerUp(this);
+                }
             }
-        }
-
-        if (DisablePowerUp != null)
-        {
-            DisablePowerUp(this);
         }
     }
 }

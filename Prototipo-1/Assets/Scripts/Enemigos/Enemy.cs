@@ -152,6 +152,7 @@ public class Enemy : MonoBehaviour
     public float timeStuned = 0;
 
     private float auxSpeed;
+    //private bool onceJump = false;
     public static event Action<Enemy, string> OnModifireState;
     public static event Action<Enemy, string> OnDisableModifireState;
     public static event Action<Enemy> OnDie;
@@ -1158,9 +1159,8 @@ public class Enemy : MonoBehaviour
         //Debug.Log(isJamping);
         //Debug.Log("CheckMove: "+CheckMove(new Vector3(transform.position.x, alturaMaxima.y, transform.position.z)));// esto es false
         //Debug.Log("isJumping: " + isJamping);
-        if (CheckMove(new Vector3(transform.position.x, alturaMaxima.y + 20, transform.position.z)) && isJamping)
+        if (transform.position.y > InitialPosition.y || isJamping)
         {
-            Debug.Log("ENTRE");
             if (transform.position.y <= InitialPosition.y)
             {
                 eventWise.StartEvent("saltar");
@@ -1183,10 +1183,6 @@ public class Enemy : MonoBehaviour
             {
                 Deffence();
             }
-        }
-        else
-        {
-            MoveJamp(Vector3.down);
         }
     }
     public void ParabolaAttack()
@@ -1264,7 +1260,7 @@ public class Enemy : MonoBehaviour
         {
             life = 0;
         }*/
-        //Debug.Log("ENTRE");
+        //
         if (direccion == Vector3.up)
         {
             transform.Translate(direccion * SpeedJump * Time.deltaTime);
@@ -1272,6 +1268,7 @@ public class Enemy : MonoBehaviour
         }
         else if (direccion == Vector3.down)
         {
+            Debug.Log("ENTRE");
             transform.Translate(direccion * SpeedJump * Time.deltaTime);
             SpeedJump = SpeedJump + Time.deltaTime * Gravity;
         }
