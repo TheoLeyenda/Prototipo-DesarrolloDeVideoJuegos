@@ -59,6 +59,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c5e0bc171bf67c8408f4edacb7e42fdb, type: 3}
   - {fileID: 21300000, guid: 3e4221fb24a133547b990e9f96be8119, type: 3}
   - {fileID: 21300000, guid: e7761af8a1b067d4f86bea4b99f8d26a, type: 3}
+  - {fileID: 21300000, guid: ab1210c3a2f6edf4e8efa6ea88efccf5, type: 3}
   - {fileID: 21300000, guid: 4bf4c43bd9037ce4d921b9cfadd6f1b4, type: 3}
   powerUpContainerManager_IA: {fileID: 5594763890789635760}
 --- !u!114 &5594763890789635760
@@ -102,6 +103,11 @@ MonoBehaviour:
     currentPowerUp: 0
   - namePowerUp: 
     powerUp: {fileID: 5899924728231308585}
+    countPowerUps: 0
+    maxCountPowerUps: 5
+    currentPowerUp: 0
+  - namePowerUp: 
+    powerUp: {fileID: 6381674174961981910}
     countPowerUps: 0
     maxCountPowerUps: 5
     currentPowerUp: 0
@@ -536,6 +542,8 @@ MonoBehaviour:
   userPowerUp: 0
   player: {fileID: 0}
   enemy: {fileID: 0}
-  namePowerUp: 
-  delayEffect: 10
+  namePowerUp: PowerUp_DividirPuntaje
+  delayEffect: 12
   enableEffect: 0
+  newScoreForHit: 0
+  newScoreForKill: 0

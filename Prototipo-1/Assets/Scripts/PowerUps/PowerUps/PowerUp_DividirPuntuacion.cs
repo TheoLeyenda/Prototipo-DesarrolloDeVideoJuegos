@@ -5,9 +5,16 @@ using System;
 
 public class PowerUp_DividirPuntuacion : PowerUp
 {
-    private float auxScoreForHit = 0;
-    private float auxScoreForKill = 0;
+    [HideInInspector]
+    public float newScoreForHit = 0;
+    [HideInInspector]
+    public float newScoreForKill = 0;
     public static event Action<PowerUp> DisablePowerUp;
+    public static event Action<PowerUp_DividirPuntuacion> SettingPowerUp_DividirPuntuacion;
+    public static event Action<PowerUp_DividirPuntuacion> OnEffectPowerUp;
+    public static event Action<PowerUp_DividirPuntuacion> DisableEffectPowerUp_DividirPuntuacion;
+    [HideInInspector]
+    public bool settedPowerUp = false;
     protected override void Start()
     {
         typePowerUp = TypePowerUp.PowerUpDelay;
@@ -17,12 +24,25 @@ public class PowerUp_DividirPuntuacion : PowerUp
     {
         if (enableEffect)
         {
+            if (!settedPowerUp)
+            {
+                if(SettingPowerUp_DividirPuntuacion != null)
+                    SettingPowerUp_DividirPuntuacion(this);
+            }
             if (delayEffect > 0)
             {
                 delayEffect = delayEffect - Time.deltaTime;
+                if (OnEffectPowerUp != null)
+                {
+                    OnEffectPowerUp(this);
+                }
             }
             else
             {
+                if (DisableEffectPowerUp_DividirPuntuacion != null)
+                {
+                    DisableEffectPowerUp_DividirPuntuacion(this);
+                }
                 DisableEffect();
             }
         }
@@ -30,27 +50,9 @@ public class PowerUp_DividirPuntuacion : PowerUp
     public override void ActivatedPowerUp()
     {
         enableEffect = true;
-        if (player != null)
-        {
-            auxScoreForHit = player.PD.scoreForHit;
-            auxScoreForKill = player.PD.scoreForEnemyDead;
-            player.PD.scoreForHit = player.PD.scoreForHit / 2;
-            player.PD.scoreForEnemyDead = player.PD.scoreForEnemyDead / 2;
-        }
     }
     public override void DisableEffect()
     {
-        base.DisableEffect();
-        if (DisablePowerUp != null)
-        {
-            DisablePowerUp(this);
-        }
-        if (player != null)
-        {
-            player.PD.scoreForHit = auxScoreForHit;
-            player.PD.scoreForEnemyDead = auxScoreForKill;
-        }
-        enableEffect = false;
-        delayEffect = auxDelayEffect;
+        settedPowerUp = false;
     }
 }

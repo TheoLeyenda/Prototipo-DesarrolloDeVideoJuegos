@@ -4,7 +4,6 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
 {
     public Player playerReference;
     public Enemy enemyReference;
-
     private void OnEnable()
     {
         PowerUp_QuietoAhi.OnEffectPowerUp += EffectPowerUp_QuietoAhi;
@@ -13,6 +12,12 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
 
         PowerUp_NadaDeDefensa.OnSettingsPowerUp += SettingPowerUp_NadaDeDefensa;
         PowerUp_NadaDeDefensa.OnDisablePowerUp_NadaDeDefensa += DisableEffectPowerUp_NadaDeDefensa;
+
+        PowerUp_DividirPuntuacion.SettingPowerUp_DividirPuntuacion += SavingDataPowerUp_DividirPuntuacion;
+        PowerUp_DividirPuntuacion.OnEffectPowerUp += EffectPowerUp_DividirPuntuacion;
+        PowerUp_DividirPuntuacion.DisableEffectPowerUp_DividirPuntuacion += DisableEffectPowerUp_DividirPuntuacion;
+
+
     }
     private void OnDisable()
     {
@@ -22,6 +27,10 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
 
         PowerUp_NadaDeDefensa.OnSettingsPowerUp -= SettingPowerUp_NadaDeDefensa;
         PowerUp_NadaDeDefensa.OnDisablePowerUp_NadaDeDefensa -= DisableEffectPowerUp_NadaDeDefensa;
+
+        PowerUp_DividirPuntuacion.SettingPowerUp_DividirPuntuacion -= SavingDataPowerUp_DividirPuntuacion;
+        PowerUp_DividirPuntuacion.OnEffectPowerUp -= EffectPowerUp_DividirPuntuacion;
+        PowerUp_DividirPuntuacion.DisableEffectPowerUp_DividirPuntuacion -= DisableEffectPowerUp_DividirPuntuacion;
     }
     public void SavingDataPowerUp_QuietoAhi(PowerUp_QuietoAhi powerUp_QuietoAhí)
     {
@@ -158,6 +167,62 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
 
         enemyReference.enableDeffence = true;
         powerUp_NadaDeDefensa.enableEffect = false;
+    }
+
+    public void SavingDataPowerUp_DividirPuntuacion(PowerUp_DividirPuntuacion powerUp_DividirPuntuacion)
+    {
+        if (!powerUp_DividirPuntuacion.settedPowerUp)
+        {
+            if (playerReference != null && powerUp_DividirPuntuacion.player != null)
+            {
+                if (powerUp_DividirPuntuacion.player == playerReference ||
+                   powerUp_DividirPuntuacion.player.enumsPlayers.numberPlayer == playerReference.enumsPlayers.numberPlayer)
+                    return;
+            }
+            if ((powerUp_DividirPuntuacion.player != null && playerReference != null) ||
+                       (powerUp_DividirPuntuacion.enemy != null && playerReference != null))
+            {
+                powerUp_DividirPuntuacion.newScoreForHit = playerReference.PD.scoreForHit / 2;
+                powerUp_DividirPuntuacion.newScoreForKill = playerReference.PD.scoreForEnemyDead / 2;
+                powerUp_DividirPuntuacion.settedPowerUp = true;
+                Debug.Log("ENTRE");
+            }
+        }
+    }
+    public void EffectPowerUp_DividirPuntuacion(PowerUp_DividirPuntuacion powerUp_DividirPuntuacion)
+    {
+        if (playerReference != null && powerUp_DividirPuntuacion.player != null)
+        {
+            if (powerUp_DividirPuntuacion.player == playerReference ||
+                powerUp_DividirPuntuacion.player.enumsPlayers.numberPlayer == playerReference.enumsPlayers.numberPlayer)
+                return;
+        }
+        if ((powerUp_DividirPuntuacion.player != null && playerReference != null) ||
+            (powerUp_DividirPuntuacion.enemy != null && playerReference != null))
+        {
+            playerReference.PD.scoreForHit = powerUp_DividirPuntuacion.newScoreForHit;
+            playerReference.PD.scoreForEnemyDead = powerUp_DividirPuntuacion.newScoreForKill;
+        }
+    }
+    public void DisableEffectPowerUp_DividirPuntuacion(PowerUp_DividirPuntuacion powerUp_DividirPuntuacion)
+    {
+        if (powerUp_DividirPuntuacion.enableEffect)
+        {
+            //Debug.Log("HIJO DE REMIL PUTA");
+            if (playerReference != null && powerUp_DividirPuntuacion.player != null)
+            {
+                if (powerUp_DividirPuntuacion.player == playerReference ||
+                powerUp_DividirPuntuacion.player.enumsPlayers.numberPlayer == playerReference.enumsPlayers.numberPlayer)
+                    return;
+            }
+            if ((powerUp_DividirPuntuacion.player != null && playerReference != null) ||
+                 (powerUp_DividirPuntuacion.enemy != null && playerReference != null))
+            {
+                playerReference.PD.ResetScoreValue();
+                powerUp_DividirPuntuacion.enableEffect = false;
+            }
+            
+        }
     }
 
 }

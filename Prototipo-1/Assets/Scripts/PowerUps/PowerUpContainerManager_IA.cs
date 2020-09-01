@@ -174,34 +174,32 @@ public class PowerUpContainerManager_IA : PowerUpContainer
         if (powerUpContainerContent[currentIndexPowerUp].countPowerUps > 0) return;
 
         powerUpContainerContent[currentIndexPowerUp].currentPowerUp = false;
-        if (currentIndexPowerUp == powerUpContainerContent.Count - 1)
+
+        if (!CheckPowerUpAssigned(powerUpAsigned, currentIndexPowerUp))
         {
-            currentIndexPowerUp = 0;
+            if (!CheckPowerUpAssigned(powerUpAsigned, 0))
+            {
+                emptyPowerUps = true;
+                currentIndexPowerUp = powerUpContainerContent.Count - 1;
+                powerUpContainerContent[currentIndexPowerUp].currentPowerUp = true;
+                OnRefreshDataPowerUpUI(this);
+            }
         }
-        for (int j = currentIndexPowerUp; j < powerUpContainerContent.Count; j++)
+    }
+    public bool CheckPowerUpAssigned(bool _powerUpAsigned, int _initIndex)
+    {
+        _powerUpAsigned = false;
+        for (int j = _initIndex; j < powerUpContainerContent.Count; j++)
         {
             if (powerUpContainerContent[j].countPowerUps > 0)
             {
-                //Debug.Log("ASIGNO EL NUEVO POWER UP");
-                powerUpAsigned = true;
+                _powerUpAsigned = true;
                 powerUpContainerContent[j].currentPowerUp = true;
                 currentIndexPowerUp = j;
                 j = powerUpContainerContent.Count;
-                if (OnNextPowerUpAsigned != null)
-                {
-                    OnNextPowerUpAsigned(this);
-                }
             }
         }
-        if (!powerUpAsigned)
-        {
-            currentIndexPowerUp = powerUpContainerContent.Count - 1;
-            emptyPowerUps = true;
-            if (OnNextPowerUpAsigned != null)
-            {
-                OnNextPowerUpAsigned(this);
-            }
-        }
+        return _powerUpAsigned;
     }
 
     public void CheckDropPowerUp(Enemy e)
