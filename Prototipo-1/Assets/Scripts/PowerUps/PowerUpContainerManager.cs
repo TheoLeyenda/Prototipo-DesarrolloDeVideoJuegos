@@ -23,10 +23,16 @@ public class PowerUpContainerManager : MonoBehaviour
     public List<Container> powerUpContainerContent;
     public ThrowPowerUpController.UserPowerUpController userContainer;
     public static event Action<PowerUpContainerManager> OnRefreshDataPowerUpUI;
-    public static event Action<PowerUpContainerManager> OnNextPowerUpAsigned;
+    //public static event Action<PowerUpContainerManager> OnNextPowerUpAsigned;
     private GameManager gm;
     [HideInInspector]
     public int currentIndexPowerUp;
+    [HideInInspector]
+    public PowerUp prevPowerUp;
+    [HideInInspector]
+    public int prevIndex;
+    [HideInInspector]
+    public bool emptyPowerUps = false;
     private void Awake()
     {
         gameData = GameData.instaceGameData;
@@ -93,13 +99,18 @@ public class PowerUpContainerManager : MonoBehaviour
                 delayEnableShootPowerUp = auxDelayEnableShootPowerUp;
                 enableDelay = false;
                 enableShootPowerUp = true;
+                if (OnRefreshDataPowerUpUI != null)
+                {
+                    OnRefreshDataPowerUpUI(this);
+                }
             }
         }
     }
     public void ThrowPowerUp(int index)
     {
         
-        if (gameData.indexCurrentPowerUp < 0 || gameData.indexCurrentPowerUp >= powerUpContainerContent.Count)
+        if (gameData.indexCurrentPowerUp < 0 || gameData.indexCurrentPowerUp >= powerUpContainerContent.Count
+            || emptyPowerUps)
             return;
 
         currentIndexPowerUp = index;
@@ -130,6 +141,9 @@ public class PowerUpContainerManager : MonoBehaviour
                 powerUpContainerContent[index].powerUp.ActivatedPowerUp();
                 powerUpContainerContent[index].countPowerUps--;
                 enableShootPowerUp = false;
+
+                prevPowerUp = powerUpContainerContent[index].powerUp;
+                prevIndex = index;
                 //Debug.Log("POWER UP LANZADO");
                 if (p != null)
                 {
@@ -138,6 +152,7 @@ public class PowerUpContainerManager : MonoBehaviour
                     {
                         gameData.dataPlayerPowerUp[index].countPowerUp--;
                     }
+                    
                     CheckNextPowerUpAssigned();
                 }
                 if (OnRefreshDataPowerUpUI != null)
@@ -158,36 +173,34 @@ public class PowerUpContainerManager : MonoBehaviour
         if (powerUpContainerContent[currentIndexPowerUp].countPowerUps > 0) return;
 
         powerUpContainerContent[currentIndexPowerUp].currentPowerUp = false;
-        if (currentIndexPowerUp == powerUpContainerContent.Count - 1)
+
+        if (!CheckPowerUpAssigned(powerUpAsigned, currentIndexPowerUp))
         {
-            currentIndexPowerUp = 0;
+            if (!CheckPowerUpAssigned(powerUpAsigned, 0))
+            {
+                emptyPowerUps = true;
+                currentIndexPowerUp = powerUpContainerContent.Count - 1;
+                powerUpContainerContent[currentIndexPowerUp].currentPowerUp = true;
+                OnRefreshDataPowerUpUI(this);
+            }
         }
-        for (int j = currentIndexPowerUp; j < powerUpContainerContent.Count; j++)
+    }
+    public bool CheckPowerUpAssigned(bool _powerUpAsigned, int _initIndex)
+    {
+        _powerUpAsigned = false;
+        for (int j = _initIndex; j < powerUpContainerContent.Count; j++)
         {
             if (powerUpContainerContent[j].countPowerUps > 0)
             {
-                //Debug.Log("ASIGNO EL NUEVO POWER UP");
-                powerUpAsigned = true;
+                _powerUpAsigned = true;
                 powerUpContainerContent[j].currentPowerUp = true;
                 gameData.indexCurrentPowerUp = j;
                 currentIndexPowerUp = j;
                 j = powerUpContainerContent.Count;
-                if (OnNextPowerUpAsigned != null)
-                {
-                    OnNextPowerUpAsigned(this);
-                }
             }
         }
-        if (!powerUpAsigned)
-        {
-            currentIndexPowerUp = powerUpContainerContent.Count - 1;
-            if (OnNextPowerUpAsigned != null)
-            {
-                OnNextPowerUpAsigned(this);
-            }
-        }
+        return _powerUpAsigned;
     }
-
     public void DeselectAllPowerUps()
     {
         for (int i = 0; i < powerUpContainerContent.Count; i++)
@@ -210,6 +223,7 @@ public class PowerUpContainerManager : MonoBehaviour
                         gameData.dataPlayerPowerUp[i].countPowerUp++;
                         powerUpContainerContent[i].countPowerUps++;
                         powerUp.EffectDisablePowerUp();
+                        emptyPowerUps = false;
                     }
                     else
                     {
@@ -231,12 +245,12 @@ public class PowerUpContainerManager : MonoBehaviour
                     {
                         powerUpContainerContent[i].countPowerUps++;
                         powerUp.EffectDisablePowerUp();
+                        emptyPowerUps = false;
                     }
                     else
                     {
                         powerUp.EffectDestroyPowerUp();
                     }
-
                 }
             }
         }

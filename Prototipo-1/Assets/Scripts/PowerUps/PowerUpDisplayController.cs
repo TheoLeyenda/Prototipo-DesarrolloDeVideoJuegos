@@ -16,7 +16,6 @@ public class PowerUpDisplayController : MonoBehaviour
     private bool inNextPowerUp;
     private bool enableUpdateData = false;
     private float minSizeScrollbarPowerUp = 0.005f;
-    PowerUp prevPowerUp;
     private void Awake()
     {
         ui_Manager = UI_Manager.instanceUI_Manager;
@@ -25,7 +24,6 @@ public class PowerUpDisplayController : MonoBehaviour
     private void OnEnable()
     {
         PowerUpContainerManager.OnRefreshDataPowerUpUI += UpdatePowerDataDisplay;
-        PowerUpContainerManager.OnNextPowerUpAsigned += NextPowerUpAsigned;
 
         switch (powerUpContainerManager.userContainer)
         {
@@ -41,18 +39,15 @@ public class PowerUpDisplayController : MonoBehaviour
                 break;
         }
         UpdatePowerDataDisplay(powerUpContainerManager);
-        prevPowerUp = powerUpContainerManager.powerUpContainerContent[powerUpContainerManager.currentIndexPowerUp].powerUp;
         scrollbarPowerUp.size = 0;
     }
     private void OnDisable()
     {
         PowerUpContainerManager.OnRefreshDataPowerUpUI -= UpdatePowerDataDisplay;
-        PowerUpContainerManager.OnNextPowerUpAsigned -= NextPowerUpAsigned;
     }
     private void Start()
     {
         UpdatePowerDataDisplay(powerUpContainerManager);
-        prevPowerUp = powerUpContainerManager.powerUpContainerContent[powerUpContainerManager.currentIndexPowerUp].powerUp;
         scrollbarPowerUp.size = 0;
     }
     
@@ -60,24 +55,26 @@ public class PowerUpDisplayController : MonoBehaviour
     {
         if (_powerUpContainerManager == powerUpContainerManager)
         {
-            if (powerUpContainerManager.currentIndexPowerUp >= powerUpContainerManager.powerUpContainerContent.Count - 1)
+            if (powerUpContainerManager.emptyPowerUps 
+                && powerUpContainerManager.powerUpContainerContent[powerUpContainerManager.prevIndex].countPowerUps <= 0
+                && !powerUpContainerManager.prevPowerUp.enableEffect)
             {
-                int index = powerUpContainerManager.powerUpContainerContent.Count - 1;
-                prevPowerUp = powerUpContainerManager.powerUpContainerContent[index].powerUp;
                 imageCurrentPowerUp.sprite = spritesPowerUps[spritesPowerUps.Count - 1];
-                textCountPowerUp.text = "" + powerUpContainerManager.powerUpContainerContent[index].countPowerUps;
+                textCountPowerUp.text = " ";
+                powerUpContainerManager.prevIndex = powerUpContainerManager.powerUpContainerContent.Count - 1;
+                return;
             }
-            else if (prevPowerUp != null)
+            if (powerUpContainerManager.prevPowerUp != null)
             {
-                if (prevPowerUp.typePowerUp == PowerUp.TypePowerUp.PowerUpDisable || !prevPowerUp.enableEffect)
+                if (!powerUpContainerManager.prevPowerUp.enableEffect && powerUpContainerManager.powerUpContainerContent[powerUpContainerManager.prevIndex].countPowerUps <= 0)
                 {
                     imageCurrentPowerUp.sprite = spritesPowerUps[powerUpContainerManager.currentIndexPowerUp];
                     textCountPowerUp.text = "" + powerUpContainerManager.powerUpContainerContent[powerUpContainerManager.currentIndexPowerUp].countPowerUps;
-                    //Debug.Log("ACTUALICE CORRECTAMENTE");
                 }
                 else
                 {
-                    textCountPowerUp.text = "" + powerUpContainerManager.powerUpContainerContent[powerUpContainerManager.currentIndexPowerUp - 1].countPowerUps;
+                    imageCurrentPowerUp.sprite = spritesPowerUps[powerUpContainerManager.prevIndex];
+                    textCountPowerUp.text = "" + powerUpContainerManager.powerUpContainerContent[powerUpContainerManager.prevIndex].countPowerUps;
                 }
             }
             else
@@ -87,75 +84,63 @@ public class PowerUpDisplayController : MonoBehaviour
             }
         }
     }
-    public void NextPowerUpAsigned(PowerUpContainerManager _powerUpContainerManager)
-    {
-        if (_powerUpContainerManager == powerUpContainerManager)
-        {
-            prevPowerUp = powerUpContainerManager.powerUpContainerContent[powerUpContainerManager.currentIndexPowerUp - 1].powerUp;
-            if (!prevPowerUp.enableEffect)
-            {
-                scrollbarPowerUp.size = 0;
-            }
-        }
-    }
+    
     public void UpdatePowerUpScrollbarDisplay()
     {
-        if (powerUpContainerManager.currentIndexPowerUp >= powerUpContainerManager.powerUpContainerContent.Count - 1)
+        if (powerUpContainerManager.currentIndexPowerUp >= powerUpContainerManager.powerUpContainerContent.Count - 1 && !powerUpContainerManager.prevPowerUp.enableEffect)
         {
             scrollbarPowerUp.size = 0;
             return;
         }
         PowerUp currentPowerUp = powerUpContainerManager.powerUpContainerContent[powerUpContainerManager.currentIndexPowerUp].powerUp;
-        if (scrollbarPowerUp == null
-            || currentPowerUp == null
-            || prevPowerUp == null) return;
 
-        if (currentPowerUp.enableEffect && currentPowerUp.delayEffect > 0)
+        if (currentPowerUp != null)
         {
-            float value = currentPowerUp.delayEffect;
-            float maxValue = currentPowerUp.GetAuxDelayEffect();
-
-            scrollbarPowerUp.size = value / maxValue;
-            if (scrollbarPowerUp.size <= minSizeScrollbarPowerUp)
+            if (currentPowerUp.enableEffect && currentPowerUp.delayEffect > 0)
             {
-                //Debug.Log("ENTRO");
-                currentPowerUp.DisableEffect();
+                float value = currentPowerUp.delayEffect;
+                float maxValue = currentPowerUp.GetAuxDelayEffect();
+
+                scrollbarPowerUp.size = value / maxValue;
+                if (scrollbarPowerUp.size <= minSizeScrollbarPowerUp)
+                {
+                    //Debug.Log("ENTRO");
+                    currentPowerUp.DisableEffect();
+                    scrollbarPowerUp.size = 0;
+                    UpdatePowerDataDisplay(powerUpContainerManager);
+                    enableUpdateData = true;
+                }
+            }
+            else
+            {
                 scrollbarPowerUp.size = 0;
-                UpdatePowerDataDisplay(powerUpContainerManager);
-                enableUpdateData = true;
             }
         }
-        else if (prevPowerUp.enableEffect && prevPowerUp.delayEffect > 0)
+        if (powerUpContainerManager.prevPowerUp != null)
         {
-            float value = prevPowerUp.delayEffect;
-            float maxValue = prevPowerUp.GetAuxDelayEffect();
-
-            scrollbarPowerUp.size = value / maxValue;
-            if (scrollbarPowerUp.size <= minSizeScrollbarPowerUp)
+            if (powerUpContainerManager.prevPowerUp.enableEffect && powerUpContainerManager.prevPowerUp.delayEffect > 0)
             {
-                //Debug.Log("ENTRO");
-                currentPowerUp.DisableEffect();
+                float value = powerUpContainerManager.prevPowerUp.delayEffect;
+                float maxValue = powerUpContainerManager.prevPowerUp.GetAuxDelayEffect();
+
+                scrollbarPowerUp.size = value / maxValue;
+                if (scrollbarPowerUp.size <= minSizeScrollbarPowerUp)
+                {
+                    //Debug.Log("ENTRO");
+                    powerUpContainerManager.prevPowerUp.DisableEffect();
+                    scrollbarPowerUp.size = 0;
+                    UpdatePowerDataDisplay(powerUpContainerManager);
+                    enableUpdateData = true;
+                }
+            }
+            else
+            {
                 scrollbarPowerUp.size = 0;
-                UpdatePowerDataDisplay(powerUpContainerManager);
-                enableUpdateData = true;
             }
         }
-        else if (currentPowerUp.enableEffect && currentPowerUp.typePowerUp == PowerUp.TypePowerUp.PowerUpDisable)
-        {
-            scrollbarPowerUp.size = 1;
-            //Debug.Log("CUACK");
-        }
-        else if (prevPowerUp.enableEffect && prevPowerUp.typePowerUp == PowerUp.TypePowerUp.PowerUpDisable)
-        {
-            scrollbarPowerUp.size = 1;
-        }
-        else if (!prevPowerUp.enableEffect)
-        {
-            scrollbarPowerUp.size = 0;
-        }
 
-        if (prevPowerUp != null && currentPowerUp != null && enableUpdateData)
-            if (!currentPowerUp.enableEffect && !prevPowerUp.enableEffect)
+        if (powerUpContainerManager.prevPowerUp != null && currentPowerUp != null && enableUpdateData)
+            if (!currentPowerUp.enableEffect && !powerUpContainerManager.prevPowerUp.enableEffect)
             {
                 UpdatePowerDataDisplay(powerUpContainerManager);
                 enableUpdateData = false;

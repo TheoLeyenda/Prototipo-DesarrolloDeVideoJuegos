@@ -38,6 +38,8 @@ public class PowerUp_Blindaje : PowerUp
     {
         if (enableEffect)
         {
+            delayEffect = 1;
+            auxDelayEffect = 1;
             if (player != null)
             {
                 player.PD.lifePlayer = auxLife;
@@ -64,6 +66,11 @@ public class PowerUp_Blindaje : PowerUp
                     }
                 }
             }
+        }
+        else
+        {
+            delayEffect = 0;
+            auxDelayEffect = 1;
         }
     }
 }

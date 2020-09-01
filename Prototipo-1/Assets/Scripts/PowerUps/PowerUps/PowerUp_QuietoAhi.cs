@@ -28,7 +28,7 @@ public class PowerUp_QuietoAhi : PowerUp
     {
         if (enableEffect)
         {
-            Debug.Log("ENTRE AL POWER_UP");
+            //Debug.Log("ENTRE AL POWER_UP");
             if (savingData)
             {
                 if (OnSavingDataPowerUp_QuietoAhi != null)
@@ -41,12 +41,12 @@ public class PowerUp_QuietoAhi : PowerUp
             if (delayEffect > 0)
             {
                 ThrowEffect();
-                Debug.Log("ESTOY ACTIVADO CULEAOOOO");
+                //Debug.Log("ESTOY ACTIVADO CULEAOOOO");
                 delayEffect = delayEffect - Time.deltaTime;
             }
             else
             {
-                Debug.Log("DESACTIVE EL POWERUP");
+                //Debug.Log("DESACTIVE EL POWERUP");
                 DisableEffect();
                 //Debug.Log("Desactive el efecto");
             }

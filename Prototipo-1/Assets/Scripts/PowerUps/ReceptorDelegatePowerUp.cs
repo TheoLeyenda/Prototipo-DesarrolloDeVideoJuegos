@@ -60,7 +60,7 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
     public void EffectPowerUp_QuietoAhi(PowerUp_QuietoAhi powerUp_QuietoAhí)
     {
         //Debug.Log("HIJO DE REMIL PUTA");
-        if (playerReference != null)
+        if (playerReference != null && powerUp_QuietoAhí.player != null)
         {
             if (powerUp_QuietoAhí.player == playerReference ||
                 powerUp_QuietoAhí.player.enumsPlayers.numberPlayer == playerReference.enumsPlayers.numberPlayer)
