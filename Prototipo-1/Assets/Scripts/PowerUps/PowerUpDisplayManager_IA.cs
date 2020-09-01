@@ -16,7 +16,7 @@ public class PowerUpDisplayManager_IA : MonoBehaviour
     private bool inNextPowerUp;
     private bool enableUpdateData = false;
     private float minSizeScrollbarPowerUp = 0.005f;
-    PowerUp prevPowerUp;
+    //PowerUp prevPowerUp;
     private void Awake()
     {
         ui_Manager = UI_Manager.instanceUI_Manager;
@@ -25,25 +25,25 @@ public class PowerUpDisplayManager_IA : MonoBehaviour
     private void OnEnable()
     {
         PowerUpContainerManager_IA.OnRefreshDataPowerUpUI += UpdatePowerDataDisplay;
-        PowerUpContainerManager_IA.OnNextPowerUpAsigned += NextPowerUpAsigned;
+        //PowerUpContainerManager_IA.OnNextPowerUpAsigned += NextPowerUpAsigned;
 
         scrollbarPowerUp = ui_Manager.enemyHUD.scrollbarPowerUp;
         imageCurrentPowerUp = ui_Manager.enemyHUD.imageCurrentPowerUp;
         textCountPowerUp = ui_Manager.enemyHUD.textCountPowerUp;
             
         UpdatePowerDataDisplay(powerUpContainerManager_IA);
-        prevPowerUp = powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].powerUp;
+        //prevPowerUp = powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].powerUp;
         scrollbarPowerUp.size = 0;
     }
     private void OnDisable()
     {
         PowerUpContainerManager_IA.OnRefreshDataPowerUpUI -= UpdatePowerDataDisplay;
-        PowerUpContainerManager_IA.OnNextPowerUpAsigned -= NextPowerUpAsigned;
+        //PowerUpContainerManager_IA.OnNextPowerUpAsigned -= NextPowerUpAsigned;
     }
     private void Start()
     {
         UpdatePowerDataDisplay(powerUpContainerManager_IA);
-        prevPowerUp = powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].powerUp;
+        //prevPowerUp = powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].powerUp;
         scrollbarPowerUp.size = 0;
     }
 
@@ -52,26 +52,27 @@ public class PowerUpDisplayManager_IA : MonoBehaviour
         
         if (_powerUpContainerManager == powerUpContainerManager_IA)
         {
-            //if(_powerUpContainerManager.userEnemy.gameObject.activeSelf)
-                //Debug.Log(_powerUpContainerManager.currentIndexPowerUp);
 
-            if (powerUpContainerManager_IA.currentIndexPowerUp >= powerUpContainerManager_IA.powerUpContainerContent.Count - 1)
+            if (powerUpContainerManager_IA.emptyPowerUps
+                && powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.prevIndex].countPowerUps <= 0
+                && !powerUpContainerManager_IA.prevPowerUp.enableEffect)
             {
-                int index = powerUpContainerManager_IA.powerUpContainerContent.Count - 1;
-                prevPowerUp = powerUpContainerManager_IA.powerUpContainerContent[index].powerUp;
                 imageCurrentPowerUp.sprite = spritesPowerUps[spritesPowerUps.Count - 1];
-                textCountPowerUp.text = "" + powerUpContainerManager_IA.powerUpContainerContent[index].countPowerUps;
+                textCountPowerUp.text = " ";
+                powerUpContainerManager_IA.prevIndex = powerUpContainerManager_IA.powerUpContainerContent.Count - 1;
+                return;
             }
-            else if (prevPowerUp != null)
+            if (powerUpContainerManager_IA.prevPowerUp != null)
             {
-                if (prevPowerUp.typePowerUp == PowerUp.TypePowerUp.PowerUpDisable || !prevPowerUp.enableEffect)
+                if (!powerUpContainerManager_IA.prevPowerUp.enableEffect && powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.prevIndex].countPowerUps <= 0)
                 {
                     imageCurrentPowerUp.sprite = spritesPowerUps[powerUpContainerManager_IA.currentIndexPowerUp];
                     textCountPowerUp.text = "" + powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].countPowerUps;
                 }
                 else
                 {
-                    textCountPowerUp.text = "" + powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp - 1].countPowerUps;
+                    imageCurrentPowerUp.sprite = spritesPowerUps[powerUpContainerManager_IA.prevIndex];
+                    textCountPowerUp.text = "" + powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.prevIndex].countPowerUps;
                 }
             }
             else
@@ -81,7 +82,7 @@ public class PowerUpDisplayManager_IA : MonoBehaviour
             }
         }
     }
-    public void NextPowerUpAsigned(PowerUpContainerManager_IA _powerUpContainerManager)
+    /*public void NextPowerUpAsigned(PowerUpContainerManager_IA _powerUpContainerManager)
     {
         if (_powerUpContainerManager == powerUpContainerManager_IA)
         {
@@ -91,62 +92,63 @@ public class PowerUpDisplayManager_IA : MonoBehaviour
                 scrollbarPowerUp.size = 0;
             }
         }
-    }
+    }*/
     public void UpdatePowerUpScrollbarDisplay()
     {
-        if (powerUpContainerManager_IA.currentIndexPowerUp >= powerUpContainerManager_IA.powerUpContainerContent.Count - 1)
+        if (powerUpContainerManager_IA.currentIndexPowerUp >= powerUpContainerManager_IA.powerUpContainerContent.Count - 1 && !powerUpContainerManager_IA.prevPowerUp.enableEffect)
         {
             scrollbarPowerUp.size = 0;
             return;
         }
         PowerUp currentPowerUp = powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].powerUp;
-        if (scrollbarPowerUp == null
-            || currentPowerUp == null
-            || prevPowerUp == null) return;
 
-        if (currentPowerUp.enableEffect && currentPowerUp.delayEffect > 0)
+        if (currentPowerUp != null)
         {
-            float value = currentPowerUp.delayEffect;
-            float maxValue = currentPowerUp.GetAuxDelayEffect();
-
-            scrollbarPowerUp.size = value / maxValue;
-            if (scrollbarPowerUp.size <= minSizeScrollbarPowerUp)
+            if (currentPowerUp.enableEffect && currentPowerUp.delayEffect > 0)
             {
-                currentPowerUp.DisableEffect();
+                float value = currentPowerUp.delayEffect;
+                float maxValue = currentPowerUp.GetAuxDelayEffect();
+
+                scrollbarPowerUp.size = value / maxValue;
+                if (scrollbarPowerUp.size <= minSizeScrollbarPowerUp)
+                {
+                    //Debug.Log("ENTRO");
+                    currentPowerUp.DisableEffect();
+                    scrollbarPowerUp.size = 0;
+                    UpdatePowerDataDisplay(powerUpContainerManager_IA);
+                    enableUpdateData = true;
+                }
+            }
+            else
+            {
                 scrollbarPowerUp.size = 0;
-                UpdatePowerDataDisplay(powerUpContainerManager_IA);
-                enableUpdateData = true;
             }
         }
-        else if (prevPowerUp.enableEffect && prevPowerUp.delayEffect > 0)
+        if (powerUpContainerManager_IA.prevPowerUp != null)
         {
-            float value = prevPowerUp.delayEffect;
-            float maxValue = prevPowerUp.GetAuxDelayEffect();
-
-            scrollbarPowerUp.size = value / maxValue;
-            if (scrollbarPowerUp.size <= minSizeScrollbarPowerUp)
+            if (powerUpContainerManager_IA.prevPowerUp.enableEffect && powerUpContainerManager_IA.prevPowerUp.delayEffect > 0)
             {
-                currentPowerUp.DisableEffect();
+                float value = powerUpContainerManager_IA.prevPowerUp.delayEffect;
+                float maxValue = powerUpContainerManager_IA.prevPowerUp.GetAuxDelayEffect();
+
+                scrollbarPowerUp.size = value / maxValue;
+                if (scrollbarPowerUp.size <= minSizeScrollbarPowerUp)
+                {
+                    //Debug.Log("ENTRO");
+                    powerUpContainerManager_IA.prevPowerUp.DisableEffect();
+                    scrollbarPowerUp.size = 0;
+                    UpdatePowerDataDisplay(powerUpContainerManager_IA);
+                    enableUpdateData = true;
+                }
+            }
+            else
+            {
                 scrollbarPowerUp.size = 0;
-                UpdatePowerDataDisplay(powerUpContainerManager_IA);
-                enableUpdateData = true;
             }
         }
-        else if (currentPowerUp.enableEffect && currentPowerUp.typePowerUp == PowerUp.TypePowerUp.PowerUpDisable)
-        {
-            scrollbarPowerUp.size = 1;
-        }
-        else if (prevPowerUp.enableEffect && prevPowerUp.typePowerUp == PowerUp.TypePowerUp.PowerUpDisable)
-        {
-            scrollbarPowerUp.size = 1;
-        }
-        else if (!prevPowerUp.enableEffect)
-        {
-            scrollbarPowerUp.size = 0;
-        }
 
-        if (prevPowerUp != null && currentPowerUp != null && enableUpdateData)
-            if (!currentPowerUp.enableEffect && !prevPowerUp.enableEffect)
+        if (powerUpContainerManager_IA.prevPowerUp != null && currentPowerUp != null && enableUpdateData)
+            if (!currentPowerUp.enableEffect && !powerUpContainerManager_IA.prevPowerUp.enableEffect)
             {
                 UpdatePowerDataDisplay(powerUpContainerManager_IA);
                 enableUpdateData = false;

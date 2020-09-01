@@ -9,14 +9,20 @@ public class PowerUpContainerManager_IA : PowerUpContainer
     public static event Action<PowerUpContainerManager_IA> OnRefreshDataPowerUpUI;
     public static event Action<PowerUpContainerManager_IA> OnNextPowerUpAsigned;
     public int minPowerUpGenerar = 2;
-    public int maxPowerUpGenerar = 7;
+    public int maxPowerUpGenerar = 5;
     public int intentosDeAsignacion;
+    private int auxIntentosDeAsignacion;
     public Enemy userEnemy;
     public float minDelayThrowPowerUp = 7;
     public float maxDelayThrowPowerUp = 18;
     [SerializeField]
     private float delayThrowPowerUp;
-
+    [HideInInspector]
+    public PowerUp prevPowerUp;
+    [HideInInspector]
+    public int prevIndex;
+    [HideInInspector]
+    public bool emptyPowerUps = false;
     private void Awake()
     {
         for (int i = 0; i < powerUpContainerContent.Count; i++)
@@ -30,8 +36,15 @@ public class PowerUpContainerManager_IA : PowerUpContainer
     }
     private void OnEnable()
     {
+        currentIndexPowerUp = powerUpContainerContent.Count - 1;
+        delayThrowPowerUp = UnityEngine.Random.Range(minDelayThrowPowerUp, maxDelayThrowPowerUp);
         PowerUp.OnDisablePowerUpEffect += EnableShootPowerUp;
         Enemy.OnDie += CheckDropPowerUp;
+        if (intentosDeAsignacion <= 1)
+        {
+            intentosDeAsignacion = 10;
+        }
+        SettingsDataPowerUpInSpawn();
     }
     private void OnDisable()
     {
@@ -40,20 +53,8 @@ public class PowerUpContainerManager_IA : PowerUpContainer
     }
     void Start()
     {
+        auxIntentosDeAsignacion = intentosDeAsignacion;
         userContainer = ThrowPowerUpController.UserPowerUpController.Enemy;
-        delayThrowPowerUp = UnityEngine.Random.Range(minDelayThrowPowerUp, maxDelayThrowPowerUp);
-
-        currentIndexPowerUp = powerUpContainerContent.Count - 1;
-        if (intentosDeAsignacion <= 1)
-        {
-            intentosDeAsignacion = 10;
-        }
-
-        DeselectAllPowerUps();
-        SettingsDataPowerUpInSpawn();
-
-        //if (userEnemy.gameObject.activeSelf)
-            //Debug.Log(currentIndexPowerUp);
     }
 
     void Update()
@@ -61,7 +62,13 @@ public class PowerUpContainerManager_IA : PowerUpContainer
         DelayEnableThrowPowerUp();
         CheckDelayThrowPowerUp();
     }
-
+    public void ResetCountPowerUps()
+    {
+        for (int i = 0; i < powerUpContainerContent.Count; i++)
+        {
+            powerUpContainerContent[i].countPowerUps = 0;
+        }
+    }
     public void CheckDelayThrowPowerUp()
     {
         if (delayThrowPowerUp > 0)
@@ -79,24 +86,33 @@ public class PowerUpContainerManager_IA : PowerUpContainer
         if (powerUp.userPowerUp == userContainer)
         {
             enableDelay = true;
+            if (OnRefreshDataPowerUpUI != null)
+            {
+                OnRefreshDataPowerUpUI(this);
+            }
         }
     }
 
     public void SettingsDataPowerUpInSpawn()
     {
-        float countPowerUp = UnityEngine.Random.Range(minPowerUpGenerar, maxPowerUpGenerar + 1);
+        ResetCountPowerUps();
+        int countPowerUp = UnityEngine.Random.Range(minPowerUpGenerar, maxPowerUpGenerar + 1);
         int countAsignedPowerUp = 0;
         while (countAsignedPowerUp < countPowerUp && intentosDeAsignacion > 0)
         {
-            int randomIndexSelected = UnityEngine.Random.Range(0, powerUpContainerContent.Count - 2);
+            int randomIndexSelected = UnityEngine.Random.Range(1, powerUpContainerContent.Count);
+            randomIndexSelected--;
 
-            if (powerUpContainerContent[randomIndexSelected].countPowerUps <= 0)
+            if (powerUpContainerContent[randomIndexSelected].countPowerUps <= 0 
+                && powerUpContainerContent[randomIndexSelected].namePowerUp != "None")
             {
+                DeselectAllPowerUps();
                 int randomCount = UnityEngine.Random.Range(1, powerUpContainerContent[randomIndexSelected].maxCountPowerUps + 1);
                 powerUpContainerContent[randomIndexSelected].countPowerUps = randomCount;
                 powerUpContainerContent[randomIndexSelected].currentPowerUp = true;
                 currentIndexPowerUp = randomIndexSelected;
                 countAsignedPowerUp++;
+                emptyPowerUps = false;
             }
             intentosDeAsignacion--;
         }
@@ -111,7 +127,7 @@ public class PowerUpContainerManager_IA : PowerUpContainer
     }
     public override void ThrowPowerUp(int index)
     {
-        if (powerUpContainerContent[index].countPowerUps <= 0)
+        if (powerUpContainerContent[index].countPowerUps <= 0 || emptyPowerUps || index < 0 || index >= powerUpContainerContent.Count)
             return;
 
         if (powerUpContainerContent[index].namePowerUp != "None")
@@ -130,27 +146,26 @@ public class PowerUpContainerManager_IA : PowerUpContainer
                 powerUpContainerContent[index].powerUp.ActivatedPowerUp();
                 powerUpContainerContent[index].countPowerUps--;
                 enableShootPowerUp = false;
+
+                prevPowerUp = powerUpContainerContent[index].powerUp;
+                prevIndex = index;
                 //Debug.Log("POWER UP LANZADO");
 
                 CheckNextPowerUpAssigned();
-                if (OnRefreshDataPowerUpUI != null)
-                {
-                    OnRefreshDataPowerUpUI(this);
-                }
             }
-            else if (OnRefreshDataPowerUpUI != null)
-            {
-                OnRefreshDataPowerUpUI(this);
-            }
-        }
-        else
-        {
             if (OnRefreshDataPowerUpUI != null)
             {
-                currentIndexPowerUp = powerUpContainerContent.Count - 1;
                 OnRefreshDataPowerUpUI(this);
             }
         }
+        //else
+        //{
+            //if (OnRefreshDataPowerUpUI != null)
+            //{
+                //currentIndexPowerUp = powerUpContainerContent.Count - 1;
+                //OnRefreshDataPowerUpUI(this);
+            //}
+        //}
     }
 
     public void CheckNextPowerUpAssigned()
@@ -181,6 +196,7 @@ public class PowerUpContainerManager_IA : PowerUpContainer
         if (!powerUpAsigned)
         {
             currentIndexPowerUp = powerUpContainerContent.Count - 1;
+            emptyPowerUps = true;
             if (OnNextPowerUpAsigned != null)
             {
                 OnNextPowerUpAsigned(this);
@@ -190,7 +206,7 @@ public class PowerUpContainerManager_IA : PowerUpContainer
 
     public void CheckDropPowerUp(Enemy e)
     {
-        if (e == userEnemy) return;
+        if (e != userEnemy) return;
        
         //FUNCIONALIDAD QUE DROPEA EL POWER UP
         
