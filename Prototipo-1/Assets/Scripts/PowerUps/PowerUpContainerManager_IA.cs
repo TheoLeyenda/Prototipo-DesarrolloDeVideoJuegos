@@ -158,14 +158,6 @@ public class PowerUpContainerManager_IA : PowerUpContainer
                 OnRefreshDataPowerUpUI(this);
             }
         }
-        //else
-        //{
-            //if (OnRefreshDataPowerUpUI != null)
-            //{
-                //currentIndexPowerUp = powerUpContainerContent.Count - 1;
-                //OnRefreshDataPowerUpUI(this);
-            //}
-        //}
     }
 
     public void CheckNextPowerUpAssigned()
