@@ -6,7 +6,13 @@ public class GameData : MonoBehaviour
 {
     //Aqui se guardara toda la data qie se deba guardar en playerPref
     //la cantidad de powerUps.
-
+    public enum GameMode
+    {
+        None,
+        Survival,
+        History,
+        PvP,
+    }
     public string[] nameLokedObjects;
     public string[] nameUnlokedObjects;
     public string[] auxNameLokedObjects;
@@ -17,6 +23,8 @@ public class GameData : MonoBehaviour
     private int auxIndexCurrentPowerUp;
     public string currentNameUser = "None";
     public int generalScore;
+    public GameMode gd = GameMode.None;
+
     [System.Serializable]
     public class InventoryPlayer
     {
@@ -27,7 +35,6 @@ public class GameData : MonoBehaviour
 
     public InventoryPlayer[] dataPlayerPowerUp;
     public InventoryPlayer[] auxDataPlayerPowerUp;
-
     public static GameData instaceGameData;
 
     private void Awake()

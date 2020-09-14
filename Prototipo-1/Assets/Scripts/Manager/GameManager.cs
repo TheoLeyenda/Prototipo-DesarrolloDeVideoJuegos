@@ -6,6 +6,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    
     public PlayerData playerData_P1;
     public PlayerData playerData_P2;
     public GameObject CanvasGameOver;

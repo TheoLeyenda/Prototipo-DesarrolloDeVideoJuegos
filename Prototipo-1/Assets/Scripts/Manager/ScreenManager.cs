@@ -38,6 +38,7 @@ public class ScreenManager : MonoBehaviour
             if (idListaNiveles == -1 && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Nulo
                 && gm.structGameManager.gm_dataCombatPvP.modoElegido == StructGameManager.ModoPvPElegido.TiroAlBlanco)
             {
+                gameData.gd = GameData.GameMode.PvP;
                 SceneManager.LoadScene("SelectPlayerScene");
             }
         }
@@ -62,7 +63,7 @@ public class ScreenManager : MonoBehaviour
             SceneManager.LoadScene("HighScore");
         }
     }
-        
+     
     public void LoadLevel(int numerLevel)
     {
         if (gm != null)
@@ -73,8 +74,35 @@ public class ScreenManager : MonoBehaviour
             gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Historia;
             if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
             {
+                gameData.gd = GameData.GameMode.History;
                 SceneManager.LoadScene("Nivel " + numerLevel);
             }
+        }
+    }
+    public void SetGameMode(int _gd) 
+    {
+        switch (_gd)
+        {
+            case 1:
+                gameData.gd = GameData.GameMode.History;
+                break;
+            case 2:
+                gameData.gd = GameData.GameMode.Survival;
+                break;
+        }
+    }
+    public void CheckLoadLevel() 
+    {
+        switch (gameData.gd) 
+        {
+            case GameData.GameMode.History:
+                LoadLevel();
+                break;
+            case GameData.GameMode.Survival:
+                Supervivencia();
+                break;
+            case GameData.GameMode.PvP:
+                break;
         }
     }
     public void LoadLevel()
@@ -87,6 +115,7 @@ public class ScreenManager : MonoBehaviour
             gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Historia;
             if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
             {
+                gameData.gd = GameData.GameMode.History;
                 SceneManager.LoadScene("Nivel " + (int)(gameData.currentLevel + 1));
             }
         }
@@ -104,6 +133,7 @@ public class ScreenManager : MonoBehaviour
         gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Supervivencia;
         if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Supervivencia)
         {
+            gameData.gd = GameData.GameMode.Survival;
             SceneManager.LoadScene("Supervivencia");
         }
     }
@@ -168,6 +198,7 @@ public class ScreenManager : MonoBehaviour
             idListaNiveles = -1;
             if (idListaNiveles == -1 && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Nulo)
             {
+                gameData.gd = GameData.GameMode.PvP;
                 SceneManager.LoadScene("SelectPlayerScene");
             }
         }
@@ -187,6 +218,7 @@ public class ScreenManager : MonoBehaviour
             gm.CanvasGameOver.SetActive(false);
             if (!gm.CanvasGameOver.activeSelf)
             {
+                gameData.gd = GameData.GameMode.None;
                 SceneManager.LoadScene("MENU");
             }
         }
