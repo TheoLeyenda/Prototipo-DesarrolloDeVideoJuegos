@@ -47,6 +47,52 @@ public class PowerUp_DividirPuntuacion : PowerUp
             }
         }
     }
+    private void OnEnable()
+    {
+        if (player != null)
+        {
+            Player.OnDie += CheckDeadTarget;
+        }
+        else if (enemy != null) 
+        {
+            Enemy.OnDie += CheckDeadTarget;
+        }
+    }
+    private void OnDisable()
+    {
+        if (player != null)
+        {
+            Player.OnDie -= CheckDeadTarget;
+        }
+        else if (enemy != null)
+        {
+            Enemy.OnDie -= CheckDeadTarget;
+        }
+    }
+    public override void CheckDeadTarget(Enemy e) 
+    {
+        if (e == enemy) 
+        {
+            base.CheckDeadTarget(e);
+            if (DisableEffectPowerUp_DividirPuntuacion != null)
+            {
+                DisableEffectPowerUp_DividirPuntuacion(this);
+            }
+            DisableEffect();
+        }
+    }
+    public override void CheckDeadTarget(Player p)
+    {
+        if (p == player)
+        {
+            base.CheckDeadTarget(p);
+            if (DisableEffectPowerUp_DividirPuntuacion != null)
+            {
+                DisableEffectPowerUp_DividirPuntuacion(this);
+            }
+            DisableEffect();
+        }
+    }
     public override void ActivatedPowerUp()
     {
         enableEffect = true;

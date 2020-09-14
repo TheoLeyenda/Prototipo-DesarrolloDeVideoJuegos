@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public class BoxColliderController : MonoBehaviour
@@ -19,6 +17,7 @@ public class BoxColliderController : MonoBehaviour
     public float delayEnableCounterAttack = 0.05f;
     [HideInInspector]
     public float auxDelayEnableCounterAttack = 0.05f;
+
     public enum StateBoxCollider
     {
         Defendido,

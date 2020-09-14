@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Player Data", menuName = "Player Data")]
-public class PlayerData : ScriptableObject
+public class PlayerData : ScriptableObject 
 {
     public float lifePlayer;
     public float maxLifePlayer;
@@ -17,8 +17,8 @@ public class PlayerData : ScriptableObject
     public float auxScore;
     public float scoreForHit;
     public float scoreForEnemyDead;
-    public float auxScoreForHit;
-    public float auxScoreForEnemyDead;
+    [SerializeField] float auxScoreForHit;
+    [SerializeField] float auxScoreForEnemyDead;
 
     public void ResetScoreValue()
     {

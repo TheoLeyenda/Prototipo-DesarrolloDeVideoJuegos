@@ -77,12 +77,15 @@ public class PowerUpContainerManager : MonoBehaviour
                 powerUpContainerContent[i].powerUp.userPowerUp = userContainer;
             }
         }
-        if (powerUpContainerContent[gameData.indexCurrentPowerUp].powerUp.player != null)
+        if (powerUpContainerContent[gameData.indexCurrentPowerUp].powerUp != null)
         {
-            if (gameData.indexCurrentPowerUp < powerUpContainerContent.Count && gameData.indexCurrentPowerUp >= 0)
+            if (powerUpContainerContent[gameData.indexCurrentPowerUp].powerUp.player != null)
             {
-                powerUpContainerContent[gameData.indexCurrentPowerUp].currentPowerUp = true;
-                currentIndexPowerUp = gameData.indexCurrentPowerUp;
+                if (gameData.indexCurrentPowerUp < powerUpContainerContent.Count && gameData.indexCurrentPowerUp >= 0)
+                {
+                    powerUpContainerContent[gameData.indexCurrentPowerUp].currentPowerUp = true;
+                    currentIndexPowerUp = gameData.indexCurrentPowerUp;
+                }
             }
         }
     }
@@ -224,6 +227,15 @@ public class PowerUpContainerManager : MonoBehaviour
                         powerUpContainerContent[i].countPowerUps++;
                         powerUp.EffectDisablePowerUp();
                         emptyPowerUps = false;
+                        if (powerUpContainerContent[currentIndexPowerUp].namePowerUp == "None") 
+                        {
+                            //powerUpContainerContent[currentIndexPowerUp].currentPowerUp = true;
+                            CheckNextPowerUpAssigned();
+                            if (OnRefreshDataPowerUpUI != null)
+                            {
+                                OnRefreshDataPowerUpUI(this);
+                            }
+                        }
                     }
                     else
                     {

@@ -14,6 +14,7 @@ public class PowerUp_Blindaje : PowerUp
         typePowerUp = TypePowerUp.PowerUpDisable;
         base.Start();
     }
+
     public override void ActivatedPowerUp()
     {
         enableEffect = true;

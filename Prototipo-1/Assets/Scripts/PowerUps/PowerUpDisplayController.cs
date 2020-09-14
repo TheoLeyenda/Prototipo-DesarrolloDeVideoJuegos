@@ -87,10 +87,13 @@ public class PowerUpDisplayController : MonoBehaviour
     
     public void UpdatePowerUpScrollbarDisplay()
     {
-        if (powerUpContainerManager.currentIndexPowerUp >= powerUpContainerManager.powerUpContainerContent.Count - 1 && !powerUpContainerManager.prevPowerUp.enableEffect)
+        if (powerUpContainerManager.prevPowerUp != null)
         {
-            scrollbarPowerUp.size = 0;
-            return;
+            if (powerUpContainerManager.currentIndexPowerUp >= powerUpContainerManager.powerUpContainerContent.Count - 1 && !powerUpContainerManager.prevPowerUp.enableEffect)
+            {
+                scrollbarPowerUp.size = 0;
+                return;
+            }
         }
         PowerUp currentPowerUp = powerUpContainerManager.powerUpContainerContent[powerUpContainerManager.currentIndexPowerUp].powerUp;
 

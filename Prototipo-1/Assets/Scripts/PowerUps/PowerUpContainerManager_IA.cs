@@ -39,7 +39,6 @@ public class PowerUpContainerManager_IA : PowerUpContainer
         currentIndexPowerUp = powerUpContainerContent.Count - 1;
         delayThrowPowerUp = UnityEngine.Random.Range(minDelayThrowPowerUp, maxDelayThrowPowerUp);
         PowerUp.OnDisablePowerUpEffect += EnableShootPowerUp;
-        Enemy.OnDie += CheckDropPowerUp;
         if (intentosDeAsignacion <= 1)
         {
             intentosDeAsignacion = 10;
@@ -49,7 +48,6 @@ public class PowerUpContainerManager_IA : PowerUpContainer
     private void OnDisable()
     {
         PowerUp.OnDisablePowerUpEffect -= EnableShootPowerUp;
-        Enemy.OnDie -= CheckDropPowerUp;
     }
     void Start()
     {
@@ -194,11 +192,5 @@ public class PowerUpContainerManager_IA : PowerUpContainer
         return _powerUpAsigned;
     }
 
-    public void CheckDropPowerUp(Enemy e)
-    {
-        if (e != userEnemy) return;
-       
-        //FUNCIONALIDAD QUE DROPEA EL POWER UP
-        
-    }
+    
 }
