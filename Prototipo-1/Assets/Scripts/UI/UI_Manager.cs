@@ -12,6 +12,8 @@ public class UI_Manager : MonoBehaviour
     public GameObject camvasPlayerDerecha;
     public GameObject camvasEnemy;
     public static UI_Manager instanceUI_Manager;
+    public GameObject[] ObjectsPowerUps;
+    public bool disablePowerUpsInventory;
     private void Awake()
     {
         if (instanceUI_Manager == null)
@@ -198,6 +200,13 @@ public class UI_Manager : MonoBehaviour
             }
         }
         enemyHUD.ImageBlindaje.gameObject.SetActive(false);
+        if (disablePowerUpsInventory)
+        {
+            for (int i = 0; i < ObjectsPowerUps.Length; i++)
+            {
+                ObjectsPowerUps[i].SetActive(false);
+            }
+        }
     }
         
     private void Start()

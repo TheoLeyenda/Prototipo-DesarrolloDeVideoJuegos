@@ -66,19 +66,31 @@ public class PowerUpDisplayManager_IA : MonoBehaviour
             {
                 if (!powerUpContainerManager_IA.prevPowerUp.enableEffect && powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.prevIndex].countPowerUps <= 0)
                 {
-                    imageCurrentPowerUp.sprite = spritesPowerUps[powerUpContainerManager_IA.currentIndexPowerUp];
-                    textCountPowerUp.text = "" + powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].countPowerUps;
+                    if (spritesPowerUps[powerUpContainerManager_IA.currentIndexPowerUp] != null)
+                    {
+                        imageCurrentPowerUp.sprite = spritesPowerUps[powerUpContainerManager_IA.currentIndexPowerUp];
+                        textCountPowerUp.text = "" + powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].countPowerUps;
+                    }
                 }
                 else
                 {
-                    imageCurrentPowerUp.sprite = spritesPowerUps[powerUpContainerManager_IA.prevIndex];
-                    textCountPowerUp.text = "" + powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.prevIndex].countPowerUps;
+                    if (spritesPowerUps[powerUpContainerManager_IA.currentIndexPowerUp] != null)
+                    {
+                        imageCurrentPowerUp.sprite = spritesPowerUps[powerUpContainerManager_IA.prevIndex];
+                        textCountPowerUp.text = "" + powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.prevIndex].countPowerUps;
+                    }
                 }
             }
             else
             {
-                imageCurrentPowerUp.sprite = spritesPowerUps[powerUpContainerManager_IA.currentIndexPowerUp];
-                textCountPowerUp.text = "" + powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].countPowerUps;
+                if (imageCurrentPowerUp != null)
+                {
+                    if (spritesPowerUps[powerUpContainerManager_IA.currentIndexPowerUp] != null)
+                    {
+                        imageCurrentPowerUp.sprite = spritesPowerUps[powerUpContainerManager_IA.currentIndexPowerUp];
+                        textCountPowerUp.text = "" + powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].countPowerUps;
+                    }
+                }
             }
         }
     }

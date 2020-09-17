@@ -14,6 +14,7 @@ public class PowerUpContainerManager : MonoBehaviour
         public int maxCountPowerUps;
         public bool currentPowerUp;
     }
+    private bool enableBehaviour = false;
     [HideInInspector]
     public bool enableShootPowerUp = true;
     private float delayEnableShootPowerUp = 0.1f;
@@ -88,6 +89,15 @@ public class PowerUpContainerManager : MonoBehaviour
                 }
             }
         }
+
+        if (gameData.gd == GameData.GameMode.PvP)
+        {
+            enableBehaviour = false;
+        }
+        else 
+        {
+            enableBehaviour = true;
+        }
     }
     private void Update()
     {
@@ -113,7 +123,7 @@ public class PowerUpContainerManager : MonoBehaviour
     {
         
         if (gameData.indexCurrentPowerUp < 0 || gameData.indexCurrentPowerUp >= powerUpContainerContent.Count
-            || emptyPowerUps)
+            || emptyPowerUps || !enableBehaviour)
             return;
 
         currentIndexPowerUp = index;
