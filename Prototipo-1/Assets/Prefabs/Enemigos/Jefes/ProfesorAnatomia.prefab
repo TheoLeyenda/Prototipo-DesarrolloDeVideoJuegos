@@ -1669,9 +1669,13 @@ MonoBehaviour:
   delayAttack: 0.8
   anguloAtaqueSalto: 180
   Speed: 20
+  auxSpeed: 20
   SpeedJump: 12
+  auxSpeedJump: 12
   Resistace: 22
+  auxResistace: 22
   Gravity: 35
+  auxGravity: 35
   delayAttackJumping: 0.5
   colliderSprites: {fileID: 2531832292111907142}
   InitialPosition: {x: 0, y: 0, z: 0}
@@ -1741,6 +1745,7 @@ MonoBehaviour:
   cameraShake: {fileID: 1268085395}
   initBraggert: 0
   enableSetRandomSpecialAttack: 1
+  initBehavour: 0
   fsmProfesorAnatomia: {fileID: 0}
 --- !u!114 &2793434760028993244
 MonoBehaviour:
@@ -1771,6 +1776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeBoss: 0
   typeEnemy: 0
+  movement: 0
 --- !u!114 &3655946750016353239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2014,6 +2020,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grid
       objectReference: {fileID: 0}
+    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
     - target: {fileID: 7296128619017103692, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2068,21 +2089,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
       objectReference: {fileID: 0}
     - target: {fileID: 5927136447379350933, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}

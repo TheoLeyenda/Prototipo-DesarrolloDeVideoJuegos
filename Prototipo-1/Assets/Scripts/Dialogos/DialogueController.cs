@@ -4,11 +4,14 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
 using System.Threading;
+using System;
 
 public class DialogueController : MonoBehaviour
 {
     // Start is called before the first frame update
 
+
+    public static event Action<DialogueController> OnFinishDialog;
 
     //REEMPLAZAR LA PAUSA DEL ImputManager con el enableMovemet = false del player y el enemy.
     
@@ -256,6 +259,9 @@ public class DialogueController : MonoBehaviour
 
 
                 }
+                if (OnFinishDialog != null)
+                    OnFinishDialog(this);
+
                 gameObject.SetActive(false);
             }
         }

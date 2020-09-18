@@ -24,6 +24,7 @@ public class ProfesorHistoria : Enemy
     [Header("Config Profesor Historia")]
     public float speedChargeSpecialAttack = 1;
     public List<string> NameAnimations;
+    
     public bool ChargeInSpecialAttack;
     public SpriteBoss_ProfesorHistoria spriteBoss_ProfesorHistoria;
     private bool initMasiveAttack_Lanzado;
@@ -69,6 +70,8 @@ public class ProfesorHistoria : Enemy
     private bool Idied = false;
     private bool OnProfesorHistoria = false;
 
+    public bool initBehavour = false;
+
     public static event Action<Enemy, float, int> OnInitTrowSpecialAttackLibroEdison;
     public static event Action<Enemy, float, int[]> OnInitTrowSpecialAttackDebateInjusto;
     public static event Action<ProfesorHistoria> InCombatPoint;
@@ -100,6 +103,7 @@ public class ProfesorHistoria : Enemy
         specialAttackDebateInjusto_Lanzado = false;
         Idied = false;
         Grid.OnSettingTitileo_2 += SetTargetGrid;
+        DialogueController.OnFinishDialog += EnableInitBehaviour;
     }
     protected override void OnDisable()
     {
@@ -111,6 +115,8 @@ public class ProfesorHistoria : Enemy
         Idied = false;
         enableMovement = true;
         Grid.OnSettingTitileo_2 -= SetTargetGrid;
+        DialogueController.OnFinishDialog -= EnableInitBehaviour;
+
     }
     private void Awake()
     {
@@ -159,6 +165,7 @@ public class ProfesorHistoria : Enemy
     public override void Start()
     {
         NextSpecialAttack = true;
+        OnProfesorHistoria = false;
         base.Start();
     }
 
@@ -176,20 +183,25 @@ public class ProfesorHistoria : Enemy
             if (!Idied)
             {
                 base.Update();
+               
                 switch (fsmProfesorHistoria.GetCurrentState())
                 {
                     case (int)EstadoProfesorHistoria.Idle:
                         Idle();
                         break;
                     case (int)EstadoProfesorHistoria.MasiveAttack:
-                        if (enemyPrefab.transform.position.x <= 5.355f)
+                        if (enemyPrefab.transform.position.x <= 5.5f)
                         {
                             if (!OnProfesorHistoria && InCombatPoint != null)
                             {
                                 OnProfesorHistoria = true;
                                 InCombatPoint(this);
+                                Debug.Log("ENTRE");
                             }
-                            InitMasiveAttack();
+                            if (initBehavour)
+                            {
+                                InitMasiveAttack();
+                            }
                         }
                         break;
                     case (int)EstadoProfesorHistoria.FirstSpecialAttackLibroDeEdison:
@@ -242,11 +254,14 @@ public class ProfesorHistoria : Enemy
             }
         }
     }
-
+    public void EnableInitBehaviour(DialogueController dialogueController) 
+    {
+        initBehavour = true;
+    }
     public void Idle()
     {
         initMasiveAttack_Lanzado = false;
-        fsmProfesorHistoria.SendEvent((int)EventosProfesorHistoria.StartMasiveAttack);
+        fsmProfesorHistoria.SendEvent((int)EventosProfesorHistoria.StartMasiveAttack); 
     }
     public void InitMasiveAttack()
     {

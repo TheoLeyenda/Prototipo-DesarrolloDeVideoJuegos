@@ -576,9 +576,13 @@ MonoBehaviour:
   delayAttack: 0
   anguloAtaqueSalto: 0
   Speed: 20
-  SpeedJump: 0
-  Resistace: 0
-  Gravity: 0
+  auxSpeed: 20
+  SpeedJump: 12
+  auxSpeedJump: 12
+  Resistace: 22
+  auxResistace: 22
+  Gravity: 35
+  auxGravity: 35
   delayAttackJumping: 0.5
   colliderSprites: {fileID: 6133794810742301842}
   InitialPosition: {x: 0, y: 0, z: 0}
@@ -657,6 +661,7 @@ MonoBehaviour:
   ForwardVector: {fileID: 1232270207}
   DownVector: {fileID: 1653586845}
   fsmProfesorHistoria: {fileID: 0}
+  initBehavour: 0
 --- !u!114 &5834760706286496520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,6 +691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeBoss: 1
   typeEnemy: 0
+  movement: 0
 --- !u!1 &6133794809492626379
 GameObject:
   m_ObjectHideFlags: 0
@@ -2423,6 +2429,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grid
       objectReference: {fileID: 0}
+    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
     - target: {fileID: 7296128619017103692, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2477,21 +2498,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
       objectReference: {fileID: 0}
     - target: {fileID: 5927136447379350933, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}

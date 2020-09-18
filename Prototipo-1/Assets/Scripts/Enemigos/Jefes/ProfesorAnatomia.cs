@@ -72,6 +72,8 @@ public class ProfesorAnatomia : Enemy
     private bool OnProfesorAnatomia;
     private bool Idied = false;
     private float porcentageThrowSpecialAttack;
+    
+    public bool initBehavour = false;
     public enum EstadoProfesorAnatomia
     {
         Idle,
@@ -124,6 +126,7 @@ public class ProfesorAnatomia : Enemy
     protected override void OnEnable()
     {
         base.OnEnable();
+        DialogueController.OnFinishDialog += EnableInitBehaviour;
         Grid.OnSettingTitileo += SetTargetGrid;
         //InitialPosition = new Vector3(5.17f, -3.42f, 0f);
         enemyPrefab.transform.position = new Vector3(transform.position.x, -3.42f, 0f);
@@ -133,6 +136,7 @@ public class ProfesorAnatomia : Enemy
     {
         base.OnDisable();
         Grid.OnSettingTitileo -= SetTargetGrid;
+        DialogueController.OnFinishDialog -= EnableInitBehaviour;
         Idied = false;
         OnProfesorAnatomia = false;
         enableMovement = true;
@@ -167,14 +171,19 @@ public class ProfesorAnatomia : Enemy
         {
             if (!Idied)
             {
+                //Debug.Log("ENTRE");
                 base.Update();
+                //if (enemyPrefab.transform.position.x > 5.355f)
+                //{
+                    //transform.Translate(Vector3.left * Speed * Time.deltaTime);
+                //}
                 switch (fsmProfesorAnatomia.GetCurrentState())
                 {
                     case (int)EstadoProfesorAnatomia.Idle:
                         Idle();
                         break;
                     case (int)EstadoProfesorAnatomia.MasiveAttack:
-                        if (!OnProfesorAnatomia && InCombatPoint != null && enemyPrefab.transform.position.x <= 5.355f)
+                        if (!OnProfesorAnatomia && InCombatPoint != null && enemyPrefab.transform.position.x <= 5.5f)
                         {
                             //Debug.Log("ENTRE AL COMBATE");
                             if (!OnProfesorAnatomia)
@@ -182,9 +191,11 @@ public class ProfesorAnatomia : Enemy
                                 OnProfesorAnatomia = true;
                                 InCombatPoint(this);
                             }
-                            
                         }
-                        MasiveAttack();
+                        if (initBehavour)
+                        {
+                            MasiveAttack();
+                        }
                         break;
                     case (int)EstadoProfesorAnatomia.ThrowSpecialAttack:
                         ThrowSpecialAttack();
@@ -227,10 +238,14 @@ public class ProfesorAnatomia : Enemy
             fsmProfesorAnatomia.SendEvent((int)EventosProfesorAnatomia.SpecialAttackReady);
         }
     }
+    public void EnableInitBehaviour(DialogueController dialogueController)
+    {
+        initBehavour = true;
+    }
     public void Idle() 
     {
         //CAMBIAR ESTO POR LAS ANIMACIONES DE LAS POSES QUE ESTARAN DURANTE EL DIALOGO ANTES DE LA PELEA
-        fsmProfesorAnatomia.SendEvent((int)EventosProfesorAnatomia.StartMasiveAttack);
+        fsmProfesorAnatomia.SendEvent((int)EventosProfesorAnatomia.StartMasiveAttack);    
     }
     public void ThrowSpecialAttack()
     {
