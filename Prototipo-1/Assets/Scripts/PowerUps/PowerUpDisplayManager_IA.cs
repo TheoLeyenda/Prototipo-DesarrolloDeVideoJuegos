@@ -30,8 +30,20 @@ public class PowerUpDisplayManager_IA : MonoBehaviour
         scrollbarPowerUp = ui_Manager.enemyHUD.scrollbarPowerUp;
         imageCurrentPowerUp = ui_Manager.enemyHUD.imageCurrentPowerUp;
         textCountPowerUp = ui_Manager.enemyHUD.textCountPowerUp;
-            
-        UpdatePowerDataDisplay(powerUpContainerManager_IA, true);
+
+        //UpdatePowerDataDisplay(powerUpContainerManager_IA, true);
+        
+        if (powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].namePowerUp == "None")
+        {
+            imageCurrentPowerUp.sprite = spritesPowerUps[spritesPowerUps.Count - 1];
+            textCountPowerUp.text = " ";
+            powerUpContainerManager_IA.prevIndex = powerUpContainerManager_IA.powerUpContainerContent.Count - 1;
+        }
+        else 
+        {
+            imageCurrentPowerUp.sprite = spritesPowerUps[powerUpContainerManager_IA.currentIndexPowerUp];
+            textCountPowerUp.text = "" + powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].countPowerUps;
+        }
         //prevPowerUp = powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].powerUp;
         scrollbarPowerUp.size = 0;
     }
