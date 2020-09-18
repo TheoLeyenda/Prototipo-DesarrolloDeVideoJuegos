@@ -9,7 +9,7 @@ public class GranadaGaseosa : ProyectilParabola
     private int idPlataforma;
     private GameObject[] grid;
     public Pool poolGaseosa;
-    private PoolObject poolObject;
+    //private PoolObject PO;
     private GameObject cuadrillaColision;
     List<GameObject> cuadrillasAbajo = new List<GameObject>();
     public Sprite propLata;
@@ -24,7 +24,7 @@ public class GranadaGaseosa : ProyectilParabola
         soundgenerate = false;
         idPlataforma = 0;
             
-        poolObject = GetComponent<PoolObject>();
+        //PO = GetComponent<PoolObject>();
     }
     private void OnDisable()
     {

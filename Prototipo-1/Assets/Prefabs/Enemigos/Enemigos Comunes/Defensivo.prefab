@@ -1048,9 +1048,13 @@ MonoBehaviour:
   delayAttack: 0.45
   anguloAtaqueSalto: 180
   Speed: 17
+  auxSpeed: 17
   SpeedJump: 12
+  auxSpeedJump: 12
   Resistace: 22
+  auxResistace: 22
   Gravity: 35
+  auxGravity: 35
   delayAttackJumping: 0.5
   colliderSprites: {fileID: 1936033509}
   InitialPosition: {x: 0, y: 0, z: 0}
@@ -1105,6 +1109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeBoss: 9
   typeEnemy: 3
+  movement: 0
 --- !u!114 &2925986500153405123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1140,20 +1145,6 @@ MonoBehaviour:
     timeLifeParticleJamp: 0.3
     auxTimeLifeParticleJamp: 0.3
     particleJump: {fileID: 7020158621524183097}
---- !u!114 &7787452014748614529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4688177777539405394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e90e8529684ca343859b16e70c4390f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerReference: {fileID: 0}
-  enemyReference: {fileID: 1922781421727944640}
 --- !u!114 &5089705215467859380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1169,8 +1160,22 @@ MonoBehaviour:
   userEnemy: {fileID: 1922781421727944640}
   poolItemPowerUp: {fileID: 446716530066208033}
   porcentageDropPowerUp: 100
-  ModifyVertical: -0.04
+  ModifyVertical: -1.5
   ModifyHorizontal: 0.014
+--- !u!114 &7787452014748614529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4688177777539405394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e90e8529684ca343859b16e70c4390f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerReference: {fileID: 0}
+  enemyReference: {fileID: 1922781421727944640}
 --- !u!1001 &201043545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1560,21 +1565,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2510886537487143251}
     m_Modifications:
-    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
     - target: {fileID: 2688081505215426912, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_Name
@@ -1584,6 +1574,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
       objectReference: {fileID: 0}
     - target: {fileID: 7296128619017103692, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
@@ -2023,6 +2028,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: P 2 Der
       objectReference: {fileID: 0}
+    - target: {fileID: 1460512151993268299, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_Name
+      value: P 3 Der
+      objectReference: {fileID: 0}
     - target: {fileID: 1460512152097571539, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_Name
@@ -2047,11 +2057,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: P 2 Der
-      objectReference: {fileID: 0}
-    - target: {fileID: 1460512151993268299, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_Name
-      value: P 3 Der
       objectReference: {fileID: 0}
     - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
       propertyPath: enemy

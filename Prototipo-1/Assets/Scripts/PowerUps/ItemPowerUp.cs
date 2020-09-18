@@ -21,6 +21,7 @@ public class ItemPowerUp : MonoBehaviour
     [SerializeField] List<DataItemPowerUp> dataItemsPowerUps;
     [SerializeField] PowerUp powerUpInstance;
     [SerializeField] PowerUp.TypeCheckCollision typeCheckCollisionPowerUpItem;
+    public Vector3 initPosition;
     // Update is called once per frame
     void Start()
     {
@@ -41,15 +42,14 @@ public class ItemPowerUp : MonoBehaviour
     }
     private void OnEnable()
     {
-        trailRenderer.Clear();
-        trailRenderer.emitting = true;
+        trailRenderer.enabled = true;
         myCollider2D.enabled = true;
         InitData();
     }
     private void OnDisable()
     {
         trailRenderer.Clear();
-        trailRenderer.emitting = false;
+        trailRenderer.enabled = false;
         myCollider2D.enabled = true;
     }
     public void GoToTarget()

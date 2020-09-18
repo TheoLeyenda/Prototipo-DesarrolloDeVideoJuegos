@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
     public GameObject generadorProyectilParabolaAgachado;
     private float MinRangeRandom = 0;
     private float MaxRangeRandom = 100;
-    private float TypeRandom = 3;
+    //private float TypeRandom = 3;
     protected float delaySelectMovement;
     public float maxRandomDelayMovement;
     public float minRandomDelayMovement;
@@ -78,10 +78,13 @@ public class Enemy : MonoBehaviour
     private bool isDeffended;
     public float anguloAtaqueSalto;
     public float Speed;
+    [SerializeField]private float auxSpeed = 0;
     public float SpeedJump;
-    private float auxSpeedJump;
+    [SerializeField] private float auxSpeedJump = 0;
     public float Resistace;
+    [SerializeField] private float auxResistace = 0;
     public float Gravity;
+    [SerializeField] private float auxGravity = 0;
     public float delayAttackJumping;
     private bool isJamping;
     public Collider2D colliderSprites;
@@ -151,7 +154,7 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public float timeStuned = 0;
 
-    private float auxSpeed;
+    
     //private bool onceJump = false;
     public static event Action<Enemy, string> OnModifireState;
     public static event Action<Enemy, string> OnDisableModifireState;
@@ -169,6 +172,10 @@ public class Enemy : MonoBehaviour
         weitVictory = false;
         enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
         Player.OnDie += AnimationVictory;
+        if (!inCombatPosition && enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe) 
+        {
+            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+        }
     }
     protected virtual void OnDisable()
     {
@@ -180,17 +187,21 @@ public class Enemy : MonoBehaviour
         isJamping = false;
         myVictory = false;
         weitVictory = false;
+        inCombatPosition = false;
+
+        Speed = auxSpeed;
+        SpeedJump = auxSpeedJump;
+        Resistace = auxResistace;
+        Gravity = auxGravity;
     }
     public virtual void Start()
     {
-        auxSpeed = Speed;
         weitVictory = false;
         specialAttackParabolaEnemyController = GetComponent<SpecialAttackParabolaEnemyController>();
         tolerableStillTime = maxRandomDelayMovement;
         auxTolerableStillTime = maxRandomDelayMovement;
         eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
         enableSpecialAttack = false;
-        auxSpeedJump = SpeedJump;
         InitialPosition = transform.position;
         auxDelayAttack = delayAttack;
         delaySelectMovement = 0.5f;
@@ -735,7 +746,7 @@ public class Enemy : MonoBehaviour
             {
                 gm.countEnemysDead++;
                 gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
-                gm.ResetRoundCombat(false);
+                //gm.ResetRoundCombat(false);
                 ResetEnemy();
                 enemyPrefab.gameObject.SetActive(false);
                 xpActual = 0;
@@ -753,7 +764,7 @@ public class Enemy : MonoBehaviour
                         gm.generateEnemy = true;
                         gm.countEnemysDead++;
                         gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
-                        gm.ResetRoundCombat(false);
+                        //gm.ResetRoundCombat(false);
                         ResetEnemy();
                         //poolObjectEnemy.Recycle();
                         pool.Recycle(enemyPrefab);
@@ -768,7 +779,7 @@ public class Enemy : MonoBehaviour
                         gm.generateEnemy = true;
                         gm.countEnemysDead++;
                         gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
-                        gm.ResetRoundCombat(false);
+                        //gm.ResetRoundCombat(false);
                         ResetEnemy();
                         //poolObjectEnemy.Recycle();
                         pool.Recycle(enemyPrefab);
@@ -782,7 +793,7 @@ public class Enemy : MonoBehaviour
                     {
                         gm.countEnemysDead++;
                         gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
-                        gm.ResetRoundCombat(false);
+                        //gm.ResetRoundCombat(false);
                         ResetEnemy();
                         enemyPrefab.gameObject.SetActive(false);
                         xpActual = 0;
@@ -1268,7 +1279,7 @@ public class Enemy : MonoBehaviour
         }
         else if (direccion == Vector3.down)
         {
-            Debug.Log("ENTRE");
+            //Debug.Log("ENTRE");
             transform.Translate(direccion * SpeedJump * Time.deltaTime);
             SpeedJump = SpeedJump + Time.deltaTime * Gravity;
         }
@@ -1320,6 +1331,10 @@ public class Enemy : MonoBehaviour
     public void SetIsJumping(bool _isJumping)
     {
         isJamping = _isJumping;
+    }
+    public bool GetInCombatPosition() 
+    {
+        return inCombatPosition;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

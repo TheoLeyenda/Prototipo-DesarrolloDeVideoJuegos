@@ -484,7 +484,7 @@ public class Player : MonoBehaviour
         {
             enableMovementPlayer = false;
         }
-        gm.ResetRoundCombat(true);
+        //gm.ResetRoundCombat(true);
     }
     public void DelayEnableAttack()
     {

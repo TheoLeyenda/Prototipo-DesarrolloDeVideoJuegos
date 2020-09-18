@@ -6,7 +6,7 @@ using System;
 public class PowerUpContainerManager_IA : PowerUpContainer
 {
     // Start is called before the first frame update
-    public static event Action<PowerUpContainerManager_IA> OnRefreshDataPowerUpUI;
+    public static event Action<PowerUpContainerManager_IA, bool> OnRefreshDataPowerUpUI;
     public static event Action<PowerUpContainerManager_IA> OnNextPowerUpAsigned;
     public int minPowerUpGenerar = 2;
     public int maxPowerUpGenerar = 5;
@@ -57,8 +57,11 @@ public class PowerUpContainerManager_IA : PowerUpContainer
 
     void Update()
     {
-        DelayEnableThrowPowerUp();
-        CheckDelayThrowPowerUp();
+        if (userEnemy.GetInCombatPosition())
+        {
+            DelayEnableThrowPowerUp();
+            CheckDelayThrowPowerUp();
+        }
     }
     public void ResetCountPowerUps()
     {
@@ -86,7 +89,7 @@ public class PowerUpContainerManager_IA : PowerUpContainer
             enableDelay = true;
             if (OnRefreshDataPowerUpUI != null)
             {
-                OnRefreshDataPowerUpUI(this);
+                OnRefreshDataPowerUpUI(this, false);
             }
         }
     }
@@ -125,7 +128,8 @@ public class PowerUpContainerManager_IA : PowerUpContainer
     }
     public override void ThrowPowerUp(int index)
     {
-        if (powerUpContainerContent[index].countPowerUps <= 0 || emptyPowerUps || index < 0 || index >= powerUpContainerContent.Count)
+        if (powerUpContainerContent[index].countPowerUps <= 0 || emptyPowerUps || index < 0 || index >= powerUpContainerContent.Count
+            || powerUpContainerContent[index].powerUp.enableEffect)
             return;
 
         if (powerUpContainerContent[index].namePowerUp != "None")
@@ -153,7 +157,7 @@ public class PowerUpContainerManager_IA : PowerUpContainer
             }
             if (OnRefreshDataPowerUpUI != null)
             {
-                OnRefreshDataPowerUpUI(this);
+                OnRefreshDataPowerUpUI(this, false);
             }
         }
     }
@@ -172,7 +176,7 @@ public class PowerUpContainerManager_IA : PowerUpContainer
                 emptyPowerUps = true;
                 currentIndexPowerUp = powerUpContainerContent.Count - 1;
                 powerUpContainerContent[currentIndexPowerUp].currentPowerUp = true;
-                OnRefreshDataPowerUpUI(this);
+                OnRefreshDataPowerUpUI(this, false);
             }
         }
     }

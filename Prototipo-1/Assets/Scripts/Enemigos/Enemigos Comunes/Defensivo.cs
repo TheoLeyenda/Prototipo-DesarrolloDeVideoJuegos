@@ -136,6 +136,11 @@ public class Defensivo : Enemy
     {
         if (enemyPrefab.activeSelf == true)
         {
+            if (!inCombatPosition)
+            {
+                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+                return;
+            }
             if (!inAttack)
             {
                 valueAttack = Random.Range(0, 100);

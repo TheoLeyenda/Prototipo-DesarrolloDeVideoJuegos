@@ -9045,6 +9045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeBoss: 9
   typeEnemy: 4
+  movement: 0
 --- !u!114 &1837312878639225777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9116,9 +9117,13 @@ MonoBehaviour:
   delayAttack: 0.4
   anguloAtaqueSalto: 180
   Speed: 17
+  auxSpeed: 17
   SpeedJump: 12
+  auxSpeedJump: 12
   Resistace: 28.5
+  auxResistace: 28.5
   Gravity: 35
+  auxGravity: 35
   delayAttackJumping: 0.4
   colliderSprites: {fileID: 6291037100013266853}
   InitialPosition: {x: 5.17, y: -3.18, z: 0}
@@ -9186,7 +9191,7 @@ MonoBehaviour:
   userEnemy: {fileID: 3119680522468236778}
   poolItemPowerUp: {fileID: 687517022277313255}
   porcentageDropPowerUp: 100
-  ModifyVertical: -0.04
+  ModifyVertical: -2.5
   ModifyHorizontal: 0.014
 --- !u!1 &8163521573060275563
 GameObject:

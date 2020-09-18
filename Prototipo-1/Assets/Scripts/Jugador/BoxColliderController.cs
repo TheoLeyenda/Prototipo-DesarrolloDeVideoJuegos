@@ -251,7 +251,7 @@ public class BoxColliderController : MonoBehaviour
             else if (state == StateBoxCollider.Defendido)
             {
                 Player_PvP player_PvP = player.gameObject.GetComponent<Player_PvP>();
-                float realDamage;
+                //float realDamage;
                 if (PlayerDisparador != null)
                 {
                     //AUMENTO XP PARA EL ATAQUE ESPECIAL
@@ -345,7 +345,7 @@ public class BoxColliderController : MonoBehaviour
         }
         else if (enemy != null && !inPlayer && inEnemy)
         {
-            bool enableDamagePlayer = true;
+            //bool enableDamagePlayer = true;
             if (state == StateBoxCollider.Normal)
             {
                 if (PlayerDisparador != null)

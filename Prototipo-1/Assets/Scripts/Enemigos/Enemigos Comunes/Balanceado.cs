@@ -37,7 +37,7 @@ public class Balanceado : Enemy
             AnimationAttack();
         }
     }
-    public void CheckSpecialAttack()
+    /*public void CheckSpecialAttack()
     {
         if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto 
             || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado 
@@ -45,12 +45,17 @@ public class Balanceado : Enemy
         {
             delaySelectMovement = 0.1f;
         }
-    }
+    }*/
     public override void AnimationAttack()
     {
         bool inSpecialAttack = (xpActual >= xpNededSpecialAttack);
         if (enemyPrefab.activeSelf == true)
         {
+            if (!inCombatPosition)
+            {
+                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+                return;
+            }
             if (!inAttack)
             {
                 valueAttack = Random.Range(0, 100);

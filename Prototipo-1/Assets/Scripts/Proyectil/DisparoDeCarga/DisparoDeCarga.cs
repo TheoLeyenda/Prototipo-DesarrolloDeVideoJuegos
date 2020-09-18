@@ -11,7 +11,7 @@ public class DisparoDeCarga : MonoBehaviour
     public float damage;
     private float auxDamage;
 
-    public ParticleSystem particleSystem;
+    public ParticleSystem particleSystemProyectil;
     public ParticleSystem.MainModule mainModule;
     private float auxStartSpeedParticleSystem;
     private GameObject objectCollisionPartycleSystem;
@@ -20,9 +20,9 @@ public class DisparoDeCarga : MonoBehaviour
     private void Start()
     {
         auxDamage = damage;
-        if(particleSystem != null)
+        if(particleSystemProyectil != null)
         {
-            mainModule = particleSystem.main;
+            mainModule = particleSystemProyectil.main;
             auxStartSpeedParticleSystem = mainModule.startSpeedMultiplier;
         }
     }
@@ -59,7 +59,7 @@ public class DisparoDeCarga : MonoBehaviour
             objectCollisionPartycleSystem = collision.gameObject;
             Vector3 Distance = objectCollisionPartycleSystem.transform.position - collision.transform.position;
             damage = 0;
-            if(particleSystem != null)
+            if(particleSystemProyectil != null)
             {
                 mainModule.startLifetime = 0.65f;
                 mainModule.startSpeedMultiplier = Distance.x + proximity;
@@ -71,7 +71,7 @@ public class DisparoDeCarga : MonoBehaviour
         if (collision.tag == "MagicBust")
         {
             damage = auxDamage;
-            if(particleSystem != null)
+            if(particleSystemProyectil != null)
             {
                 mainModule.startLifetime = 2.1f;
                 mainModule.startSpeedMultiplier = auxStartSpeedParticleSystem;

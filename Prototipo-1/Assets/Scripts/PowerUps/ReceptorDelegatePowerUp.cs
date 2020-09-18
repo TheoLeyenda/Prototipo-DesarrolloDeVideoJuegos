@@ -64,7 +64,7 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
                 powerUp_QuietoAhí.SetAuxDelayAttack(playerReference.delayAttack);
                 playerReference.delayAttack = powerUp_QuietoAhí.GetDelayAttack();
             }
-            Debug.Log("QUIETO");
+            //Debug.Log("QUIETO");
         }
     }
     public void EffectPowerUp_QuietoAhi(PowerUp_QuietoAhi powerUp_QuietoAhí)
@@ -127,7 +127,7 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
                 if (powerUp_QuietoAhí.disableAttack)
                 {
                     playerReference.delayAttack = powerUp_QuietoAhí.GetAuxDelayAttack();
-                    Debug.Log("ENTRE");
+                    //Debug.Log("ENTRE");
                 }
 
                 playerReference.Speed = powerUp_QuietoAhí.GetAuxSpeed();
@@ -185,7 +185,7 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
                 powerUp_DividirPuntuacion.newScoreForHit = playerReference.PD.scoreForHit / 2;
                 powerUp_DividirPuntuacion.newScoreForKill = playerReference.PD.scoreForEnemyDead / 2;
                 powerUp_DividirPuntuacion.settedPowerUp = true;
-                Debug.Log("ENTRE");
+                //Debug.Log("ENTRE");
             }
         }
     }

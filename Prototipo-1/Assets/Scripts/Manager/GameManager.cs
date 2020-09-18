@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     public int totalCountEnemysDead;
     public ScreenManager screenManager;
     public StructGameManager structGameManager;
-    private int roundCombat;
+    //private int roundCombat;
     [HideInInspector]
     public bool restartLevel;
     private void Awake()
@@ -66,13 +66,13 @@ public class GameManager : MonoBehaviour
     public void ResetGameManager()
     {
         countEnemysDead = 0;
-        roundCombat = 0;
+        //roundCombat = 0;
         structGameManager.gm_dataCombatPvP.rondaActual = 0;
         structGameManager.gm_dataCombatPvP.countRoundsWiningP1 = 0;
         structGameManager.gm_dataCombatPvP.countRoundsWiningP2 = 0;
         structGameManager.gm_dataCombatPvP.countRounds = 0;
     }
-    public void ResetRoundCombat(bool PlayerDeath)
+    /*public void ResetRoundCombat(bool PlayerDeath)
     {
         if (!PlayerDeath)
         {
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
         {
             roundCombat = 1;
         }
-    }
+    }*/
     public void GameOver(string finishScene)
     {
         if (screenManager.eventWise != null && finishScene != "GameOverHistoria" && finishScene != "GameOverSupervivencia")

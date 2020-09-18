@@ -12,7 +12,7 @@ public class ProyectilParabola : Proyectil
     public Sprite spriteProyectilParabola;
     [SerializeField]
     private ParabolaController parabolaController;
-    private PoolObject poolObject;
+    //private PoolObject poolObject;
     [HideInInspector]
     public int TypeRoot;
     private EventWise eventWise;

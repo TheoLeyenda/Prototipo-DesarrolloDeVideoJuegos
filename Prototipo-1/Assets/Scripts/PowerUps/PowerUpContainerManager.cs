@@ -121,10 +121,18 @@ public class PowerUpContainerManager : MonoBehaviour
     }
     public void ThrowPowerUp(int index)
     {
-        
-        if (gameData.indexCurrentPowerUp < 0 || gameData.indexCurrentPowerUp >= powerUpContainerContent.Count
-            || emptyPowerUps || !enableBehaviour)
-            return;
+        if (prevPowerUp != null)
+        {
+            if (gameData.indexCurrentPowerUp < 0 || gameData.indexCurrentPowerUp >= powerUpContainerContent.Count
+                || emptyPowerUps || !enableBehaviour || prevPowerUp.enableEffect)
+                return;
+        }
+        else 
+        {
+            if (gameData.indexCurrentPowerUp < 0 || gameData.indexCurrentPowerUp >= powerUpContainerContent.Count
+                    || emptyPowerUps || !enableBehaviour)
+                return;
+        }
 
         currentIndexPowerUp = index;
 

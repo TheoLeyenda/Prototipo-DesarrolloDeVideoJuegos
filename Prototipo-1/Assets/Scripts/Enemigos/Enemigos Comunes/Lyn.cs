@@ -18,13 +18,15 @@ public class Lyn : Enemy
     {
         base.Start();
     }
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
         Player.OnDie += AnimationVictory;
     }
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         Player.OnDie -= AnimationVictory;
     }
     // Update is called once per frame
@@ -63,6 +65,11 @@ public class Lyn : Enemy
     {
         if (enemyPrefab.activeSelf == true)
         {
+            if (!inCombatPosition)
+            {
+                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+                return;
+            }
             if (!inAttack)
             {
                 valueAttack = Random.Range(0, 100);

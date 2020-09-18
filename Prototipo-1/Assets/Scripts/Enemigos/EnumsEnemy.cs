@@ -59,6 +59,7 @@ public class EnumsEnemy : MonoBehaviour
     }
     public TiposDeJefe typeBoss;
     public TiposDeEnemigo typeEnemy;
+    [SerializeField]
     private Movimiento movement;
     private EstadoEnemigo stateEnemy;
 

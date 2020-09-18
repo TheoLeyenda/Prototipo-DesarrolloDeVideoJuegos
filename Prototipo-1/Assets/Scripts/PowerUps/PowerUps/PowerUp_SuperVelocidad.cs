@@ -12,7 +12,7 @@ public class PowerUp_SuperVelocidad : PowerUp
     private float auxResitance;
     public float NewGravity;
     private float auxGravity;
-    private bool settingAuxData = false;
+    //private bool settingAuxData = false;
     protected override void Start()
     {
         typePowerUp = TypePowerUp.PowerUpDelay;
@@ -118,7 +118,7 @@ public class PowerUp_SuperVelocidad : PowerUp
     public override void DisableEffect()
     {
         DisablePowerUpEffect();
-        settingAuxData = false;
+        //settingAuxData = false;
     }
     public void DisablePowerUpEffect()
     {

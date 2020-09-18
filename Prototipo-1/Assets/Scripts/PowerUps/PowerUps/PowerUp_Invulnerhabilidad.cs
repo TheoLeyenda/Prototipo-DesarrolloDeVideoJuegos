@@ -21,11 +21,25 @@ public class PowerUp_Invulnerhabilidad : PowerUp
                 delayEffect = delayEffect - Time.deltaTime;
                 if (player != null)
                 {
-                    player.PD.lifePlayer = currentLife;
+                    if (player.PD.lifePlayer > 0)
+                    {
+                        player.PD.lifePlayer = currentLife;
+                    }
+                    else 
+                    {
+                        DisableEffect();
+                    }
                 }
                 if (enemy != null)
                 {
-                    enemy.life = currentLife; 
+                    if (enemy.life > 0)
+                    {
+                        enemy.life = currentLife;
+                    }
+                    else 
+                    {
+                        DisableEffect();
+                    }
                 }
             }
             else

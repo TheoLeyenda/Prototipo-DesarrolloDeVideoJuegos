@@ -13,13 +13,15 @@ public class KathyAndTyke : Enemy
     {
         base.Start();
     }
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
         Player.OnDie += AnimationVictory;
     }
-    private void OnDisable() 
+    protected override void OnDisable() 
     {
+        base.OnDisable();
         Player.OnDie -= AnimationVictory;
     }
 
@@ -111,6 +113,11 @@ public class KathyAndTyke : Enemy
 
         if (enemyPrefab.activeSelf == true)
         {
+            if (!inCombatPosition)
+            {
+                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+                return;
+            }
             if (!inAttack)
             {
                 valueAttack = Random.Range(0, 100);

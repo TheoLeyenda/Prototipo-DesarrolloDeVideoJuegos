@@ -31,7 +31,7 @@ public class Agresivo : Enemy
             }
         }
     }
-    public void CheckSpecialAttack()
+    /*public void CheckSpecialAttack()
     {
         if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
             || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
@@ -46,7 +46,7 @@ public class Agresivo : Enemy
                 spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", false);
             }
         }
-    }
+    }*/
     public override void CheckDelayAttack(bool specialAttack)
     {
         if (delayAttack > 0)
@@ -66,7 +66,11 @@ public class Agresivo : Enemy
     {
         if (enemyPrefab.activeSelf == true)
         {
-
+            if (!inCombatPosition)
+            {
+                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+                return;
+            }
             if (!inAttack)
             {
                 valueAttack = Random.Range(0, 100);
@@ -151,6 +155,7 @@ public class Agresivo : Enemy
         Proyectil proyectil = null;
         ProyectilInparable proyectilInparable = null;
         Proyectil.typeProyectil tipoProyectil = Proyectil.typeProyectil.Nulo;
+
         if (!specialAttack)
         {
             go = poolObjectAttack.GetObject();

@@ -31,26 +31,28 @@ public class PowerUpDisplayManager_IA : MonoBehaviour
         imageCurrentPowerUp = ui_Manager.enemyHUD.imageCurrentPowerUp;
         textCountPowerUp = ui_Manager.enemyHUD.textCountPowerUp;
             
-        UpdatePowerDataDisplay(powerUpContainerManager_IA);
+        UpdatePowerDataDisplay(powerUpContainerManager_IA, true);
         //prevPowerUp = powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].powerUp;
         scrollbarPowerUp.size = 0;
     }
     private void OnDisable()
     {
         PowerUpContainerManager_IA.OnRefreshDataPowerUpUI -= UpdatePowerDataDisplay;
+        //UpdatePowerDataDisplay(powerUpContainerManager_IA, true);
         //PowerUpContainerManager_IA.OnNextPowerUpAsigned -= NextPowerUpAsigned;
     }
     private void Start()
     {
-        UpdatePowerDataDisplay(powerUpContainerManager_IA);
+        UpdatePowerDataDisplay(powerUpContainerManager_IA, true);
         //prevPowerUp = powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].powerUp;
         scrollbarPowerUp.size = 0;
     }
 
-    public void UpdatePowerDataDisplay(PowerUpContainerManager_IA _powerUpContainerManager)
+    public void UpdatePowerDataDisplay(PowerUpContainerManager_IA _powerUpContainerManager, bool enterForEnable)
     {
         
-        if (_powerUpContainerManager == powerUpContainerManager_IA)
+        if ((_powerUpContainerManager == powerUpContainerManager_IA && _powerUpContainerManager.userEnemy == powerUpContainerManager_IA.userEnemy)
+            || enterForEnable)
         {
 
             if (powerUpContainerManager_IA.emptyPowerUps
@@ -127,7 +129,7 @@ public class PowerUpDisplayManager_IA : MonoBehaviour
                     //Debug.Log("ENTRO");
                     currentPowerUp.DisableEffect();
                     scrollbarPowerUp.size = 0;
-                    UpdatePowerDataDisplay(powerUpContainerManager_IA);
+                    UpdatePowerDataDisplay(powerUpContainerManager_IA, false);
                     enableUpdateData = true;
                 }
             }
@@ -149,7 +151,7 @@ public class PowerUpDisplayManager_IA : MonoBehaviour
                     //Debug.Log("ENTRO");
                     powerUpContainerManager_IA.prevPowerUp.DisableEffect();
                     scrollbarPowerUp.size = 0;
-                    UpdatePowerDataDisplay(powerUpContainerManager_IA);
+                    UpdatePowerDataDisplay(powerUpContainerManager_IA, false);
                     enableUpdateData = true;
                 }
             }
@@ -162,7 +164,7 @@ public class PowerUpDisplayManager_IA : MonoBehaviour
         if (powerUpContainerManager_IA.prevPowerUp != null && currentPowerUp != null && enableUpdateData)
             if (!currentPowerUp.enableEffect && !powerUpContainerManager_IA.prevPowerUp.enableEffect)
             {
-                UpdatePowerDataDisplay(powerUpContainerManager_IA);
+                UpdatePowerDataDisplay(powerUpContainerManager_IA, false);
                 enableUpdateData = false;
             }
     }

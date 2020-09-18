@@ -60,6 +60,11 @@ public class PowerUp_DividirPuntuacion : PowerUp
     }
     private void OnDisable()
     {
+        if (DisableEffectPowerUp_DividirPuntuacion != null)
+        {
+            DisableEffectPowerUp_DividirPuntuacion(this);
+        }
+        DisableEffect();
         if (player != null)
         {
             Player.OnDie -= CheckDeadTarget;

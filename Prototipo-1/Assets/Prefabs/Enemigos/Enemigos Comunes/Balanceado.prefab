@@ -524,9 +524,13 @@ MonoBehaviour:
   delayAttack: 0.4
   anguloAtaqueSalto: 180
   Speed: 17
+  auxSpeed: 17
   SpeedJump: 12
+  auxSpeedJump: 12
   Resistace: 22
+  auxResistace: 22
   Gravity: 35
+  auxGravity: 35
   delayAttackJumping: 0.5
   colliderSprites: {fileID: 8936571031010982473}
   InitialPosition: {x: 0, y: 0, z: 0}
@@ -612,6 +616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeBoss: 9
   typeEnemy: 1
+  movement: 0
 --- !u!114 &7172927804782708880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,7 +646,7 @@ MonoBehaviour:
   userEnemy: {fileID: 1349699400}
   poolItemPowerUp: {fileID: 472643789457066351}
   porcentageDropPowerUp: 100
-  ModifyVertical: -0.04
+  ModifyVertical: -1.5
   ModifyHorizontal: 0.014
 --- !u!1 &8936571030437953440
 GameObject:
@@ -1454,26 +1459,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4068828010732992973}
     m_Modifications:
-    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 1460512151194861319, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
     - target: {fileID: 2688081505215426912, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_Name
@@ -1483,6 +1468,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
       objectReference: {fileID: 0}
     - target: {fileID: 7296128619017103692, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
@@ -1906,6 +1906,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: P 2 Der
+      objectReference: {fileID: 0}
+    - target: {fileID: 1460512151194861319, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1460512151545111591, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
@@ -2415,15 +2420,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6602513850568851150}
     m_Modifications:
-    - target: {fileID: 4664205932121916671, guid: 9021a4b2ca0a7e2489001dca1d9ce961,
-        type: 3}
-      propertyPath: parentName
-      value: ProyectilesGenerados
-      objectReference: {fileID: 0}
     - target: {fileID: 4664205932121916640, guid: 9021a4b2ca0a7e2489001dca1d9ce961,
         type: 3}
       propertyPath: m_Name
       value: PoolGranadaGaseosa
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664205932121916671, guid: 9021a4b2ca0a7e2489001dca1d9ce961,
+        type: 3}
+      propertyPath: parentName
+      value: ProyectilesGenerados
       objectReference: {fileID: 0}
     - target: {fileID: 4664205932121916670, guid: 9021a4b2ca0a7e2489001dca1d9ce961,
         type: 3}

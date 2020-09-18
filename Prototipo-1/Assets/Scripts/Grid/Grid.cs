@@ -24,7 +24,7 @@ public class Grid : MonoBehaviour
     private IdPlataforma idPlataforma;
     public List<GameObject> Gm_Plataformas;
     private int cuadrilla_columnas = 3;
-    private int cuadrilla_filas = 3;
+    //private int cuadrilla_filas = 3;
     public int baseGrild = 2;
     private GameManager gm;
     public Plataformas[] plataformas;

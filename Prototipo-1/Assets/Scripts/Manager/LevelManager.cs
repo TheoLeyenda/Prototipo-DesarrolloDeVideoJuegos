@@ -29,7 +29,7 @@ public class LevelManager : MonoBehaviour
     public int ObjectiveOfPassLevel;
     public float delayPassLevel = 4f;
     private float auxDelayPassLevel;
-    private int Level;
+    //private int Level;
     private bool inDialog;
     private int idDialogo;
     public bool inSurvival;
@@ -81,7 +81,7 @@ public class LevelManager : MonoBehaviour
         {
             gm = GameManager.instanceGameManager;
         }
-        Level = 1;
+        //Level = 1;
         ObjectiveOfPassLevel = 1;
         
 
