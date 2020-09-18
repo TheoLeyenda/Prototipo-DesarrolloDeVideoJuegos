@@ -22,13 +22,13 @@ public class Player : MonoBehaviour
     public Color colorShoot;
     public string namePlayer;
     //BOOLEANOS DE MOVIMIENTO
-    [HideInInspector]
+    //[HideInInspector]
     public bool enableMovement;
     [HideInInspector]
     public bool enableMoveHorizontalPlayer;
     [HideInInspector]
     public bool enableMoveVerticalPlayer;
-    [HideInInspector]
+    //[HideInInspector]
     public bool enableMovementPlayer;
     //----------------------//
     //CODIGO DE INPUT
@@ -424,12 +424,12 @@ public class Player : MonoBehaviour
                     enableMovementPlayer = false;
                 }
                 break;
-            case EnumsPlayers.SpecialAttackEquipped.Limusina:
+            /*case EnumsPlayers.SpecialAttackEquipped.Limusina:
                 if (structsPlayer.dataAttack.Limusina.gameObject.activeSelf)
                 {
                     enableMovementPlayer = false;
                 }
-                break;
+                break;*/
             case EnumsPlayers.SpecialAttackEquipped.MagicBust:
                 if (structsPlayer.dataAttack.ProyectilMagicBust.gameObject.activeSelf)
                 {
