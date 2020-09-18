@@ -16,12 +16,14 @@ public class KathyAndTyke : Enemy
     protected override void OnEnable()
     {
         base.OnEnable();
+        limo_gameObject.gameObject.SetActive(false);
         enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
         Player.OnDie += AnimationVictory;
     }
     protected override void OnDisable() 
     {
         base.OnDisable();
+        limo_gameObject.gameObject.SetActive(false);
         Player.OnDie -= AnimationVictory;
     }
 

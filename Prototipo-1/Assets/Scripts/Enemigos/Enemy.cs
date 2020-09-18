@@ -154,7 +154,7 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public float timeStuned = 0;
 
-    
+    private Vector3 outPosition; 
     //private bool onceJump = false;
     public static event Action<Enemy, string> OnModifireState;
     public static event Action<Enemy, string> OnDisableModifireState;
@@ -182,7 +182,7 @@ public class Enemy : MonoBehaviour
         enableDeffence = true;
         Player.OnDie -= AnimationVictory;
         ResetSpeedJump();
-        enemyPrefab.transform.position = new Vector3(500, 500, 500);
+        enemyPrefab.transform.position = outPosition;
         inCombatPosition = false;
         isJamping = false;
         myVictory = false;
@@ -196,6 +196,7 @@ public class Enemy : MonoBehaviour
     }
     public virtual void Start()
     {
+        outPosition = new Vector3(500, 500, 500);
         weitVictory = false;
         specialAttackParabolaEnemyController = GetComponent<SpecialAttackParabolaEnemyController>();
         tolerableStillTime = maxRandomDelayMovement;
@@ -361,7 +362,8 @@ public class Enemy : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);
                 delaySelectMovement = 0.1f;
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
-                SpeedJump = auxSpeedJump;
+                if (SpeedJump <= auxSpeedJump)
+                    SpeedJump = auxSpeedJump;
             }
             else if (transform.position.y > InitialPosition.y && (life <= 0))
             {
