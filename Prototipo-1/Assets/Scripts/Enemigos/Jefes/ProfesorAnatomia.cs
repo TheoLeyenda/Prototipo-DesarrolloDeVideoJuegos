@@ -253,7 +253,6 @@ public class ProfesorAnatomia : Enemy
         if (enableSetRandomSpecialAttack)
         {
             porcentageThrowSpecialAttack = UnityEngine.Random.Range(0, 120);
-            porcentageThrowSpecialAttack = 100;
             enableSetRandomSpecialAttack = false;
         }
 

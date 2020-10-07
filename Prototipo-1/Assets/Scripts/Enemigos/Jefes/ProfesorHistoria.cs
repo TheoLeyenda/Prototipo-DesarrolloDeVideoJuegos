@@ -196,7 +196,7 @@ public class ProfesorHistoria : Enemy
                             {
                                 OnProfesorHistoria = true;
                                 InCombatPoint(this);
-                                Debug.Log("ENTRE");
+                                //Debug.Log("ENTRE");
                             }
                             if (initBehavour)
                             {
