@@ -1004,6 +1004,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 806cea2c38877d443ab2ed8e6c7c7b8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alturaMaxima: {fileID: 1738355945896093064}
+  posicionesDeMovimiento:
+  - {fileID: 4380783258996457756}
+  - {fileID: 3264777706341821506}
+  - {fileID: 7048158425268352208}
+  grid: {fileID: 8113548307329544735}
   applyColorShoot: 0
   myHeadSprite: {fileID: 21300000, guid: e80ca81a5a8e273409faf0dd682b8a6e, type: 3}
   fraseVictoria: Justo a tiempo para el almuerzo.
@@ -1014,18 +1020,12 @@ MonoBehaviour:
   enableDeffence: 1
   enableMovement: 0
   inCombatPosition: 0
-  alturaMaxima: {fileID: 1738355945896093064}
-  posicionesDeMovimiento:
-  - {fileID: 4380783258996457756}
-  - {fileID: 3264777706341821506}
-  - {fileID: 7048158425268352208}
   barraDeEscudo: {fileID: 0}
   enableSpecialAttack: 0
   spriteEnemy: {fileID: 1936033508}
   Blindaje: 0
   MaxBlindaje: 0
   enemyPrefab: {fileID: 2510886537487143250}
-  gridEnemy: {fileID: 8113548307329544735}
   enumsEnemy: {fileID: 2510886538865436556}
   structsEnemys: {fileID: 4273028219833214137}
   SpriteRendererEnemigo: {fileID: 1936033510}
@@ -1565,17 +1565,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2510886537487143251}
     m_Modifications:
-    - target: {fileID: 2688081505215426912, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_Name
-      value: Grid
-      objectReference: {fileID: 0}
-    - target: {fileID: 1460512151874349111, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.04
-      objectReference: {fileID: 0}
     - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_TagString
       value: Cuadrilla
@@ -1585,10 +1580,15 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Cuadrilla
       objectReference: {fileID: 0}
-    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
+    - target: {fileID: 2688081505215426912, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
+      propertyPath: m_Name
+      value: Grid
+      objectReference: {fileID: 0}
+    - target: {fileID: 1460512151874349111, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7296128619017103692, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
@@ -2028,11 +2028,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: P 2 Der
       objectReference: {fileID: 0}
-    - target: {fileID: 1460512151993268299, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_Name
-      value: P 3 Der
-      objectReference: {fileID: 0}
     - target: {fileID: 1460512152097571539, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_Name
@@ -2057,6 +2052,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: P 2 Der
+      objectReference: {fileID: 0}
+    - target: {fileID: 1460512151993268299, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_Name
+      value: P 3 Der
       objectReference: {fileID: 0}
     - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
       propertyPath: enemy
@@ -2354,11 +2354,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2510886537487143251}
     m_Modifications:
-    - target: {fileID: 5705363471336372538, guid: 30372ef7a00f5aa4d896a20e3e6e6a30,
-        type: 3}
-      propertyPath: m_Name
-      value: PoolItemPowerUp
-      objectReference: {fileID: 0}
     - target: {fileID: 5705363471336372537, guid: 30372ef7a00f5aa4d896a20e3e6e6a30,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2413,6 +2408,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705363471336372538, guid: 30372ef7a00f5aa4d896a20e3e6e6a30,
+        type: 3}
+      propertyPath: m_Name
+      value: PoolItemPowerUp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30372ef7a00f5aa4d896a20e3e6e6a30, type: 3}

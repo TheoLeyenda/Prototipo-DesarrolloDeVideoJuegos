@@ -1624,6 +1624,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dd513c132413bc4ea9f31ecc6f6c5e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alturaMaxima: {fileID: 1603447084531973527}
+  posicionesDeMovimiento:
+  - {fileID: 3644779946566260995}
+  - {fileID: 2526982439044428893}
+  - {fileID: 8038751181233794255}
+  grid: {fileID: 9135105544399596032}
   applyColorShoot: 0
   myHeadSprite: {fileID: 21300000, guid: de8d1ce917fd30c41a057bbae923c774, type: 3}
   fraseVictoria: Reprobaste mi materia debilucho, vuelve cuando tengas un cuerpo perfecto
@@ -1635,18 +1641,12 @@ MonoBehaviour:
   enableDeffence: 1
   enableMovement: 0
   inCombatPosition: 0
-  alturaMaxima: {fileID: 1603447084531973527}
-  posicionesDeMovimiento:
-  - {fileID: 3644779946566260995}
-  - {fileID: 2526982439044428893}
-  - {fileID: 8038751181233794255}
   barraDeEscudo: {fileID: 0}
   enableSpecialAttack: 0
   spriteEnemy: {fileID: 0}
   Blindaje: 0
   MaxBlindaje: 0
   enemyPrefab: {fileID: 3208534520697555277}
-  gridEnemy: {fileID: 9135105544399596032}
   enumsEnemy: {fileID: 3208534522070613907}
   structsEnemys: {fileID: 3824593626665204902}
   SpriteRendererEnemigo: {fileID: 2531832292111907143}
@@ -2015,12 +2015,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3208534520697555276}
     m_Modifications:
-    - target: {fileID: 2688081505215426912, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_Name
-      value: Grid
-      objectReference: {fileID: 0}
     - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_TagString
       value: Cuadrilla
@@ -2030,10 +2030,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Cuadrilla
       objectReference: {fileID: 0}
-    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
+    - target: {fileID: 2688081505215426912, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
+      propertyPath: m_Name
+      value: Grid
       objectReference: {fileID: 0}
     - target: {fileID: 7296128619017103692, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
@@ -2185,15 +2185,15 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.08566023
       objectReference: {fileID: 0}
-    - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: enemy
-      value: 
-      objectReference: {fileID: 2531832291478649058}
     - target: {fileID: 1460512152298850783, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 2531832291478649058}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
 --- !u!1 &3644779946566260995 stripped

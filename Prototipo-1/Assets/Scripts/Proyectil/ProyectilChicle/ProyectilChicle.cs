@@ -159,7 +159,7 @@ public class ProyectilChicle : Proyectil
             {
                 //Debug.Log("CHECK GRID 1");
                 grid = piso.player.posicionesDeMovimiento;
-                refPlataformas = piso.player.gridPlayer;
+                refPlataformas = piso.player.grid;
                 InitRefPlataformas();
             }
         }
@@ -169,7 +169,7 @@ public class ProyectilChicle : Proyectil
             {
                 //Debug.Log("CHECK GRID 2");
                 grid = piso.player.posicionesDeMovimiento;
-                refPlataformas = piso.player.gridPlayer;
+                refPlataformas = piso.player.grid;
                 InitRefPlataformas();
             }
         }
@@ -179,7 +179,7 @@ public class ProyectilChicle : Proyectil
             {
                 //Debug.Log("CHECK GRID 3");
                 grid = piso.enemy.posicionesDeMovimiento;
-                refPlataformas = piso.enemy.gridEnemy;
+                refPlataformas = piso.enemy.grid;
                 InitRefPlataformas();
             }
         }

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using System;
 using Boo.Lang.Environments;
 
-public class Player : MonoBehaviour
+public class Player : Character
 {
     public ApplyColorShoot applyColorShoot;
     public enum ApplyColorShoot
@@ -45,8 +45,8 @@ public class Player : MonoBehaviour
     //-----------------------//
 
     //DATOS PARA EL MOVIMIENTO
-    public GameObject alturaMaxima;
-    public GameObject[] posicionesDeMovimiento;
+    //public GameObject alturaMaxima;
+    //public GameObject[] posicionesDeMovimiento;
     //-------------------------------------------//
     public float DamageAttack;
     public float DamageParabolaAttack;
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
     public bool resetPlayer;
     public bool resetScore;
     public PlayerData PD;
-    public Grid gridPlayer;
+   
     private float auxLife;
     public StructsPlayer structsPlayer;
     public List<SpritePlayer> spritePlayers;

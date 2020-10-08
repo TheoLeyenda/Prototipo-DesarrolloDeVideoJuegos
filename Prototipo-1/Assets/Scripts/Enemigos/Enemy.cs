@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using System;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
     public ApplyColorShoot applyColorShoot; 
     public enum ApplyColorShoot
@@ -28,8 +28,7 @@ public class Enemy : MonoBehaviour
     public bool enableMovement;
     [SerializeField]
     protected bool inCombatPosition;
-    public GameObject alturaMaxima;
-    public GameObject[] posicionesDeMovimiento;
+
     //-------------------------------------------//
     public BarraDeEscudo barraDeEscudo;
     [HideInInspector]
@@ -40,7 +39,6 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public float MaxBlindaje;
     public GameObject enemyPrefab;
-    public Grid gridEnemy;
     public EnumsEnemy enumsEnemy;
     public StructsEnemys structsEnemys;
     public SpriteRenderer SpriteRendererEnemigo;
@@ -488,7 +486,7 @@ public class Enemy : MonoBehaviour
                 if (opcionMovement < MovePorcentage)
                 {
                     //MOVIMIENTO 
-                    if (structsEnemys.dataEnemy.columnaActual >= gridEnemy.GetCuadrilla_columnas() - 1)
+                    if (structsEnemys.dataEnemy.columnaActual >= grid.GetCuadrilla_columnas() - 1)
                     {
                         movimiento = EnumsEnemy.Movimiento.MoverAdelante;
                     }
@@ -863,7 +861,7 @@ public class Enemy : MonoBehaviour
                 break;
             case EnumsEnemy.Movimiento.MoverAtras:
                 isDeffended = false;
-                if (structsEnemys.dataEnemy.columnaActual < gridEnemy.GetCuadrilla_columnas() - 1)
+                if (structsEnemys.dataEnemy.columnaActual < grid.GetCuadrilla_columnas() - 1)
                 {
                     MoveRight(posicionesDeMovimiento[structsEnemys.dataEnemy.columnaActual + 1].transform.position);
                 }

@@ -9073,6 +9073,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd7335819ad7484b81704eacd2beb50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alturaMaxima: {fileID: 3025190699808248058}
+  posicionesDeMovimiento:
+  - {fileID: 950233433236812910}
+  - {fileID: 2065623266888751408}
+  - {fileID: 5779338585433571746}
+  grid: {fileID: 4719031745358890861}
   applyColorShoot: 0
   myHeadSprite: {fileID: 21300000, guid: 62e92e8c6136aad4f8bc061937492f5e, type: 3}
   fraseVictoria: Ja... El dinero lo puede todo, Plebeyo.
@@ -9083,18 +9089,12 @@ MonoBehaviour:
   enableDeffence: 1
   enableMovement: 0
   inCombatPosition: 1
-  alturaMaxima: {fileID: 3025190699808248058}
-  posicionesDeMovimiento:
-  - {fileID: 950233433236812910}
-  - {fileID: 2065623266888751408}
-  - {fileID: 5779338585433571746}
   barraDeEscudo: {fileID: 0}
   enableSpecialAttack: 0
   spriteEnemy: {fileID: 6291037100013266852}
   Blindaje: 0
   MaxBlindaje: 0
   enemyPrefab: {fileID: 1386041526207554592}
-  gridEnemy: {fileID: 4719031745358890861}
   enumsEnemy: {fileID: 1386041527520957182}
   structsEnemys: {fileID: 768035169043026379}
   SpriteRendererEnemigo: {fileID: 6291037100013266854}
@@ -9362,11 +9362,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1386041526207554593}
     m_Modifications:
-    - target: {fileID: 5705363471336372538, guid: 30372ef7a00f5aa4d896a20e3e6e6a30,
-        type: 3}
-      propertyPath: m_Name
-      value: PoolItemPowerUp
-      objectReference: {fileID: 0}
     - target: {fileID: 5705363471336372537, guid: 30372ef7a00f5aa4d896a20e3e6e6a30,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9421,6 +9416,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705363471336372538, guid: 30372ef7a00f5aa4d896a20e3e6e6a30,
+        type: 3}
+      propertyPath: m_Name
+      value: PoolItemPowerUp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30372ef7a00f5aa4d896a20e3e6e6a30, type: 3}

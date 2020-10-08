@@ -89,7 +89,6 @@ public class GranadaGaseosa : ProyectilParabola
             float x = 0;
             if (cantProyectiles == 1)
             {
-                
                 if (distanceOfLeftFloor.magnitude <= rangeMagnitude)
                 {
                     cuadrillasAbajo.Add(grid[0]);
@@ -100,7 +99,7 @@ public class GranadaGaseosa : ProyectilParabola
                     cuadrillasAbajo.Add(grid[1]);
                     x = refPlataformas.plataformas[idPlataforma].plataformaCentral.transform.position.x;
                 }
-                else if (distanceOfRightFloor.magnitude < rangeMagnitude)
+                else if (distanceOfRightFloor.magnitude <= rangeMagnitude)
                 {
                     cuadrillasAbajo.Add(grid[2]);
                     x = refPlataformas.plataformas[idPlataforma].plataformaDerecha.transform.position.x;
@@ -118,21 +117,16 @@ public class GranadaGaseosa : ProyectilParabola
                 float[] arr = new float[cantProyectiles];
                 if (grid != null)
                 {
-                    //Debug.Log("ENTRE");
-                    if (distanceOfLeftFloor.magnitude < rangeMagnitude)
+                    if (distanceOfLeftFloor.magnitude <= rangeMagnitude)
                     {
-                        //Debug.Log("ENTRE 1");
                         cuadrillasAbajo.Add(grid[1]);
                         cuadrillasAbajo.Add(grid[0]);
                         arr[0] = refPlataformas.plataformas[idPlataforma].plataformaIzquierda.transform.position.x;
                         arr[1] = refPlataformas.plataformas[idPlataforma].plataformaCentral.transform.position.x;
-                        //Debug.Log("JAJA XD");
                     }
-                    else if (distanceOfCenterFloor.magnitude < rangeMagnitude)
+                    else if (distanceOfCenterFloor.magnitude <= rangeMagnitude)
                     {
-                        //Debug.Log("ENTRE 2");
                         num = (int)Random.Range(0, 100);
-                        //Debug.Log(num);
                         arr[0] = refPlataformas.plataformas[idPlataforma].plataformaCentral.transform.position.x;
                         if (num >= 50)
                         {
@@ -146,17 +140,13 @@ public class GranadaGaseosa : ProyectilParabola
                         }
                         cuadrillasAbajo.Add(grid[1]);
                         cuadrillasAbajo.Add(grid[num]);
-                            
-                        //Debug.Log("JAJA XD");
                     }
-                    else if (distanceOfRightFloor.magnitude < rangeMagnitude)
+                    else if (distanceOfRightFloor.magnitude <= rangeMagnitude)
                     {
-                        //Debug.Log("ENTRE 3");
                         cuadrillasAbajo.Add(grid[1]);
                         cuadrillasAbajo.Add(grid[2]);
                         arr[0] = refPlataformas.plataformas[idPlataforma].plataformaDerecha.transform.position.x;
                         arr[1] = refPlataformas.plataformas[idPlataforma].plataformaCentral.transform.position.x;
-                        //Debug.Log("JAJA XD");
                     }
                     for (int i = 0; i < cuadrillasAbajo.Count; i++)
                     {
@@ -208,36 +198,33 @@ public class GranadaGaseosa : ProyectilParabola
             }
         }
     }
+    void SettingGrid(Piso piso, Character character)
+    {
+        grid = character.posicionesDeMovimiento;
+        refPlataformas = character.grid;
+        InitRefPlataformas();
+    }
     public void CheckGrid(Piso piso)
     {
         if (disparadorDelProyectil == DisparadorDelProyectil.Jugador2 || disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
         {
             if (piso.player != null && piso.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
             {
-                //Debug.Log("CHECK GRID 1");
-                grid = piso.player.posicionesDeMovimiento;
-                refPlataformas = piso.player.gridPlayer;
-                InitRefPlataformas();
+                SettingGrid(piso, piso.player);
             }
         }
         if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1 || disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
         {
             if (piso.player != null && piso.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
             {
-                //Debug.Log("CHECK GRID 2");
-                grid = piso.player.posicionesDeMovimiento;
-                refPlataformas = piso.player.gridPlayer;
-                InitRefPlataformas();
+                SettingGrid(piso, piso.player);
             }
         }
         if (disparadorDelProyectil == DisparadorDelProyectil.Jugador2 || disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
         {
             if (piso.enemy != null)
             {
-                //Debug.Log("CHECK GRID 3");
-                grid = piso.enemy.posicionesDeMovimiento;
-                refPlataformas = piso.enemy.gridEnemy;
-                InitRefPlataformas();
+                SettingGrid(piso, piso.enemy);
             }
         }
     }
