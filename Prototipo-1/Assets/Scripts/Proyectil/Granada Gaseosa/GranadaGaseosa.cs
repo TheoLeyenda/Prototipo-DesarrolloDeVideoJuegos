@@ -241,66 +241,53 @@ public class GranadaGaseosa : ProyectilParabola
             }
         }
     }
+    public void CheckCreateGaseosa(Player currentPlayer)
+    {
+        int countGaseosaProta = 3;
+        int countGaseosaBalanceado = 2;
+        int countDefaultGaseosa = 1;
+        if (currentPlayer != null)
+        {
+            switch (currentPlayer.GetPlayerPvP().playerSelected)
+            {
+                case Player_PvP.PlayerSelected.Protagonista:
+                    CreateGaseosas(countGaseosaProta);
+                    break;
+                case Player_PvP.PlayerSelected.Balanceado:
+                    CreateGaseosas(countGaseosaBalanceado);
+                    break;
+                default:
+                    CreateGaseosas(countDefaultGaseosa);
+                    break;
+            }
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Piso")
         {
-            //ENTRA AUNQUE NO GENERE GASEOSA
-            //Debug.Log("MUERTE");
-            //ENTRA AUNQUE NO GENERE GASEOSA
-
-
             GameObject cuadrilla = collision.gameObject;
             Piso piso = collision.GetComponent<Piso>();
             // DEPENDIENDO DE QUIEN DISPARO ES LA CANTIDAD DE BALAS QUE SE GENERARAN.
             CheckGrid(piso);
-            if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
+            cuadrillaColision = cuadrilla;
+            switch (disparadorDelProyectil)
             {
-                cuadrillaColision = cuadrilla;
-                //Debug.Log(PLAYER1);
-                if (PLAYER1 != null)
-                {
-                    if (PLAYER1.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Protagonista)
+                case DisparadorDelProyectil.Jugador1:
+                    if (PLAYER1 != null)
                     {
-                        CreateGaseosas(3);
+                        CheckCreateGaseosa(PLAYER1);
                     }
-                    else if (PLAYER1.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Balanceado)
+                    break;
+                case DisparadorDelProyectil.Jugador2:
+                    if (PLAYER2 != null)
                     {
-                        CreateGaseosas(2);
+                        CheckCreateGaseosa(PLAYER2);
                     }
-                    else
-                    {
-                        CreateGaseosas(1);
-                    }
-                }
-                               
-            }
-            else if (disparadorDelProyectil == DisparadorDelProyectil.Jugador2)
-            {
-                              
-                cuadrillaColision = cuadrilla;
-                if (PLAYER2 != null)
-                {
-                    if (PLAYER2.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Protagonista)
-                    {
-                        CreateGaseosas(3);
-                    }
-                    else if (PLAYER2.GetPlayerPvP().playerSelected == Player_PvP.PlayerSelected.Balanceado)
-                    {
-                        CreateGaseosas(2);
-                    }
-                    else
-                    {
-                        CreateGaseosas(1);
-                    }
-                                   
-                }
-            }
-            else if (disparadorDelProyectil == DisparadorDelProyectil.Enemigo)
-            {
-                cuadrillaColision = cuadrilla;
-                CreateGaseosas(2);
-
+                    break;
+                case DisparadorDelProyectil.Enemigo:
+                    CreateGaseosas(2);
+                    break;
             }
         }  
     }
