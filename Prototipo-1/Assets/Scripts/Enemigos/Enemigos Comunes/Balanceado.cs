@@ -49,7 +49,7 @@ public class Balanceado : Enemy
     public override void AnimationAttack()
     {
         bool inSpecialAttack = (xpActual >= xpNededSpecialAttack);
-        if (enemyPrefab.activeSelf == true)
+        if (myPrefab.activeSelf == true)
         {
             if (!inCombatPosition)
             {

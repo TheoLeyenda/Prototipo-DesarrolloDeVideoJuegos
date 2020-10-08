@@ -113,7 +113,7 @@ public class KathyAndTyke : Enemy
     public override void AnimationAttack()
     {
 
-        if (enemyPrefab.activeSelf == true)
+        if (myPrefab.activeSelf == true)
         {
             if (!inCombatPosition)
             {

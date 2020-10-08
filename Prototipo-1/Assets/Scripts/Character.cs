@@ -8,6 +8,11 @@ public class Character : MonoBehaviour
     public GameObject alturaMaxima;
     public GameObject[] posicionesDeMovimiento;
     public Grid grid;
+    [HideInInspector]
+    public float xpActual;
+    public float xpNededSpecialAttack;
+    public float xpForHit;
+    public GameObject myPrefab;
     void Start()
     {
         

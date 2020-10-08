@@ -38,22 +38,18 @@ public class Enemy : Character
     public float Blindaje;
     [HideInInspector]
     public float MaxBlindaje;
-    public GameObject enemyPrefab;
     public EnumsEnemy enumsEnemy;
     public StructsEnemys structsEnemys;
     public SpriteRenderer SpriteRendererEnemigo;
     public SpecialAttackParabolaEnemyController specialAttackParabolaEnemyController;
     private float auxLife;
-    private Animator animator;
+    //private Animator animator;
     public bool InPool;
     public Pool pool;
     //private PoolObject poolObjectEnemy;
     public float life;
     public float maxLife;
-    [HideInInspector]
-    public float xpActual;
-    public float xpNededSpecialAttack;
-    public float xpForHit;
+
     public Pool poolParabolaAttack;
     public Pool poolObjectAttack;
     protected Rigidbody2D rg2D;
@@ -180,7 +176,7 @@ public class Enemy : Character
         enableDeffence = true;
         Player.OnDie -= AnimationVictory;
         ResetSpeedJump();
-        enemyPrefab.transform.position = outPosition;
+        myPrefab.transform.position = outPosition;
         inCombatPosition = false;
         isJamping = false;
         myVictory = false;
@@ -206,7 +202,7 @@ public class Enemy : Character
         delaySelectMovement = 0.5f;
         auxLife = life;
         //poolObjectEnemy = GetComponent<PoolObject>();
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         if (GameManager.instanceGameManager != null)
         {
             gm = GameManager.instanceGameManager;
@@ -680,13 +676,13 @@ public class Enemy : Character
         if (CheckMove(new Vector3(pointCombat.x, transform.position.y, transform.position.z)))
         {
             delaySelectMovement = 999;
-            if (pointCombat.x < enemyPrefab.transform.position.x)
+            if (pointCombat.x < myPrefab.transform.position.x)
             {
-                enemyPrefab.transform.Translate(Vector3.left * Speed * Time.deltaTime);
+                myPrefab.transform.Translate(Vector3.left * Speed * Time.deltaTime);
             }
-            else if (pointCombat.x > enemyPrefab.transform.position.x)
+            else if (pointCombat.x > myPrefab.transform.position.x)
             {
-                enemyPrefab.transform.Translate(Vector3.right * Speed * Time.deltaTime);
+                myPrefab.transform.Translate(Vector3.right * Speed * Time.deltaTime);
             }
         }
         else
@@ -714,7 +710,7 @@ public class Enemy : Character
                 gm.countEnemysDead++;
                 gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
                 ResetEnemy();
-                enemyPrefab.gameObject.SetActive(false);
+                myPrefab.gameObject.SetActive(false);
                 xpActual = 0;
                 inCombatPosition = false;
             }
@@ -730,7 +726,7 @@ public class Enemy : Character
                         gm.countEnemysDead++;
                         gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
                         ResetEnemy();
-                        pool.Recycle(enemyPrefab);
+                        pool.Recycle(myPrefab);
                         xpActual = 0;
                         inCombatPosition = false;
                     }
@@ -742,10 +738,10 @@ public class Enemy : Character
                         gm.countEnemysDead++;
                         gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
                         ResetEnemy();
-                        pool.Recycle(enemyPrefab);
+                        pool.Recycle(myPrefab);
                         xpActual = 0;
                         inCombatPosition = false;
-                        enemyPrefab.gameObject.SetActive(false);
+                        myPrefab.gameObject.SetActive(false);
                     }
                     break;
                 case EnumsGameManager.ModosDeJuego.Nulo:
@@ -754,7 +750,7 @@ public class Enemy : Character
                         gm.countEnemysDead++;
                         gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
                         ResetEnemy();
-                        enemyPrefab.gameObject.SetActive(false);
+                        myPrefab.gameObject.SetActive(false);
                         xpActual = 0;
                         inCombatPosition = false;
                     }
@@ -1054,7 +1050,7 @@ public class Enemy : Character
             life = maxLife;
             xpActual = 0;
             transform.position = InitialPosition;
-            enemyPrefab.transform.position = InitialPosition;
+            myPrefab.transform.position = InitialPosition;
         }
     }
     public void MoveLeft(Vector3 cuadrillaDestino)

@@ -222,7 +222,7 @@ public class UI_Manager : MonoBehaviour
     {
         if (!inPvP)
         {
-            if (enemy == null || !enemy.enemyPrefab.activeSelf)
+            if (enemy == null || !enemy.myPrefab.activeSelf)
             {
                 GameObject goEnemy = GameObject.Find("Enemigo");
                 if (goEnemy != null)

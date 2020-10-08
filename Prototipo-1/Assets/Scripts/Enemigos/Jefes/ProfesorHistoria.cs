@@ -190,7 +190,7 @@ public class ProfesorHistoria : Enemy
                         Idle();
                         break;
                     case (int)EstadoProfesorHistoria.MasiveAttack:
-                        if (enemyPrefab.transform.position.x <= 5.5f)
+                        if (myPrefab.transform.position.x <= 5.5f)
                         {
                             if (!OnProfesorHistoria && InCombatPoint != null)
                             {

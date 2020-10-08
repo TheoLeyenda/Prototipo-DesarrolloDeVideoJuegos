@@ -37,7 +37,7 @@ public class SpriteEnemy : SpriteCharacter
         if (!enemy.myVictory)
         {
             CheckEnumSprite();
-            if (!enemy.enemyPrefab.activeSelf)
+            if (!enemy.myPrefab.activeSelf)
             {
                 animator.Play("Idle");
                 DisableSpecialAttack();
@@ -159,7 +159,7 @@ public class SpriteEnemy : SpriteCharacter
     }
     public override void PlayAnimation(string nameAnimation)
     {
-        if (enemy.enemyPrefab.activeSelf == true && animator != null && !enemy.myVictory)
+        if (enemy.myPrefab.activeSelf == true && animator != null && !enemy.myVictory)
         {
             animator.Play(nameAnimation);
         }

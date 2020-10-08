@@ -51,7 +51,6 @@ public class Player : Character
     public float DamageAttack;
     public float DamageParabolaAttack;
     public BarraDeEscudo barraDeEscudo;
-    public GameObject PrefabPlayer;
     public bool resetPlayer;
     public bool resetScore;
     public PlayerData PD;
@@ -67,12 +66,8 @@ public class Player : Character
     public GameObject generadorProyectilesAgachado;
     public GameObject generadorProyectilesParabola;
     public GameObject generadorProyectilesParabolaAgachado;
-    private Animator animator;
+    //private Animator animator;
 
-    [HideInInspector]
-    public float xpActual;
-    public float xpNededSpecialAttack;
-    public float xpForHit;
     public float SpeedJump;
     public float Speed;
     public float Resistace;
@@ -190,7 +185,7 @@ public class Player : Character
         {
             gm = GameManager.instanceGameManager;
         }
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         //DrawScore();
 
     }

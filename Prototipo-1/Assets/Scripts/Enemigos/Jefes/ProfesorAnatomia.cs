@@ -129,7 +129,7 @@ public class ProfesorAnatomia : Enemy
         DialogueController.OnFinishDialog += EnableInitBehaviour;
         Grid.OnSettingTitileo += SetTargetGrid;
         //InitialPosition = new Vector3(5.17f, -3.42f, 0f);
-        enemyPrefab.transform.position = new Vector3(transform.position.x, -3.42f, 0f);
+        myPrefab.transform.position = new Vector3(transform.position.x, -3.42f, 0f);
         Idied = false;
     }
     protected override void OnDisable()
@@ -155,7 +155,7 @@ public class ProfesorAnatomia : Enemy
         {
             speedChargeSpecialAttack = 1;
         }
-        enemyPrefab.transform.position = new Vector3(transform.position.x, -3.42f, 0f);
+        myPrefab.transform.position = new Vector3(transform.position.x, -3.42f, 0f);
     }
 
     // Update is called once per frame
@@ -183,7 +183,7 @@ public class ProfesorAnatomia : Enemy
                         Idle();
                         break;
                     case (int)EstadoProfesorAnatomia.MasiveAttack:
-                        if (!OnProfesorAnatomia && InCombatPoint != null && enemyPrefab.transform.position.x <= 5.5f)
+                        if (!OnProfesorAnatomia && InCombatPoint != null && myPrefab.transform.position.x <= 5.5f)
                         {
                             //Debug.Log("ENTRE AL COMBATE");
                             if (!OnProfesorAnatomia)

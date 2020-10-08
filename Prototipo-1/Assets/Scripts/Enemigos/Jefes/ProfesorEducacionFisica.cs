@@ -20,12 +20,12 @@ public class ProfesorEducacionFisica : Enemy
     public override void Update()
     {
         life = maxLife;
-        if (enemyPrefab.transform.position.x > 5.5f || !OnProfesorEducacionFisica)
+        if (myPrefab.transform.position.x > 5.5f || !OnProfesorEducacionFisica)
         {
             base.Update();
         }
 
-        if (InCombatPoint != null && enemyPrefab.transform.position.x <= 5.5f)
+        if (InCombatPoint != null && myPrefab.transform.position.x <= 5.5f)
         {
             //Debug.Log("ENTRE AL COMBATE");
             if (!OnProfesorEducacionFisica)
