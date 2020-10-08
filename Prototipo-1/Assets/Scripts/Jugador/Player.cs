@@ -196,11 +196,6 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKey(KeyCode.V))
-        {
-            Debug.Log(enableMovement);
-            Debug.Log(Speed);
-        }
         if (weitVictory && transform.position.y <= InitialPosition.y) 
         {
             spritePlayerActual.GetAnimator().Play("Victory");
@@ -208,21 +203,6 @@ public class Player : MonoBehaviour
             myVictory = true;
             weitVictory = false;
         }
-        //BORRAR LUEGO DE TESTEAR
-        //if (Input.GetKey(KeyCode.F))
-        //{
-            //xpActual = xpNededSpecialAttack;
-            //PD.lifePlayer = PD.maxLifePlayer;
-        //}
-        //if (Input.GetKey(KeyCode.F)) 
-        //{
-            PD.lifePlayer = PD.maxLifePlayer;
-        //}
-        if (Input.GetKey(KeyCode.M))
-        {
-            PD.lifePlayer = 0;
-        }
-        //--------------------------------
         if (myVictory)
         {
             structsPlayer.dataAttack.DisparoDeCarga.SetActive(false);

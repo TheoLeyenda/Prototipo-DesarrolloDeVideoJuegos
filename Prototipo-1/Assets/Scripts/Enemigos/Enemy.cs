@@ -258,21 +258,6 @@ public class Enemy : MonoBehaviour
             weitVictory = false;
         }
         ResetSpeedJump();
-        //BORRAR LUEGO DE TESTEO
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //Debug.Log(enumsEnemy.GetMovement());
-            //Debug.Log("Enable Movement: " + enableMovement);
-            //Debug.Log("Speed:" + Speed);
-            //Debug.Log("SpeedJump:" + SpeedJump);
-            //Debug.Log("Delay Movimiento: " + delaySelectMovement);
-            //Debug.Log("SpriteEnemy:"+ spriteEnemy.nameActual);
-            //Debug.Log(inCombatPosition);
-            //Debug.Log(enumsEnemy.GetStateEnemy());
-            life = 0;
-        }
-        
-        //-----------------------------------
         CheckState();
         CheckDead();
 
