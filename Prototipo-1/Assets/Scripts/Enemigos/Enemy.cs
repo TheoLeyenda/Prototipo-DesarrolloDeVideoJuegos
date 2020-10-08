@@ -377,36 +377,26 @@ public class Enemy : MonoBehaviour
         }
         enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
         tolerableStillTime = auxTolerableStillTime;
-        //poolObjectEnemy = GetComponent<PoolObject>();
         if (GameManager.instanceGameManager != null)
         {
             gm = GameManager.instanceGameManager;
         }
         CheckInitialCharacter();
-        //spriteEnemy.ActualSprite = SpriteCharacter.SpriteActual.Parado;
         xpActual = 0;
     }
     public void IA()
     {
-        //Debug.Log("ENTRE A IA");
-        //Debug.Log(enumsEnemy.GetMovement());
-
-
         if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.MoveToPointCombat)
         {
-            //Debug.Log("ESTOY ENTRANDO ACA CONCHAETUMADRE XD");
             delaySelectMovement = 10;
             CheckMovement();
             return;
         }
         if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
         {
-            //Debug.Log("IP: "+InitialPosition.y);
-            //Debug.Log("TY:" + transform.position.y);
             if (transform.position.y > InitialPosition.y && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && inCombatPosition)
             {
                 delaySelectMovement = 0.1f;
-                //Debug.Log("ESTOY ENTRANDO");
                 if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
                 {
                     enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
@@ -418,8 +408,7 @@ public class Enemy : MonoBehaviour
 
             if (life > 0 && enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
             {
-                //Debug.Log("ESTOY ENTRANDO ACA");
-                //Debug.Log(delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque));
+               
                 if (delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque))
                 {
                     if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
@@ -486,8 +475,6 @@ public class Enemy : MonoBehaviour
     }
     public void CheckComportamiento()
     {
-        //Debug.Log("ENTRE AL COMPORTAMIENTO");
-        //Debug.Log("inCombatPosition: "+inCombatPosition);
         EnumsEnemy.Movimiento movimiento = EnumsEnemy.Movimiento.Nulo;
         if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat 
             && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath 
@@ -669,7 +656,6 @@ public class Enemy : MonoBehaviour
                 enableSpecialAttack = false;
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
                 AnimationAttack();
-                //xpActual = 0;
             }
             else if (enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Balanceado)
             {
@@ -688,8 +674,6 @@ public class Enemy : MonoBehaviour
                     enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
                 }
                 AnimationAttack();
-                //xpActual = 0;
-
             }
         }
     }
@@ -697,7 +681,6 @@ public class Enemy : MonoBehaviour
     {
         if (CheckMove(new Vector3(pointCombat.x, transform.position.y, transform.position.z)))
         {
-            //Debug.Log("ME MUEVOOOO");
             delaySelectMovement = 999;
             if (pointCombat.x < enemyPrefab.transform.position.x)
             {
@@ -710,7 +693,6 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            //Debug.Log("EN POSICION");
             life = maxLife;
             delaySelectMovement = 0;
             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
@@ -733,7 +715,6 @@ public class Enemy : MonoBehaviour
             {
                 gm.countEnemysDead++;
                 gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
-                //gm.ResetRoundCombat(false);
                 ResetEnemy();
                 enemyPrefab.gameObject.SetActive(false);
                 xpActual = 0;
@@ -747,13 +728,10 @@ public class Enemy : MonoBehaviour
                 case EnumsGameManager.ModosDeJuego.Supervivencia:
                     if (life <= 0)
                     {
-                        //life = auxLife;
                         gm.generateEnemy = true;
                         gm.countEnemysDead++;
                         gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
-                        //gm.ResetRoundCombat(false);
                         ResetEnemy();
-                        //poolObjectEnemy.Recycle();
                         pool.Recycle(enemyPrefab);
                         xpActual = 0;
                         inCombatPosition = false;
@@ -762,13 +740,10 @@ public class Enemy : MonoBehaviour
                 case EnumsGameManager.ModosDeJuego.Historia:
                     if (life <= 0)
                     {
-                        //life = auxLife;
                         gm.generateEnemy = true;
                         gm.countEnemysDead++;
                         gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
-                        //gm.ResetRoundCombat(false);
                         ResetEnemy();
-                        //poolObjectEnemy.Recycle();
                         pool.Recycle(enemyPrefab);
                         xpActual = 0;
                         inCombatPosition = false;
@@ -780,7 +755,6 @@ public class Enemy : MonoBehaviour
                     {
                         gm.countEnemysDead++;
                         gm.playerData_P1.score = gm.playerData_P1.score + gm.playerData_P1.scoreForEnemyDead;
-                        //gm.ResetRoundCombat(false);
                         ResetEnemy();
                         enemyPrefab.gameObject.SetActive(false);
                         xpActual = 0;
@@ -864,7 +838,6 @@ public class Enemy : MonoBehaviour
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
             }
         }
-        //Debug.Log(isDuck);
 
         switch (enumsEnemy.GetMovement())
         {
@@ -959,7 +932,6 @@ public class Enemy : MonoBehaviour
                 Jump(alturaMaxima.transform.position);
                 break;
             case EnumsEnemy.Movimiento.MoveToPointCombat:
-                //Debug.Log("ENTRE AL MOVIMIENTO");
                 isDeffended = false;
                 MoveToPoint(pointOfCombat);
                 if(enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
@@ -1154,9 +1126,6 @@ public class Enemy : MonoBehaviour
     }
     public void Jump(Vector3 alturaMaxima)
     {
-        //Debug.Log(isJamping);
-        //Debug.Log("CheckMove: "+CheckMove(new Vector3(transform.position.x, alturaMaxima.y, transform.position.z)));// esto es false
-        //Debug.Log("isJumping: " + isJamping);
         if (transform.position.y > InitialPosition.y || isJamping)
         {
             if (transform.position.y <= InitialPosition.y)
@@ -1167,7 +1136,6 @@ public class Enemy : MonoBehaviour
             {
                 enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
             }
-            //Debug.Log("SALTO");
             MoveJamp(Vector3.up);
             if (SpeedJump <= 0)
             {
@@ -1235,8 +1203,6 @@ public class Enemy : MonoBehaviour
     {
         Vector3 distaciaObjetivo = transform.position - PosicionDestino;
         bool mover = false;
-        //Debug.Log(distaciaObjetivo.magnitude + "/ 0.2f");
-        //Debug.Log(enumsEnemy.GetMovement());
         if (distaciaObjetivo.magnitude > 0.2f)
         {
             mover = true;
@@ -1253,12 +1219,6 @@ public class Enemy : MonoBehaviour
     }
     public void MoveJamp(Vector3 direccion)
     {
-        //Debug.Log("ENTRE AL MOVIMIENTO");
-        /*if (Input.GetKey(KeyCode.X))
-        {
-            life = 0;
-        }*/
-        //
         if (direccion == Vector3.up)
         {
             transform.Translate(direccion * SpeedJump * Time.deltaTime);
@@ -1266,7 +1226,6 @@ public class Enemy : MonoBehaviour
         }
         else if (direccion == Vector3.down)
         {
-            //Debug.Log("ENTRE");
             transform.Translate(direccion * SpeedJump * Time.deltaTime);
             SpeedJump = SpeedJump + Time.deltaTime * Gravity;
         }
@@ -1327,7 +1286,6 @@ public class Enemy : MonoBehaviour
     {
         if(collision.tag == "pointOfCombat")
         {
-            //Debug.Log("ENTRE");
             inCombatPosition = true;
         }
     }
