@@ -14,7 +14,7 @@ public class Balanceado : Enemy
     {
         base.Update();
         CheckSpecialAttack();
-        if(delaySelectMovement <= 0 && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
+        if(delaySelectMovement <= 0 && enumsEnemy.movimiento == EnumsEnemy.Movimiento.Nulo)
         {
             CheckComportamiento();
             CheckMovement();
@@ -26,7 +26,7 @@ public class Balanceado : Enemy
         if (delayAttack > 0)
         {
             delayAttack = delayAttack - Time.deltaTime;
-            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
+            if (enumsEnemy.movimiento == EnumsEnemy.Movimiento.SaltoAtaque)
             {
                 //Debug.Log("ENTRE AL SALTO");
                 spriteEnemy.PlayAnimation("Salto balanceado");
@@ -53,7 +53,7 @@ public class Balanceado : Enemy
         {
             if (!inCombatPosition)
             {
-                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+                enumsEnemy.movimiento = EnumsCharacter.Movimiento.MoveToPointCombat;
                 return;
             }
             if (!inAttack)
@@ -61,62 +61,62 @@ public class Balanceado : Enemy
                 valueAttack = Random.Range(0, 100);
             }
             if (valueAttack >= parabolaAttack
-                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
-                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
-                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto 
+                || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecial
+                || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecialAgachado
+                || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecialSalto 
                 || !enableMecanicParabolaAttack)
             {
-                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
-                    && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp()
-                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque
+                if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtacarEnElLugar
+                    && !GetIsJumping() && SpeedJump >= GetAuxSpeedJump()
+                    && enumsEnemy.movimiento != EnumsCharacter.Movimiento.AgacharseAtaque
                     && !GetIsDuck() && !inSpecialAttack)
                 {
                     spriteEnemy.GetAnimator().Play("Ataque enemigo balanceado");
                     inAttack = true;
                 }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo && !inSpecialAttack)
+                else if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoAtaque
+                    || enumsEnemy.movimiento == EnumsCharacter.Movimiento.Nulo && !inSpecialAttack)
                 {
                     spriteEnemy.GetAnimator().Play("Ataque Salto enemigo balanceado");
                     inAttack = true;
                 }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && GetIsDuck() && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp() && !inSpecialAttack)
+                else if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.AgacharseAtaque && GetIsDuck() && !GetIsJumping() && SpeedJump >= GetAuxSpeedJump() && !inSpecialAttack)
                 {
                     spriteEnemy.GetAnimator().Play("Ataque Agachado enemigo balanceado");
                     inAttack = true;
                 }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo 
+                else if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecial
+                    || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecialAgachado
+                    || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecialSalto
+                    || enumsEnemy.movimiento == EnumsCharacter.Movimiento.Nulo 
                     || inSpecialAttack)
                 {
-                    switch (enumsEnemy.GetMovement())
+                    switch (enumsEnemy.movimiento)
                     {
-                        case EnumsEnemy.Movimiento.AtaqueEspecial:
+                        case EnumsCharacter.Movimiento.AtaqueEspecial:
                             spriteEnemy.GetAnimator().SetTrigger("AtaqueEspecial");
                             spriteEnemy.spriteRenderer.color = Color.white;
-                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
+                            enumsEnemy.movimiento = EnumsCharacter.Movimiento.AtaqueEspecial;
                             SetEnableSpecialAttack(false);
                             inAttack = true;
                             xpActual = 0;
                             break;
-                        case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
+                        case EnumsCharacter.Movimiento.AtaqueEspecialAgachado:
                             spriteEnemy.GetAnimator().Play("Ataque Especial Agachado Balanceado");
                             spriteEnemy.spriteRenderer.color = Color.white;
-                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecialAgachado);
+                            enumsEnemy.movimiento = EnumsCharacter.Movimiento.AtaqueEspecialAgachado;
                             SetEnableSpecialAttack(false);
                             inAttack = true;
                             xpActual = 0;
                             break;
-                        case EnumsEnemy.Movimiento.AtaqueEspecialSalto:
+                        case EnumsCharacter.Movimiento.AtaqueEspecialSalto:
                             /*spriteEnemy.GetAnimator().SetTrigger("AtaqueParabolaSalto");
                             spriteEnemy.spriteRenderer.color = Color.white;
                             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecialSalto);
                             SetEnableSpecialAttack(false);
                             inAttack = true;
                             //xpActual = 0;*/
-                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
+                            enumsEnemy.movimiento = EnumsCharacter.Movimiento.Saltar;
                             break;
                     }
                 }
@@ -124,18 +124,18 @@ public class Balanceado : Enemy
             else if (valueAttack < parabolaAttack)
             {
                 //ParabolaAttack();
-                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
-                    && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp() && delayAttack <= 0)
+                if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtacarEnElLugar
+                    && !GetIsJumping() && SpeedJump >= GetAuxSpeedJump() && delayAttack <= 0)
                 {
                     spriteEnemy.PlayAnimation("Ataque Parabola enemigo balanceado");
                     inAttack = true;
                 }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && delayAttack <= 0)
+                else if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoAtaque && delayAttack <= 0)
                 {
                     spriteEnemy.PlayAnimation("Ataque Parabola Salto enemigo balanceado");
                     inAttack = true;
                 }
-                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && delayAttack <= 0)
+                else if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.AgacharseAtaque && delayAttack <= 0)
                 {
                     spriteEnemy.PlayAnimation("Ataque Parabola Agachado enemigo balanceado");
                     inAttack = true;
@@ -186,8 +186,8 @@ public class Balanceado : Enemy
                 tipoProyectil = Proyectil.typeProyectil.ProyectilAereo;
                 shootDown = true;
             }
-            go.transform.rotation = generadoresProyectiles.transform.rotation;
-            go.transform.position = generadoresProyectiles.transform.position;
+            go.transform.rotation = generadorProyectiles.transform.rotation;
+            go.transform.position = generadorProyectiles.transform.position;
             proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
         }
         else if (!specialAttack && GetIsDuck())
@@ -204,11 +204,11 @@ public class Balanceado : Enemy
             tipoProyectil = Proyectil.typeProyectil.AtaqueEspecial;
             if (!GetIsDuck())
             {
-                CheckSpecialAttackEnemyController(0, 0, generadorProyectilParabola);
+                CheckSpecialAttackEnemyController(0, 0, generadorProyectilesParabola);
             }
             else
             {
-                CheckSpecialAttackEnemyController(0, 0, generadorProyectilParabolaAgachado);
+                CheckSpecialAttackEnemyController(0, 0, generadorProyectilesParabolaAgachado);
             }
         }
         if (!specialAttack)

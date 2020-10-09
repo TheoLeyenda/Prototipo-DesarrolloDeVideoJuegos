@@ -6,33 +6,14 @@ using System;
 
 public class Enemy : Character
 {
-    public ApplyColorShoot applyColorShoot; 
-    public enum ApplyColorShoot
-    {
-        Stela,
-        Proyectil,
-        StelaAndProyectil,
-        None,
-    }
-    public Sprite myHeadSprite;
     public string fraseVictoria;
-    public Color colorShoot;
     public bool EnableChargerSpecialAttackForHit = true;
     public string nameEnemy;
     public bool enableColorShootSpecialAttack;
-
     [HideInInspector]
     public bool enableDeffence = true;
-
-    //DATOS PARA EL MOVIMIENTO
-    public bool enableMovement;
     [SerializeField]
     protected bool inCombatPosition;
-
-    //-------------------------------------------//
-    public BarraDeEscudo barraDeEscudo;
-    [HideInInspector]
-    public bool enableSpecialAttack;
     public SpriteEnemy spriteEnemy;
     [HideInInspector]
     public float Blindaje;
@@ -43,65 +24,37 @@ public class Enemy : Character
     public SpriteRenderer SpriteRendererEnemigo;
     public SpecialAttackParabolaEnemyController specialAttackParabolaEnemyController;
     private float auxLife;
-    //private Animator animator;
     public bool InPool;
     public Pool pool;
-    //private PoolObject poolObjectEnemy;
     public float life;
     public float maxLife;
-
     public Pool poolParabolaAttack;
     public Pool poolObjectAttack;
-    protected Rigidbody2D rg2D;
-    private GameManager gm;
-    public GameObject generadoresProyectiles;
-    public GameObject generadorProyectilesAgachado;
-    public GameObject generadorProyectilParabola;
-    public GameObject generadorProyectilParabolaAgachado;
     private float MinRangeRandom = 0;
     private float MaxRangeRandom = 100;
-    //private float TypeRandom = 3;
     protected float delaySelectMovement;
     public float maxRandomDelayMovement;
     public float minRandomDelayMovement;
-    public float delayAttack;
-    protected float auxDelayAttack;
-    //protected float auxDelayParabolaAttack;
     private bool doubleDamage;
-    private bool isDuck;
     private bool isDeffended;
     public float anguloAtaqueSalto;
-    public float Speed;
-    [SerializeField]private float auxSpeed = 0;
-    public float SpeedJump;
-    [SerializeField] private float auxSpeedJump = 0;
-    public float Resistace;
+    [SerializeField] private float auxSpeed = 0;
     [SerializeField] private float auxResistace = 0;
-    public float Gravity;
     [SerializeField] private float auxGravity = 0;
     public float delayAttackJumping;
-    private bool isJamping;
     public Collider2D colliderSprites;
-    [HideInInspector]
-    public Vector3 InitialPosition;
     [HideInInspector]
     public Vector3 pointOfDeath;
     [HideInInspector]
     public Vector3 pointOfCombat;
     public bool damageCounterAttack;
     public bool activateComportamiento;
-    public BoxColliderController boxColliderPiernas;
-    public BoxColliderController boxColliderSprite;
-    public BoxColliderController boxColliderControllerAgachado;
-    public BoxColliderController boxColliderControllerParado;
-    public BoxColliderController boxColliderControllerSaltando;
+
     public bool enableMecanicParabolaAttack;
     [HideInInspector]
     public bool inAttack;
     protected EventWise eventWise;
     private bool insound;
-    [HideInInspector]
-    public bool myVictory = false;
     protected float valueAttack;
 
     public bool DontRestart;
@@ -144,10 +97,6 @@ public class Enemy : Character
     private float tolerableStillTime;
     private float auxTolerableStillTime;
 
-    private bool weitVictory;
-    [HideInInspector]
-    public float timeStuned = 0;
-
     private Vector3 outPosition; 
     //private bool onceJump = false;
     public static event Action<Enemy, string> OnModifireState;
@@ -157,6 +106,7 @@ public class Enemy : Character
 
     protected virtual void OnEnable()
     {
+        
         enableDeffence = true;
         xpActual = 0;
         life = maxLife;
@@ -164,11 +114,12 @@ public class Enemy : Character
         isJamping = false;
         myVictory = false;
         weitVictory = false;
-        enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
+        
+        enumsEnemy.estado = EnumsCharacter.EstadoCharacter.vivo;
         Player.OnDie += AnimationVictory;
         if (!inCombatPosition && enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe) 
         {
-            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
+            enumsEnemy.movimiento = EnumsCharacter.Movimiento.MoveToPointCombat;
         }
     }
     protected virtual void OnDisable()
@@ -190,6 +141,7 @@ public class Enemy : Character
     }
     public virtual void Start()
     {
+        distanceMove = 0.2f;
         outPosition = new Vector3(500, 500, 500);
         weitVictory = false;
         specialAttackParabolaEnemyController = GetComponent<SpecialAttackParabolaEnemyController>();
@@ -201,32 +153,25 @@ public class Enemy : Character
         auxDelayAttack = delayAttack;
         delaySelectMovement = 0.5f;
         auxLife = life;
-        //poolObjectEnemy = GetComponent<PoolObject>();
-        //animator = GetComponent<Animator>();
         if (GameManager.instanceGameManager != null)
         {
             gm = GameManager.instanceGameManager;
         }
-        rg2D = GetComponent<Rigidbody2D>();
         CheckInitialCharacter();
-        enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
+        enumsEnemy.estado = EnumsCharacter.EstadoCharacter.vivo;
     }
     public void AnimationVictory(Player p) 
     {
-        //Debug.Log("ENTRE");
         if (transform.position.y <= InitialPosition.y)
         {
-            //Debug.Log("ENTRE");
             if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
             {
                 spriteEnemy.GetAnimator().Play("Victory");
             }
             enableMovement = false;
             myVictory = true;
-            //Debug.Log("SOY GLORIOSO");
             if (OnVictory != null)
             {
-                //Debug.Log("SOY GLORIOSO");
                 OnVictory(this, fraseVictoria, nameEnemy, myHeadSprite);
             }
         }
@@ -257,12 +202,11 @@ public class Enemy : Character
 
         if (enableMovement)
         {
-     
-            CheckDeffense();
+            CheckShild();
             CheckBoxColliders2D();
 
-            if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
-                && enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto)
+            if (enumsEnemy.movimiento != EnumsCharacter.Movimiento.AtaqueEspecial
+                && enumsEnemy.estado != EnumsCharacter.EstadoCharacter.muerto)
             {
                 IA();
                 tolerableStillTime = auxTolerableStillTime;
@@ -279,9 +223,9 @@ public class Enemy : Character
 
     public void CheckState()
     {
-        switch (enumsEnemy.GetStateEnemy())
+        switch (enumsEnemy.estado)
         {
-            case EnumsEnemy.EstadoEnemigo.Atrapado:
+            case EnumsCharacter.EstadoCharacter.Atrapado:
                 if(OnModifireState != null)
                 {
                     OnModifireState(this, "Atrapado Chicle");
@@ -308,11 +252,11 @@ public class Enemy : Character
             spriteEnemy.spriteRenderer.color = Color.white;
             if (life > 0)
             {
-                enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
+                enumsEnemy.estado = EnumsCharacter.EstadoCharacter.vivo;
             }
             else
             {
-                enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
+                enumsEnemy.estado = EnumsCharacter.EstadoCharacter.muerto;
             }
             if (OnDisableModifireState != null)
             {
@@ -331,24 +275,24 @@ public class Enemy : Character
     }
     public void CheckOutLimit()
     {
-        if (enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto && inCombatPosition)
+        if (enumsEnemy.estado != EnumsCharacter.EstadoCharacter.muerto && inCombatPosition)
         {
-            if (transform.position.y <= InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar && !isJamping
-                || transform.position.y <= InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && !isJamping
-                || transform.position.y <= InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa && !isJamping
-                || transform.position.y <= InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto && !isJamping)
+            if (transform.position.y <= InitialPosition.y && enumsEnemy.movimiento == EnumsCharacter.Movimiento.Saltar && !isJamping
+                || transform.position.y <= InitialPosition.y && enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoAtaque && !isJamping
+                || transform.position.y <= InitialPosition.y && enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoDefensa && !isJamping
+                || transform.position.y <= InitialPosition.y && enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecialSalto && !isJamping)
             {
                 transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);
                 delaySelectMovement = 0.1f;
-                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+                enumsEnemy.movimiento = EnumsCharacter.Movimiento.Nulo;
                 if (SpeedJump <= auxSpeedJump)
                     SpeedJump = auxSpeedJump;
             }
             else if (transform.position.y > InitialPosition.y && (life <= 0))
             {
-                if (CheckMove(new Vector3(transform.position.x, InitialPosition.y, transform.position.z)))
+                if (CheckMove(new Vector3(transform.position.x, InitialPosition.y, transform.position.z), distanceMove))
                 {
-                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
+                    enumsEnemy.movimiento = EnumsCharacter.Movimiento.Saltar;
                     MoveJamp(Vector3.down);
                 }
                 else
@@ -369,7 +313,7 @@ public class Enemy : Character
             boxColliderControllerAgachado.GetBoxCollider2D().enabled = false;
             boxColliderControllerSaltando.GetBoxCollider2D().enabled = false;
         }
-        enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.vivo);
+        enumsEnemy.estado = EnumsCharacter.EstadoCharacter.vivo;
         tolerableStillTime = auxTolerableStillTime;
         if (GameManager.instanceGameManager != null)
         {
@@ -380,7 +324,7 @@ public class Enemy : Character
     }
     public void IA()
     {
-        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.MoveToPointCombat)
+        if (enumsEnemy.movimiento == EnumsEnemy.Movimiento.MoveToPointCombat)
         {
             delaySelectMovement = 10;
             CheckMovement();
@@ -388,28 +332,28 @@ public class Enemy : Character
         }
         if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
         {
-            if (transform.position.y > InitialPosition.y && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && inCombatPosition)
+            if (transform.position.y > InitialPosition.y && enumsEnemy.movimiento != EnumsCharacter.Movimiento.MoveToPointCombat && inCombatPosition)
             {
                 delaySelectMovement = 0.1f;
-                if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
+                if (enumsEnemy.movimiento != EnumsCharacter.Movimiento.SaltoAtaque && enumsEnemy.movimiento != EnumsCharacter.Movimiento.SaltoDefensa && enumsEnemy.movimiento != EnumsEnemy.Movimiento.Saltar && enumsEnemy.movimiento != EnumsEnemy.Movimiento.MoveToPointCombat)
                 {
-                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
+                    enumsEnemy.movimiento = EnumsCharacter.Movimiento.Saltar;
                     isJamping = true;
                     Jump(alturaMaxima.transform.position);
                     isDeffended = false;
                 }
             }
 
-            if (life > 0 && enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
+            if (life > 0 && enumsEnemy.estado != EnumsCharacter.EstadoCharacter.muerto && enumsEnemy.movimiento != EnumsCharacter.Movimiento.MoveToPointCombat)
             {
                
-                if (delaySelectMovement <= 0 && (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque))
+                if (delaySelectMovement <= 0 && (enumsEnemy.movimiento != EnumsCharacter.Movimiento.Saltar || enumsEnemy.movimiento != EnumsCharacter.Movimiento.SaltoAtaque))
                 {
-                    if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
-                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialAgachado
-                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto
-                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAdelante
-                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAtras)
+                    if (enumsEnemy.movimiento != EnumsCharacter.Movimiento.AtaqueEspecial
+                        && enumsEnemy.movimiento != EnumsCharacter.Movimiento.AtaqueEspecialAgachado
+                        && enumsEnemy.movimiento != EnumsCharacter.Movimiento.AtaqueEspecialSalto
+                        && enumsEnemy.movimiento != EnumsCharacter.Movimiento.MoverAdelante
+                        && enumsEnemy.movimiento != EnumsCharacter.Movimiento.MoverAtras)
                     {
                         CheckComportamiento();
                     }
@@ -426,40 +370,40 @@ public class Enemy : Character
     {
         if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
         {
-            if (isDuck || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Agacharse
-                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque
-                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa
-                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado)
+            if (isDuck || enumsEnemy.movimiento == EnumsCharacter.Movimiento.Agacharse
+                || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AgacharseAtaque
+                || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AgacheDefensa
+                || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecialAgachado)
             {
-                if (boxColliderPiernas != null)
+                if (boxColliderControllerPiernas != null)
                 {
-                    boxColliderPiernas.GetBoxCollider2D().enabled = false;
+                    boxColliderControllerPiernas.GetBoxCollider2D().enabled = false;
                 }
                 boxColliderControllerAgachado.GetBoxCollider2D().enabled = true;
                 boxColliderControllerParado.GetBoxCollider2D().enabled = false;
                 boxColliderControllerSaltando.GetBoxCollider2D().enabled = false;
             }
-            else if (isJamping || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar
-                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
-                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa
-                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto)
+            else if (isJamping || enumsEnemy.movimiento == EnumsCharacter.Movimiento.Saltar
+                || enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoAtaque
+                || enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoDefensa
+                || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecialSalto)
             {
-                if (boxColliderPiernas != null)
+                if (boxColliderControllerPiernas != null)
                 {
-                    boxColliderPiernas.GetBoxCollider2D().enabled = false;
+                    boxColliderControllerPiernas.GetBoxCollider2D().enabled = false;
                 }
                 boxColliderControllerAgachado.GetBoxCollider2D().enabled = false;
                 boxColliderControllerParado.GetBoxCollider2D().enabled = false;
                 boxColliderControllerSaltando.GetBoxCollider2D().enabled = true;
             }
-            else if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar
-                || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque
-                || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa
-                || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto)
+            else if (enumsEnemy.movimiento != EnumsCharacter.Movimiento.Saltar
+                || enumsEnemy.movimiento != EnumsCharacter.Movimiento.SaltoAtaque
+                || enumsEnemy.movimiento != EnumsCharacter.Movimiento.SaltoDefensa
+                || enumsEnemy.movimiento != EnumsCharacter.Movimiento.AtaqueEspecialSalto)
             {
-                if (boxColliderPiernas != null)
+                if (boxColliderControllerPiernas != null)
                 {
-                    boxColliderPiernas.GetBoxCollider2D().enabled = true;
+                    boxColliderControllerPiernas.GetBoxCollider2D().enabled = true;
                 }
                 boxColliderControllerAgachado.GetBoxCollider2D().enabled = false;
                 boxColliderControllerParado.GetBoxCollider2D().enabled = true;
@@ -469,10 +413,10 @@ public class Enemy : Character
     }
     public void CheckComportamiento()
     {
-        EnumsEnemy.Movimiento movimiento = EnumsEnemy.Movimiento.Nulo;
-        if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat 
-            && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath 
-            && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp()
+        EnumsCharacter.Movimiento movimiento = EnumsCharacter.Movimiento.Nulo;
+        if (enumsEnemy.movimiento != EnumsCharacter.Movimiento.MoveToPointCombat 
+            && enumsEnemy.movimiento != EnumsCharacter.Movimiento.MoveToPointDeath 
+            && !GetIsJumping() && SpeedJump >= GetAuxSpeedJump()
             && inCombatPosition)
         {
             if (activateComportamiento)
@@ -484,22 +428,22 @@ public class Enemy : Character
                     //MOVIMIENTO 
                     if (structsEnemys.dataEnemy.columnaActual >= grid.GetCuadrilla_columnas() - 1)
                     {
-                        movimiento = EnumsEnemy.Movimiento.MoverAdelante;
+                        movimiento = EnumsCharacter.Movimiento.MoverAdelante;
                     }
                     else if (structsEnemys.dataEnemy.columnaActual <= 0)
                     {
-                        movimiento = EnumsEnemy.Movimiento.MoverAtras;
+                        movimiento = EnumsCharacter.Movimiento.MoverAtras;
                     }
                     else
                     {
                         opcionMovement = UnityEngine.Random.Range(MinRangeRandom, MaxRangeRandom);
                         if (opcionMovement < MoveBackPorcentage)
                         {
-                            movimiento = EnumsEnemy.Movimiento.MoverAtras;
+                            movimiento = EnumsCharacter.Movimiento.MoverAtras;
                         }
                         else
                         {
-                            movimiento = EnumsEnemy.Movimiento.MoverAdelante;
+                            movimiento = EnumsCharacter.Movimiento.MoverAdelante;
                         }
                     }
                 }
@@ -509,15 +453,15 @@ public class Enemy : Character
                     opcionMovement = UnityEngine.Random.Range(MinRangeRandom, MaxRangeRandom);
                     if (opcionMovement < AttackJumpPorcentage)
                     {
-                        movimiento = EnumsEnemy.Movimiento.SaltoAtaque;
+                        movimiento = EnumsCharacter.Movimiento.SaltoAtaque;
                     }
                     else if (opcionMovement >= AttackJumpPorcentage && opcionMovement < (AttackJumpPorcentage + DefenceJumpPorcentage))
                     {
-                        movimiento = EnumsEnemy.Movimiento.SaltoDefensa;
+                        movimiento = EnumsCharacter.Movimiento.SaltoDefensa;
                     }
                     else if (opcionMovement >= (AttackJumpPorcentage + DefenceJumpPorcentage))
                     {
-                        movimiento = EnumsEnemy.Movimiento.Saltar;
+                        movimiento = EnumsCharacter.Movimiento.Saltar;
                     }
                 }
                 else if (opcionMovement >= (MovePorcentage + JumpPorcentage) && opcionMovement < (MovePorcentage + JumpPorcentage + DuckPorcentage))
@@ -526,15 +470,15 @@ public class Enemy : Character
                     opcionMovement = UnityEngine.Random.Range(MinRangeRandom, MaxRangeRandom);
                     if (opcionMovement < AttackDuckPorcentage)
                     {
-                        movimiento = EnumsEnemy.Movimiento.AgacharseAtaque;
+                        movimiento = EnumsCharacter.Movimiento.AgacharseAtaque;
                     }
                     else if (opcionMovement >= AttackDuckPorcentage && opcionMovement < (AttackDuckPorcentage + DefenceDuckPorcentage))
                     {
-                        movimiento = EnumsEnemy.Movimiento.AgacheDefensa;
+                        movimiento = EnumsCharacter.Movimiento.AgacheDefensa;
                     }
                     else if (opcionMovement >= (AttackDuckPorcentage + DefenceDuckPorcentage))
                     {
-                        movimiento = EnumsEnemy.Movimiento.Agacharse;
+                        movimiento = EnumsCharacter.Movimiento.Agacharse;
                     }
                 }
                 else if (opcionMovement >= (MovePorcentage + JumpPorcentage + DuckPorcentage))
@@ -543,20 +487,20 @@ public class Enemy : Character
                     opcionMovement = UnityEngine.Random.Range(MinRangeRandom, MaxRangeRandom);
                     if (opcionMovement < AttackPorcentage)
                     {
-                        movimiento = EnumsEnemy.Movimiento.AtacarEnElLugar;
+                        movimiento = EnumsCharacter.Movimiento.AtacarEnElLugar;
                     }
                     else if (opcionMovement >= AttackPorcentage && opcionMovement < (AttackPorcentage + DeffensePorcentage))
                     {
-                        movimiento = EnumsEnemy.Movimiento.DefensaEnElLugar;
+                        movimiento = EnumsCharacter.Movimiento.DefensaEnElLugar;
                     }
                 }
             }
         }
         else
         {
-            movimiento = enumsEnemy.GetMovement();
+            movimiento = enumsEnemy.movimiento;
         }
-        if (movimiento == EnumsEnemy.Movimiento.MoveToPointCombat)
+        if (movimiento == EnumsCharacter.Movimiento.MoveToPointCombat)
         {
             delaySelectMovement = 10;
         }
@@ -564,69 +508,69 @@ public class Enemy : Character
         {
             delaySelectMovement = UnityEngine.Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
         }
-        enumsEnemy.SetMovement(movimiento);
-        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto)
+        enumsEnemy.movimiento = movimiento;
+        if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoAtaque || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecialSalto)
         {
             delayAttack = delayAttackJumping;
         }
-        if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar)
+        if (enumsEnemy.movimiento != EnumsCharacter.Movimiento.SaltoDefensa || enumsEnemy.movimiento != EnumsCharacter.Movimiento.DefensaEnElLugar)
         {
             isDeffended = false;
         }
     }
-    public EnumsEnemy.Movimiento CheckSpecialAttack(EnumsEnemy.Movimiento _movimiento)
+    public EnumsCharacter.Movimiento CheckSpecialAttack(EnumsCharacter.Movimiento _movimiento)
     {
         float specialMovement = UnityEngine.Random.Range(MinRangeRandom, MaxRangeRandom);
-        EnumsEnemy.Movimiento movimiento = _movimiento;
+        EnumsCharacter.Movimiento movimiento = _movimiento;
         if (specialMovement < AttackSpecialPorcentage)
         {
-            if (_movimiento == EnumsEnemy.Movimiento.Agacharse || _movimiento == EnumsEnemy.Movimiento.AgacharseAtaque || _movimiento == EnumsEnemy.Movimiento.AgacheDefensa)
+            if (_movimiento == EnumsCharacter.Movimiento.Agacharse || _movimiento == EnumsCharacter.Movimiento.AgacharseAtaque || _movimiento == EnumsCharacter.Movimiento.AgacheDefensa)
             {
-                movimiento = EnumsEnemy.Movimiento.AtaqueEspecialAgachado;
+                movimiento = EnumsCharacter.Movimiento.AtaqueEspecialAgachado;
             }
-            else if (_movimiento == EnumsEnemy.Movimiento.Saltar || _movimiento == EnumsEnemy.Movimiento.SaltoAtaque || _movimiento == EnumsEnemy.Movimiento.SaltoDefensa)
+            else if (_movimiento == EnumsCharacter.Movimiento.Saltar || _movimiento == EnumsCharacter.Movimiento.SaltoAtaque || _movimiento == EnumsCharacter.Movimiento.SaltoDefensa)
             {
-                movimiento = EnumsEnemy.Movimiento.AtaqueEspecialSalto;
+                movimiento = EnumsCharacter.Movimiento.AtaqueEspecialSalto;
             }
-            else if (_movimiento == EnumsEnemy.Movimiento.AtacarEnElLugar || _movimiento == EnumsEnemy.Movimiento.DefensaEnElLugar)
+            else if (_movimiento == EnumsCharacter.Movimiento.AtacarEnElLugar || _movimiento == EnumsCharacter.Movimiento.DefensaEnElLugar)
             {
-                movimiento = EnumsEnemy.Movimiento.AtaqueEspecial;
+                movimiento = EnumsCharacter.Movimiento.AtaqueEspecial;
             }
         }
         return movimiento;
     }
     public void DefaultBehavior()
     {
-        EnumsEnemy.Movimiento movimiento;
-        int min = (int)EnumsEnemy.Movimiento.Nulo + 1;
-        int max = (int)EnumsEnemy.Movimiento.Count - 3;
-        if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
+        EnumsCharacter.Movimiento movimiento;
+        int min = (int)EnumsCharacter.Movimiento.Nulo + 1;
+        int max = (int)EnumsCharacter.Movimiento.Count - 3;
+        if (enumsEnemy.movimiento != EnumsCharacter.Movimiento.MoveToPointCombat && enumsEnemy.movimiento != EnumsCharacter.Movimiento.MoveToPointDeath)
         {
-            movimiento = (EnumsEnemy.Movimiento)UnityEngine.Random.Range(min, max);
+            movimiento = (EnumsCharacter.Movimiento)UnityEngine.Random.Range(min, max);
             switch (movimiento)
             {
-                case EnumsEnemy.Movimiento.AgacheDefensa:
-                    movimiento = EnumsEnemy.Movimiento.Agacharse;
+                case EnumsCharacter.Movimiento.AgacheDefensa:
+                    movimiento = EnumsCharacter.Movimiento.Agacharse;
                     break;
-                case EnumsEnemy.Movimiento.DefensaEnElLugar:
-                    movimiento = EnumsEnemy.Movimiento.AtacarEnElLugar;
+                case EnumsCharacter.Movimiento.DefensaEnElLugar:
+                    movimiento = EnumsCharacter.Movimiento.AtacarEnElLugar;
                     break;
-                case EnumsEnemy.Movimiento.SaltoDefensa:
-                    movimiento = EnumsEnemy.Movimiento.Saltar;
+                case EnumsCharacter.Movimiento.SaltoDefensa:
+                    movimiento = EnumsCharacter.Movimiento.Saltar;
                     break;
             }
         }
         else
         {
-            movimiento = enumsEnemy.GetMovement();
+            movimiento = enumsEnemy.movimiento;
         }
         delaySelectMovement = UnityEngine.Random.Range(minRandomDelayMovement, maxRandomDelayMovement);
-        enumsEnemy.SetMovement(movimiento);
-        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto)
+        enumsEnemy.movimiento = movimiento;
+        if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoAtaque || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecialSalto)
         {
             delayAttack = delayAttackJumping;
         }
-        if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa || enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar)
+        if (enumsEnemy.movimiento != EnumsCharacter.Movimiento.SaltoDefensa || enumsEnemy.movimiento != EnumsCharacter.Movimiento.DefensaEnElLugar)
         {
             isDeffended = false;
         }
@@ -639,33 +583,33 @@ public class Enemy : Character
             boxColliderControllerAgachado.state = BoxColliderController.StateBoxCollider.Normal;
             boxColliderControllerParado.state = BoxColliderController.StateBoxCollider.Normal;
             boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Normal;
-            boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
+            boxColliderControllerSprite.state = BoxColliderController.StateBoxCollider.Normal;
 
             if (!isJamping && !isDuck
-                && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar
-                && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque
-                && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa)
+                && enumsEnemy.movimiento != EnumsCharacter.Movimiento.Saltar
+                && enumsEnemy.movimiento != EnumsCharacter.Movimiento.SaltoAtaque
+                && enumsEnemy.movimiento != EnumsCharacter.Movimiento.SaltoDefensa)
             {
                 delaySelectMovement = 0.1f;
                 enableSpecialAttack = false;
-                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
+                enumsEnemy.movimiento = EnumsCharacter.Movimiento.AtaqueEspecial;
                 AnimationAttack();
             }
             else if (enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Balanceado)
             {
-                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
+                if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.Saltar
+                    || enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoAtaque
+                    || enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoDefensa)
                 {
-                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecialSalto);
+                    enumsEnemy.movimiento = EnumsCharacter.Movimiento.AtaqueEspecialSalto;
                 }
                 else if (isDuck)
                 {
-                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecialAgachado);
+                    enumsEnemy.movimiento = EnumsCharacter.Movimiento.AtaqueEspecialAgachado;
                 }
                 else
                 {
-                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
+                    enumsEnemy.movimiento = EnumsCharacter.Movimiento.AtaqueEspecial;
                 }
                 AnimationAttack();
             }
@@ -673,7 +617,7 @@ public class Enemy : Character
     }
     public void MoveToPoint(Vector3 pointCombat)
     {
-        if (CheckMove(new Vector3(pointCombat.x, transform.position.y, transform.position.z)))
+        if (CheckMove(new Vector3(pointCombat.x, transform.position.y, transform.position.z), distanceMove))
         {
             delaySelectMovement = 999;
             if (pointCombat.x < myPrefab.transform.position.x)
@@ -689,7 +633,7 @@ public class Enemy : Character
         {
             life = maxLife;
             delaySelectMovement = 0;
-            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+            enumsEnemy.movimiento = EnumsCharacter.Movimiento.Nulo;
         }
     }
 
@@ -767,18 +711,18 @@ public class Enemy : Character
             {
                 spriteEnemy.PlayAnimation("Death");
             }
-            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
-            enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.muerto);
+            enumsEnemy.movimiento = EnumsCharacter.Movimiento.Nulo;
+            enumsEnemy.estado = EnumsCharacter.EstadoCharacter.muerto;
         }
     }
     public void CheckMovement()
     {
         
-        if (enableDeffence && barraDeEscudo != null && inCombatPosition && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat)
+        if (enableDeffence && barraDeEscudo != null && inCombatPosition && enumsEnemy.movimiento != EnumsCharacter.Movimiento.MoveToPointCombat)
         {
-            if ((enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar
-            && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacheDefensa
-            && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa)
+            if ((enumsEnemy.movimiento != EnumsCharacter.Movimiento.DefensaEnElLugar
+            && enumsEnemy.movimiento != EnumsCharacter.Movimiento.AgacheDefensa
+            && enumsEnemy.movimiento != EnumsCharacter.Movimiento.SaltoDefensa)
             || barraDeEscudo.nededBarMaxPorcentage)
             {
 
@@ -787,37 +731,37 @@ public class Enemy : Character
                 if (barraDeEscudo.GetValueShild() <= barraDeEscudo.porcentageNededForDeffence)
                 {
                     barraDeEscudo.SetEnableDeffence(false);
-                    if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa)
+                    if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.AgacheDefensa)
                     {
-                        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Agacharse);
+                        enumsEnemy.movimiento = EnumsCharacter.Movimiento.Agacharse;
                     }
-                    else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
+                    else if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoDefensa)
                     {
-                        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
+                        enumsEnemy.movimiento = EnumsCharacter.Movimiento.Saltar;
                     }
-                    else if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa
-                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque
-                        && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar
+                    else if (enumsEnemy.movimiento != EnumsCharacter.Movimiento.SaltoDefensa
+                        && enumsEnemy.movimiento != EnumsCharacter.Movimiento.SaltoAtaque
+                        && enumsEnemy.movimiento != EnumsCharacter.Movimiento.Saltar
                         && !isDuck)
                     {
-                        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+                        enumsEnemy.movimiento = EnumsCharacter.Movimiento.Nulo;
                     }
                 }
             }
         }
         if (!enableDeffence && transform.position.y <= InitialPosition.y
-            && !isJamping && SpeedJump >= GetAuxSpeedJamp()
-            && (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar
-            || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa))
+            && !isJamping && SpeedJump >= GetAuxSpeedJump()
+            && (enumsEnemy.movimiento == EnumsCharacter.Movimiento.DefensaEnElLugar
+            || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AgacheDefensa))
         {
             float delay = 0.1f;
-            while (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar
-                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa)
+            while (enumsEnemy.movimiento == EnumsCharacter.Movimiento.DefensaEnElLugar
+                || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AgacheDefensa)
             {
                 CheckComportamiento();
                 if (delay <= 0)
                 {
-                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtacarEnElLugar);
+                    enumsEnemy.movimiento = EnumsCharacter.Movimiento.AtacarEnElLugar;
                 }
                 else
                 {
@@ -827,24 +771,24 @@ public class Enemy : Character
         }
         if (!enableDeffence)
         {
-            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
+            if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoDefensa)
             {
-                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
+                enumsEnemy.movimiento = EnumsCharacter.Movimiento.Saltar;
             }
         }
 
-        switch (enumsEnemy.GetMovement())
+        switch (enumsEnemy.movimiento)
         {
-            case EnumsEnemy.Movimiento.AtacarEnElLugar:
+            case EnumsCharacter.Movimiento.AtacarEnElLugar:
                 CheckDelayAttack(false);
                 isDeffended = false;
                 break;
-            case EnumsEnemy.Movimiento.AgacharseAtaque:
+            case EnumsCharacter.Movimiento.AgacharseAtaque:
                 Duck(structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                 CheckDelayAttack(false);
                 isDeffended = false;
                 break;
-            case EnumsEnemy.Movimiento.SaltoAtaque:
+            case EnumsCharacter.Movimiento.SaltoAtaque:
                 if (!isJamping && SpeedJump > 0 && structsEnemys.particleMovement.particleJump != null)
                 {
                     structsEnemys.particleMovement.particleJump.transform.position = new Vector3(transform.position.x, structsEnemys.particleMovement.particleJump.transform.position.y, structsEnemys.particleMovement.particleJump.transform.position.z);
@@ -855,7 +799,7 @@ public class Enemy : Character
                 Jump(alturaMaxima.transform.position);
                 isDeffended = false;
                 break;
-            case EnumsEnemy.Movimiento.MoverAtras:
+            case EnumsCharacter.Movimiento.MoverAtras:
                 isDeffended = false;
                 if (structsEnemys.dataEnemy.columnaActual < grid.GetCuadrilla_columnas() - 1)
                 {
@@ -866,7 +810,7 @@ public class Enemy : Character
                     delaySelectMovement = 0;
                 }
                 break;
-            case EnumsEnemy.Movimiento.MoverAdelante:
+            case EnumsCharacter.Movimiento.MoverAdelante:
                 isDeffended = false;
                 if (structsEnemys.dataEnemy.columnaActual > 0)
                 {
@@ -877,7 +821,7 @@ public class Enemy : Character
                     delaySelectMovement = 0;
                 }
                 break;
-            case EnumsEnemy.Movimiento.Saltar:
+            case EnumsCharacter.Movimiento.Saltar:
                 if (!isJamping && SpeedJump > 0 && structsEnemys.particleMovement.particleJump != null)
                 {
                     structsEnemys.particleMovement.particleJump.transform.position = new Vector3(transform.position.x, structsEnemys.particleMovement.particleJump.transform.position.y, structsEnemys.particleMovement.particleJump.transform.position.z);
@@ -887,10 +831,10 @@ public class Enemy : Character
                 isJamping = true;
                 Jump(alturaMaxima.transform.position);
                 break;
-            case EnumsEnemy.Movimiento.DefensaEnElLugar:
+            case EnumsCharacter.Movimiento.DefensaEnElLugar:
                 Deffence();
                 break;
-            case EnumsEnemy.Movimiento.SaltoDefensa:
+            case EnumsCharacter.Movimiento.SaltoDefensa:
                 if (!isJamping && SpeedJump > 0 && structsEnemys.particleMovement.particleJump != null)
                 {
                     structsEnemys.particleMovement.particleJump.transform.position = new Vector3(transform.position.x, structsEnemys.particleMovement.particleJump.transform.position.y, structsEnemys.particleMovement.particleJump.transform.position.z);
@@ -900,22 +844,22 @@ public class Enemy : Character
                 Jump(alturaMaxima.transform.position);
                 Deffence();
                 break;
-            case EnumsEnemy.Movimiento.AgacheDefensa:
+            case EnumsCharacter.Movimiento.AgacheDefensa:
                 Duck(structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                 Deffence();
                 break;
-            case EnumsEnemy.Movimiento.Agacharse:
+            case EnumsCharacter.Movimiento.Agacharse:
                 isDeffended = false;
                 Duck(structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                 break;
-            case EnumsEnemy.Movimiento.AtaqueEspecial:
+            case EnumsCharacter.Movimiento.AtaqueEspecial:
                 isDeffended = false;
                 break;
-            case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
+            case EnumsCharacter.Movimiento.AtaqueEspecialAgachado:
                 Duck(structsEnemys.dataEnemy.CantCasillasOcupadas_Y);
                 isDeffended = false;
                 break;
-            case EnumsEnemy.Movimiento.AtaqueEspecialSalto:
+            case EnumsCharacter.Movimiento.AtaqueEspecialSalto:
                 if (!isJamping && SpeedJump > 0 && structsEnemys.particleMovement.particleJump != null)
                 {
                     structsEnemys.particleMovement.particleJump.transform.position = new Vector3(transform.position.x, structsEnemys.particleMovement.particleJump.transform.position.y, structsEnemys.particleMovement.particleJump.transform.position.z);
@@ -925,18 +869,18 @@ public class Enemy : Character
                 isJamping = true;
                 Jump(alturaMaxima.transform.position);
                 break;
-            case EnumsEnemy.Movimiento.MoveToPointCombat:
+            case EnumsCharacter.Movimiento.MoveToPointCombat:
                 isDeffended = false;
                 MoveToPoint(pointOfCombat);
                 if(enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
                     spriteEnemy.ActualSprite = SpriteCharacter.SpriteActual.MoverAdelante;
                 break;
-            case EnumsEnemy.Movimiento.MoveToPointDeath:
+            case EnumsCharacter.Movimiento.MoveToPointDeath:
                 isDeffended = false;
                 MoveToPoint(pointOfDeath);
                 break;
         }
-        if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacheDefensa && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Agacharse)
+        if (enumsEnemy.movimiento != EnumsCharacter.Movimiento.AgacharseAtaque && enumsEnemy.movimiento != EnumsCharacter.Movimiento.AgacheDefensa && enumsEnemy.movimiento != EnumsCharacter.Movimiento.Agacharse)
         {
             colliderSprites.enabled = true;
             isDuck = false;
@@ -956,7 +900,7 @@ public class Enemy : Character
             }
         }
     }
-    public void CheckDeffense()
+    public void CheckShild()
     {
         if (barraDeEscudo != null)
         {
@@ -966,14 +910,14 @@ public class Enemy : Character
                 boxColliderControllerAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
                 boxColliderControllerParado.state = BoxColliderController.StateBoxCollider.Defendido;
                 boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
-                boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
+                boxColliderControllerSprite.state = BoxColliderController.StateBoxCollider.Defendido;
             }
             else
             {
                 boxColliderControllerAgachado.state = BoxColliderController.StateBoxCollider.Normal;
                 boxColliderControllerParado.state = BoxColliderController.StateBoxCollider.Normal;
                 boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Normal;
-                boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
+                boxColliderControllerSprite.state = BoxColliderController.StateBoxCollider.Normal;
                 if (barraDeEscudo != null)
                 {
                     barraDeEscudo.AddPorcentageBar();
@@ -989,30 +933,7 @@ public class Enemy : Character
     public void Deffence()
     {
         isDeffended = true;
-        if (!isDuck
-            && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar
-            && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque
-            && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa
-            && !isJamping)
-        {
-            boxColliderControllerParado.state = BoxColliderController.StateBoxCollider.Defendido;
-        }
-        else if (isDuck
-            && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar
-            && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque
-            && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa
-            && !isJamping)
-        {
-            boxColliderControllerAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
-        }
-        else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar
-            || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
-            || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa
-            || isJamping)
-        {
-            boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
-        }
-        boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
+        CheckDeffense(enumsEnemy);
         if (barraDeEscudo != null)
         {
             barraDeEscudo.SubstractPorcentageBar();
@@ -1032,7 +953,7 @@ public class Enemy : Character
         else if (delayAttack <= 0)
         {
             delayAttack = auxDelayAttack;
-            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto)
+            if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoAtaque || enumsEnemy.movimiento == EnumsCharacter.Movimiento.Nulo || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecialSalto)
             {
                 delayAttack = delayAttackJumping;
                 Attack(true, specialAttack,false);
@@ -1055,41 +976,41 @@ public class Enemy : Character
     }
     public void MoveLeft(Vector3 cuadrillaDestino)
     {
-        if (CheckMove(new Vector3(posicionesDeMovimiento[0].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
+        if (CheckMove(new Vector3(posicionesDeMovimiento[0].transform.position.x, transform.position.y, transform.position.z), distanceMove) && transform.position.x > cuadrillaDestino.x)
         {
-            if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAdelante || !insound)
+            if (enumsEnemy.movimiento != EnumsCharacter.Movimiento.MoverAdelante || !insound)
             {
                 insound = true;
                 eventWise.StartEvent("moverse");
             }
             Move(Vector3.left);
-            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoverAdelante);
+            enumsEnemy.movimiento = EnumsCharacter.Movimiento.MoverAdelante;
         }
-        else if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Nulo)
+        else if (enumsEnemy.movimiento != EnumsCharacter.Movimiento.Nulo)
         {
             insound = false;
             structsEnemys.dataEnemy.columnaActual--;
-            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+            enumsEnemy.movimiento = EnumsCharacter.Movimiento.Nulo;
             delaySelectMovement = 0;
         }
     }
     public void MoveRight(Vector3 cuadrillaDestino)
     {
-        if (CheckMove(new Vector3(posicionesDeMovimiento[posicionesDeMovimiento.Length-1].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
+        if (CheckMove(new Vector3(posicionesDeMovimiento[posicionesDeMovimiento.Length-1].transform.position.x, transform.position.y, transform.position.z), distanceMove) && transform.position.x < cuadrillaDestino.x)
         {
-            if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAtras || !insound)
+            if (enumsEnemy.movimiento != EnumsCharacter.Movimiento.MoverAtras || !insound)
             {
                 insound = true;
                 eventWise.StartEvent("moverse");
             }
             Move(Vector3.right);
-            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoverAtras);
+            enumsEnemy.movimiento = EnumsCharacter.Movimiento.MoverAtras;
         }
-        else if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Nulo)
+        else if (enumsEnemy.movimiento != EnumsCharacter.Movimiento.Nulo)
         {
             insound = false;
             structsEnemys.dataEnemy.columnaActual++;
-            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
+            enumsEnemy.movimiento = EnumsCharacter.Movimiento.Nulo;
             delaySelectMovement = 0;
         }
     }
@@ -1126,9 +1047,9 @@ public class Enemy : Character
             {
                 eventWise.StartEvent("saltar");
             }
-            if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto)
+            if (enumsEnemy.movimiento != EnumsCharacter.Movimiento.SaltoAtaque && enumsEnemy.movimiento != EnumsCharacter.Movimiento.SaltoDefensa && enumsEnemy.movimiento != EnumsCharacter.Movimiento.AtaqueEspecialSalto)
             {
-                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
+                enumsEnemy.movimiento = EnumsCharacter.Movimiento.Saltar;
             }
             MoveJamp(Vector3.up);
             if (SpeedJump <= 0)
@@ -1139,7 +1060,7 @@ public class Enemy : Character
             {
                 delaySelectMovement = 0.1f;
             }
-            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
+            if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoDefensa)
             {
                 Deffence();
             }
@@ -1173,12 +1094,12 @@ public class Enemy : Character
             if (!GetIsDuck())
             {
                 proyectil.TypeRoot = 1;
-                go.transform.position = generadorProyectilParabola.transform.position;
+                go.transform.position = generadorProyectilesParabola.transform.position;
             }
             else
             {
                 proyectil.TypeRoot = 2;
-                go.transform.position = generadorProyectilParabolaAgachado.transform.position;
+                go.transform.position = generadorProyectilesParabolaAgachado.transform.position;
             }
             switch (proyectil.TypeRoot)
             {
@@ -1193,89 +1114,22 @@ public class Enemy : Character
             proyectil.OnParabola(this,null, Proyectil.typeProyectil.Nulo);
         }
     }
-    public bool CheckMove(Vector3 PosicionDestino)
-    {
-        Vector3 distaciaObjetivo = transform.position - PosicionDestino;
-        bool mover = false;
-        if (distaciaObjetivo.magnitude > 0.2f)
-        {
-            mover = true;
-        }
-        return mover;
-    }
-    public void Move(Vector3 direccion)
-    {
-        transform.Translate(direccion * Speed * Time.deltaTime);
-    }
-    public void Move(Vector3 direccion, int substractSpeed)
-    {
-        transform.Translate(direccion * Speed/substractSpeed * Time.deltaTime);
-    }
-    public void MoveJamp(Vector3 direccion)
-    {
-        if (direccion == Vector3.up)
-        {
-            transform.Translate(direccion * SpeedJump * Time.deltaTime);
-            SpeedJump = SpeedJump - Time.deltaTime * Resistace;
-        }
-        else if (direccion == Vector3.down)
-        {
-            transform.Translate(direccion * SpeedJump * Time.deltaTime);
-            SpeedJump = SpeedJump + Time.deltaTime * Gravity;
-        }
-    }
-    public void Duck(int rangoAgachado)
-    {
-        isDuck = true;
-    }
+
     public bool GetIsDeffended()
     {
         return isDeffended;
     }
-    public bool GetIsJamping()
-    {
-        return isJamping;
-    }
-    public bool GetIsDuck()
-    {
-        return isDuck;
-    }
-    public void SetXpActual(float xp)
-    {
-        xpActual = xp;
-    }
-    public float GetXpActual()
-    {
-        return xpActual;
-    }
-    public float GetAuxDelayAttack()
-    {
-        return auxDelayAttack;
-    }
-    public float GetAuxSpeedJamp()
-    {
-        return auxSpeedJump;
-    }
+
     public void SetDelaySelectMovement(float delay)
     {
         delaySelectMovement = delay;
     }
-    public void SetEnableSpecialAttack(bool _enableSpecialAttack)
-    {
-        enableSpecialAttack = _enableSpecialAttack;
-    }
-    public void SetIsDuck(bool _isDuck)
-    {
-        isDuck = _isDuck;
-    }
-    public void SetIsJumping(bool _isJumping)
-    {
-        isJamping = _isJumping;
-    }
+
     public bool GetInCombatPosition() 
     {
         return inCombatPosition;
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "pointOfCombat")

@@ -62,8 +62,8 @@ public class ProfesorMatematica : Enemy
                 tipoProyectil = Proyectil.typeProyectil.ProyectilAereo;
                 shootDown = true;
             }
-            go.transform.rotation = generadoresProyectiles.transform.rotation;
-            go.transform.position = generadoresProyectiles.transform.position;
+            go.transform.rotation = generadorProyectiles.transform.rotation;
+            go.transform.position = generadorProyectiles.transform.position;
             proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
         }
         else if (!specialAttack && GetIsDuck())
@@ -81,11 +81,11 @@ public class ProfesorMatematica : Enemy
             int minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
             if (!GetIsDuck())
             {
-                CheckSpecialAttackEnemyController(minRutas, maxRutas, generadorProyectilParabola);
+                CheckSpecialAttackEnemyController(minRutas, maxRutas, generadorProyectilesParabola);
             }
             else
             {
-                CheckSpecialAttackEnemyController(minRutas, maxRutas, generadorProyectilParabolaAgachado);
+                CheckSpecialAttackEnemyController(minRutas, maxRutas, generadorProyectilesParabolaAgachado);
             }
         }
         if (!specialAttack)

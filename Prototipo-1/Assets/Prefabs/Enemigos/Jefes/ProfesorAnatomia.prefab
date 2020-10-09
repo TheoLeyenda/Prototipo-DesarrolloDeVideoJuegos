@@ -1624,6 +1624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dd513c132413bc4ea9f31ecc6f6c5e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  applyColorShoot: 0
   alturaMaxima: {fileID: 1603447084531973527}
   posicionesDeMovimiento:
   - {fileID: 3644779946566260995}
@@ -1634,19 +1635,34 @@ MonoBehaviour:
   xpNededSpecialAttack: 300
   xpForHit: 0
   myPrefab: {fileID: 3208534520697555277}
-  applyColorShoot: 0
+  barraDeEscudo: {fileID: 0}
   myHeadSprite: {fileID: 21300000, guid: de8d1ce917fd30c41a057bbae923c774, type: 3}
+  colorShoot: {r: 1, g: 0.9780377, b: 0, a: 1}
+  enableMovement: 0
+  myVictory: 0
+  SpeedJump: 12
+  auxSpeedJump: 12
+  Speed: 20
+  Resistace: 22
+  Gravity: 35
+  delayAttack: 0.8
+  boxColliderControllerPiernas: {fileID: 0}
+  boxColliderControllerSprite: {fileID: 1450382849}
+  boxColliderControllerAgachado: {fileID: 455702778}
+  boxColliderControllerParado: {fileID: 1711270102}
+  boxColliderControllerSaltando: {fileID: 1922578228}
+  generadorProyectiles: {fileID: 2531832291287769806}
+  generadorProyectilesAgachado: {fileID: 2531832293023430354}
+  generadorProyectilesParabola: {fileID: 2531832291360211595}
+  generadorProyectilesParabolaAgachado: {fileID: 2531832293205352431}
+  timeStuned: 0
   fraseVictoria: Reprobaste mi materia debilucho, vuelve cuando tengas un cuerpo perfecto
     como el mio...
-  colorShoot: {r: 1, g: 0.9780377, b: 0, a: 1}
   EnableChargerSpecialAttackForHit: 1
   nameEnemy: RIO
   enableColorShootSpecialAttack: 0
   enableDeffence: 1
-  enableMovement: 0
   inCombatPosition: 0
-  barraDeEscudo: {fileID: 0}
-  enableSpecialAttack: 0
   spriteEnemy: {fileID: 0}
   Blindaje: 0
   MaxBlindaje: 0
@@ -1660,37 +1676,20 @@ MonoBehaviour:
   maxLife: 500
   poolParabolaAttack: {fileID: 8487580257667219313}
   poolObjectAttack: {fileID: 283761603341161400}
-  generadoresProyectiles: {fileID: 2531832291287769806}
-  generadorProyectilesAgachado: {fileID: 2531832293023430354}
-  generadorProyectilParabola: {fileID: 2531832291360211595}
-  generadorProyectilParabolaAgachado: {fileID: 2531832293205352431}
   maxRandomDelayMovement: 2
   minRandomDelayMovement: 1.5
-  delayAttack: 0.8
   anguloAtaqueSalto: 180
-  Speed: 20
   auxSpeed: 20
-  SpeedJump: 12
-  auxSpeedJump: 12
-  Resistace: 22
   auxResistace: 22
-  Gravity: 35
   auxGravity: 35
   delayAttackJumping: 0.5
   colliderSprites: {fileID: 2531832292111907142}
-  InitialPosition: {x: 0, y: 0, z: 0}
   pointOfDeath: {x: 0, y: 0, z: 0}
   pointOfCombat: {x: 0, y: 0, z: 0}
   damageCounterAttack: 1
   activateComportamiento: 0
-  boxColliderPiernas: {fileID: 0}
-  boxColliderSprite: {fileID: 1450382849}
-  boxColliderControllerAgachado: {fileID: 455702778}
-  boxColliderControllerParado: {fileID: 1711270102}
-  boxColliderControllerSaltando: {fileID: 1922578228}
   enableMecanicParabolaAttack: 1
   inAttack: 0
-  myVictory: 0
   DontRestart: 1
   MovePorcentage: 0
   JumpPorcentage: 0
@@ -1711,7 +1710,6 @@ MonoBehaviour:
   CantCasillasOcupadas_X: 2
   CantCasillasOcupadas_Y: 3
   ColumnaActual: 1
-  timeStuned: 0
   ChargeInBraggartState: 0
   speedChargeSpecialAttack: 10
   delayBraggart: 3

@@ -17,7 +17,7 @@ public class FinishStoryController : MonoBehaviour
     }
     public void FinishStory(ProfesorEducacionFisica profesorEducacionFisica)
     {
-        player.weitVictory = true;
+        player.SetWeitVictory(true);
         levelManager.ObjectiveOfPassLevel = 0;
     }
 }

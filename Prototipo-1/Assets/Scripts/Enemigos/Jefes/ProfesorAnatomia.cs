@@ -398,21 +398,21 @@ public class ProfesorAnatomia : Enemy
                     //TARGET IZQUIERDO
                     SetIsJumping(false);
                     SetIsDuck(false);
-                    CheckSpecialAttackEnemyController(0, 0, generadorProyectilParabola);
+                    CheckSpecialAttackEnemyController(0, 0, generadorProyectilesParabola);
                 }
                 else if (porcentage > porcentageLeftTarget && porcentage <= porcentageLeftTarget + porcentageCentralTarget)
                 {
                     //TARGET CENTRAL
                     SetIsJumping(false);
                     SetIsDuck(false);
-                    CheckSpecialAttackEnemyController(1, 1, generadorProyectilParabola);
+                    CheckSpecialAttackEnemyController(1, 1, generadorProyectilesParabola);
                 }
                 else
                 {
                     //TARGET DERECHO
                     SetIsJumping(false);
                     SetIsDuck(false);
-                    CheckSpecialAttackEnemyController(2, 2, generadorProyectilParabola);
+                    CheckSpecialAttackEnemyController(2, 2, generadorProyectilesParabola);
                 }
             }
             else
@@ -424,21 +424,21 @@ public class ProfesorAnatomia : Enemy
                     //TARGET IZQUIERDO
                     SetIsJumping(false);
                     SetIsDuck(true);
-                    CheckSpecialAttackEnemyController(0, 0, generadorProyectilParabolaAgachado);
+                    CheckSpecialAttackEnemyController(0, 0, generadorProyectilesParabolaAgachado);
                 }
                 else if (porcentage > porcentageLeftTarget && porcentage <= porcentageLeftTarget + porcentageCentralTarget)
                 {
                     //TARGET CENTRAL
                     SetIsJumping(false);
                     SetIsDuck(true);
-                    CheckSpecialAttackEnemyController(1, 1, generadorProyectilParabolaAgachado);
+                    CheckSpecialAttackEnemyController(1, 1, generadorProyectilesParabolaAgachado);
                 }
                 else
                 {
                     //TARGET DERECHO
                     SetIsJumping(false);
                     SetIsDuck(true);
-                    CheckSpecialAttackEnemyController(2, 2, generadorProyectilParabolaAgachado);
+                    CheckSpecialAttackEnemyController(2, 2, generadorProyectilesParabolaAgachado);
                 }
             }
         }
@@ -480,8 +480,8 @@ public class ProfesorAnatomia : Enemy
         else 
         {
             tipoProyectil = Proyectil.typeProyectil.ProyectilNormal;
-            go.transform.rotation = generadoresProyectiles.transform.rotation;
-            go.transform.position = generadoresProyectiles.transform.position;
+            go.transform.rotation = generadorProyectiles.transform.rotation;
+            go.transform.position = generadorProyectiles.transform.position;
             proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
         }
         if (applyColorShoot == ApplyColorShoot.None || applyColorShoot == ApplyColorShoot.Stela)

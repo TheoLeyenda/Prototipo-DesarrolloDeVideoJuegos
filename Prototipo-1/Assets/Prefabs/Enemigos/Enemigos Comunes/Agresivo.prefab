@@ -1017,6 +1017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6761e6c71cc000442b8ea7140e5e181f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  applyColorShoot: 0
   alturaMaxima: {fileID: 3846767524877911411}
   posicionesDeMovimiento:
   - {fileID: 1276273527518798311}
@@ -1027,18 +1028,33 @@ MonoBehaviour:
   xpNededSpecialAttack: 30
   xpForHit: 10
   myPrefab: {fileID: 1127554859473777065}
-  applyColorShoot: 0
+  barraDeEscudo: {fileID: 0}
   myHeadSprite: {fileID: 21300000, guid: cecfcbd1ac587744891e0c3a7cecb6b6, type: 3}
-  fraseVictoria: Te aplaste! Te aplaste! Te Aplaste! Te Aplaste! Hua Hua.
   colorShoot: {r: 1, g: 0.2971698, b: 0.2971698, a: 1}
+  enableMovement: 0
+  myVictory: 0
+  SpeedJump: 12
+  auxSpeedJump: 12
+  Speed: 17
+  Resistace: 22
+  Gravity: 35
+  delayAttack: 0.28
+  boxColliderControllerPiernas: {fileID: 0}
+  boxColliderControllerSprite: {fileID: 629231363}
+  boxColliderControllerAgachado: {fileID: 1030986548}
+  boxColliderControllerParado: {fileID: 83561382}
+  boxColliderControllerSaltando: {fileID: 318357399}
+  generadorProyectiles: {fileID: 1415393134}
+  generadorProyectilesAgachado: {fileID: 1323542633}
+  generadorProyectilesParabola: {fileID: 1698922128}
+  generadorProyectilesParabolaAgachado: {fileID: 427011434}
+  timeStuned: 0
+  fraseVictoria: Te aplaste! Te aplaste! Te Aplaste! Te Aplaste! Hua Hua.
   EnableChargerSpecialAttackForHit: 1
   nameEnemy: Joey
   enableColorShootSpecialAttack: 0
   enableDeffence: 1
-  enableMovement: 0
   inCombatPosition: 0
-  barraDeEscudo: {fileID: 0}
-  enableSpecialAttack: 0
   spriteEnemy: {fileID: 847702456}
   Blindaje: 0
   MaxBlindaje: 0
@@ -1052,37 +1068,20 @@ MonoBehaviour:
   maxLife: 250
   poolParabolaAttack: {fileID: 6195039064853560246}
   poolObjectAttack: {fileID: 2365233829003209564}
-  generadoresProyectiles: {fileID: 1415393134}
-  generadorProyectilesAgachado: {fileID: 1323542633}
-  generadorProyectilParabola: {fileID: 1698922128}
-  generadorProyectilParabolaAgachado: {fileID: 427011434}
   maxRandomDelayMovement: 1.2
   minRandomDelayMovement: 1
-  delayAttack: 0.28
   anguloAtaqueSalto: 180
-  Speed: 17
   auxSpeed: 17
-  SpeedJump: 12
-  auxSpeedJump: 12
-  Resistace: 22
   auxResistace: 22
-  Gravity: 35
   auxGravity: 35
   delayAttackJumping: 0.28
   colliderSprites: {fileID: 847702457}
-  InitialPosition: {x: 0, y: 0, z: 0}
   pointOfDeath: {x: 0, y: 0, z: 0}
   pointOfCombat: {x: 0, y: 0, z: 0}
   damageCounterAttack: 1
   activateComportamiento: 1
-  boxColliderPiernas: {fileID: 0}
-  boxColliderSprite: {fileID: 629231363}
-  boxColliderControllerAgachado: {fileID: 1030986548}
-  boxColliderControllerParado: {fileID: 83561382}
-  boxColliderControllerSaltando: {fileID: 318357399}
   enableMecanicParabolaAttack: 1
   inAttack: 0
-  myVictory: 0
   DontRestart: 0
   MovePorcentage: 25
   JumpPorcentage: 25
@@ -1103,7 +1102,6 @@ MonoBehaviour:
   CantCasillasOcupadas_X: 1
   CantCasillasOcupadas_Y: 2
   ColumnaActual: 1
-  timeStuned: 0
   GeneradorAtaqueEspecial: {fileID: 1323542633}
   poolProyectilImparable: {fileID: 6277484039425447165}
 --- !u!114 &1127554860718884727

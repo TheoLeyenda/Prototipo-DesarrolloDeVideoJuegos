@@ -103,9 +103,9 @@ public class BarraDeEscudo : MonoBehaviour
         else if(enemy != null)
         {
             if ((enemy != null
-                && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.DefensaEnElLugar
-                && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacheDefensa
-                && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa))
+                && enemy.enumsEnemy.movimiento != EnumsCharacter.Movimiento.DefensaEnElLugar
+                && enemy.enumsEnemy.movimiento != EnumsCharacter.Movimiento.AgacheDefensa
+                && enemy.enumsEnemy.movimiento != EnumsCharacter.Movimiento.SaltoDefensa))
             {
                 LoadBar();
             }

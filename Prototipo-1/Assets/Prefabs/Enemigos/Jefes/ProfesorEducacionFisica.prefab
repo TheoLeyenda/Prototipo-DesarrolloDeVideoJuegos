@@ -1566,6 +1566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fec4840990eac184a8b26c87fdf11b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  applyColorShoot: 0
   alturaMaxima: {fileID: 3440220784436496703}
   posicionesDeMovimiento:
   - {fileID: 822562514249559467}
@@ -1576,18 +1577,33 @@ MonoBehaviour:
   xpNededSpecialAttack: 0
   xpForHit: 0
   myPrefab: {fileID: 1547418678573186533}
-  applyColorShoot: 0
+  barraDeEscudo: {fileID: 0}
   myHeadSprite: {fileID: 21300000, guid: 43cbdb8b5c911c8449f76c8e49cf30b6, type: 3}
-  fraseVictoria: 
   colorShoot: {r: 1, g: 1, b: 1, a: 1}
+  enableMovement: 0
+  myVictory: 0
+  SpeedJump: 12
+  auxSpeedJump: 12
+  Speed: 20
+  Resistace: 22
+  Gravity: 35
+  delayAttack: 1.3
+  boxColliderControllerPiernas: {fileID: 0}
+  boxColliderControllerSprite: {fileID: 331685644}
+  boxColliderControllerAgachado: {fileID: 1632205731}
+  boxColliderControllerParado: {fileID: 899676737}
+  boxColliderControllerSaltando: {fileID: 503299193}
+  generadorProyectiles: {fileID: 1935536552373065318}
+  generadorProyectilesAgachado: {fileID: 1935536551676019322}
+  generadorProyectilesParabola: {fileID: 1935536552298591779}
+  generadorProyectilesParabolaAgachado: {fileID: 1935536552133733191}
+  timeStuned: 0
+  fraseVictoria: 
   EnableChargerSpecialAttackForHit: 1
   nameEnemy: BOLT
   enableColorShootSpecialAttack: 0
   enableDeffence: 1
-  enableMovement: 0
   inCombatPosition: 0
-  barraDeEscudo: {fileID: 0}
-  enableSpecialAttack: 0
   spriteEnemy: {fileID: 0}
   Blindaje: 0
   MaxBlindaje: 0
@@ -1601,37 +1617,20 @@ MonoBehaviour:
   maxLife: 500
   poolParabolaAttack: {fileID: 4667122787239390923}
   poolObjectAttack: {fileID: 4183447815393027856}
-  generadoresProyectiles: {fileID: 1935536552373065318}
-  generadorProyectilesAgachado: {fileID: 1935536551676019322}
-  generadorProyectilParabola: {fileID: 1935536552298591779}
-  generadorProyectilParabolaAgachado: {fileID: 1935536552133733191}
   maxRandomDelayMovement: 2
   minRandomDelayMovement: 1.5
-  delayAttack: 1.3
   anguloAtaqueSalto: 180
-  Speed: 20
   auxSpeed: 20
-  SpeedJump: 12
-  auxSpeedJump: 12
-  Resistace: 22
   auxResistace: 22
-  Gravity: 35
   auxGravity: 35
   delayAttackJumping: 0.5
   colliderSprites: {fileID: 1935536553192869358}
-  InitialPosition: {x: 0, y: 0, z: 0}
   pointOfDeath: {x: 0, y: 0, z: 0}
   pointOfCombat: {x: 0, y: 0, z: 0}
   damageCounterAttack: 1
   activateComportamiento: 0
-  boxColliderPiernas: {fileID: 0}
-  boxColliderSprite: {fileID: 331685644}
-  boxColliderControllerAgachado: {fileID: 1632205731}
-  boxColliderControllerParado: {fileID: 899676737}
-  boxColliderControllerSaltando: {fileID: 503299193}
   enableMecanicParabolaAttack: 1
   inAttack: 0
-  myVictory: 0
   DontRestart: 0
   MovePorcentage: 0
   JumpPorcentage: 0
@@ -1652,7 +1651,6 @@ MonoBehaviour:
   CantCasillasOcupadas_X: 2
   CantCasillasOcupadas_Y: 3
   ColumnaActual: 1
-  timeStuned: 0
   delayFinishLevel: 1
 --- !u!1001 &320977479468420113
 PrefabInstance:

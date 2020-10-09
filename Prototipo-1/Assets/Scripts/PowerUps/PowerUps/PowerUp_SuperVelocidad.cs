@@ -84,7 +84,7 @@ public class PowerUp_SuperVelocidad : PowerUp
         }
         else if (enemy != null)
         {
-            if (enemy.transform.position.y <= enemy.InitialPosition.y)
+            if (enemy.transform.position.y <= enemy.GetInitialPosition().y)
             {
                 enemy.Speed = NewSpeed;
 
@@ -118,7 +118,6 @@ public class PowerUp_SuperVelocidad : PowerUp
     public override void DisableEffect()
     {
         DisablePowerUpEffect();
-        //settingAuxData = false;
     }
     public void DisablePowerUpEffect()
     {
@@ -141,7 +140,7 @@ public class PowerUp_SuperVelocidad : PowerUp
         }
         else if (enemy != null)
         {
-            if (enemy.transform.position.y <= enemy.InitialPosition.y)
+            if (enemy.transform.position.y <= enemy.GetInitialPosition().y)
             {
                 enemy.Speed = auxSpeed;
                 enemy.SpeedJump = auxSpeedJump;

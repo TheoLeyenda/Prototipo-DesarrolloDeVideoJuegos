@@ -147,11 +147,11 @@ public class PowerUpContainerManager : MonoBehaviour
 
             if (p != null)
             {
-                characterEnableMovement = (p.enableMovement || p.enumsPlayers.estadoJugador == EnumsPlayers.EstadoJugador.Atrapado);
+                characterEnableMovement = (p.enableMovement || p.enumsPlayers.estado == EnumsCharacter.EstadoCharacter.Atrapado);
             }
             else if (e != null)
             {
-                characterEnableMovement = (e.enableMovement || e.enumsEnemy.GetStateEnemy() == EnumsEnemy.EstadoEnemigo.Atrapado);
+                characterEnableMovement = (e.enableMovement || e.enumsEnemy.estado == EnumsCharacter.EstadoCharacter.Atrapado);
             }
 
             if (powerUpContainerContent[index].currentPowerUp 

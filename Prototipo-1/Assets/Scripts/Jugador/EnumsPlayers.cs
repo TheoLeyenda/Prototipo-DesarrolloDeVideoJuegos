@@ -2,31 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnumsPlayers : MonoBehaviour
+public class EnumsPlayers : EnumsCharacter
 {
-    public enum Movimiento
-    {
-        Nulo,
-        AtacarEnParabola,
-        SaltoAtaque,
-        AgacharseAtaque,
-        AtacarEnElLugar,
-        SaltoDefensa,
-        AgacheDefensa,
-        DefensaEnElLugar,
-        Saltar,
-        Agacharse,
-        MoverAdelante,
-        MoverAtras,
-        Count,
-    }
-    public enum EstadoJugador
-    {
-        vivo,
-        Atrapado,
-        muerto,
-        Count,
-    }
+
     public enum NumberPlayer
     {
         player1,
@@ -45,7 +23,5 @@ public class EnumsPlayers : MonoBehaviour
         Default
     }
     public SpecialAttackEquipped specialAttackEquipped;
-    public Movimiento movimiento;
-    public EstadoJugador estadoJugador;
     public NumberPlayer numberPlayer;
 }

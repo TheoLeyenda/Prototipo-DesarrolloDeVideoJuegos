@@ -9,21 +9,10 @@ using Boo.Lang.Environments;
 
 public class Player : Character
 {
-    public ApplyColorShoot applyColorShoot;
-    public enum ApplyColorShoot
-    {
-        Stela,
-        Proyectil,
-        StelaAndProyectil,
-        None,
-    }
-    public Sprite myHeadSprite;
     public Sprite spritePayerDie;
-    public Color colorShoot;
     public string namePlayer;
     //BOOLEANOS DE MOVIMIENTO
     //[HideInInspector]
-    public bool enableMovement;
     [HideInInspector]
     public bool enableMoveHorizontalPlayer;
     [HideInInspector]
@@ -44,41 +33,19 @@ public class Player : Character
     public string inputPauseButton;
     //-----------------------//
 
-    //DATOS PARA EL MOVIMIENTO
-    //public GameObject alturaMaxima;
-    //public GameObject[] posicionesDeMovimiento;
-    //-------------------------------------------//
     public float DamageAttack;
     public float DamageParabolaAttack;
-    public BarraDeEscudo barraDeEscudo;
     public bool resetPlayer;
     public bool resetScore;
     public PlayerData PD;
    
-    private float auxLife;
     public StructsPlayer structsPlayer;
     public List<SpritePlayer> spritePlayers;
     [HideInInspector]
     public SpritePlayer spritePlayerActual;
     public EnumsPlayers enumsPlayers;
-
-    public GameObject generadorProyectiles;
-    public GameObject generadorProyectilesAgachado;
-    public GameObject generadorProyectilesParabola;
-    public GameObject generadorProyectilesParabolaAgachado;
-    //private Animator animator;
-
-    public float SpeedJump;
-    public float Speed;
-    public float Resistace;
-    public float Gravity;
-    private float auxSpeedJump;
-    private GameManager gm;
     private bool doubleDamage;
-    private bool isJumping;
-    private bool isDuck;
     private bool EnableCounterAttack;
-    private Vector3 InitialPosition;
     public string ButtonDeffence;
     public string ButtonAttack;
     public string ButtonSpecialAttack;
@@ -89,33 +56,19 @@ public class Player : Character
     public bool DoubleSpeed;
     public bool LookingForward;
     public bool LookingBack;
-    public float delayAttack;
     public float delayParabolaAttack;
     private float auxDelayParabolaAttack;
-    private float auxDelayAttack;
     [HideInInspector]
     public bool enableAttack;
-    [HideInInspector]
-    public bool enableSpecialAttack;
-    public BoxColliderController boxColliderPiernas;
-    public BoxColliderController boxColliderSprite;
-    public BoxColliderController boxColliderParado;
-    public BoxColliderController boxColliderAgachado;
-    public BoxColliderController boxColliderSaltando;
     public string NameInputManager;
     private InputManager inputManager;
     private Player_PvP player_PvP;
     private bool enableParabolaAttack;
     public bool enableMecanicParabolaAttack;
-    [HideInInspector]
-    public float timeStuned = 0;
-    [HideInInspector]
-    public bool myVictory = false;
+    
     [HideInInspector]
     public EventWise eventWise;
     private bool InFuegoEmpieza;
-    [HideInInspector]
-    public bool weitVictory;
     public static event Action<Player, string> OnModifireState;
     public static event Action<Player, string> OnDisableModifireState;
     public static event Action<Player> OnDie;
@@ -141,6 +94,7 @@ public class Player : Character
 
     void Start()
     {
+        distanceMove = 0.0f;
         PD.ResetScoreValue();
         weitVictory = false;
         delayParabolaAttack = 0;
@@ -172,15 +126,15 @@ public class Player : Character
         auxSpeedJump = SpeedJump;
         InitialPosition = transform.position;
         isJumping = false;
-        enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+        enumsPlayers.movimiento = EnumsCharacter.Movimiento.Nulo;
         structsPlayer.dataPlayer.CantCasillasOcupadas_X = 1;
         structsPlayer.dataPlayer.CantCasillasOcupadas_Y = 2;
         structsPlayer.dataPlayer.CantCasillasOcupadasAgachado = structsPlayer.dataPlayer.CantCasillasOcupadas_Y /2;
         structsPlayer.dataPlayer.CantCasillasOcupadasParado = structsPlayer.dataPlayer.CantCasillasOcupadas_Y;
         structsPlayer.dataPlayer.columnaActual = 1;
         doubleDamage = false;
-        enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
-        enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.vivo;
+        enumsPlayers.movimiento = EnumsCharacter.Movimiento.Nulo;
+        enumsPlayers.estado = EnumsCharacter.EstadoCharacter.vivo;
         if (GameManager.instanceGameManager != null)
         {
             gm = GameManager.instanceGameManager;
@@ -276,9 +230,9 @@ public class Player : Character
     }
     public void CheckState()
     {
-        switch (enumsPlayers.estadoJugador)
+        switch (enumsPlayers.estado)
         {
-            case EnumsPlayers.EstadoJugador.Atrapado:
+            case EnumsCharacter.EstadoCharacter.Atrapado:
                 if (OnModifireState != null)
                 {
                     OnModifireState(this, "Atrapado Chicle");
@@ -305,11 +259,11 @@ public class Player : Character
             enableMovement = true;
             if (PD.lifePlayer > 0)
             {
-                enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.vivo;
+                enumsPlayers.estado = EnumsCharacter.EstadoCharacter.vivo;
             }
             else
             {
-                enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.muerto;
+                enumsPlayers.estado = EnumsCharacter.EstadoCharacter.muerto;
             }
             if (OnDisableModifireState != null)
             {
@@ -320,75 +274,75 @@ public class Player : Character
     }
     public void CheckBoxColliders2D()
     {
-        if (!isDuck && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-             && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-             && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+        if (!isDuck && enumsPlayers.movimiento != EnumsCharacter.Movimiento.Saltar
+             && enumsPlayers.movimiento != EnumsCharacter.Movimiento.SaltoAtaque
+             && enumsPlayers.movimiento != EnumsCharacter.Movimiento.SaltoDefensa)
         {
-                boxColliderAgachado.GetBoxCollider2D().enabled = false;
-                boxColliderParado.GetBoxCollider2D().enabled = true;
-                boxColliderSaltando.GetBoxCollider2D().enabled = false;
-                if (spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ParadoDefensa)
+            boxColliderControllerAgachado.GetBoxCollider2D().enabled = false;
+            boxColliderControllerParado.GetBoxCollider2D().enabled = true;
+            boxColliderControllerSaltando.GetBoxCollider2D().enabled = false;
+            if (spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ParadoDefensa)
+            {
+                if (boxColliderControllerPiernas != null)
                 {
-                    if (boxColliderPiernas != null)
-                    {
-                        boxColliderPiernas.GetBoxCollider2D().enabled = true;
-                    }
+                    boxColliderControllerPiernas.GetBoxCollider2D().enabled = true;
                 }
-                else
+            }
+            else
+            {
+                if (boxColliderControllerPiernas != null)
                 {
-                    if (boxColliderPiernas != null)
-                    {
-                        boxColliderPiernas.GetBoxCollider2D().enabled = false;
-                    }
+                    boxColliderControllerPiernas.GetBoxCollider2D().enabled = false;
                 }
+            }
         }
-        else if (isDuck || enumsPlayers.movimiento == EnumsPlayers.Movimiento.Agacharse
-            || enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacharseAtaque
-            || enumsPlayers.movimiento == EnumsPlayers.Movimiento.AgacheDefensa)
+        else if (isDuck || enumsPlayers.movimiento == EnumsCharacter.Movimiento.Agacharse
+            || enumsPlayers.movimiento == EnumsCharacter.Movimiento.AgacharseAtaque
+            || enumsPlayers.movimiento == EnumsCharacter.Movimiento.AgacheDefensa)
         {
-                boxColliderAgachado.GetBoxCollider2D().enabled = true;
-                boxColliderParado.GetBoxCollider2D().enabled = false;
-                boxColliderSaltando.GetBoxCollider2D().enabled = false;
-                if (spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ParadoDefensa)
+            boxColliderControllerAgachado.GetBoxCollider2D().enabled = true;
+            boxColliderControllerParado.GetBoxCollider2D().enabled = false;
+            boxColliderControllerSaltando.GetBoxCollider2D().enabled = false;
+            if (spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ParadoDefensa)
+            {
+                if (boxColliderControllerPiernas != null)
                 {
-                    if (boxColliderPiernas != null)
-                    {
-                        boxColliderPiernas.GetBoxCollider2D().enabled = true;
-                    }
+                    boxColliderControllerPiernas.GetBoxCollider2D().enabled = true;
                 }
-                else
+            }
+            else
+            {
+                if (boxColliderControllerPiernas != null)
                 {
-                    if (boxColliderPiernas != null)
-                    {
-                        boxColliderPiernas.GetBoxCollider2D().enabled = false;
-                    }
+                    boxColliderControllerPiernas.GetBoxCollider2D().enabled = false;
                 }
+            }
         }
-        else if (isJumping || enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar
-            || enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoAtaque
-            || enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa)
+        else if (isJumping || enumsPlayers.movimiento == EnumsCharacter.Movimiento.Saltar
+            || enumsPlayers.movimiento == EnumsCharacter.Movimiento.SaltoAtaque
+            || enumsPlayers.movimiento == EnumsCharacter.Movimiento.SaltoDefensa)
         {
-                if (spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ParadoDefensa)
+            if (spritePlayerActual.ActualSprite == SpritePlayer.SpriteActual.ParadoDefensa)
+            {
+                if (boxColliderControllerPiernas != null)
                 {
-                    if (boxColliderPiernas != null)
-                    {
-                        boxColliderPiernas.GetBoxCollider2D().enabled = true;
-                    }
+                    boxColliderControllerPiernas.GetBoxCollider2D().enabled = true;
                 }
-                else
+            }
+            else
+            {
+                if (boxColliderControllerPiernas != null)
                 {
-                    if (boxColliderPiernas != null)
-                    {
-                        boxColliderPiernas.GetBoxCollider2D().enabled = false;
-                    }
+                    boxColliderControllerPiernas.GetBoxCollider2D().enabled = false;
                 }
-                boxColliderAgachado.GetBoxCollider2D().enabled = false;
-                boxColliderParado.GetBoxCollider2D().enabled = false;
-                boxColliderSaltando.GetBoxCollider2D().enabled = true;
+            }
+            boxColliderControllerAgachado.GetBoxCollider2D().enabled = false;
+            boxColliderControllerParado.GetBoxCollider2D().enabled = false;
+            boxColliderControllerSaltando.GetBoxCollider2D().enabled = true;
         }
-            
+
     }
-        
+
     public void CheckMovementInSpecialAttack()
     {
         switch (enumsPlayers.specialAttackEquipped)
@@ -453,7 +407,7 @@ public class Player : Character
     }
     public void Dead()
     {
-        enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.muerto;
+        enumsPlayers.estado = EnumsCharacter.EstadoCharacter.muerto;
        
         if (SceneManager.GetActiveScene().name == "PvP" || SceneManager.GetActiveScene().name == "TiroAlBlanco")
         {
@@ -583,9 +537,9 @@ public class Player : Character
             }
             if (!isDuck)
             {
-                if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+                if (enumsPlayers.movimiento != EnumsCharacter.Movimiento.Saltar
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.SaltoAtaque
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.SaltoDefensa)
                 {
                     tipoProyectil = Proyectil.typeProyectil.ProyectilNormal;
                 }
@@ -827,9 +781,9 @@ public class Player : Character
                 if (enableSpecialAttack)
                 {
                     if (!isJumping && !isDuck
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.Saltar
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.SaltoAtaque
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.SaltoDefensa)
                     {
                         structsPlayer.dataAttack.DisparoDeCarga.SetActive(true);
                         enableSpecialAttack = false;
@@ -841,9 +795,9 @@ public class Player : Character
                 if (enableSpecialAttack)
                 {
                     if (!isJumping && !isDuck
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.Saltar
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.SaltoAtaque
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.SaltoDefensa)
                     {
                         GameObject go = structsPlayer.dataAttack.poolProyectilImparable.GetObject();
                         ProyectilInparable proyectilInparable = go.GetComponent<ProyectilInparable>();
@@ -880,9 +834,9 @@ public class Player : Character
                 if (enableSpecialAttack)
                 {
                     if (!isJumping && !isDuck
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.Saltar
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.SaltoAtaque
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.SaltoDefensa)
                     {
                         structsPlayer.dataAttack.Limusina.SetPlayer(this);
                         structsPlayer.dataAttack.Limusina.gameObject.SetActive(true);
@@ -905,9 +859,9 @@ public class Player : Character
                 if (enableSpecialAttack)
                 {
                     if (!isJumping && !isDuck
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa)
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.Saltar
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.SaltoAtaque
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.SaltoDefensa)
                     {
                         GameObject go = structsPlayer.dataAttack.poolProyectilChicle.GetObject();
                         ProyectilChicle proyectilChicle = go.GetComponent<ProyectilChicle>();
@@ -948,12 +902,12 @@ public class Player : Character
                 if (enableSpecialAttack)
                 {
                     if (!isJumping && !isDuck
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Agacharse
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.AgacharseAtaque
-                    && enumsPlayers.movimiento != EnumsPlayers.Movimiento.AgacheDefensa)
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.Saltar
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.SaltoAtaque
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.SaltoDefensa
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.Agacharse
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.AgacharseAtaque
+                    && enumsPlayers.movimiento != EnumsCharacter.Movimiento.AgacheDefensa)
                     {
                         /*
                          ProyectilMagicBust.transform.position = GeneradorProyectilMagicBust.transform.position;
@@ -1042,68 +996,42 @@ public class Player : Character
     {
         Duck(structsPlayer.dataPlayer.CantCasillasOcupadas_Y);
     }
-    public bool CheckMove(Vector3 PosicionDestino)
-    {
-        Vector3 distaciaObjetivo = transform.position - PosicionDestino;
-        bool mover = false;
-        if (distaciaObjetivo.magnitude > 0f)
-        {
-            mover = true;
-        }
-        return mover;
-    }
-    public void Move(Vector3 direccion)
-    {
-        transform.Translate(direccion * Speed * Time.deltaTime);
-    }
-    public void MoveJamp(Vector3 direccion)
-    {
-        if (direccion == Vector3.up)
-        {
-            transform.Translate(direccion * SpeedJump * Time.deltaTime);
-            SpeedJump = SpeedJump - Time.deltaTime * Resistace;
-        }
-        else if (direccion == Vector3.down)
-        {
-            transform.Translate(direccion * SpeedJump * Time.deltaTime);
-            SpeedJump = SpeedJump + Time.deltaTime * Gravity;
-        }
-    }
+
 
     public void MoveLeft(Vector3 cuadrillaDestino)
     {
         if (LookingForward)
         {
-            if (CheckMove(new Vector3(posicionesDeMovimiento[0].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
+            if (CheckMove(new Vector3(posicionesDeMovimiento[0].transform.position.x, transform.position.y, transform.position.z), distanceMove) && transform.position.x > cuadrillaDestino.x)
             {
                 Move(Vector3.left);
-                if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras)
+                if (enumsPlayers.movimiento != EnumsCharacter.Movimiento.MoverAtras)
                 {
                     eventWise.StartEvent("moverse");
                 }
-                enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAtras;
+                enumsPlayers.movimiento = EnumsCharacter.Movimiento.MoverAtras;
             }
-            else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
+            else if (enumsPlayers.movimiento != EnumsCharacter.Movimiento.Nulo)
             {
                 structsPlayer.dataPlayer.columnaActual--;
-                enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+                enumsPlayers.movimiento = EnumsCharacter.Movimiento.Nulo;
             }
         }
         else if (LookingBack)
         {
-            if (CheckMove(new Vector3(posicionesDeMovimiento[0].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x > cuadrillaDestino.x)
+            if (CheckMove(new Vector3(posicionesDeMovimiento[0].transform.position.x, transform.position.y, transform.position.z), distanceMove) && transform.position.x > cuadrillaDestino.x)
             {
                 Move(-Vector3.left);
-                if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras)
+                if (enumsPlayers.movimiento != EnumsCharacter.Movimiento.MoverAtras)
                 {
                     eventWise.StartEvent("moverse");
                 }
-                enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAtras;
+                enumsPlayers.movimiento = EnumsCharacter.Movimiento.MoverAtras;
             }
-            else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
+            else if (enumsPlayers.movimiento != EnumsCharacter.Movimiento.Nulo)
             {
                 structsPlayer.dataPlayer.columnaActual--;
-                enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+                enumsPlayers.movimiento = EnumsCharacter.Movimiento.Nulo;
             }
         }
     }
@@ -1111,48 +1039,48 @@ public class Player : Character
     {
         if (LookingForward)
         {
-            if (CheckMove(new Vector3(posicionesDeMovimiento[posicionesDeMovimiento.Length-1].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
+            if (CheckMove(new Vector3(posicionesDeMovimiento[posicionesDeMovimiento.Length-1].transform.position.x, transform.position.y, transform.position.z), distanceMove) && transform.position.x < cuadrillaDestino.x)
             {
                 Move(Vector3.right);
-                if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante)
+                if (enumsPlayers.movimiento != EnumsCharacter.Movimiento.MoverAdelante)
                 {
                     eventWise.StartEvent("moverse");
                 }
-                enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
+                enumsPlayers.movimiento = EnumsCharacter.Movimiento.MoverAdelante;
             }
-            else if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.Nulo)
+            else if (enumsPlayers.movimiento != EnumsCharacter.Movimiento.Nulo)
             {
                 structsPlayer.dataPlayer.columnaActual++;
-                enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+                enumsPlayers.movimiento = EnumsCharacter.Movimiento.Nulo;
             }
         }
         else if (LookingBack)
         {
-            if (CheckMove(new Vector3(posicionesDeMovimiento[posicionesDeMovimiento.Length - 1].transform.position.x, transform.position.y, transform.position.z)) && transform.position.x < cuadrillaDestino.x)
+            if (CheckMove(new Vector3(posicionesDeMovimiento[posicionesDeMovimiento.Length - 1].transform.position.x, transform.position.y, transform.position.z), distanceMove) && transform.position.x < cuadrillaDestino.x)
             {
-                if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante)
+                if (enumsPlayers.movimiento != EnumsCharacter.Movimiento.MoverAdelante)
                 {
                     eventWise.StartEvent("moverse");
                 }
                 Move(-Vector3.right);
-                enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
+                enumsPlayers.movimiento = EnumsCharacter.Movimiento.MoverAdelante;
             }
             else 
             {
                 structsPlayer.dataPlayer.columnaActual++;
-                enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+                enumsPlayers.movimiento = EnumsCharacter.Movimiento.Nulo;
             }
         }
     }
     public void Jump(Vector3 alturaMaxima)
     {
-        if (CheckMove(new Vector3(transform.position.x, alturaMaxima.y, transform.position.z)) && isJumping)
+        if (CheckMove(new Vector3(transform.position.x, alturaMaxima.y, transform.position.z), distanceMove) && isJumping)
         {
-            if(enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar)
+            if(enumsPlayers.movimiento != EnumsCharacter.Movimiento.Saltar)
             {
                 eventWise.StartEvent("saltar");
             }
-            enumsPlayers.movimiento = EnumsPlayers.Movimiento.Saltar;
+            enumsPlayers.movimiento = EnumsCharacter.Movimiento.Saltar;
             MoveJamp(Vector3.up);
             if (SpeedJump <= 0)
             {
@@ -1162,48 +1090,22 @@ public class Player : Character
         else
         {
             isJumping = false;
-            if (CheckMove(new Vector3(transform.position.x, InitialPosition.y, transform.position.z)))
+            if (CheckMove(new Vector3(transform.position.x, InitialPosition.y, transform.position.z), distanceMove))
             {
                 MoveJamp(Vector3.down);
             }
             else
             {
                 eventWise.StartEvent("caer");
-                enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
+                enumsPlayers.movimiento = EnumsCharacter.Movimiento.Nulo;
                 SpeedJump = auxSpeedJump;
             }
         }
     }
-    public void Duck(int rangoAgachado)
-    {
-        isDuck = true;
-    }
+    
     public void Deffence()
     {
-        if (!isDuck
-            && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-            && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-            && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa
-            && !isJumping)
-        {
-            boxColliderParado.state = BoxColliderController.StateBoxCollider.Defendido;
-        }
-        else if (isDuck 
-            && enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar
-            && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-            && enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa
-            && !isJumping)
-        {
-            boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
-        }
-        else if(enumsPlayers.movimiento == EnumsPlayers.Movimiento.Saltar 
-            || enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoAtaque 
-            || enumsPlayers.movimiento == EnumsPlayers.Movimiento.SaltoDefensa
-            || isJumping)
-        {
-            boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
-        }
-        boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
+        CheckDeffense(enumsPlayers);
         if (player_PvP != null)
         {
             if (player_PvP.playerSelected == Player_PvP.PlayerSelected.Defensivo)
@@ -1226,8 +1128,6 @@ public class Player : Character
         {
             barraDeEscudo.SubstractPorcentageBar();
         }
-            
-
     }
     public bool GetEnableCounterAttack()
     {
@@ -1237,37 +1137,10 @@ public class Player : Character
     {
         EnableCounterAttack = _enableCounterAttack;
     }
-    public float GetAuxDelayAttack()
-    {
-        return auxDelayAttack;
-    }
+
     public float GetAuxDelayCounterAttack()
     {
         return auxDelayCounterAttack;
-    }
-    public bool GetIsDuck()
-    {
-        return isDuck;
-    }
-    public void SetIsDuck(bool _isDuck)
-    {
-        isDuck = _isDuck;
-    }
-    public bool GetIsJumping()
-    {
-        return isJumping;
-    }
-    public void SetIsJumping(bool _isJumping)
-    {
-        isJumping = _isJumping;
-    }
-    public float GetAuxSpeedJump()
-    {
-        return auxSpeedJump;
-    }
-    public void SetAuxSpeedJump(float _auxSpeedJump)
-    {
-        auxSpeedJump = _auxSpeedJump;
     }
     public void SetControllerJoystick(bool _controllerJoystick)
     {
@@ -1277,37 +1150,13 @@ public class Player : Character
     {
         return controllerJoystick;
     }
-    public void SetEnableSpecialAttack(bool _enableSpecialAttack)
-    {
-        enableSpecialAttack = _enableSpecialAttack;
-    }
-    public void SetXpActual(float _xpActual)
-    {
-        xpActual = _xpActual;
-    }
-    public float GetXpActual()
-    {
-        return xpActual;
-    }
-    public bool GetEnableAttack()
-    {
-        return enableAttack;
-    }
     public InputManager GetInputManager()
     {
         return inputManager;
     }
-    public bool GetEnableSpecialAttack()
-    {
-        return enableSpecialAttack;
-    }
     public Player_PvP GetPlayerPvP()
     {
         return player_PvP;
-    }
-    public Vector3 GetInitialPosition()
-    {
-        return InitialPosition;
     }
     public void SetInFuegoEmpieza(bool _inFuegoEmpieza)
     {

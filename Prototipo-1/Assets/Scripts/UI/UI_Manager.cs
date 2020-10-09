@@ -78,7 +78,7 @@ public class UI_Manager : MonoBehaviour
             if (p.xpActual >= p.xpNededSpecialAttack)
             {
                 p.xpActual = p.xpNededSpecialAttack;
-                p.enableSpecialAttack = true;
+                p.SetEnableSpecialAttack(true);
             }
             if (p.xpActual <= p.xpNededSpecialAttack)
             {
@@ -132,7 +132,7 @@ public class UI_Manager : MonoBehaviour
                 if (_enemy.xpActual >= _enemy.xpNededSpecialAttack)
                 {
                     _enemy.xpActual = _enemy.xpNededSpecialAttack;
-                    _enemy.enableSpecialAttack = true;
+                    _enemy.SetEnableSpecialAttack(true);
                 }
                 if (_enemy.xpActual <= _enemy.xpNededSpecialAttack)
                 {
@@ -183,9 +183,7 @@ public class UI_Manager : MonoBehaviour
                         PlayerIzquierdaHUD.ImageBlindaje.gameObject.SetActive(false);
                         players[i].barraDeEscudo.SetPlayer(players[i]);
                         PlayerIzquierdaHUD.textNamePlayer.text = players[i].namePlayer;
-                    }
-
-                        
+                    }  
                 }
                 else
                 {

@@ -16,7 +16,6 @@ public class ChicleCasilla : MonoBehaviour
     private bool inStunedEffect;
 
     private bool targetAssigned;
-    // Update is called once per frame
     private void OnDisable()
     {
         inStunedEffect = false;
@@ -35,19 +34,16 @@ public class ChicleCasilla : MonoBehaviour
     }
     public void CheckEffect()
     {
-        //Debug.Log(player != null);
-        //Debug.Log(!player.GetIsJumping());
-        //Debug.Log(player.SpeedJump >= player.GetAuxSpeedJump());
         if(player != null && player.transform.position.y <= player.GetInitialPosition().y && !player.GetIsJumping() 
-            && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar 
-            && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
-            && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoDefensa
+            && player.enumsPlayers.movimiento != EnumsCharacter.Movimiento.Saltar 
+            && player.enumsPlayers.movimiento != EnumsCharacter.Movimiento.SaltoAtaque
+            && player.enumsPlayers.movimiento != EnumsCharacter.Movimiento.SaltoDefensa
             && player.SpeedJump >= player.GetAuxSpeedJump())
         {
             if (!inStunedEffect)
             {
                 player.timeStuned = timeStuned;
-                player.enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.Atrapado;
+                player.enumsPlayers.estado = EnumsCharacter.EstadoCharacter.Atrapado;
                 inStunedEffect = true;
                 targetAssigned = true;
             }
@@ -57,16 +53,16 @@ public class ChicleCasilla : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
-        else if (enemy != null && enemy.transform.position.y <= enemy.InitialPosition.y && !enemy.GetIsJamping()
-            && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.Saltar
-            && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque
-            && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa
-            && enemy.SpeedJump >= enemy.GetAuxSpeedJamp())
+        else if (enemy != null && enemy.transform.position.y <= enemy.GetInitialPosition().y && !enemy.GetIsJumping()
+            && enemy.enumsEnemy.movimiento != EnumsCharacter.Movimiento.Saltar
+            && enemy.enumsEnemy.movimiento != EnumsCharacter.Movimiento.SaltoAtaque
+            && enemy.enumsEnemy.movimiento != EnumsCharacter.Movimiento.SaltoDefensa
+            && enemy.SpeedJump >= enemy.GetAuxSpeedJump())
         {
             if (!inStunedEffect)
             {
                 enemy.timeStuned = timeStuned;
-                enemy.enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.Atrapado);
+                enemy.enumsEnemy.estado = EnumsCharacter.EstadoCharacter.Atrapado;
                 inStunedEffect = true;
                 targetAssigned = true;
             }
@@ -83,8 +79,6 @@ public class ChicleCasilla : MonoBehaviour
             if (!targetAssigned)
             {
                 player = collision.GetComponent<Player>();
-                //Debug.Log(collision.name);
-                //Debug.Log(player); 
             }
             if (player == null)
             {

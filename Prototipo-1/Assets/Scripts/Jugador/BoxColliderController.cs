@@ -350,7 +350,7 @@ public class BoxColliderController : MonoBehaviour
             {
                 if (PlayerDisparador != null)
                 {
-                    if (enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
+                    if (enemy.enumsEnemy.movimiento != EnumsCharacter.Movimiento.MoveToPointCombat && enemy.enumsEnemy.movimiento != EnumsCharacter.Movimiento.MoveToPointDeath)
                     {
                         if (enemy.Blindaje <= 0)
                         {
@@ -399,9 +399,9 @@ public class BoxColliderController : MonoBehaviour
                         }
                     }
 
-                    if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar
-                        || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa
-                        || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
+                    if (enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.DefensaEnElLugar
+                        || enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.AgacheDefensa
+                        || enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoDefensa)
                     {
                         //MECANICA DEFENSIVA DEL ENEMIGO DEFENSIVO//
                         if (enemy.GetComponent<Defensivo>() != null)
@@ -421,9 +421,9 @@ public class BoxColliderController : MonoBehaviour
                     }
                     if (enemy.barraDeEscudo != null)
                     {
-                        if (enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
-                            && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialAgachado
-                            && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto)
+                        if (enemy.enumsEnemy.movimiento != EnumsCharacter.Movimiento.AtaqueEspecial
+                            && enemy.enumsEnemy.movimiento != EnumsCharacter.Movimiento.AtaqueEspecialAgachado
+                            && enemy.enumsEnemy.movimiento != EnumsCharacter.Movimiento.AtaqueEspecialSalto)
                         {
                             enemy.barraDeEscudo.SubstractPorcentageBar(enemy.barraDeEscudo.substractForHit);
                         }
