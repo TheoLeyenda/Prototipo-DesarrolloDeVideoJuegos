@@ -37,6 +37,31 @@ public class PowerUp_NadaDeDefensa : PowerUp
             }
         }
     }
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        if (player != null)
+        {
+            Player.OnDie += CheckDeadTarget;
+        }
+        else if (enemy != null)
+        {
+            Enemy.OnDie += CheckDeadTarget;
+        }
+    }
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        if (player != null)
+        {
+            Player.OnDie -= CheckDeadTarget;
+        }
+        else if (enemy != null)
+        {
+            Enemy.OnDie -= CheckDeadTarget;
+        }
+
+    }
     public override void CheckDeadTarget(Enemy e)
     {
         if (enableEffect)

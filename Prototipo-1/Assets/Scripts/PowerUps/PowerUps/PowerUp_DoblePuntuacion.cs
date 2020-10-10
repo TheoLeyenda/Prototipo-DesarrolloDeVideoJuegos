@@ -15,12 +15,14 @@ public class PowerUp_DoblePuntuacion : PowerUp
         typePowerUp = TypePowerUp.PowerUpDelay;
         base.Start();
     }
-    private void OnEnable()
-    {
-    }
-    private void OnDisable()
-    {
-    }
+    //protected override void OnEnable()
+    //{
+    //    base.OnEnable();
+    //}
+    //protected override void OnDisable()
+    //{
+    //    base.OnDisable();
+    //}
     private void Update()
     {
         if (enableEffect)

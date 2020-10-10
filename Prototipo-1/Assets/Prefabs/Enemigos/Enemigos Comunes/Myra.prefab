@@ -1155,47 +1155,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a97dbfded11872d489f95826cb44eb96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  applyColorShoot: 0
   alturaMaxima: {fileID: 2535370798983309438}
   posicionesDeMovimiento:
   - {fileID: 575115925723352298}
   - {fileID: 1620805260564046260}
   - {fileID: 6548380593436277030}
   grid: {fileID: 5452046021746376681}
-  xpActual: 0
-  xpNededSpecialAttack: 50
-  xpForHit: 10
-  myPrefab: {fileID: 1866994702988090532}
-  barraDeEscudo: {fileID: 0}
+  applyColorShoot: 0
   myHeadSprite: {fileID: 21300000, guid: 89e720b76ae610741b253057aefe273b, type: 3}
-  colorShoot: {r: 1, g: 0.29803923, b: 0.29803923, a: 1}
-  enableMovement: 0
-  myVictory: 0
-  SpeedJump: 12
-  auxSpeedJump: 12
-  Speed: 17
-  Resistace: 22
-  Gravity: 35
-  delayAttack: 0.35
-  boxColliderControllerPiernas: {fileID: 2422800598306374939}
-  boxColliderControllerSprite: {fileID: 2422800598539683707}
-  boxColliderControllerAgachado: {fileID: 2422800598513572433}
-  boxColliderControllerParado: {fileID: 2422800597731055384}
-  boxColliderControllerSaltando: {fileID: 2422800598492342758}
-  generadorProyectiles: {fileID: 6744862063357417974}
-  generadorProyectilesAgachado: {fileID: 6744862063263473393}
-  generadorProyectilesParabola: {fileID: 6744862063609448456}
-  generadorProyectilesParabolaAgachado: {fileID: 6744862064612989938}
-  timeStuned: 0
   fraseVictoria: Has sucumbido ante mi oscuridad.
+  colorShoot: {r: 1, g: 0.29803923, b: 0.29803923, a: 1}
   EnableChargerSpecialAttackForHit: 1
   nameEnemy: Myra
   enableColorShootSpecialAttack: 0
   enableDeffence: 1
+  enableMovement: 0
   inCombatPosition: 0
+  barraDeEscudo: {fileID: 0}
+  enableSpecialAttack: 0
   spriteEnemy: {fileID: 6744862065073495840}
   Blindaje: 0
   MaxBlindaje: 0
+  enemyPrefab: {fileID: 1866994702988090532}
   enumsEnemy: {fileID: 1866994702155065978}
   structsEnemys: {fileID: 34985687061080399}
   SpriteRendererEnemigo: {fileID: 6744862065073495842}
@@ -1204,22 +1185,42 @@ MonoBehaviour:
   pool: {fileID: 0}
   life: 300
   maxLife: 300
+  xpActual: 0
+  xpNededSpecialAttack: 50
+  xpForHit: 10
   poolParabolaAttack: {fileID: 8907688198051747312}
   poolObjectAttack: {fileID: 3936140864642745937}
+  generadoresProyectiles: {fileID: 6744862063357417974}
+  generadorProyectilesAgachado: {fileID: 6744862063263473393}
+  generadorProyectilParabola: {fileID: 6744862063609448456}
+  generadorProyectilParabolaAgachado: {fileID: 6744862064612989938}
   maxRandomDelayMovement: 1.5
   minRandomDelayMovement: 1
+  delayAttack: 0.35
   anguloAtaqueSalto: 180
+  Speed: 17
   auxSpeed: 17
+  SpeedJump: 12
+  auxSpeedJump: 12
+  Resistace: 22
   auxResistace: 22
+  Gravity: 35
   auxGravity: 35
   delayAttackJumping: 0.35
   colliderSprites: {fileID: 6744862065073495841}
+  InitialPosition: {x: 0, y: 0, z: 0}
   pointOfDeath: {x: 0, y: 0, z: 0}
   pointOfCombat: {x: 0, y: 0, z: 0}
   damageCounterAttack: 1
   activateComportamiento: 1
+  boxColliderPiernas: {fileID: 2422800598306374939}
+  boxColliderSprite: {fileID: 2422800598539683707}
+  boxColliderControllerAgachado: {fileID: 2422800598513572433}
+  boxColliderControllerParado: {fileID: 2422800597731055384}
+  boxColliderControllerSaltando: {fileID: 2422800598492342758}
   enableMecanicParabolaAttack: 1
   inAttack: 0
+  myVictory: 0
   DontRestart: 0
   MovePorcentage: 25
   JumpPorcentage: 25
@@ -1240,6 +1241,7 @@ MonoBehaviour:
   CantCasillasOcupadas_X: 1
   CantCasillasOcupadas_Y: 2
   ColumnaActual: 1
+  timeStuned: 0
   GeneradorProyectilMagicBust: {fileID: 1061719628787624967}
   ProyectilMagicBust: {fileID: 3184881575782850543}
   timeSpecialAttack: 4

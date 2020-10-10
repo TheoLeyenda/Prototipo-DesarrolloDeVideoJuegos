@@ -18,20 +18,19 @@ public class GranadaGaseosa : ProyectilParabola
     private EventWise eventWise;
 
     private float rangeMagnitude = 1.65f;
+    private float substractHeight = 0.25f;
 
     private void Start()
     {
         soundgenerate = false;
         idPlataforma = 0;
-            
-        //PO = GetComponent<PoolObject>();
     }
     private void OnDisable()
     {
         inAnimation = false;
         soundgenerate = false;
     }
-    // Update is called once per frame
+
     void Update()
     {
         if (eventWise == null)
@@ -109,7 +108,7 @@ public class GranadaGaseosa : ProyectilParabola
                     go = poolGaseosa.GetObject();
                     gaseosa = go.GetComponent<Gaseosa>();
                     gaseosa.disparadorDelProyectil = disparadorDelProyectil;
-                    gaseosa.transform.position = new Vector3(x,cuadrillasAbajo[i].transform.position.y, cuadrillasAbajo[i].transform.position.z);
+                    gaseosa.transform.position = new Vector3(x,cuadrillasAbajo[i].transform.position.y - substractHeight, cuadrillasAbajo[i].transform.position.z);
                 }
             }
             else if (cantProyectiles == 2)
@@ -155,7 +154,7 @@ public class GranadaGaseosa : ProyectilParabola
                         gaseosa.disparadorDelProyectil = disparadorDelProyectil;
                         if (i < arr.Length)
                         {
-                            gaseosa.transform.position = new Vector3(arr[i], cuadrillasAbajo[i].transform.position.y, cuadrillasAbajo[i].transform.position.z);
+                            gaseosa.transform.position = new Vector3(arr[i], cuadrillasAbajo[i].transform.position.y - substractHeight, cuadrillasAbajo[i].transform.position.z);
                         }
                     }
                 }
@@ -177,7 +176,7 @@ public class GranadaGaseosa : ProyectilParabola
                         go = poolGaseosa.GetObject();
                         gaseosa = go.GetComponent<Gaseosa>();
                         gaseosa.disparadorDelProyectil = disparadorDelProyectil;
-                        gaseosa.transform.position = new Vector3(arr[i], cuadrillasAbajo[i].transform.position.y, cuadrillasAbajo[i].transform.position.z);
+                        gaseosa.transform.position = new Vector3(arr[i], cuadrillasAbajo[i].transform.position.y - substractHeight, cuadrillasAbajo[i].transform.position.z);
                             
                     }
                 }

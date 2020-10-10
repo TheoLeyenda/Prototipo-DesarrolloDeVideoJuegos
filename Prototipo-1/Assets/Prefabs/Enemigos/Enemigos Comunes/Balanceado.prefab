@@ -480,47 +480,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eea905aa73066de469d574039d5cc15c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  applyColorShoot: 0
   alturaMaxima: {fileID: 193925271446768918}
   posicionesDeMovimiento:
   - {fileID: 2766543526281554306}
   - {fileID: 4026716707417687260}
   - {fileID: 8898832740398832718}
   grid: {fileID: 7653316396709059201}
-  xpActual: 0
-  xpNededSpecialAttack: 40
-  xpForHit: 10
-  myPrefab: {fileID: 4068828010732992972}
-  barraDeEscudo: {fileID: 0}
+  applyColorShoot: 0
   myHeadSprite: {fileID: 21300000, guid: 8e00c0a6574a17441aa157658bc00363, type: 3}
-  colorShoot: {r: 1, g: 0.29803923, b: 0.29803923, a: 1}
-  enableMovement: 0
-  myVictory: 0
-  SpeedJump: 12
-  auxSpeedJump: 12
-  Speed: 17
-  Resistace: 22
-  Gravity: 35
-  delayAttack: 0.4
-  boxColliderControllerPiernas: {fileID: 2103828595}
-  boxColliderControllerSprite: {fileID: 256762387}
-  boxColliderControllerAgachado: {fileID: 247693113}
-  boxColliderControllerParado: {fileID: 1604268656}
-  boxColliderControllerSaltando: {fileID: 142560398}
-  generadorProyectiles: {fileID: 8936571031518149790}
-  generadorProyectilesAgachado: {fileID: 8936571031340055449}
-  generadorProyectilesParabola: {fileID: 8936571031769918816}
-  generadorProyectilesParabolaAgachado: {fileID: 8936571030625975962}
-  timeStuned: 0
   fraseVictoria: Elementalmente caerias ante mi en algun momento.
+  colorShoot: {r: 1, g: 0.29803923, b: 0.29803923, a: 1}
   EnableChargerSpecialAttackForHit: 1
   nameEnemy: Eli
   enableColorShootSpecialAttack: 0
   enableDeffence: 1
+  enableMovement: 0
   inCombatPosition: 0
+  barraDeEscudo: {fileID: 0}
+  enableSpecialAttack: 0
   spriteEnemy: {fileID: 8936571031010982472}
   Blindaje: 0
   MaxBlindaje: 0
+  enemyPrefab: {fileID: 4068828010732992972}
   enumsEnemy: {fileID: 4068828011971940114}
   structsEnemys: {fileID: 2442023033880022055}
   SpriteRendererEnemigo: {fileID: 8936571031010982474}
@@ -529,22 +510,42 @@ MonoBehaviour:
   pool: {fileID: 0}
   life: 350
   maxLife: 350
+  xpActual: 0
+  xpNededSpecialAttack: 40
+  xpForHit: 10
   poolParabolaAttack: {fileID: 6485732628066627736}
   poolObjectAttack: {fileID: 1657464359974871865}
+  generadoresProyectiles: {fileID: 8936571031518149790}
+  generadorProyectilesAgachado: {fileID: 8936571031340055449}
+  generadorProyectilParabola: {fileID: 8936571031769918816}
+  generadorProyectilParabolaAgachado: {fileID: 8936571030625975962}
   maxRandomDelayMovement: 1.5
   minRandomDelayMovement: 1
+  delayAttack: 0.4
   anguloAtaqueSalto: 180
+  Speed: 17
   auxSpeed: 17
+  SpeedJump: 12
+  auxSpeedJump: 12
+  Resistace: 22
   auxResistace: 22
+  Gravity: 35
   auxGravity: 35
   delayAttackJumping: 0.5
   colliderSprites: {fileID: 8936571031010982473}
+  InitialPosition: {x: 0, y: 0, z: 0}
   pointOfDeath: {x: 0, y: 0, z: 0}
   pointOfCombat: {x: 0, y: 0, z: 0}
   damageCounterAttack: 1
   activateComportamiento: 1
+  boxColliderPiernas: {fileID: 2103828595}
+  boxColliderSprite: {fileID: 256762387}
+  boxColliderControllerAgachado: {fileID: 247693113}
+  boxColliderControllerParado: {fileID: 1604268656}
+  boxColliderControllerSaltando: {fileID: 142560398}
   enableMecanicParabolaAttack: 1
   inAttack: 0
+  myVictory: 0
   DontRestart: 0
   MovePorcentage: 25
   JumpPorcentage: 25
@@ -565,6 +566,7 @@ MonoBehaviour:
   CantCasillasOcupadas_X: 1
   CantCasillasOcupadas_Y: 2
   ColumnaActual: 1
+  timeStuned: 0
 --- !u!114 &2442023033880022055
 MonoBehaviour:
   m_ObjectHideFlags: 0

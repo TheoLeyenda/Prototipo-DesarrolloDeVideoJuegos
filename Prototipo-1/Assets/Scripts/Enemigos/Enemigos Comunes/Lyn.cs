@@ -21,7 +21,7 @@ public class Lyn : Enemy
     protected override void OnEnable()
     {
         base.OnEnable();
-        enumsEnemy.movimiento = EnumsCharacter.Movimiento.MoveToPointCombat;
+        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
         Player.OnDie += AnimationVictory;
     }
     protected override void OnDisable()
@@ -34,12 +34,12 @@ public class Lyn : Enemy
     {
         base.Update();
         CheckSpecialAttack();
-        if (delaySelectMovement <= 0 && enumsEnemy.movimiento == EnumsCharacter.Movimiento.Nulo)
+        if (delaySelectMovement <= 0 && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
         {
             CheckComportamiento();
             CheckMovement();
         }
-        if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.MoveToPointCombat)
+        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.MoveToPointCombat)
         {
             delaySelectMovement = 0.1f;
         }
@@ -50,7 +50,7 @@ public class Lyn : Enemy
         if (delayAttack > 0)
         {
             delayAttack = delayAttack - Time.deltaTime;
-            if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoAtaque)
+            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
             {
                 //Debug.Log("ENTRE AL SALTO");
                 spriteEnemy.PlayAnimation("Salto tomboy");
@@ -63,80 +63,80 @@ public class Lyn : Enemy
     }
     public override void AnimationAttack()
     {
-        if (myPrefab.activeSelf == true)
+        if (enemyPrefab.activeSelf == true)
         {
             if (!inCombatPosition)
             {
-                enumsEnemy.movimiento = EnumsCharacter.Movimiento.MoveToPointCombat;
+                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
                 return;
             }
             if (!inAttack)
             {
                 valueAttack = Random.Range(0, 100);
             }
-            if (valueAttack >= parabolaAttack || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecial
-                || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecialAgachado
-                || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecialSalto
+            if (valueAttack >= parabolaAttack || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
                 || !enableMecanicParabolaAttack)
             {
-                if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtacarEnElLugar
-                    && !GetIsJumping() && SpeedJump >= GetAuxSpeedJump()
-                    && enumsEnemy.movimiento != EnumsCharacter.Movimiento.AgacharseAtaque
+                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
+                    && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp()
+                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque
                     && !GetIsDuck())
                 {
                     spriteEnemy.GetAnimator().Play("Ataque Parado tomboy");
                     inAttack = true;
                     SetIsDuck(false);
                 }
-                else if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoAtaque
-                    || enumsEnemy.movimiento == EnumsCharacter.Movimiento.Nulo)
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
                 {
                     spriteEnemy.GetAnimator().Play("Ataque Salto tomboy");
                     inAttack = true;
                     SetIsDuck(false);
                 }
-                else if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.AgacharseAtaque && GetIsDuck() && !GetIsJumping() && SpeedJump >= GetAuxSpeedJump())
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && GetIsDuck() && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
                 {
                     spriteEnemy.GetAnimator().Play("Ataque Agachado tomboy");
                     inAttack = true;
                     SetIsDuck(true);
                 }
-                else if ((enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecial
-                    || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecialAgachado
-                    || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecialSalto
-                    || enumsEnemy.movimiento == EnumsCharacter.Movimiento.Nulo) && transform.position.y <= InitialPosition.y)
+                else if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo) && transform.position.y <= InitialPosition.y)
                 {
-                    switch (enumsEnemy.movimiento)
+                    switch (enumsEnemy.GetMovement())
                     {
-                        case EnumsCharacter.Movimiento.AtaqueEspecial:
+                        case EnumsEnemy.Movimiento.AtaqueEspecial:
                             spriteEnemy.GetAnimator().Play("Ataque Especial tomboy");
-                            enumsEnemy.movimiento = EnumsCharacter.Movimiento.AtaqueEspecial;
+                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
                             inAttack = true;
                             xpActual = 0;
                             break;
-                        case EnumsCharacter.Movimiento.AtaqueEspecialAgachado:
+                        case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
                             break;
-                        case EnumsCharacter.Movimiento.AtaqueEspecialSalto:
+                        case EnumsEnemy.Movimiento.AtaqueEspecialSalto:
                             break;
                     }
                 }
             }
             else if (valueAttack < parabolaAttack)
             {
-                if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtacarEnElLugar
-                    && !GetIsJumping() && SpeedJump >= GetAuxSpeedJump() && delayAttack <= 0)
+                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
+                    && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp() && delayAttack <= 0)
                 {
                     spriteEnemy.PlayAnimation("Ataque Parado Parabola tomboy");
                     inAttack = true;
                     SetIsDuck(false);
                 }
-                else if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoAtaque && delayAttack <= 0)
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && delayAttack <= 0)
                 {
                     spriteEnemy.PlayAnimation("Ataque Salto Parabola tomboy");
                     inAttack = true;
                     SetIsDuck(false);
                 }
-                else if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.AgacharseAtaque && delayAttack <= 0)
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && delayAttack <= 0)
                 {
                     spriteEnemy.PlayAnimation("Ataque Agachado Parabola tomboy");
                     inAttack = true;
@@ -188,8 +188,8 @@ public class Lyn : Enemy
                 tipoProyectil = Proyectil.typeProyectil.ProyectilAereo;
                 shootDown = true;
             }
-            go.transform.rotation = generadorProyectiles.transform.rotation;
-            go.transform.position = generadorProyectiles.transform.position;
+            go.transform.rotation = generadoresProyectiles.transform.rotation;
+            go.transform.position = generadoresProyectiles.transform.position;
             proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
         }
         else if (!specialAttack && GetIsDuck())
@@ -201,7 +201,7 @@ public class Lyn : Enemy
         }
         if (specialAttack)
         {
-            if (!GetIsDuck() && !GetIsJumping() && SpeedJump >= GetAuxSpeedJump())
+            if (!GetIsDuck() && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
             {
                 tipoProyectil = Proyectil.typeProyectil.AtaqueEspecial;
                 go = PoolProyectilChicle.GetObject();

@@ -31,6 +31,14 @@ public class GameManager : MonoBehaviour
     //private int roundCombat;
     [HideInInspector]
     public bool restartLevel;
+
+    private void OnLevelWasLoaded(int level)
+    {
+        if (SceneManager.GetActiveScene().name == "Supervivencia")
+        {
+            restartLevel = false;
+        }
+    }
     private void Awake()
     {
         if (instanceGameManager == null)

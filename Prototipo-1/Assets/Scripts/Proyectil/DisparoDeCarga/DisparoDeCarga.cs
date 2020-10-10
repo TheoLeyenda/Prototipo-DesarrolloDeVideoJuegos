@@ -52,7 +52,10 @@ public class DisparoDeCarga : MonoBehaviour
             {
                 return;
             }
-            boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
+            if (boxColliderController.player.PD.Blindaje <= 0)
+                boxColliderController.player.PD.lifePlayer = boxColliderController.player.PD.lifePlayer - damage;
+            else
+                boxColliderController.player.PD.Blindaje = boxColliderController.player.PD.Blindaje - damage;
         }
         if(collision.tag == "MagicBust")
         {

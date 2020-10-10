@@ -61,8 +61,8 @@ public class ProfesorLautaro : Enemy
                 tipoProyectil = Proyectil.typeProyectil.ProyectilAereo;
                 shootDown = true;
             }
-            go.transform.rotation = generadorProyectiles.transform.rotation;
-            go.transform.position = generadorProyectiles.transform.position;
+            go.transform.rotation = generadoresProyectiles.transform.rotation;
+            go.transform.position = generadoresProyectiles.transform.position;
             proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
         }
         else if (!specialAttack && GetIsDuck())
@@ -80,11 +80,11 @@ public class ProfesorLautaro : Enemy
             int minRutas = 1;//minima cantidad de rutas que seguira la bala al ser disparada.
             if (!GetIsDuck())
             {
-                CheckSpecialAttackEnemyController(minRutas, maxRutas, generadorProyectilesParabola);
+                CheckSpecialAttackEnemyController(minRutas, maxRutas, generadorProyectilParabola);
             }
             else
             {
-                CheckSpecialAttackEnemyController(minRutas, maxRutas, generadorProyectilesParabolaAgachado);
+                CheckSpecialAttackEnemyController(minRutas, maxRutas, generadorProyectilParabolaAgachado);
             }
         }
         if (!specialAttack)

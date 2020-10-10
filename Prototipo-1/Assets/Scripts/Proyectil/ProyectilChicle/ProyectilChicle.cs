@@ -202,7 +202,7 @@ public class ProyectilChicle : Proyectil
             {
                 if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
                 {
-                    if (e.enumsEnemy.movimiento != EnumsCharacter.Movimiento.MoveToPointCombat && e.enumsEnemy.movimiento != EnumsCharacter.Movimiento.MoveToPointDeath)
+                    if (e.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointCombat && e.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoveToPointDeath)
                     {
                         if (e.Blindaje <= 0)
                         {
@@ -240,11 +240,11 @@ public class ProyectilChicle : Proyectil
                 }
                 if (PlayerDisparador != null)
                 {
-                    if (boxColliderController != PlayerDisparador.boxColliderControllerAgachado
-                        && boxColliderController != PlayerDisparador.boxColliderControllerParado
-                        && boxColliderController != PlayerDisparador.boxColliderControllerPiernas
-                        && boxColliderController != PlayerDisparador.boxColliderControllerSaltando
-                        && boxColliderController != PlayerDisparador.boxColliderControllerSprite)
+                    if (boxColliderController != PlayerDisparador.boxColliderAgachado
+                        && boxColliderController != PlayerDisparador.boxColliderParado
+                        && boxColliderController != PlayerDisparador.boxColliderPiernas
+                        && boxColliderController != PlayerDisparador.boxColliderSaltando
+                        && boxColliderController != PlayerDisparador.boxColliderSprite)
                     {
                         p.SetEnableCounterAttack(true);
                         if (p.PD.Blindaje <= 0)

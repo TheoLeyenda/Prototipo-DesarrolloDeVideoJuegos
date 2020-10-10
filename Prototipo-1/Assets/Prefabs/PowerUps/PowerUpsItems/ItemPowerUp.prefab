@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b66d0efc6a564048b7872082fa86ad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableCollision: 1
   typePowerUp: 0
   typeCheckCollision: 0
   userPowerUp: 0
@@ -168,6 +169,7 @@ MonoBehaviour:
     trailColor: {r: 0.3254902, g: 0.41960785, b: 0.7254902, a: 1}
   powerUpInstance: {fileID: 6118866957175448722}
   typeCheckCollisionPowerUpItem: 1
+  initPosition: {x: 0, y: 0, z: 0}
 --- !u!58 &6118866957397908909
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -202,7 +204,7 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!212 &6118866957397908880

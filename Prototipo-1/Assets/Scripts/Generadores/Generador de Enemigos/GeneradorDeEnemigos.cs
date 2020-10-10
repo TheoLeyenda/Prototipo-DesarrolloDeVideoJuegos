@@ -97,7 +97,7 @@ public class GeneradorDeEnemigos : MonoBehaviour
             case TypeGeneration.DeadthEnemy:
                 if (enemigoActual != null)
                 {
-                    if (enemigoActual.life <= 0 && enemigoActual.enumsEnemy.estado == EnumsCharacter.EstadoCharacter.muerto || !enemigoActual.myPrefab.gameObject.activeSelf)
+                    if (enemigoActual.life <= 0 && enemigoActual.enumsEnemy.GetStateEnemy() == EnumsEnemy.EstadoEnemigo.muerto || !enemigoActual.enemyPrefab.gameObject.activeSelf)
                     {
                         Generate();
                     }
@@ -112,19 +112,19 @@ public class GeneradorDeEnemigos : MonoBehaviour
         {
             if (countEnemysGenerate == 1)
             {
-                enemigoActual.myPrefab.transform.position = pointOfCombat.transform.position;
-                enemigoActual.enumsEnemy.movimiento = EnumsCharacter.Movimiento.Nulo;
+                enemigoActual.enemyPrefab.transform.position = pointOfCombat.transform.position;
+                enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
                 enemigoActual.enableMovement = false;
                 //Debug.Log("ENTRE");
             }
             else
             {
-                enemigoActual.myPrefab.transform.position = Generador.transform.position;
+                enemigoActual.enemyPrefab.transform.position = Generador.transform.position;
                 //enemigoActual.gridEnemy.gameObject.transform.position = new Vector3(0, enemigoActual.gridEnemy.gameObject.transform.position.y, 0);
                 enemigoActual.transform.localPosition = new Vector3(0, enemigoActual.transform.localPosition.y, 0);
                 enemigoActual.pointOfCombat = pointOfCombat.transform.position;
                 enemigoActual.pointOfDeath = pointOfInit.transform.position;
-                enemigoActual.enumsEnemy.movimiento = EnumsCharacter.Movimiento.MoveToPointCombat;
+                enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
                 enemigoActual.enableMovement = true;
                 enemigoActual.SetDelaySelectMovement(1.4f);
             }
@@ -135,18 +135,18 @@ public class GeneradorDeEnemigos : MonoBehaviour
             {
                 if (idListEnemy == 1)
                 {
-                    enemigoActual.myPrefab.transform.position = pointOfCombat.transform.position;
-                    enemigoActual.enumsEnemy.movimiento = EnumsCharacter.Movimiento.Nulo;
+                    enemigoActual.enemyPrefab.transform.position = pointOfCombat.transform.position;
+                    enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
                     enemigoActual.enableMovement = false;
                 }
                 else
                 {
-                    enemigoActual.myPrefab.transform.position = Generador.transform.position;
+                    enemigoActual.enemyPrefab.transform.position = Generador.transform.position;
                     //enemigoActual.gridEnemy.gameObject.transform.position = new Vector3(0, enemigoActual.gridEnemy.gameObject.transform.position.y, 0);
                     enemigoActual.transform.localPosition = new Vector3(0, enemigoActual.transform.localPosition.y, 0);
                     enemigoActual.pointOfCombat = pointOfCombat.transform.position;
                     enemigoActual.pointOfDeath = pointOfInit.transform.position;
-                    enemigoActual.enumsEnemy.movimiento = EnumsCharacter.Movimiento.MoveToPointCombat;
+                    enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
                     enemigoActual.SetDelaySelectMovement(1.4f);
                     enemigoActual.enableMovement = true;
                     if (enemigoActual.enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Jefe) 
@@ -185,8 +185,8 @@ public class GeneradorDeEnemigos : MonoBehaviour
                 if (enemy != null)
                 {
                     enemigoActual = enemy;
-                    enemigoActual.myPrefab.transform.position = Generador.transform.position;
-                    enemigoActual.SetInitialPosition(enemigoActual.transform.position);
+                    enemigoActual.enemyPrefab.transform.position = Generador.transform.position;
+                    enemigoActual.InitialPosition = enemigoActual.transform.position;
                     //Debug.Log(enemigoActual.InitialPosition);
                     enemigoActual.ResetEnemy();
                 }
@@ -208,8 +208,8 @@ public class GeneradorDeEnemigos : MonoBehaviour
                         if (enemy != null)
                         {
                             enemigoActual = enemy;
-                            enemigoActual.myPrefab.transform.position = Generador.transform.position;
-                            enemigoActual.SetInitialPosition(enemigoActual.transform.position);
+                            enemigoActual.enemyPrefab.transform.position = Generador.transform.position;
+                            enemigoActual.InitialPosition = enemigoActual.transform.position;
                             enemigoActual.ResetEnemy();
                         }
                         enemigoActual.xpActual = 0;

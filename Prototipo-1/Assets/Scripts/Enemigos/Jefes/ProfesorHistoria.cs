@@ -190,7 +190,7 @@ public class ProfesorHistoria : Enemy
                         Idle();
                         break;
                     case (int)EstadoProfesorHistoria.MasiveAttack:
-                        if (myPrefab.transform.position.x <= 5.5f)
+                        if (enemyPrefab.transform.position.x <= 5.5f)
                         {
                             if (!OnProfesorHistoria && InCombatPoint != null)
                             {
@@ -417,6 +417,7 @@ public class ProfesorHistoria : Enemy
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!initBehavour) return;
         Proyectil proyectil = collision.GetComponent<Proyectil>();
         if (proyectil != null)
         {

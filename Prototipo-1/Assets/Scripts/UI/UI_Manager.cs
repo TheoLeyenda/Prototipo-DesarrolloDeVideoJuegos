@@ -78,7 +78,7 @@ public class UI_Manager : MonoBehaviour
             if (p.xpActual >= p.xpNededSpecialAttack)
             {
                 p.xpActual = p.xpNededSpecialAttack;
-                p.SetEnableSpecialAttack(true);
+                p.enableSpecialAttack = true;
             }
             if (p.xpActual <= p.xpNededSpecialAttack)
             {
@@ -132,7 +132,7 @@ public class UI_Manager : MonoBehaviour
                 if (_enemy.xpActual >= _enemy.xpNededSpecialAttack)
                 {
                     _enemy.xpActual = _enemy.xpNededSpecialAttack;
-                    _enemy.SetEnableSpecialAttack(true);
+                    _enemy.enableSpecialAttack = true;
                 }
                 if (_enemy.xpActual <= _enemy.xpNededSpecialAttack)
                 {
@@ -183,7 +183,9 @@ public class UI_Manager : MonoBehaviour
                         PlayerIzquierdaHUD.ImageBlindaje.gameObject.SetActive(false);
                         players[i].barraDeEscudo.SetPlayer(players[i]);
                         PlayerIzquierdaHUD.textNamePlayer.text = players[i].namePlayer;
-                    }  
+                    }
+
+                        
                 }
                 else
                 {
@@ -220,7 +222,7 @@ public class UI_Manager : MonoBehaviour
     {
         if (!inPvP)
         {
-            if (enemy == null || !enemy.myPrefab.activeSelf)
+            if (enemy == null || !enemy.enemyPrefab.activeSelf)
             {
                 GameObject goEnemy = GameObject.Find("Enemigo");
                 if (goEnemy != null)

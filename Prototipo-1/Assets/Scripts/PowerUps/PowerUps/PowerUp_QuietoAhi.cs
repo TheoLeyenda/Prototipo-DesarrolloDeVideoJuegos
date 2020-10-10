@@ -63,6 +63,20 @@ public class PowerUp_QuietoAhi : PowerUp
             OnEffectPowerUp(this);
         }
     }
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        Enemy.OnDie += CheckDeadTarget;
+        Player.OnDie += CheckDeadTarget;
+        Enemy.OnAlive += CheckDeadTarget;
+    }
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        Player.OnDie -= CheckDeadTarget;
+        Enemy.OnDie -= CheckDeadTarget;
+        Enemy.OnAlive -= CheckDeadTarget;
+    }
     public override void CheckDeadTarget(Enemy e)
     {
         if (enableEffect)
@@ -96,6 +110,7 @@ public class PowerUp_QuietoAhi : PowerUp
         }
         delayEffect = auxDelayEffect;
         savingData = true;
+        enableEffect = false;
     }
 
     public void SetAuxSpeed(float _auxSpeed) => auxSpeed = _auxSpeed;

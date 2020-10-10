@@ -9073,47 +9073,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd7335819ad7484b81704eacd2beb50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  applyColorShoot: 0
   alturaMaxima: {fileID: 3025190699808248058}
   posicionesDeMovimiento:
   - {fileID: 950233433236812910}
   - {fileID: 2065623266888751408}
   - {fileID: 5779338585433571746}
   grid: {fileID: 4719031745358890861}
-  xpActual: 0
-  xpNededSpecialAttack: 50
-  xpForHit: 10
-  myPrefab: {fileID: 1386041526207554592}
-  barraDeEscudo: {fileID: 0}
+  applyColorShoot: 0
   myHeadSprite: {fileID: 21300000, guid: 62e92e8c6136aad4f8bc061937492f5e, type: 3}
-  colorShoot: {r: 1, g: 0.29803923, b: 0.29803923, a: 1}
-  enableMovement: 0
-  myVictory: 0
-  SpeedJump: 12
-  auxSpeedJump: 12
-  Speed: 17
-  Resistace: 28.5
-  Gravity: 35
-  delayAttack: 0.4
-  boxColliderControllerPiernas: {fileID: 0}
-  boxColliderControllerSprite: {fileID: 3119680522379427839}
-  boxColliderControllerAgachado: {fileID: 3119680522371982037}
-  boxColliderControllerParado: {fileID: 3119680523735379868}
-  boxColliderControllerSaltando: {fileID: 3119680522328199522}
-  generadorProyectiles: {fileID: 6291037100460728690}
-  generadorProyectilesAgachado: {fileID: 6291037100087010933}
-  generadorProyectilesParabola: {fileID: 6291037100714078348}
-  generadorProyectilesParabolaAgachado: {fileID: 6291037099305821046}
-  timeStuned: 0
   fraseVictoria: Ja... El dinero lo puede todo, Plebeyo.
+  colorShoot: {r: 1, g: 0.29803923, b: 0.29803923, a: 1}
   EnableChargerSpecialAttackForHit: 1
   nameEnemy: Kathy & Tyke
   enableColorShootSpecialAttack: 0
   enableDeffence: 1
+  enableMovement: 0
   inCombatPosition: 1
+  barraDeEscudo: {fileID: 0}
+  enableSpecialAttack: 0
   spriteEnemy: {fileID: 6291037100013266852}
   Blindaje: 0
   MaxBlindaje: 0
+  enemyPrefab: {fileID: 1386041526207554592}
   enumsEnemy: {fileID: 1386041527520957182}
   structsEnemys: {fileID: 768035169043026379}
   SpriteRendererEnemigo: {fileID: 6291037100013266854}
@@ -9122,22 +9103,42 @@ MonoBehaviour:
   pool: {fileID: 0}
   life: 400
   maxLife: 400
+  xpActual: 0
+  xpNededSpecialAttack: 50
+  xpForHit: 10
   poolParabolaAttack: {fileID: 8163521573060275572}
   poolObjectAttack: {fileID: 4344614531536830165}
+  generadoresProyectiles: {fileID: 6291037100460728690}
+  generadorProyectilesAgachado: {fileID: 6291037100087010933}
+  generadorProyectilParabola: {fileID: 6291037100714078348}
+  generadorProyectilParabolaAgachado: {fileID: 6291037099305821046}
   maxRandomDelayMovement: 1.5
   minRandomDelayMovement: 1
+  delayAttack: 0.4
   anguloAtaqueSalto: 180
+  Speed: 17
   auxSpeed: 17
+  SpeedJump: 12
+  auxSpeedJump: 12
+  Resistace: 28.5
   auxResistace: 28.5
+  Gravity: 35
   auxGravity: 35
   delayAttackJumping: 0.4
   colliderSprites: {fileID: 6291037100013266853}
+  InitialPosition: {x: 5.17, y: -3.18, z: 0}
   pointOfDeath: {x: 0, y: 0, z: 0}
   pointOfCombat: {x: 0, y: 0, z: 0}
   damageCounterAttack: 1
   activateComportamiento: 1
+  boxColliderPiernas: {fileID: 3119680524290456991}
+  boxColliderSprite: {fileID: 3119680522379427839}
+  boxColliderControllerAgachado: {fileID: 3119680522371982037}
+  boxColliderControllerParado: {fileID: 3119680523735379868}
+  boxColliderControllerSaltando: {fileID: 3119680522328199522}
   enableMecanicParabolaAttack: 1
   inAttack: 0
+  myVictory: 0
   DontRestart: 0
   MovePorcentage: 25
   JumpPorcentage: 25
@@ -9158,6 +9159,7 @@ MonoBehaviour:
   CantCasillasOcupadas_X: 1
   CantCasillasOcupadas_Y: 2
   ColumnaActual: 1
+  timeStuned: 0
   limo_gameObject: {fileID: 3119680523987810192}
   CounchDefense: 1
 --- !u!114 &7020909385814843154

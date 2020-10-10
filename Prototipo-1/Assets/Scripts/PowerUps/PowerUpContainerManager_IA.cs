@@ -139,7 +139,7 @@ public class PowerUpContainerManager_IA : PowerUpContainer
             Enemy e  = powerUpContainerContent[index].powerUp.enemy;
             if (e == null) return;
 
-            characterEnableMovement = (e.enableMovement || e.enumsEnemy.estado == EnumsCharacter.EstadoCharacter.Atrapado);
+            characterEnableMovement = (e.enableMovement || e.enumsEnemy.GetStateEnemy() == EnumsEnemy.EstadoEnemigo.Atrapado);
 
             if (powerUpContainerContent[index].currentPowerUp
             && powerUpContainerContent[index].countPowerUps > 0

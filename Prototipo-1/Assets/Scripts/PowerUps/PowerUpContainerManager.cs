@@ -147,11 +147,11 @@ public class PowerUpContainerManager : MonoBehaviour
 
             if (p != null)
             {
-                characterEnableMovement = (p.enableMovement || p.enumsPlayers.estado == EnumsCharacter.EstadoCharacter.Atrapado);
+                characterEnableMovement = (p.enableMovement || p.enumsPlayers.estadoJugador == EnumsPlayers.EstadoJugador.Atrapado);
             }
             else if (e != null)
             {
-                characterEnableMovement = (e.enableMovement || e.enumsEnemy.estado == EnumsCharacter.EstadoCharacter.Atrapado);
+                characterEnableMovement = (e.enableMovement || e.enumsEnemy.GetStateEnemy() == EnumsEnemy.EstadoEnemigo.Atrapado);
             }
 
             if (powerUpContainerContent[index].currentPowerUp 
@@ -259,8 +259,12 @@ public class PowerUpContainerManager : MonoBehaviour
                     {
                         powerUp.EffectDestroyPowerUp();
                     }
+                    
                 }
             }
+            //SACAR ESTO UNA VEZ EL EFECTO DEL ITEM AL SER AGARRADO ESTE INCORPORADO
+            if (powerUp.disableCollision)
+                powerUp.transform.parent.gameObject.SetActive(false);
         }
     }
     public void AddCountPowerUp(PowerUp powerUp)

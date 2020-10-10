@@ -34,6 +34,7 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
     }
     public void SavingDataPowerUp_QuietoAhi(PowerUp_QuietoAhi powerUp_QuietoAhí)
     {
+
         if (playerReference != null && powerUp_QuietoAhí.player != null)
         {
             if (powerUp_QuietoAhí.player == playerReference ||
@@ -42,10 +43,10 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
         }
         if (powerUp_QuietoAhí.player != null && enemyReference != null)
         {
-            powerUp_QuietoAhí.SetAuxSpeed(enemyReference.Speed);
-            powerUp_QuietoAhí.SetAuxSpeedJump(enemyReference.SpeedJump);
-            powerUp_QuietoAhí.SetAuxGravity(enemyReference.Gravity);
-            powerUp_QuietoAhí.SetAuxResistence(enemyReference.Resistace);
+            powerUp_QuietoAhí.SetAuxSpeed(enemyReference.auxSpeed);
+            powerUp_QuietoAhí.SetAuxSpeedJump(enemyReference.auxSpeedJump);
+            powerUp_QuietoAhí.SetAuxGravity(enemyReference.auxGravity);
+            powerUp_QuietoAhí.SetAuxResistence(enemyReference.auxResistace);
 
             if (powerUp_QuietoAhí.disableAttack)
             {
@@ -55,10 +56,10 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
         else if ((powerUp_QuietoAhí.player != null && playerReference != null) ||
                    (powerUp_QuietoAhí.enemy != null && playerReference != null))
         {
-            powerUp_QuietoAhí.SetAuxSpeed(playerReference.Speed);
-            powerUp_QuietoAhí.SetAuxSpeedJump(playerReference.SpeedJump);
-            powerUp_QuietoAhí.SetAuxGravity(playerReference.Gravity);
-            powerUp_QuietoAhí.SetAuxResistence(playerReference.Resistace);
+            powerUp_QuietoAhí.SetAuxSpeed(playerReference.AuxSpeed);
+            powerUp_QuietoAhí.SetAuxSpeedJump(playerReference.AuxSpeedJump);
+            powerUp_QuietoAhí.SetAuxGravity(playerReference.AuxGravity);
+            powerUp_QuietoAhí.SetAuxResistence(playerReference.AuxResistace);
             if (powerUp_QuietoAhí.disableAttack)
             {
                 powerUp_QuietoAhí.SetAuxDelayAttack(playerReference.delayAttack);
@@ -79,12 +80,15 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
 
         if (powerUp_QuietoAhí.player != null && enemyReference != null)
         {
-            enemyReference.Speed = 0;
-            enemyReference.SpeedJump = 0;
-            enemyReference.Resistace = 0;
-            enemyReference.Gravity = 0;
-            if (powerUp_QuietoAhí.disableAttack)
-                enemyReference.delayAttack = powerUp_QuietoAhí.GetDelayAttack();
+            if (enemyReference.GetInCombatPosition())
+            {
+                enemyReference.Speed = 0;
+                enemyReference.SpeedJump = 0;
+                enemyReference.Resistace = 0;
+                enemyReference.Gravity = 0;
+                if (powerUp_QuietoAhí.disableAttack)
+                    enemyReference.delayAttack = 99999;
+            }
         }
         else if ((powerUp_QuietoAhí.player != null && playerReference != null) ||
                    (powerUp_QuietoAhí.enemy != null && playerReference != null))
@@ -94,7 +98,7 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
             playerReference.Resistace = 0;
             playerReference.Gravity = 0;
             if (powerUp_QuietoAhí.disableAttack)
-                playerReference.delayAttack = powerUp_QuietoAhí.GetDelayAttack();
+                playerReference.delayAttack = 99999;
         }
     }
     public void DisableEffectPowerUp_QuietoAhi(PowerUp_QuietoAhi powerUp_QuietoAhí)
@@ -115,10 +119,10 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
                 {
                     enemyReference.delayAttack = powerUp_QuietoAhí.GetAuxDelayAttack();
                 }
-                enemyReference.Speed = powerUp_QuietoAhí.GetAuxSpeed();
-                enemyReference.SpeedJump = powerUp_QuietoAhí.GetAuxSpeedJump();
-                enemyReference.Resistace = powerUp_QuietoAhí.GetAuxResistence();
-                enemyReference.Gravity = powerUp_QuietoAhí.GetAuxGravity();
+                enemyReference.Speed = enemyReference.auxSpeed;
+                enemyReference.SpeedJump = enemyReference.auxSpeedJump;
+                enemyReference.Resistace = enemyReference.auxResistace;
+                enemyReference.Gravity = enemyReference.auxGravity;
             }
             else if ((powerUp_QuietoAhí.player != null && playerReference != null) ||
                  (powerUp_QuietoAhí.enemy != null && playerReference != null))
@@ -130,10 +134,10 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
                     //Debug.Log("ENTRE");
                 }
 
-                playerReference.Speed = powerUp_QuietoAhí.GetAuxSpeed();
-                playerReference.SpeedJump = powerUp_QuietoAhí.GetAuxSpeedJump();
-                playerReference.Resistace = powerUp_QuietoAhí.GetAuxResistence();
-                playerReference.Gravity = powerUp_QuietoAhí.GetAuxGravity();
+                playerReference.Speed = playerReference.AuxSpeed;
+                playerReference.SpeedJump = playerReference.AuxSpeedJump;
+                playerReference.Resistace = playerReference.AuxResistace;
+                playerReference.Gravity = playerReference.AuxGravity;
 
             }
             powerUp_QuietoAhí.enableEffect = false;
@@ -151,8 +155,11 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
         }
         if (powerUp_NadaDeDefensa.player != null && enemyReference != null)
         {
-            powerUp_NadaDeDefensa.SetBarraDeEscudo(enemyReference.barraDeEscudo);
-            enemyReference.enableDeffence = false;
+            if (enemyReference.GetInCombatPosition())
+            {
+                powerUp_NadaDeDefensa.SetBarraDeEscudo(enemyReference.barraDeEscudo);
+                enemyReference.enableDeffence = false;
+            }
         }
         else if ((powerUp_NadaDeDefensa.player != null && playerReference != null) ||
                    (powerUp_NadaDeDefensa.enemy != null && playerReference != null))

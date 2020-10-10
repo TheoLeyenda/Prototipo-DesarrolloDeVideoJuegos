@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class ItemPowerUp : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -29,7 +28,7 @@ public class ItemPowerUp : MonoBehaviour
     }
     void InitData()
     {
-        int selectName = Random.Range(0, dataItemsPowerUps.Count);
+        int selectName = UnityEngine.Random.Range(0, dataItemsPowerUps.Count);
         powerUpInstance.namePowerUp = dataItemsPowerUps[selectName].powerUpName;
         trailRenderer.startColor = dataItemsPowerUps[selectName].trailColor;
         //trailRenderer.endColor = dataItemsPowerUps[selectName].trailColor;
@@ -59,13 +58,14 @@ public class ItemPowerUp : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, Target.transform.position, step);
 
         Vector3 distance = transform.position - Target.transform.position;
-        if (distance.magnitude <= distaceDisableMe)
-        {
-            gameObject.SetActive(false);
-        }
+        //if (distance.magnitude <= distaceDisableMe)
+        //{
+            //gameObject.SetActive(false);
+        //}
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (Target != null) return;
         if (collision.tag == "Player")
         {
             Target = collision.GetComponent<Player>();

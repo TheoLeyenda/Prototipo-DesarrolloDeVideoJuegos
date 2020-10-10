@@ -161,33 +161,40 @@ public class LevelManager : MonoBehaviour
             switch (waysToLevelUp) 
             {
                 case WaysToLevelUp.ByTime:
-                    if (delayPassLevel <= 0)
+                    if (Time.timeScale > 0 && !gm.restartLevel)
                     {
-                        delayPassLevel = auxDelayPassLevel;
-                        if (SceneManager.GetActiveScene().name == "Supervivencia")
+                        if (delayPassLevel <= 0)
                         {
-                            gm.GameOver("GameOverSupervivencia");
+                            delayPassLevel = auxDelayPassLevel;
+                            if (SceneManager.GetActiveScene().name == "Supervivencia")
+                            {
+                                gm.GameOver("GameOverSupervivencia");
+                            }
+                            else if (SceneManager.GetActiveScene().name != "PvP" && SceneManager.GetActiveScene().name != "TiroAlBlanco")
+                            {
+                                gm.GameOver("GameOverHistoria");
+                            }
                         }
-                        else if (SceneManager.GetActiveScene().name != "PvP" && SceneManager.GetActiveScene().name != "TiroAlBlanco")
+                        else
                         {
-                            gm.GameOver("GameOverHistoria");
+                            delayPassLevel = delayPassLevel - Time.deltaTime;
                         }
-                    }
-                    else
-                    {
-                        delayPassLevel = delayPassLevel - Time.deltaTime;
                     }
                     break;
                 case WaysToLevelUp.ByButton:
-                    if (InputPlayerController.GetInputButtonDown("SelectButton_P1"))
+                    if (Time.timeScale > 0 && !gm.restartLevel)
                     {
-                        if (SceneManager.GetActiveScene().name == "Supervivencia")
+                        if (InputPlayerController.GetInputButtonDown("SelectButton_P1"))
                         {
-                            gm.GameOver("GameOverSupervivencia");
-                        }
-                        else if (SceneManager.GetActiveScene().name != "PvP" && SceneManager.GetActiveScene().name != "TiroAlBlanco")
-                        {
-                            gm.GameOver("GameOverHistoria");
+
+                            if (SceneManager.GetActiveScene().name == "Supervivencia")
+                            {
+                                gm.GameOver("GameOverSupervivencia");
+                            }
+                            else if (SceneManager.GetActiveScene().name != "PvP" && SceneManager.GetActiveScene().name != "TiroAlBlanco")
+                            {
+                                gm.GameOver("GameOverHistoria");
+                            }
                         }
                     }
                     break;

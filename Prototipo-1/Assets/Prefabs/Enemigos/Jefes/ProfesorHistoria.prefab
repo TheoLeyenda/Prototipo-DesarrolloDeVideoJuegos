@@ -532,47 +532,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 590b4cb61130d1041a28d8c5f2e4e0f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  applyColorShoot: 0
   alturaMaxima: {fileID: 6952972124817809475}
   posicionesDeMovimiento:
   - {fileID: 4947663662221362391}
   - {fileID: 6137518763584006537}
   - {fileID: 1851573682727399707}
   grid: {fileID: 647137326970910676}
-  xpActual: 0
-  xpNededSpecialAttack: 250
-  xpForHit: 0
-  myPrefab: {fileID: 6537675017224524953}
-  barraDeEscudo: {fileID: 0}
+  applyColorShoot: 0
   myHeadSprite: {fileID: 21300000, guid: 830bd73f2e26ded4fb8de1613d60ed01, type: 3}
-  colorShoot: {r: 1, g: 0.9764706, b: 0, a: 1}
-  enableMovement: 0
-  myVictory: 0
-  SpeedJump: 12
-  auxSpeedJump: 12
-  Speed: 20
-  Resistace: 22
-  Gravity: 35
-  delayAttack: 0
-  boxColliderControllerPiernas: {fileID: 0}
-  boxColliderControllerSprite: {fileID: 68460783}
-  boxColliderControllerAgachado: {fileID: 216591628}
-  boxColliderControllerParado: {fileID: 305611084}
-  boxColliderControllerSaltando: {fileID: 1608762725}
-  generadorProyectiles: {fileID: 6133794810958364442}
-  generadorProyectilesAgachado: {fileID: 6133794809507916550}
-  generadorProyectilesParabola: {fileID: 6133794811024449375}
-  generadorProyectilesParabolaAgachado: {fileID: 6133794809644745275}
-  timeStuned: 0
   fraseVictoria: Como diria Confucio, "Aprender sin reflexionar es mal gastar la energia".
+  colorShoot: {r: 1, g: 0.9764706, b: 0, a: 1}
   EnableChargerSpecialAttackForHit: 1
   nameEnemy: Leyenda
   enableColorShootSpecialAttack: 0
   enableDeffence: 1
+  enableMovement: 0
   inCombatPosition: 0
+  barraDeEscudo: {fileID: 0}
+  enableSpecialAttack: 0
   spriteEnemy: {fileID: 0}
   Blindaje: 0
   MaxBlindaje: 0
+  enemyPrefab: {fileID: 6537675017224524953}
   enumsEnemy: {fileID: 6537675016455332423}
   structsEnemys: {fileID: 4841037874113978738}
   SpriteRendererEnemigo: {fileID: 6133794810742301843}
@@ -581,22 +562,42 @@ MonoBehaviour:
   pool: {fileID: 0}
   life: 500
   maxLife: 500
+  xpActual: 0
+  xpNededSpecialAttack: 250
+  xpForHit: 0
   poolParabolaAttack: {fileID: 1341309553992121324}
   poolObjectAttack: {fileID: 8488548913124937324}
+  generadoresProyectiles: {fileID: 6133794810958364442}
+  generadorProyectilesAgachado: {fileID: 6133794809507916550}
+  generadorProyectilParabola: {fileID: 6133794811024449375}
+  generadorProyectilParabolaAgachado: {fileID: 6133794809644745275}
   maxRandomDelayMovement: 0
   minRandomDelayMovement: 0
+  delayAttack: 0
   anguloAtaqueSalto: 0
+  Speed: 20
   auxSpeed: 20
+  SpeedJump: 12
+  auxSpeedJump: 12
+  Resistace: 22
   auxResistace: 22
+  Gravity: 35
   auxGravity: 35
   delayAttackJumping: 0.5
   colliderSprites: {fileID: 6133794810742301842}
+  InitialPosition: {x: 0, y: 0, z: 0}
   pointOfDeath: {x: 0, y: 0, z: 0}
   pointOfCombat: {x: 0, y: 0, z: 0}
   damageCounterAttack: 1
   activateComportamiento: 0
+  boxColliderPiernas: {fileID: 0}
+  boxColliderSprite: {fileID: 68460783}
+  boxColliderControllerAgachado: {fileID: 216591628}
+  boxColliderControllerParado: {fileID: 305611084}
+  boxColliderControllerSaltando: {fileID: 1608762725}
   enableMecanicParabolaAttack: 1
   inAttack: 0
+  myVictory: 0
   DontRestart: 0
   MovePorcentage: 0
   JumpPorcentage: 0
@@ -617,6 +618,7 @@ MonoBehaviour:
   CantCasillasOcupadas_X: 2
   CantCasillasOcupadas_Y: 3
   ColumnaActual: 1
+  timeStuned: 0
   speedChargeSpecialAttack: 10
   NameAnimations:
   - Idle

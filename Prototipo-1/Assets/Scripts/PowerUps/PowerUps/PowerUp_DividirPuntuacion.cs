@@ -47,8 +47,9 @@ public class PowerUp_DividirPuntuacion : PowerUp
             }
         }
     }
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         if (player != null)
         {
             Player.OnDie += CheckDeadTarget;
@@ -58,8 +59,9 @@ public class PowerUp_DividirPuntuacion : PowerUp
             Enemy.OnDie += CheckDeadTarget;
         }
     }
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         if (DisableEffectPowerUp_DividirPuntuacion != null)
         {
             DisableEffectPowerUp_DividirPuntuacion(this);

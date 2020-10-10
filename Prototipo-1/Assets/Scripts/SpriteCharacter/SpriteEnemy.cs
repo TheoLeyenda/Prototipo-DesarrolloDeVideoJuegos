@@ -37,7 +37,7 @@ public class SpriteEnemy : SpriteCharacter
         if (!enemy.myVictory)
         {
             CheckEnumSprite();
-            if (!enemy.myPrefab.activeSelf)
+            if (!enemy.enemyPrefab.activeSelf)
             {
                 animator.Play("Idle");
                 DisableSpecialAttack();
@@ -51,11 +51,11 @@ public class SpriteEnemy : SpriteCharacter
     public void CheckEnumSprite()
     {
             
-        if (enemy.enumsEnemy.estado != EnumsCharacter.EstadoCharacter.muerto)
+        if (enemy.enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.muerto)
         {
-            if (enemy.enumsEnemy.movimiento != EnumsCharacter.Movimiento.AtaqueEspecial
-                    && enemy.enumsEnemy.movimiento != EnumsCharacter.Movimiento.AtaqueEspecialAgachado
-                    && enemy.enumsEnemy.movimiento != EnumsCharacter.Movimiento.AtaqueEspecialSalto)
+            if (enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecial
+                    && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialAgachado
+                    && enemy.enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto)
             {
                 if (ActualSprite == SpriteActual.ContraAtaque)
                 {
@@ -63,43 +63,43 @@ public class SpriteEnemy : SpriteCharacter
                 }
                 else
                 {
-                    if (enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.Saltar)
+                    if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar)
                     {
                         ActualSprite = SpriteActual.Salto;
                     }
-                    else if (enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoAtaque)
+                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
                     {
                         ActualSprite = SpriteActual.SaltoAtaque;
                     }
-                    else if (enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoDefensa)
+                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
                     {
                         ActualSprite = SpriteActual.SaltoDefensa;
                     }
-                    else if (enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.MoverAdelante || enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.MoveToPointCombat)
+                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.MoverAdelante || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.MoveToPointCombat)
                     {
                         ActualSprite = SpriteActual.MoverAdelante;
                     }
-                    else if (enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.MoverAtras)
+                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.MoverAtras)
                     {
                         ActualSprite = SpriteActual.MoverAtras;
                     }
-                    else if (enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.DefensaEnElLugar)
+                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.DefensaEnElLugar)
                     {
                         ActualSprite = SpriteActual.ParadoDefensa;
                     }
-                    else if (enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtacarEnElLugar)
+                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar)
                     {
                         ActualSprite = SpriteActual.ParadoAtaque;
                     }
-                    else if (enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.AgacheDefensa)
+                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa)
                     {
                         ActualSprite = SpriteActual.AgachadoDefensa;
                     }
-                    else if (enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.AgacharseAtaque)
+                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
                     {
                         ActualSprite = SpriteActual.AgachadoAtaque;
                     }
-                    else if (enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.Agacharse)
+                    else if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Agacharse)
                     {
                         ActualSprite = SpriteActual.Agachado;
                     }
@@ -134,11 +134,11 @@ public class SpriteEnemy : SpriteCharacter
             else if (ActualSprite == SpriteActual.ContraAtaque 
                 && enemy.enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Defensivo)
             {
-                if (enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoDefensa)
+                if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
                 {
                     PlayAnimation("Contra Ataque Salto enemigo defensivo");
                 }
-                else if (enemy.GetIsDuck() || enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.AgacheDefensa)
+                else if (enemy.GetIsDuck() || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa)
                 {
                     PlayAnimation("Contra Ataque Agachado enemigo defensivo");
                 }
@@ -151,7 +151,7 @@ public class SpriteEnemy : SpriteCharacter
     }
     public void InSpecialAttack()
     {
-        enemy.enumsEnemy.movimiento = EnumsCharacter.Movimiento.AtaqueEspecial;
+        enemy.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
         enemy.boxColliderControllerAgachado.state = BoxColliderController.StateBoxCollider.Normal;
         enemy.boxColliderControllerParado.state = BoxColliderController.StateBoxCollider.Normal;
         enemy.boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Normal;
@@ -159,7 +159,7 @@ public class SpriteEnemy : SpriteCharacter
     }
     public override void PlayAnimation(string nameAnimation)
     {
-        if (enemy.myPrefab.activeSelf == true && animator != null && !enemy.myVictory)
+        if (enemy.enemyPrefab.activeSelf == true && animator != null && !enemy.myVictory)
         {
             animator.Play(nameAnimation);
         }
@@ -180,17 +180,17 @@ public class SpriteEnemy : SpriteCharacter
     public void DisableSpecialAttack()
     {
         //Debug.Log("ENTRE A LA FUNCION");
-        if (enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.Saltar
-            || enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecialSalto
-            || enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoAtaque
-            || enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoDefensa)
+        if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar
+            || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
+            || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
+            || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoDefensa)
         {
-            enemy.enumsEnemy.movimiento = EnumsCharacter.Movimiento.Saltar;
+            enemy.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
         }
         else
         {
             //Debug.Log("ENTRE");
-            enemy.enumsEnemy.movimiento = EnumsCharacter.Movimiento.Nulo;
+            enemy.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
             enemy.SetDelaySelectMovement(0.1f);
         }
     }
@@ -210,15 +210,15 @@ public class SpriteEnemy : SpriteCharacter
     }
     public void RestartDelayAttackEnemy()
     {
-        if (enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtacarEnElLugar && !enemy.GetIsJumping() 
-            && enemy.SpeedJump >= enemy.GetAuxSpeedJump() 
-            || enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.AgacharseAtaque 
-            && enemy.SpeedJump >= enemy.GetAuxSpeedJump())
+        if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar && !enemy.GetIsJamping() 
+            && enemy.SpeedJump >= enemy.GetAuxSpeedJamp() 
+            || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque 
+            && enemy.SpeedJump >= enemy.GetAuxSpeedJamp())
         {
             enemy.delayAttack = enemy.GetAuxDelayAttack();
         }
-        else if(enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoAtaque
-            || enemy.enumsEnemy.movimiento == EnumsCharacter.Movimiento.Nulo)
+        else if(enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
+            || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
         {
             enemy.delayAttack = enemy.delayAttackJumping;
         }

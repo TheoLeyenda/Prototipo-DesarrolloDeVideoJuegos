@@ -129,7 +129,7 @@ public class ProfesorAnatomia : Enemy
         DialogueController.OnFinishDialog += EnableInitBehaviour;
         Grid.OnSettingTitileo += SetTargetGrid;
         //InitialPosition = new Vector3(5.17f, -3.42f, 0f);
-        myPrefab.transform.position = new Vector3(transform.position.x, -3.42f, 0f);
+        enemyPrefab.transform.position = new Vector3(transform.position.x, -3.42f, 0f);
         Idied = false;
     }
     protected override void OnDisable()
@@ -155,7 +155,7 @@ public class ProfesorAnatomia : Enemy
         {
             speedChargeSpecialAttack = 1;
         }
-        myPrefab.transform.position = new Vector3(transform.position.x, -3.42f, 0f);
+        enemyPrefab.transform.position = new Vector3(transform.position.x, -3.42f, 0f);
     }
 
     // Update is called once per frame
@@ -183,7 +183,7 @@ public class ProfesorAnatomia : Enemy
                         Idle();
                         break;
                     case (int)EstadoProfesorAnatomia.MasiveAttack:
-                        if (!OnProfesorAnatomia && InCombatPoint != null && myPrefab.transform.position.x <= 5.5f)
+                        if (!OnProfesorAnatomia && InCombatPoint != null && enemyPrefab.transform.position.x <= 5.5f)
                         {
                             //Debug.Log("ENTRE AL COMBATE");
                             if (!OnProfesorAnatomia)
@@ -398,21 +398,21 @@ public class ProfesorAnatomia : Enemy
                     //TARGET IZQUIERDO
                     SetIsJumping(false);
                     SetIsDuck(false);
-                    CheckSpecialAttackEnemyController(0, 0, generadorProyectilesParabola);
+                    CheckSpecialAttackEnemyController(0, 0, generadorProyectilParabola);
                 }
                 else if (porcentage > porcentageLeftTarget && porcentage <= porcentageLeftTarget + porcentageCentralTarget)
                 {
                     //TARGET CENTRAL
                     SetIsJumping(false);
                     SetIsDuck(false);
-                    CheckSpecialAttackEnemyController(1, 1, generadorProyectilesParabola);
+                    CheckSpecialAttackEnemyController(1, 1, generadorProyectilParabola);
                 }
                 else
                 {
                     //TARGET DERECHO
                     SetIsJumping(false);
                     SetIsDuck(false);
-                    CheckSpecialAttackEnemyController(2, 2, generadorProyectilesParabola);
+                    CheckSpecialAttackEnemyController(2, 2, generadorProyectilParabola);
                 }
             }
             else
@@ -424,21 +424,21 @@ public class ProfesorAnatomia : Enemy
                     //TARGET IZQUIERDO
                     SetIsJumping(false);
                     SetIsDuck(true);
-                    CheckSpecialAttackEnemyController(0, 0, generadorProyectilesParabolaAgachado);
+                    CheckSpecialAttackEnemyController(0, 0, generadorProyectilParabolaAgachado);
                 }
                 else if (porcentage > porcentageLeftTarget && porcentage <= porcentageLeftTarget + porcentageCentralTarget)
                 {
                     //TARGET CENTRAL
                     SetIsJumping(false);
                     SetIsDuck(true);
-                    CheckSpecialAttackEnemyController(1, 1, generadorProyectilesParabolaAgachado);
+                    CheckSpecialAttackEnemyController(1, 1, generadorProyectilParabolaAgachado);
                 }
                 else
                 {
                     //TARGET DERECHO
                     SetIsJumping(false);
                     SetIsDuck(true);
-                    CheckSpecialAttackEnemyController(2, 2, generadorProyectilesParabolaAgachado);
+                    CheckSpecialAttackEnemyController(2, 2, generadorProyectilParabolaAgachado);
                 }
             }
         }
@@ -480,8 +480,8 @@ public class ProfesorAnatomia : Enemy
         else 
         {
             tipoProyectil = Proyectil.typeProyectil.ProyectilNormal;
-            go.transform.rotation = generadorProyectiles.transform.rotation;
-            go.transform.position = generadorProyectiles.transform.position;
+            go.transform.rotation = generadoresProyectiles.transform.rotation;
+            go.transform.position = generadoresProyectiles.transform.position;
             proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
         }
         if (applyColorShoot == ApplyColorShoot.None || applyColorShoot == ApplyColorShoot.Stela)

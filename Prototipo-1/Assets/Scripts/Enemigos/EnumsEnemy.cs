@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class EnumsEnemy : EnumsCharacter
+public class EnumsEnemy : MonoBehaviour
 {
     public enum TiposDeEnemigo
     {
@@ -30,7 +30,53 @@ public class EnumsEnemy : EnumsCharacter
         Nulo,
         Count
     }
-   
+    public enum Movimiento
+    {
+        Nulo,
+        AtacarEnElLugar,
+        AgacharseAtaque,
+        SaltoAtaque,
+        MoverAtras,
+        MoverAdelante,
+        Saltar,
+        DefensaEnElLugar,
+        SaltoDefensa,
+        AgacheDefensa,
+        Agacharse,
+        AtaqueEspecial,
+        AtaqueEspecialAgachado,
+        AtaqueEspecialSalto,
+        MoveToPointCombat,
+        MoveToPointDeath,
+        Count,
+    }
+    public enum EstadoEnemigo
+    {
+        vivo,
+        Atrapado,
+        muerto,
+        Count,
+    }
     public TiposDeJefe typeBoss;
     public TiposDeEnemigo typeEnemy;
+    [SerializeField]
+    private Movimiento movement;
+    private EstadoEnemigo stateEnemy;
+
+    public void SetMovement(Movimiento mov)
+    {
+        movement = mov;
+    }
+    public void SetStateEnemy(EstadoEnemigo _stateEnemy)
+    {
+        stateEnemy = _stateEnemy;
+    }
+    public Movimiento GetMovement()
+    {
+        return movement;
+    }
+    public EstadoEnemigo GetStateEnemy()
+    {
+        return stateEnemy;
+    }
 }

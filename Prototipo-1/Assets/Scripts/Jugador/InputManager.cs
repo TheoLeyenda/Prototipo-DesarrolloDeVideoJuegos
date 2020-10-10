@@ -162,7 +162,7 @@ public class InputManager : MonoBehaviour
 
     public void CheckParabolaAttack(string inputParabolaAttack, string inputDeffenceButton,ref bool enableMovement, Player player)
     {
-        if (InputPlayerController.GetInputButtonDown(inputParabolaAttack) && player.enableAttack
+        if (InputPlayerController.GetInputButtonDown(inputParabolaAttack) && player.GetEnableAttack()
             && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante
             && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
             && !InputPlayerController.GetInputButton(inputDeffenceButton))
@@ -311,7 +311,7 @@ public class InputManager : MonoBehaviour
             
         if (!inPause)
         {
-            if (InputPlayerController.GetInputButtonDown(inputAttackButton) && player.enableAttack
+            if (InputPlayerController.GetInputButtonDown(inputAttackButton) && player.GetEnableAttack()
                 && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante
                 && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras
                 && !InputPlayerController.GetInputButton(inputDeffenseButton))
@@ -355,10 +355,10 @@ public class InputManager : MonoBehaviour
             {
                 player.SetControllerJoystick(true);
                 player.Deffence();
-                player.boxColliderControllerAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
-                player.boxColliderControllerParado.state = BoxColliderController.StateBoxCollider.Defendido;
-                player.boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
-                player.boxColliderControllerSprite.state = BoxColliderController.StateBoxCollider.Defendido;
+                player.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Defendido;
+                player.boxColliderParado.state = BoxColliderController.StateBoxCollider.Defendido;
+                player.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Defendido;
+                player.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Defendido;
             }
             else
             {
@@ -371,10 +371,10 @@ public class InputManager : MonoBehaviour
                         player.spritePlayerActual.spriteRenderer.color = Color.white;
                     }
                 }
-                player.boxColliderControllerAgachado.state = BoxColliderController.StateBoxCollider.Normal;
-                player.boxColliderControllerParado.state = BoxColliderController.StateBoxCollider.Normal;
-                player.boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Normal;
-                player.boxColliderControllerSprite.state = BoxColliderController.StateBoxCollider.Normal;
+                player.boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Normal;
+                player.boxColliderParado.state = BoxColliderController.StateBoxCollider.Normal;
+                player.boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Normal;
+                player.boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
                 player.GetPlayerPvP().stateDeffence = Player_PvP.StateDeffence.NormalDeffense;
                 player.barraDeEscudo.AddPorcentageBar();
                 if (player.barraDeEscudo.GetValueShild() <= player.barraDeEscudo.porcentageNededForDeffence)

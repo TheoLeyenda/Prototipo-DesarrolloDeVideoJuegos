@@ -16,6 +16,7 @@ public class PowerUp : MonoBehaviour
         PowerUpDelay,
         PowerUpDisable,
     }
+    public bool disableCollision;
     [HideInInspector]
     public TypePowerUp typePowerUp;
     public TypeCheckCollision typeCheckCollision;
@@ -37,7 +38,7 @@ public class PowerUp : MonoBehaviour
         auxDelayEffect = delayEffect;
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         PowerUp_VidaExtra.DisablePowerUp += DisablePowerUpEffect;
         PowerUp_SuperVelocidad.DisablePowerUp += DisablePowerUpEffect;
@@ -50,7 +51,7 @@ public class PowerUp : MonoBehaviour
         Enemy.OnDie += CheckDeadTarget;
         Player.OnDie += CheckDeadTarget;
     }
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         OnDisablePowerUpEffect(this);
         PowerUp_VidaExtra.DisablePowerUp -= DisablePowerUpEffect;
@@ -81,17 +82,11 @@ public class PowerUp : MonoBehaviour
     }
     public virtual void CheckDeadTarget(Enemy e)
     {
-        if(enemy == e)
-        {
-            OnDisablePowerUpEffect(this);
-        }
+        OnDisablePowerUpEffect(this);
     }
     public virtual void CheckDeadTarget(Player p)
     {
-        if (player == p)
-        {
-            OnDisablePowerUpEffect(this);
-        }
+        OnDisablePowerUpEffect(this);
     }
     public virtual void DisableEffect() { }
     public virtual void ActivatedPowerUp() { }

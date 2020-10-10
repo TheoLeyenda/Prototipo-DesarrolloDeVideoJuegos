@@ -33,7 +33,7 @@ public class RayoEdison : MonoBehaviour
     }
     public void DisableMe()
     {
-        Debug.Log("ENTRE AL DESTRUIR RAYO");
+        //Debug.Log("ENTRE AL DESTRUIR RAYO");
         if (pool != null)
         {
             pool.Recycle(gameObject);

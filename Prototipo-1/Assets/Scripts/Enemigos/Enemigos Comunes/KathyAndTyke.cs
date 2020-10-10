@@ -17,7 +17,7 @@ public class KathyAndTyke : Enemy
     {
         base.OnEnable();
         limo_gameObject.gameObject.SetActive(false);
-        enumsEnemy.movimiento = EnumsCharacter.Movimiento.MoveToPointCombat;
+        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
         Player.OnDie += AnimationVictory;
     }
     protected override void OnDisable() 
@@ -55,18 +55,18 @@ public class KathyAndTyke : Enemy
             delaySelectMovement = 0.1f;
         }
         CheckInSpecialAttack();
-        if (enumsEnemy.movimiento == EnumsEnemy.Movimiento.MoveToPointCombat)
+        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.MoveToPointCombat)
         {
             delaySelectMovement = 0.1f;
         }
-        if (transform.position.y > InitialPosition.y && enumsEnemy.movimiento == EnumsEnemy.Movimiento.AtaqueEspecial)
+        if (transform.position.y > InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
         {
-            enumsEnemy.movimiento = EnumsEnemy.Movimiento.Nulo;
+            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
             SpeedJump = -1f;
             CheckMovement();
             delaySelectMovement = 0.7f;
         }
-        if (enumsEnemy.movimiento == EnumsEnemy.Movimiento.AtaqueEspecial && xpActual < xpNededSpecialAttack)
+        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial && xpActual < xpNededSpecialAttack)
         {
             delaySelectMovement = 0;
             CheckMovement();
@@ -100,7 +100,7 @@ public class KathyAndTyke : Enemy
         if (delayAttack > 0)
         {
             delayAttack = delayAttack - Time.deltaTime;
-            if (enumsEnemy.movimiento == EnumsEnemy.Movimiento.Saltar || enumsEnemy.movimiento == EnumsEnemy.Movimiento.SaltoAtaque)
+            if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
             {
                 spriteEnemy.PlayAnimation("Salto famosa");
             }
@@ -113,11 +113,11 @@ public class KathyAndTyke : Enemy
     public override void AnimationAttack()
     {
 
-        if (myPrefab.activeSelf == true)
+        if (enemyPrefab.activeSelf == true)
         {
             if (!inCombatPosition)
             {
-                enumsEnemy.movimiento = EnumsEnemy.Movimiento.MoveToPointCombat;
+                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
                 return;
             }
             if (!inAttack)
@@ -131,17 +131,17 @@ public class KathyAndTyke : Enemy
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
                     || !enableMecanicParabolaAttack)
                 {*/
-                if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoAtaque
-                || enumsEnemy.movimiento == EnumsCharacter.Movimiento.Nulo)
+                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
+                || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
                 {
                     //Debug.Log("ATAQUE SALTO");
                     spriteEnemy.GetAnimator().Play("Ataque salto famosa");
                     inAttack = true;
                     SetIsDuck(false);
                 }
-                else if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtacarEnElLugar
-                    && !GetIsJumping() && SpeedJump >= GetAuxSpeedJump()
-                    && enumsEnemy.movimiento != EnumsCharacter.Movimiento.AgacharseAtaque
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
+                    && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp()
+                    && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque
                     && !GetIsDuck())
                 {
                     //Debug.Log("ATAQUE PARADO");
@@ -149,7 +149,7 @@ public class KathyAndTyke : Enemy
                     inAttack = true;
                     SetIsDuck(false);
                 }
-                else if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.AgacharseAtaque && GetIsDuck() && !GetIsJumping() && SpeedJump >= GetAuxSpeedJump())
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && GetIsDuck() && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
                 {
                     //Debug.Log("ATAQUE AGACHADO");
                     spriteEnemy.GetAnimator().Play("Ataque agachado famosa");
@@ -161,19 +161,19 @@ public class KathyAndTyke : Enemy
                     enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
                     spriteEnemy.PlayAnimation("Salto famosa");
                 }*/
-                else if ((enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecial)
+                else if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
                     && transform.position.y <= InitialPosition.y && !GetIsDuck()
                     && spriteEnemy.spriteRenderer.sprite.name != "KT - Crouch Def" && spriteEnemy.spriteRenderer.name != "KT - Crouch"
                     && spriteEnemy.spriteRenderer.sprite.name != "KT - Jump" && spriteEnemy.spriteRenderer.sprite.name != "KT - Jump Def"
-                    && SpeedJump >= GetAuxSpeedJump()
+                    && SpeedJump >= GetAuxSpeedJamp()
                     && spriteEnemy.spriteRenderer.sprite.name != "F1 KT-Couch")
                 {
-                    switch (enumsEnemy.movimiento)
+                    switch (enumsEnemy.GetMovement())
                     {
-                        case EnumsCharacter.Movimiento.AtaqueEspecial:
+                        case EnumsEnemy.Movimiento.AtaqueEspecial:
                             spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", true);
                             spriteEnemy.GetAnimator().Play("PreparandoAtaqueEspecial");
-                            enumsEnemy.movimiento = EnumsCharacter.Movimiento.AtaqueEspecial;
+                            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
                             inAttack = true;
                             xpActual = 0;
                             CheckMovement();
@@ -181,12 +181,12 @@ public class KathyAndTyke : Enemy
                             break;
                     }
                 }
-                else if ((enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecialSalto
-                    || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecial
-                    || enumsEnemy.movimiento == EnumsCharacter.Movimiento.Nulo)
+                else if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
                     && transform.position.y > InitialPosition.y)
                 {
-                    enumsEnemy.movimiento = EnumsCharacter.Movimiento.Saltar;
+                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
                     spriteEnemy.GetAnimator().Play("Salto famosa");
                     CheckMovement();
                     if (transform.position.y > InitialPosition.y)
@@ -195,22 +195,22 @@ public class KathyAndTyke : Enemy
                     }
                     //Debug.Log("ENTRO AL SALTANDO");
                 }
-                else if ((enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecialAgachado
-                    || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecial)
+                else if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
+                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
                     && (spriteEnemy.spriteRenderer.name == "KT - Crouch"
                     || spriteEnemy.spriteRenderer.sprite.name == "KT - Crouch Def"
                     || spriteEnemy.spriteRenderer.sprite.name == "F1 KT-Couch"))
                 {
                     if (CounchDefense)
                     {
-                        enumsEnemy.movimiento = EnumsCharacter.Movimiento.AgacheDefensa;
+                        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AgacheDefensa);
                         spriteEnemy.GetAnimator().Play("Agachado Defensa famosa");
                         delaySelectMovement = 0.5f;
 
                     }
                     else
                     {
-                        enumsEnemy.movimiento = EnumsCharacter.Movimiento.Agacharse;
+                        enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Agacharse);
                         spriteEnemy.GetAnimator().Play("Agachado famosa");
                         delaySelectMovement = 0.5f;
                     }
@@ -219,11 +219,11 @@ public class KathyAndTyke : Enemy
                     //Debug.Log("ENTRO AL AGACHADO");
 
                 }
-                else if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecial)
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
                 {
                     spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", true);
                     spriteEnemy.GetAnimator().Play("PreparandoAtaqueEspecial");
-                    enumsEnemy.movimiento = EnumsCharacter.Movimiento.AtaqueEspecial;
+                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
                     inAttack = true;
                     xpActual = 0;
                     CheckMovement();
@@ -234,38 +234,38 @@ public class KathyAndTyke : Enemy
             }
             else if (valueAttack < parabolaAttack)
             {
-                if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.SaltoAtaque && delayAttack <= 0)
+                if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && delayAttack <= 0)
                 {
                     //Debug.Log("ATAQUE PARABOLA SALTO");
                     spriteEnemy.PlayAnimation("Ataque Parabola salto famosa");
                     inAttack = true;
                     SetIsDuck(false);
                 }
-                else if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtacarEnElLugar
-                    && !GetIsJumping() && SpeedJump >= GetAuxSpeedJump() && delayAttack <= 0)
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
+                    && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp() && delayAttack <= 0)
                 {
                     //Debug.Log("ATAQUE PARABOLA NORMAL");
                     spriteEnemy.PlayAnimation("Ataque Parabola parado famosa");
                     inAttack = true;
                     SetIsDuck(false);
                 }
-                else if (enumsEnemy.movimiento == EnumsCharacter.Movimiento.AgacharseAtaque && delayAttack <= 0)
+                else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && delayAttack <= 0)
                 {
                     //Debug.Log("ATAQUE PARABOLA AGACHADO");
                     spriteEnemy.PlayAnimation("Ataque Parabola agachado famosa");
                     inAttack = true;
                     SetIsDuck(true);
                 }
-                else if ((enumsEnemy.movimiento == EnumsCharacter.Movimiento.AtaqueEspecial)
+                else if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
                     && transform.position.y <= InitialPosition.y && !GetIsDuck()
                     && spriteEnemy.spriteRenderer.sprite.name != "KT - Crouch Def" && spriteEnemy.spriteRenderer.name != "KT - Crouch"
                     && spriteEnemy.spriteRenderer.sprite.name != "KT - Jump" && spriteEnemy.spriteRenderer.sprite.name != "KT - Jump Def"
-                    && SpeedJump >= GetAuxSpeedJump()
+                    && SpeedJump >= GetAuxSpeedJamp()
                     && spriteEnemy.spriteRenderer.sprite.name != "F1 KT-Couch")
                 {
                     spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", true);
                     spriteEnemy.GetAnimator().Play("PreparandoAtaqueEspecial");    
-                    enumsEnemy.movimiento = EnumsCharacter.Movimiento.AtaqueEspecial;
+                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
                     inAttack = true;
                     xpActual = 0;
                     CheckMovement();
@@ -286,11 +286,11 @@ public class KathyAndTyke : Enemy
             limo_gameObject.gameObject.SetActive(true);
             limo_gameObject.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
             spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", false);
-            enumsEnemy.movimiento = EnumsCharacter.Movimiento.AtaqueEspecial;
+            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
         }
         else if (transform.position.y > InitialPosition.y)
         {
-            enumsEnemy.movimiento = EnumsCharacter.Movimiento.Nulo;
+            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
             SpeedJump = -1f;
             CheckMovement();
             delaySelectMovement = 0.7f;
@@ -324,7 +324,7 @@ public class KathyAndTyke : Enemy
                     proyectil.damage = proyectil.damageCounterAttack;
                 }
             }
-            if (!GetIsDuck() && !specialAttack && enumsEnemy.movimiento != EnumsCharacter.Movimiento.AgacharseAtaque)
+            if (!GetIsDuck() && !specialAttack && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque)
             {
                 tipoProyectil = Proyectil.typeProyectil.ProyectilNormal;
                 if (jampAttack)
@@ -332,11 +332,11 @@ public class KathyAndTyke : Enemy
                     tipoProyectil = Proyectil.typeProyectil.ProyectilAereo;
                     shootDown = true;
                 }
-                go.transform.rotation = generadorProyectiles.transform.rotation;
-                go.transform.position = generadorProyectiles.transform.position;
+                go.transform.rotation = generadoresProyectiles.transform.rotation;
+                go.transform.position = generadoresProyectiles.transform.position;
                 proyectil.posicionDisparo = Proyectil.PosicionDisparo.PosicionMedia;
             }
-            else if (!specialAttack && GetIsDuck() || enumsEnemy.movimiento == EnumsCharacter.Movimiento.AgacharseAtaque)
+            else if (!specialAttack && GetIsDuck() || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque)
             {
                 tipoProyectil = Proyectil.typeProyectil.ProyectilBajo;
                 go.transform.rotation = generadorProyectilesAgachado.transform.rotation;
