@@ -21,6 +21,7 @@ public class MenuDePausa : MonoBehaviour
     private GameData gd;
     private MenuActual menuActual;
     private bool soundPause = false;
+    [SerializeField] private bool useLoadingScene = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -80,12 +81,24 @@ public class MenuDePausa : MonoBehaviour
                 gm.restartLevel = true;
                 if (gm.restartLevel)
                 {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    if (useLoadingScene)
+                    {
+                        LevelLoader.nextLevel = SceneManager.GetActiveScene().name;
+                        SceneManager.LoadScene("LoadScene");
+                    }
+                    else
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
             }
             else
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                if (useLoadingScene)
+                {
+                    LevelLoader.nextLevel = SceneManager.GetActiveScene().name;
+                    SceneManager.LoadScene("LoadScene");
+                }
+                else
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
     }

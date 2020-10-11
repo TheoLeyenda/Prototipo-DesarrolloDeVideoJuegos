@@ -53,7 +53,8 @@ public class PowerUp : MonoBehaviour
     }
     protected virtual void OnDisable()
     {
-        OnDisablePowerUpEffect(this);
+        if(OnDisablePowerUpEffect != null)
+            OnDisablePowerUpEffect(this);
         PowerUp_VidaExtra.DisablePowerUp -= DisablePowerUpEffect;
         PowerUp_SuperVelocidad.DisablePowerUp -= DisablePowerUpEffect;
         PowerUp_QuietoAhi.DisablePowerUp -= DisablePowerUpEffect;

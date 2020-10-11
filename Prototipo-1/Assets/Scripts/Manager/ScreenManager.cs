@@ -23,6 +23,7 @@ public class ScreenManager : MonoBehaviour
     }
     public void Multijugador()
     {
+        LevelLoader.nextLevel = "Multijugador";
         SceneManager.LoadScene("Multijugador");
         //SceneManager.LoadScene("Ejemplo", LoadSceneMode.Additive);
            
@@ -39,20 +40,24 @@ public class ScreenManager : MonoBehaviour
                 && gm.structGameManager.gm_dataCombatPvP.modoElegido == StructGameManager.ModoPvPElegido.TiroAlBlanco)
             {
                 gameData.gd = GameData.GameMode.PvP;
+                LevelLoader.nextLevel = "SelectPlayerScene";
                 SceneManager.LoadScene("SelectPlayerScene");
             }
         }
     }
     public void LoadScene(string name)
     {
+        LevelLoader.nextLevel = name;
         SceneManager.LoadScene(name);
     }
     public void Controles()
     {
+        LevelLoader.nextLevel = "Controles";
         SceneManager.LoadScene("Controles");
     }
     public void Creditos()
     {
+        LevelLoader.nextLevel = "Creditos";
         SceneManager.LoadScene("Creditos");
     }
     public void HighScore()
@@ -60,6 +65,7 @@ public class ScreenManager : MonoBehaviour
         gm.CanvasGameOver.SetActive(false);
         if (!gm.CanvasGameOver.activeSelf)
         {
+            LevelLoader.nextLevel = "HighScore";
             SceneManager.LoadScene("HighScore");
         }
     }
@@ -75,7 +81,8 @@ public class ScreenManager : MonoBehaviour
             if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
             {
                 gameData.gd = GameData.GameMode.History;
-                SceneManager.LoadScene("Nivel " + numerLevel);
+                LevelLoader.nextLevel = "Nivel " + numerLevel;
+                SceneManager.LoadScene("LoadScene");
             }
         }
     }
@@ -116,25 +123,28 @@ public class ScreenManager : MonoBehaviour
             if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
             {
                 gameData.gd = GameData.GameMode.History;
-                SceneManager.LoadScene("Nivel " + (int)(gameData.currentLevel + 1));
+                LevelLoader.nextLevel = "Nivel " + (int)(gameData.currentLevel + 1);
+                SceneManager.LoadScene("LoadScene");
             }
         }
     }
     public void SelectPlayerScene()
     {
+        LevelLoader.nextLevel = "SelectPlayerScene";
         SceneManager.LoadScene("SelectPlayerScene");
     }
-    public void Prueba()
-    {
-        SceneManager.LoadScene("SampleScene");
-    }
+    //public void Prueba()
+    //{
+    //    SceneManager.LoadScene("SampleScene");
+    //}
     public void Supervivencia()
     {
         gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Supervivencia;
         if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Supervivencia)
         {
             gameData.gd = GameData.GameMode.Survival;
-            SceneManager.LoadScene("Supervivencia");
+            LevelLoader.nextLevel = "Supervivencia";
+            SceneManager.LoadScene("LoadScene");
         }
     }
     public void Salir()
@@ -199,6 +209,7 @@ public class ScreenManager : MonoBehaviour
             if (idListaNiveles == -1 && gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Nulo)
             {
                 gameData.gd = GameData.GameMode.PvP;
+                LevelLoader.nextLevel = "SelectPlayerScene";
                 SceneManager.LoadScene("SelectPlayerScene");
             }
         }
@@ -219,6 +230,7 @@ public class ScreenManager : MonoBehaviour
             if (!gm.CanvasGameOver.activeSelf)
             {
                 gameData.gd = GameData.GameMode.None;
+                LevelLoader.nextLevel = "MENU";
                 SceneManager.LoadScene("MENU");
             }
         }

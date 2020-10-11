@@ -51,11 +51,13 @@ public class ConfiguracionPartida : MonoBehaviour
     {
         if (gm.structGameManager.gm_dataCombatPvP.modoElegido == StructGameManager.ModoPvPElegido.PvP)
         {
-            SceneManager.LoadScene("PvP");
+            LevelLoader.nextLevel = "PvP";
+            SceneManager.LoadScene("LoadScene");
         }
         else if (gm.structGameManager.gm_dataCombatPvP.modoElegido == StructGameManager.ModoPvPElegido.TiroAlBlanco)
         {
-            SceneManager.LoadScene("TiroAlBlanco");
+            LevelLoader.nextLevel = "TiroAlBlanco";
+            SceneManager.LoadScene("LoadScene");
         }
     }
     private void Update()
