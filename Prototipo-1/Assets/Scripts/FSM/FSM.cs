@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FSM : MonoBehaviour
+public class FSM
 {
     // Start is called before the first frame update
     private int[,] fsm;

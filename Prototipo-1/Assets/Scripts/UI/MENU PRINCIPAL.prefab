@@ -640,7 +640,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -3099,7 +3099,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -3234,7 +3234,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -3628,7 +3628,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -3842,7 +3842,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -3977,7 +3977,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -4175,6 +4175,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ControladorDeInput
       objectReference: {fileID: 0}
+    - target: {fileID: 5758012208329972734, guid: 60ad38848a8bb984c96bb8ff2c1e9775,
+        type: 3}
+      propertyPath: m_FirstSelected
+      value: 
+      objectReference: {fileID: 1107006081261517647}
     - target: {fileID: 5758012208329972732, guid: 60ad38848a8bb984c96bb8ff2c1e9775,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4230,11 +4235,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5758012208329972734, guid: 60ad38848a8bb984c96bb8ff2c1e9775,
-        type: 3}
-      propertyPath: m_FirstSelected
-      value: 
-      objectReference: {fileID: 1107006081261517647}
     - target: {fileID: 5758012208329972733, guid: 60ad38848a8bb984c96bb8ff2c1e9775,
         type: 3}
       propertyPath: m_ForceModuleActive
@@ -4255,6 +4255,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1107006081141894832}
     m_Modifications:
+    - target: {fileID: 6861449461201696388, guid: 8eec066ac8547e84f8600266e253a367,
+        type: 3}
+      propertyPath: m_Name
+      value: Controles
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306984205753419512, guid: 8eec066ac8547e84f8600266e253a367,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ActivateMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306984205753419512, guid: 8eec066ac8547e84f8600266e253a367,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 550043677540186957, guid: 8eec066ac8547e84f8600266e253a367,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4188121720346866150, guid: 8eec066ac8547e84f8600266e253a367,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4360,10 +4380,45 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6861449461201696388, guid: 8eec066ac8547e84f8600266e253a367,
+    - target: {fileID: 4539484663755829510, guid: 8eec066ac8547e84f8600266e253a367,
         type: 3}
-      propertyPath: m_Name
-      value: Controles
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539484663755829510, guid: 8eec066ac8547e84f8600266e253a367,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539484663755829510, guid: 8eec066ac8547e84f8600266e253a367,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539484663755829510, guid: 8eec066ac8547e84f8600266e253a367,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624882395586653875, guid: 8eec066ac8547e84f8600266e253a367,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624882395586653875, guid: 8eec066ac8547e84f8600266e253a367,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624882395586653875, guid: 8eec066ac8547e84f8600266e253a367,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624882395586653875, guid: 8eec066ac8547e84f8600266e253a367,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2510516389022368359, guid: 8eec066ac8547e84f8600266e253a367,
         type: 3}
@@ -4379,56 +4434,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8624882395586653875, guid: 8eec066ac8547e84f8600266e253a367,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8624882395586653875, guid: 8eec066ac8547e84f8600266e253a367,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8624882395586653875, guid: 8eec066ac8547e84f8600266e253a367,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8624882395586653875, guid: 8eec066ac8547e84f8600266e253a367,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4539484663755829510, guid: 8eec066ac8547e84f8600266e253a367,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4539484663755829510, guid: 8eec066ac8547e84f8600266e253a367,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4539484663755829510, guid: 8eec066ac8547e84f8600266e253a367,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4539484663755829510, guid: 8eec066ac8547e84f8600266e253a367,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3306984205753419512, guid: 8eec066ac8547e84f8600266e253a367,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ActivateMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 3306984205753419512, guid: 8eec066ac8547e84f8600266e253a367,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7308691236135811363, guid: 8eec066ac8547e84f8600266e253a367,
         type: 3}
@@ -4451,11 +4456,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1677640258463861161, guid: 8eec066ac8547e84f8600266e253a367,
-        type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 550043677540186957, guid: 8eec066ac8547e84f8600266e253a367,
         type: 3}
       propertyPath: m_RaycastTarget
       value: 0

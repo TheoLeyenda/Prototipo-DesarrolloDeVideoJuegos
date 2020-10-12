@@ -252,13 +252,13 @@ public class Player : Character
     }
     public void AnimationVictory(Player p)
     {
-        if (p.PD.lifePlayer <= 0 && p != this && transform.position.y <= InitialPosition.y)
+        if (p.PD.lifePlayer <= 0 && p != this && transform.position.y <= InitialPosition.y && PD.lifePlayer > 0)
         {
             spritePlayerActual.GetAnimator().Play("Victory");
             enableMovement = false;
             myVictory = true;
         }
-        else if(p.PD.lifePlayer <= 0 && p != this)
+        else if(p.PD.lifePlayer <= 0 && p != this && PD.lifePlayer > 0)
         {
             weitVictory = true;
         }

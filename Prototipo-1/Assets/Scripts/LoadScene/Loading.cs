@@ -6,6 +6,8 @@ public class Loading : MonoBehaviour
 {
     [SerializeField] private float speedLoad;
 
+    [SerializeField]private bool usePanelTransitions = true;
+    [SerializeField]private Transitions panelTransitions;
     public float porcentageLoad = 0;
     [HideInInspector]public float maxPorcentage = 99;
     string nameloadLevel = LevelLoader.nextLevel;
@@ -21,13 +23,20 @@ public class Loading : MonoBehaviour
         if (porcentageLoad < maxPorcentage)
         {
             porcentageLoad = porcentageLoad + Time.deltaTime * speedLoad;
-            if (!loadScene && porcentageLoad >= minPorcentageChackLoadScene + 1)
+            if (!usePanelTransitions && !loadScene && porcentageLoad >= minPorcentageChackLoadScene + 1)
             {
                 loadScene = true;
                 SceneManager.LoadSceneAsync(nameloadLevel);
             }
         }
         else
+        {
             porcentageLoad = maxPorcentage;
+            if (!loadScene && usePanelTransitions)
+            {
+                loadScene = true;
+                panelTransitions.LoadScene(nameloadLevel);
+            }
+        }
     }
 }

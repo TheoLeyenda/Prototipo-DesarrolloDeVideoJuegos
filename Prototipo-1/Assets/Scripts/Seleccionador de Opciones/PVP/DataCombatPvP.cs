@@ -41,6 +41,8 @@ public class DataCombatPvP : MonoBehaviour
     }
     //LAS LISTAS DE Player1 y Player2 DEBEN SER INICIALIZADAs EN EL MISMO ORDEN QUE EL ENUMERADOR Player_Selected.
     public UI_Manager uI_Manager;
+    public GameObject uI_Player1;
+    public GameObject uI_Player2;
 
     public List<GameObject> Players1;
     public List<GameObject> Players2;
@@ -210,7 +212,9 @@ public class DataCombatPvP : MonoBehaviour
             prefabWinPlayer2.SetActive(true);
             spritePlayer1Win.sprite = spriteWining[(int)player1_selected];
             spritePlayer2Win.sprite = spriteWining[(int)player2_selected];
-            uI_Manager.gameObject.SetActive(false);
+            //uI_Manager.gameObject.SetActive(false);
+            uI_Player1.SetActive(false);
+            uI_Player2.SetActive(false);
             player1.gameObject.SetActive(false);
             player2.gameObject.SetActive(false);
             player1.gameObject.SetActive(false);
@@ -244,7 +248,9 @@ public class DataCombatPvP : MonoBehaviour
             prefabPlayerWin.SetActive(true);
             prefabPlayerLose.SetActive(false);
             spritePlayerWin.sprite = spriteWining[playerSelected];
-            uI_Manager.gameObject.SetActive(false);
+            //uI_Manager.gameObject.SetActive(false);
+            uI_Player1.SetActive(false);
+            uI_Player2.SetActive(false);
             player1.gameObject.SetActive(false);
             player2.gameObject.SetActive(false);
             player1.eventWise.StartEvent("fuego_termina");

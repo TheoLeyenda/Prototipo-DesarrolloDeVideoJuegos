@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
         ByTime,
         Count,
     }
+    [SerializeField] private Transitions panelTransitions;
     public WaysToLevelUp waysToLevelUp = WaysToLevelUp.ByTime;
     public bool NivelFinal;
     public string NameFinishSceneStoryMode;
@@ -62,6 +63,8 @@ public class LevelManager : MonoBehaviour
     {
         Player.OnDie += EnableGameOver;
         ActivatorDialogueManager.OnDialogueVictoryEnemyActivated += SwitchWaysToLevelUp;
+
+        Init();
     }
     private void OnDisable()
     {
@@ -69,8 +72,10 @@ public class LevelManager : MonoBehaviour
         ActivatorDialogueManager.OnDialogueVictoryEnemyActivated -= SwitchWaysToLevelUp;
         waysToLevelUp = WaysToLevelUp.ByTime;
     }
-    private void Start()
+    void Init()
     {
+        GameObject go = GameObject.FindGameObjectWithTag("LoadPanel");
+        panelTransitions = go.GetComponent<Transitions>();
         gameData = GameData.instaceGameData;
         auxDelayPassLevel = delayPassLevel;
         if (InitDialog)
@@ -83,10 +88,7 @@ public class LevelManager : MonoBehaviour
         }
         //Level = 1;
         ObjectiveOfPassLevel = 1;
-        
-
     }
-    
     void Update()
     {
         if (hablador_Enemy == null || hablador_Player == null && InitDialog)
@@ -155,7 +157,7 @@ public class LevelManager : MonoBehaviour
     }
     public void CheckPassGameOver()
     {
-        if (goToGameOver)
+        if (goToGameOver && LevelLoader.nextLevel != "MENU")
         {
             goToGameOver = false;
             switch (waysToLevelUp) 
@@ -168,11 +170,17 @@ public class LevelManager : MonoBehaviour
                             delayPassLevel = auxDelayPassLevel;
                             if (SceneManager.GetActiveScene().name == "Supervivencia")
                             {
-                                gm.GameOver("GameOverSupervivencia");
+                                if (panelTransitions != null)
+                                    panelTransitions.LoadScene("GameOverSupervivencia");
+                                else
+                                    gm.GameOver("GameOverSupervivencia");
                             }
                             else if (SceneManager.GetActiveScene().name != "PvP" && SceneManager.GetActiveScene().name != "TiroAlBlanco")
                             {
-                                gm.GameOver("GameOverHistoria");
+                                if (panelTransitions != null)
+                                    panelTransitions.LoadScene("GameOverHistoria");
+                                else
+                                    gm.GameOver("GameOverHistoria");
                             }
                         }
                         else
@@ -189,11 +197,17 @@ public class LevelManager : MonoBehaviour
 
                             if (SceneManager.GetActiveScene().name == "Supervivencia")
                             {
-                                gm.GameOver("GameOverSupervivencia");
+                                if (panelTransitions != null)
+                                    panelTransitions.LoadScene("GameOverSupervivencia");
+                                else
+                                    gm.GameOver("GameOverSupervivencia");
                             }
                             else if (SceneManager.GetActiveScene().name != "PvP" && SceneManager.GetActiveScene().name != "TiroAlBlanco")
                             {
-                                gm.GameOver("GameOverHistoria");
+                                if (panelTransitions != null)
+                                    panelTransitions.LoadScene("GameOverHistoria");
+                                else
+                                    gm.GameOver("GameOverHistoria");
                             }
                         }
                     }
@@ -252,11 +266,17 @@ public class LevelManager : MonoBehaviour
                     {
                         //gm.screenManager.LoadLevel(gm.screenManager.GetIdListLevel() + 1);
                         gameData.currentLevel++;
-                        gm.screenManager.LoadScene("SelectedPowerUp");
+                        if (panelTransitions != null)
+                            panelTransitions.LoadScene("SelectedPowerUp");
+                        else
+                            gm.screenManager.LoadScene("SelectedPowerUp");
                     }
                     else
                     {
-                        gm.GameOver(NameFinishSceneStoryMode);
+                        if (panelTransitions != null)
+                            panelTransitions.LoadScene(NameFinishSceneStoryMode);
+                        else
+                            gm.GameOver(NameFinishSceneStoryMode);
                     }
                 }
                 else
@@ -271,11 +291,17 @@ public class LevelManager : MonoBehaviour
                     {
                         //gm.screenManager.LoadLevel(gm.screenManager.GetIdListLevel() + 1);
                         gameData.currentLevel++;
-                        gm.screenManager.LoadScene("SelectedPowerUp");
+                        if (panelTransitions != null)
+                            panelTransitions.LoadScene("SelectedPowerUp");
+                        else
+                            gm.screenManager.LoadScene("SelectedPowerUp");
                     }
                     else
                     {
-                        gm.GameOver(NameFinishSceneStoryMode);
+                        if(panelTransitions != null)
+                            panelTransitions.LoadScene(NameFinishSceneStoryMode);
+                        else 
+                            gm.GameOver(NameFinishSceneStoryMode);
                     }
                 }
                 break;

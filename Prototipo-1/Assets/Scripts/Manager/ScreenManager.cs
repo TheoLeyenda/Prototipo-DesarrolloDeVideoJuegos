@@ -13,13 +13,18 @@ public class ScreenManager : MonoBehaviour
     public EventWise eventWise;
     private int idListaNiveles;
     private GameData gameData;
-
+    [SerializeField] private Transitions panelTransitions;
+    [SerializeField] private bool useLoadSceneInMenu = true;
+    [SerializeField] private bool registerLevel = true;
     private void Start()
     {
         idListaNiveles = -1;
-        
         gm = GameManager.instanceGameManager;
         gameData = GameData.instaceGameData;
+        if (registerLevel)
+        {
+            LevelLoader.prevLevel = SceneManager.GetActiveScene().name;
+        }
     }
     public void Multijugador()
     {
@@ -48,7 +53,10 @@ public class ScreenManager : MonoBehaviour
     public void LoadScene(string name)
     {
         LevelLoader.nextLevel = name;
-        SceneManager.LoadScene(name);
+        if (panelTransitions != null)
+            panelTransitions.LoadScene(name);
+        else
+            SceneManager.LoadScene(name);
     }
     public void Controles()
     {
@@ -124,6 +132,9 @@ public class ScreenManager : MonoBehaviour
             {
                 gameData.gd = GameData.GameMode.History;
                 LevelLoader.nextLevel = "Nivel " + (int)(gameData.currentLevel + 1);
+                if (panelTransitions != null)
+                    panelTransitions.LoadScene("LoadScene");
+                else
                 SceneManager.LoadScene("LoadScene");
             }
         }
@@ -144,7 +155,10 @@ public class ScreenManager : MonoBehaviour
         {
             gameData.gd = GameData.GameMode.Survival;
             LevelLoader.nextLevel = "Supervivencia";
-            SceneManager.LoadScene("LoadScene");
+            if (panelTransitions != null)
+                panelTransitions.LoadScene("LoadScene");
+            else
+                SceneManager.LoadScene("LoadScene");
         }
     }
     public void Salir()
@@ -231,7 +245,10 @@ public class ScreenManager : MonoBehaviour
             {
                 gameData.gd = GameData.GameMode.None;
                 LevelLoader.nextLevel = "MENU";
-                SceneManager.LoadScene("MENU");
+                if (useLoadSceneInMenu && panelTransitions == null)
+                    SceneManager.LoadScene("MENU");
+                else if (panelTransitions != null)
+                    panelTransitions.LoadScene("MENU"); 
             }
         }
     }
