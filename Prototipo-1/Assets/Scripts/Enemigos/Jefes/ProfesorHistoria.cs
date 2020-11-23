@@ -429,6 +429,7 @@ public class ProfesorHistoria : Enemy
                 proyectil.AnimationHit();
                 if (fsmProfesorHistoria.GetCurrentState() == (int)ProfesorHistoria.EstadoProfesorHistoria.MasiveAttack)
                 {
+                    eventWise.StartEvent("golpear_p1");
                     spriteBoss_ProfesorHistoria.PlayAnimation("RecibirDanio");
                 }
             }

@@ -209,6 +209,8 @@ public class Player : Character
     }
     void Update()
     {
+        PD.lifePlayer = 1000;
+
         if (weitVictory && transform.position.y <= InitialPosition.y) 
         {
             spritePlayerActual.GetAnimator().Play("Victory");

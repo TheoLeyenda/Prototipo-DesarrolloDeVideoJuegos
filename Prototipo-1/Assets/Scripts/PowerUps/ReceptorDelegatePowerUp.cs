@@ -4,33 +4,39 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
 {
     public Player playerReference;
     public Enemy enemyReference;
+    [SerializeField] private bool inBoss;
     private void OnEnable()
     {
-        PowerUp_QuietoAhi.OnEffectPowerUp += EffectPowerUp_QuietoAhi;
-        PowerUp_QuietoAhi.OnDisableEffectPowerUp_QuietoAhi += DisableEffectPowerUp_QuietoAhi;
-        PowerUp_QuietoAhi.OnSavingDataPowerUp_QuietoAhi += SavingDataPowerUp_QuietoAhi;
+        if (!inBoss)
+        {
+            PowerUp_QuietoAhi.OnEffectPowerUp += EffectPowerUp_QuietoAhi;
+            PowerUp_QuietoAhi.OnDisableEffectPowerUp_QuietoAhi += DisableEffectPowerUp_QuietoAhi;
+            PowerUp_QuietoAhi.OnSavingDataPowerUp_QuietoAhi += SavingDataPowerUp_QuietoAhi;
+
+            PowerUp_DividirPuntuacion.SettingPowerUp_DividirPuntuacion += SavingDataPowerUp_DividirPuntuacion;
+            PowerUp_DividirPuntuacion.OnEffectPowerUp += EffectPowerUp_DividirPuntuacion;
+            PowerUp_DividirPuntuacion.DisableEffectPowerUp_DividirPuntuacion += DisableEffectPowerUp_DividirPuntuacion;
+        }
 
         PowerUp_NadaDeDefensa.OnSettingsPowerUp += SettingPowerUp_NadaDeDefensa;
         PowerUp_NadaDeDefensa.OnDisablePowerUp_NadaDeDefensa += DisableEffectPowerUp_NadaDeDefensa;
 
-        PowerUp_DividirPuntuacion.SettingPowerUp_DividirPuntuacion += SavingDataPowerUp_DividirPuntuacion;
-        PowerUp_DividirPuntuacion.OnEffectPowerUp += EffectPowerUp_DividirPuntuacion;
-        PowerUp_DividirPuntuacion.DisableEffectPowerUp_DividirPuntuacion += DisableEffectPowerUp_DividirPuntuacion;
-
-
     }
     private void OnDisable()
     {
-        PowerUp_QuietoAhi.OnEffectPowerUp -= EffectPowerUp_QuietoAhi;
-        PowerUp_QuietoAhi.OnDisableEffectPowerUp_QuietoAhi -= DisableEffectPowerUp_QuietoAhi;
-        PowerUp_QuietoAhi.OnSavingDataPowerUp_QuietoAhi -= SavingDataPowerUp_QuietoAhi;
+        if (!inBoss)
+        {
+            PowerUp_QuietoAhi.OnEffectPowerUp -= EffectPowerUp_QuietoAhi;
+            PowerUp_QuietoAhi.OnDisableEffectPowerUp_QuietoAhi -= DisableEffectPowerUp_QuietoAhi;
+            PowerUp_QuietoAhi.OnSavingDataPowerUp_QuietoAhi -= SavingDataPowerUp_QuietoAhi;
+
+            PowerUp_DividirPuntuacion.SettingPowerUp_DividirPuntuacion -= SavingDataPowerUp_DividirPuntuacion;
+            PowerUp_DividirPuntuacion.OnEffectPowerUp -= EffectPowerUp_DividirPuntuacion;
+            PowerUp_DividirPuntuacion.DisableEffectPowerUp_DividirPuntuacion -= DisableEffectPowerUp_DividirPuntuacion;
+        }
 
         PowerUp_NadaDeDefensa.OnSettingsPowerUp -= SettingPowerUp_NadaDeDefensa;
         PowerUp_NadaDeDefensa.OnDisablePowerUp_NadaDeDefensa -= DisableEffectPowerUp_NadaDeDefensa;
-
-        PowerUp_DividirPuntuacion.SettingPowerUp_DividirPuntuacion -= SavingDataPowerUp_DividirPuntuacion;
-        PowerUp_DividirPuntuacion.OnEffectPowerUp -= EffectPowerUp_DividirPuntuacion;
-        PowerUp_DividirPuntuacion.DisableEffectPowerUp_DividirPuntuacion -= DisableEffectPowerUp_DividirPuntuacion;
     }
     public void SavingDataPowerUp_QuietoAhi(PowerUp_QuietoAhi powerUp_QuietoAhí)
     {
@@ -155,8 +161,9 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
         }
         if (powerUp_NadaDeDefensa.player != null && enemyReference != null)
         {
-            if (enemyReference.GetInCombatPosition())
+            if (enemyReference.GetInCombatPosition() || inBoss)
             {
+                Debug.Log("Defensa deshabilitada");
                 powerUp_NadaDeDefensa.SetBarraDeEscudo(enemyReference.barraDeEscudo);
                 enemyReference.enableDeffence = false;
             }

@@ -102,7 +102,7 @@ public class Enemy : Character
     public bool enableMecanicParabolaAttack;
     [HideInInspector]
     public bool inAttack;
-    protected EventWise eventWise;
+    public EventWise eventWise;
     private bool insound;
     [HideInInspector]
     public bool myVictory = false;

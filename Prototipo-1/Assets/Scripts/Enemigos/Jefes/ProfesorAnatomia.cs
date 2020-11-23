@@ -171,12 +171,8 @@ public class ProfesorAnatomia : Enemy
         {
             if (!Idied)
             {
-                //Debug.Log("ENTRE");
                 base.Update();
-                //if (enemyPrefab.transform.position.x > 5.355f)
-                //{
-                    //transform.Translate(Vector3.left * Speed * Time.deltaTime);
-                //}
+
                 switch (fsmProfesorAnatomia.GetCurrentState())
                 {
                     case (int)EstadoProfesorAnatomia.Idle:
@@ -527,6 +523,7 @@ public class ProfesorAnatomia : Enemy
         proyectil.AnimationHit();
         if (fsmProfesorAnatomia.GetCurrentState() == (int)EstadoProfesorAnatomia.MasiveAttack)
         {
+            eventWise.StartEvent("golpear_p1");
             spriteBoss_ProfesorAnatomia.PlayAnimation("RecibirDanio");
         }
     }

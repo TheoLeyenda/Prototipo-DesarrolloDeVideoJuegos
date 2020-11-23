@@ -1033,6 +1033,7 @@ GameObject:
   - component: {fileID: 2531832292111907128}
   - component: {fileID: 1450382849}
   - component: {fileID: 879448681}
+  - component: {fileID: 123535847}
   m_Layer: 0
   m_Name: SpriteProfe
   m_TagString: SpriteProfeAnatomia
@@ -1193,6 +1194,21 @@ MonoBehaviour:
   size: {x: 0.05428684, y: 0.05131365}
   auxOffset: {x: -0.001121514, y: 0.1560885}
   auxSize: {x: 0.03740813, y: 0.06112999}
+--- !u!114 &123535847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2531832292111907130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e90e8529684ca343859b16e70c4390f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerReference: {fileID: 0}
+  enemyReference: {fileID: 2531832291478649058}
+  inBoss: 1
 --- !u!1 &2531832292395522146
 GameObject:
   m_ObjectHideFlags: 0
@@ -1746,7 +1762,6 @@ MonoBehaviour:
   initBraggert: 0
   enableSetRandomSpecialAttack: 1
   initBehavour: 0
-  fsmProfesorAnatomia: {fileID: 0}
 --- !u!114 &2793434760028993244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1791,6 +1806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerReference: {fileID: 0}
   enemyReference: {fileID: 2531832291478649058}
+  inBoss: 0
 --- !u!114 &3824593626665204902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1983,11 +1999,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.y
       value: 0.97046983
-      objectReference: {fileID: 0}
-    - target: {fileID: 653642188877632927, guid: a1daafd76b9ace6439d40451082b89b5,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.pivot.x
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1307445900869073884, guid: a1daafd76b9ace6439d40451082b89b5,
         type: 3}

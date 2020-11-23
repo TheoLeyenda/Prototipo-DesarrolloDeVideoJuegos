@@ -75,14 +75,19 @@ public class SpriteBoss_ProfesorAnatomia : SpriteBossController
             Proyectil proyectil = collision.GetComponent<Proyectil>();
             if (profesorAnatomia.fsmProfesorAnatomia.GetCurrentState() == (int)ProfesorAnatomia.EstadoProfesorAnatomia.MasiveAttack)
             {
-
-                if ((proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador1
-                    || proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador2)
-                    && proyectil.tipoDeProyectil != Proyectil.typeProyectil.AtaqueEspecial)
+                Debug.Log(profesorAnatomia.enableDeffence);
+                bool playerAttack = (proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador1 || proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador2);
+                if (playerAttack && proyectil.tipoDeProyectil != Proyectil.typeProyectil.AtaqueEspecial && profesorAnatomia.enableDeffence)
                 {
                     PlayAnimation("CounterAttack");
                     profesorAnatomia.CounterAttack(proyectil);
                     proyectil.AnimationHit();
+                }
+                else if(playerAttack)
+                {
+                    profesorAnatomia.eventWise.StartEvent("golpear_p1");
+                    proyectil.AnimationHit();
+                    profesorAnatomia.TakeDamage(proyectil);
                 }
             }
             else
@@ -91,7 +96,9 @@ public class SpriteBoss_ProfesorAnatomia : SpriteBossController
                     || proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador2)
                     && proyectil.tipoDeProyectil != Proyectil.typeProyectil.AtaqueEspecial)
                 {
+                    profesorAnatomia.eventWise.StartEvent("golpear_p1");
                     proyectil.AnimationHit();
+                    profesorAnatomia.TakeDamage(proyectil);
                 }
             }
         }

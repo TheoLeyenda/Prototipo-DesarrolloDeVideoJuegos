@@ -43,6 +43,7 @@ public class AnatomiaPunch : MonoBehaviour
             {
                 p.PD.Blindaje = p.PD.Blindaje - damage / 2;
             }
+            p.eventWise.StartEvent("golpear_p1");
             p.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
         }
     }
