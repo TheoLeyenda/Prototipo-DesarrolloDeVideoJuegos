@@ -232,6 +232,7 @@ public class ScreenManager : MonoBehaviour
     {
         if (eventWise != null)
         {
+            eventWise.StartEvent("despausar");
             eventWise.StartEvent("fuego_termina");
             eventWise.StartEvent("volver_al_menu");
         }

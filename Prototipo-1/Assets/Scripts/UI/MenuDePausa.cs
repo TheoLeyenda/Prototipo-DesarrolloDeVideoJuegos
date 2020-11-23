@@ -62,12 +62,14 @@ public class MenuDePausa : MonoBehaviour
         UnityEngine.Cursor.visible = false;
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         eventwise.StartEvent("despausar");
+        eventwise.StartEvent("seleccionar");
         soundPause = false;
     }
     public void ReiniciarNivel()
     {
         DisableMenues();
         gm.playerData_P1.score = gm.playerData_P1.auxScore;
+        eventwise.StartEvent("despausar");
         eventwise.StartEvent("seleccionar");
         eventwise.StartEvent("reiniciar");
         if (gd != null)
