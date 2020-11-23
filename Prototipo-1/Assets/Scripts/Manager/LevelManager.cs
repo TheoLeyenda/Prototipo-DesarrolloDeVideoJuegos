@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
         ByTime,
         Count,
     }
+    [SerializeField] private EventWise eventWise;
     [SerializeField] private Transitions panelTransitions;
     public WaysToLevelUp waysToLevelUp = WaysToLevelUp.ByTime;
     public bool NivelFinal;
@@ -273,6 +274,9 @@ public class LevelManager : MonoBehaviour
                     }
                     else
                     {
+                        eventWise.StartEvent("despausar");
+                        eventWise.StartEvent("fuego_termina");
+                        eventWise.StartEvent("volver_al_menu");
                         if (panelTransitions != null)
                             panelTransitions.LoadScene(NameFinishSceneStoryMode);
                         else
@@ -298,7 +302,10 @@ public class LevelManager : MonoBehaviour
                     }
                     else
                     {
-                        if(panelTransitions != null)
+                        eventWise.StartEvent("despausar");
+                        eventWise.StartEvent("fuego_termina");
+                        eventWise.StartEvent("volver_al_menu");
+                        if (panelTransitions != null)
                             panelTransitions.LoadScene(NameFinishSceneStoryMode);
                         else 
                             gm.GameOver(NameFinishSceneStoryMode);
