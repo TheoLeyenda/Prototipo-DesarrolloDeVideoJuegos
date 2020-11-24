@@ -128,7 +128,6 @@ public class Player : Character
     public static event Action<Player, string> OnDisableModifireState;
     public static event Action<Player> OnDie;
 
-
     private void OnEnable()
     {
         PD.ResetScoreValue();

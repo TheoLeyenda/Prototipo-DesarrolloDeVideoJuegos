@@ -13,7 +13,7 @@ public class SoundForInput : MonoBehaviour
     public bool menuPrincipal;
     public bool menuPausa;
     private Movimiento mov;
-    private ControlPausador controlPausador;
+    [SerializeField] private ControlPausador controlPausador = ControlPausador.player1;
     public enum Movimiento
     {
         Habilitado,
@@ -47,18 +47,33 @@ public class SoundForInput : MonoBehaviour
         {
             mov = Movimiento.Habilitado;
         }
-        if (movimientoHorizontal)
+        if (movimientoHorizontal && !movimientoVertical)
         {
-            if (((InputPlayerController.GetInputAxis("Horizontal") > 0.5f || InputPlayerController.GetInputAxis("Horizontal") < - 0.5f) 
+            if (((InputPlayerController.GetInputAxis("Horizontal") > 0.5f || InputPlayerController.GetInputAxis("Horizontal") < -0.5f)
                 || (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))) && mov == Movimiento.Habilitado)
             {
                 AkSoundEngine.PostEvent(nombreEventoMovimiento, gameObject);
                 mov = Movimiento.Nulo;
             }
         }
-        if (movimientoVertical)
+        else if (movimientoVertical && !movimientoHorizontal)
         {
             if (((InputPlayerController.GetInputAxis("Vertical") > 0.5f || InputPlayerController.GetInputAxis("Vertical") < -0.5f)
+                || (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))) && mov == Movimiento.Habilitado)
+            {
+                AkSoundEngine.PostEvent(nombreEventoMovimiento, gameObject);
+                mov = Movimiento.Nulo;
+            }
+        }
+        else if (movimientoHorizontal && movimientoVertical)
+        {
+            if (((InputPlayerController.GetInputAxis("Horizontal") > 0.5f || InputPlayerController.GetInputAxis("Horizontal") < -0.5f)
+                || (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))) && mov == Movimiento.Habilitado)
+            {
+                AkSoundEngine.PostEvent(nombreEventoMovimiento, gameObject);
+                mov = Movimiento.Nulo;
+            }
+            else if(((InputPlayerController.GetInputAxis("Vertical") > 0.5f || InputPlayerController.GetInputAxis("Vertical") < -0.5f)
                 || (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))) && mov == Movimiento.Habilitado)
             {
                 AkSoundEngine.PostEvent(nombreEventoMovimiento, gameObject);
@@ -74,11 +89,12 @@ public class SoundForInput : MonoBehaviour
     }
     public void CheckSelectionP2()
     {
+        Debug.Log("Controllador de pausa 2");
         if (InputPlayerController.GetInputAxis("Horizontal_P2") == 0 && InputPlayerController.GetInputAxis("Vertical_P2") == 0)
         {
             mov = Movimiento.Habilitado;
         }
-        if (movimientoHorizontal)
+        if (movimientoHorizontal && !movimientoVertical)
         {
             if (((InputPlayerController.GetInputAxis("Horizontal_P2") > 0.5f || InputPlayerController.GetInputAxis("Horizontal_P2") < -0.5f)
                 || (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))) && mov == Movimiento.Habilitado)
@@ -87,7 +103,7 @@ public class SoundForInput : MonoBehaviour
                 mov = Movimiento.Nulo;
             }
         }
-        if (movimientoVertical)
+        else if (movimientoVertical && !movimientoHorizontal)
         {
             if (((InputPlayerController.GetInputAxis("Vertical_P2") > 0.5f || InputPlayerController.GetInputAxis("Vertical_P2") < -0.5f)
                 || (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))) && mov == Movimiento.Habilitado)
@@ -96,7 +112,21 @@ public class SoundForInput : MonoBehaviour
                 mov = Movimiento.Nulo;
             }
         }
-
+        else if (movimientoHorizontal && movimientoVertical)
+        {
+            if (((InputPlayerController.GetInputAxis("Horizontal_P2") > 0.5f || InputPlayerController.GetInputAxis("Horizontal_P2") < -0.5f)
+               || (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))) && mov == Movimiento.Habilitado)
+            {
+                AkSoundEngine.PostEvent(nombreEventoMovimiento, gameObject);
+                mov = Movimiento.Nulo;
+            }
+            else if (((InputPlayerController.GetInputAxis("Vertical_P2") > 0.5f || InputPlayerController.GetInputAxis("Vertical_P2") < -0.5f)
+                || (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))) && mov == Movimiento.Habilitado)
+            {
+                AkSoundEngine.PostEvent(nombreEventoMovimiento, gameObject);
+                mov = Movimiento.Nulo;
+            }
+        }
         if (InputPlayerController.GetInputButtonDown("SelectButton_P2"))
         {
             AkSoundEngine.PostEvent(nombreEventoSeleccion, gameObject);
@@ -104,17 +134,10 @@ public class SoundForInput : MonoBehaviour
     }
     public void CheckSelectionPause()
     {
-        if (InputPlayerController.GetInputButton("PauseButton_P1") && Time.timeScale == 1)
+        if ((InputPlayerController.GetInputButton("PauseButton_P1") || InputPlayerController.GetInputButton("PauseButton_P2")) && Time.timeScale == 1)
         {
             AkSoundEngine.PostEvent("pausa", gameObject);
-            controlPausador = ControlPausador.player1;
             mov = Movimiento.Habilitado;
-        }
-        if (InputPlayerController.GetInputButton("PauseButton_P2") && Time.timeScale == 1)
-        {
-            mov = Movimiento.Habilitado;
-            AkSoundEngine.PostEvent("pausa", gameObject);
-            controlPausador = ControlPausador.player2;
         }
         if (Time.timeScale == 0 && controlPausador == ControlPausador.player1)
         {

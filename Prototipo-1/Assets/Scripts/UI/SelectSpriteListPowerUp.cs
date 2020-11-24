@@ -6,7 +6,7 @@ using TMPro;
 public class SelectSpriteListPowerUp : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    //[SerializeField] private EventWise eventWise; 
     public List<Sprite> sprites;
     public List<string> namesPowerUps;
     public Image image;
@@ -62,6 +62,7 @@ public class SelectSpriteListPowerUp : MonoBehaviour
             }
             textNamePowerUp.text = namesPowerUps[indexSprite];
             textNamePowerUp.color = colorTextPowerUp;
+            //eventWise.StartEvent("seleccionar");
         }
     }
     public void PrevSprite()
@@ -80,6 +81,7 @@ public class SelectSpriteListPowerUp : MonoBehaviour
             textCount.text = "" + gameData.dataPlayerPowerUp[indexSprite].countPowerUp;
             textNamePowerUp.text = namesPowerUps[indexSprite];
             textNamePowerUp.color = colorTextPowerUp;
+            //eventWise.StartEvent("seleccionar");
         }
     }
 }

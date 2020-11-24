@@ -75,7 +75,7 @@ public class SpriteBoss_ProfesorAnatomia : SpriteBossController
             Proyectil proyectil = collision.GetComponent<Proyectil>();
             if (profesorAnatomia.fsmProfesorAnatomia.GetCurrentState() == (int)ProfesorAnatomia.EstadoProfesorAnatomia.MasiveAttack)
             {
-                Debug.Log(profesorAnatomia.enableDeffence);
+                //Debug.Log(profesorAnatomia.enableDeffence);
                 bool playerAttack = (proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador1 || proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador2);
                 if (playerAttack && proyectil.tipoDeProyectil != Proyectil.typeProyectil.AtaqueEspecial && profesorAnatomia.enableDeffence)
                 {
