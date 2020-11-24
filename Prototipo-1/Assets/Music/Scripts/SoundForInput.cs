@@ -13,6 +13,7 @@ public class SoundForInput : MonoBehaviour
     public bool menuPrincipal;
     public bool menuPausa;
     private Movimiento mov;
+    [SerializeField] private bool useSelectSound = true;
     [SerializeField] private ControlPausador controlPausador = ControlPausador.player1;
     public enum Movimiento
     {
@@ -80,10 +81,12 @@ public class SoundForInput : MonoBehaviour
                 mov = Movimiento.Nulo;
             }
         }
-        
-        if (InputPlayerController.GetInputButtonDown("SelectButton_P1"))
+        if (useSelectSound)
         {
-            AkSoundEngine.PostEvent(nombreEventoSeleccion, gameObject);
+            if (InputPlayerController.GetInputButtonDown("SelectButton_P1"))
+            {
+                AkSoundEngine.PostEvent(nombreEventoSeleccion, gameObject);
+            }
         }
         
     }
@@ -127,9 +130,12 @@ public class SoundForInput : MonoBehaviour
                 mov = Movimiento.Nulo;
             }
         }
-        if (InputPlayerController.GetInputButtonDown("SelectButton_P2"))
+        if (useSelectSound)
         {
-            AkSoundEngine.PostEvent(nombreEventoSeleccion, gameObject);
+            if (InputPlayerController.GetInputButtonDown("SelectButton_P2"))
+            {
+                AkSoundEngine.PostEvent(nombreEventoSeleccion, gameObject);
+            }
         }
     }
     public void CheckSelectionPause()
@@ -148,6 +154,10 @@ public class SoundForInput : MonoBehaviour
             CheckSelectionP2();
         }
     }
+    public void SetNombreEventoSeleccion(string _nombreEventoSeleccion)
+    {
+        nombreEventoSeleccion = _nombreEventoSeleccion;
+    }
     public void PauseSelected()
     {
         if (mov == Movimiento.Habilitado)
@@ -155,5 +165,9 @@ public class SoundForInput : MonoBehaviour
             AkSoundEngine.PostEvent(nombreEventoMovimiento, gameObject);
             mov = Movimiento.Nulo;
         }
+    }
+    public void UseSound(string name)
+    {
+        AkSoundEngine.PostEvent(name, gameObject);
     }
 }
