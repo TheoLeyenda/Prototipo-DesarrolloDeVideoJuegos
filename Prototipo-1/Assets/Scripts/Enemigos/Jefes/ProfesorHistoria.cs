@@ -329,7 +329,7 @@ public class ProfesorHistoria : Enemy
             go.transform.rotation = UpVector.transform.rotation;
             go.transform.position = UpVector.transform.position;
         }
-
+        eventWise.StartEvent("tirar_goma");
         proyectil.ShootForward();
     }
     public void ChargeSpecialAttack()
