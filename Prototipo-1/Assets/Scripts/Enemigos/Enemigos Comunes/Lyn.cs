@@ -113,6 +113,7 @@ public class Lyn : Enemy
                             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
                             inAttack = true;
                             xpActual = 0;
+                            eventWise.StartEvent("ataque_especial_tomboy_op1");
                             break;
                         case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
                             break;

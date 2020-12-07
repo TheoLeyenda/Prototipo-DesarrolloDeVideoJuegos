@@ -667,8 +667,6 @@ public class Player : Character
     //ATAQUE EN PARABOLA.
     public void ParabolaAttack(Proyectil.DisparadorDelProyectil disparador)
     {
-        //Debug.Log("EnableParabolaAttack: "+enableParabolaAttack);
-        //Debug.Log("EnableMecanicParabolaAttack: " + enableMecanicParabolaAttack);
         if (enableParabolaAttack && enableMecanicParabolaAttack)
         {
             GameObject go = structsPlayer.dataAttack.poolProyectilParabola.GetObject();
@@ -987,16 +985,7 @@ public class Player : Character
                     && enumsPlayers.movimiento != EnumsPlayers.Movimiento.AgacharseAtaque
                     && enumsPlayers.movimiento != EnumsPlayers.Movimiento.AgacheDefensa)
                     {
-                        /*
-                         ProyectilMagicBust.transform.position = GeneradorProyectilMagicBust.transform.position;
-                        ProyectilMagicBust.transform.rotation = GeneradorProyectilMagicBust.transform.rotation;
-                        if(timeSpecialAttack > 0)
-                        { 
-                            ProyectilMagicBust.timeLife = timeSpecialAttack;
-                            ProyectilMagicBust.auxTimeLife = timeSpecialAttack;
-                        }
-                        ProyectilMagicBust.gameObject.SetActive(true);
-                        */
+                        
                         structsPlayer.dataAttack.ProyectilMagicBust.transform.position = structsPlayer.dataAttack.GeneradorMagicBust.transform.position;
                         structsPlayer.dataAttack.ProyectilMagicBust.transform.rotation = structsPlayer.dataAttack.GeneradorMagicBust.transform.rotation;
                         if (structsPlayer.dataAttack.timeSpecialAttackMagicBust > 0)

@@ -427,6 +427,9 @@ public class InputManager : MonoBehaviour
                     {
                         player.spritePlayerActual.PlayAnimation("Ataque Especial protagonista");//ANIMACION DE ATAQUE ESPECIAL SALTANDO
                         enableMovementPlayer = false;
+
+                        if (player.enumsPlayers.specialAttackEquipped == EnumsPlayers.SpecialAttackEquipped.ProyectilChicle)
+                            player.eventWise.StartEvent("ataque_especial_tomboy_op1");
                     }
                     else if(player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Agacharse
                         && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.AgacharseAtaque
