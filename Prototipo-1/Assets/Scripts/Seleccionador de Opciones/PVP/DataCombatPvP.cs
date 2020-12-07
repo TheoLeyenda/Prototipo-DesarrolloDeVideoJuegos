@@ -74,6 +74,9 @@ public class DataCombatPvP : MonoBehaviour
     public float auxDelayFinishRound;
     private bool soundEnter;
     public bool restartMusic = true;
+
+    private bool soundEmpate = false;
+
     void Start()
     {
         soundEnter = false;
@@ -203,7 +206,12 @@ public class DataCombatPvP : MonoBehaviour
         }
         else
         {
-            // EVENTO DE EMPATE DEL SONIDO 
+            if (!soundEmpate)
+            {
+                AkSoundEngine.PostEvent("pvp_ganador", eventWisse);
+                soundEmpate = true;
+            }
+
             menuPausa_P1.SetActive(false);
             menuPausa_P2.SetActive(false);
             FondosNivel[(int)level_selected].SetActive(false);

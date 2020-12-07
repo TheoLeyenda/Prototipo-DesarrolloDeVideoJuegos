@@ -12,6 +12,14 @@ public class Blancos : MonoBehaviour
     public float delayColor;
     public float auxDelayColor;
 
+    private EventWise eventWise;
+    private string soundHit = "diana_golpeada_op7";
+
+    private void Start()
+    {
+        eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
+    }
+
     private void Update()
     {
         CheckColor();
@@ -44,12 +52,14 @@ public class Blancos : MonoBehaviour
                 spriteRenderer.color = Color.green;
                 proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + scoreForHit;
                 proyectil.AnimationHit();
+                eventWise.StartEvent(soundHit);
             }
             else if (proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador2 && numberPlayerInThis == 1)
             {
                 spriteRenderer.color = Color.green;
                 proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + scoreForHit;
                 proyectil.AnimationHit();
+                eventWise.StartEvent(soundHit);
             }
 
         }
