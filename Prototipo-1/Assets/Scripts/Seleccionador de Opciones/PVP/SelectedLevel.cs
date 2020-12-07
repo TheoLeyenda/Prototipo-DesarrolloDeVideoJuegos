@@ -45,6 +45,12 @@ public class SelectedLevel : MonoBehaviour
     public GameObject PantallaAnterior;
     public bool activateCountRoundsSelection;
 
+    private EventWise eventWise;
+    private string soundMoveSelectionCharacter = "seleccion_de_personaje_op4";
+    private string soundSelectCharacter = "seleccion_de_personaje_op2";
+    private bool soundSelectCharacterPlayer_1 = false;
+    private bool soundSelectCharacterPlayer_2 = false;
+
     [System.Serializable]
     public class ElementsSelectionLevels
     {
@@ -64,6 +70,7 @@ public class SelectedLevel : MonoBehaviour
     public List<BackGroundSelectionLevels> backGroundSelectionLevels;
     void Start()
     {
+        eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
         CamvasSeleccionRounds.SetActive(false);
         Fondo.SetActive(true);
         CuadrillaDeSeleccion.SetActive(true);
@@ -138,6 +145,7 @@ public class SelectedLevel : MonoBehaviour
                     cursorPlayer1.x++;
                     CursorSelectorPlayer1.MoveRight();
                     aviableMoveHorizontal = false;
+                    eventWise.StartEvent(soundMoveSelectionCharacter);
                 }
             }
             else if (InputPlayerController.GetInputAxis("Horizontal") < 0 && cursorPlayer1.x > 0)
@@ -147,6 +155,7 @@ public class SelectedLevel : MonoBehaviour
                     cursorPlayer1.x--;
                     CursorSelectorPlayer1.MoveLeft();
                     aviableMoveHorizontal = false;
+                    eventWise.StartEvent(soundMoveSelectionCharacter);
                 }
             }
         }
@@ -159,6 +168,7 @@ public class SelectedLevel : MonoBehaviour
                     cursorPlayer1.y--;
                     CursorSelectorPlayer1.MoveUp();
                     aviableMoveVertical = false;
+                    eventWise.StartEvent(soundMoveSelectionCharacter);
                 }
             }
             else if (InputPlayerController.GetInputAxis("Vertical") < 0 && cursorPlayer1.y < columnas - 1)
@@ -168,6 +178,7 @@ public class SelectedLevel : MonoBehaviour
                     cursorPlayer1.y++;
                     CursorSelectorPlayer1.MoveDown();
                     aviableMoveVertical = false;
+                    eventWise.StartEvent(soundMoveSelectionCharacter);
                 }
             }
         }
@@ -190,6 +201,7 @@ public class SelectedLevel : MonoBehaviour
                 {
                     gm.structGameManager.gm_dataCombatPvP.level_selected = elementsSelectionLevels[i].levelSelect;
                     cursorPlayer1.condirmed = true;
+                    eventWise.StartEvent(soundSelectCharacter);
                 }
             }
         }

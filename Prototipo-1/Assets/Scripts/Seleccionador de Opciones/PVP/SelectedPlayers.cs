@@ -76,10 +76,15 @@ public class SelectedPlayers : MonoBehaviour
     public SpriteRenderer spriteCursor1;
     public SpriteRenderer spriteCursor2;
     //----------------------------------//
-
+    private EventWise eventWise;
+    private string soundMoveSelectionCharacter = "seleccion_de_personaje_op4";
+    private string soundSelectCharacter = "seleccion_de_personaje_op2";
+    private bool soundSelectCharacterPlayer_1 = false;
+    private bool soundSelectCharacterPlayer_2 = false;
     // HACER QUE SE PUEDAN ELEGIR LOS TRES ENEMIGOS NUEVOS Y PONER UNA CASILLA MAS QUE PERMITA ELEGIR A UN JUGADOR DE FORMA ALEATORIA.
     private void Start()
     {
+        eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
         aviableMoveHorizontalP1 = true;
         aviableMoveVerticalP1 = true;
         elementsCharacters[elementsCharacters.Count - 1].nameCharacter = nameRandomPlayer;
@@ -212,6 +217,7 @@ public class SelectedPlayers : MonoBehaviour
                         CursorSelectorPlayer.MoveRight();
                         aviableMoveHorizontal = false;
                         CheckNamePlayersSelect();
+                        eventWise.StartEvent(soundMoveSelectionCharacter);
                     }
                 }
                 else if (InputPlayerController.GetInputAxis(inputHorizontal) < 0 && cursorPlayer.x > 0)
@@ -222,6 +228,7 @@ public class SelectedPlayers : MonoBehaviour
                         CursorSelectorPlayer.MoveLeft();
                         aviableMoveHorizontal = false;
                         CheckNamePlayersSelect();
+                        eventWise.StartEvent(soundMoveSelectionCharacter);
                     }
                 }
             }
@@ -235,6 +242,7 @@ public class SelectedPlayers : MonoBehaviour
                         CursorSelectorPlayer.MoveUp();
                         aviableMoveVertical = false;
                         CheckNamePlayersSelect();
+                        eventWise.StartEvent(soundMoveSelectionCharacter);
                     }
                 }
                 else if (InputPlayerController.GetInputAxis(inputVertical) < 0 && cursorPlayer.y < columnas - 1)
@@ -245,6 +253,7 @@ public class SelectedPlayers : MonoBehaviour
                         CursorSelectorPlayer.MoveDown();
                         aviableMoveVertical = false;
                         CheckNamePlayersSelect();
+                        eventWise.StartEvent(soundMoveSelectionCharacter);
                     }
                 }
             }
@@ -264,10 +273,21 @@ public class SelectedPlayers : MonoBehaviour
         {
             spriteCursor1.color = Color.yellow;
             CursorGrandePlayer1.GetComponent<SpriteRenderer>().color = Color.yellow;
+            if (!soundSelectCharacterPlayer_1)
+            {
+                eventWise.StartEvent(soundSelectCharacter);
+                soundSelectCharacterPlayer_1 = true;
+            }
+            
         }
         if (cursorPlayer2.condirmed)
         {
             spriteCursor2.color = Color.yellow;
+            if (!soundSelectCharacterPlayer_2)
+            {
+                eventWise.StartEvent(soundSelectCharacter);
+                soundSelectCharacterPlayer_2 = true;
+            }
         }
     }
     public void CheckSelectCursor(string inputSelectButton, ref CursorMatriz cursorPlayer,ref DataCombatPvP.Player_Selected player_Selected, ref Cursor cursor, ref SpriteRenderer imagePlayer)
