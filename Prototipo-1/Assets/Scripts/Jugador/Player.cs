@@ -154,9 +154,10 @@ public class Player : Character
     {
         eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
         if (structsPlayer.dataAttack.Limusina != null)
-        {
             structsPlayer.dataAttack.Limusina.eventWise = eventWise;
-        }
+
+        if (structsPlayer.dataAttack.ProyectilMagicBust != null)
+            structsPlayer.dataAttack.ProyectilMagicBust.eventWise = eventWise;
 
         AuxSpeed = Speed;
         AuxSpeedJump = SpeedJump;

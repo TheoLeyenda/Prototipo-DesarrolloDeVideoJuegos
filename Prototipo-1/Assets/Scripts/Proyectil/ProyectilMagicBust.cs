@@ -8,13 +8,32 @@ public class ProyectilMagicBust : DisparoDeCarga
     private bool enableDamage = false;
     public bool DestroyProjectileEnemy;
     public Animator animator;
+
+    public EventWise eventWise { set; get; }
+
+    private string nameEventActivate = "ataque_especial_gotica_op1";
+    private string nameEventDisable = "parar_ataque_especial_gotica_op1";
+
     private void OnDisable()
     {
         DisableDamage();
         timeLife = auxTimeLife;
         animator.SetBool("FinalTornado", false);
+
+        eventWise.StartEvent(nameEventDisable);
     }
-    // Update is called once per frame
+
+    private void OnEnable()
+    {
+        //StartCoroutine(StartSound(0.0f));
+        eventWise.StartEvent(nameEventActivate);
+    }
+    /*IEnumerator StartSound(float timeDelay)
+    {
+        eventWise.StartEvent(nameEventActivate);
+        yield return new WaitForSeconds(timeDelay);
+    }*/
+
     protected override void Update()
     {
         base.Update();

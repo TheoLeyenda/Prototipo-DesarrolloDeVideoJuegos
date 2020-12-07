@@ -21,6 +21,11 @@
 			<ShortName>main</ShortName>
 			<Path>main.bnk</Path>
 			<IncludedEvents>
+				<Event Id="4123893398" Name="ataque_especial_gotica_op1" ObjectPath="\Events\Default Work Unit\Evento Ataque Especial Gotica\ataque_especial_gotica_op1" DurationType="OneShot" DurationMin="18.639433" DurationMax="18.639433"/>
+				<Event Id="4123893397" Name="ataque_especial_gotica_op2" ObjectPath="\Events\Default Work Unit\Evento Ataque Especial Gotica\ataque_especial_gotica_op2" DurationType="OneShot" DurationMin="19.058662" DurationMax="19.058662"/>
+				<Event Id="3538579611" Name="ataque_especial_tomboy_op1" ObjectPath="\Events\Default Work Unit\Evento Ataque Especial Tomboy\ataque_especial_tomboy_op1" DurationType="OneShot" DurationMin="0.641066" DurationMax="0.641066"/>
+				<Event Id="3538579608" Name="ataque_especial_tomboy_op2" ObjectPath="\Events\Default Work Unit\Evento Ataque Especial Tomboy\ataque_especial_tomboy_op2" DurationType="OneShot" DurationMin="0.405964" DurationMax="0.405964"/>
+				<Event Id="3538579609" Name="ataque_especial_tomboy_op3" ObjectPath="\Events\Default Work Unit\Evento Ataque Especial Tomboy\ataque_especial_tomboy_op3" DurationType="OneShot" DurationMin="1.398617" DurationMax="1.398617"/>
 				<Event Id="3214022966" Name="botella_romper" ObjectPath="\Events\Default Work Unit\botella_romper" DurationType="OneShot" DurationMin="0.667664" DurationMax="0.667664"/>
 				<Event Id="3870729452" Name="caer" ObjectPath="\Events\Default Work Unit\caer" DurationType="OneShot" DurationMin="0.281837" DurationMax="0.281837"/>
 				<Event Id="3406505131" Name="despausar" ObjectPath="\Events\Default Work Unit\despausar" DurationType="OneShot" DurationMin="1.846168" DurationMax="1.846168"/>
@@ -51,6 +56,8 @@
 				<Event Id="3634810774" Name="mover_seleccion" ObjectPath="\Events\Default Work Unit\mover_seleccion" DurationType="OneShot" DurationMin="0.281791" DurationMax="0.281791"/>
 				<Event Id="1931278216" Name="moverse" ObjectPath="\Events\Default Work Unit\moverse" DurationType="OneShot" DurationMin="0.202812" DurationMax="0.202812"/>
 				<Event Id="284163330" Name="muerte_personaje_op1" ObjectPath="\Events\Default Work Unit\Muerte Personaje\muerte_personaje_op1" DurationType="OneShot" DurationMin="0.405964" DurationMax="0.405964"/>
+				<Event Id="1816189793" Name="parar_ataque_especial_gotica_op1" ObjectPath="\Events\Default Work Unit\Evento Ataque Especial Gotica\parar_ataque_especial_gotica_op1" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="1816189794" Name="parar_ataque_especial_gotica_op2" ObjectPath="\Events\Default Work Unit\Evento Ataque Especial Gotica\parar_ataque_especial_gotica_op2" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="2733797788" Name="patear_pelota" ObjectPath="\Events\Default Work Unit\patear_pelota" DurationType="OneShot" DurationMin="0.254807" DurationMax="0.254807"/>
 				<Event Id="3092587489" Name="pausa" ObjectPath="\Events\Default Work Unit\pausa" DurationType="OneShot" DurationMin="1.846168" DurationMax="1.846168"/>
 				<Event Id="2433235219" Name="perder" ObjectPath="\Events\Default Work Unit\perder" DurationType="OneShot" DurationMin="9.217257" DurationMax="9.217257"/>
@@ -119,6 +126,10 @@
 					<ShortName>golpe2.wav</ShortName>
 					<Path>SFX\golpe2_CA0198D6.wem</Path>
 				</File>
+				<File Id="199983349" Language="SFX">
+					<ShortName>Ataque Especial Tomboy Op2.wav</ShortName>
+					<Path>SFX\Ataque Especial Tomboy Op2_CA0198D6.wem</Path>
+				</File>
 				<File Id="208206010" Language="SFX">
 					<ShortName>sonidodeiniciarataqueespecial.wav</ShortName>
 					<Path>SFX\sonidodeiniciarataqueespecial_CA0198D6.wem</Path>
@@ -126,6 +137,10 @@
 				<File Id="232350508" Language="SFX">
 					<ShortName>golpe3.wav</ShortName>
 					<Path>SFX\golpe3_CA0198D6.wem</Path>
+				</File>
+				<File Id="272607660" Language="SFX">
+					<ShortName>Ataque Especial Tomboy Op3.wav</ShortName>
+					<Path>SFX\Ataque Especial Tomboy Op3_CA0198D6.wem</Path>
 				</File>
 				<File Id="290122315" Language="SFX">
 					<ShortName>Diana al ser golpeada op6.wav</ShortName>
@@ -163,6 +178,10 @@
 					<ShortName>especialfantasmas.wav</ShortName>
 					<Path>SFX\especialfantasmas_CA0198D6.wem</Path>
 				</File>
+				<File Id="408685281" Language="SFX">
+					<ShortName>Ataque especial gotica op1.wav</ShortName>
+					<Path>SFX\Ataque especial gotica op1_CA0198D6.wem</Path>
+				</File>
 				<File Id="412410830" Language="SFX">
 					<ShortName>Bully's over.wav</ShortName>
 					<Path>SFX\Bully's over_181A13A0.wem</Path>
@@ -194,6 +213,10 @@
 				<File Id="551263504" Language="SFX">
 					<ShortName>arrojarboladepapel.wav</ShortName>
 					<Path>SFX\arrojarboladepapel_CA0198D6.wem</Path>
+				</File>
+				<File Id="552985493" Language="SFX">
+					<ShortName>Ataque Especial Tomboy Op1.wav</ShortName>
+					<Path>SFX\Ataque Especial Tomboy Op1_CA0198D6.wem</Path>
 				</File>
 				<File Id="567928832" Language="SFX">
 					<ShortName>SeleccionDePersonaje_op5.wav</ShortName>
@@ -270,6 +293,10 @@
 				<File Id="1019753840" Language="SFX">
 					<ShortName>Diana al ser golpeada op3.wav</ShortName>
 					<Path>SFX\Diana al ser golpeada op3_CA0198D6.wem</Path>
+				</File>
+				<File Id="1035011434" Language="SFX">
+					<ShortName>Ataque especial gotica op2.wav</ShortName>
+					<Path>SFX\Ataque especial gotica op2_CA0198D6.wem</Path>
 				</File>
 				<File Id="1055290361" Language="SFX">
 					<ShortName>movimiento_entre_opciones_del_menu_inicio.wav</ShortName>

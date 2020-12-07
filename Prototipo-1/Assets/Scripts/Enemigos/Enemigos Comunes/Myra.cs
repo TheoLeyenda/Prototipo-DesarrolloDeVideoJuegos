@@ -12,6 +12,7 @@ public class Myra : Enemy
     public override void Start()
     {
         base.Start();
+        ProyectilMagicBust.eventWise = eventWise;
     }
     protected override void OnDisable()
     {

@@ -564,6 +564,7 @@
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="1"/>
 							</PropertyList>
+							<ReferenceList/>
 						</Action>
 					</ChildrenList>
 				</Event>
@@ -880,6 +881,112 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="Sonido De Limusina Op5" ID="{AA71DFAA-468A-4508-92BF-05084BBCFD85}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Evento Ataque Especial Gotica" ID="{14E3CFC6-0DCA-414B-9858-D1900FD429B2}" ShortID="36379903">
+					<ChildrenList>
+						<Event Name="ataque_especial_gotica_op1" ID="{C1D56BB7-D450-4EBC-8B91-83FDF753D71D}">
+							<ChildrenList>
+								<Action Name="" ID="{F0036D05-A73F-4EDE-9D69-4B8DC9EC3CBB}" ShortID="1040702719">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ataque especial gotica op1" ID="{29E6553E-16D4-4C8D-A2CC-4B76B61D1C18}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="ataque_especial_gotica_op2" ID="{80DA1889-E0B4-4F0B-A014-5625D59386BC}">
+							<ChildrenList>
+								<Action Name="" ID="{38F2CA6A-F582-41CA-8152-1E337D7224F3}" ShortID="44650102">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ataque especial gotica op2" ID="{968B799E-CD2B-4694-A06A-4B35CC1B17A9}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="parar_ataque_especial_gotica_op1" ID="{4A50BEC2-9298-4765-AEAB-ABE6B8E48D22}">
+							<ChildrenList>
+								<Action Name="" ID="{F8C67745-7706-44FA-A6F4-D64212E0E906}" ShortID="964043185">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ataque especial gotica op1" ID="{29E6553E-16D4-4C8D-A2CC-4B76B61D1C18}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="parar_ataque_especial_gotica_op2" ID="{75EECDEE-7928-41E9-8547-7B30A7A9B7E6}">
+							<ChildrenList>
+								<Action Name="" ID="{BC2B9F14-97C5-454A-BB00-2720B8361E15}" ShortID="265419439">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ataque especial gotica op2" ID="{968B799E-CD2B-4694-A06A-4B35CC1B17A9}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Evento Ataque Especial Tomboy" ID="{5C98FF9F-E49C-4B0C-BEC4-E5573F2924E6}" ShortID="287718447">
+					<ChildrenList>
+						<Event Name="ataque_especial_tomboy_op1" ID="{CCBCBDDD-03F5-4561-8D46-790544F8B203}">
+							<ChildrenList>
+								<Action Name="" ID="{520D656C-B05C-4BE7-9278-449F39D5A3B4}" ShortID="664369621">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ataque Especial Tomboy Op1" ID="{DF323226-AB8E-46FA-A2C1-38E0169FEB9F}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="ataque_especial_tomboy_op2" ID="{AB62A7FD-E1E0-4068-A56E-5AC77928CEE4}">
+							<ChildrenList>
+								<Action Name="" ID="{99D09E2A-359F-4822-BD43-D810B02EA16C}" ShortID="686962759">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ataque Especial Tomboy Op2" ID="{B7177B4E-D73B-4D1C-B579-8C2783D2A25D}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="ataque_especial_tomboy_op3" ID="{5C543064-2166-4E9A-801F-21AD9649BC22}">
+							<ChildrenList>
+								<Action Name="" ID="{5FFFC004-85D1-4A30-AE58-E04A9B0E224E}" ShortID="770709642">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ataque Especial Tomboy Op3" ID="{C360A89F-138B-4ED6-AC8E-9D972B438D35}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
