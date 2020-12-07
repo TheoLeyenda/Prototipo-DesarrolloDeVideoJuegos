@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System;
-using Boo.Lang.Environments;
 
 public class Player : Character
 {
@@ -153,6 +152,12 @@ public class Player : Character
 
     void Start()
     {
+        eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
+        if (structsPlayer.dataAttack.Limusina != null)
+        {
+            structsPlayer.dataAttack.Limusina.eventWise = eventWise;
+        }
+
         AuxSpeed = Speed;
         AuxSpeedJump = SpeedJump;
         AuxResistace = Resistace;
@@ -164,7 +169,6 @@ public class Player : Character
         enableMovementPlayer = false;
         enableMovement = false;
         InFuegoEmpieza = false;
-        eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
         enableParabolaAttack = true;
         GameObject go = GameObject.Find(NameInputManager);
         inputManager = go.GetComponent<InputManager>();

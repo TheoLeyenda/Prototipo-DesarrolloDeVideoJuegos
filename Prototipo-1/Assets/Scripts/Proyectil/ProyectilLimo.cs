@@ -5,9 +5,10 @@ using UnityEngine;
 public class ProyectilLimo : ProyectilInparable
 {
     // Start is called before the first frame update
-
     public GameObject SpawnPosition;
     private int crash = 3;
+
+    public EventWise eventWise { set; get; }
 
     public override void Start()
     {
@@ -24,6 +25,15 @@ public class ProyectilLimo : ProyectilInparable
         transform.position = SpawnPosition.transform.position;
         crash = 3;
     }
+    private void OnEnable()
+    {
+        StartCoroutine(StartSound(0.5f));
+    }
+    IEnumerator StartSound(float timeDelay)
+    {
+        eventWise.StartEvent("sonido_de_limusina_op5");
+        yield return new WaitForSeconds(timeDelay);
+    }
     // Update is called once per frame
     public override void Update()
     {
@@ -34,11 +44,6 @@ public class ProyectilLimo : ProyectilInparable
         }
         rg2D.AddForce(-transform.right * (speed * Time.deltaTime), ForceMode2D.Force);
         CheckTimeLife();
-    }
-
-    public override void Sonido()
-    {
-        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

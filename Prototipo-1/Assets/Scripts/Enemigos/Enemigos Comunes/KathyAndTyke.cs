@@ -12,6 +12,7 @@ public class KathyAndTyke : Enemy
     public override void Start()
     {
         base.Start();
+        limo_gameObject.eventWise = eventWise;
     }
     protected override void OnEnable()
     {
@@ -126,11 +127,6 @@ public class KathyAndTyke : Enemy
             }
             if(valueAttack >= parabolaAttack)
             {
-                /*if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
-                    || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
-                    || !enableMecanicParabolaAttack)
-                {*/
                 if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
                 || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
                 {
@@ -156,11 +152,6 @@ public class KathyAndTyke : Enemy
                     inAttack = true;
                     SetIsDuck(true);
                 }
-                /*else if (transform.position.y > InitialPosition.y && spriteEnemy.spriteRenderer.sprite.name == "KT - Stand")
-                {
-                    enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
-                    spriteEnemy.PlayAnimation("Salto famosa");
-                }*/
                 else if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
                     && transform.position.y <= InitialPosition.y && !GetIsDuck()
                     && spriteEnemy.spriteRenderer.sprite.name != "KT - Crouch Def" && spriteEnemy.spriteRenderer.name != "KT - Crouch"

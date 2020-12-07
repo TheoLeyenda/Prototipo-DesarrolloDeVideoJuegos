@@ -8,6 +8,7 @@ public class EventWise : MonoBehaviour
     public string nombre;
     public bool initEventInStart;
     public bool inMenu;
+
     void Start()
     {
         if (inMenu)

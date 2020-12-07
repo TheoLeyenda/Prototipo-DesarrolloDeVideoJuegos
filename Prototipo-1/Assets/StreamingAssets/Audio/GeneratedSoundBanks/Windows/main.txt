@@ -1,0 +1,143 @@
+Event	ID	Name			Wwise Object Path	Notes
+	189118561	sonido_de_limusina_op1			\Default Work Unit\Sonido de Limusina\sonido_de_limusina_op1	
+	189118562	sonido_de_limusina_op2			\Default Work Unit\Sonido de Limusina\sonido_de_limusina_op2	
+	189118563	sonido_de_limusina_op3			\Default Work Unit\Sonido de Limusina\sonido_de_limusina_op3	
+	189118564	sonido_de_limusina_op4			\Default Work Unit\Sonido de Limusina\sonido_de_limusina_op4	
+	189118565	sonido_de_limusina_op5			\Default Work Unit\Sonido de Limusina\sonido_de_limusina_op5	
+	284163330	muerte_personaje_op1			\Default Work Unit\Muerte Personaje\muerte_personaje_op1	
+	343221722	inicio_creditos			\Default Work Unit\inicio_creditos	
+	492541325	jugador_1_bloquear			\Default Work Unit\jugador_1_bloquear	
+	572204020	iniciar_combate			\Default Work Unit\iniciar_combate	
+	666922721	reiniciar			\Default Work Unit\reiniciar	
+	770618969	seleccionar			\Default Work Unit\seleccionar	
+	775054918	inicio_historia			\Default Work Unit\inicio_historia	
+	928907744	inicia_menu			\Default Work Unit\inicia_menu	
+	997344291	especial_lista			\Default Work Unit\especial_lista	
+	1119248036	jugador_2_bloquear			\Default Work Unit\jugador_2_bloquear	
+	1464367099	empate			\Default Work Unit\empate	
+	1702541306	tirar_goma			\Default Work Unit\tirar_goma	
+	1836857536	saltar			\Default Work Unit\saltar	
+	1931278216	moverse			\Default Work Unit\moverse	
+	1974158987	inicio_supervivencia			\Default Work Unit\inicio_supervivencia	
+	2022051578	pvp_ganador			\Default Work Unit\pvp_ganador	
+	2071188724	tirar_parabola			\Default Work Unit\tirar_parabola	
+	2161557176	perfect			\Default Work Unit\perfect	
+	2242281495	iniciar_combate_pvp			\Default Work Unit\iniciar_combate_pvp	
+	2305039898	inicio_controles			\Default Work Unit\inicio_controles	
+	2311903553	golpear_p1			\Default Work Unit\golpear_p1	
+	2311903554	golpear_p2			\Default Work Unit\golpear_p2	
+	2433235219	perder			\Default Work Unit\perder	
+	2658298240	inicio			\Default Work Unit\inicio	
+	2733797788	patear_pelota			\Default Work Unit\patear_pelota	
+	2990634451	inicio_pvp			\Default Work Unit\inicio_pvp	
+	3092587489	pausa			\Default Work Unit\pausa	
+	3214022966	botella_romper			\Default Work Unit\botella_romper	
+	3249189695	fuego_empieza			\Default Work Unit\fuego_empieza	
+	3406505131	despausar			\Default Work Unit\despausar	
+	3411128985	volver_al_menu			\Default Work Unit\volver_al_menu	
+	3500222696	diana_golpeada_op2			\Default Work Unit\Eventos Diano Golpeada\diana_golpeada_op2	
+	3500222697	diana_golpeada_op3			\Default Work Unit\Eventos Diano Golpeada\diana_golpeada_op3	
+	3500222699	diana_golpeada_op1			\Default Work Unit\Eventos Diano Golpeada\diana_golpeada_op1	
+	3500222700	diana_golpeada_op6			\Default Work Unit\Eventos Diano Golpeada\diana_golpeada_op6	
+	3500222701	diana_golpeada_op7			\Default Work Unit\Eventos Diano Golpeada\diana_golpeada_op7	
+	3500222702	diana_golpeada_op4			\Default Work Unit\Eventos Diano Golpeada\diana_golpeada_op4	
+	3500222703	diana_golpeada_op5			\Default Work Unit\Eventos Diano Golpeada\diana_golpeada_op5	
+	3542359744	fuego_termina			\Default Work Unit\fuego_termina	
+	3634810774	mover_seleccion			\Default Work Unit\mover_seleccion	
+	3870729452	caer			\Default Work Unit\caer	
+	4154110816	seleccion_de_personaje_op6			\Default Work Unit\Seleccion De Personajes\seleccion_de_personaje_op6	
+	4154110818	seleccion_de_personaje_op4			\Default Work Unit\Seleccion De Personajes\seleccion_de_personaje_op4	
+	4154110819	seleccion_de_personaje_op5			\Default Work Unit\Seleccion De Personajes\seleccion_de_personaje_op5	
+	4154110820	seleccion_de_personaje_op2			\Default Work Unit\Seleccion De Personajes\seleccion_de_personaje_op2	
+	4154110821	seleccion_de_personaje_op3			\Default Work Unit\Seleccion De Personajes\seleccion_de_personaje_op3	
+	4154110823	seleccion_de_personaje_op1			\Default Work Unit\Seleccion De Personajes\seleccion_de_personaje_op1	
+
+Switch Group	ID	Name			Wwise Object Path	Notes
+	1063701865	stage			\Default Work Unit\stage	
+
+Switch	ID	Name	Switch Group			Notes
+	646655239	nada	stage			
+	884851824	aula_geografia	stage			
+	1108116845	cafeteria	stage			
+	1985893511	aula_biologia	stage			
+	2107195691	aula_computacion	stage			
+	3530593856	gimnasio	stage			
+	3863248690	aula_quimica	stage			
+
+State Group	ID	Name			Wwise Object Path	Notes
+	2607556080	menu			\Default Work Unit\menu	
+	3092587489	pausa			\Default Work Unit\pausa	
+
+State	ID	Name	State Group			Notes
+	0	None	menu			
+	956887760	creditos	menu			
+	2658298240	inicio	menu			
+	0	None	pausa			
+	1584861549	si	pausa			
+	1668749452	no	pausa			
+
+Custom State	ID	Name	State Group	Owner		Notes
+	48869961	si	pausa	\Interactive Music Hierarchy\Default Work Unit\Combate		
+	676905336	creditos	menu	\Interactive Music Hierarchy\Default Work Unit\Intro		
+
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	2145737091	volumen_sonidos			\Default Work Unit\volumen_sonidos	
+	2975884740	volumen_musica			\Default Work Unit\volumen_musica	
+	3621576114	volumen_general			\Default Work Unit\volumen_general	
+
+Audio Bus	ID	Name			Wwise Object Path	Notes
+	805203703	Master Secondary Bus			\Default Work Unit\Master Secondary Bus	
+	3803692087	Master Audio Bus			\Default Work Unit\Master Audio Bus	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	2924607	VictoryStinger2	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\VictoryStinger2_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\StingerVictoria\VictoryStinger2		977116
+	22232919	Rubbers'n'battlesb168	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\Rubbers'n'battlesb168_181A13A0.wem		\Interactive Music Hierarchy\Default Work Unit\Combate\Rubbers\Rubbers'n'battlesb168\Rubbers'n'battlesb168		19916004
+	63029751	Diana al ser golpeada op2	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\Diana al ser golpeada op2_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Diana al ser golpeada\Diana al ser golpeada op2		130144
+	73816131	SeleccionDePersonaje_op1	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\SeleccionDePersonaje_op1_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Seleccion de personajes\SeleccionDePersonaje_op1		20616
+	78379430	Diana al ser golpeada op1	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\Diana al ser golpeada op1_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Diana al ser golpeada\Diana al ser golpeada op1		126868
+	80123793	SeleccionDePersonaje_op3	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\SeleccionDePersonaje_op3_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Seleccion de personajes\SeleccionDePersonaje_op3		59456
+	83002284	damefuegodamedamefuego	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\damefuegodamedamefuego_181A13A0.wem		\Actor-Mixer Hierarchy\Default Work Unit\damefuegodamedamefuego		1195816
+	121492834	volveramenuprincipaldesdeescape	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\volveramenuprincipaldesdeescape_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\volveramenuprincipaldesdeescape		325792
+	132033056	Sonido De Limusina Op2	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\Sonido De Limusina Op2_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sonido de Limusina\Sonido De Limusina Op2		2594556
+	157416624	Diana al ser golpeada op4	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\Diana al ser golpeada op4_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Diana al ser golpeada\Diana al ser golpeada op4		29156
+	162273826	golpe2	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\golpe2_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\golpe\golpe2		63920
+	208206010	sonidodeiniciarataqueespecial	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\sonidodeiniciarataqueespecial_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\sonidodeiniciarataqueespecial		252444
+	232350508	golpe3	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\golpe3_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\golpe\golpe3		63848
+	290122315	Diana al ser golpeada op6	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\Diana al ser golpeada op6_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Diana al ser golpeada\Diana al ser golpeada op6		33176
+	324120074	IntroLoop	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\IntroLoop_F26CE7B0.wem		\Interactive Music Hierarchy\Default Work Unit\Intro\IntroLoop\IntroLoop		2116928
+	324710112	golpe1	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\golpe1_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\golpe\golpe1		59960
+	326601414	SeleccionDePersonaje_op2	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\SeleccionDePersonaje_op2_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Seleccion de personajes\SeleccionDePersonaje_op2		364096
+	338163884	SeleccionDePersonaje_op4	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\SeleccionDePersonaje_op4_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Seleccion de personajes\SeleccionDePersonaje_op4		14276
+	353165905	Muerte Personaje Comun Op1	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\Muerte Personaje Comun Op1_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Muerte de personaje\Muerte Personaje Comun Op1		71676
+	374588946	Diana al ser golpeada op5	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\Diana al ser golpeada op5_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Diana al ser golpeada\Diana al ser golpeada op5		27518
+	381412982	voler_a_menu_inicio	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\voler_a_menu_inicio_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\voler_a_menu_inicio		57660
+	385197353	especialfantasmas	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\especialfantasmas_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\especialfantasmas		537900
+	412410830	Bully's over	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\Bully's over_181A13A0.wem		\Interactive Music Hierarchy\Default Work Unit\Combate\Bullysover\Bully's over\Bully's over		22426764
+	423121435	sonidodeselecciondepersonajespvp	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\sonidodeselecciondepersonajespvp_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\sonidodeselecciondepersonajespvp		325792
+	461007770	campanaescolar	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\campanaescolar_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\campanaescolar		871952
+	485758218	golpefinalcaepersonaje3	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\golpefinalcaepersonaje3_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\golpefinalcaepersonaje3		103144
+	515398468	Sonido De Limusina Op5	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\Sonido De Limusina Op5_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sonido de Limusina\Sonido De Limusina Op5		439076
+	529726793	arrojaravioncito	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\arrojaravioncito_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\arrojaravioncito		64064
+	532994792	golpefinalcaepersonaje1	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\golpefinalcaepersonaje1_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\golpefinalcaepersonaje1		107756
+	551263504	arrojarboladepapel	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\arrojarboladepapel_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\arrojarboladepapel		45776
+	567928832	SeleccionDePersonaje_op5	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\SeleccionDePersonaje_op5_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Seleccion de personajes\SeleccionDePersonaje_op5		68912
+	596358593	impactobombamolotov	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\impactobombamolotov_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\impactobombamolotov		117840
+	640985106	movimientodashentrecuadradosdepersonaje	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\movimientodashentrecuadradosdepersonaje_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\movimientodashentrecuadradosdepersonaje		35840
+	676051814	Sonido De Limusina Op1	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\Sonido De Limusina Op1_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sonido de Limusina\Sonido De Limusina Op1		1133820
+	717797529	Sonido De Limusina Op4	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\Sonido De Limusina Op4_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sonido de Limusina\Sonido De Limusina Op4		630864
+	731713535	Diana al ser golpeada op7	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\Diana al ser golpeada op7_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Diana al ser golpeada\Diana al ser golpeada op7		29526
+	757378275	sonidodecaidaimpactocontraelsuelo	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\sonidodecaidaimpactocontraelsuelo_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\sonidodecaidaimpactocontraelsuelo		49780
+	786303899	SeleccionDePersonaje_op6	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\SeleccionDePersonaje_op6_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Seleccion de personajes\SeleccionDePersonaje_op6		173996
+	793714700	golpefinalcaepersonaje2	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\golpefinalcaepersonaje2_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\golpefinalcaepersonaje2		116732
+	801312740	VictoryStinger	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\VictoryStinger_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\VictoryStinger		1626052
+	826660059	salto	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\salto_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\salto		60820
+	841261815	Sonido De Limusina Op3	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\Sonido De Limusina Op3_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Sonido de Limusina\Sonido De Limusina Op3		697512
+	847614260	LostStinger2	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\LostStinger2_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\LostStinger2		1626052
+	885526831	salirdepausa	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\salirdepausa_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\salirdepausa		325792
+	965590129	barraespeciallena	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\barraespeciallena_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\barraespeciallena		259320
+	965718914	especialpelota	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\especialpelota_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\especialpelota		45012
+	991206202	elegiralgunmododebatalla	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\elegiralgunmododebatalla_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\elegiralgunmododebatalla		367292
+	1000310429	sonidodeentrarapausa	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\sonidodeentrarapausa_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\sonidodeentrarapausa		325792
+	1019753840	Diana al ser golpeada op3	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\Diana al ser golpeada op3_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Diana al ser golpeada\Diana al ser golpeada op3		39016
+	1055290361	movimiento_entre_opciones_del_menu_inicio	C:\Users\Theo Leyenda\Desktop\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\.cache\Windows\SFX\movimiento_entre_opciones_del_menu_inicio_CA0198D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\movimiento_entre_opciones_del_menu_inicio		49772
+
