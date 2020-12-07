@@ -3104,7 +3104,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1676877275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4278,6 +4278,16 @@ PrefabInstance:
       propertyPath: PantallaAnterior
       value: 
       objectReference: {fileID: 1081088739}
+    - target: {fileID: 4512500628462001202, guid: 5c05ec614e2e904478ecd8822b31a28f,
+        type: 3}
+      propertyPath: spriteCursor1
+      value: 
+      objectReference: {fileID: 8225111841769072220}
+    - target: {fileID: 4512500628462001202, guid: 5c05ec614e2e904478ecd8822b31a28f,
+        type: 3}
+      propertyPath: timeTransitionScene
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c05ec614e2e904478ecd8822b31a28f, type: 3}
 --- !u!1 &4512500627449218106 stripped
@@ -4567,6 +4577,12 @@ PrefabInstance:
 --- !u!1 &8225111841769072219 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7618767114161980760, guid: 403d2944d591bff4290732520a2a4019,
+    type: 3}
+  m_PrefabInstance: {fileID: 8225111841769072218}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &8225111841769072220 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7618767114993683167, guid: 403d2944d591bff4290732520a2a4019,
     type: 3}
   m_PrefabInstance: {fileID: 8225111841769072218}
   m_PrefabAsset: {fileID: 0}

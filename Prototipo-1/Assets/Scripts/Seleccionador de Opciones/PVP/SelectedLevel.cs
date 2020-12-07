@@ -45,11 +45,15 @@ public class SelectedLevel : MonoBehaviour
     public GameObject PantallaAnterior;
     public bool activateCountRoundsSelection;
 
+    public SpriteRenderer spriteCursor1;
+
     private EventWise eventWise;
     private string soundMoveSelectionCharacter = "seleccion_de_personaje_op4";
     private string soundSelectCharacter = "seleccion_de_personaje_op2";
-    private bool soundSelectCharacterPlayer_1 = false;
-    private bool soundSelectCharacterPlayer_2 = false;
+    private bool soundSelectCharacterPlayer = false;
+
+    [SerializeField]
+    private float timeTransitionScene = 0.2f;
 
     [System.Serializable]
     public class ElementsSelectionLevels
@@ -129,9 +133,9 @@ public class SelectedLevel : MonoBehaviour
         if (!cursorPlayer1.condirmed)
         {
             MoveCursor();
-            CheckSelectCursor();
             CheckFondo();
         }
+        CheckSelectCursor();
         //Debug.Log(grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y]);
     }
     public void MoveCursor()
@@ -201,27 +205,39 @@ public class SelectedLevel : MonoBehaviour
                 {
                     gm.structGameManager.gm_dataCombatPvP.level_selected = elementsSelectionLevels[i].levelSelect;
                     cursorPlayer1.condirmed = true;
-                    eventWise.StartEvent(soundSelectCharacter);
+                    spriteCursor1.color = Color.yellow;
+                    if (!soundSelectCharacterPlayer)
+                    {
+                        eventWise.StartEvent(soundSelectCharacter);
+                        soundSelectCharacterPlayer = true;
+                    }
                 }
             }
         }
-        cursorPlayer2.condirmed = true; 
+        cursorPlayer2.condirmed = true;
+        
         if (cursorPlayer1.condirmed && cursorPlayer2.condirmed)
         {
-            
-            if (activateCountRoundsSelection)
+            if (timeTransitionScene > 0)
             {
-                CamvasSeleccionRounds.SetActive(true);
-                Fondo.SetActive(true);
-                CuadrillaDeSeleccion.SetActive(true);
-                if (PantallaAnterior != null)
-                {
-                    PantallaAnterior.SetActive(false);
-                }
+                timeTransitionScene = timeTransitionScene - Time.deltaTime;
             }
             else
             {
-                NextScene();
+                if (activateCountRoundsSelection)
+                {
+                    CamvasSeleccionRounds.SetActive(true);
+                    Fondo.SetActive(true);
+                    CuadrillaDeSeleccion.SetActive(true);
+                    if (PantallaAnterior != null)
+                    {
+                        PantallaAnterior.SetActive(false);
+                    }
+                }
+                else
+                {
+                    NextScene();
+                }
             }
         }
     }
