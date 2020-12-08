@@ -42,7 +42,6 @@ public class Grid : MonoBehaviour
     private void Start()
     {
         ActivatePlataforma();
-        
     }
     private void OnEnable()
     {
@@ -270,7 +269,7 @@ public class Grid : MonoBehaviour
                     Gm_Plataformas[i].SetActive(false);
                 }
             }
-            if (SceneManager.GetActiveScene().name != "PvP")
+            if (SceneManager.GetActiveScene().name != "PvP" && SceneManager.GetActiveScene().name != "TiroAlBlanco")
             {
                 //CUANDO AYA MAS NIVELES AGREGARLOS ACA PARA ACTIVAR LAS PLATAFORMAS DEPENDIENDO DEL NIVEL
                 switch (SceneManager.GetActiveScene().name)
@@ -290,10 +289,11 @@ public class Grid : MonoBehaviour
                 }
                 Gm_Plataformas[(int)idPlataforma].SetActive(true);
             }
-            else if (SceneManager.GetActiveScene().name == "PvP")
+            else if (SceneManager.GetActiveScene().name == "PvP" || SceneManager.GetActiveScene().name == "TiroAlBlanco")
             {
                 if (gm != null)
                 {
+                    //Debug.Log("ENTRE");
                     Gm_Plataformas[(int)gm.structGameManager.gm_dataCombatPvP.level_selected].SetActive(true);
                 }
             }

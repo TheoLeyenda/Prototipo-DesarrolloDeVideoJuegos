@@ -6,7 +6,6 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    
     public PlayerData playerData_P1;
     public PlayerData playerData_P2;
     public GameObject CanvasGameOver;
@@ -48,7 +47,7 @@ public class GameManager : MonoBehaviour
         }
         else if (instanceGameManager != null)
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
     void Start()
@@ -80,17 +79,7 @@ public class GameManager : MonoBehaviour
         structGameManager.gm_dataCombatPvP.countRoundsWiningP2 = 0;
         structGameManager.gm_dataCombatPvP.countRounds = 0;
     }
-    /*public void ResetRoundCombat(bool PlayerDeath)
-    {
-        if (!PlayerDeath)
-        {
-            roundCombat = 0;
-        }
-        else if (PlayerDeath)
-        {
-            roundCombat = 1;
-        }
-    }*/
+    
     public void GameOver(string finishScene)
     {
         if (screenManager.eventWise != null && finishScene != "GameOverHistoria" && finishScene != "GameOverSupervivencia")
