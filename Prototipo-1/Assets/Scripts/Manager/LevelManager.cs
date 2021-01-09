@@ -41,6 +41,11 @@ public class LevelManager : MonoBehaviour
 
     private Player hablador_Player;
     private Enemy hablador_Enemy;
+
+    private string[] namesSoundEffectDialog = { "pasar_dialogo_op1", "pasar_dialogo_op2", "pasar_dialogo_op1" };
+
+    private string currentSoundEffectDialog;
+
     [System.Serializable]
     public class Dialogos
     {
@@ -89,6 +94,13 @@ public class LevelManager : MonoBehaviour
         }
         //Level = 1;
         ObjectiveOfPassLevel = 1;
+
+        GameObject go_eventWise;
+        if (eventWise == null)
+        {
+            go_eventWise = GameObject.Find("EventWise");
+            eventWise = go_eventWise.GetComponent<EventWise>();
+        }
     }
     void Update()
     {
@@ -136,7 +148,16 @@ public class LevelManager : MonoBehaviour
         if (InputPlayerController.GetInputButtonDown("SelectButton_P1"))
         {
             NextId();
+            InitSoundDialog();
+            eventWise.StartEvent(currentSoundEffectDialog);
         }
+    }
+
+    public void InitSoundDialog()
+    {
+        int index = Random.Range(0, namesSoundEffectDialog.Length);
+
+        currentSoundEffectDialog = namesSoundEffectDialog[index];
     }
     public void SwitchWaysToLevelUp(ActivatorDialogueManager activatorDialogueManager)
     {

@@ -16,6 +16,7 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private Transitions panelTransitions;
     [SerializeField] private bool useLoadSceneInMenu = true;
     [SerializeField] private bool registerLevel = true;
+
     private void Start()
     {
         idListaNiveles = -1;

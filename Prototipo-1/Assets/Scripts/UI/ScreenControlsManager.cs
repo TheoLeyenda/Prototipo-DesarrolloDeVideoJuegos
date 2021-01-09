@@ -20,10 +20,13 @@ public class ScreenControlsManager : MonoBehaviour
     public TextMeshProUGUI textTeclado;
     public Image imageBarTeclado;
 
+    [SerializeField] private bool initSwitch = true;
+
 
     private void Start()
     {
-        SwitchControlsTeclado("TECLADO");
+        if(initSwitch)
+            SwitchControlsTeclado("TECLADO");
     }
     public void SwitchControlsTeclado(string valueText)
     {

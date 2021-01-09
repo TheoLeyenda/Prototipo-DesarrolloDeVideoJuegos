@@ -55,6 +55,12 @@ public class DialogueController : MonoBehaviour
     public DataCombatPvP dataCombatPvP;
     [HideInInspector]
     public bool OpenDialogInEnableObject = true;
+
+    private EventWise eventWise;
+
+    private string[] namesSoundEffectDialog = { "pasar_dialogo_op1", "pasar_dialogo_op2", "pasar_dialogo_op1" };
+
+    private string currentSoundEffectDialog;
     void Awake()
     {
         if (dialogue.Count > 0)
@@ -119,6 +125,12 @@ public class DialogueController : MonoBehaviour
                     gameObject.SetActive(false);
                 }
             }
+        }
+        GameObject go_eventWise;
+        if (eventWise == null)
+        {
+            go_eventWise = GameObject.Find("EventWise");
+            eventWise = go_eventWise.GetComponent<EventWise>();
         }
     }
     private void OnDisable()
@@ -231,12 +243,21 @@ public class DialogueController : MonoBehaviour
         textDialog.text = dialogos[indexDialog][ID_Dialog].nameHabladorActual+": " +dialogos[indexDialog][ID_Dialog].dialogoPersonaje;
 
     }
-    // Update is called once per frame
+
+    public void InitSoundDialog()
+    {
+        int index = UnityEngine.Random.Range(0, namesSoundEffectDialog.Length);
+
+        currentSoundEffectDialog = namesSoundEffectDialog[index];
+    }
+
     void Update()
     {
         if (InputPlayerController.GetInputButtonDown("SelectButton_P1") && OpenDialogInEnableObject)
         {
-            
+            //Debug.Log("ENTRE");
+            InitSoundDialog();
+            eventWise.StartEvent(currentSoundEffectDialog);
             ID_Dialog++;
             if (ID_Dialog < dialogos[indexDialog].Count)
             {
