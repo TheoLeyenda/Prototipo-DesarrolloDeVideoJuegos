@@ -49,5 +49,7 @@ Download it from itch.io: https://facundogt.itch.io/school-out
 
 En caso que desee bajar el proyecto para probar y ver como esta desarrollado por dentro debe tener en cuenta que para hacer que el audio funcione correctamente, debe descomprimir el banco de sonido de Wwise, este archivo se identifica como la carpeta "Windows.zip". 
 La ubicacion de este archivo para descomprimirlo esta aqui:
+
 ...\School-s-Out-\Prototipo-1\School's Out!! sesion wwise\GeneratedSoundBanks.
+
 Este path variara segun donde se abra el proyecto y si lo descarga sin ser miembro del proyecto debe tomar en cuenta que el nombre no sera explicitamente "School-s-Out-" sino que GitHub cuando baje el proyecto le asignara otro nombre.
