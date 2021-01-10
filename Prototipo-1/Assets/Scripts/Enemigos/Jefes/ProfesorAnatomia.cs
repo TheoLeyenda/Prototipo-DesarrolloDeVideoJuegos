@@ -74,6 +74,11 @@ public class ProfesorAnatomia : Enemy
     private float porcentageThrowSpecialAttack;
     
     public bool initBehavour = false;
+
+    private bool playMusicBoss = false;
+
+    private bool firstEnableBoss = false;
+
     public enum EstadoProfesorAnatomia
     {
         Idle,
@@ -131,6 +136,21 @@ public class ProfesorAnatomia : Enemy
         //InitialPosition = new Vector3(5.17f, -3.42f, 0f);
         enemyPrefab.transform.position = new Vector3(transform.position.x, -3.42f, 0f);
         Idied = false;
+
+        string[] optionsNamesMusicBoss = { "musica_boss1_op1", "musica_boss1_op2" };
+        int currentIndexMusicFight = 1;
+        if (eventWise == null)
+        {
+            eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
+        }
+        if (!playMusicBoss && firstEnableBoss)
+        {
+            playMusicBoss = true;
+            Debug.Log("Musica boss activada por FinishDialog");
+            eventWise.StartEvent(optionsNamesMusicBoss[currentIndexMusicFight]);
+        }
+
+        firstEnableBoss = true;
     }
     protected override void OnDisable()
     {
@@ -162,10 +182,10 @@ public class ProfesorAnatomia : Enemy
     public override void Update()
     {
         //BORRAR LUEGO DE TESTEO
-        if (Input.GetKeyDown(KeyCode.F)) 
-        {
-        xpActual = xpNededSpecialAttack;
-        }
+        //if (Input.GetKeyDown(KeyCode.F)) 
+        //{
+        //xpActual = xpNededSpecialAttack;
+        //}
         //-----------------
         if (enableMovement)
         {
@@ -313,6 +333,7 @@ public class ProfesorAnatomia : Enemy
     {
         spriteBoss_ProfesorAnatomia.PlayAnimation(NameAnimations[(int)MyAnimations.Death]);
         Idied = true;
+        eventWise.StartEvent("finish_boss_fight");
     }
     public void SetTargetGrid(Grid g, Vector3 target)
     {

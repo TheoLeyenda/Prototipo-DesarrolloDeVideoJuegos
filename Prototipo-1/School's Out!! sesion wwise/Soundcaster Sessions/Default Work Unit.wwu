@@ -76,6 +76,87 @@
 						<CurrentSwitchRef Name="jefe" ID="{A945DC91-162C-419A-8629-4CBD31E1B004}"/>
 					</CurrentSwitchList>
 				</SoundcasterSession>
+				<SoundcasterSession Name="Testeo_BossFight_1" ID="{C5DD20FF-A57F-4783-A68D-EA7E4336068B}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="musica_boss1_op1" ID="{105A8191-AC0A-454E-8310-5F690EF7CB01}" WorkUnitID="{8B3389A3-41E0-4AD6-A101-D4CDCA497D71}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="inicio_historia" ID="{C173EAD2-A15C-4CF6-8AF4-C84D8D2ECF45}" WorkUnitID="{8B3389A3-41E0-4AD6-A101-D4CDCA497D71}"/>
+							<Position X="1" Y="0"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="musica_boss1_op2" ID="{8C9BAA0A-3734-49BC-B286-0463B9CFBBCF}" WorkUnitID="{8B3389A3-41E0-4AD6-A101-D4CDCA497D71}"/>
+							<Position X="2" Y="0"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true">
+						<RTPCValue>
+							<GameParameterRef Name="SS_Air_Turbulence" ID="{EDA87B19-73AA-40A0-9F19-2073606DB710}"/>
+							<Value>6</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="SS_Air_Month" ID="{09E2B445-C4A3-447F-B3CA-818A1D925EF7}"/>
+							<Value>6</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="SS_Air_RPM" ID="{A34890AB-B9D5-4526-A64D-5290C43EF2DC}"/>
+							<Value>50</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="volumen_general" ID="{AA6E7728-6211-4661-91EB-186E17A9DD21}"/>
+							<Value>50</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="SS_Air_Fury" ID="{A2AE79DC-CA3A-46BA-9652-9986C322A87B}"/>
+							<Value>50</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="SS_Air_Size" ID="{1329EBEF-A193-472E-A38C-64668B494879}"/>
+							<Value>50</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="SS_Air_Storm" ID="{E93F8CDB-06D1-4737-ACAF-7CD44BBED783}"/>
+							<Value>75</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="SS_Air_Presence" ID="{E3B7811A-7B2F-490F-B44F-5FE51B468041}"/>
+							<Value>75</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="volumen_musica" ID="{0FF8543F-BCF2-4BEB-AB7A-4329BB2626C9}"/>
+							<Value>50</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="SS_Air_TimeOfDay" ID="{536FA72C-8C7E-4C8B-AE03-EF34FDADC314}"/>
+							<Value>6</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="volumen_sonidos" ID="{0E233762-701F-4D70-9E70-A1FFD877913B}"/>
+							<Value>50</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="SS_Air_Freefall" ID="{2F2DFE37-4F9E-4D94-83D8-53CCA39781AD}"/>
+							<Value>75</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="SS_Air_Fear" ID="{F72E0659-4346-4E1C-A1B1-DAB46A05101E}"/>
+							<Value>50</Value>
+						</RTPCValue>
+					</RTPCValueList>
+					<CurrentStateList ShowAll="true">
+						<CurrentStateRef Name="None" ID="{71AECEC6-1B97-4CDA-95DA-8B1E7198B4A9}"/>
+						<CurrentStateRef Name="None" ID="{798E8B94-D89F-4D94-95CE-99C93C0265B9}"/>
+					</CurrentStateList>
+					<CurrentSwitchList ShowAll="true">
+						<CurrentSwitchRef Name="personaje_agresivo" ID="{3C5F71AB-71A3-46DC-BED5-BC7FFF4BF2A0}"/>
+						<CurrentSwitchRef Name="bloq" ID="{282B3E5B-88E9-441B-8E59-EA51BC445AA2}"/>
+						<CurrentSwitchRef Name="bloq" ID="{F94CFFB8-3F73-450C-B2E6-079BED04D990}"/>
+						<CurrentSwitchRef Name="boss1_op1" ID="{FEEC3D79-5E3C-48C0-B9DA-409A9B493154}"/>
+						<CurrentSwitchRef Name="jefe" ID="{A945DC91-162C-419A-8629-4CBD31E1B004}"/>
+					</CurrentSwitchList>
+				</SoundcasterSession>
 			</ChildrenList>
 		</WorkUnit>
 	</SoundcasterSessions>

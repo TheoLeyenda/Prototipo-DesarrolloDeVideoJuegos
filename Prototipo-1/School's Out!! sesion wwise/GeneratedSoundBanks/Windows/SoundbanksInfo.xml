@@ -41,6 +41,7 @@
 				<Event Id="4159970214" Name="fight_op1" ObjectPath="\Events\Default Work Unit\Eventos Ready Fight\fight_op1" DurationType="OneShot" DurationMin="0.541270" DurationMax="0.541270"/>
 				<Event Id="4159970213" Name="fight_op2" ObjectPath="\Events\Default Work Unit\Eventos Ready Fight\fight_op2" DurationType="OneShot" DurationMin="0.572200" DurationMax="0.572200"/>
 				<Event Id="4159970212" Name="fight_op3" ObjectPath="\Events\Default Work Unit\Eventos Ready Fight\fight_op3" DurationType="OneShot" DurationMin="0.989751" DurationMax="0.989751"/>
+				<Event Id="548681567" Name="finish_boss_fight" ObjectPath="\Events\Default Work Unit\finish_boss_fight" DurationType="Infinite"/>
 				<Event Id="3249189695" Name="fuego_empieza" ObjectPath="\Events\Default Work Unit\fuego_empieza" DurationType="Infinite"/>
 				<Event Id="3542359744" Name="fuego_termina" ObjectPath="\Events\Default Work Unit\fuego_termina" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="2311903553" Name="golpear_p1" ObjectPath="\Events\Default Work Unit\golpear_p1" DurationType="OneShot" DurationMin="0.311006" DurationMax="0.389324"/>
@@ -59,6 +60,8 @@
 				<Event Id="3634810774" Name="mover_seleccion" ObjectPath="\Events\Default Work Unit\mover_seleccion" DurationType="OneShot" DurationMin="0.281791" DurationMax="0.281791"/>
 				<Event Id="1931278216" Name="moverse" ObjectPath="\Events\Default Work Unit\moverse" DurationType="OneShot" DurationMin="0.202812" DurationMax="0.202812"/>
 				<Event Id="284163330" Name="muerte_personaje_op1" ObjectPath="\Events\Default Work Unit\Muerte Personaje\muerte_personaje_op1" DurationType="OneShot" DurationMin="0.405964" DurationMax="0.405964"/>
+				<Event Id="3972977933" Name="musica_boss1_op1" ObjectPath="\Events\Default Work Unit\musica_boss1_op1" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="3972977934" Name="musica_boss1_op2" ObjectPath="\Events\Default Work Unit\musica_boss1_op2" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="1816189793" Name="parar_ataque_especial_gotica_op1" ObjectPath="\Events\Default Work Unit\Evento Ataque Especial Gotica\parar_ataque_especial_gotica_op1" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="1816189794" Name="parar_ataque_especial_gotica_op2" ObjectPath="\Events\Default Work Unit\Evento Ataque Especial Gotica\parar_ataque_especial_gotica_op2" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="4051069527" Name="pasar_dialogo_op1" ObjectPath="\Events\Default Work Unit\Pasar Dialogo\pasar_dialogo_op1" DurationType="OneShot" DurationMin="0.804172" DurationMax="0.804172"/>
@@ -179,6 +182,10 @@
 					<ShortName>SeleccionDePersonaje_op4.wav</ShortName>
 					<Path>SFX\SeleccionDePersonaje_op4_CA0198D6.wem</Path>
 				</File>
+				<File Id="346147775" Language="SFX">
+					<ShortName>BossTheme5v2 -  - Output - Stereo Out.wav</ShortName>
+					<Path>SFX\BossTheme5v2 -  - Output - Stereo Out_181A13A0.wem</Path>
+				</File>
 				<File Id="353165905" Language="SFX">
 					<ShortName>Muerte Personaje Comun Op1.wav</ShortName>
 					<Path>SFX\Muerte Personaje Comun Op1_CA0198D6.wem</Path>
@@ -262,6 +269,10 @@
 				<File Id="596358593" Language="SFX">
 					<ShortName>impactobombamolotov.wav</ShortName>
 					<Path>SFX\impactobombamolotov_CA0198D6.wem</Path>
+				</File>
+				<File Id="597020630" Language="SFX">
+					<ShortName>BossTheme5 -  - Output - Stereo Out.wav</ShortName>
+					<Path>SFX\BossTheme5 -  - Output - Stereo Out_181A13A0.wem</Path>
 				</File>
 				<File Id="640985106" Language="SFX">
 					<ShortName>movimientodashentrecuadradosdepersonaje.wav</ShortName>
