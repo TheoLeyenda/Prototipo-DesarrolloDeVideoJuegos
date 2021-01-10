@@ -1128,6 +1128,69 @@
 						</Event>
 					</ChildrenList>
 				</Folder>
+				<Event Name="musica_boss1_op1" ID="{105A8191-AC0A-454E-8310-5F690EF7CB01}">
+					<ChildrenList>
+						<Action Name="" ID="{6949ACAB-5B15-4B2B-863C-08D3A83AB282}" ShortID="433642969">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="23"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="boss1_op1" ID="{FEEC3D79-5E3C-48C0-B9DA-409A9B493154}" WorkUnitID="{BDE24D5E-4195-4104-9781-47EC1BEEF222}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="musica_boss1_op2" ID="{8C9BAA0A-3734-49BC-B286-0463B9CFBBCF}">
+					<ChildrenList>
+						<Action Name="" ID="{2AAA76DE-6D6A-4172-A7EA-D656A036EDA4}" ShortID="933465512">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="23"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="boss1_op2" ID="{100343A4-AE0C-4144-9191-68310E1C31B2}" WorkUnitID="{BDE24D5E-4195-4104-9781-47EC1BEEF222}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="finish_boss_fight" ID="{F91DDE63-9F84-4ABF-8416-C48E76C3BAFE}">
+					<ChildrenList>
+						<Action Name="" ID="{15D0A22C-D303-4240-9E9D-6405A970FF5A}" ShortID="673354236">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Combate" ID="{D826CF7D-7C99-4D5B-92E2-7448C6DE9526}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{2AF4F6A6-B996-480F-AC01-E84AE3B40AF7}" ShortID="999455635">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="23"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="aula_biologia" ID="{6990D55D-462C-4E82-BF5E-8A8E1EDE1AD8}" WorkUnitID="{BDE24D5E-4195-4104-9781-47EC1BEEF222}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{41AF43AF-284B-4096-BEAD-D59803829124}" ShortID="182528802">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="4"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Intro" ID="{D9702D72-B404-48A7-9E8D-33E44E8916B0}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
