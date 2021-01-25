@@ -146,7 +146,7 @@ public class ProfesorAnatomia : Enemy
         if (!playMusicBoss && firstEnableBoss)
         {
             playMusicBoss = true;
-            Debug.Log("Musica boss activada por FinishDialog");
+            //Debug.Log("Musica boss activada por FinishDialog");
             eventWise.StartEvent(optionsNamesMusicBoss[currentIndexMusicFight]);
         }
 

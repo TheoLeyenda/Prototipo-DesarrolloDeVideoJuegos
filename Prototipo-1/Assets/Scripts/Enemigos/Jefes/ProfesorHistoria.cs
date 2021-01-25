@@ -187,6 +187,8 @@ public class ProfesorHistoria : Enemy
                 switch (fsmProfesorHistoria.GetCurrentState())
                 {
                     case (int)EstadoProfesorHistoria.Idle:
+                        Debug.Log("ENTRE AL TEMA");
+                        eventWise.StartEvent("musica_boss1_op2");
                         Idle();
                         break;
                     case (int)EstadoProfesorHistoria.MasiveAttack:
