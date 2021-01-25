@@ -72,6 +72,7 @@ public class MenuDePausa : MonoBehaviour
         eventwise.StartEvent("despausar");
         eventwise.StartEvent("seleccionar");
         eventwise.StartEvent("reiniciar");
+        gm.resetMusic = true;
         if (gd != null)
         {
             gd.LoadAuxData();

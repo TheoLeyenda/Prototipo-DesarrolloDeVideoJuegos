@@ -188,7 +188,7 @@ public class ProfesorHistoria : Enemy
                 {
                     case (int)EstadoProfesorHistoria.Idle:
                         Debug.Log("ENTRE AL TEMA");
-                        eventWise.StartEvent("musica_boss1_op2");
+                        eventWise.StartEvent("musica_boss2_op1");
                         Idle();
                         break;
                     case (int)EstadoProfesorHistoria.MasiveAttack:
@@ -234,6 +234,7 @@ public class ProfesorHistoria : Enemy
                         initMasiveAttack_Lanzado = false;
                         if (!Idied)
                         {
+                            eventWise.StartEvent("finish_boss_fight");
                             Idied = true;
                             spriteBoss_ProfesorHistoria.PlayAnimation(NameAnimations[(int)MyAnimations.Death]);
                         }

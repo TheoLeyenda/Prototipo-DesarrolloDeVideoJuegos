@@ -279,6 +279,7 @@ public class ProfesorAnatomia : Enemy
             {
                 if (NextSpecialAttack)
                 {
+                    eventWise.StartEvent("PunioFuria");
                     spriteBoss_ProfesorAnatomia.PlayAnimation(NameAnimations[(int)MyAnimations.PunietazoDeFuria]);
                     NextSpecialAttack = false;
                     countRepetitionSpecialAttack--;
@@ -302,6 +303,7 @@ public class ProfesorAnatomia : Enemy
     }
     public void Braggart()
     {
+        eventWise.StartEvent("StopPunioFuria");
         if (!initBraggert)
         {
             if (delayBraggart > 0)

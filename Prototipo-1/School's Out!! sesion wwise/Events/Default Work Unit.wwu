@@ -44,6 +44,41 @@
 				</Event>
 				<Event Name="inicio_historia" ID="{C173EAD2-A15C-4CF6-8AF4-C84D8D2ECF45}">
 					<ChildrenList>
+						<Action Name="" ID="{4B46A53F-8915-4134-B7C5-0113FA2B2142}" ShortID="566951528">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+								<Property Name="Inclusion" Type="bool">
+									<ValueList>
+										<Value>False</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Bully's over" ID="{24E1103C-29B0-45F5-AC17-AD1E101B0195}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{97F593A3-9AA3-4942-9789-63FAA418F244}" ShortID="76328190">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Combate" ID="{D826CF7D-7C99-4D5B-92E2-7448C6DE9526}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{3E6C6949-8291-4783-980E-D0012052D852}" ShortID="780921932">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="23"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="aula_biologia" ID="{6990D55D-462C-4E82-BF5E-8A8E1EDE1AD8}" WorkUnitID="{BDE24D5E-4195-4104-9781-47EC1BEEF222}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
 						<Action Name="" ID="{BDD9D8CE-C8DB-4AEC-8ADB-B02E0C6027BB}" ShortID="533309880">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="4"/>
@@ -52,16 +87,6 @@
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="Intro" ID="{D9702D72-B404-48A7-9E8D-33E44E8916B0}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
-								</Reference>
-							</ReferenceList>
-						</Action>
-						<Action Name="" ID="{4B46A53F-8915-4134-B7C5-0113FA2B2142}" ShortID="566951528">
-							<PropertyList>
-								<Property Name="ActionType" Type="int16" Value="1"/>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Target">
-									<ObjectRef Name="Bully's over" ID="{24E1103C-29B0-45F5-AC17-AD1E101B0195}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -1120,12 +1145,16 @@
 				</Folder>
 				<Event Name="musica_boss1_op1" ID="{105A8191-AC0A-454E-8310-5F690EF7CB01}">
 					<ChildrenList>
-						<Action Name="" ID="{8FCB4CB2-2215-4B8D-9D6F-0BF6C06580A1}" ShortID="191937054">
+						<Action Name="" ID="{AD48B9B6-88D9-457E-98D5-C061F5CEC665}" ShortID="90157353">
 							<PropertyList>
-								<Property Name="ActionType" Type="int16" Value="3"/>
+								<Property Name="ActionType" Type="int16" Value="2"/>
 								<Property Name="Scope" Type="int16" Value="1"/>
 							</PropertyList>
-							<ReferenceList/>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Combate" ID="{D826CF7D-7C99-4D5B-92E2-7448C6DE9526}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+								</Reference>
+							</ReferenceList>
 						</Action>
 						<Action Name="" ID="{E56CEAD2-EFA3-4F6F-9CDB-A2BE56D434EB}" ShortID="148094579">
 							<PropertyList>
@@ -1133,7 +1162,17 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="BossTheme5 -  - Output - Stereo Out" ID="{0576E850-4759-466C-865C-EE827F8659D6}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+									<ObjectRef Name="Combate" ID="{D826CF7D-7C99-4D5B-92E2-7448C6DE9526}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{91BAECC8-5CD9-4B8B-830C-79635F8DCF43}" ShortID="270446843">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="23"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="boss1_op1" ID="{FEEC3D79-5E3C-48C0-B9DA-409A9B493154}" WorkUnitID="{BDE24D5E-4195-4104-9781-47EC1BEEF222}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -1141,12 +1180,16 @@
 				</Event>
 				<Event Name="musica_boss1_op2" ID="{8C9BAA0A-3734-49BC-B286-0463B9CFBBCF}">
 					<ChildrenList>
-						<Action Name="" ID="{B2968808-1316-4213-AA9B-184DEAF3FA8E}" ShortID="586522051">
+						<Action Name="" ID="{4287D8BF-5A4C-4BA0-BB1C-B515A8C080FB}" ShortID="422545553">
 							<PropertyList>
-								<Property Name="ActionType" Type="int16" Value="3"/>
+								<Property Name="ActionType" Type="int16" Value="2"/>
 								<Property Name="Scope" Type="int16" Value="1"/>
 							</PropertyList>
-							<ReferenceList/>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Combate" ID="{D826CF7D-7C99-4D5B-92E2-7448C6DE9526}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+								</Reference>
+							</ReferenceList>
 						</Action>
 						<Action Name="" ID="{AF3AEFC3-AF58-476B-9DAA-D2E5C067F46F}" ShortID="136789549">
 							<PropertyList>
@@ -1154,7 +1197,17 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="BossTheme5v2 -  - Output - Stereo Out" ID="{8F0B0279-490C-4AB3-A22A-7365153B9E8C}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+									<ObjectRef Name="Combate" ID="{D826CF7D-7C99-4D5B-92E2-7448C6DE9526}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{88377997-7892-4C64-8266-8952EE4D6741}" ShortID="1011515234">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="23"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="boss1_op2" ID="{100343A4-AE0C-4144-9191-68310E1C31B2}" WorkUnitID="{BDE24D5E-4195-4104-9781-47EC1BEEF222}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -1162,12 +1215,16 @@
 				</Event>
 				<Event Name="finish_boss_fight" ID="{F91DDE63-9F84-4ABF-8416-C48E76C3BAFE}">
 					<ChildrenList>
-						<Action Name="" ID="{F7EF89CE-3237-4E99-9AE8-103B7DBD86DC}" ShortID="434776337">
+						<Action Name="" ID="{397E7440-5237-429A-A918-6BD6A67F91CD}" ShortID="758793173">
 							<PropertyList>
-								<Property Name="ActionType" Type="int16" Value="3"/>
+								<Property Name="ActionType" Type="int16" Value="2"/>
 								<Property Name="Scope" Type="int16" Value="1"/>
 							</PropertyList>
-							<ReferenceList/>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Combate" ID="{D826CF7D-7C99-4D5B-92E2-7448C6DE9526}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+								</Reference>
+							</ReferenceList>
 						</Action>
 						<Action Name="" ID="{23D906EB-DD64-40AF-BE84-FCFBA6E79368}" ShortID="826029353">
 							<PropertyList>
@@ -1175,12 +1232,90 @@
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="Bully's over" ID="{24E1103C-29B0-45F5-AC17-AD1E101B0195}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+									<ObjectRef Name="Combate" ID="{D826CF7D-7C99-4D5B-92E2-7448C6DE9526}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{247ACA42-8E82-4D03-8214-5844E8B604CD}" ShortID="1062479977">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="23"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="aula_biologia" ID="{6990D55D-462C-4E82-BF5E-8A8E1EDE1AD8}" WorkUnitID="{BDE24D5E-4195-4104-9781-47EC1BEEF222}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="musica_boss2_op1" ID="{C4160671-9134-4D23-9B5D-E6A4B91D2E24}">
+					<ChildrenList>
+						<Action Name="" ID="{CD8DA6C0-1063-495E-9AF6-F13981921D56}" ShortID="712938123">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Combate" ID="{D826CF7D-7C99-4D5B-92E2-7448C6DE9526}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{6A69B08E-F701-4B83-B696-3F14889B34FB}" ShortID="200000366">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Combate" ID="{D826CF7D-7C99-4D5B-92E2-7448C6DE9526}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{86E1690F-637B-445A-9DC8-B1C0EAFBD3B4}" ShortID="147221492">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="23"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="boss2" ID="{C4348FB9-2216-4633-9F15-BD0E06131D04}" WorkUnitID="{BDE24D5E-4195-4104-9781-47EC1BEEF222}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Folder Name="Eventos Ataques Especiales Prof Anatomia" ID="{5E46AF2F-7D97-43E2-BC1B-B3F79FE6A6BB}" ShortID="383040183">
+					<ChildrenList>
+						<Event Name="PunioFuria" ID="{A955B839-87D8-4152-A199-BA4A46CFBD3A}">
+							<ChildrenList>
+								<Action Name="" ID="{AA70B589-DE8E-4508-AEAC-7DF33F88D70D}" ShortID="791111106">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-001-PuñoFuria (Recortado)" ID="{3934B165-28D5-4900-8398-02963CB56B70}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="StopPunioFuria" ID="{8D52072D-90FE-4069-98F3-85D77EA621A3}">
+							<ChildrenList>
+								<Action Name="" ID="{7F9B8B8E-E251-4C70-BC6D-0219E3842E59}" ShortID="541750302">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="Scope" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-001-PuñoFuria (Recortado)" ID="{3934B165-28D5-4900-8398-02963CB56B70}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

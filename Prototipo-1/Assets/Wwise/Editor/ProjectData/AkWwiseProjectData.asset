@@ -17,13 +17,13 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: 501f115075562943a24c322d9e764055
     GuidInternal: 
-    m_lastTime: -8586268128994775808
+    m_lastTime: -8585900682348363035
     List: []
   - PhysicalPath: Virtual Acoustics\Factory Reflect Acoustic Textures.wwu
     ParentPhysicalPath: 
     guid: 6b663d46a83ca54f8b4a5fef12b883f6
     GuidInternal: 
-    m_lastTime: -8586268128994775808
+    m_lastTime: -8585900682348353055
     List:
     - name: Acoustic_Banner
       guid: f2532d2fccda8e408b8898b1b52a26d6
@@ -184,14 +184,14 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: 4872cc630656dd4daf89d81fbf243772
     GuidInternal: 
-    m_lastTime: -8586170618157257401
+    m_lastTime: -8585900682497639725
     List: []
   BankWwu:
   - PhysicalPath: SoundBanks\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 04e79a54159189409a3a8a9aeb04e287
     GuidInternal: 
-    m_lastTime: -8586268019714775808
+    m_lastTime: -8585900682348402926
     List:
     - name: main
       guid: 33c02da4ea465e4fb029a33ca61cecbf
@@ -207,7 +207,7 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: a389338be041d64aa101d4cdca497d71
     GuidInternal: 
-    m_lastTime: -8585913033569405850
+    m_lastTime: -8585900022277192934
     List:
     - name: ataque_especial_gotica_op1
       guid: b76bd5c150d4bc4e8b9183fdf753d71d
@@ -719,8 +719,8 @@ MonoBehaviour:
         ObjectType: 3
       Path: Default Work Unit\musica_boss1_op1
       maxAttenuation: 0
-      maxDuration: 0
-      minDuration: 0
+      maxDuration: -1
+      minDuration: -1
     - name: musica_boss1_op2
       guid: 0aaa9b8c3437bc49b2860463b9cfbbcf
       id: 3972977934
@@ -731,8 +731,20 @@ MonoBehaviour:
         ObjectType: 3
       Path: Default Work Unit\musica_boss1_op2
       maxAttenuation: 0
-      maxDuration: 0
-      minDuration: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: musica_boss2_op1
+      guid: 710616c43491234d9b5de6a4b91d2e24
+      id: 745102714
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: musica_boss2_op1
+        ObjectType: 3
+      Path: Default Work Unit\musica_boss2_op1
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
     - name: parar_ataque_especial_gotica_op1
       guid: c2be504a98926547aeababe6b8e48d22
       id: 1816189793
@@ -851,6 +863,20 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: PunioFuria
+      guid: 39b855a9d8875241a199ba4a46cfbd3a
+      id: 3854034543
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Eventos Ataques Especiales Prof Anatomia
+        ObjectType: 4
+      - ElementName: PunioFuria
+        ObjectType: 3
+      Path: Default Work Unit\Eventos Ataques Especiales Prof Anatomia\PunioFuria
+      maxAttenuation: 0
+      maxDuration: 1687188
+      minDuration: 1687188
     - name: pvp_ganador
       guid: 879ce44fb9442e42904998e2c1b9a90e
       id: 2022051578
@@ -1095,6 +1121,20 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 2488730
       minDuration: 2488730
+    - name: StopPunioFuria
+      guid: 2d07528dfe90694098f385d77ea621a3
+      id: 1173435975
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Eventos Ataques Especiales Prof Anatomia
+        ObjectType: 4
+      - ElementName: StopPunioFuria
+        ObjectType: 3
+      Path: Default Work Unit\Eventos Ataques Especiales Prof Anatomia\StopPunioFuria
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: tirar_goma
       guid: 9504a11322375b4d8d1d5fe940c2a3f4
       id: 1702541306
@@ -1136,7 +1176,7 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: 9588ed4f6ff24445a8f0a192eea0a3e2
     GuidInternal: 
-    m_lastTime: -8586170618155473624
+    m_lastTime: -8585900682514303614
     List:
     - name: volumen_general
       guid: 28776eaa1162614691eb186e17a9dd21
@@ -1169,7 +1209,7 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: 5577163b42fb8b4598bf96f557afb3b9
     GuidInternal: 
-    m_lastTime: -8586268128994775808
+    m_lastTime: -8585900682514293635
     List:
     - name: SS_Air_Fear
       guid: 59062ef746431c4ea1b1dab46a05101e
@@ -1266,7 +1306,7 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: 4d773181a9f60d499289b751f90d45a5
     GuidInternal: 
-    m_lastTime: -8586267517714775808
+    m_lastTime: -8585900682348382984
     List:
     - name: jugador_1_bloquear
       guid: d1ab103c2688dd4380ea2fefbfcd7c62
@@ -1397,7 +1437,7 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: 5e4de2bd95410441978147ec1beef222
     GuidInternal: 
-    m_lastTime: -8585913674368299835
+    m_lastTime: -8585900108137774215
     List:
     - name: jugador_1
       guid: e6e3d224d197b741b56cc01a61d4c8fc
@@ -1575,6 +1615,12 @@ MonoBehaviour:
         PathAndIcons:
         - ElementName: boss1_op2
           ObjectType: 10
+      - name: boss2
+        guid: b98f34c4162233469f15bd0e06131d04
+        id: 2253511092
+        PathAndIcons:
+        - ElementName: boss2
+          ObjectType: 10
       - name: cafeteria
         guid: 64b5cce61cda7a429bf14a52bd20b772
         id: 1108116845
@@ -1601,7 +1647,7 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: ef9edc7397fa494a8498f3595b2c3eb7
     GuidInternal: 
-    m_lastTime: -8586268128994775808
+    m_lastTime: -8585900682348363035
     List: []
   ExpandedItems:
   - /School's Out!!

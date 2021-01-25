@@ -8,17 +8,21 @@ public class EventWise : MonoBehaviour
     public string nombre;
     public bool initEventInStart;
     public bool inMenu;
+    private GameManager gm;
 
     void Start()
     {
+        gm = GameManager.instanceGameManager;
         if (inMenu)
         {
             StartEvent("volver_al_menu");
         }
-        if (initEventInStart)
+        if (initEventInStart || gm.resetMusic)
         {
             StartEvent();
+            gm.resetMusic = false;
         }
+
     }
 
     public void StartEvent()

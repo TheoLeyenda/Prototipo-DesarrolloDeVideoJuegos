@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     //private int roundCombat;
     [HideInInspector]
     public bool restartLevel;
+    [HideInInspector]
+    public bool resetMusic;
 
     private void OnLevelWasLoaded(int level)
     {
