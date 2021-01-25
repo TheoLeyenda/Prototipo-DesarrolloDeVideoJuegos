@@ -2784,6 +2784,85 @@
 						</Sound>
 					</ChildrenList>
 				</Folder>
+				<Folder Name="Ataque Especial Prof Historia" ID="{0950DC1E-2302-480E-B5F3-D7250C015EBD}" ShortID="904459180">
+					<ChildrenList>
+						<Sound Name="SchoolsOutSFX-003-LibroEdison (Chispas)" ID="{2A43077C-41FC-48EA-88F4-544578EF5564}" ShortID="972156826">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4E99CCAF-DF9E-475F-8766-FD0E77EEA793}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{63CC7248-5606-4DDD-AF89-D81FBF243772}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SchoolsOutSFX-003-LibroEdison (Chispas)" ID="{C3172011-EE92-47D4-9F17-F81BA956590C}" ShortID="333171608">
+									<PropertyList>
+										<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+										<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+										<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+										<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>SchoolsOutSFX-003-LibroEdison (Chispas).wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SchoolsOutSFX-003-LibroEdison (Chispas)" ID="{C3172011-EE92-47D4-9F17-F81BA956590C}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SchoolsOutSFX-003-LibroEdison (Trueno)" ID="{64CD14AA-40F9-4080-A781-4C1C154E3FE2}" ShortID="18820904">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4E99CCAF-DF9E-475F-8766-FD0E77EEA793}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{63CC7248-5606-4DDD-AF89-D81FBF243772}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SchoolsOutSFX-003-LibroEdison (Trueno)" ID="{FFEC5F58-437E-4E25-A847-9BFEF934A84F}" ShortID="105150414">
+									<PropertyList>
+										<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+										<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+										<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+										<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>SchoolsOutSFX-003-LibroEdison (Trueno).wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SchoolsOutSFX-003-LibroEdison (Trueno)" ID="{FFEC5F58-437E-4E25-A847-9BFEF934A84F}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="SchoolsOutSFX-003-LibroEdison" ID="{5684DD06-BE3F-4CED-A186-9131BCFEE1E4}" ShortID="453638862">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4E99CCAF-DF9E-475F-8766-FD0E77EEA793}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{63CC7248-5606-4DDD-AF89-D81FBF243772}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="SchoolsOutSFX-003-LibroEdison" ID="{B5A7A80D-70CA-4180-82F7-AB30939BC252}" ShortID="757868248">
+									<PropertyList>
+										<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+										<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+										<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+										<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>SchoolsOutSFX-003-LibroEdison.wav</AudioFile>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="SchoolsOutSFX-003-LibroEdison" ID="{B5A7A80D-70CA-4180-82F7-AB30939BC252}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

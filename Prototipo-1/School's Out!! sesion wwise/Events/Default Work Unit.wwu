@@ -1316,6 +1316,89 @@
 						</Event>
 					</ChildrenList>
 				</Folder>
+				<Folder Name="Eventos Ataques Especiales Prof Historia" ID="{D2708B33-A0BC-4F14-B9B1-81F36B63500D}" ShortID="112661971">
+					<ChildrenList>
+						<Event Name="Chispas_LibroEdison" ID="{AB24D6C0-97F7-41CF-8E2B-0DBEBD785641}">
+							<ChildrenList>
+								<Action Name="" ID="{40E57007-B0AC-431E-AC32-4BF077704308}" ShortID="821036046">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-003-LibroEdison (Chispas)" ID="{2A43077C-41FC-48EA-88F4-544578EF5564}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Trueno_LibroEdison" ID="{7037927A-4629-4974-B2D3-EA47B321683E}">
+							<ChildrenList>
+								<Action Name="" ID="{F47D3046-A6B2-4BBF-B30C-1668C8DD892A}" ShortID="250732983">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-003-LibroEdison (Trueno)" ID="{64CD14AA-40F9-4080-A781-4C1C154E3FE2}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Stop_LibroEdison" ID="{A0F60AF8-1F12-4D46-8969-CA2A66ADD72E}">
+							<ChildrenList>
+								<Action Name="" ID="{EF0D4860-FEAB-42E8-A3AD-0D4E0BAD6903}" ShortID="93969371">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="Scope" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-003-LibroEdison (Chispas)" ID="{2A43077C-41FC-48EA-88F4-544578EF5564}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{740A08AF-9554-4CCB-AABA-8887149CA7B8}" ShortID="711345813">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="Scope" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-003-LibroEdison (Trueno)" ID="{64CD14AA-40F9-4080-A781-4C1C154E3FE2}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{1A20C24D-BA39-403E-9236-C034DFE0E763}" ShortID="189878751">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="Scope" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-003-LibroEdison" ID="{5684DD06-BE3F-4CED-A186-9131BCFEE1E4}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="LibroEdison_Completo" ID="{2CCF1BEB-DB05-47FE-9905-5C9CE5D82D2D}">
+							<ChildrenList>
+								<Action Name="" ID="{B6D2DEDD-F5FA-4802-A6F4-3F7D9F12EAEC}" ShortID="636772461">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-003-LibroEdison" ID="{5684DD06-BE3F-4CED-A186-9131BCFEE1E4}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

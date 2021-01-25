@@ -18,6 +18,27 @@ public class SpriteBoss_ProfesorHistoria : SpriteBossController
             profesorHistoria.spriteBoss_ProfesorHistoria.animator.SetBool(profesorHistoria.NameAnimations[(int)ProfesorHistoria.MyAnimations.FinalDebateInjusto], true);
         }
     }
+
+    public void LibroEdisonCompleto()
+    {
+        profesorHistoria.eventWise.StartEvent("LibroEdison_Completo");
+    }
+
+    public void ChispitasSound()
+    {
+        profesorHistoria.eventWise.StartEvent("Chispas_LibroEdison");
+    }
+
+    public void TruenoSound()
+    {
+        profesorHistoria.eventWise.StartEvent("Trueno_LibroEdison");
+    }
+
+    public void StopSundLibroEdison()
+    {
+        profesorHistoria.eventWise.StartEvent("Stop_LibroEdison");
+    }
+
     public void Death() 
     {
         profesorHistoria.Dead();
