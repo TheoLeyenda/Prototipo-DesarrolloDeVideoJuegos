@@ -336,6 +336,8 @@ public class ProfesorAnatomia : Enemy
         spriteBoss_ProfesorAnatomia.PlayAnimation(NameAnimations[(int)MyAnimations.Death]);
         Idied = true;
         eventWise.StartEvent("finish_boss_fight");
+        eventWise.StartEvent("StopTerremoto");
+        eventWise.StartEvent("StopPunioFuria");
     }
     public void SetTargetGrid(Grid g, Vector3 target)
     {

@@ -1476,6 +1476,105 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="GritoRayo_Inicio" ID="{035DCE26-DDF0-4A63-AF68-AAB917ACE6F9}">
+							<ChildrenList>
+								<Action Name="" ID="{C5CCC336-83D1-4854-A40B-BF4EF8D92FEE}" ShortID="1044087403">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-005-gritoRayo (Inicio)" ID="{FDB94CE4-73B5-45A1-AC5E-978A606F2EB1}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="GritoRayo_Loop" ID="{BA59E038-CF56-43AD-9789-5C545D976195}">
+							<ChildrenList>
+								<Action Name="" ID="{1C12DE67-785C-49E0-91EC-AE21FC0CAAE7}" ShortID="10622118">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="5"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-005-gritoRayo (Loop)" ID="{B2579CDE-16C1-47B8-8906-3A34C9D2E7B1}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{6B00CE20-24A1-443A-A0CD-0787344ADAEF}" ShortID="107837363">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-005-gritoRayo (Loop)" ID="{B2579CDE-16C1-47B8-8906-3A34C9D2E7B1}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="GritoRayo_Final" ID="{13E30EFD-612F-41EA-9660-0C859BC8EC13}">
+							<ChildrenList>
+								<Action Name="" ID="{6D1AAC6E-FD38-4537-A5AA-16F8314D49C1}" ShortID="987560207">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-005-gritoRayo (Final)" ID="{CD3DC042-E320-4967-9AEC-BCA7D1EC1B50}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Stop_GritoRayo" ID="{6BC9FC51-41AA-4238-A575-93413D86D2DC}">
+							<ChildrenList>
+								<Action Name="" ID="{64DD7536-1058-42A0-98D8-0E07184019A6}" ShortID="600707410">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="Scope" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-005-gritoRayo (Inicio)" ID="{FDB94CE4-73B5-45A1-AC5E-978A606F2EB1}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{9020AEF1-1642-465E-927E-E4F10E09C9BC}" ShortID="808603203">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="Scope" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-005-gritoRayo (Loop)" ID="{B2579CDE-16C1-47B8-8906-3A34C9D2E7B1}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{EEEAF642-81B4-4D08-9C13-6F0490B767A4}" ShortID="510646458">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="Scope" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-005-gritoRayo (Final)" ID="{CD3DC042-E320-4967-9AEC-BCA7D1EC1B50}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{B79C8DBB-9743-4F47-8C04-F2AFBD346B2B}" ShortID="1071069987">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="4"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-005-gritoRayo (Loop)" ID="{B2579CDE-16C1-47B8-8906-3A34C9D2E7B1}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 			</ChildrenList>

@@ -39,6 +39,27 @@ public class SpriteBoss_ProfesorHistoria : SpriteBossController
         profesorHistoria.eventWise.StartEvent("Stop_LibroEdison");
     }
 
+    public void GritoRayoInicioSound()
+    {
+        profesorHistoria.eventWise.StartEvent("GritoRayo_Inicio");
+    }
+
+    public void GritoRayoLoopSound()
+    {
+        profesorHistoria.eventWise.StartEvent("GritoRayo_Loop");
+    }
+
+    public void GritoRayoFinalSound()
+    {
+        profesorHistoria.eventWise.StartEvent("GritoRayo_Final");
+    }
+
+    public void StopSoundGritoRayo()
+    {
+        profesorHistoria.eventWise.StartEvent("Stop_GritoRayo");
+    }
+
+
     public void Death() 
     {
         profesorHistoria.Dead();

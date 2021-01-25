@@ -235,6 +235,8 @@ public class ProfesorHistoria : Enemy
                         if (!Idied)
                         {
                             eventWise.StartEvent("finish_boss_fight");
+                            eventWise.StartEvent("Stop_GritoRayo");
+                            eventWise.StartEvent("Stop_LibroEdison");
                             Idied = true;
                             spriteBoss_ProfesorHistoria.PlayAnimation(NameAnimations[(int)MyAnimations.Death]);
                         }
