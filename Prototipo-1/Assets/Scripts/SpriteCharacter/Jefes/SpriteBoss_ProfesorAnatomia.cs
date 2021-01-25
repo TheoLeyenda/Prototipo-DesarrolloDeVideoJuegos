@@ -26,6 +26,27 @@ public class SpriteBoss_ProfesorAnatomia : SpriteBossController
         profesorAnatomia.enableSetRandomSpecialAttack = true;
         //Debug.Log("ENTRE");
     }
+
+    public void TerremotoSound()
+    {
+        profesorAnatomia.eventWise.StartEvent("Terremoto");
+    }
+
+    public void TerremotoEscombrosSound()
+    {
+        profesorAnatomia.eventWise.StartEvent("TerremotoEscombros");
+    }
+
+    public void TerremotoGrunidoSound()
+    {
+        profesorAnatomia.eventWise.StartEvent("TerremotoGrunido");
+    }
+
+    public void TerremotoStopSound()
+    {
+        profesorAnatomia.eventWise.StartEvent("StopTerremoto");
+    }
+
     public void InitSpecialAttack_PunietazoDeFuria()
     {
         profesorAnatomia.InitSpecialAttack_PunietazoDeFuria();

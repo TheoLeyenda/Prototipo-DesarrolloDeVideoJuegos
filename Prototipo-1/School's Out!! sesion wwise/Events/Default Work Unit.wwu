@@ -1314,6 +1314,85 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="TerremotoGrunido" ID="{947E56FE-308B-477D-A994-C3E4FA722B54}">
+							<ChildrenList>
+								<Action Name="" ID="{5F3F2E00-3D79-4F10-B649-4F0D7A0D3C48}" ShortID="425610110">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-004-Terremoto (Gruñido)" ID="{49829A75-FA63-4445-9863-E89F0E213D13}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="TerremotoEscombros" ID="{89016B7B-ED9E-4986-84F6-09609CA3ED9C}">
+							<ChildrenList>
+								<Action Name="" ID="{1D985C6D-B21D-4729-9EB0-0470864E24C2}" ShortID="141604086">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-004-Terremoto (Escombros)" ID="{81C78769-B17B-474B-BBF5-AD42A804015A}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Terremoto" ID="{4AEF7BFD-3EDD-4D5D-85E3-C0BACCB22A3B}">
+							<ChildrenList>
+								<Action Name="" ID="{70827A28-DB9D-4DC0-8D44-C2B92AB7713B}" ShortID="75568239">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-004-Terremoto" ID="{E996C204-823E-4507-84BC-639D295C466E}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="StopTerremoto" ID="{5A12EE77-54CA-499C-8A14-99D440B354AD}">
+							<ChildrenList>
+								<Action Name="" ID="{9BB61F8D-C2E6-4EB6-974D-CD58D0F83FB7}" ShortID="88215290">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="Scope" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-004-Terremoto" ID="{E996C204-823E-4507-84BC-639D295C466E}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{3858C3F7-0C5A-4992-AC6D-C25E4897894B}" ShortID="433600261">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="Scope" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-004-Terremoto (Escombros)" ID="{81C78769-B17B-474B-BBF5-AD42A804015A}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{6F8233AF-B747-4878-9921-58CA0C1D5329}" ShortID="670158569">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+										<Property Name="Scope" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="SchoolsOutSFX-004-Terremoto (Gruñido)" ID="{49829A75-FA63-4445-9863-E89F0E213D13}" WorkUnitID="{38256767-CE3C-4498-BE8E-467669B155BB}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Eventos Ataques Especiales Prof Historia" ID="{D2708B33-A0BC-4F14-B9B1-81F36B63500D}" ShortID="112661971">
