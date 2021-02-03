@@ -142,6 +142,9 @@ public class ScreenManager : MonoBehaviour
     }
     public void SelectPlayerScene()
     {
+        eventWise.StartEvent("despausar");
+        eventWise.StartEvent("fuego_termina");
+        eventWise.StartEvent("volver_al_menu");
         LevelLoader.nextLevel = "SelectPlayerScene";
         SceneManager.LoadScene("SelectPlayerScene");
     }
