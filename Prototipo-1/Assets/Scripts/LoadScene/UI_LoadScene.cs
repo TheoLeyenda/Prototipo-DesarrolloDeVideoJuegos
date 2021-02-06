@@ -11,7 +11,6 @@ public class UI_LoadScene : MonoBehaviour
     [SerializeField] Image loadImage;
     private GameData gd;
     public Loading loadingReference;
-    // Start is called before the first frame update
     void Start()
     {
         loadImage.fillAmount = 0;

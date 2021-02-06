@@ -20,10 +20,8 @@ public class LevelManager : MonoBehaviour
     public string NameFinishSceneStoryMode;
     public GameObject marcoTexto;
     public Image imageHabladorActual;
-    //public GameObject imageEnemigoHablando;
     public GameObject CamvasInicioPelea;
     public TextMeshProUGUI textDialog;
-    //public TextMeshProUGUI textHabladorActual;
     public List<Dialogos> DialogoInicial;
     private GameManager gm;
     public bool InitDialog;
@@ -31,7 +29,6 @@ public class LevelManager : MonoBehaviour
     public int ObjectiveOfPassLevel;
     public float delayPassLevel = 4f;
     private float auxDelayPassLevel;
-    //private int Level;
     private bool inDialog;
     private int idDialogo;
     public bool inSurvival;
@@ -92,7 +89,6 @@ public class LevelManager : MonoBehaviour
         {
             gm = GameManager.instanceGameManager;
         }
-        //Level = 1;
         ObjectiveOfPassLevel = 1;
 
         GameObject go_eventWise;
@@ -149,7 +145,9 @@ public class LevelManager : MonoBehaviour
         {
             NextId();
             InitSoundDialog();
-            eventWise.StartEvent(currentSoundEffectDialog);
+
+            if(gameData.initScene)
+                eventWise.StartEvent(currentSoundEffectDialog);
         }
     }
 
@@ -245,7 +243,6 @@ public class LevelManager : MonoBehaviour
             Time.timeScale = 0;
             inDialog = true;
             imageHabladorActual.sprite = DialogoInicial[idDialogo].spriteHabladorActual;
-            //textHabladorActual.text = " "; ;
             textDialog.text = DialogoInicial[idDialogo].nombreHabladorActual + ": " + DialogoInicial[idDialogo].dialogoPersonaje;
         }
         else
@@ -286,7 +283,6 @@ public class LevelManager : MonoBehaviour
                     delayPassLevel = auxDelayPassLevel;
                     if (!NivelFinal)
                     {
-                        //gm.screenManager.LoadLevel(gm.screenManager.GetIdListLevel() + 1);
                         gameData.currentLevel++;
                         if (panelTransitions != null)
                             panelTransitions.LoadScene("SelectedPowerUp");
@@ -295,9 +291,12 @@ public class LevelManager : MonoBehaviour
                     }
                     else
                     {
-                        eventWise.StartEvent("despausar");
-                        eventWise.StartEvent("fuego_termina");
-                        eventWise.StartEvent("volver_al_menu");
+                        if (gameData.initScene)
+                        {
+                            eventWise.StartEvent("despausar");
+                            eventWise.StartEvent("fuego_termina");
+                            eventWise.StartEvent("volver_al_menu");
+                        }
                         if (panelTransitions != null)
                             panelTransitions.LoadScene(NameFinishSceneStoryMode);
                         else
@@ -314,7 +313,6 @@ public class LevelManager : MonoBehaviour
                 {
                     if (!NivelFinal)
                     {
-                        //gm.screenManager.LoadLevel(gm.screenManager.GetIdListLevel() + 1);
                         gameData.currentLevel++;
                         if (panelTransitions != null)
                             panelTransitions.LoadScene("SelectedPowerUp");
@@ -323,9 +321,12 @@ public class LevelManager : MonoBehaviour
                     }
                     else
                     {
-                        eventWise.StartEvent("despausar");
-                        eventWise.StartEvent("fuego_termina");
-                        eventWise.StartEvent("volver_al_menu");
+                        if (gameData.initScene)
+                        {
+                            eventWise.StartEvent("despausar");
+                            eventWise.StartEvent("fuego_termina");
+                            eventWise.StartEvent("volver_al_menu");
+                        }
                         if (panelTransitions != null)
                             panelTransitions.LoadScene(NameFinishSceneStoryMode);
                         else 

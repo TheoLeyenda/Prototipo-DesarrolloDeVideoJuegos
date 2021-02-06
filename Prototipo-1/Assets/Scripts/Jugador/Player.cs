@@ -21,13 +21,11 @@ public class Player : Character
     public Color colorShoot;
     public string namePlayer;
     //BOOLEANOS DE MOVIMIENTO
-    //[HideInInspector]
     public bool enableMovement;
     [HideInInspector]
     public bool enableMoveHorizontalPlayer;
     [HideInInspector]
     public bool enableMoveVerticalPlayer;
-    //[HideInInspector]
     public bool enableMovementPlayer;
     //----------------------//
     //CODIGO DE INPUT
@@ -43,10 +41,6 @@ public class Player : Character
     public string inputPauseButton;
     //-----------------------//
 
-    //DATOS PARA EL MOVIMIENTO
-    //public GameObject alturaMaxima;
-    //public GameObject[] posicionesDeMovimiento;
-    //-------------------------------------------//
     public float DamageAttack;
     public float DamageParabolaAttack;
     public BarraDeEscudo barraDeEscudo;
@@ -118,14 +112,15 @@ public class Player : Character
     public float timeStuned = 0;
     [HideInInspector]
     public bool myVictory = false;
-    [HideInInspector]
-    public EventWise eventWise;
     private bool InFuegoEmpieza;
     [HideInInspector]
     public bool weitVictory;
     public static event Action<Player, string> OnModifireState;
     public static event Action<Player, string> OnDisableModifireState;
     public static event Action<Player> OnDie;
+
+    [HideInInspector] public EventWise eventWise;
+    public GameData gd;
 
     private void OnEnable()
     {
@@ -152,6 +147,7 @@ public class Player : Character
 
     void Start()
     {
+        gd = GameData.instaceGameData;
         eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
         if (structsPlayer.dataAttack.Limusina != null)
             structsPlayer.dataAttack.Limusina.eventWise = eventWise;
@@ -208,7 +204,6 @@ public class Player : Character
             gm = GameManager.instanceGameManager;
         }
         animator = GetComponent<Animator>();
-        //DrawScore();
 
     }
     void Update()
@@ -223,7 +218,9 @@ public class Player : Character
         if (myVictory)
         {
             structsPlayer.dataAttack.DisparoDeCarga.SetActive(false);
-            eventWise.StartEvent("fuego_termina");
+
+            if (gd.initScene)
+                eventWise.StartEvent("fuego_termina");
         }
         CheckOutLimit();
         CheckDead();
@@ -266,7 +263,6 @@ public class Player : Character
         {
             weitVictory = true;
         }
-        //spriteEnemy.GetAnimator().SetBool("Idle", false);
     }
     public void AnimationVictory(Enemy e) 
     {
@@ -431,12 +427,6 @@ public class Player : Character
                     enableMovementPlayer = false;
                 }
                 break;
-            /*case EnumsPlayers.SpecialAttackEquipped.Limusina:
-                if (structsPlayer.dataAttack.Limusina.gameObject.activeSelf)
-                {
-                    enableMovementPlayer = false;
-                }
-                break;*/
             case EnumsPlayers.SpecialAttackEquipped.MagicBust:
                 if (structsPlayer.dataAttack.ProyectilMagicBust.gameObject.activeSelf)
                 {
@@ -491,7 +481,6 @@ public class Player : Character
         {
             enableMovementPlayer = false;
         }
-        //gm.ResetRoundCombat(true);
     }
     public void DelayEnableAttack()
     {
@@ -852,7 +841,9 @@ public class Player : Character
                 if (!InFuegoEmpieza)
                 {
                     InFuegoEmpieza = true;
-                    eventWise.StartEvent("fuego_empieza");
+
+                    if(gd.initScene)
+                        eventWise.StartEvent("fuego_empieza");
                 }
                 if (enableSpecialAttack)
                 {
@@ -886,7 +877,6 @@ public class Player : Character
                                 proyectilInparable.SetColorStela(colorShoot);
                                 break;
                         }
-                        //proyectilInparable.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
                         if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
                         {
                             proyectilInparable.SetPlayer(gameObject.GetComponent<Player>());
@@ -950,7 +940,6 @@ public class Player : Character
                                 proyectilChicle.SetColorStela(colorShoot);
                                 break;
                         }
-                        //proyectilInparable.disparadorDelProyectil = Proyectil.DisparadorDelProyectil.Enemigo;
                         if (enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
                         {
                             proyectilChicle.SetPlayer(gameObject.GetComponent<Player>());
@@ -1100,7 +1089,8 @@ public class Player : Character
                 Move(Vector3.left);
                 if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras)
                 {
-                    eventWise.StartEvent("moverse");
+                    if(gd.initScene)
+                        eventWise.StartEvent("moverse");
                 }
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAtras;
             }
@@ -1117,7 +1107,8 @@ public class Player : Character
                 Move(-Vector3.left);
                 if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras)
                 {
-                    eventWise.StartEvent("moverse");
+                    if(gd.initScene)
+                        eventWise.StartEvent("moverse");
                 }
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAtras;
             }
@@ -1137,7 +1128,8 @@ public class Player : Character
                 Move(Vector3.right);
                 if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante)
                 {
-                    eventWise.StartEvent("moverse");
+                    if(gd.initScene)
+                        eventWise.StartEvent("moverse");
                 }
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
             }
@@ -1153,7 +1145,8 @@ public class Player : Character
             {
                 if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante)
                 {
-                    eventWise.StartEvent("moverse");
+                    if(gd.initScene)
+                        eventWise.StartEvent("moverse");
                 }
                 Move(-Vector3.right);
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
@@ -1171,7 +1164,8 @@ public class Player : Character
         {
             if(enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar)
             {
-                eventWise.StartEvent("saltar");
+                if(gd.initScene)
+                    eventWise.StartEvent("saltar");
             }
             enumsPlayers.movimiento = EnumsPlayers.Movimiento.Saltar;
             MoveJamp(Vector3.up);
@@ -1189,7 +1183,9 @@ public class Player : Character
             }
             else
             {
-                eventWise.StartEvent("caer");
+                if(gd.initScene)
+                    eventWise.StartEvent("caer");
+
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
                 SpeedJump = AuxSpeedJump;
             }
@@ -1247,8 +1243,6 @@ public class Player : Character
         {
             barraDeEscudo.SubstractPorcentageBar();
         }
-            
-
     }
     public bool GetEnableCounterAttack()
     {

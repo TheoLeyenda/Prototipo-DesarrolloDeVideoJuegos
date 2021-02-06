@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ProyectilChicle : Proyectil
 {
-    // Start is called before the first frame update
     public float checkMagnitude = 2f;
     public float timeEffectStuned;
     public Pool poolChicleCasilla;
@@ -19,9 +18,7 @@ public class ProyectilChicle : Proyectil
     private bool collisionWhitBoxColliderController;
     void Start()
     {
-
         tipoDeProyectil = Proyectil.typeProyectil.AtaqueEspecial;
-        //soundgenerate = false;
         ShootForward();
         timeLife = auxTimeLife;
         if (GameManager.instanceGameManager != null)
@@ -43,18 +40,8 @@ public class ProyectilChicle : Proyectil
         }
         rg2D.AddForce(-transform.right * _speed, ForceMode2D.Force);
     }
-    // Update is called once per frame
     void Update()
     {
-        /*if (eventWise == null)
-        {
-            eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
-        }
-        if (eventWise != null && !soundgenerate)
-        {
-            soundgenerate = true;
-            Sonido();
-        }*/
         CheckTimeLife();
     }
     private void OnDisable()
@@ -157,7 +144,6 @@ public class ProyectilChicle : Proyectil
         {
             if (piso.player != null && piso.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player1)
             {
-                //Debug.Log("CHECK GRID 1");
                 grid = piso.player.posicionesDeMovimiento;
                 refPlataformas = piso.player.grid;
                 InitRefPlataformas();
@@ -167,7 +153,6 @@ public class ProyectilChicle : Proyectil
         {
             if (piso.player != null && piso.player.enumsPlayers.numberPlayer == EnumsPlayers.NumberPlayer.player2)
             {
-                //Debug.Log("CHECK GRID 2");
                 grid = piso.player.posicionesDeMovimiento;
                 refPlataformas = piso.player.grid;
                 InitRefPlataformas();
@@ -177,7 +162,6 @@ public class ProyectilChicle : Proyectil
         {
             if (piso.enemy != null)
             {
-                //Debug.Log("CHECK GRID 3");
                 grid = piso.enemy.posicionesDeMovimiento;
                 refPlataformas = piso.enemy.grid;
                 InitRefPlataformas();
@@ -273,7 +257,6 @@ public class ProyectilChicle : Proyectil
             if (disparadorDelProyectil == DisparadorDelProyectil.Jugador1)
             {
                 cuadrillaColision = cuadrilla;
-                //Debug.Log(PLAYER1);
                 if (PLAYER1 != null)
                 {
                     CreateChicleCasilla(1, piso.player, null);
@@ -298,7 +281,6 @@ public class ProyectilChicle : Proyectil
             }
         }
     }
-    // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D collision)
     {
         CheckCollision(collision, PLAYER1);

@@ -7,11 +7,14 @@ public class ProyectilInparable : Proyectil
 {
     public List<Sprite> propsProyectilImparable;
     public float speedRotation;
-    //public SpriteRenderer spriteRenderer;
+
+    private GameData gd;
+
     private EventWise eventWise;
-    // Start is called before the first frame update
+
     public virtual void Start()
     {
+        gd = GameData.instaceGameData;
         soundgenerate = false;
         ShootForward();
         timeLife = auxTimeLife;
@@ -29,7 +32,6 @@ public class ProyectilInparable : Proyectil
     private void OnEnable()
     {
         timeLife = auxTimeLife;
-        //tipoProyectil = Proyectil.typeProyectil.AtaqueEspecial;
         int random = Random.Range(0, propsProyectilImparable.Count);
         if (spriteRenderer != null)
         {
@@ -38,7 +40,8 @@ public class ProyectilInparable : Proyectil
     }
     public override void Sonido()
     {
-        eventWise.StartEvent("patear_pelota");
+        if(gd.initScene)
+            eventWise.StartEvent("patear_pelota");
     }
     public virtual void Update()
     {
@@ -139,7 +142,6 @@ public class ProyectilInparable : Proyectil
             }
         }
     }
-    // Update is called once per frame
     private void OnTriggerStay2D(Collider2D collision)
     {
         CheckCollision(collision,PLAYER1,true);

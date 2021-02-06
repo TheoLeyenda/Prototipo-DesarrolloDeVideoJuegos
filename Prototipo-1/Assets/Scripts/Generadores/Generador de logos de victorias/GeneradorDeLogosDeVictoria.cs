@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public enum PlayerActual
 {
     player1,
@@ -16,7 +15,7 @@ public class GeneradorDeLogosDeVictoria : MonoBehaviour
     public PlayerActual playerActual;
     public float unidadesDeSeparacion;
     private bool OneEjecution;
-    // Start is called before the first frame update
+
     void Start()
     {
         OneEjecution = true;

@@ -6,7 +6,7 @@ using TMPro;
 
 public class ScreenControlsManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+
     public Color NormalColor;
     public Color DisableColor;
     public GameObject Teclado;

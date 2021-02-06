@@ -47,7 +47,6 @@ public class Enemy : Character
     private Animator animator;
     public bool InPool;
     public Pool pool;
-    //private PoolObject poolObjectEnemy;
     public float life;
     public float maxLife;
     [HideInInspector]
@@ -64,13 +63,11 @@ public class Enemy : Character
     public GameObject generadorProyectilParabolaAgachado;
     private float MinRangeRandom = 0;
     private float MaxRangeRandom = 100;
-    //private float TypeRandom = 3;
     protected float delaySelectMovement;
     public float maxRandomDelayMovement;
     public float minRandomDelayMovement;
     public float delayAttack;
     protected float auxDelayAttack;
-    //protected float auxDelayParabolaAttack;
     private bool doubleDamage;
     private bool isDuck;
     private bool isDeffended;
@@ -149,16 +146,17 @@ public class Enemy : Character
     private float auxTolerableStillTime;
 
     private bool weitVictory;
-    [HideInInspector]
-    public float timeStuned = 0;
+
+    [HideInInspector] public float timeStuned = 0;
 
     private Vector3 outPosition; 
-    //private bool onceJump = false;
     public static event Action<Enemy, string> OnModifireState;
     public static event Action<Enemy, string> OnDisableModifireState;
     public static event Action<Enemy> OnDie;
     public static event Action<Enemy, string, string, Sprite> OnVictory;
     public static event Action<Enemy> OnAlive;
+
+    [HideInInspector] public GameData gd;
 
     protected virtual void OnEnable()
     {
@@ -205,6 +203,7 @@ public class Enemy : Character
     }
     public virtual void Start()
     {
+        gd = GameData.instaceGameData;
         outPosition = new Vector3(500, 500, 500);
         weitVictory = false;
         specialAttackParabolaEnemyController = GetComponent<SpecialAttackParabolaEnemyController>();
@@ -216,7 +215,6 @@ public class Enemy : Character
         auxDelayAttack = delayAttack;
         delaySelectMovement = 0.5f;
         auxLife = life;
-        //poolObjectEnemy = GetComponent<PoolObject>();
         animator = GetComponent<Animator>();
         if (GameManager.instanceGameManager != null)
         {
@@ -228,20 +226,16 @@ public class Enemy : Character
     }
     public void AnimationVictory(Player p) 
     {
-        //Debug.Log("ENTRE");
         if (transform.position.y <= InitialPosition.y)
         {
-            //Debug.Log("ENTRE");
             if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
             {
                 spriteEnemy.GetAnimator().Play("Victory");
             }
             enableMovement = false;
             myVictory = true;
-            //Debug.Log("SOY GLORIOSO");
             if (OnVictory != null)
             {
-                //Debug.Log("SOY GLORIOSO");
                 OnVictory(this, fraseVictoria, nameEnemy, myHeadSprite);
             }
         }
@@ -250,7 +244,6 @@ public class Enemy : Character
     {
         if (life <= 0)
         {
-            //Debug.Log("ENTRE");
             SpeedJump = auxSpeedJump;
         }
     }
@@ -1079,7 +1072,9 @@ public class Enemy : Character
             if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAdelante || !insound)
             {
                 insound = true;
-                eventWise.StartEvent("moverse");
+
+                if(gd.initScene)
+                    eventWise.StartEvent("moverse");
             }
             Move(Vector3.left);
             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoverAdelante);
@@ -1099,7 +1094,9 @@ public class Enemy : Character
             if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.MoverAtras || !insound)
             {
                 insound = true;
-                eventWise.StartEvent("moverse");
+
+                if(gd.initScene)
+                    eventWise.StartEvent("moverse");
             }
             Move(Vector3.right);
             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoverAtras);
@@ -1143,7 +1140,8 @@ public class Enemy : Character
         {
             if (transform.position.y <= InitialPosition.y)
             {
-                eventWise.StartEvent("saltar");
+                if(gd.initScene)
+                    eventWise.StartEvent("saltar");
             }
             if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto)
             {

@@ -9,7 +9,6 @@ public class GranadaGaseosa : ProyectilParabola
     private int idPlataforma;
     private GameObject[] grid;
     public Pool poolGaseosa;
-    //private PoolObject PO;
     private GameObject cuadrillaColision;
     List<GameObject> cuadrillasAbajo = new List<GameObject>();
     public Sprite propLata;
@@ -20,8 +19,11 @@ public class GranadaGaseosa : ProyectilParabola
     private float rangeMagnitude = 1.65f;
     private float substractHeight = 0.25f;
 
+    private GameData gd;
+
     private void Start()
     {
+        gd = GameData.instaceGameData;
         soundgenerate = false;
         idPlataforma = 0;
     }
@@ -72,7 +74,8 @@ public class GranadaGaseosa : ProyectilParabola
     }
     public override void Sonido()
     {
-        eventWise.StartEvent("tirar_parabola");
+        if(gd.initScene)
+            eventWise.StartEvent("tirar_parabola");
     }
     public void CreateGaseosas(int cantProyectiles)
     {
@@ -181,7 +184,10 @@ public class GranadaGaseosa : ProyectilParabola
                     }
                 }
             }
-            eventWise.StartEvent("botella_romper");
+
+            if(gd.initScene)
+                eventWise.StartEvent("botella_romper");
+
             gameObject.SetActive(false);
             timeLife = 0f;
             GetPoolObject().Recycle();
@@ -254,7 +260,7 @@ public class GranadaGaseosa : ProyectilParabola
         {
             GameObject cuadrilla = collision.gameObject;
             Piso piso = collision.GetComponent<Piso>();
-            // DEPENDIENDO DE QUIEN DISPARO ES LA CANTIDAD DE BALAS QUE SE GENERARAN.
+            // DEPENDIENDO DE QUIEN DISPARO ES LA CANTIDAD DE CHARCOS GASEOSAS QUE SE GENERARAN.
             CheckGrid(piso);
             cuadrillaColision = cuadrilla;
             switch (disparadorDelProyectil)

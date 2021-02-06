@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FSM
 {
-    // Start is called before the first frame update
     private int[,] fsm;
     private int currentState;
     

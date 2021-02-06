@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//CODIGO PARA VERSIONAR
 public class OnFinishAnimation : MonoBehaviour
 {
     public GameObject camvasStartCombat;
@@ -11,7 +10,6 @@ public class OnFinishAnimation : MonoBehaviour
     private Enemy enemy;
     float delayActivateMovement = 0.5f;
     private bool disableMovementCharacters;
-    //public bool enableMovementCharacterInDisableMe = true;
     private void OnEnable()
     {
         enemy = null;
@@ -21,10 +19,6 @@ public class OnFinishAnimation : MonoBehaviour
     private void OnDisable()
     {
         disableMovementCharacters = false;
-        /*if (enableMovementCharacterInDisableMe)
-        {
-            EnableMovementPlayers();
-        }*/
     }
     private void Start()
     {
@@ -37,11 +31,9 @@ public class OnFinishAnimation : MonoBehaviour
         {
             player = FindObjectOfType<Player>();
             enemy = FindObjectOfType<Enemy>();
-            //Debug.Log(enemy);
         }
         if (!disableMovementCharacters)
         {
-            //Debug.Log("ENTRA CONCHUDO");
             DisableMovementPlayers();
             disableMovementCharacters = true;
         }

@@ -5,18 +5,15 @@ using TMPro;
 
 public class PowerUpDisplayManager_IA : MonoBehaviour
 {
-    // Start is called before the first frame update
     public List<Sprite> spritesPowerUps;
     public PowerUpContainerManager_IA powerUpContainerManager_IA;
     private Scrollbar scrollbarPowerUp;
     private Image imageCurrentPowerUp;
     private TextMeshProUGUI textCountPowerUp;
     private UI_Manager ui_Manager;
-    //public string InputThrowPowerUp;
     private bool inNextPowerUp;
     private bool enableUpdateData = false;
     private float minSizeScrollbarPowerUp = 0.005f;
-    //PowerUp prevPowerUp;
     private void Awake()
     {
         ui_Manager = UI_Manager.instanceUI_Manager;
@@ -25,13 +22,10 @@ public class PowerUpDisplayManager_IA : MonoBehaviour
     private void OnEnable()
     {
         PowerUpContainerManager_IA.OnRefreshDataPowerUpUI += UpdatePowerDataDisplay;
-        //PowerUpContainerManager_IA.OnNextPowerUpAsigned += NextPowerUpAsigned;
 
         scrollbarPowerUp = ui_Manager.enemyHUD.scrollbarPowerUp;
         imageCurrentPowerUp = ui_Manager.enemyHUD.imageCurrentPowerUp;
         textCountPowerUp = ui_Manager.enemyHUD.textCountPowerUp;
-
-        //UpdatePowerDataDisplay(powerUpContainerManager_IA, true);
         
         if (powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].namePowerUp == "None")
         {
@@ -44,25 +38,20 @@ public class PowerUpDisplayManager_IA : MonoBehaviour
             imageCurrentPowerUp.sprite = spritesPowerUps[powerUpContainerManager_IA.currentIndexPowerUp];
             textCountPowerUp.text = "" + powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].countPowerUps;
         }
-        //prevPowerUp = powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].powerUp;
         scrollbarPowerUp.size = 0;
     }
     private void OnDisable()
     {
         PowerUpContainerManager_IA.OnRefreshDataPowerUpUI -= UpdatePowerDataDisplay;
-        //UpdatePowerDataDisplay(powerUpContainerManager_IA, true);
-        //PowerUpContainerManager_IA.OnNextPowerUpAsigned -= NextPowerUpAsigned;
     }
     private void Start()
     {
         UpdatePowerDataDisplay(powerUpContainerManager_IA, true);
-        //prevPowerUp = powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp].powerUp;
         scrollbarPowerUp.size = 0;
     }
 
     public void UpdatePowerDataDisplay(PowerUpContainerManager_IA _powerUpContainerManager, bool enterForEnable)
     {
-        
         if ((_powerUpContainerManager == powerUpContainerManager_IA && _powerUpContainerManager.userEnemy == powerUpContainerManager_IA.userEnemy)
             || enterForEnable)
         {
@@ -108,17 +97,7 @@ public class PowerUpDisplayManager_IA : MonoBehaviour
             }
         }
     }
-    /*public void NextPowerUpAsigned(PowerUpContainerManager_IA _powerUpContainerManager)
-    {
-        if (_powerUpContainerManager == powerUpContainerManager_IA)
-        {
-            prevPowerUp = powerUpContainerManager_IA.powerUpContainerContent[powerUpContainerManager_IA.currentIndexPowerUp - 1].powerUp;
-            if (!prevPowerUp.enableEffect)
-            {
-                scrollbarPowerUp.size = 0;
-            }
-        }
-    }*/
+
     public void UpdatePowerUpScrollbarDisplay()
     {
         if (powerUpContainerManager_IA.currentIndexPowerUp >= powerUpContainerManager_IA.powerUpContainerContent.Count - 1 && !powerUpContainerManager_IA.prevPowerUp.enableEffect)
@@ -138,7 +117,6 @@ public class PowerUpDisplayManager_IA : MonoBehaviour
                 scrollbarPowerUp.size = value / maxValue;
                 if (scrollbarPowerUp.size <= minSizeScrollbarPowerUp)
                 {
-                    //Debug.Log("ENTRO");
                     currentPowerUp.DisableEffect();
                     scrollbarPowerUp.size = 0;
                     UpdatePowerDataDisplay(powerUpContainerManager_IA, false);
@@ -160,7 +138,6 @@ public class PowerUpDisplayManager_IA : MonoBehaviour
                 scrollbarPowerUp.size = value / maxValue;
                 if (scrollbarPowerUp.size <= minSizeScrollbarPowerUp)
                 {
-                    //Debug.Log("ENTRO");
                     powerUpContainerManager_IA.prevPowerUp.DisableEffect();
                     scrollbarPowerUp.size = 0;
                     UpdatePowerDataDisplay(powerUpContainerManager_IA, false);

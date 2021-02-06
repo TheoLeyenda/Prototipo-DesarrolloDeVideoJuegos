@@ -5,12 +5,10 @@ using UnityEngine;
 
 public class PoolObject : MonoBehaviour {
 
-    // Use this for initialization
     public Pool pool;
 	void Start () {
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		
 	}

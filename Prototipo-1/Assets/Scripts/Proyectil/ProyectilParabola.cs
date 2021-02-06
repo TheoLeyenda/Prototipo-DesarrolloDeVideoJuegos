@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ProyectilParabola : Proyectil
 {
-    // Start is called before the first frame update
     public GameObject rutaParabola_AtaqueJugador;
     public GameObject rutaParabolaAgachado_AtaqueJugador;
     public GameObject rutaParabola_AtaqueEnemigo;
@@ -12,12 +11,15 @@ public class ProyectilParabola : Proyectil
     public Sprite spriteProyectilParabola;
     [SerializeField]
     private ParabolaController parabolaController;
-    //private PoolObject poolObject;
     [HideInInspector]
     public int TypeRoot;
     private EventWise eventWise;
+
+    private GameData gd;
+    
     void Start()
     {
+        gd = GameData.instaceGameData;
         soundgenerate = false;
         spriteProyectilParabola = spriteRenderer.sprite;
         timeLife = auxTimeLife;
@@ -52,9 +54,9 @@ public class ProyectilParabola : Proyectil
     }
     public override void Sonido()
     {
-        eventWise.StartEvent("tirar_parabola");
+        if(gd.initScene)
+            eventWise.StartEvent("tirar_parabola");
     }
-    // Update is called once per frame
     void Update()
     {
         if (eventWise == null)

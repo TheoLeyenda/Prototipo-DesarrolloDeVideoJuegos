@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class KathyAndTyke : Enemy
 {
-    // Start is called before the first frame update
     public ProyectilLimo limo_gameObject;
 
     public bool CounchDefense = true;
@@ -28,29 +27,9 @@ public class KathyAndTyke : Enemy
         Player.OnDie -= AnimationVictory;
     }
 
-    // Update is called once per frame
     public override void Update()
     {
-        //BORRAR ESTO DESPUES DE TESTEAR
-        /*if (Input.GetKey(KeyCode.Space))
-        {
-            xpActual = xpNededSpecialAttack;
-            Debug.Log(enumsEnemy.GetMovement());
-            Debug.Log(GetIsDuck());
-        }
-        if (Input.GetKey(KeyCode.N))
-        {
-            Debug.Log(enumsEnemy.GetMovement());
-            //Debug.Log(valueAttack);
-            //Debug.Log(delayAttack);
-        }*/
-        //----------------------------------//
         base.Update();
-        /*if (transform.position.y > InitialPosition.y && spriteEnemy.spriteRenderer.sprite.name == "KT - Stand")
-        {
-            enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
-            spriteEnemy.PlayAnimation("Salto famosa");
-        }*/
         if (limo_gameObject.gameObject.activeSelf)
         {
             delaySelectMovement = 0.1f;
@@ -83,7 +62,6 @@ public class KathyAndTyke : Enemy
             {
                 if (spriteEnemy.GetAnimator() != null)
                 {
-                    //spriteEnemy.GetAnimator().SetBool("EnPlenoAtaqueEspecial", false);
                     spriteEnemy.GetAnimator().SetBool("FinalAtaqueEspecial", true);
 
                 }
@@ -91,9 +69,7 @@ public class KathyAndTyke : Enemy
         }
         else
         {
-            //spriteEnemy.GetAnimator().SetBool("EnPlenoAtaqueEspecial", true);
             spriteEnemy.GetAnimator().SetBool("FinalAtaqueEspecial", false);
-            //spriteEnemy.disableSpecialAttack = false;
         }
     }
     public override void CheckDelayAttack(bool specialAttack)
@@ -130,7 +106,6 @@ public class KathyAndTyke : Enemy
                 if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
                 || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
                 {
-                    //Debug.Log("ATAQUE SALTO");
                     spriteEnemy.GetAnimator().Play("Ataque salto famosa");
                     inAttack = true;
                     SetIsDuck(false);
@@ -140,14 +115,12 @@ public class KathyAndTyke : Enemy
                     && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AgacharseAtaque
                     && !GetIsDuck())
                 {
-                    //Debug.Log("ATAQUE PARADO");
                     spriteEnemy.GetAnimator().Play("Ataque parado famosa");
                     inAttack = true;
                     SetIsDuck(false);
                 }
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && GetIsDuck() && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp())
                 {
-                    //Debug.Log("ATAQUE AGACHADO");
                     spriteEnemy.GetAnimator().Play("Ataque agachado famosa");
                     inAttack = true;
                     SetIsDuck(true);
@@ -168,7 +141,6 @@ public class KathyAndTyke : Enemy
                             inAttack = true;
                             xpActual = 0;
                             CheckMovement();
-                            //Debug.Log("ENTRO AL ESPECIAL PARADO");
                             break;
                     }
                 }
@@ -184,7 +156,6 @@ public class KathyAndTyke : Enemy
                     {
                         delaySelectMovement = 0.1f;
                     }
-                    //Debug.Log("ENTRO AL SALTANDO");
                 }
                 else if ((enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
                     || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
@@ -207,7 +178,6 @@ public class KathyAndTyke : Enemy
                     }
                     CheckMovement();
                     SetIsDuck(true);
-                    //Debug.Log("ENTRO AL AGACHADO");
 
                 }
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
@@ -218,7 +188,6 @@ public class KathyAndTyke : Enemy
                     inAttack = true;
                     xpActual = 0;
                     CheckMovement();
-                    //Debug.Log("ENTRO AL ESPECIAL ELSE IF");
                 }
                 
                 
@@ -227,7 +196,6 @@ public class KathyAndTyke : Enemy
             {
                 if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque && delayAttack <= 0)
                 {
-                    //Debug.Log("ATAQUE PARABOLA SALTO");
                     spriteEnemy.PlayAnimation("Ataque Parabola salto famosa");
                     inAttack = true;
                     SetIsDuck(false);
@@ -235,14 +203,12 @@ public class KathyAndTyke : Enemy
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
                     && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp() && delayAttack <= 0)
                 {
-                    //Debug.Log("ATAQUE PARABOLA NORMAL");
                     spriteEnemy.PlayAnimation("Ataque Parabola parado famosa");
                     inAttack = true;
                     SetIsDuck(false);
                 }
                 else if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque && delayAttack <= 0)
                 {
-                    //Debug.Log("ATAQUE PARABOLA AGACHADO");
                     spriteEnemy.PlayAnimation("Ataque Parabola agachado famosa");
                     inAttack = true;
                     SetIsDuck(true);
@@ -260,7 +226,6 @@ public class KathyAndTyke : Enemy
                     inAttack = true;
                     xpActual = 0;
                     CheckMovement();
-                    //Debug.Log("ENTRO AL ESPECIAL PARABOLA");
                 }
             }
         }

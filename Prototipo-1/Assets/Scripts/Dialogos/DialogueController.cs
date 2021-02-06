@@ -8,12 +8,7 @@ using System;
 
 public class DialogueController : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-
     public static event Action<DialogueController> OnFinishDialog;
-
-    //REEMPLAZAR LA PAUSA DEL ImputManager con el enableMovemet = false del player y el enemy.
     
     [System.Serializable]
     public class Dialogos
@@ -37,13 +32,12 @@ public class DialogueController : MonoBehaviour
         public bool startAnimation;
         public string nameAnimation;
     }
-    //public LevelManager levelManager;
+
     public bool enableDialogVictory = true;
     public GameObject CamvasInicioPelea;
     public Enemy enemyAsignedDialog;
     public GameObject MarcoDialogo;
     public TextMeshProUGUI textDialog;
-    //public TextMeshProUGUI textName;
     public Image imageHabladorActual;
     private InputManager inputManager;
     public List<Dialogos> dialogue;
@@ -57,6 +51,7 @@ public class DialogueController : MonoBehaviour
     public bool OpenDialogInEnableObject = true;
 
     private EventWise eventWise;
+    private GameData gd;
 
     private string[] namesSoundEffectDialog = { "pasar_dialogo_op1", "pasar_dialogo_op2", "pasar_dialogo_op1" };
 
@@ -73,7 +68,6 @@ public class DialogueController : MonoBehaviour
             {
                 gm = GameManager.instanceGameManager;
             }
-            //Debug.Log(dialogue.Count);
             for (int i = 0; i < dialogue.Count; i++)
             {
                 auxDialogue.Add(dialogue[i]);
@@ -108,6 +102,12 @@ public class DialogueController : MonoBehaviour
             }
         }
     }
+
+    private void Start()
+    {
+        gd = GameData.instaceGameData;
+    }
+
     private void OnEnable()
     {
         imageHabladorActual.gameObject.SetActive(true);
@@ -137,16 +137,10 @@ public class DialogueController : MonoBehaviour
     {
         OpenDialogInEnableObject = true;
     }
-    //private void OnDisable()
-    //{
-    //inputManager.SetInPause(false);
-    //inputManager.CheckInPause();
-    //}
     public void DialogVictoryEnemy(Enemy enemy,string fraseVictoria,string nameEnemy,Sprite headSprite)
     {
         if (enableDialogVictory && fraseVictoria != " " && nameEnemy != " " && !MarcoDialogo.activeSelf)
         {
-            //Debug.Log("DENTRO DE FUNCION");
             MarcoDialogo.SetActive(true);
             imageHabladorActual.sprite = headSprite;
             textDialog.text = nameEnemy + ": " + fraseVictoria;
@@ -154,18 +148,6 @@ public class DialogueController : MonoBehaviour
     }
     public void OpenDialog() 
     {
-        /*if (dialogue[i].characterDialog == Dialogos.CharacterDialog.Player && inputManager != null)
-        {
-            dialogue[i].player = inputManager.player1;
-        }
-        else if (dialogue[i].characterDialog == Dialogos.CharacterDialog.Enemy && inputManager != null)
-        {
-            dialogue[i].enemy = enemyAsignedDialog;
-        }
-        else if (inputManager == null)
-        {
-            Debug.Log("inputManager null");
-        }*/
         for (int i = 0; i < dialogos.Count; i++) 
         {
             for (int j = 0; j < dialogos[i].Count; j++) 
@@ -215,9 +197,6 @@ public class DialogueController : MonoBehaviour
     }
     public void CheckDialog(int ID_Dialog) 
     {
-        //Debug.Log(dialogos.Count);
-        //Debug.Log(dialogos[0].Count);
-
         if (dialogos[indexDialog][ID_Dialog].player != null)
         {
             SpritePlayer spritePlayer = dialogos[indexDialog][ID_Dialog].player.spritePlayerActual;
@@ -255,9 +234,11 @@ public class DialogueController : MonoBehaviour
     {
         if (InputPlayerController.GetInputButtonDown("SelectButton_P1") && OpenDialogInEnableObject)
         {
-            //Debug.Log("ENTRE");
             InitSoundDialog();
-            eventWise.StartEvent(currentSoundEffectDialog);
+
+            if (gd.initScene)
+                eventWise.StartEvent(currentSoundEffectDialog);
+
             ID_Dialog++;
             if (ID_Dialog < dialogos[indexDialog].Count)
             {
@@ -275,10 +256,7 @@ public class DialogueController : MonoBehaviour
                 else
                 {
                     enemyAsignedDialog.enableMovement = true;
-                    //inputManager.player1.enableMovement = true;
                     inputManager.player1.enableMovementPlayer = true;
-
-
                 }
                 if (OnFinishDialog != null)
                     OnFinishDialog(this);

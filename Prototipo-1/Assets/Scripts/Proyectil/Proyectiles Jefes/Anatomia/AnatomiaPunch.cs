@@ -14,7 +14,6 @@ public class AnatomiaPunch : MonoBehaviour
     }
     public void DisableMe() 
     {
-        //Debug.Log("ENTRE AL DESTRUIR PUÑO");
         if (pool != null)
         {
             pool.Recycle(gameObject);
@@ -43,7 +42,10 @@ public class AnatomiaPunch : MonoBehaviour
             {
                 p.PD.Blindaje = p.PD.Blindaje - damage / 2;
             }
-            p.eventWise.StartEvent("golpear_p1");
+
+            if(p.gd.initScene)
+                p.eventWise.StartEvent("golpear_p1");
+
             p.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
         }
     }

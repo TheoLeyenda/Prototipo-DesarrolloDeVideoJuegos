@@ -1,14 +1,9 @@
-﻿
-
-
-// ARREGLAR EL BUG DE QUE CUANDO TIRA EL ATAQUE ESPECIAL EN EL AIRE O AGACHADO SE BUGEA
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Lyn : Enemy
 {
-    // Start is called before the first frame update
     [Header("Datos del Ataque Especial")]
     public Pool PoolProyectilChicle;
     public float timeEffectChicle;
@@ -29,7 +24,7 @@ public class Lyn : Enemy
         base.OnDisable();
         Player.OnDie -= AnimationVictory;
     }
-    // Update is called once per frame
+
     public override void Update()
     {
         base.Update();
@@ -52,7 +47,6 @@ public class Lyn : Enemy
             delayAttack = delayAttack - Time.deltaTime;
             if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
             {
-                //Debug.Log("ENTRE AL SALTO");
                 spriteEnemy.PlayAnimation("Salto tomboy");
             }
         }
@@ -113,7 +107,10 @@ public class Lyn : Enemy
                             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
                             inAttack = true;
                             xpActual = 0;
-                            eventWise.StartEvent("ataque_especial_tomboy_op1");
+
+                            if (gd.initScene)
+                                eventWise.StartEvent("ataque_especial_tomboy_op1");
+
                             break;
                         case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:
                             break;

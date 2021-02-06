@@ -24,7 +24,6 @@ public class ProfesorAnatomia : Enemy
     public float delayBraggart;
     public float delayFinishBraggart;
     public float delayAttackPunietazoDeFuria;
-    //private float auxDelayAttackPunietazoDeFuria;
     private float auxDelayBraggart;
     private float auxDelayFinishBraggart;
     public SpriteBoss_ProfesorAnatomia spriteBoss_ProfesorAnatomia;
@@ -133,7 +132,6 @@ public class ProfesorAnatomia : Enemy
         base.OnEnable();
         DialogueController.OnFinishDialog += EnableInitBehaviour;
         Grid.OnSettingTitileo += SetTargetGrid;
-        //InitialPosition = new Vector3(5.17f, -3.42f, 0f);
         enemyPrefab.transform.position = new Vector3(transform.position.x, -3.42f, 0f);
         Idied = false;
 
@@ -146,8 +144,9 @@ public class ProfesorAnatomia : Enemy
         if (!playMusicBoss && firstEnableBoss)
         {
             playMusicBoss = true;
-            //Debug.Log("Musica boss activada por FinishDialog");
-            eventWise.StartEvent(optionsNamesMusicBoss[currentIndexMusicFight]);
+
+            if (gd.initScene)
+                eventWise.StartEvent(optionsNamesMusicBoss[currentIndexMusicFight]);
         }
 
         firstEnableBoss = true;
@@ -168,7 +167,6 @@ public class ProfesorAnatomia : Enemy
         NextSpecialAttack = true;
         auxDelayBraggart = delayBraggart;
         auxDelayFinishBraggart = delayFinishBraggart;
-        //auxDelayAttackPunietazoDeFuria = delayAttackPunietazoDeFuria;
         auxCountRepetitionSpecialAttack = countRepetitionSpecialAttack;
         base.Start();
         if (speedChargeSpecialAttack <= 0)
@@ -178,15 +176,8 @@ public class ProfesorAnatomia : Enemy
         enemyPrefab.transform.position = new Vector3(transform.position.x, -3.42f, 0f);
     }
 
-    // Update is called once per frame
     public override void Update()
     {
-        //BORRAR LUEGO DE TESTEO
-        //if (Input.GetKeyDown(KeyCode.F)) 
-        //{
-        //xpActual = xpNededSpecialAttack;
-        //}
-        //-----------------
         if (enableMovement)
         {
             if (!Idied)
@@ -201,7 +192,6 @@ public class ProfesorAnatomia : Enemy
                     case (int)EstadoProfesorAnatomia.MasiveAttack:
                         if (!OnProfesorAnatomia && InCombatPoint != null && enemyPrefab.transform.position.x <= 5.5f)
                         {
-                            //Debug.Log("ENTRE AL COMBATE");
                             if (!OnProfesorAnatomia)
                             {
                                 OnProfesorAnatomia = true;
@@ -260,12 +250,10 @@ public class ProfesorAnatomia : Enemy
     }
     public void Idle() 
     {
-        //CAMBIAR ESTO POR LAS ANIMACIONES DE LAS POSES QUE ESTARAN DURANTE EL DIALOGO ANTES DE LA PELEA
         fsmProfesorAnatomia.SendEvent((int)EventosProfesorAnatomia.StartMasiveAttack);    
     }
     public void ThrowSpecialAttack()
     {
-        //ARMAR LAS ANIMACIONES
         if (enableSetRandomSpecialAttack)
         {
             porcentageThrowSpecialAttack = UnityEngine.Random.Range(0, 120);
@@ -279,7 +267,9 @@ public class ProfesorAnatomia : Enemy
             {
                 if (NextSpecialAttack)
                 {
-                    eventWise.StartEvent("PunioFuria");
+                    if(gd.initScene)
+                        eventWise.StartEvent("PunioFuria");
+
                     spriteBoss_ProfesorAnatomia.PlayAnimation(NameAnimations[(int)MyAnimations.PunietazoDeFuria]);
                     NextSpecialAttack = false;
                     countRepetitionSpecialAttack--;
@@ -303,7 +293,9 @@ public class ProfesorAnatomia : Enemy
     }
     public void Braggart()
     {
-        eventWise.StartEvent("StopPunioFuria");
+        if(gd.initScene)
+            eventWise.StartEvent("StopPunioFuria");
+
         if (!initBraggert)
         {
             if (delayBraggart > 0)
@@ -335,9 +327,13 @@ public class ProfesorAnatomia : Enemy
     {
         spriteBoss_ProfesorAnatomia.PlayAnimation(NameAnimations[(int)MyAnimations.Death]);
         Idied = true;
-        eventWise.StartEvent("finish_boss_fight");
-        eventWise.StartEvent("StopTerremoto");
-        eventWise.StartEvent("StopPunioFuria");
+
+        if (gd.initScene)
+        {
+            eventWise.StartEvent("finish_boss_fight");
+            eventWise.StartEvent("StopTerremoto");
+            eventWise.StartEvent("StopPunioFuria");
+        }
     }
     public void SetTargetGrid(Grid g, Vector3 target)
     {
@@ -548,7 +544,9 @@ public class ProfesorAnatomia : Enemy
         proyectil.AnimationHit();
         if (fsmProfesorAnatomia.GetCurrentState() == (int)EstadoProfesorAnatomia.MasiveAttack)
         {
-            eventWise.StartEvent("golpear_p1");
+            if(gd.initScene)
+                eventWise.StartEvent("golpear_p1");
+
             spriteBoss_ProfesorAnatomia.PlayAnimation("RecibirDanio");
         }
     }

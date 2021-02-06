@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ChicleCasilla : MonoBehaviour
 {
-    // Start is called before the first frame update
     public Proyectil.DisparadorDelProyectil disparadorDelProyectil;
 
     public Player player;
@@ -16,7 +15,7 @@ public class ChicleCasilla : MonoBehaviour
     private bool inStunedEffect;
 
     private bool targetAssigned;
-    // Update is called once per frame
+
     private void OnDisable()
     {
         inStunedEffect = false;
@@ -35,9 +34,6 @@ public class ChicleCasilla : MonoBehaviour
     }
     public void CheckEffect()
     {
-        //Debug.Log(player != null);
-        //Debug.Log(!player.GetIsJumping());
-        //Debug.Log(player.SpeedJump >= player.GetAuxSpeedJump());
         if(player != null && player.transform.position.y <= player.GetInitialPosition().y && !player.GetIsJumping() 
             && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar 
             && player.enumsPlayers.movimiento != EnumsPlayers.Movimiento.SaltoAtaque
@@ -83,8 +79,6 @@ public class ChicleCasilla : MonoBehaviour
             if (!targetAssigned)
             {
                 player = collision.GetComponent<Player>();
-                //Debug.Log(collision.name);
-                //Debug.Log(player); 
             }
             if (player == null)
             {

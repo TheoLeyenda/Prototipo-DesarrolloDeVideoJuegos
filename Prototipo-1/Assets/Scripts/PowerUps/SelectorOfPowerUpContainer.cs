@@ -35,14 +35,12 @@ public class SelectorOfPowerUpContainer : MonoBehaviour
         if (indexPowerUpContainerContent < powerUpContainerManager.powerUpContainerContent.Count - 1)
             indexPowerUpContainerContent++;
         CheckEnablePowerUp();
-        //Debug.Log(indexPowerUpContainerContent);
     }
     public void PrevPowerUp()
     {
         if (indexPowerUpContainerContent > 0)
             indexPowerUpContainerContent--;
         CheckEnablePowerUp();
-        //Debug.Log(indexPowerUpContainerContent);
     }
     public void CheckEnablePowerUp()
     {

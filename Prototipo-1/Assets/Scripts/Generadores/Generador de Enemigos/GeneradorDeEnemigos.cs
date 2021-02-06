@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class GeneradorDeEnemigos : MonoBehaviour
 {
-    // Start is called before the first frame update
-    //FIJARSE COMO PROGRAME EL GENERADOR DE ENEMIGOS EN TheDudgeBall Y LUEGO REPLICARLO ACA.
     public enum TypeGeneration
     {
         DeadthEnemy,
@@ -115,12 +112,10 @@ public class GeneradorDeEnemigos : MonoBehaviour
                 enemigoActual.enemyPrefab.transform.position = pointOfCombat.transform.position;
                 enemigoActual.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
                 enemigoActual.enableMovement = false;
-                //Debug.Log("ENTRE");
             }
             else
             {
                 enemigoActual.enemyPrefab.transform.position = Generador.transform.position;
-                //enemigoActual.gridEnemy.gameObject.transform.position = new Vector3(0, enemigoActual.gridEnemy.gameObject.transform.position.y, 0);
                 enemigoActual.transform.localPosition = new Vector3(0, enemigoActual.transform.localPosition.y, 0);
                 enemigoActual.pointOfCombat = pointOfCombat.transform.position;
                 enemigoActual.pointOfDeath = pointOfInit.transform.position;
@@ -142,7 +137,6 @@ public class GeneradorDeEnemigos : MonoBehaviour
                 else
                 {
                     enemigoActual.enemyPrefab.transform.position = Generador.transform.position;
-                    //enemigoActual.gridEnemy.gameObject.transform.position = new Vector3(0, enemigoActual.gridEnemy.gameObject.transform.position.y, 0);
                     enemigoActual.transform.localPosition = new Vector3(0, enemigoActual.transform.localPosition.y, 0);
                     enemigoActual.pointOfCombat = pointOfCombat.transform.position;
                     enemigoActual.pointOfDeath = pointOfInit.transform.position;
@@ -174,7 +168,6 @@ public class GeneradorDeEnemigos : MonoBehaviour
                 else
                 {
                     randomEnemyGenerate = Random.Range(0, ListEnemyGenerate.Count);
-                    //randomEnemyGenerate = ListEnemyGenerate.Count - 4;
                     go = ListEnemyGenerate[randomEnemyGenerate].poolEnemy.GetObject();
                     pool = ListEnemyGenerate[randomEnemyGenerate].poolEnemy;
                 }
@@ -187,7 +180,6 @@ public class GeneradorDeEnemigos : MonoBehaviour
                     enemigoActual = enemy;
                     enemigoActual.enemyPrefab.transform.position = Generador.transform.position;
                     enemigoActual.InitialPosition = enemigoActual.transform.position;
-                    //Debug.Log(enemigoActual.InitialPosition);
                     enemigoActual.ResetEnemy();
                 }
                 enemigoActual.xpActual = 0;

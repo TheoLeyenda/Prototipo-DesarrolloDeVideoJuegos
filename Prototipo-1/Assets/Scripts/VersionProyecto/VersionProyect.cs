@@ -6,7 +6,6 @@ using TMPro;
 
 public class VersionProyect : MonoBehaviour
 {
-    // Start is called before the first frame update
     public TextMeshProUGUI textoDeVersion;
 
     void Start()

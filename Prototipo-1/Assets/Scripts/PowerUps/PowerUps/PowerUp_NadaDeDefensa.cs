@@ -66,12 +66,10 @@ public class PowerUp_NadaDeDefensa : PowerUp
     {
         if (enableEffect)
         {
-            //Debug.Log("JAJA");
             base.CheckDeadTarget(e);
             DisableEffect();
             if (barraDeEscudo != null)
             {
-                //Debug.Log("TREMENDO SETEO DE ESCUDO");
                 barraDeEscudo.SetEnableDeffence(true);
                 barraDeEscudo.SetValueShild(barraDeEscudo.MaxValueShild);
             }
@@ -118,18 +116,13 @@ public class PowerUp_NadaDeDefensa : PowerUp
             barraDeEscudo.SetEnableDeffence(false);
             barraDeEscudo.SetValueShild(0);
         }
-        //else
-            //Debug.Log("barraDeEscudo is null");
     }
     public void DisableEffectPowerUp_NadaDeDefensa()
     {
         if (barraDeEscudo != null)
         {
             barraDeEscudo.SetEnableDeffence(true);
-            //barraDeEscudo = null;
         }
-        //else
-            //Debug.Log("barraDeEscudo is null");
     }
 
 }

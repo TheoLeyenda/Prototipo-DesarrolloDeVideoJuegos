@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ProyectilMagicBust : DisparoDeCarga
 {
-    // Start is called before the first frame update
     private bool enableDamage = false;
     public bool DestroyProjectileEnemy;
     public Animator animator;
@@ -14,25 +13,28 @@ public class ProyectilMagicBust : DisparoDeCarga
     private string nameEventActivate = "ataque_especial_gotica_op1";
     private string nameEventDisable = "parar_ataque_especial_gotica_op1";
 
+    private GameData gd;
+
+    private void Start()
+    {
+        gd = GameData.instaceGameData;
+    }
+
     private void OnDisable()
     {
         DisableDamage();
         timeLife = auxTimeLife;
         animator.SetBool("FinalTornado", false);
-
-        eventWise.StartEvent(nameEventDisable);
+        
+        if(gd.initScene)
+            eventWise.StartEvent(nameEventDisable);
     }
 
     private void OnEnable()
     {
-        //StartCoroutine(StartSound(0.0f));
-        eventWise.StartEvent(nameEventActivate);
+        if(gd.initScene)
+            eventWise.StartEvent(nameEventActivate);
     }
-    /*IEnumerator StartSound(float timeDelay)
-    {
-        eventWise.StartEvent(nameEventActivate);
-        yield return new WaitForSeconds(timeDelay);
-    }*/
 
     protected override void Update()
     {
@@ -95,11 +97,7 @@ public class ProyectilMagicBust : DisparoDeCarga
         if((collision.tag == "Proyectil" || collision.tag == "ProyectilGaseosa") && DestroyProjectileEnemy)
         {
             Proyectil proyectil = collision.GetComponent<Proyectil>();
-            //GranadaGaseosa proyectilParabola = collision.GetComponent<GranadaGaseosa>();
-            //ProyectilInparable proyectilImparabe = collision.GetComponent<ProyectilInparable>();
             ProyectilLimo proyectilLimo = collision.GetComponent<ProyectilLimo>();
-            //ProyectilChicle proyectilChicle = collision.GetComponent<ProyectilChicle>();
-            //Debug.Log("Entre colision con proyectil");
             GranadaGaseosa granadaGaseosa = collision.GetComponent<GranadaGaseosa>();
             if (granadaGaseosa != null)
             {
@@ -114,20 +112,6 @@ public class ProyectilMagicBust : DisparoDeCarga
             {
                 proyectilLimo.AnimationHit();
             }
-            /*else if(proyectilParabola != null)
-            {
-                //Debug.Log("Entre AnimacioHit");
-                proyectilParabola.AnimationHit();
-            }
-            else if(proyectilImparabe != null)
-            {
-                proyectilImparabe.AnimationHit();
-            }
-
-            else if(proyectilChicle != null)
-            {
-                proyectilChicle.AnimationHit();
-            }*/
         }
     }
 }

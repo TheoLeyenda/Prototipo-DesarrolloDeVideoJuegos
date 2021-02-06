@@ -9,7 +9,6 @@ public class PowerUp_QuietoAhi : PowerUp
     public static event Action<PowerUp_QuietoAhi> OnEffectPowerUp;
     public static event Action<PowerUp_QuietoAhi> OnDisableEffectPowerUp_QuietoAhi;
     public static event Action<PowerUp_QuietoAhi> OnSavingDataPowerUp_QuietoAhi;
-    //public TargetEffect targetEffect;
     public bool disableAttack = false;
     private bool savingData = true;
     private float auxSpeed;
@@ -28,7 +27,6 @@ public class PowerUp_QuietoAhi : PowerUp
     {
         if (enableEffect)
         {
-            //Debug.Log("ENTRE AL POWER_UP");
             if (savingData)
             {
                 if (OnSavingDataPowerUp_QuietoAhi != null)
@@ -41,14 +39,11 @@ public class PowerUp_QuietoAhi : PowerUp
             if (delayEffect > 0)
             {
                 ThrowEffect();
-                //Debug.Log("ESTOY ACTIVADO CULEAOOOO");
                 delayEffect = delayEffect - Time.deltaTime;
             }
             else
             {
-                //Debug.Log("DESACTIVE EL POWERUP");
                 DisableEffect();
-                //Debug.Log("Desactive el efecto");
             }
         }
     }

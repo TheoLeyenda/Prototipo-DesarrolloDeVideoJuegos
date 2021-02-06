@@ -16,7 +16,6 @@ public class GameData : MonoBehaviour
     public string[] nameLokedObjects;
     public string[] nameUnlokedObjects;
     public string[] auxNameLokedObjects;
-    //[HideInInspector]
     public string[] auxNameUnlokedObjects;
     public int currentLevel;
     public int indexCurrentPowerUp;
@@ -24,6 +23,8 @@ public class GameData : MonoBehaviour
     public string currentNameUser = "None";
     public int generalScore;
     public GameMode gd = GameMode.None;
+
+    public bool initScene;
 
     [System.Serializable]
     public class InventoryPlayer

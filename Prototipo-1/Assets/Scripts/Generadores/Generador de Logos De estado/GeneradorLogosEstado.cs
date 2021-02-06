@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class GeneradorLogosEstado : MonoBehaviour
 {
-    // Start is called before the first frame update
     public EnumsPlayers.NumberPlayer numberPlayer;
     public Pool poolLogo;
     public float DistanceBetweenLogos;

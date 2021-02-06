@@ -71,12 +71,10 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
                 powerUp_QuietoAhí.SetAuxDelayAttack(playerReference.delayAttack);
                 playerReference.delayAttack = powerUp_QuietoAhí.GetDelayAttack();
             }
-            //Debug.Log("QUIETO");
         }
     }
     public void EffectPowerUp_QuietoAhi(PowerUp_QuietoAhi powerUp_QuietoAhí)
     {
-        //Debug.Log("HIJO DE REMIL PUTA");
         if (playerReference != null && powerUp_QuietoAhí.player != null)
         {
             if (powerUp_QuietoAhí.player == playerReference ||
@@ -111,7 +109,6 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
     {
         if (powerUp_QuietoAhí.enableEffect)
         {
-            //Debug.Log("HIJO DE REMIL PUTA");
             if (playerReference != null && powerUp_QuietoAhí.player != null)
             {
                 if (powerUp_QuietoAhí.player == playerReference ||
@@ -137,7 +134,6 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
                 if (powerUp_QuietoAhí.disableAttack)
                 {
                     playerReference.delayAttack = powerUp_QuietoAhí.GetAuxDelayAttack();
-                    //Debug.Log("ENTRE");
                 }
 
                 playerReference.Speed = playerReference.AuxSpeed;
@@ -163,7 +159,6 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
         {
             if (enemyReference.GetInCombatPosition() || inBoss)
             {
-                Debug.Log("Defensa deshabilitada");
                 powerUp_NadaDeDefensa.SetBarraDeEscudo(enemyReference.barraDeEscudo);
                 enemyReference.enableDeffence = false;
             }
@@ -199,7 +194,6 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
                 powerUp_DividirPuntuacion.newScoreForHit = playerReference.PD.scoreForHit / 2;
                 powerUp_DividirPuntuacion.newScoreForKill = playerReference.PD.scoreForEnemyDead / 2;
                 powerUp_DividirPuntuacion.settedPowerUp = true;
-                //Debug.Log("ENTRE");
             }
         }
     }
@@ -222,7 +216,6 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
     {
         if (powerUp_DividirPuntuacion.enableEffect)
         {
-            //Debug.Log("HIJO DE REMIL PUTA");
             if (playerReference != null && powerUp_DividirPuntuacion.player != null)
             {
                 if (powerUp_DividirPuntuacion.player == playerReference ||
@@ -235,7 +228,6 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
                 playerReference.PD.ResetScoreValue();
                 powerUp_DividirPuntuacion.enableEffect = false;
             }
-            
         }
     }
 

@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 public class Loading : MonoBehaviour
 {
     [SerializeField] private float speedLoad;
-
     [SerializeField]private bool usePanelTransitions = true;
     [SerializeField]private Transitions panelTransitions;
     public float porcentageLoad = 0;
@@ -13,6 +12,7 @@ public class Loading : MonoBehaviour
     string nameloadLevel = LevelLoader.nextLevel;
     bool loadScene = false;
     public float minPorcentageChackLoadScene = 70;
+
     private void Update()
     {
        CheckLoad();

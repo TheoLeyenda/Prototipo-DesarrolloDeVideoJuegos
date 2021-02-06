@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DropPowerUpController : MonoBehaviour
 {
-    // Start is called before the first frame update
     public Enemy userEnemy;
     public Pool poolItemPowerUp;
     public float porcentageDropPowerUp;

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 public class ItemPowerUp : MonoBehaviour
 {
-    // Start is called before the first frame update
     [System.Serializable]
     public class DataItemPowerUp
     {
@@ -21,7 +20,6 @@ public class ItemPowerUp : MonoBehaviour
     [SerializeField] PowerUp powerUpInstance;
     [SerializeField] PowerUp.TypeCheckCollision typeCheckCollisionPowerUpItem;
     public Vector3 initPosition;
-    // Update is called once per frame
     void Start()
     {
         InitData();
@@ -31,7 +29,6 @@ public class ItemPowerUp : MonoBehaviour
         int selectName = UnityEngine.Random.Range(0, dataItemsPowerUps.Count);
         powerUpInstance.namePowerUp = dataItemsPowerUps[selectName].powerUpName;
         trailRenderer.startColor = dataItemsPowerUps[selectName].trailColor;
-        //trailRenderer.endColor = dataItemsPowerUps[selectName].trailColor;
         spriteRenderer.sprite = dataItemsPowerUps[selectName].spriteItem;
     }
     void Update()
@@ -56,12 +53,6 @@ public class ItemPowerUp : MonoBehaviour
         float step = speed * Time.deltaTime;
 
         transform.position = Vector2.MoveTowards(transform.position, Target.transform.position, step);
-
-        Vector3 distance = transform.position - Target.transform.position;
-        //if (distance.magnitude <= distaceDisableMe)
-        //{
-            //gameObject.SetActive(false);
-        //}
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

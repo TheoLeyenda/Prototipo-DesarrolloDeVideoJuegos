@@ -4,18 +4,10 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    // Start is called before the first frame update
     public GameObject alturaMaxima;
     public GameObject[] posicionesDeMovimiento;
     public Grid grid;
-    void Start()
-    {
-        
-    }
+    void Start(){ }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void Update(){ }
 }

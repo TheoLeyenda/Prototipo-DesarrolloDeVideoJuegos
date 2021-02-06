@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class DisparoDeCarga : MonoBehaviour
 {
-    // Start is called before the first frame update
     public float timeLife;
     public float auxTimeLife;
     public float damage;
@@ -16,7 +15,7 @@ public class DisparoDeCarga : MonoBehaviour
     private float auxStartSpeedParticleSystem;
     private GameObject objectCollisionPartycleSystem;
     private float proximity = 2f;
-    // Update is called once per frame
+
     private void Start()
     {
         auxDamage = damage;

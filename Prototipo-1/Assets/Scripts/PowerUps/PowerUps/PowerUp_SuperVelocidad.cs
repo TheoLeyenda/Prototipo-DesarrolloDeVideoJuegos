@@ -8,7 +8,6 @@ public class PowerUp_SuperVelocidad : PowerUp
     public float NewSpeedJump;
     public float NewResitance;
     public float NewGravity;
-    //private bool settingAuxData = false;
     protected override void Start()
     {
         typePowerUp = TypePowerUp.PowerUpDelay;

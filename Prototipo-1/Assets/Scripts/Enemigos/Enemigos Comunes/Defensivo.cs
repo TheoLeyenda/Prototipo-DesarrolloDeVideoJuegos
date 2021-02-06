@@ -38,15 +38,9 @@ public class Defensivo : Enemy
         if (life <= 0 || myVictory)
         {
             Disparo.gameObject.SetActive(false);
-            //spriteEnemy.disableSpecialAttack = false;
 
         }
-        //Esto es para testear borrar luego.
-        //if (Input.GetKey(KeyCode.Space))
-        //{
-            //xpActual = xpNededSpecialAttack;
-        //}
-        //----------------------------------
+        
         base.Update();
         CheckInDeffense();
         if (Disparo.gameObject.activeSelf)
@@ -60,20 +54,17 @@ public class Defensivo : Enemy
             SpeedJump = -1f;
             CheckMovement();
             delaySelectMovement = 0.7f;
-            //spriteEnemy.GetAnimator().Play("Salto enemigo defensivo");
         }
         if(transform.position.y > InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo)
         {
             delaySelectMovement = 0.1f;
             Move(Vector3.down,4);
-            //spriteEnemy.GetAnimator().Play("Salto enemigo defensivo");
         }
-        //PARA QUE EL ENEMIGO DEFENSIVO NO SE QUEDE QUIETO TESTEAR
+        //PARA QUE EL ENEMIGO DEFENSIVO NO SE QUEDE QUIETO
         if (transform.position.y <= InitialPosition.y && enableMovement && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Nulo 
             && !GetIsDeffended() && !GetIsJamping() && !GetIsDuck() && delayStateDeffense >= auxDelayStateDeffense 
             && delayVulnerable >= auxDelayVulnerable)
         {
-            //Debug.Log("ENTRE");
             SpeedJump = GetAuxSpeedJamp();
             SetIsJumping(false);
             transform.position = new Vector3(transform.position.x, InitialPosition.y, transform.position.z);
@@ -81,13 +72,6 @@ public class Defensivo : Enemy
             CheckMovement();
             
         }
-        //--------------------------------------------------------
-        //if (Input.GetKey(KeyCode.Space))
-        //{
-            //Debug.Log(enumsEnemy.GetMovement());
-            //Debug.Log(enableMovement);
-            //Debug.Log(transform.position.y <= InitialPosition.y);
-        //}
     }
     public void CheckInSpecialAttack()
     {
@@ -97,9 +81,11 @@ public class Defensivo : Enemy
             {
                 if (spriteEnemy.GetAnimator() != null)
                 {
-                    //spriteEnemy.GetAnimator().SetBool("EnPlenoAtaqueEspecial", false);
                     spriteEnemy.GetAnimator().SetBool("FinalAtaqueEspecial", true);
-                    eventWise.StartEvent("fuego_termina");
+
+                    if(gd.initScene)
+                        eventWise.StartEvent("fuego_termina");
+
                     inFuegoEmpieza = false;
                 }
             }
@@ -108,12 +94,12 @@ public class Defensivo : Enemy
         {
             if (!inFuegoEmpieza)
             {
-                eventWise.StartEvent("fuego_empieza");
+                if(gd.initScene)
+                    eventWise.StartEvent("fuego_empieza");
+
                 inFuegoEmpieza = true;
             }
-            //spriteEnemy.GetAnimator().SetBool("EnPlenoAtaqueEspecial", true);
             spriteEnemy.GetAnimator().SetBool("FinalAtaqueEspecial", false);
-            //spriteEnemy.disableSpecialAttack = false;
         }
     }
     public override void CheckDelayAttack(bool specialAttack)

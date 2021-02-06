@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SpriteCharacter : MonoBehaviour
 {
-    // Start is called before the first frame update
     public SpriteRenderer spriteRenderer;
     protected Animator animator;
     public SpriteActual ActualSprite;

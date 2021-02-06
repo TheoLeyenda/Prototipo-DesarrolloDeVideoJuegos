@@ -37,10 +37,8 @@ public class Player_PvP : MonoBehaviour
     public State playerState;
     public float delayCounterAttackDeffense;
     public float auxDelayCounterAttackDeffense;
-    // Start is called before the first frame update
     private void Start()
     {
         auxDelayCounterAttackDeffense = delayCounterAttackDeffense;
     }
-    // Update is called once per frame
 }

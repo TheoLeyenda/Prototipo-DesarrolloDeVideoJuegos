@@ -40,7 +40,6 @@ public class UI_Manager : MonoBehaviour
     [System.Serializable]
     public struct playerHUD
     {
-        //public string NamePlayer;
         public GeneradorLogosEstado generadorLogosEstado;
         public TextMeshProUGUI textNamePlayer;
         public GameObject BARRA_DE_VIDA;
@@ -99,7 +98,6 @@ public class UI_Manager : MonoBehaviour
     [System.Serializable]
     public struct EnemyHUD
     {
-        //public string NameEnemy;
         public TextMeshProUGUI textNameEnemy;
         public BarraDeEscudo barraDeEscudo;
         public GameObject BARRA_DE_VIDA;

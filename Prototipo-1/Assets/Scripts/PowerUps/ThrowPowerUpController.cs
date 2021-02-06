@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ThrowPowerUpController : MonoBehaviour
 {
-    // Start is called before the first frame update
     public PowerUpContainerManager powerUpContainerManager;
 
     public enum UserPowerUpController
@@ -24,7 +23,6 @@ public class ThrowPowerUpController : MonoBehaviour
     private GameData gameData;
     public DataUser dataUser;
 
-    // Update is called once per frame
     private void Start()
     {
         gameData = GameData.instaceGameData;

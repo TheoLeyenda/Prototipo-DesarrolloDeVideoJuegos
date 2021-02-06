@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Gaseosa : MonoBehaviour
 {
-    // Start is called before the first frame update
     public float damage;
     public float timeLife;
     public float auxTimeLife;
@@ -50,7 +49,6 @@ public class Gaseosa : MonoBehaviour
             {
                 player.PD.Blindaje = player.PD.Blindaje - damage / 2;
             }
-            //Debug.Log("Colisiono con el enemigo ahre");
         }
         if (collision.tag == "Enemy")
         {

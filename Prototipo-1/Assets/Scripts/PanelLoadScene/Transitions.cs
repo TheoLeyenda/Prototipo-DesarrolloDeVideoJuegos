@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class Transitions : MonoBehaviour
 {
-    // Start is called before the first frame update
     private Animator animator;
     [SerializeField] private float waitForSeconds = 1.5f;
     [SerializeField] private bool useAnimationsEnter;

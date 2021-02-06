@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-
 public class PowerUp_DoblePuntuacion : PowerUp
 {
- 
     private float auxScoreForHit = 0;
     private float auxScoreForKill = 0;
     public static event Action<PowerUp> DisablePowerUp;
@@ -15,14 +13,7 @@ public class PowerUp_DoblePuntuacion : PowerUp
         typePowerUp = TypePowerUp.PowerUpDelay;
         base.Start();
     }
-    //protected override void OnEnable()
-    //{
-    //    base.OnEnable();
-    //}
-    //protected override void OnDisable()
-    //{
-    //    base.OnDisable();
-    //}
+
     private void Update()
     {
         if (enableEffect)

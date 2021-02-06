@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ProfesorHistoria : Enemy
 {
-    //HACER EL ATAQUE ESPECIAL DEL LIBRO DE EDISON BASANDOME EN LOS ATAQUES ESPECIALES DEL PROFESOR DE ANATOMIA.
-    // Start is called before the first frame update
     public enum MyAnimations
     {
         Idle,
@@ -169,15 +167,8 @@ public class ProfesorHistoria : Enemy
         base.Start();
     }
 
-    // Update is called once per frame
     public override void Update()
     {
-        //BORRAR LUEGO DE TESTEO
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            xpActual = xpNededSpecialAttack;
-        }
-        //-----------------
         if (enableMovement)
         {
             if (!Idied)
@@ -187,8 +178,10 @@ public class ProfesorHistoria : Enemy
                 switch (fsmProfesorHistoria.GetCurrentState())
                 {
                     case (int)EstadoProfesorHistoria.Idle:
-                        //Debug.Log("ENTRE AL TEMA");
-                        eventWise.StartEvent("musica_boss2_op1");
+
+                        if (gd.initScene)
+                            eventWise.StartEvent("musica_boss2_op1");
+
                         Idle();
                         break;
                     case (int)EstadoProfesorHistoria.MasiveAttack:
@@ -234,9 +227,12 @@ public class ProfesorHistoria : Enemy
                         initMasiveAttack_Lanzado = false;
                         if (!Idied)
                         {
-                            eventWise.StartEvent("finish_boss_fight");
-                            eventWise.StartEvent("Stop_GritoRayo");
-                            eventWise.StartEvent("Stop_LibroEdison");
+                            if (gd.initScene)
+                            {
+                                eventWise.StartEvent("finish_boss_fight");
+                                eventWise.StartEvent("Stop_GritoRayo");
+                                eventWise.StartEvent("Stop_LibroEdison");
+                            }
                             Idied = true;
                             spriteBoss_ProfesorHistoria.PlayAnimation(NameAnimations[(int)MyAnimations.Death]);
                         }
@@ -272,7 +268,6 @@ public class ProfesorHistoria : Enemy
     {
         if (!initMasiveAttack_Lanzado && enableMovement)
         {
-            //Debug.Log("ENTRE");
             initMasiveAttack_Lanzado = true;
             spriteBoss_ProfesorHistoria.PlayAnimation(NameAnimations[(int)MyAnimations.InicioMasiveAttack]);
         }
@@ -334,7 +329,10 @@ public class ProfesorHistoria : Enemy
             go.transform.rotation = UpVector.transform.rotation;
             go.transform.position = UpVector.transform.position;
         }
-        eventWise.StartEvent("tirar_goma");
+
+        if(gd.initScene)
+            eventWise.StartEvent("tirar_goma");
+
         proyectil.ShootForward();
     }
     public void ChargeSpecialAttack()
@@ -434,7 +432,9 @@ public class ProfesorHistoria : Enemy
                 proyectil.AnimationHit();
                 if (fsmProfesorHistoria.GetCurrentState() == (int)ProfesorHistoria.EstadoProfesorHistoria.MasiveAttack)
                 {
-                    eventWise.StartEvent("golpear_p1");
+                    if(gd.initScene)
+                        eventWise.StartEvent("golpear_p1");
+
                     spriteBoss_ProfesorHistoria.PlayAnimation("RecibirDanio");
                 }
             }

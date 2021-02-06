@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ResetData : MonoBehaviour
 {
-    // Start is called before the first frame update
     private GameData gameData;
     public bool resetCurrentLevel = true;
 

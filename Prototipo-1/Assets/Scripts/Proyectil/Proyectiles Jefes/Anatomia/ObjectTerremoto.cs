@@ -5,7 +5,6 @@ using UnityEngine.Experimental.PlayerLoop;
 
 public class ObjectTerremoto : MonoBehaviour
 {
-    // Start is called before the first frame update
     public int damage;
     public float timeLife;
     public bool disableByTime = false;
@@ -51,7 +50,10 @@ public class ObjectTerremoto : MonoBehaviour
             {
                 p.PD.Blindaje = p.PD.Blindaje - damage / 2;
             }
-            p.eventWise.StartEvent("golpear_p1");
+
+            if(p.gd.initScene)
+                p.eventWise.StartEvent("golpear_p1");
+
             p.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
         }
     }

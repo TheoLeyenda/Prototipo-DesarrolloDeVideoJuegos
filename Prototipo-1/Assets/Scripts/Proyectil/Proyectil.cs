@@ -27,7 +27,6 @@ public class Proyectil : MonoBehaviour
     }
     public enum typeProyectil
     {
-        //COMENTAR LA OPCION Nulo PARA SABER DONDE TENGO QUE PONER LA OPCION DE ProyectilParabola/AtaqueEspecial
         Nulo,
         ProyectilAereo,
         ProyectilNormal,
@@ -74,8 +73,11 @@ public class Proyectil : MonoBehaviour
     public Transform initialPosition;
     public bool colisionPlayer;
     protected bool inAnimation;
-    private EventWise eventWise;
     protected bool soundgenerate;
+
+    private GameData gd; 
+    private EventWise eventWise;
+
     private void Awake()
     {
         soundgenerate = false;
@@ -112,7 +114,7 @@ public class Proyectil : MonoBehaviour
     }
     private void Start()
     {
-        //eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
+        gd = GameData.instaceGameData;
         inAnimation = false;
         if (GameManager.instanceGameManager != null)
         {
@@ -135,7 +137,8 @@ public class Proyectil : MonoBehaviour
     }
     public virtual void Sonido()
     {
-        eventWise.StartEvent("tirar_goma");
+        if(gd.initScene)
+            eventWise.StartEvent("tirar_goma");
     }
     private void Update()
     {

@@ -5,7 +5,6 @@ using System;
 
 public class PowerUpContainerManager_IA : PowerUpContainer
 {
-    // Start is called before the first frame update
     public static event Action<PowerUpContainerManager_IA, bool> OnRefreshDataPowerUpUI;
     public static event Action<PowerUpContainerManager_IA> OnNextPowerUpAsigned;
     public int minPowerUpGenerar = 2;
@@ -151,7 +150,6 @@ public class PowerUpContainerManager_IA : PowerUpContainer
 
                 prevPowerUp = powerUpContainerContent[index].powerUp;
                 prevIndex = index;
-                //Debug.Log("POWER UP LANZADO");
 
                 CheckNextPowerUpAssigned();
             }
@@ -194,7 +192,5 @@ public class PowerUpContainerManager_IA : PowerUpContainer
             }
         }
         return _powerUpAsigned;
-    }
-
-    
+    }   
 }

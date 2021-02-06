@@ -9,13 +9,12 @@ public class ScreenManager : MonoBehaviour
     private SpriteRenderer spriteRendererFondo;
     private GameManager gm;
     public List<Sprite> ListaNiveles;
-    [HideInInspector]
-    public EventWise eventWise;
     private int idListaNiveles;
     private GameData gameData;
     [SerializeField] private Transitions panelTransitions;
     [SerializeField] private bool useLoadSceneInMenu = true;
     [SerializeField] private bool registerLevel = true;
+    [HideInInspector] public EventWise eventWise;
 
     private void Start()
     {
@@ -30,13 +29,10 @@ public class ScreenManager : MonoBehaviour
     public void Multijugador()
     {
         LevelLoader.nextLevel = "Multijugador";
-        SceneManager.LoadScene("Multijugador");
-        //SceneManager.LoadScene("Ejemplo", LoadSceneMode.Additive);
-           
+        SceneManager.LoadScene("Multijugador");      
     }
     public void TiroAlBlanco()
     {
-        //SceneManager.UnloadSceneAsync("Ejemplo");
         if (gm != null)
         {
             gm.structGameManager.gm_dataCombatPvP.modoElegido = StructGameManager.ModoPvPElegido.TiroAlBlanco;
@@ -142,16 +138,15 @@ public class ScreenManager : MonoBehaviour
     }
     public void SelectPlayerScene()
     {
-        eventWise.StartEvent("despausar");
-        eventWise.StartEvent("fuego_termina");
-        eventWise.StartEvent("volver_al_menu");
+        if (gameData.initScene)
+        {
+            eventWise.StartEvent("despausar");
+            eventWise.StartEvent("fuego_termina");
+            eventWise.StartEvent("volver_al_menu");
+        }
         LevelLoader.nextLevel = "SelectPlayerScene";
         SceneManager.LoadScene("SelectPlayerScene");
     }
-    //public void Prueba()
-    //{
-    //    SceneManager.LoadScene("SampleScene");
-    //}
     public void Supervivencia()
     {
         gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Supervivencia;
@@ -178,7 +173,6 @@ public class ScreenManager : MonoBehaviour
     }
     public void CheckMainCameraInScreen()
     {
-        //Debug.Log(gm.restartLevel);
         if (ListaNiveles.Count <= 0) return;
         if (fondo != null) return;
 
@@ -234,7 +228,7 @@ public class ScreenManager : MonoBehaviour
     }
     public void Menu()
     {
-        if (eventWise != null)
+        if (eventWise != null && gameData.initScene)
         {
             eventWise.StartEvent("despausar");
             eventWise.StartEvent("fuego_termina");
@@ -261,7 +255,6 @@ public class ScreenManager : MonoBehaviour
     {
         if (gm != null)
         {
-            //Debug.Log(idListaNiveles + gameObject.name);
             if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia)
             {
                 Historia();

@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class ProyectilLimo : ProyectilInparable
 {
-    // Start is called before the first frame update
     public GameObject SpawnPosition;
     private int crash = 3;
 
+    private GameData gd;
     public EventWise eventWise { set; get; }
 
     public override void Start()
     {
+        gd = GameData.instaceGameData;
         soundgenerate = false;
         timeLife = auxTimeLife;
         if (GameManager.instanceGameManager != null)
@@ -31,10 +32,11 @@ public class ProyectilLimo : ProyectilInparable
     }
     IEnumerator StartSound(float timeDelay)
     {
-        eventWise.StartEvent("sonido_de_limusina_op5");
+        if(gd.initScene)
+            eventWise.StartEvent("sonido_de_limusina_op5");
+
         yield return new WaitForSeconds(timeDelay);
     }
-    // Update is called once per frame
     public override void Update()
     {
         float normalizedSpeed = speed * Time.deltaTime;
@@ -54,7 +56,6 @@ public class ProyectilLimo : ProyectilInparable
             {
                 timeLife = -0.1f;
             }
-            //gameObject.SetActive(false);
         }
     }
     private void OnTriggerStay2D(Collider2D collision)

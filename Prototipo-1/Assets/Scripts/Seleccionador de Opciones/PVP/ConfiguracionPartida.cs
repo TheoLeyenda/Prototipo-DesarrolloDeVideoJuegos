@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class ConfiguracionPartida : MonoBehaviour
 {
-    //[SerializeField] private EventWise eventWise;
     private GameManager gm;
     public Color colorDisable;
     public string nameNextScene;
@@ -22,7 +21,6 @@ public class ConfiguracionPartida : MonoBehaviour
     public TextMeshProUGUI textButtonYesPointForHit;
     public TextMeshProUGUI textButtonNoPointForHit;
     public TextMeshProUGUI textYesOrNot;
-    // Start is called before the first frame update
 
     void Start()
     {
@@ -50,7 +48,6 @@ public class ConfiguracionPartida : MonoBehaviour
 
     public void StartGame()
     {
-        //eventWise.StartEvent("seleccionar");
         if (gm.structGameManager.gm_dataCombatPvP.modoElegido == StructGameManager.ModoPvPElegido.PvP)
         {
             LevelLoader.nextLevel = "PvP";
@@ -94,7 +91,6 @@ public class ConfiguracionPartida : MonoBehaviour
     {
         if (gm.structGameManager.gm_dataCombatPvP.countRounds < maxRounds)
         {
-            //eventWise.StartEvent("seleccionar");
             gm.structGameManager.gm_dataCombatPvP.countRounds++;
             textCountRounds.text = "" + gm.structGameManager.gm_dataCombatPvP.countRounds;
         }
@@ -103,14 +99,12 @@ public class ConfiguracionPartida : MonoBehaviour
     {
         if (gm.structGameManager.gm_dataCombatPvP.countRounds > minRounds)
         {
-            //eventWise.StartEvent("seleccionar");
             gm.structGameManager.gm_dataCombatPvP.countRounds--;
             textCountRounds.text = "" + gm.structGameManager.gm_dataCombatPvP.countRounds;
         }
     }
     public void YesPointForHit()
     {
-        //eventWise.StartEvent("seleccionar");
         textButtonNoPointForHit.color = Color.white;
         textButtonYesPointForHit.color = colorDisable;
         gm.structGameManager.gm_dataCombatPvP.pointsForHit = true;
@@ -118,7 +112,6 @@ public class ConfiguracionPartida : MonoBehaviour
     }
     public void NoPointForHit()
     {
-        //eventWise.StartEvent("seleccionar");
         textButtonNoPointForHit.color = colorDisable;
         textButtonYesPointForHit.color = Color.white;
         gm.structGameManager.gm_dataCombatPvP.pointsForHit = false;

@@ -4,7 +4,6 @@ using UnityEngine;
 using System;
 public class PowerUp : MonoBehaviour
 {
-    // Start is called before the first frame update
     public enum TypeCheckCollision
     {
         None,

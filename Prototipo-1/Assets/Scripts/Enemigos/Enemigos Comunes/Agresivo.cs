@@ -11,7 +11,6 @@ public class Agresivo : Enemy
         base.Start();
     }
 
-    // Update is called once per frame
     public override void Update()
     {
         base.Update();
@@ -31,22 +30,7 @@ public class Agresivo : Enemy
             }
         }
     }
-    /*public void CheckSpecialAttack()
-    {
-        if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
-            || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
-            || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
-        {
-            delaySelectMovement = 0.1f;
-        }
-        else
-        {
-            if (spriteEnemy.GetAnimator() != null)
-            {
-                spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", false);
-            }
-        }
-    }*/
+
     public override void CheckDelayAttack(bool specialAttack)
     {
         if (delayAttack > 0)
@@ -75,7 +59,6 @@ public class Agresivo : Enemy
             {
                 valueAttack = Random.Range(0, 100);
             }
-            //Debug.Log(valueAttack);
             if (valueAttack >= parabolaAttack || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial
                 || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
                 || enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
@@ -124,7 +107,6 @@ public class Agresivo : Enemy
             }
             else if (valueAttack < parabolaAttack)
             {
-                //ParabolaAttack();
                 if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtacarEnElLugar
                     && !GetIsJamping() && SpeedJump >= GetAuxSpeedJamp() && delayAttack <= 0)
                 {
@@ -144,7 +126,6 @@ public class Agresivo : Enemy
                     spriteEnemy.GetAnimator().SetBool("Idle", false);
                     inAttack = true;
                 }
-                //spriteEnemy.RestartDelayAttackEnemy();
             }
         }
     }

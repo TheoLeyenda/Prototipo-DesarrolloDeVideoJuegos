@@ -4,14 +4,12 @@ using UnityEngine.UI;
 using TMPro;
 public class PowerUpDisplayController : MonoBehaviour
 {
-    // Start is called before the first frame update
     public List<Sprite> spritesPowerUps;
     public PowerUpContainerManager powerUpContainerManager;
     private Scrollbar scrollbarPowerUp;
     private Image imageCurrentPowerUp;
     private TextMeshProUGUI textCountPowerUp;
     private UI_Manager ui_Manager;
-    //private bool enableScrollBar;
     public string InputThrowPowerUp;
     private bool inNextPowerUp;
     private bool enableUpdateData = false;
@@ -107,7 +105,6 @@ public class PowerUpDisplayController : MonoBehaviour
                 scrollbarPowerUp.size = value / maxValue;
                 if (scrollbarPowerUp.size <= minSizeScrollbarPowerUp)
                 {
-                    //Debug.Log("ENTRO");
                     currentPowerUp.DisableEffect();
                     scrollbarPowerUp.size = 0;
                     UpdatePowerDataDisplay(powerUpContainerManager);
@@ -129,7 +126,6 @@ public class PowerUpDisplayController : MonoBehaviour
                 scrollbarPowerUp.size = value / maxValue;
                 if (scrollbarPowerUp.size <= minSizeScrollbarPowerUp)
                 {
-                    //Debug.Log("ENTRO");
                     powerUpContainerManager.prevPowerUp.DisableEffect();
                     scrollbarPowerUp.size = 0;
                     UpdatePowerDataDisplay(powerUpContainerManager);

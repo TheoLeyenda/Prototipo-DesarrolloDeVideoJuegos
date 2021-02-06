@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Blancos : MonoBehaviour
 {
-    // Start is called before the first frame update
     public float scoreForHit;
     public SpriteRenderer spriteRenderer;
     public int numberPlayerInThis;
@@ -12,11 +11,13 @@ public class Blancos : MonoBehaviour
     public float delayColor;
     public float auxDelayColor;
 
+    private GameData gd;
     private EventWise eventWise;
     private string soundHit = "diana_golpeada_op7";
 
     private void Start()
     {
+        gd = GameData.instaceGameData;
         eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
     }
 
@@ -52,14 +53,18 @@ public class Blancos : MonoBehaviour
                 spriteRenderer.color = Color.green;
                 proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + scoreForHit;
                 proyectil.AnimationHit();
-                eventWise.StartEvent(soundHit);
+
+                if(gd.initScene)
+                    eventWise.StartEvent(soundHit);
             }
             else if (proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador2 && numberPlayerInThis == 1)
             {
                 spriteRenderer.color = Color.green;
                 proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + scoreForHit;
                 proyectil.AnimationHit();
-                eventWise.StartEvent(soundHit);
+
+                if(gd.initScene)
+                    eventWise.StartEvent(soundHit);
             }
 
         }

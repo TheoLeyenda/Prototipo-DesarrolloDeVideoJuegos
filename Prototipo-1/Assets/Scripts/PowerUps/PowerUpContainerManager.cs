@@ -4,7 +4,6 @@ using UnityEngine;
 using System;
 public class PowerUpContainerManager : MonoBehaviour
 {
-    // Start is called before the first frame update
     [System.Serializable]
     public class Container
     {
@@ -24,7 +23,6 @@ public class PowerUpContainerManager : MonoBehaviour
     public List<Container> powerUpContainerContent;
     public ThrowPowerUpController.UserPowerUpController userContainer;
     public static event Action<PowerUpContainerManager> OnRefreshDataPowerUpUI;
-    //public static event Action<PowerUpContainerManager> OnNextPowerUpAsigned;
     private GameManager gm;
     [HideInInspector]
     public int currentIndexPowerUp;
@@ -158,14 +156,12 @@ public class PowerUpContainerManager : MonoBehaviour
             && powerUpContainerContent[index].countPowerUps > 0 
             && characterEnableMovement && enableShootPowerUp)
             {
-                //Debug.Log("Entre al disparo del efecto del powerUp");
                 powerUpContainerContent[index].powerUp.ActivatedPowerUp();
                 powerUpContainerContent[index].countPowerUps--;
                 enableShootPowerUp = false;
 
                 prevPowerUp = powerUpContainerContent[index].powerUp;
                 prevIndex = index;
-                //Debug.Log("POWER UP LANZADO");
                 if (p != null)
                 {
                     if (gm.enumsGameManager.modoDeJuego == EnumsGameManager.ModosDeJuego.Historia
@@ -247,7 +243,6 @@ public class PowerUpContainerManager : MonoBehaviour
                         emptyPowerUps = false;
                         if (powerUpContainerContent[currentIndexPowerUp].namePowerUp == "None") 
                         {
-                            //powerUpContainerContent[currentIndexPowerUp].currentPowerUp = true;
                             CheckNextPowerUpAssigned();
                             if (OnRefreshDataPowerUpUI != null)
                             {
@@ -262,6 +257,7 @@ public class PowerUpContainerManager : MonoBehaviour
                     
                 }
             }
+
             //SACAR ESTO UNA VEZ EL EFECTO DEL ITEM AL SER AGARRADO ESTE INCORPORADO
             if (powerUp.disableCollision)
                 powerUp.transform.parent.gameObject.SetActive(false);

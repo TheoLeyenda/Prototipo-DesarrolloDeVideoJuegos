@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class StructsPlayer : MonoBehaviour
 {
-    // Start is called before the first frame update
     private void Awake()
     {
         player = GetComponent<Player>();

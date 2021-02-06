@@ -5,8 +5,6 @@ using UnityEngine;
 public class SpriteBoss_ProfesorHistoria : SpriteBossController
 {
     public ProfesorHistoria profesorHistoria;
-    // Start is called before the first frame update
-    
     public void EnableNextSpecialAttack()
     {
         profesorHistoria.NextSpecialAttack = true;
@@ -21,42 +19,50 @@ public class SpriteBoss_ProfesorHistoria : SpriteBossController
 
     public void LibroEdisonCompleto()
     {
-        profesorHistoria.eventWise.StartEvent("LibroEdison_Completo");
+        if(profesorHistoria.gd.initScene)
+            profesorHistoria.eventWise.StartEvent("LibroEdison_Completo");
     }
 
     public void ChispitasSound()
     {
-        profesorHistoria.eventWise.StartEvent("Chispas_LibroEdison");
+        if(profesorHistoria.gd.initScene)
+            profesorHistoria.eventWise.StartEvent("Chispas_LibroEdison");
     }
 
     public void TruenoSound()
     {
-        profesorHistoria.eventWise.StartEvent("Trueno_LibroEdison");
+        if(profesorHistoria.gd.initScene)
+            profesorHistoria.eventWise.StartEvent("Trueno_LibroEdison");
     }
 
     public void StopSundLibroEdison()
     {
-        profesorHistoria.eventWise.StartEvent("Stop_LibroEdison");
+        if(profesorHistoria.gd.initScene)
+            profesorHistoria.eventWise.StartEvent("Stop_LibroEdison");
     }
 
     public void GritoRayoInicioSound()
     {
-        profesorHistoria.eventWise.StartEvent("GritoRayo_Inicio");
+        if(profesorHistoria.gd.initScene)
+            profesorHistoria.eventWise.StartEvent("GritoRayo_Inicio");
     }
 
     public void GritoRayoLoopSound()
     {
-        profesorHistoria.eventWise.StartEvent("GritoRayo_Loop");
+        if(profesorHistoria.gd.initScene)
+            profesorHistoria.eventWise.StartEvent("GritoRayo_Loop");
     }
 
     public void GritoRayoFinalSound()
     {
-        profesorHistoria.eventWise.StartEvent("GritoRayo_Final");
+        if(profesorHistoria.gd.initScene)
+            profesorHistoria.eventWise.StartEvent("GritoRayo_Final");
     }
 
     public void StopSoundGritoRayo()
     {
-        profesorHistoria.eventWise.StartEvent("Stop_GritoRayo");
+        if(profesorHistoria.gd.initScene)
+            profesorHistoria.eventWise.StartEvent("Stop_GritoRayo");
     }
 
 

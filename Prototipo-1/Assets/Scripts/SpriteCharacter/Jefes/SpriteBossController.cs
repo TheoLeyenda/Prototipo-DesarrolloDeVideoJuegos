@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SpriteBossController : MonoBehaviour
 {
-    // Start is called before the first frame update
     public Animator animator;
     public void PlayAnimation(string AnimationName)
     {

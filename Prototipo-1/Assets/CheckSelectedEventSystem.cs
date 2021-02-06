@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class CheckSelectedEventSystem : MonoBehaviour
 {
-    // Update is called once per frame
 
     public GameObject newFirstGo;
     void Update()

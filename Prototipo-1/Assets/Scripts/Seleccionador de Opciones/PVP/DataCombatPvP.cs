@@ -77,8 +77,11 @@ public class DataCombatPvP : MonoBehaviour
 
     private bool soundEmpate = false;
 
+    private GameData gd;
+
     void Start()
     {
+        gd = GameData.instaceGameData;
         soundEnter = false;
         fondoWining.SetActive(false);
         fondoEmpate.SetActive(false);
@@ -113,9 +116,6 @@ public class DataCombatPvP : MonoBehaviour
         {
             FondosNivel[(int)level_selected].SetActive(true);
         }
-        //Debug.Log(player1_selected);
-        //Debug.Log(player2_selected);
-        //Debug.Log(level_selected);
     }
     private void Update()
     {
@@ -201,14 +201,19 @@ public class DataCombatPvP : MonoBehaviour
         {
             ReiniciarRonda();
             soundEnter = false;
-            player1.eventWise.StartEvent("fuego_termina");
-            player2.eventWise.StartEvent("fuego_termina");
+            if (gd.initScene)
+            {
+                player1.eventWise.StartEvent("fuego_termina");
+                player2.eventWise.StartEvent("fuego_termina");
+            }
         }
         else
         {
             if (!soundEmpate)
             {
-                AkSoundEngine.PostEvent("pvp_ganador", eventWisse);
+                if (gd.initScene)
+                    AkSoundEngine.PostEvent("pvp_ganador", eventWisse);
+
                 soundEmpate = true;
             }
 
@@ -220,15 +225,18 @@ public class DataCombatPvP : MonoBehaviour
             prefabWinPlayer2.SetActive(true);
             spritePlayer1Win.sprite = spriteWining[(int)player1_selected];
             spritePlayer2Win.sprite = spriteWining[(int)player2_selected];
-            //uI_Manager.gameObject.SetActive(false);
             uI_Player1.SetActive(false);
             uI_Player2.SetActive(false);
             player1.gameObject.SetActive(false);
             player2.gameObject.SetActive(false);
             player1.gameObject.SetActive(false);
             player2.gameObject.SetActive(false);
-            player1.eventWise.StartEvent("fuego_termina");
-            player2.eventWise.StartEvent("fuego_termina");
+
+            if (gd.initScene)
+            {
+                player1.eventWise.StartEvent("fuego_termina");
+                player2.eventWise.StartEvent("fuego_termina");
+            }
         }
     }
     public void CheckWinPlayer(ref int countRoundsWinPlayer, GameObject prefabPlayerWin, GameObject prefabPlayerLose, SpriteRenderer spritePlayerWin, int playerSelected)
@@ -238,14 +246,20 @@ public class DataCombatPvP : MonoBehaviour
         {
             ReiniciarRonda();
             soundEnter = false;
-            player1.eventWise.StartEvent("fuego_termina");
-            player2.eventWise.StartEvent("fuego_termina");
+
+            if (gd.initScene)
+            {
+                player1.eventWise.StartEvent("fuego_termina");
+                player2.eventWise.StartEvent("fuego_termina");
+            }
         }
         else
         {
             if (!soundEnter)
             {
-                AkSoundEngine.PostEvent("pvp_ganador", eventWisse);
+                if (gd.initScene)
+                    AkSoundEngine.PostEvent("pvp_ganador", eventWisse);
+
                 soundEnter = true;
             }
 
@@ -256,13 +270,16 @@ public class DataCombatPvP : MonoBehaviour
             prefabPlayerWin.SetActive(true);
             prefabPlayerLose.SetActive(false);
             spritePlayerWin.sprite = spriteWining[playerSelected];
-            //uI_Manager.gameObject.SetActive(false);
             uI_Player1.SetActive(false);
             uI_Player2.SetActive(false);
             player1.gameObject.SetActive(false);
             player2.gameObject.SetActive(false);
-            player1.eventWise.StartEvent("fuego_termina");
-            player2.eventWise.StartEvent("fuego_termina");
+
+            if (gd.initScene)
+            {
+                player1.eventWise.StartEvent("fuego_termina");
+                player2.eventWise.StartEvent("fuego_termina");
+            }
         }
         gm.structGameManager.gm_dataCombatPvP.rondaActual++;
     }
@@ -270,7 +287,8 @@ public class DataCombatPvP : MonoBehaviour
     {
         if (restartMusic)
         {
-            player1.eventWise.StartEvent("volver_al_menu");
+            if(gd.initScene)
+                player1.eventWise.StartEvent("volver_al_menu");
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

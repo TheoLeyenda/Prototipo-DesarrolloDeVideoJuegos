@@ -23,13 +23,12 @@ public class InputManager : MonoBehaviour
             player2 = GameObject.Find("Player2").GetComponent<Player>();
             player2_PvP = player2.gameObject.GetComponent<Player_PvP>();
         }
-        //player1.enableMovementPlayer = true;
+
         player1.enableMoveHorizontalPlayer = true;
         player1.enableMoveVerticalPlayer = true;
 
         if (player2 != null)
         {
-            //player2.enableMovementPlayer = true;
             player2.enableMoveHorizontalPlayer = true;
             player2.enableMoveVerticalPlayer = true;
         }

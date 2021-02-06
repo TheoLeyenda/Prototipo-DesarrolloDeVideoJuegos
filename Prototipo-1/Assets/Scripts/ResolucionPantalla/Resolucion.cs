@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Resolucion : MonoBehaviour
 {
-    // Start is called before the first frame update
     public float Resolucion_X;
     public float Resolucion_Y;
     private float OriginalResolution_X;
@@ -36,7 +35,5 @@ public class Resolucion : MonoBehaviour
                 Screen.SetResolution((int)Resolucion_X, (int)Resolucion_Y, fullScreen);
             }
         }
-        //Debug.Log(Screen.width + " "Screen.height);
     }
-    
 }

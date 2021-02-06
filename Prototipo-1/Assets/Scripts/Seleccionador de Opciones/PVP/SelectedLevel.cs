@@ -28,7 +28,6 @@ public class SelectedLevel : MonoBehaviour
     private GameManager gm;
     public List<string> nameLevelsOptions;
     public Cursor CursorSelectorPlayer1;
-    //public Cursor CursorSelectorPlayer2;
     private string[,] grillaDeSeleccion;
     public int filas;
     public int columnas;
@@ -47,7 +46,10 @@ public class SelectedLevel : MonoBehaviour
 
     public SpriteRenderer spriteCursor1;
 
+    private GameData gd;
+
     private EventWise eventWise;
+
     private string soundMoveSelectionCharacter = "seleccion_de_personaje_op4";
     private string soundSelectCharacter = "seleccion_de_personaje_op2";
     private bool soundSelectCharacterPlayer = false;
@@ -74,6 +76,7 @@ public class SelectedLevel : MonoBehaviour
     public List<BackGroundSelectionLevels> backGroundSelectionLevels;
     void Start()
     {
+        gd = GameData.instaceGameData;
         eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
         CamvasSeleccionRounds.SetActive(false);
         Fondo.SetActive(true);
@@ -136,7 +139,6 @@ public class SelectedLevel : MonoBehaviour
             CheckFondo();
         }
         CheckSelectCursor();
-        //Debug.Log(grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y]);
     }
     public void MoveCursor()
     {
@@ -149,7 +151,9 @@ public class SelectedLevel : MonoBehaviour
                     cursorPlayer1.x++;
                     CursorSelectorPlayer1.MoveRight();
                     aviableMoveHorizontal = false;
-                    eventWise.StartEvent(soundMoveSelectionCharacter);
+
+                    if (gd.initScene)
+                        eventWise.StartEvent(soundMoveSelectionCharacter);
                 }
             }
             else if (InputPlayerController.GetInputAxis("Horizontal") < 0 && cursorPlayer1.x > 0)
@@ -159,7 +163,9 @@ public class SelectedLevel : MonoBehaviour
                     cursorPlayer1.x--;
                     CursorSelectorPlayer1.MoveLeft();
                     aviableMoveHorizontal = false;
-                    eventWise.StartEvent(soundMoveSelectionCharacter);
+
+                    if(gd.initScene)
+                        eventWise.StartEvent(soundMoveSelectionCharacter);
                 }
             }
         }
@@ -172,7 +178,9 @@ public class SelectedLevel : MonoBehaviour
                     cursorPlayer1.y--;
                     CursorSelectorPlayer1.MoveUp();
                     aviableMoveVertical = false;
-                    eventWise.StartEvent(soundMoveSelectionCharacter);
+
+                    if(gd.initScene)
+                        eventWise.StartEvent(soundMoveSelectionCharacter);
                 }
             }
             else if (InputPlayerController.GetInputAxis("Vertical") < 0 && cursorPlayer1.y < columnas - 1)
@@ -182,7 +190,9 @@ public class SelectedLevel : MonoBehaviour
                     cursorPlayer1.y++;
                     CursorSelectorPlayer1.MoveDown();
                     aviableMoveVertical = false;
-                    eventWise.StartEvent(soundMoveSelectionCharacter);
+
+                    if(gd.initScene)
+                        eventWise.StartEvent(soundMoveSelectionCharacter);
                 }
             }
         }
@@ -208,7 +218,9 @@ public class SelectedLevel : MonoBehaviour
                     spriteCursor1.color = Color.yellow;
                     if (!soundSelectCharacterPlayer)
                     {
-                        eventWise.StartEvent(soundSelectCharacter);
+                        if(gd.initScene)
+                            eventWise.StartEvent(soundSelectCharacter);
+
                         soundSelectCharacterPlayer = true;
                     }
                 }

@@ -12,7 +12,6 @@ public class Pool : MonoBehaviour {
     private int id;
     private bool substractValuesBalls;
     public bool GeneratePoolOnEnable;
-    // Use this for initialization
     void Awake()
     {
         
@@ -55,7 +54,6 @@ public class Pool : MonoBehaviour {
         }
         id = 0;
     }
-    // Update is called once per frame
     void Update () {
     }
     public List<GameObject> GetListPelotasComunes()

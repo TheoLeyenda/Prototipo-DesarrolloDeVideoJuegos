@@ -8,8 +8,6 @@ public class SpriteEnemy : SpriteCharacter
     public Enemy enemy;
     [HideInInspector]
     public string nameActual;
-    //[HideInInspector]
-    //public bool disableSpecialAttack = false;
     private void Start()
     {
         auxDelaySpriteRecibirDanio = delaySpriteRecibirDanio;
@@ -23,14 +21,6 @@ public class SpriteEnemy : SpriteCharacter
         auxDelaySpriteContraAtaque = delaySpriteContraAtaque;
         ActualSprite = SpriteActual.Parado;
         DisableSpecialAttack();
-        /*if (enemy.enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Defensivo)
-        {
-            if (animator != null)
-            {
-                animator.SetBool("EnPlenoAtaqueEspecial", true);
-                animator.SetBool("FinalAtaqueEspecial", false);
-            }
-        }*/
     }
     public void Update()
     {
@@ -44,10 +34,6 @@ public class SpriteEnemy : SpriteCharacter
             }
         }
     }
-    /*public void DisableSpecialAttackDefensivo()
-    {
-        disableSpecialAttack = true;
-    }*/
     public void CheckEnumSprite()
     {
             
@@ -155,7 +141,6 @@ public class SpriteEnemy : SpriteCharacter
         enemy.boxColliderControllerAgachado.state = BoxColliderController.StateBoxCollider.Normal;
         enemy.boxColliderControllerParado.state = BoxColliderController.StateBoxCollider.Normal;
         enemy.boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Normal;
-        //enemy.boxColliderPiernas.state = BoxColliderController.StateBoxCollider.Normal;
     }
     public override void PlayAnimation(string nameAnimation)
     {
@@ -179,7 +164,6 @@ public class SpriteEnemy : SpriteCharacter
     }
     public void DisableSpecialAttack()
     {
-        //Debug.Log("ENTRE A LA FUNCION");
         if (enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.Saltar
             || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialSalto
             || enemy.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque
@@ -189,7 +173,6 @@ public class SpriteEnemy : SpriteCharacter
         }
         else
         {
-            //Debug.Log("ENTRE");
             enemy.enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Nulo);
             enemy.SetDelaySelectMovement(0.1f);
         }

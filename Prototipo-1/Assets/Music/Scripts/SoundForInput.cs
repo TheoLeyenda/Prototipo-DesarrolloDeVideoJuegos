@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SoundForInput : MonoBehaviour
 {
-    // Start is called before the first frame update
     public bool movimientoVertical;
     public bool movimientoHorizontal;
     public string nombreEventoMovimiento;
@@ -15,6 +14,7 @@ public class SoundForInput : MonoBehaviour
     private Movimiento mov;
     [SerializeField] private bool useSelectSound = true;
     [SerializeField] private ControlPausador controlPausador = ControlPausador.player1;
+    private GameData gd;
     public enum Movimiento
     {
         Habilitado,
@@ -28,22 +28,28 @@ public class SoundForInput : MonoBehaviour
 
     private void Start()
     {
+        gd = GameData.instaceGameData;
         mov = Movimiento.Habilitado;
     }
-    // Update is called once per frame
     void Update()
     {
-        if (menuPrincipal)
+        if (gd.initScene)
         {
-            CheckSelectionP1();
-        }
-        else if (menuPausa)
-        {
-            CheckSelectionPause();
+            if (menuPrincipal)
+            {
+                CheckSelectionP1();
+            }
+            else if (menuPausa)
+            {
+                CheckSelectionPause();
+            }
         }
     }
     public void CheckSelectionP1()
     {
+        if (!gd.initScene)
+            return;
+
         if (InputPlayerController.GetInputAxis("Horizontal") == 0 && InputPlayerController.GetInputAxis("Vertical") == 0)
         {
             mov = Movimiento.Habilitado;
@@ -92,7 +98,9 @@ public class SoundForInput : MonoBehaviour
     }
     public void CheckSelectionP2()
     {
-        Debug.Log("Controllador de pausa 2");
+        if (!gd.initScene)
+            return;
+
         if (InputPlayerController.GetInputAxis("Horizontal_P2") == 0 && InputPlayerController.GetInputAxis("Vertical_P2") == 0)
         {
             mov = Movimiento.Habilitado;
@@ -140,6 +148,9 @@ public class SoundForInput : MonoBehaviour
     }
     public void CheckSelectionPause()
     {
+        if (!gd.initScene)
+            return;
+
         if ((InputPlayerController.GetInputButton("PauseButton_P1") || InputPlayerController.GetInputButton("PauseButton_P2")) && Time.timeScale == 1)
         {
             AkSoundEngine.PostEvent("pausa", gameObject);
@@ -156,10 +167,16 @@ public class SoundForInput : MonoBehaviour
     }
     public void SetNombreEventoSeleccion(string _nombreEventoSeleccion)
     {
+        if (!gd.initScene)
+            return;
+
         nombreEventoSeleccion = _nombreEventoSeleccion;
     }
     public void PauseSelected()
     {
+        if (!gd.initScene)
+            return;
+
         if (mov == Movimiento.Habilitado)
         {
             AkSoundEngine.PostEvent(nombreEventoMovimiento, gameObject);
@@ -168,6 +185,9 @@ public class SoundForInput : MonoBehaviour
     }
     public void UseSound(string name)
     {
+        if (!gd.initScene)
+            return;
+
         AkSoundEngine.PostEvent(name, gameObject);
     }
 }

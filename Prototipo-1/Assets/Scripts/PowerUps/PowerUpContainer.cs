@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PowerUpContainer : MonoBehaviour
 {
-    // Start is called before the first frame update
     [System.Serializable]
     public class Container
     {

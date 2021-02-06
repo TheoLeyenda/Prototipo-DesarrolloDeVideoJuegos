@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class BarraDeEscudo : MonoBehaviour
 {
-    // Start is called before the first frame update
     public Enemy enemy;
     public Player player;
     public float porcentageNededForDeffence;

@@ -22,7 +22,6 @@ public class Grid : MonoBehaviour
     private IdPlataforma idPlataforma;
     public List<GameObject> Gm_Plataformas;
     private int cuadrilla_columnas = 3;
-    //private int cuadrilla_filas = 3;
     public int baseGrild = 2;
     private GameManager gm;
     public Plataformas[] plataformas;
@@ -127,8 +126,6 @@ public class Grid : MonoBehaviour
                         {
                             OnSettingTitileo(this, cuadrilla.transform.position);
                         }
-                        //profesorAnatomia.GeneratorSpecialAttack.transform.position = cuadrilla.transform.position;
-                        //Debug.Log("ENTRE");
                     }
                 }
                 else
@@ -148,8 +145,6 @@ public class Grid : MonoBehaviour
                     if (OnSettingTitileo != null)
                     {
                         OnSettingTitileo(this, currentPlataforma.transform.position + new Vector3(0, -substractVector, 0));
-                        //profesorAnatomia.GeneratorSpecialAttack.transform.position = cuadrilla.transform.position;
-                        //Debug.Log("ENTRE");
                     }
                     else
                     {
@@ -293,7 +288,6 @@ public class Grid : MonoBehaviour
             {
                 if (gm != null)
                 {
-                    //Debug.Log("ENTRE");
                     Gm_Plataformas[(int)gm.structGameManager.gm_dataCombatPvP.level_selected].SetActive(true);
                 }
             }

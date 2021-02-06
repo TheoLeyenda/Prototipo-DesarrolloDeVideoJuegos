@@ -5,7 +5,6 @@ using System;
 
 public class ActivatorDialogueManager : MonoBehaviour
 {
-    // Start is called before the first frame update
     public DialogueController dialogueController;
     private bool activatedProfesorAnatomia;
     private bool activatedProfesorHistoria;
@@ -30,7 +29,6 @@ public class ActivatorDialogueManager : MonoBehaviour
     {
         if (!winingEnemy && dialogueController != null && dialogueController.gameObject != null)
         {
-            //Debug.Log("ENTRE AL PUNTERO A FUNCION");
             dialogueController.OpenDialogInEnableObject = false;
             dialogueController.gameObject.SetActive(true);
             dialogueController.DialogVictoryEnemy(enemy, fraseVictoria, nameEnemy, headSprite);

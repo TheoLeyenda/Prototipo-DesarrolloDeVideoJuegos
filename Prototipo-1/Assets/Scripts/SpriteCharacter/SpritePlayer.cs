@@ -6,9 +6,11 @@ using UnityEngine;
 public class SpritePlayer : SpriteCharacter
 {
     public Player player;
+    private GameData gd;
 
     private void Start()
     {
+        gd = GameData.instaceGameData;
         animator = GetComponent<Animator>();
         ActualSprite = SpriteActual.Parado;
         auxDelaySpriteRecibirDanio = delaySpriteRecibirDanio;
@@ -121,7 +123,9 @@ public class SpritePlayer : SpriteCharacter
         if (player.enumsPlayers.specialAttackEquipped == EnumsPlayers.SpecialAttackEquipped.DisparoDeCarga)
         {
             player.SetInFuegoEmpieza(false);
-            player.eventWise.StartEvent("fuego_termina");
+
+            if(gd.initScene)
+                player.eventWise.StartEvent("fuego_termina");
         }
         else if (player.enumsPlayers.specialAttackEquipped == EnumsPlayers.SpecialAttackEquipped.Limusina)
         {

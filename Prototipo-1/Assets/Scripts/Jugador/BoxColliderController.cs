@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 public class BoxColliderController : MonoBehaviour
 {
     public Player player;
@@ -9,7 +8,6 @@ public class BoxColliderController : MonoBehaviour
     public bool inPlayer;
     public bool ZonaContraAtaque;
     private BoxCollider2D boxCollider2D;
-    public EventWise eventWise;
     private GameManager gm;
     [HideInInspector]
     public bool enableCounterAttack;
@@ -18,6 +16,10 @@ public class BoxColliderController : MonoBehaviour
     [HideInInspector]
     public float auxDelayEnableCounterAttack = 0.05f;
 
+    public EventWise eventWise;
+
+    private GameData gd;
+    
     public enum StateBoxCollider
     {
         Defendido,
@@ -51,6 +53,7 @@ public class BoxColliderController : MonoBehaviour
     }
     private void Start()
     {
+        gd = GameData.instaceGameData;
         enableCounterAttack = true;
         GameObject go = GameObject.Find("EventWise");
         eventWise = go.GetComponent<EventWise>();
@@ -72,17 +75,14 @@ public class BoxColliderController : MonoBehaviour
             bool enableDamagePlayer = true;
             if (state == StateBoxCollider.Normal)
             {
-                //Debug.Log("ENTRE");
                 if (proyectil.GetEnemy() != null)
                 {
                     Enemy enemy = proyectil.GetEnemy();
-                    //Debug.Log("ENTRE");
                     if (proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Enemigo)
                     {
                         player.SetEnableCounterAttack(true);
                         if (player.delayCounterAttack > 0)
                         {
-                            //Debug.Log("ENTRE");
                             if (InputPlayerController.GetInputButtonDown(player.inputDeffenseButton) && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage && enableCounterAttack)
                             {
                                 proyectil.gameObject.SetActive(false);
@@ -94,7 +94,6 @@ public class BoxColliderController : MonoBehaviour
                         }
                         if (player.delayCounterAttack <= 0 && proyectil.timeLife <= 0 && enableDamagePlayer || (!ZonaContraAtaque || (proyectil.colisionPlayer && notProyectilParabola)))
                         {
-                            //Debug.Log("ENTRE");
                             if (proyectil.gameObject.activeSelf && gameObject.activeSelf && proyectil != null && enemy != null)
                             {
                                 if (Proyectil.typeProyectil.AtaqueEspecial != proyectil.tipoDeProyectil
@@ -118,7 +117,9 @@ public class BoxColliderController : MonoBehaviour
                             }
                             if (!ZonaContraAtaque)
                             {
-                                eventWise.StartEvent("golpear_p1");
+                                if(gd.initScene)
+                                    eventWise.StartEvent("golpear_p1");
+
                                 if (enableAnimationHit)
                                 {
                                     proyectil.AnimationHit();
@@ -126,7 +127,9 @@ public class BoxColliderController : MonoBehaviour
                             }
                             if (proyectil.colisionPlayer)
                             {
-                                eventWise.StartEvent("golpear_p1");
+                                if(gd.initScene)
+                                    eventWise.StartEvent("golpear_p1");
+
                                 if (enableAnimationHit)
                                 {
                                     proyectil.AnimationHit();
@@ -135,7 +138,6 @@ public class BoxColliderController : MonoBehaviour
                         }
                         else if (player.delayCounterAttack <= 0 && proyectil.timeLife > 0 && enableDamagePlayer || (!ZonaContraAtaque || (proyectil.colisionPlayer && notProyectilParabola)))
                         {
-                            //Debug.Log("ENTRE");
                             if (Proyectil.typeProyectil.AtaqueEspecial != proyectil.tipoDeProyectil
                                 && enemy.EnableChargerSpecialAttackForHit)
                             {
@@ -154,7 +156,10 @@ public class BoxColliderController : MonoBehaviour
                             {
                                 player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                             }
-                            eventWise.StartEvent("golpear_p1");
+
+                            if (gd.initScene)
+                                eventWise.StartEvent("golpear_p1");
+
                             if (enableAnimationHit)
                             {
                                 proyectil.AnimationHit();
@@ -204,7 +209,10 @@ public class BoxColliderController : MonoBehaviour
                             {
                                 PlayerDisparador.PD.score = PlayerDisparador.PD.score + PlayerDisparador.PD.scoreForHit;
                             }
-                            eventWise.StartEvent("golpear_p1");
+
+                            if(gd.initScene)
+                                eventWise.StartEvent("golpear_p1");
+
                             if (enableAnimationHit)
                             {
                                 proyectil.AnimationHit();
@@ -238,7 +246,10 @@ public class BoxColliderController : MonoBehaviour
                             {
                                 PlayerDisparador.PD.score = PlayerDisparador.PD.score + PlayerDisparador.PD.scoreForHit;
                             }
-                            eventWise.StartEvent("golpear_p1");
+
+                            if (gd.initScene)
+                                eventWise.StartEvent("golpear_p1");
+
                             if (enableAnimationHit)
                             {
                                 proyectil.AnimationHit();
@@ -251,7 +262,6 @@ public class BoxColliderController : MonoBehaviour
             else if (state == StateBoxCollider.Defendido)
             {
                 Player_PvP player_PvP = player.gameObject.GetComponent<Player_PvP>();
-                //float realDamage;
                 if (PlayerDisparador != null)
                 {
                     //AUMENTO XP PARA EL ATAQUE ESPECIAL
@@ -269,7 +279,10 @@ public class BoxColliderController : MonoBehaviour
                     }
                     proyectil.damage = proyectil.GetAuxDamage();
                     player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
-                    eventWise.StartEvent("jugador_1_bloquear");
+
+                    if (gd.initScene)
+                        eventWise.StartEvent("jugador_1_bloquear");
+
                     if (enableAnimationHit)
                     {
                         proyectil.AnimationHit();
@@ -289,14 +302,16 @@ public class BoxColliderController : MonoBehaviour
                                         player.enableAttack = true;
                                         player.Attack(PlayerCounterAttack);
                                         player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.ContraAtaque;
-                                        //BORRAR LINEA DE ABAJO (enableCounterAttack = false) SI PREFERIMOS QUE AL DEFENDER TIRE DOS PROYECTILES EN VEZ DE UNO
                                         enableCounterAttack = false;
                                     }
                                     proyectil.damage = proyectil.GetAuxDamage();
                                     player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
                                 }
                                 proyectil.GetPoolObject().Recycle();
-                                eventWise.StartEvent("jugador_1_bloquear");
+
+                                if (gd.initScene)
+                                    eventWise.StartEvent("jugador_1_bloquear");
+
                                 break;
                             default:
                                 if (PlayerDisparador != null)
@@ -317,7 +332,10 @@ public class BoxColliderController : MonoBehaviour
                                 }
                                 proyectil.damage = proyectil.GetAuxDamage();
                                 player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
-                                eventWise.StartEvent("jugador_1_bloquear");
+
+                                if (gd.initScene)
+                                    eventWise.StartEvent("jugador_1_bloquear");
+
                                 if (enableAnimationHit)
                                 {
                                     proyectil.AnimationHit();
@@ -334,7 +352,10 @@ public class BoxColliderController : MonoBehaviour
                     }
                     proyectil.damage = proyectil.GetAuxDamage();
                     player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
-                    eventWise.StartEvent("jugador_1_bloquear");
+
+                    if (gd.initScene)
+                        eventWise.StartEvent("jugador_1_bloquear");
+
                     if (enableAnimationHit)
                     {
                         proyectil.AnimationHit();
@@ -345,7 +366,6 @@ public class BoxColliderController : MonoBehaviour
         }
         else if (enemy != null && !inPlayer && inEnemy)
         {
-            //bool enableDamagePlayer = true;
             if (state == StateBoxCollider.Normal)
             {
                 if (PlayerDisparador != null)
@@ -373,7 +393,10 @@ public class BoxColliderController : MonoBehaviour
                                 PlayerDisparador.PD.score = PlayerDisparador.PD.score + PlayerDisparador.PD.scoreForHit;
                             }
                         }
-                        eventWise.StartEvent("golpear_p1");
+
+                        if (gd.initScene)
+                            eventWise.StartEvent("golpear_p1");
+
                         if (enableAnimationHit)
                         {
                             proyectil.AnimationHit();
@@ -428,7 +451,10 @@ public class BoxColliderController : MonoBehaviour
                             enemy.barraDeEscudo.SubstractPorcentageBar(enemy.barraDeEscudo.substractForHit);
                         }
                     }
-                    eventWise.StartEvent("jugador_1_bloquear");
+
+                    if(gd.initScene)
+                        eventWise.StartEvent("jugador_1_bloquear");
+
                     if (enableAnimationHit)
                     {
                         proyectil.AnimationHit();

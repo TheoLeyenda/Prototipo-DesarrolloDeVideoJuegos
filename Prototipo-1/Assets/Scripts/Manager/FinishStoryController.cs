@@ -7,10 +7,14 @@ public class FinishStoryController : MonoBehaviour
     // Start is called before the first frame update
     public Player player;
     public LevelManager levelManager;
-    private EventWise eventWise;
     private bool musicPlaying;
+
+    private EventWise eventWise;
+    private GameData gd;
+
     private void Start()
     {
+        gd = GameData.instaceGameData;
         musicPlaying = false;
         eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
     }
@@ -27,7 +31,7 @@ public class FinishStoryController : MonoBehaviour
     {
         player.weitVictory = true;
         levelManager.ObjectiveOfPassLevel = 0;
-        if (!musicPlaying)
+        if (!musicPlaying && gd.initScene)
         {
             musicPlaying = true;
             eventWise.StartEvent("pvp_ganador");

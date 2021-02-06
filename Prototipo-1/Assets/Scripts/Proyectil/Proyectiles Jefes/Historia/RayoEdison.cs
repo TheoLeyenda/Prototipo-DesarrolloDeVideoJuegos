@@ -33,7 +33,6 @@ public class RayoEdison : MonoBehaviour
     }
     public void DisableMe()
     {
-        //Debug.Log("ENTRE AL DESTRUIR RAYO");
         if (pool != null)
         {
             pool.Recycle(gameObject);
@@ -62,7 +61,10 @@ public class RayoEdison : MonoBehaviour
             {
                 p.PD.Blindaje = p.PD.Blindaje - damage / 2;
             }
-            p.eventWise.StartEvent("golpear_p1");
+
+            if(p.gd.initScene)
+                p.eventWise.StartEvent("golpear_p1");
+
             p.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
         }
     }

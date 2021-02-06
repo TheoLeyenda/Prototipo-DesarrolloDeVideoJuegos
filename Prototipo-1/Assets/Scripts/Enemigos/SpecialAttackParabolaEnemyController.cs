@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class SpecialAttackParabolaEnemyController : MonoBehaviour
 {
-    // Start is called before the first frame update
     public Pool poolObjectSpecialAttack;
     public Enemy.ApplyColorShoot applyColorShoot = Enemy.ApplyColorShoot.None;
     public Color colorShoot;

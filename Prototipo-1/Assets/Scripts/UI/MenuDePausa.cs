@@ -22,7 +22,7 @@ public class MenuDePausa : MonoBehaviour
     private MenuActual menuActual;
     private bool soundPause = false;
     [SerializeField] private bool useLoadingScene = true;
-    // Start is called before the first frame update
+
     void Start()
     {
         menuActual = MenuActual.MenuPausa;
@@ -37,7 +37,7 @@ public class MenuDePausa : MonoBehaviour
     {
         OnMenuPausa();
     }
-    // Update is called once per frame
+
     void Update()
     {
         if (levelManager != null)
@@ -54,24 +54,31 @@ public class MenuDePausa : MonoBehaviour
     }
     public void SoundDespausar()
     {
-        eventwise.StartEvent("despausar");
+        if(gd.initScene)
+            eventwise.StartEvent("despausar");
     }
     public void Reanudar()
     {
         Time.timeScale = 1;
         UnityEngine.Cursor.visible = false;
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-        eventwise.StartEvent("despausar");
-        eventwise.StartEvent("seleccionar");
+        if (gd.initScene)
+        {
+            eventwise.StartEvent("despausar");
+            eventwise.StartEvent("seleccionar");
+        }
         soundPause = false;
     }
     public void ReiniciarNivel()
     {
         DisableMenues();
         gm.playerData_P1.score = gm.playerData_P1.auxScore;
-        eventwise.StartEvent("despausar");
-        eventwise.StartEvent("seleccionar");
-        eventwise.StartEvent("reiniciar");
+        if (gd.initScene)
+        {
+            eventwise.StartEvent("despausar");
+            eventwise.StartEvent("seleccionar");
+            eventwise.StartEvent("reiniciar");
+        }
         gm.resetMusic = true;
         if (gd != null)
         {
@@ -116,7 +123,7 @@ public class MenuDePausa : MonoBehaviour
             else if (Time.timeScale == 0)
             {
                 MenuPausa.gameObject.SetActive(true);
-                if (!soundPause)
+                if (!soundPause && gd.initScene)
                 {
                     eventwise.StartEvent("pausa");
                     soundPause = true;
@@ -126,7 +133,9 @@ public class MenuDePausa : MonoBehaviour
     }
     public void DisableMenues()
     {
-        eventwise.StartEvent("seleccionar");
+        if(gd.initScene)
+            eventwise.StartEvent("seleccionar");
+
         Time.timeScale = 1;
         MenuPausa.SetActive(false);
         MenuOpciones.SetActive(false);
@@ -134,7 +143,9 @@ public class MenuDePausa : MonoBehaviour
     }
     public void OnMenuPausa()
     {
-        eventwise.StartEvent("seleccionar");
+        if(gd.initScene)
+            eventwise.StartEvent("seleccionar");
+
         MenuPausa.SetActive(true);
         MenuOpciones.SetActive(false);
         MenuControles.SetActive(false);
@@ -142,7 +153,9 @@ public class MenuDePausa : MonoBehaviour
     }
     public void OnMenuOpciones()
     {
-        eventwise.StartEvent("seleccionar");
+        if(gd.initScene)
+            eventwise.StartEvent("seleccionar");
+
         MenuPausa.SetActive(false);
         MenuOpciones.SetActive(true);
         MenuControles.SetActive(false);
@@ -150,7 +163,9 @@ public class MenuDePausa : MonoBehaviour
     }
     public void OnMenuControles()
     {
-        eventwise.StartEvent("seleccionar");
+        if(gd.initScene)
+            eventwise.StartEvent("seleccionar");
+
         MenuPausa.SetActive(false);
         MenuOpciones.SetActive(false);
         MenuControles.SetActive(true);

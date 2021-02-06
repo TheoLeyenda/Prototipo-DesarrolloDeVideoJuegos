@@ -6,7 +6,6 @@ public class ControladorDeMenuesDePausa : MonoBehaviour
 {
     public GameObject menuPlayer1;
     public GameObject menuPlayer2;
-    // Update is called once per frame
     void Update()
     {
         CheckMenu();

@@ -37,12 +37,15 @@ public class InicioDePelea : MonoBehaviour
 
     private float delayFightInRounds = 2.3f;
 
+    private GameData gd;
+
     private void Start()
     {
         Init();
         GameObject go_eventWise;
         if (eventWise == null)
         {
+            gd = GameData.instaceGameData;
             go_eventWise = GameObject.Find("EventWise");
             eventWise = go_eventWise.GetComponent<EventWise>();
         }
@@ -84,19 +87,20 @@ public class InicioDePelea : MonoBehaviour
             {
                 int roundActual = gm.structGameManager.gm_dataCombatPvP.rondaActual + 1;
                 string nameSound = "Round_" + roundActual;
-                if (roundActual < 11)
-                {
+
+                if (roundActual < 11 && gd.initScene)
                     eventWise.StartEvent(nameSound);
-                }
+                
                 text1.text = "ROUND " + (roundActual);
                 text2.text = "FIGHT";
             }
             else if (typeCountdown == TypeCountdown.RedyFight)
             {
-                //text1.text = "¿READY?";
-                //text1.text = "READY?";
                 InitReady();
-                eventWise.StartEvent(currentNameSoundReady);
+
+                if (gd.initScene)
+                    eventWise.StartEvent(currentNameSoundReady);
+
                 text1.text = "READY ?";
                 text2.text = "FIGHT";
             }
@@ -105,9 +109,11 @@ public class InicioDePelea : MonoBehaviour
 
         if (!OneEjecution && !text1.gameObject.activeSelf && !DisableAllText && (delayFightInRounds <= 0 || typeCountdown == TypeCountdown.RedyFight))
         {
-            //Debug.Log("ENTRE");
             InitFight();
-            eventWise.StartEvent(currentNameSoundFight);
+
+            if (gd.initScene)
+                eventWise.StartEvent(currentNameSoundFight);
+
             text2.gameObject.SetActive(true);
             DisableAllText = true;
         }

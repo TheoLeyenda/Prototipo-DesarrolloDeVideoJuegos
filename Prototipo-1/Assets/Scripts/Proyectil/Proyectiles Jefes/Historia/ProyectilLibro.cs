@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ProyectilLibro : Proyectil
 {
-    // Start is called before the first frame update
     [Header("Config ProyectilLibro")]
     public List<Sprite> spriteLibros;
     private int IdLibro;
@@ -77,7 +76,6 @@ public class ProyectilLibro : Proyectil
                 p = boxColliderController.player;
             }
             delayCounterAttack = delayCounterAttack - Time.deltaTime;
-            //p.delayCounterAttack = p.delayCounterAttack - Time.deltaTime;
             if (boxColliderController.state != BoxColliderController.StateBoxCollider.Defendido)
             {
                 if (p.delayCounterAttack > 0)
@@ -105,7 +103,10 @@ public class ProyectilLibro : Proyectil
                     {
                         p.PD.Blindaje = p.PD.Blindaje - damage / 2;
                     }
-                    p.eventWise.StartEvent("golpear_p1");
+
+                    if(p.gd.initScene)
+                        p.eventWise.StartEvent("golpear_p1");
+
                     p.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                     boxCollider2D.enabled = false;
                     trailRenderer.Clear();

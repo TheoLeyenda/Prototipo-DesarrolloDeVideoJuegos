@@ -76,14 +76,18 @@ public class SelectedPlayers : MonoBehaviour
     public SpriteRenderer spriteCursor1;
     public SpriteRenderer spriteCursor2;
     //----------------------------------//
+
     private EventWise eventWise;
     private string soundMoveSelectionCharacter = "seleccion_de_personaje_op4";
     private string soundSelectCharacter = "seleccion_de_personaje_op2";
     private bool soundSelectCharacterPlayer_1 = false;
     private bool soundSelectCharacterPlayer_2 = false;
-    // HACER QUE SE PUEDAN ELEGIR LOS TRES ENEMIGOS NUEVOS Y PONER UNA CASILLA MAS QUE PERMITA ELEGIR A UN JUGADOR DE FORMA ALEATORIA.
+
+    private GameData gd;
+
     private void Start()
     {
+        gd = GameData.instaceGameData;
         eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
         aviableMoveHorizontalP1 = true;
         aviableMoveVerticalP1 = true;
@@ -105,7 +109,6 @@ public class SelectedPlayers : MonoBehaviour
         if (filas > 0 && columnas > 0)
         {
             grillaDeSeleccion = new string[filas, columnas];
-            //positionNameCharacter = new Vector3[filas, columnas];
             if (grillaDeSeleccion != null)
             {
                 int i = columnas - 1;
@@ -121,8 +124,6 @@ public class SelectedPlayers : MonoBehaviour
                                 grillaDeSeleccion[j, i] = namePlayersOptions[idOption];
                                 elementsCharacters[idOption].x = j;
                                 elementsCharacters[idOption].y = i;
-                                //positionNameCharacter[j, i] = positionsNameCharacters[idOption];
-                                //Debug.Log("[" + j + "," + i + "]: " + grillaDeSeleccion[j, i]);
                             }
                             idOption++;
                         }
@@ -138,7 +139,6 @@ public class SelectedPlayers : MonoBehaviour
                             grillaDeSeleccion[j, i] = namePlayersOptions[idOption];
                             elementsCharacters[idOption].x = j;
                             elementsCharacters[idOption].y = i;
-                            //positionNameCharacter[j, i] = positionsNameCharacters[idOption];
                         }
                         idOption++;
                     }
@@ -164,8 +164,6 @@ public class SelectedPlayers : MonoBehaviour
     {
         namePlayer1.text = grillaDeSeleccion[cursorPlayer1.x, cursorPlayer1.y];
         namePlayer2.text = grillaDeSeleccion[cursorPlayer2.x, cursorPlayer2.y];
-        //namePlayer1.rectTransform.localPosition = positionNameCharacter[cursorPlayer1.x, cursorPlayer1.y];
-        //namePlayer2.rectTransform.localPosition = positionNameCharacter[cursorPlayer2.x, cursorPlayer2.y];
     }
     public void CheckPositionCursor()
     {
@@ -217,7 +215,9 @@ public class SelectedPlayers : MonoBehaviour
                         CursorSelectorPlayer.MoveRight();
                         aviableMoveHorizontal = false;
                         CheckNamePlayersSelect();
-                        eventWise.StartEvent(soundMoveSelectionCharacter);
+
+                        if (gd.initScene)
+                            eventWise.StartEvent(soundMoveSelectionCharacter);
                     }
                 }
                 else if (InputPlayerController.GetInputAxis(inputHorizontal) < 0 && cursorPlayer.x > 0)
@@ -228,7 +228,9 @@ public class SelectedPlayers : MonoBehaviour
                         CursorSelectorPlayer.MoveLeft();
                         aviableMoveHorizontal = false;
                         CheckNamePlayersSelect();
-                        eventWise.StartEvent(soundMoveSelectionCharacter);
+
+                        if(gd.initScene)
+                            eventWise.StartEvent(soundMoveSelectionCharacter);
                     }
                 }
             }
@@ -242,7 +244,9 @@ public class SelectedPlayers : MonoBehaviour
                         CursorSelectorPlayer.MoveUp();
                         aviableMoveVertical = false;
                         CheckNamePlayersSelect();
-                        eventWise.StartEvent(soundMoveSelectionCharacter);
+
+                        if (gd.initScene)
+                            eventWise.StartEvent(soundMoveSelectionCharacter);
                     }
                 }
                 else if (InputPlayerController.GetInputAxis(inputVertical) < 0 && cursorPlayer.y < columnas - 1)
@@ -253,7 +257,9 @@ public class SelectedPlayers : MonoBehaviour
                         CursorSelectorPlayer.MoveDown();
                         aviableMoveVertical = false;
                         CheckNamePlayersSelect();
-                        eventWise.StartEvent(soundMoveSelectionCharacter);
+
+                        if(gd.initScene)
+                            eventWise.StartEvent(soundMoveSelectionCharacter);
                     }
                 }
             }
@@ -275,7 +281,9 @@ public class SelectedPlayers : MonoBehaviour
             CursorGrandePlayer1.GetComponent<SpriteRenderer>().color = Color.yellow;
             if (!soundSelectCharacterPlayer_1)
             {
-                eventWise.StartEvent(soundSelectCharacter);
+                if(gd.initScene)
+                    eventWise.StartEvent(soundSelectCharacter);
+
                 soundSelectCharacterPlayer_1 = true;
             }
             
@@ -285,7 +293,9 @@ public class SelectedPlayers : MonoBehaviour
             spriteCursor2.color = Color.yellow;
             if (!soundSelectCharacterPlayer_2)
             {
-                eventWise.StartEvent(soundSelectCharacter);
+                if(gd.initScene)
+                    eventWise.StartEvent(soundSelectCharacter);
+
                 soundSelectCharacterPlayer_2 = true;
             }
         }

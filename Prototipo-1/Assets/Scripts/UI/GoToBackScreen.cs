@@ -7,9 +7,7 @@ public class GoToBackScreen : MonoBehaviour
 {
     public string nameBackScreen;
     public bool activateInputP2;
-    // Start is called before the first frame update
 
-    // Update is called once per frame
     void Update()
     {
         if (InputPlayerController.GetInputButton("DeffenseButton_P1"))

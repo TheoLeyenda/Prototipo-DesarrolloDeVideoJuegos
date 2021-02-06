@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Myra : Enemy
 {
-    // Start is called before the first frame update
     public GameObject GeneradorProyectilMagicBust;
     public ProyectilMagicBust ProyectilMagicBust;
     public float timeSpecialAttack;
     private bool inMagicAttack;
+
     public override void Start()
     {
         base.Start();
         ProyectilMagicBust.eventWise = eventWise;
     }
+
     protected override void OnDisable()
     {
         base.OnDisable();
@@ -22,13 +23,14 @@ public class Myra : Enemy
         ProyectilMagicBust.gameObject.SetActive(false);
         Player.OnDie -= AnimationVictory;
     }
+
     protected override void OnEnable()
     {
         base.OnEnable();
         enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoveToPointCombat);
         Player.OnDie += AnimationVictory;
     }
-    // Update is called once per frame
+
     public override void Update()
     {
         base.Update();
@@ -53,9 +55,7 @@ public class Myra : Enemy
             {
                 if (spriteEnemy.GetAnimator() != null)
                 {
-                    //spriteEnemy.GetAnimator().SetBool("EnPlenoAtaqueEspecial", false);
                     spriteEnemy.GetAnimator().SetBool("FinalAtaqueEspecial", true);
-                    //eventWise.StartEvent("fuego_termina");
                     inMagicAttack = false;
                 }
             }
@@ -64,12 +64,9 @@ public class Myra : Enemy
         {
             if (!inMagicAttack)
             {
-                //eventWise.StartEvent("fuego_empieza");
                 inMagicAttack = true;
             }
-            //spriteEnemy.GetAnimator().SetBool("EnPlenoAtaqueEspecial", true);
             spriteEnemy.GetAnimator().SetBool("FinalAtaqueEspecial", false);
-            //spriteEnemy.disableSpecialAttack = false;
         }
     }
     public override void CheckDelayAttack(bool specialAttack)
@@ -79,7 +76,6 @@ public class Myra : Enemy
             delayAttack = delayAttack - Time.deltaTime;
             if (enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.SaltoAtaque)
             {
-                //Debug.Log("ENTRE AL SALTO");
                 spriteEnemy.PlayAnimation("Salto gotica");
             }
         }
