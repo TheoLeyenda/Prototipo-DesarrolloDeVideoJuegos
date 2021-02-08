@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
     
     public void GameOver(string finishScene)
     {
-        if (screenManager.eventWise != null && finishScene != "GameOverHistoria" && finishScene != "GameOverSupervivencia" && gd.initScene)
+        if (screenManager.eventWise != null && finishScene != "GameOverHistoria" && finishScene != "GameOverSupervivencia")
         {
             screenManager.eventWise.StartEvent("volver_al_menu");
         }

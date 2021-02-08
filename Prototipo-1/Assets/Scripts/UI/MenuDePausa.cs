@@ -54,31 +54,28 @@ public class MenuDePausa : MonoBehaviour
     }
     public void SoundDespausar()
     {
-        if(gd.initScene)
-            eventwise.StartEvent("despausar");
+        eventwise.StartEvent("despausar");
     }
     public void Reanudar()
     {
         Time.timeScale = 1;
         UnityEngine.Cursor.visible = false;
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-        if (gd.initScene)
-        {
-            eventwise.StartEvent("despausar");
-            eventwise.StartEvent("seleccionar");
-        }
+
+        eventwise.StartEvent("despausar");
+        eventwise.StartEvent("seleccionar");
+
         soundPause = false;
     }
     public void ReiniciarNivel()
     {
         DisableMenues();
         gm.playerData_P1.score = gm.playerData_P1.auxScore;
-        if (gd.initScene)
-        {
-            eventwise.StartEvent("despausar");
-            eventwise.StartEvent("seleccionar");
-            eventwise.StartEvent("reiniciar");
-        }
+
+        eventwise.StartEvent("despausar");
+        eventwise.StartEvent("seleccionar");
+        eventwise.StartEvent("reiniciar");
+
         gm.resetMusic = true;
         if (gd != null)
         {
@@ -123,7 +120,7 @@ public class MenuDePausa : MonoBehaviour
             else if (Time.timeScale == 0)
             {
                 MenuPausa.gameObject.SetActive(true);
-                if (!soundPause && gd.initScene)
+                if (!soundPause)
                 {
                     eventwise.StartEvent("pausa");
                     soundPause = true;
@@ -133,8 +130,7 @@ public class MenuDePausa : MonoBehaviour
     }
     public void DisableMenues()
     {
-        if(gd.initScene)
-            eventwise.StartEvent("seleccionar");
+        eventwise.StartEvent("seleccionar");
 
         Time.timeScale = 1;
         MenuPausa.SetActive(false);
@@ -143,8 +139,7 @@ public class MenuDePausa : MonoBehaviour
     }
     public void OnMenuPausa()
     {
-        if(gd.initScene)
-            eventwise.StartEvent("seleccionar");
+        eventwise.StartEvent("seleccionar");
 
         MenuPausa.SetActive(true);
         MenuOpciones.SetActive(false);
@@ -153,8 +148,7 @@ public class MenuDePausa : MonoBehaviour
     }
     public void OnMenuOpciones()
     {
-        if(gd.initScene)
-            eventwise.StartEvent("seleccionar");
+        eventwise.StartEvent("seleccionar");
 
         MenuPausa.SetActive(false);
         MenuOpciones.SetActive(true);
@@ -163,8 +157,7 @@ public class MenuDePausa : MonoBehaviour
     }
     public void OnMenuControles()
     {
-        if(gd.initScene)
-            eventwise.StartEvent("seleccionar");
+        eventwise.StartEvent("seleccionar");
 
         MenuPausa.SetActive(false);
         MenuOpciones.SetActive(false);

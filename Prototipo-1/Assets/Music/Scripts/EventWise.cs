@@ -16,18 +16,14 @@ public class EventWise : MonoBehaviour
     {
         gd = GameData.instaceGameData;
         gm = GameManager.instanceGameManager;
-
-        if (gd.initScene)
+        if (inMenu)
         {
-            if (inMenu)
-            {
-                StartEvent("volver_al_menu");
-            }
-            if (initEventInStart || gm.resetMusic)
-            {
-                StartEvent();
-                gm.resetMusic = false;
-            }
+            StartEvent("volver_al_menu");
+        }
+        if (initEventInStart || gm.resetMusic)
+        {
+            StartEvent();
+            gm.resetMusic = false;
         }
     }
 

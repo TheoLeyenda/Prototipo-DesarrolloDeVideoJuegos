@@ -26,14 +26,12 @@ public class ProyectilMagicBust : DisparoDeCarga
         timeLife = auxTimeLife;
         animator.SetBool("FinalTornado", false);
         
-        if(gd.initScene)
-            eventWise.StartEvent(nameEventDisable);
+        eventWise.StartEvent(nameEventDisable);
     }
 
     private void OnEnable()
     {
-        if(gd.initScene)
-            eventWise.StartEvent(nameEventActivate);
+        eventWise.StartEvent(nameEventActivate);
     }
 
     protected override void Update()

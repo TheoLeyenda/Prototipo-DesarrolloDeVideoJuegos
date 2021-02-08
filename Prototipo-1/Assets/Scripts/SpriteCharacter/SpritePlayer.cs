@@ -124,8 +124,7 @@ public class SpritePlayer : SpriteCharacter
         {
             player.SetInFuegoEmpieza(false);
 
-            if(gd.initScene)
-                player.eventWise.StartEvent("fuego_termina");
+            player.eventWise.StartEvent("fuego_termina");
         }
         else if (player.enumsPlayers.specialAttackEquipped == EnumsPlayers.SpecialAttackEquipped.Limusina)
         {

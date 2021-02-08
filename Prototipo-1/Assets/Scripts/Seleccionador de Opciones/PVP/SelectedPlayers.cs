@@ -216,8 +216,7 @@ public class SelectedPlayers : MonoBehaviour
                         aviableMoveHorizontal = false;
                         CheckNamePlayersSelect();
 
-                        if (gd.initScene)
-                            eventWise.StartEvent(soundMoveSelectionCharacter);
+                        eventWise.StartEvent(soundMoveSelectionCharacter);
                     }
                 }
                 else if (InputPlayerController.GetInputAxis(inputHorizontal) < 0 && cursorPlayer.x > 0)
@@ -229,8 +228,7 @@ public class SelectedPlayers : MonoBehaviour
                         aviableMoveHorizontal = false;
                         CheckNamePlayersSelect();
 
-                        if(gd.initScene)
-                            eventWise.StartEvent(soundMoveSelectionCharacter);
+                        eventWise.StartEvent(soundMoveSelectionCharacter);
                     }
                 }
             }
@@ -245,8 +243,7 @@ public class SelectedPlayers : MonoBehaviour
                         aviableMoveVertical = false;
                         CheckNamePlayersSelect();
 
-                        if (gd.initScene)
-                            eventWise.StartEvent(soundMoveSelectionCharacter);
+                        eventWise.StartEvent(soundMoveSelectionCharacter);
                     }
                 }
                 else if (InputPlayerController.GetInputAxis(inputVertical) < 0 && cursorPlayer.y < columnas - 1)
@@ -258,8 +255,7 @@ public class SelectedPlayers : MonoBehaviour
                         aviableMoveVertical = false;
                         CheckNamePlayersSelect();
 
-                        if(gd.initScene)
-                            eventWise.StartEvent(soundMoveSelectionCharacter);
+                        eventWise.StartEvent(soundMoveSelectionCharacter);
                     }
                 }
             }
@@ -281,8 +277,7 @@ public class SelectedPlayers : MonoBehaviour
             CursorGrandePlayer1.GetComponent<SpriteRenderer>().color = Color.yellow;
             if (!soundSelectCharacterPlayer_1)
             {
-                if(gd.initScene)
-                    eventWise.StartEvent(soundSelectCharacter);
+                eventWise.StartEvent(soundSelectCharacter);
 
                 soundSelectCharacterPlayer_1 = true;
             }
@@ -293,8 +288,7 @@ public class SelectedPlayers : MonoBehaviour
             spriteCursor2.color = Color.yellow;
             if (!soundSelectCharacterPlayer_2)
             {
-                if(gd.initScene)
-                    eventWise.StartEvent(soundSelectCharacter);
+                eventWise.StartEvent(soundSelectCharacter);
 
                 soundSelectCharacterPlayer_2 = true;
             }

@@ -201,18 +201,14 @@ public class DataCombatPvP : MonoBehaviour
         {
             ReiniciarRonda();
             soundEnter = false;
-            if (gd.initScene)
-            {
-                player1.eventWise.StartEvent("fuego_termina");
-                player2.eventWise.StartEvent("fuego_termina");
-            }
+            player1.eventWise.StartEvent("fuego_termina");
+            player2.eventWise.StartEvent("fuego_termina");
         }
         else
         {
             if (!soundEmpate)
             {
-                if (gd.initScene)
-                    AkSoundEngine.PostEvent("pvp_ganador", eventWisse);
+                AkSoundEngine.PostEvent("pvp_ganador", eventWisse);
 
                 soundEmpate = true;
             }
@@ -232,11 +228,8 @@ public class DataCombatPvP : MonoBehaviour
             player1.gameObject.SetActive(false);
             player2.gameObject.SetActive(false);
 
-            if (gd.initScene)
-            {
-                player1.eventWise.StartEvent("fuego_termina");
-                player2.eventWise.StartEvent("fuego_termina");
-            }
+            player1.eventWise.StartEvent("fuego_termina");
+            player2.eventWise.StartEvent("fuego_termina");
         }
     }
     public void CheckWinPlayer(ref int countRoundsWinPlayer, GameObject prefabPlayerWin, GameObject prefabPlayerLose, SpriteRenderer spritePlayerWin, int playerSelected)
@@ -247,18 +240,15 @@ public class DataCombatPvP : MonoBehaviour
             ReiniciarRonda();
             soundEnter = false;
 
-            if (gd.initScene)
-            {
-                player1.eventWise.StartEvent("fuego_termina");
-                player2.eventWise.StartEvent("fuego_termina");
-            }
+            player1.eventWise.StartEvent("fuego_termina");
+            player2.eventWise.StartEvent("fuego_termina");
         }
         else
         {
             if (!soundEnter)
             {
-                if (gd.initScene)
-                    AkSoundEngine.PostEvent("pvp_ganador", eventWisse);
+
+                AkSoundEngine.PostEvent("pvp_ganador", eventWisse);
 
                 soundEnter = true;
             }
@@ -275,11 +265,8 @@ public class DataCombatPvP : MonoBehaviour
             player1.gameObject.SetActive(false);
             player2.gameObject.SetActive(false);
 
-            if (gd.initScene)
-            {
-                player1.eventWise.StartEvent("fuego_termina");
-                player2.eventWise.StartEvent("fuego_termina");
-            }
+            player1.eventWise.StartEvent("fuego_termina");
+            player2.eventWise.StartEvent("fuego_termina");
         }
         gm.structGameManager.gm_dataCombatPvP.rondaActual++;
     }
@@ -287,8 +274,7 @@ public class DataCombatPvP : MonoBehaviour
     {
         if (restartMusic)
         {
-            if(gd.initScene)
-                player1.eventWise.StartEvent("volver_al_menu");
+            player1.eventWise.StartEvent("volver_al_menu");
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

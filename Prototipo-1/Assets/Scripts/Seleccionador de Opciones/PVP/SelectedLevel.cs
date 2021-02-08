@@ -152,8 +152,7 @@ public class SelectedLevel : MonoBehaviour
                     CursorSelectorPlayer1.MoveRight();
                     aviableMoveHorizontal = false;
 
-                    if (gd.initScene)
-                        eventWise.StartEvent(soundMoveSelectionCharacter);
+                    eventWise.StartEvent(soundMoveSelectionCharacter);
                 }
             }
             else if (InputPlayerController.GetInputAxis("Horizontal") < 0 && cursorPlayer1.x > 0)
@@ -164,8 +163,7 @@ public class SelectedLevel : MonoBehaviour
                     CursorSelectorPlayer1.MoveLeft();
                     aviableMoveHorizontal = false;
 
-                    if(gd.initScene)
-                        eventWise.StartEvent(soundMoveSelectionCharacter);
+                    eventWise.StartEvent(soundMoveSelectionCharacter);
                 }
             }
         }
@@ -179,8 +177,7 @@ public class SelectedLevel : MonoBehaviour
                     CursorSelectorPlayer1.MoveUp();
                     aviableMoveVertical = false;
 
-                    if(gd.initScene)
-                        eventWise.StartEvent(soundMoveSelectionCharacter);
+                    eventWise.StartEvent(soundMoveSelectionCharacter);
                 }
             }
             else if (InputPlayerController.GetInputAxis("Vertical") < 0 && cursorPlayer1.y < columnas - 1)
@@ -191,8 +188,7 @@ public class SelectedLevel : MonoBehaviour
                     CursorSelectorPlayer1.MoveDown();
                     aviableMoveVertical = false;
 
-                    if(gd.initScene)
-                        eventWise.StartEvent(soundMoveSelectionCharacter);
+                    eventWise.StartEvent(soundMoveSelectionCharacter);
                 }
             }
         }
@@ -218,8 +214,7 @@ public class SelectedLevel : MonoBehaviour
                     spriteCursor1.color = Color.yellow;
                     if (!soundSelectCharacterPlayer)
                     {
-                        if(gd.initScene)
-                            eventWise.StartEvent(soundSelectCharacter);
+                        eventWise.StartEvent(soundSelectCharacter);
 
                         soundSelectCharacterPlayer = true;
                     }

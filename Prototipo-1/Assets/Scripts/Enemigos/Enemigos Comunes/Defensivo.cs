@@ -83,8 +83,7 @@ public class Defensivo : Enemy
                 {
                     spriteEnemy.GetAnimator().SetBool("FinalAtaqueEspecial", true);
 
-                    if(gd.initScene)
-                        eventWise.StartEvent("fuego_termina");
+                    eventWise.StartEvent("fuego_termina");
 
                     inFuegoEmpieza = false;
                 }
@@ -94,8 +93,7 @@ public class Defensivo : Enemy
         {
             if (!inFuegoEmpieza)
             {
-                if(gd.initScene)
-                    eventWise.StartEvent("fuego_empieza");
+                eventWise.StartEvent("fuego_empieza");
 
                 inFuegoEmpieza = true;
             }

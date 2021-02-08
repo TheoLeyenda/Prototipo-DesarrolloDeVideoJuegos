@@ -54,8 +54,7 @@ public class ProyectilParabola : Proyectil
     }
     public override void Sonido()
     {
-        if(gd.initScene)
-            eventWise.StartEvent("tirar_parabola");
+        eventWise.StartEvent("tirar_parabola");
     }
     void Update()
     {

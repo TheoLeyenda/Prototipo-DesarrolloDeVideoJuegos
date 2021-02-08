@@ -88,7 +88,7 @@ public class InicioDePelea : MonoBehaviour
                 int roundActual = gm.structGameManager.gm_dataCombatPvP.rondaActual + 1;
                 string nameSound = "Round_" + roundActual;
 
-                if (roundActual < 11 && gd.initScene)
+                if (roundActual < 11)
                     eventWise.StartEvent(nameSound);
                 
                 text1.text = "ROUND " + (roundActual);
@@ -98,8 +98,7 @@ public class InicioDePelea : MonoBehaviour
             {
                 InitReady();
 
-                if (gd.initScene)
-                    eventWise.StartEvent(currentNameSoundReady);
+                eventWise.StartEvent(currentNameSoundReady);
 
                 text1.text = "READY ?";
                 text2.text = "FIGHT";
@@ -111,8 +110,7 @@ public class InicioDePelea : MonoBehaviour
         {
             InitFight();
 
-            if (gd.initScene)
-                eventWise.StartEvent(currentNameSoundFight);
+            eventWise.StartEvent(currentNameSoundFight);
 
             text2.gameObject.SetActive(true);
             DisableAllText = true;

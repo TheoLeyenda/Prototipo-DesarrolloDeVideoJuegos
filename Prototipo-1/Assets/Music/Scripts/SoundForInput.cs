@@ -33,22 +33,17 @@ public class SoundForInput : MonoBehaviour
     }
     void Update()
     {
-        if (gd.initScene)
+        if (menuPrincipal)
         {
-            if (menuPrincipal)
-            {
-                CheckSelectionP1();
-            }
-            else if (menuPausa)
-            {
-                CheckSelectionPause();
-            }
+            CheckSelectionP1();
+        }
+        else if (menuPausa)
+        {
+            CheckSelectionPause();
         }
     }
     public void CheckSelectionP1()
     {
-        if (!gd.initScene)
-            return;
 
         if (InputPlayerController.GetInputAxis("Horizontal") == 0 && InputPlayerController.GetInputAxis("Vertical") == 0)
         {
@@ -98,8 +93,6 @@ public class SoundForInput : MonoBehaviour
     }
     public void CheckSelectionP2()
     {
-        if (!gd.initScene)
-            return;
 
         if (InputPlayerController.GetInputAxis("Horizontal_P2") == 0 && InputPlayerController.GetInputAxis("Vertical_P2") == 0)
         {
@@ -148,8 +141,6 @@ public class SoundForInput : MonoBehaviour
     }
     public void CheckSelectionPause()
     {
-        if (!gd.initScene)
-            return;
 
         if ((InputPlayerController.GetInputButton("PauseButton_P1") || InputPlayerController.GetInputButton("PauseButton_P2")) && Time.timeScale == 1)
         {
@@ -167,16 +158,10 @@ public class SoundForInput : MonoBehaviour
     }
     public void SetNombreEventoSeleccion(string _nombreEventoSeleccion)
     {
-        if (!gd.initScene)
-            return;
-
         nombreEventoSeleccion = _nombreEventoSeleccion;
     }
     public void PauseSelected()
     {
-        if (!gd.initScene)
-            return;
-
         if (mov == Movimiento.Habilitado)
         {
             AkSoundEngine.PostEvent(nombreEventoMovimiento, gameObject);
@@ -185,9 +170,6 @@ public class SoundForInput : MonoBehaviour
     }
     public void UseSound(string name)
     {
-        if (!gd.initScene)
-            return;
-
         AkSoundEngine.PostEvent(name, gameObject);
     }
 }

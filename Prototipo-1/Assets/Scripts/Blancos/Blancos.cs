@@ -54,8 +54,7 @@ public class Blancos : MonoBehaviour
                 proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + scoreForHit;
                 proyectil.AnimationHit();
 
-                if(gd.initScene)
-                    eventWise.StartEvent(soundHit);
+                eventWise.StartEvent(soundHit);
             }
             else if (proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador2 && numberPlayerInThis == 1)
             {
@@ -63,8 +62,7 @@ public class Blancos : MonoBehaviour
                 proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + scoreForHit;
                 proyectil.AnimationHit();
 
-                if(gd.initScene)
-                    eventWise.StartEvent(soundHit);
+                eventWise.StartEvent(soundHit);
             }
 
         }

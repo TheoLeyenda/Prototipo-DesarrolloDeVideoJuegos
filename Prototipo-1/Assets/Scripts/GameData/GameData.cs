@@ -24,8 +24,6 @@ public class GameData : MonoBehaviour
     public int generalScore;
     public GameMode gd = GameMode.None;
 
-    public bool initScene;
-
     [System.Serializable]
     public class InventoryPlayer
     {

@@ -137,8 +137,7 @@ public class Proyectil : MonoBehaviour
     }
     public virtual void Sonido()
     {
-        if(gd.initScene)
-            eventWise.StartEvent("tirar_goma");
+        eventWise.StartEvent("tirar_goma");
     }
     private void Update()
     {

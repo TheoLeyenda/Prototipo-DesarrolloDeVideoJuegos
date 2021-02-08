@@ -32,8 +32,7 @@ public class ProyectilLimo : ProyectilInparable
     }
     IEnumerator StartSound(float timeDelay)
     {
-        if(gd.initScene)
-            eventWise.StartEvent("sonido_de_limusina_op5");
+        eventWise.StartEvent("sonido_de_limusina_op5");
 
         yield return new WaitForSeconds(timeDelay);
     }

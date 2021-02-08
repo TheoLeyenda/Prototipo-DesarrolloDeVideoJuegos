@@ -146,8 +146,7 @@ public class LevelManager : MonoBehaviour
             NextId();
             InitSoundDialog();
 
-            if(gameData.initScene)
-                eventWise.StartEvent(currentSoundEffectDialog);
+            eventWise.StartEvent(currentSoundEffectDialog);
         }
     }
 
@@ -291,12 +290,9 @@ public class LevelManager : MonoBehaviour
                     }
                     else
                     {
-                        if (gameData.initScene)
-                        {
-                            eventWise.StartEvent("despausar");
-                            eventWise.StartEvent("fuego_termina");
-                            eventWise.StartEvent("volver_al_menu");
-                        }
+                        eventWise.StartEvent("despausar");
+                        eventWise.StartEvent("fuego_termina");
+                        eventWise.StartEvent("volver_al_menu");
                         if (panelTransitions != null)
                             panelTransitions.LoadScene(NameFinishSceneStoryMode);
                         else
@@ -321,12 +317,9 @@ public class LevelManager : MonoBehaviour
                     }
                     else
                     {
-                        if (gameData.initScene)
-                        {
-                            eventWise.StartEvent("despausar");
-                            eventWise.StartEvent("fuego_termina");
-                            eventWise.StartEvent("volver_al_menu");
-                        }
+                        eventWise.StartEvent("despausar");
+                        eventWise.StartEvent("fuego_termina");
+                        eventWise.StartEvent("volver_al_menu");
                         if (panelTransitions != null)
                             panelTransitions.LoadScene(NameFinishSceneStoryMode);
                         else 

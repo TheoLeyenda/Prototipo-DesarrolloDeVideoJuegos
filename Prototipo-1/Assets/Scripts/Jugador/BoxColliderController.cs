@@ -117,8 +117,7 @@ public class BoxColliderController : MonoBehaviour
                             }
                             if (!ZonaContraAtaque)
                             {
-                                if(gd.initScene)
-                                    eventWise.StartEvent("golpear_p1");
+                                eventWise.StartEvent("golpear_p1");
 
                                 if (enableAnimationHit)
                                 {
@@ -127,8 +126,7 @@ public class BoxColliderController : MonoBehaviour
                             }
                             if (proyectil.colisionPlayer)
                             {
-                                if(gd.initScene)
-                                    eventWise.StartEvent("golpear_p1");
+                                eventWise.StartEvent("golpear_p1");
 
                                 if (enableAnimationHit)
                                 {
@@ -157,8 +155,7 @@ public class BoxColliderController : MonoBehaviour
                                 player.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                             }
 
-                            if (gd.initScene)
-                                eventWise.StartEvent("golpear_p1");
+                            eventWise.StartEvent("golpear_p1");
 
                             if (enableAnimationHit)
                             {
@@ -210,8 +207,7 @@ public class BoxColliderController : MonoBehaviour
                                 PlayerDisparador.PD.score = PlayerDisparador.PD.score + PlayerDisparador.PD.scoreForHit;
                             }
 
-                            if(gd.initScene)
-                                eventWise.StartEvent("golpear_p1");
+                            eventWise.StartEvent("golpear_p1");
 
                             if (enableAnimationHit)
                             {
@@ -247,8 +243,7 @@ public class BoxColliderController : MonoBehaviour
                                 PlayerDisparador.PD.score = PlayerDisparador.PD.score + PlayerDisparador.PD.scoreForHit;
                             }
 
-                            if (gd.initScene)
-                                eventWise.StartEvent("golpear_p1");
+                            eventWise.StartEvent("golpear_p1");
 
                             if (enableAnimationHit)
                             {
@@ -280,8 +275,7 @@ public class BoxColliderController : MonoBehaviour
                     proyectil.damage = proyectil.GetAuxDamage();
                     player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
 
-                    if (gd.initScene)
-                        eventWise.StartEvent("jugador_1_bloquear");
+                    eventWise.StartEvent("jugador_1_bloquear");
 
                     if (enableAnimationHit)
                     {
@@ -309,8 +303,7 @@ public class BoxColliderController : MonoBehaviour
                                 }
                                 proyectil.GetPoolObject().Recycle();
 
-                                if (gd.initScene)
-                                    eventWise.StartEvent("jugador_1_bloquear");
+                                eventWise.StartEvent("jugador_1_bloquear");
 
                                 break;
                             default:
@@ -333,8 +326,7 @@ public class BoxColliderController : MonoBehaviour
                                 proyectil.damage = proyectil.GetAuxDamage();
                                 player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
 
-                                if (gd.initScene)
-                                    eventWise.StartEvent("jugador_1_bloquear");
+                                eventWise.StartEvent("jugador_1_bloquear");
 
                                 if (enableAnimationHit)
                                 {
@@ -353,8 +345,7 @@ public class BoxColliderController : MonoBehaviour
                     proyectil.damage = proyectil.GetAuxDamage();
                     player.barraDeEscudo.SubstractPorcentageBar(player.barraDeEscudo.substractForHit);
 
-                    if (gd.initScene)
-                        eventWise.StartEvent("jugador_1_bloquear");
+                    eventWise.StartEvent("jugador_1_bloquear");
 
                     if (enableAnimationHit)
                     {
@@ -394,8 +385,7 @@ public class BoxColliderController : MonoBehaviour
                             }
                         }
 
-                        if (gd.initScene)
-                            eventWise.StartEvent("golpear_p1");
+                        eventWise.StartEvent("golpear_p1");
 
                         if (enableAnimationHit)
                         {
@@ -452,8 +442,7 @@ public class BoxColliderController : MonoBehaviour
                         }
                     }
 
-                    if(gd.initScene)
-                        eventWise.StartEvent("jugador_1_bloquear");
+                    eventWise.StartEvent("jugador_1_bloquear");
 
                     if (enableAnimationHit)
                     {

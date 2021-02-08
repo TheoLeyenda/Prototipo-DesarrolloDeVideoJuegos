@@ -19,50 +19,42 @@ public class SpriteBoss_ProfesorHistoria : SpriteBossController
 
     public void LibroEdisonCompleto()
     {
-        if(profesorHistoria.gd.initScene)
-            profesorHistoria.eventWise.StartEvent("LibroEdison_Completo");
+        profesorHistoria.eventWise.StartEvent("LibroEdison_Completo");
     }
 
     public void ChispitasSound()
     {
-        if(profesorHistoria.gd.initScene)
-            profesorHistoria.eventWise.StartEvent("Chispas_LibroEdison");
+        profesorHistoria.eventWise.StartEvent("Chispas_LibroEdison");
     }
 
     public void TruenoSound()
     {
-        if(profesorHistoria.gd.initScene)
-            profesorHistoria.eventWise.StartEvent("Trueno_LibroEdison");
+        profesorHistoria.eventWise.StartEvent("Trueno_LibroEdison");
     }
 
     public void StopSundLibroEdison()
-    {
-        if(profesorHistoria.gd.initScene)
-            profesorHistoria.eventWise.StartEvent("Stop_LibroEdison");
+    {   
+        profesorHistoria.eventWise.StartEvent("Stop_LibroEdison");
     }
 
     public void GritoRayoInicioSound()
     {
-        if(profesorHistoria.gd.initScene)
-            profesorHistoria.eventWise.StartEvent("GritoRayo_Inicio");
+        profesorHistoria.eventWise.StartEvent("GritoRayo_Inicio");
     }
 
     public void GritoRayoLoopSound()
     {
-        if(profesorHistoria.gd.initScene)
-            profesorHistoria.eventWise.StartEvent("GritoRayo_Loop");
+        profesorHistoria.eventWise.StartEvent("GritoRayo_Loop");
     }
 
     public void GritoRayoFinalSound()
     {
-        if(profesorHistoria.gd.initScene)
-            profesorHistoria.eventWise.StartEvent("GritoRayo_Final");
+        profesorHistoria.eventWise.StartEvent("GritoRayo_Final");
     }
 
     public void StopSoundGritoRayo()
     {
-        if(profesorHistoria.gd.initScene)
-            profesorHistoria.eventWise.StartEvent("Stop_GritoRayo");
+        profesorHistoria.eventWise.StartEvent("Stop_GritoRayo");
     }
 
 

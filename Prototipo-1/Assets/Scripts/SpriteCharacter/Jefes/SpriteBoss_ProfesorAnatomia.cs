@@ -28,26 +28,22 @@ public class SpriteBoss_ProfesorAnatomia : SpriteBossController
 
     public void TerremotoSound()
     {
-        if(profesorAnatomia.gd.initScene)
-            profesorAnatomia.eventWise.StartEvent("Terremoto");
+        profesorAnatomia.eventWise.StartEvent("Terremoto");
     }
 
     public void TerremotoEscombrosSound()
     {
-        if(profesorAnatomia.gd.initScene)
-            profesorAnatomia.eventWise.StartEvent("TerremotoEscombros");
+        profesorAnatomia.eventWise.StartEvent("TerremotoEscombros");
     }
 
     public void TerremotoGrunidoSound()
     {
-        if(profesorAnatomia.gd.initScene)
-            profesorAnatomia.eventWise.StartEvent("TerremotoGrunido");
+        profesorAnatomia.eventWise.StartEvent("TerremotoGrunido");
     }
 
     public void TerremotoStopSound()
     {
-        if(profesorAnatomia.gd.initScene)
-            profesorAnatomia.eventWise.StartEvent("StopTerremoto");
+        profesorAnatomia.eventWise.StartEvent("StopTerremoto");
     }
 
     public void InitSpecialAttack_PunietazoDeFuria()
@@ -108,8 +104,7 @@ public class SpriteBoss_ProfesorAnatomia : SpriteBossController
                 }
                 else if(playerAttack)
                 {
-                    if(profesorAnatomia.gd.initScene)
-                        profesorAnatomia.eventWise.StartEvent("golpear_p1");
+                    profesorAnatomia.eventWise.StartEvent("golpear_p1");
 
                     proyectil.AnimationHit();
                     profesorAnatomia.TakeDamage(proyectil);
@@ -121,8 +116,7 @@ public class SpriteBoss_ProfesorAnatomia : SpriteBossController
                     || proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador2)
                     && proyectil.tipoDeProyectil != Proyectil.typeProyectil.AtaqueEspecial)
                 {
-                    if(profesorAnatomia.gd.initScene)
-                        profesorAnatomia.eventWise.StartEvent("golpear_p1");
+                    profesorAnatomia.eventWise.StartEvent("golpear_p1");
 
                     proyectil.AnimationHit();
                     profesorAnatomia.TakeDamage(proyectil);

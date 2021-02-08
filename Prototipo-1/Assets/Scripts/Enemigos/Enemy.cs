@@ -1073,8 +1073,7 @@ public class Enemy : Character
             {
                 insound = true;
 
-                if(gd.initScene)
-                    eventWise.StartEvent("moverse");
+                eventWise.StartEvent("moverse");
             }
             Move(Vector3.left);
             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoverAdelante);
@@ -1095,8 +1094,7 @@ public class Enemy : Character
             {
                 insound = true;
 
-                if(gd.initScene)
-                    eventWise.StartEvent("moverse");
+                eventWise.StartEvent("moverse");
             }
             Move(Vector3.right);
             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.MoverAtras);
@@ -1140,8 +1138,7 @@ public class Enemy : Character
         {
             if (transform.position.y <= InitialPosition.y)
             {
-                if(gd.initScene)
-                    eventWise.StartEvent("saltar");
+                eventWise.StartEvent("saltar");
             }
             if (enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoAtaque && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.SaltoDefensa && enumsEnemy.GetMovement() != EnumsEnemy.Movimiento.AtaqueEspecialSalto)
             {

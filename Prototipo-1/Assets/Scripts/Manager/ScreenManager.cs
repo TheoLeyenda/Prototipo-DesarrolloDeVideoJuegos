@@ -138,12 +138,9 @@ public class ScreenManager : MonoBehaviour
     }
     public void SelectPlayerScene()
     {
-        if (gameData.initScene)
-        {
-            eventWise.StartEvent("despausar");
-            eventWise.StartEvent("fuego_termina");
-            eventWise.StartEvent("volver_al_menu");
-        }
+        eventWise.StartEvent("despausar");
+        eventWise.StartEvent("fuego_termina");
+        eventWise.StartEvent("volver_al_menu");
         LevelLoader.nextLevel = "SelectPlayerScene";
         SceneManager.LoadScene("SelectPlayerScene");
     }
@@ -228,7 +225,7 @@ public class ScreenManager : MonoBehaviour
     }
     public void Menu()
     {
-        if (eventWise != null && gameData.initScene)
+        if (eventWise != null)
         {
             eventWise.StartEvent("despausar");
             eventWise.StartEvent("fuego_termina");

@@ -40,8 +40,7 @@ public class ProyectilInparable : Proyectil
     }
     public override void Sonido()
     {
-        if(gd.initScene)
-            eventWise.StartEvent("patear_pelota");
+        eventWise.StartEvent("patear_pelota");
     }
     public virtual void Update()
     {

@@ -104,8 +104,7 @@ public class ProyectilLibro : Proyectil
                         p.PD.Blindaje = p.PD.Blindaje - damage / 2;
                     }
 
-                    if(p.gd.initScene)
-                        p.eventWise.StartEvent("golpear_p1");
+                    p.eventWise.StartEvent("golpear_p1");
 
                     p.spritePlayerActual.ActualSprite = SpritePlayer.SpriteActual.RecibirDanio;
                     boxCollider2D.enabled = false;

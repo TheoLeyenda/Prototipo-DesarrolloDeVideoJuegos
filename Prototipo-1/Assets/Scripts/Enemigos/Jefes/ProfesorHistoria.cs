@@ -179,8 +179,7 @@ public class ProfesorHistoria : Enemy
                 {
                     case (int)EstadoProfesorHistoria.Idle:
 
-                        if (gd.initScene)
-                            eventWise.StartEvent("musica_boss2_op1");
+                        eventWise.StartEvent("musica_boss2_op1");
 
                         Idle();
                         break;
@@ -227,12 +226,9 @@ public class ProfesorHistoria : Enemy
                         initMasiveAttack_Lanzado = false;
                         if (!Idied)
                         {
-                            if (gd.initScene)
-                            {
-                                eventWise.StartEvent("finish_boss_fight");
-                                eventWise.StartEvent("Stop_GritoRayo");
-                                eventWise.StartEvent("Stop_LibroEdison");
-                            }
+                            eventWise.StartEvent("finish_boss_fight");
+                            eventWise.StartEvent("Stop_GritoRayo");
+                            eventWise.StartEvent("Stop_LibroEdison");
                             Idied = true;
                             spriteBoss_ProfesorHistoria.PlayAnimation(NameAnimations[(int)MyAnimations.Death]);
                         }
@@ -330,8 +326,7 @@ public class ProfesorHistoria : Enemy
             go.transform.position = UpVector.transform.position;
         }
 
-        if(gd.initScene)
-            eventWise.StartEvent("tirar_goma");
+        eventWise.StartEvent("tirar_goma");
 
         proyectil.ShootForward();
     }
@@ -432,8 +427,7 @@ public class ProfesorHistoria : Enemy
                 proyectil.AnimationHit();
                 if (fsmProfesorHistoria.GetCurrentState() == (int)ProfesorHistoria.EstadoProfesorHistoria.MasiveAttack)
                 {
-                    if(gd.initScene)
-                        eventWise.StartEvent("golpear_p1");
+                    eventWise.StartEvent("golpear_p1");
 
                     spriteBoss_ProfesorHistoria.PlayAnimation("RecibirDanio");
                 }

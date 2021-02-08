@@ -236,8 +236,7 @@ public class DialogueController : MonoBehaviour
         {
             InitSoundDialog();
 
-            if (gd.initScene)
-                eventWise.StartEvent(currentSoundEffectDialog);
+            eventWise.StartEvent(currentSoundEffectDialog);
 
             ID_Dialog++;
             if (ID_Dialog < dialogos[indexDialog].Count)

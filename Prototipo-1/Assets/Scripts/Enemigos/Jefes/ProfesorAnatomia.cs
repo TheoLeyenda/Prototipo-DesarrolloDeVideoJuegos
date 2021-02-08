@@ -145,8 +145,7 @@ public class ProfesorAnatomia : Enemy
         {
             playMusicBoss = true;
 
-            if (gd.initScene)
-                eventWise.StartEvent(optionsNamesMusicBoss[currentIndexMusicFight]);
+            eventWise.StartEvent(optionsNamesMusicBoss[currentIndexMusicFight]);
         }
 
         firstEnableBoss = true;
@@ -267,8 +266,7 @@ public class ProfesorAnatomia : Enemy
             {
                 if (NextSpecialAttack)
                 {
-                    if(gd.initScene)
-                        eventWise.StartEvent("PunioFuria");
+                    eventWise.StartEvent("PunioFuria");
 
                     spriteBoss_ProfesorAnatomia.PlayAnimation(NameAnimations[(int)MyAnimations.PunietazoDeFuria]);
                     NextSpecialAttack = false;
@@ -293,8 +291,7 @@ public class ProfesorAnatomia : Enemy
     }
     public void Braggart()
     {
-        if(gd.initScene)
-            eventWise.StartEvent("StopPunioFuria");
+        eventWise.StartEvent("StopPunioFuria");
 
         if (!initBraggert)
         {
@@ -328,12 +325,9 @@ public class ProfesorAnatomia : Enemy
         spriteBoss_ProfesorAnatomia.PlayAnimation(NameAnimations[(int)MyAnimations.Death]);
         Idied = true;
 
-        if (gd.initScene)
-        {
-            eventWise.StartEvent("finish_boss_fight");
-            eventWise.StartEvent("StopTerremoto");
-            eventWise.StartEvent("StopPunioFuria");
-        }
+        eventWise.StartEvent("finish_boss_fight");
+        eventWise.StartEvent("StopTerremoto");
+        eventWise.StartEvent("StopPunioFuria");
     }
     public void SetTargetGrid(Grid g, Vector3 target)
     {
@@ -544,8 +538,7 @@ public class ProfesorAnatomia : Enemy
         proyectil.AnimationHit();
         if (fsmProfesorAnatomia.GetCurrentState() == (int)EstadoProfesorAnatomia.MasiveAttack)
         {
-            if(gd.initScene)
-                eventWise.StartEvent("golpear_p1");
+            eventWise.StartEvent("golpear_p1");
 
             spriteBoss_ProfesorAnatomia.PlayAnimation("RecibirDanio");
         }

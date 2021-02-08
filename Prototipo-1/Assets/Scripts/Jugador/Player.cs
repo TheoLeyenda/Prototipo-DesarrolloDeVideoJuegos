@@ -219,8 +219,7 @@ public class Player : Character
         {
             structsPlayer.dataAttack.DisparoDeCarga.SetActive(false);
 
-            if (gd.initScene)
-                eventWise.StartEvent("fuego_termina");
+            eventWise.StartEvent("fuego_termina");
         }
         CheckOutLimit();
         CheckDead();
@@ -842,8 +841,7 @@ public class Player : Character
                 {
                     InFuegoEmpieza = true;
 
-                    if(gd.initScene)
-                        eventWise.StartEvent("fuego_empieza");
+                    eventWise.StartEvent("fuego_empieza");
                 }
                 if (enableSpecialAttack)
                 {
@@ -1089,8 +1087,7 @@ public class Player : Character
                 Move(Vector3.left);
                 if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras)
                 {
-                    if(gd.initScene)
-                        eventWise.StartEvent("moverse");
+                    eventWise.StartEvent("moverse");
                 }
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAtras;
             }
@@ -1107,8 +1104,7 @@ public class Player : Character
                 Move(-Vector3.left);
                 if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAtras)
                 {
-                    if(gd.initScene)
-                        eventWise.StartEvent("moverse");
+                    eventWise.StartEvent("moverse");
                 }
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAtras;
             }
@@ -1128,8 +1124,7 @@ public class Player : Character
                 Move(Vector3.right);
                 if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante)
                 {
-                    if(gd.initScene)
-                        eventWise.StartEvent("moverse");
+                    eventWise.StartEvent("moverse");
                 }
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
             }
@@ -1145,8 +1140,7 @@ public class Player : Character
             {
                 if (enumsPlayers.movimiento != EnumsPlayers.Movimiento.MoverAdelante)
                 {
-                    if(gd.initScene)
-                        eventWise.StartEvent("moverse");
+                    eventWise.StartEvent("moverse");
                 }
                 Move(-Vector3.right);
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.MoverAdelante;
@@ -1164,8 +1158,7 @@ public class Player : Character
         {
             if(enumsPlayers.movimiento != EnumsPlayers.Movimiento.Saltar)
             {
-                if(gd.initScene)
-                    eventWise.StartEvent("saltar");
+                eventWise.StartEvent("saltar");
             }
             enumsPlayers.movimiento = EnumsPlayers.Movimiento.Saltar;
             MoveJamp(Vector3.up);
@@ -1183,8 +1176,7 @@ public class Player : Character
             }
             else
             {
-                if(gd.initScene)
-                    eventWise.StartEvent("caer");
+                eventWise.StartEvent("caer");
 
                 enumsPlayers.movimiento = EnumsPlayers.Movimiento.Nulo;
                 SpeedJump = AuxSpeedJump;

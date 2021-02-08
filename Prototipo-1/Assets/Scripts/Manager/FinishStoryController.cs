@@ -31,7 +31,7 @@ public class FinishStoryController : MonoBehaviour
     {
         player.weitVictory = true;
         levelManager.ObjectiveOfPassLevel = 0;
-        if (!musicPlaying && gd.initScene)
+        if (!musicPlaying)
         {
             musicPlaying = true;
             eventWise.StartEvent("pvp_ganador");

@@ -108,8 +108,7 @@ public class Lyn : Enemy
                             inAttack = true;
                             xpActual = 0;
 
-                            if (gd.initScene)
-                                eventWise.StartEvent("ataque_especial_tomboy_op1");
+                            eventWise.StartEvent("ataque_especial_tomboy_op1");
 
                             break;
                         case EnumsEnemy.Movimiento.AtaqueEspecialAgachado:

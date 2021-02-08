@@ -74,8 +74,7 @@ public class GranadaGaseosa : ProyectilParabola
     }
     public override void Sonido()
     {
-        if(gd.initScene)
-            eventWise.StartEvent("tirar_parabola");
+        eventWise.StartEvent("tirar_parabola");
     }
     public void CreateGaseosas(int cantProyectiles)
     {
@@ -185,8 +184,7 @@ public class GranadaGaseosa : ProyectilParabola
                 }
             }
 
-            if(gd.initScene)
-                eventWise.StartEvent("botella_romper");
+            eventWise.StartEvent("botella_romper");
 
             gameObject.SetActive(false);
             timeLife = 0f;
