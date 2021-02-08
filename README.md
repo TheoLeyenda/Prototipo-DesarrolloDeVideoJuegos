@@ -45,7 +45,7 @@ This game was also possible thanks to the support of these professors:
 
 Download it from itch.io: https://facundogt.itch.io/school-out
 
-## NOTA IMPORTANTE
+## NOTAS IMPORTANTES
 
 -En caso que desee bajar el proyecto para probar y ver como esta desarrollado por dentro debe tener en cuenta que para hacer que el audio funcione correctamente, debe generar el banco de sonidos desde el proyecto de Wwise.
 
