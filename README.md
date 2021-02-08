@@ -48,4 +48,5 @@ Download it from itch.io: https://facundogt.itch.io/school-out
 ## NOTA IMPORTANTE
 
 -En caso que desee bajar el proyecto para probar y ver como esta desarrollado por dentro debe tener en cuenta que para hacer que el audio funcione correctamente, debe generar el banco de sonidos desde el proyecto de Wwise.
+
 -Por problemas tecnicos con el .zip que te da GitHub a la hora de descargar el proyecto, este se debe descomprimir con la aplicacion 7-Zip. Link: https://www.7-zip.org/
