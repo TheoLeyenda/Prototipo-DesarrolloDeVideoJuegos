@@ -18,20 +18,10 @@ public class Resolucion : MonoBehaviour
         Screen.SetResolution((int)Resolucion_X, (int)Resolucion_Y, fullScreen);
         if (automaticRescaledResolution)
         {
-            if (Screen.width < Resolucion_X && Screen.height < Resolucion_Y)
+            while (Screen.width < Resolucion_X || Screen.height < Resolucion_Y)
             {
                 Resolucion_X = Resolucion_X / 1.2f;
                 Resolucion_Y = Resolucion_Y / 1.2f;
-                if (Screen.width < Resolucion_X && Screen.height < Resolucion_Y)
-                {
-                    Resolucion_X = OriginalResolution_X / 1.5f;
-                    Resolucion_Y = OriginalResolution_Y / 1.5f;
-                    if (Screen.width < Resolucion_X && Screen.height < Resolucion_Y)
-                    {
-                        Resolucion_X = OriginalResolution_X / 2f;
-                        Resolucion_Y = OriginalResolution_Y / 2f;
-                    }
-                }
                 Screen.SetResolution((int)Resolucion_X, (int)Resolucion_Y, fullScreen);
             }
         }
