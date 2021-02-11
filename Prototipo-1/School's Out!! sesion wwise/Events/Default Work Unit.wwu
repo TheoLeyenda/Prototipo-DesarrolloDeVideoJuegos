@@ -382,6 +382,17 @@
 								</Reference>
 							</ReferenceList>
 						</Action>
+						<Action Name="" ID="{E62C044A-33F5-4595-A9FA-8A6EEF15A4AB}" ShortID="922434372">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Credits" ID="{111748BB-972D-4E1D-BC13-18B4380A9009}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
 						<Action Name="" ID="{9586C65A-4E12-4E3F-B519-FDCFC5468FB0}" ShortID="911687046">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="5"/>
@@ -1721,6 +1732,42 @@
 						</Event>
 					</ChildrenList>
 				</Folder>
+				<Event Name="creditos" ID="{2305B217-3D8F-47E9-A01A-3BE0479F0B20}">
+					<ChildrenList>
+						<Action Name="" ID="{1124B968-9E30-4552-B4DC-AB49FFA2CE10}" ShortID="388909872">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Credits" ID="{111748BB-972D-4E1D-BC13-18B4380A9009}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{758C7C72-0CA1-41DA-A795-D8E70AF350F2}" ShortID="784741346">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="4"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Intro" ID="{D9702D72-B404-48A7-9E8D-33E44E8916B0}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+						<Action Name="" ID="{B8BA5686-BDE6-46B7-80F1-2488461A9083}" ShortID="406688368">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="Scope" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Combate" ID="{D826CF7D-7C99-4D5B-92E2-7448C6DE9526}" WorkUnitID="{53DDC69E-3430-46FC-B8AD-4E06228E9402}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

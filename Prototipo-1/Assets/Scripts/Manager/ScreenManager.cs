@@ -62,6 +62,7 @@ public class ScreenManager : MonoBehaviour
     }
     public void Creditos()
     {
+        eventWise.StartEvent("creditos");
         LevelLoader.nextLevel = "Creditos";
         SceneManager.LoadScene("Creditos");
     }
