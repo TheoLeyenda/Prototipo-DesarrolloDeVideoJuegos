@@ -6,9 +6,10 @@ public class ProyectilLimo : ProyectilInparable
 {
     public GameObject SpawnPosition;
     private int crash = 3;
-
+    public Collider2D myCollider;
     public override void Start()
     {
+        myCollider = GetComponent<Collider2D>();
         gd = GameData.instaceGameData;
         soundgenerate = false;
         timeLife = auxTimeLife;
@@ -19,12 +20,18 @@ public class ProyectilLimo : ProyectilInparable
     }
     private void OnDisable()
     {
+        if(myCollider != null)
+            myCollider.enabled = true;
+
         timeLife = auxTimeLife;
         transform.position = SpawnPosition.transform.position;
         crash = 3;
     }
     private void OnEnable()
     {
+        if(myCollider != null)
+            myCollider.enabled = true;
+
         StartCoroutine(StartSound(0.5f));
     }
     IEnumerator StartSound(float timeDelay)

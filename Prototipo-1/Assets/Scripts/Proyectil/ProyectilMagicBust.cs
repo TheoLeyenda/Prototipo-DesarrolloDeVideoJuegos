@@ -108,6 +108,7 @@ public class ProyectilMagicBust : DisparoDeCarga
             }
             else if (proyectilLimo != null)
             {
+                proyectilLimo.myCollider.enabled = false;
                 proyectilLimo.AnimationHit();
             }
         }

@@ -324,12 +324,30 @@ public class Player : Character
             //hacer que el color del player se vea azul;
             spritePlayerActual.spriteRenderer.color = Color.cyan;
             enableMovement = false;
+            enableMovementPlayer = false;
+
+            if(boxColliderPiernas != null)
+                boxColliderPiernas.state = BoxColliderController.StateBoxCollider.Normal;
+
+            if(boxColliderSprite != null)
+                boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
+
+            if(boxColliderParado != null)
+                boxColliderParado.state = BoxColliderController.StateBoxCollider.Normal;
+
+            if(boxColliderAgachado != null)
+                boxColliderAgachado.state = BoxColliderController.StateBoxCollider.Normal;
+
+            if(boxColliderSaltando != null)
+                boxColliderSaltando.state = BoxColliderController.StateBoxCollider.Normal;
+ 
         }
         else if (timeStuned <= 0)
         {
             //hacer que el color del player se vea blanco;
             spritePlayerActual.spriteRenderer.color = Color.white;
             enableMovement = true;
+            enableMovementPlayer = true;
             if (PD.lifePlayer > 0)
             {
                 enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.vivo;
@@ -342,6 +360,7 @@ public class Player : Character
             {
                 OnDisableModifireState(this, "Atrapado Chicle");
             }
+            
 
         }
     }

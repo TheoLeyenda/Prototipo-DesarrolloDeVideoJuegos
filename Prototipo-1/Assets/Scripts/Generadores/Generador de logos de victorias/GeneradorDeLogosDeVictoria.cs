@@ -9,16 +9,20 @@ public enum PlayerActual
 }
 public class GeneradorDeLogosDeVictoria : MonoBehaviour
 {
+    [SerializeField] private Resolucion resolucion;
     private PoolObject poolObject;
     public Pool PoolLogosDeVictoria;
     private GameManager gm;
     public PlayerActual playerActual;
     public float unidadesDeSeparacion;
+    public float unidadDeSeparacionEnPantallaReducida = 25;
     private bool OneEjecution;
 
     void Start()
     {
         OneEjecution = true;
+        if (!resolucion.fullScreen)
+            unidadesDeSeparacion = unidadDeSeparacionEnPantallaReducida;
     }
     private void Update()
     {

@@ -22,9 +22,10 @@ public class Resolucion : MonoBehaviour
         {
             if (Screen.width < Resolucion_X || Screen.height < Resolucion_Y)
             {
+                fullScreen = false;
                 Resolucion_X = MinResolution_X;
                 Resolucion_Y = MinResolution_Y;
-                Screen.SetResolution((int)Resolucion_X, (int)Resolucion_Y, false);
+                Screen.SetResolution((int)Resolucion_X, (int)Resolucion_Y, fullScreen);
             }
         }
     }
