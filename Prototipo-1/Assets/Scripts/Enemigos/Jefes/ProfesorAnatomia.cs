@@ -552,6 +552,12 @@ public class ProfesorAnatomia : Enemy
                     || proyectil.disparadorDelProyectil == Proyectil.DisparadorDelProyectil.Jugador2)
                     && proyectil.tipoDeProyectil != Proyectil.typeProyectil.AtaqueEspecial)
             {
+                if (proyectil.GetPlayer() != null)
+                    proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + proyectil.GetPlayer().PD.scoreForHit;
+                
+                if(proyectil.GetPlayer2() != null)
+                    proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
+
                 TakeDamage(proyectil);
             }
         }

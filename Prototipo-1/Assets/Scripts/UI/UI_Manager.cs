@@ -107,6 +107,7 @@ public class UI_Manager : MonoBehaviour
         public Scrollbar scrollbarPowerUp;
         public Image imageCurrentPowerUp;
         public TextMeshProUGUI textCountPowerUp;
+        public GameObject DisplayPowerUpObject;
 
         public void CheckValueBar(ref float value, ref float maxValue, Image image)
         {
@@ -236,6 +237,12 @@ public class UI_Manager : MonoBehaviour
                             enemy.barraDeEscudo = enemyHUD.barraDeEscudo;
                             enemy.life = enemy.maxLife;
                             enemyHUD.textNameEnemy.text = enemy.nameEnemy;
+
+                            if (enemy.enumsEnemy.typeEnemy == EnumsEnemy.TiposDeEnemigo.Jefe)
+                                enemyHUD.DisplayPowerUpObject.SetActive(false);
+                            else
+                                enemyHUD.DisplayPowerUpObject.SetActive(true);
+
                         }
                     }
                 }

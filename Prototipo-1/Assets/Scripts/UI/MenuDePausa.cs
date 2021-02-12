@@ -72,6 +72,7 @@ public class MenuDePausa : MonoBehaviour
         DisableMenues();
         gm.playerData_P1.score = gm.playerData_P1.auxScore;
 
+        eventwise.StartEvent("fuego_termina");
         eventwise.StartEvent("despausar");
         eventwise.StartEvent("seleccionar");
         eventwise.StartEvent("reiniciar");

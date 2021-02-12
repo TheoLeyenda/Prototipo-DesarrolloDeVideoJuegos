@@ -95,6 +95,7 @@ public class ProfesorHistoria : Enemy
     protected override void OnEnable()
     {
         base.OnEnable();
+        
         OnProfesorHistoria = false;
         NextSpecialAttack = true;
         specialAttackLibroEdison_Lanzado = false;
@@ -427,9 +428,16 @@ public class ProfesorHistoria : Enemy
                 proyectil.AnimationHit();
                 if (fsmProfesorHistoria.GetCurrentState() == (int)ProfesorHistoria.EstadoProfesorHistoria.MasiveAttack)
                 {
+                    if (proyectil.GetPlayer() != null)
+                        proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + proyectil.GetPlayer().PD.scoreForHit;
+
+                    if (proyectil.GetPlayer2() != null)
+                        proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
+
                     eventWise.StartEvent("golpear_p1");
 
                     spriteBoss_ProfesorHistoria.PlayAnimation("RecibirDanio");
+
                 }
             }
         }

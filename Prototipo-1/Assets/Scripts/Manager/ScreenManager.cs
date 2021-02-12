@@ -226,12 +226,10 @@ public class ScreenManager : MonoBehaviour
     }
     public void Menu()
     {
-        if (eventWise != null)
-        {
-            eventWise.StartEvent("despausar");
-            eventWise.StartEvent("fuego_termina");
-            eventWise.StartEvent("volver_al_menu");
-        }
+        eventWise.StartEvent("despausar");
+        eventWise.StartEvent("fuego_termina");
+        eventWise.StartEvent("volver_al_menu");
+        
         gm.enumsGameManager.modoDeJuego = EnumsGameManager.ModosDeJuego.Nulo;
         idListaNiveles = -1;
         Time.timeScale = 1;
