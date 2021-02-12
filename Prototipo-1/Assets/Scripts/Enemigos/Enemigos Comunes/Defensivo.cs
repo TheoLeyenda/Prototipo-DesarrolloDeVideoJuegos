@@ -21,6 +21,9 @@ public class Defensivo : Enemy
     private float auxDelayVulnerable;
     private float auxDelayStateCounterAttackDeffense;
     private bool inDeffense;
+
+    [SerializeField] private BoxColliderController.StateBoxCollider stateBoxColliderInSpecialAttack = BoxColliderController.StateBoxCollider.Defendido;
+
     [HideInInspector]
     private StateDeffence stateDeffence;
     public override void Start()
@@ -38,7 +41,6 @@ public class Defensivo : Enemy
         if (life <= 0 || myVictory)
         {
             Disparo.gameObject.SetActive(false);
-
         }
         
         base.Update();
@@ -46,6 +48,8 @@ public class Defensivo : Enemy
         if (Disparo.gameObject.activeSelf)
         {
             delaySelectMovement = 0.1f;
+
+            
         }
         CheckInSpecialAttack();
         if (transform.position.y > InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)
@@ -91,6 +95,7 @@ public class Defensivo : Enemy
         }
         else
         {
+            ActivateBoxColliderStateInSpecialAttack();
             if (!inFuegoEmpieza)
             {
                 eventWise.StartEvent("fuego_empieza");
@@ -167,6 +172,8 @@ public class Defensivo : Enemy
                     switch (enumsEnemy.GetMovement())
                     {
                         case EnumsEnemy.Movimiento.AtaqueEspecial:
+                            ActivateBoxColliderStateInSpecialAttack();
+
                             spriteEnemy.GetAnimator().SetBool("AtaqueEspecial", true);
                             spriteEnemy.spriteRenderer.color = Color.white;
                             enumsEnemy.SetMovement(EnumsEnemy.Movimiento.AtaqueEspecial);
@@ -455,6 +462,23 @@ public class Defensivo : Enemy
                 }
             }
         }
+    }
+    private void ActivateBoxColliderStateInSpecialAttack()
+    {
+        if (boxColliderPiernas != null)
+            boxColliderPiernas.state = stateBoxColliderInSpecialAttack;
+
+        if (boxColliderSprite != null)
+            boxColliderSprite.state = stateBoxColliderInSpecialAttack;
+
+        if (boxColliderControllerAgachado != null)
+            boxColliderControllerAgachado.state = stateBoxColliderInSpecialAttack;
+
+        if (boxColliderControllerParado != null)
+            boxColliderControllerParado.state = stateBoxColliderInSpecialAttack;
+
+        if (boxColliderControllerSaltando != null)
+            boxColliderControllerSaltando.state = stateBoxColliderInSpecialAttack;
     }
     public void SetStateDeffense(StateDeffence _stateDeffence)
     {
