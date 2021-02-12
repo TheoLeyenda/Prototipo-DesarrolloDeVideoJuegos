@@ -6,6 +6,8 @@ public class Resolucion : MonoBehaviour
 {
     public float Resolucion_X;
     public float Resolucion_Y;
+    public float MinResolution_X = 640;
+    public float MinResolution_Y = 360;
     private float OriginalResolution_X;
     private float OriginalResolution_Y;
     public bool fullScreen;
@@ -18,11 +20,11 @@ public class Resolucion : MonoBehaviour
         Screen.SetResolution((int)Resolucion_X, (int)Resolucion_Y, fullScreen);
         if (automaticRescaledResolution)
         {
-            while (Screen.width < Resolucion_X || Screen.height < Resolucion_Y)
+            if (Screen.width < Resolucion_X || Screen.height < Resolucion_Y)
             {
-                Resolucion_X = Resolucion_X / 1.2f;
-                Resolucion_Y = Resolucion_Y / 1.2f;
-                Screen.SetResolution((int)Resolucion_X, (int)Resolucion_Y, fullScreen);
+                Resolucion_X = MinResolution_X;
+                Resolucion_Y = MinResolution_Y;
+                Screen.SetResolution((int)Resolucion_X, (int)Resolucion_Y, false);
             }
         }
     }
