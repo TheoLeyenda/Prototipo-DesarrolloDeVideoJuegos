@@ -141,13 +141,7 @@ public class LevelManager : MonoBehaviour
             CheckPassGameOver();
             CheckPassLevel();
         }
-        if (InputPlayerController.GetInputButtonDown("SelectButton_P1"))
-        {
-            NextId();
-            InitSoundDialog();
-
-            eventWise.StartEvent(currentSoundEffectDialog);
-        }
+        
     }
 
     public void InitSoundDialog()
@@ -239,6 +233,13 @@ public class LevelManager : MonoBehaviour
     {
         if (idDialogo < DialogoInicial.Count && inDialog)
         {
+            if (InputPlayerController.GetInputButtonDown("SelectButton_P1"))
+            {
+                NextId();
+                InitSoundDialog();
+
+                eventWise.StartEvent(currentSoundEffectDialog);
+            }
             Time.timeScale = 0;
             inDialog = true;
             imageHabladorActual.sprite = DialogoInicial[idDialogo].spriteHabladorActual;
