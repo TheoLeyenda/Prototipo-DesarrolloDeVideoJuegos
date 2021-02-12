@@ -13,9 +13,6 @@ public class ProyectilParabola : Proyectil
     private ParabolaController parabolaController;
     [HideInInspector]
     public int TypeRoot;
-    private EventWise eventWise;
-
-    private GameData gd;
     
     void Start()
     {

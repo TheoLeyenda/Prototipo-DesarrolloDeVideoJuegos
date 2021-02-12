@@ -7,9 +7,6 @@ public class ProyectilLimo : ProyectilInparable
     public GameObject SpawnPosition;
     private int crash = 3;
 
-    private GameData gd;
-    public EventWise eventWise { set; get; }
-
     public override void Start()
     {
         gd = GameData.instaceGameData;

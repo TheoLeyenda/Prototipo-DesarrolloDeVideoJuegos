@@ -231,8 +231,14 @@ public class LevelManager : MonoBehaviour
     }
     public void CheckDiagolos()
     {
-        if (idDialogo < DialogoInicial.Count && inDialog)
+        if (idDialogo >= 0 && idDialogo < DialogoInicial.Count && inDialog)
         {
+            Time.timeScale = 0;
+            inDialog = true;
+           
+            imageHabladorActual.sprite = DialogoInicial[idDialogo].spriteHabladorActual;
+            textDialog.text = DialogoInicial[idDialogo].nombreHabladorActual + ": " + DialogoInicial[idDialogo].dialogoPersonaje;
+
             if (InputPlayerController.GetInputButtonDown("SelectButton_P1"))
             {
                 NextId();
@@ -240,10 +246,6 @@ public class LevelManager : MonoBehaviour
 
                 eventWise.StartEvent(currentSoundEffectDialog);
             }
-            Time.timeScale = 0;
-            inDialog = true;
-            imageHabladorActual.sprite = DialogoInicial[idDialogo].spriteHabladorActual;
-            textDialog.text = DialogoInicial[idDialogo].nombreHabladorActual + ": " + DialogoInicial[idDialogo].dialogoPersonaje;
         }
         else
         {

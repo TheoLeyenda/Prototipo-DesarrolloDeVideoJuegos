@@ -14,12 +14,10 @@ public class GranadaGaseosa : ProyectilParabola
     public Sprite propLata;
     public Sprite propBotella;
     public List<Sprite> propsProyectilGaseosa;
-    private EventWise eventWise;
 
     private float rangeMagnitude = 1.65f;
     private float substractHeight = 0.25f;
 
-    private GameData gd;
 
     private void Start()
     {

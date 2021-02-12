@@ -83,7 +83,7 @@ public class BoxColliderController : MonoBehaviour
                         player.SetEnableCounterAttack(true);
                         if (player.delayCounterAttack > 0)
                         {
-                            if (InputPlayerController.GetInputButtonDown(player.inputDeffenseButton) && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage && enableCounterAttack)
+                            if (player.enableMovement && InputPlayerController.GetInputButtonDown(player.inputDeffenseButton) && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage && enableCounterAttack)
                             {
                                 proyectil.gameObject.SetActive(false);
                                 player.Attack(PlayerCounterAttack);
@@ -171,7 +171,7 @@ public class BoxColliderController : MonoBehaviour
                     player.SetEnableCounterAttack(true);
                     if (player.delayCounterAttack > 0)
                     {
-                        if (InputPlayerController.GetInputButtonDown(player.inputDeffenseButton) && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage && enableCounterAttack)
+                        if (player.enableMovement && InputPlayerController.GetInputButtonDown(player.inputDeffenseButton) && player.barraDeEscudo.GetEnableDeffence() && !player.barraDeEscudo.nededBarMaxPorcentage && enableCounterAttack)
                         {
                             player.Attack(PlayerCounterAttack);
                             enableDamagePlayer = false;

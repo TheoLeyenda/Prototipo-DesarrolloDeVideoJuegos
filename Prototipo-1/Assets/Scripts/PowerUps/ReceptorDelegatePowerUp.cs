@@ -101,6 +101,7 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
             playerReference.SpeedJump = 0;
             playerReference.Resistace = 0;
             playerReference.Gravity = 0;
+            playerReference.enableMovement = false;
             if (powerUp_QuietoAhí.disableAttack)
                 playerReference.delayAttack = 99999;
         }
@@ -140,6 +141,7 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
                 playerReference.SpeedJump = playerReference.AuxSpeedJump;
                 playerReference.Resistace = playerReference.AuxResistace;
                 playerReference.Gravity = playerReference.AuxGravity;
+                playerReference.enableMovement = true;
 
             }
             powerUp_QuietoAhí.enableEffect = false;

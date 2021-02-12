@@ -75,8 +75,8 @@ public class Proyectil : MonoBehaviour
     protected bool inAnimation;
     protected bool soundgenerate;
 
-    private GameData gd; 
-    private EventWise eventWise;
+    protected GameData gd; 
+    [HideInInspector] public EventWise eventWise;
 
     private void Awake()
     {

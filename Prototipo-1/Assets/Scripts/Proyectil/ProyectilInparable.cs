@@ -8,10 +8,6 @@ public class ProyectilInparable : Proyectil
     public List<Sprite> propsProyectilImparable;
     public float speedRotation;
 
-    private GameData gd;
-
-    private EventWise eventWise;
-
     public virtual void Start()
     {
         gd = GameData.instaceGameData;
