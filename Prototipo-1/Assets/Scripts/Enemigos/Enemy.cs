@@ -249,10 +249,6 @@ public class Enemy : Character
     }
     public virtual void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            life = 0;
-        }
         if (weitVictory && transform.position.y <= InitialPosition.y) 
         {
             if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
