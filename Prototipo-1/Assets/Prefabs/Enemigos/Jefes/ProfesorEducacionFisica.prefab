@@ -97,10 +97,10 @@ MonoBehaviour:
   inEnemy: 1
   inPlayer: 0
   ZonaContraAtaque: 0
-  eventWise: {fileID: 0}
   enableCounterAttack: 0
   delayEnableCounterAttack: 0.05
   auxDelayEnableCounterAttack: 0.05
+  eventWise: {fileID: 0}
   state: 1
 --- !u!1 &899676735
 GameObject:
@@ -199,10 +199,10 @@ MonoBehaviour:
   inEnemy: 1
   inPlayer: 0
   ZonaContraAtaque: 0
-  eventWise: {fileID: 0}
   enableCounterAttack: 0
   delayEnableCounterAttack: 0.05
   auxDelayEnableCounterAttack: 0.05
+  eventWise: {fileID: 0}
   state: 1
 --- !u!1 &1632205729
 GameObject:
@@ -301,10 +301,10 @@ MonoBehaviour:
   inEnemy: 1
   inPlayer: 0
   ZonaContraAtaque: 0
-  eventWise: {fileID: 0}
   enableCounterAttack: 0
   delayEnableCounterAttack: 0.05
   auxDelayEnableCounterAttack: 0.05
+  eventWise: {fileID: 0}
   state: 1
 --- !u!1 &1547418678573186533
 GameObject:
@@ -1485,10 +1485,10 @@ MonoBehaviour:
   inEnemy: 0
   inPlayer: 0
   ZonaContraAtaque: 0
-  eventWise: {fileID: 0}
   enableCounterAttack: 0
   delayEnableCounterAttack: 0.05
   auxDelayEnableCounterAttack: 0.05
+  eventWise: {fileID: 0}
   state: 0
 --- !u!114 &931444199569688590
 MonoBehaviour:
@@ -1554,6 +1554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerReference: {fileID: 0}
   enemyReference: {fileID: 7476920347204172026}
+  inBoss: 0
 --- !u!114 &7476920347204172026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1597,8 +1598,8 @@ MonoBehaviour:
   life: 500
   maxLife: 500
   xpActual: 0
-  xpNededSpecialAttack: 0
-  xpForHit: 0
+  xpNededSpecialAttack: 1000
+  xpForHit: 100
   poolParabolaAttack: {fileID: 4667122787239390923}
   poolObjectAttack: {fileID: 4183447815393027856}
   generadoresProyectiles: {fileID: 1935536552373065318}
@@ -1631,6 +1632,7 @@ MonoBehaviour:
   boxColliderControllerSaltando: {fileID: 503299193}
   enableMecanicParabolaAttack: 1
   inAttack: 0
+  eventWise: {fileID: 0}
   myVictory: 0
   DontRestart: 0
   MovePorcentage: 0
@@ -1653,6 +1655,7 @@ MonoBehaviour:
   CantCasillasOcupadas_Y: 3
   ColumnaActual: 1
   timeStuned: 0
+  gd: {fileID: 0}
   delayFinishLevel: 1
 --- !u!1001 &320977479468420113
 PrefabInstance:
@@ -1810,15 +1813,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7194419974994112974, guid: 61245c1a77e7ad847b3751885e027da7,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7194419974994112971, guid: 61245c1a77e7ad847b3751885e027da7,
         type: 3}
       propertyPath: m_Controller
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7194419974994112974, guid: 61245c1a77e7ad847b3751885e027da7,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61245c1a77e7ad847b3751885e027da7, type: 3}
@@ -1853,21 +1856,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1547418678573186532}
     m_Modifications:
-    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
-    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_TagString
-      value: Cuadrilla
-      objectReference: {fileID: 0}
     - target: {fileID: 2688081505215426912, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_Name
@@ -1926,6 +1914,11 @@ PrefabInstance:
     - target: {fileID: 7296128619017103692, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1460512152298850783, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5927136447379350933, guid: b929ac675e510d440a80e8c74d8c4990,
@@ -2003,6 +1996,21 @@ PrefabInstance:
       propertyPath: inBoss
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4235520573919949314, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 1123265504465009608, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167319014957520534, guid: b929ac675e510d440a80e8c74d8c4990,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cuadrilla
+      objectReference: {fileID: 0}
     - target: {fileID: 4830216970014270298, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
       propertyPath: m_TagString
@@ -2010,6 +2018,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4070331649406560279, guid: b929ac675e510d440a80e8c74d8c4990,
         type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 7476920347204172026}
+    - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
       propertyPath: enemy
       value: 
       objectReference: {fileID: 7476920347204172026}
@@ -2023,15 +2035,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.08566023
       objectReference: {fileID: 0}
-    - target: {fileID: 1460512152298850783, guid: b929ac675e510d440a80e8c74d8c4990,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2107844367, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
-      propertyPath: enemy
-      value: 
-      objectReference: {fileID: 7476920347204172026}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b929ac675e510d440a80e8c74d8c4990, type: 3}
 --- !u!1 &89299063799223049 stripped

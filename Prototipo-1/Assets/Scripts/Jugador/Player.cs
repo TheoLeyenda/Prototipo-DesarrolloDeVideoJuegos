@@ -474,7 +474,7 @@ public class Player : Character
     {
         if (PD.lifePlayer <= 0 && transform.position.y <= InitialPosition.y && !isJumping)
         {
-            if (transform.position.y <= InitialPosition.y && enableMovementPlayer)
+            if (transform.position.y <= InitialPosition.y)
             {
                 spritePlayerActual.PlayAnimation("Death");
             }

@@ -145,7 +145,7 @@ public class Enemy : Character
     private float tolerableStillTime;
     private float auxTolerableStillTime;
 
-    private bool weitVictory;
+    protected bool weitVictory;
 
     [HideInInspector] public float timeStuned = 0;
 
@@ -188,7 +188,7 @@ public class Enemy : Character
     {
         enableDeffence = true;
         Player.OnDie -= AnimationVictory;
-        ResetSpeedJump();
+        CheckResetSpeedJump();
         enemyPrefab.transform.position = outPosition;
         inCombatPosition = false;
         isJamping = false;
@@ -240,7 +240,7 @@ public class Enemy : Character
             }
         }
     }
-    public void ResetSpeedJump()
+    public void CheckResetSpeedJump()
     {
         if (life <= 0)
         {
@@ -249,6 +249,9 @@ public class Enemy : Character
     }
     public virtual void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+            life = 0;
+
         if (weitVictory && transform.position.y <= InitialPosition.y) 
         {
             if (enumsEnemy.typeEnemy != EnumsEnemy.TiposDeEnemigo.Jefe)
@@ -259,7 +262,7 @@ public class Enemy : Character
             myVictory = true;
             weitVictory = false;
         }
-        ResetSpeedJump();
+        CheckResetSpeedJump();
         CheckState();
         CheckDead();
 
@@ -706,6 +709,7 @@ public class Enemy : Character
     {
         if(life <= 0)
         {
+            eventWise.StartEvent("fuego_termina");
             if (OnDie != null)
             {
                 OnDie(this);

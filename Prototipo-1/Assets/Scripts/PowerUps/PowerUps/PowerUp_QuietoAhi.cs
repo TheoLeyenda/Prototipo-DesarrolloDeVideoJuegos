@@ -105,7 +105,6 @@ public class PowerUp_QuietoAhi : PowerUp
         }
         delayEffect = auxDelayEffect;
         savingData = true;
-        enableEffect = false;
     }
 
     public void SetAuxSpeed(float _auxSpeed) => auxSpeed = _auxSpeed;

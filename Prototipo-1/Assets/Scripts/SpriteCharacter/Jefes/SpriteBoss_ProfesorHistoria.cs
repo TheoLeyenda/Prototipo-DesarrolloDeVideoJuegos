@@ -67,11 +67,13 @@ public class SpriteBoss_ProfesorHistoria : SpriteBossController
         if (profesorHistoria.xpActual >= profesorHistoria.xpNededSpecialAttack / 2 && !profesorHistoria.specialAttackLibroEdison_Lanzado)
         {
             profesorHistoria.specialAttackLibroEdison_Lanzado = true;
+            animator.SetBool(profesorHistoria.NameAnimations[(int)ProfesorHistoria.MyAnimations.FinalMasiveAttack], true);
             profesorHistoria.fsmProfesorHistoria.SendEvent((int)ProfesorHistoria.EventosProfesorHistoria.SpecialAttackBarInMiddleCharge);
         }
         else if (profesorHistoria.xpActual >= profesorHistoria.xpNededSpecialAttack && !profesorHistoria.specialAttackDebateInjusto_Lanzado)
         {
             profesorHistoria.fsmProfesorHistoria.SendEvent((int)ProfesorHistoria.EventosProfesorHistoria.SpecialAttackBarCompleteCharge);
+            animator.SetBool(profesorHistoria.NameAnimations[(int)ProfesorHistoria.MyAnimations.FinalMasiveAttack], true);
             profesorHistoria.xpActual = 0;
         }
     }

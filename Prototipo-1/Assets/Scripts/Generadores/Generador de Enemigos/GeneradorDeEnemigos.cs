@@ -94,7 +94,7 @@ public class GeneradorDeEnemigos : MonoBehaviour
             case TypeGeneration.DeadthEnemy:
                 if (enemigoActual != null)
                 {
-                    if (enemigoActual.life <= 0 && enemigoActual.enumsEnemy.GetStateEnemy() == EnumsEnemy.EstadoEnemigo.muerto || !enemigoActual.enemyPrefab.gameObject.activeSelf)
+                    if (!enemigoActual.enemyPrefab.activeSelf)
                     {
                         Generate();
                     }

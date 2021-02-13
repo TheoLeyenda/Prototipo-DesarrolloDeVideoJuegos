@@ -41,6 +41,7 @@ public class Defensivo : Enemy
         if (life <= 0 || myVictory)
         {
             Disparo.gameObject.SetActive(false);
+            eventWise.StartEvent("fuego_termina");
         }
         
         base.Update();
@@ -48,8 +49,7 @@ public class Defensivo : Enemy
         if (Disparo.gameObject.activeSelf)
         {
             delaySelectMovement = 0.1f;
-
-            
+            ActivateBoxColliderStateInSpecialAttack();
         }
         CheckInSpecialAttack();
         if (transform.position.y > InitialPosition.y && enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecial)

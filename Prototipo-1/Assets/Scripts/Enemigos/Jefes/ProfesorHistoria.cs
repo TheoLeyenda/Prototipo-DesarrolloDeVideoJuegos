@@ -231,6 +231,7 @@ public class ProfesorHistoria : Enemy
                             eventWise.StartEvent("Stop_GritoRayo");
                             eventWise.StartEvent("Stop_LibroEdison");
                             Idied = true;
+                            ProyectilDebateInjusto.gameObject.SetActive(false);
                             spriteBoss_ProfesorHistoria.PlayAnimation(NameAnimations[(int)MyAnimations.Death]);
                         }
                         break;
@@ -335,7 +336,6 @@ public class ProfesorHistoria : Enemy
     {
         xpActual = xpActual + Time.deltaTime * speedChargeSpecialAttack;
     }
-
     public void CheckThrowSpecialAttack()
     {
         if (xpActual >= xpNededSpecialAttack / 2 && !specialAttackLibroEdison_Lanzado)

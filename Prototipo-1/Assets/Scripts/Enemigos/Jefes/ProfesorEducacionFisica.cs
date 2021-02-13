@@ -12,6 +12,7 @@ public class ProfesorEducacionFisica : Enemy
     public override void Start()
     {
         base.Start();
+        xpActual = 0;
     }
 
     public override void Update()

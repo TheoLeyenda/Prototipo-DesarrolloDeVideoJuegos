@@ -60,7 +60,7 @@ public class EnumsEnemy : MonoBehaviour
     public TiposDeJefe typeBoss;
     public TiposDeEnemigo typeEnemy;
     [SerializeField]
-    private Movimiento movement;
+    private Movimiento movement = Movimiento.MoveToPointCombat;
     private EstadoEnemigo stateEnemy;
 
     public void SetMovement(Movimiento mov)
