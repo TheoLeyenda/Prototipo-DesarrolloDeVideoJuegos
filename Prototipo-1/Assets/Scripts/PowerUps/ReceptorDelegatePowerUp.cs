@@ -114,6 +114,8 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
             playerReference.Gravity = 0;
             playerReference.enableMovement = false;
             playerReference.delayAttack = 99999;
+            playerReference.enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.Atrapado;
+            playerReference.timeStuned = 99999;
         }
     }
     public void DisableEffectPowerUp_QuietoAhi(PowerUp_QuietoAhi powerUp_QuietoAhí)
@@ -145,6 +147,8 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
                 playerReference.Resistace = playerReference.AuxResistace;
                 playerReference.Gravity = playerReference.AuxGravity;
                 playerReference.enableMovement = true;
+
+                playerReference.timeStuned = 0;
 
             }
             powerUp_QuietoAhí.enableEffect = false;

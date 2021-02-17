@@ -27,7 +27,7 @@ public class SpritePlayer : SpriteCharacter
     {
         if (ActualSprite == SpriteActual.RecibirDanio || ActualSprite == SpriteActual.ContraAtaque)
         {
-            if (ActualSprite == SpriteActual.RecibirDanio)
+            if (ActualSprite == SpriteActual.RecibirDanio && player.enumsPlayers.estadoJugador != EnumsPlayers.EstadoJugador.Atrapado)
             {
                 CheckDeleyRecibirDanio();
             }
