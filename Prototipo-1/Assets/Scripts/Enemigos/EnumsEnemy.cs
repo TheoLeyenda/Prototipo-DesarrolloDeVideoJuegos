@@ -54,6 +54,7 @@ public class EnumsEnemy : MonoBehaviour
     {
         vivo,
         Atrapado,
+        Congelado,
         muerto,
         Count,
     }

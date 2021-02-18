@@ -24,6 +24,7 @@ public class EnumsPlayers : MonoBehaviour
     {
         vivo,
         Atrapado,
+        Congelado,
         muerto,
         Count,
     }

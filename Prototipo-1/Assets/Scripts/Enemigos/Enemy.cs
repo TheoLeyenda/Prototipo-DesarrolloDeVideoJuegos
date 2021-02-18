@@ -158,6 +158,8 @@ public class Enemy : Character
 
     [HideInInspector] public GameData gd;
 
+    private Color colorCurrentState;
+
     protected virtual void OnEnable()
     {
         enableDeffence = true;
@@ -294,8 +296,12 @@ public class Enemy : Character
                 {
                     OnModifireState(this, "Atrapado Chicle");
                 }
+                colorCurrentState = Color.magenta;
                 CheckStune(timeStuned);
-
+                break;
+            case EnumsEnemy.EstadoEnemigo.Congelado:
+                colorCurrentState = Color.cyan;
+                CheckStune(timeStuned);
                 break;
         }
     }
@@ -306,8 +312,24 @@ public class Enemy : Character
         {
             timeStuned = timeStuned - Time.deltaTime;
             //hacer que el color del enemigo se vea azul;
-            spriteEnemy.spriteRenderer.color = Color.cyan;
+            spriteEnemy.spriteRenderer.color = colorCurrentState;
             enableMovement = false;
+
+            if (boxColliderPiernas != null)
+                boxColliderPiernas.state = BoxColliderController.StateBoxCollider.Normal;
+
+            if (boxColliderSprite != null)
+                boxColliderSprite.state = BoxColliderController.StateBoxCollider.Normal;
+
+            if (boxColliderControllerParado != null)
+                boxColliderControllerParado.state = BoxColliderController.StateBoxCollider.Normal;
+
+            if (boxColliderControllerAgachado != null)
+                boxColliderControllerAgachado.state = BoxColliderController.StateBoxCollider.Normal;
+
+            if (boxColliderControllerSaltando != null)
+                boxColliderControllerSaltando.state = BoxColliderController.StateBoxCollider.Normal;
+
         }
         else if (timeStuned <= 0)
         {

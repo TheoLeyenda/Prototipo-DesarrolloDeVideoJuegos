@@ -91,7 +91,12 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
                 enemyReference.Resistace = 0;
                 enemyReference.Gravity = 0;
                 enemyReference.delayAttack = 99999;
-                
+
+                if (enemyReference.enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.Atrapado)
+                    enemyReference.enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.Congelado);
+
+                enemyReference.timeStuned = 99999;
+
                 if (enemyReference.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacharseAtaque
                     || enemyReference.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AgacheDefensa
                     || enemyReference.enumsEnemy.GetMovement() == EnumsEnemy.Movimiento.AtaqueEspecialAgachado
@@ -114,7 +119,9 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
             playerReference.Gravity = 0;
             playerReference.enableMovement = false;
             playerReference.delayAttack = 99999;
-            playerReference.enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.Atrapado;
+            if(playerReference.enumsPlayers.estadoJugador != EnumsPlayers.EstadoJugador.Atrapado)
+                playerReference.enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.Congelado;
+
             playerReference.timeStuned = 99999;
         }
     }
@@ -136,6 +143,8 @@ public class ReceptorDelegatePowerUp : MonoBehaviour
                 enemyReference.SpeedJump = enemyReference.auxSpeedJump;
                 enemyReference.Resistace = enemyReference.auxResistace;
                 enemyReference.Gravity = enemyReference.auxGravity;
+
+                enemyReference.timeStuned = 0;
             }
             else if ((powerUp_QuietoAhí.player != null && playerReference != null) ||
                  (powerUp_QuietoAhí.enemy != null && playerReference != null))

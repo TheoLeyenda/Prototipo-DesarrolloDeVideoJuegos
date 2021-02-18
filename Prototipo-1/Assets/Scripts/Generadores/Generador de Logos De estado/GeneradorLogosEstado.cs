@@ -70,8 +70,10 @@ public class GeneradorLogosEstado : MonoBehaviour
     }
     public void GenerateLogo(Player p, string idName)
     {
+        //Debug.Log("Entre al generated logo");
         if (numberPlayer == p.enumsPlayers.numberPlayer)
         {
+            //Debug.Log("Entre a la gilada del number player");
             CreatedLogo(idName);
         }
     }

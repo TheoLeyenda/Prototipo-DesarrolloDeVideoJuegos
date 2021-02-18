@@ -51,8 +51,6 @@ public class SelectedPlayers : MonoBehaviour
     public List<string> namePlayersOptions;
     public Cursor CursorSelectorPlayer1;
     public Cursor CursorSelectorPlayer2;
-    public GameObject CursorGrandePlayer1;
-    public GameObject CursorChicoPlayer1;
     private string[,] grillaDeSeleccion;
     public int filas;
     public int columnas;
@@ -73,8 +71,16 @@ public class SelectedPlayers : MonoBehaviour
     public List<Sprite> spritesPlayers;
     public GameObject DireccionLeft;
     public GameObject DireccionRight;
-    public SpriteRenderer spriteCursor1;
-    public SpriteRenderer spriteCursor2;
+
+
+    public GameObject CursorChicoNormie;
+    public GameObject CursorGrandeNormie;
+    public GameObject CursorChicoSelected;
+    public GameObject CursorGrandeSelected;
+    public GameObject cursorSelectorNormie1;
+    public GameObject cursorSelectorSelected1;
+    public GameObject cursorSelectorNormie2;
+    public GameObject cursorSelectorSelected2;
     //----------------------------------//
 
     private EventWise eventWise;
@@ -87,6 +93,8 @@ public class SelectedPlayers : MonoBehaviour
 
     private void Start()
     {
+        cursorSelectorNormie1.SetActive(true);
+        cursorSelectorNormie2.SetActive(true);
         gd = GameData.instaceGameData;
         eventWise = GameObject.Find("EventWise").GetComponent<EventWise>();
         aviableMoveHorizontalP1 = true;
@@ -169,13 +177,37 @@ public class SelectedPlayers : MonoBehaviour
     {
         if (cursorPlayer1.x == cursorPlayer2.x && cursorPlayer2.y == cursorPlayer1.y)
         {
-            CursorGrandePlayer1.SetActive(true);
-            CursorChicoPlayer1.SetActive(false);
+            if (!cursorPlayer1.condirmed)
+            {
+                CursorGrandeNormie.SetActive(true);
+                CursorGrandeSelected.SetActive(false);
+                CursorChicoNormie.SetActive(false);
+                CursorChicoSelected.SetActive(false);
+            }
+            else
+            {
+                CursorGrandeSelected.SetActive(true);
+                CursorGrandeNormie.SetActive(false);
+                CursorChicoNormie.SetActive(false);
+                CursorChicoSelected.SetActive(false);
+            }
         }
         else
         {
-            CursorChicoPlayer1.SetActive(true);
-            CursorGrandePlayer1.SetActive(false);
+            if (!cursorPlayer1.condirmed)
+            {
+                CursorChicoNormie.SetActive(true);
+                CursorChicoSelected.SetActive(false);
+                CursorGrandeSelected.SetActive(false);
+                CursorGrandeNormie.SetActive(false);
+            }
+            else
+            {
+                CursorChicoSelected.SetActive(true);
+                CursorChicoNormie.SetActive(false);
+                CursorGrandeSelected.SetActive(false);
+                CursorGrandeNormie.SetActive(false);
+            }
         }
     }
     public void DecoratePlayerSelected(SpriteRenderer imagePlayer,ref CursorMatriz cursorPlayer)
@@ -273,8 +305,11 @@ public class SelectedPlayers : MonoBehaviour
     {
         if (cursorPlayer1.condirmed)
         {
-            spriteCursor1.color = Color.yellow;
-            CursorGrandePlayer1.GetComponent<SpriteRenderer>().color = Color.yellow;
+            if (!CursorGrandeSelected.activeSelf && !CursorGrandeNormie.activeSelf)
+            {
+                cursorSelectorSelected1.SetActive(true);
+                cursorSelectorNormie1.SetActive(false);
+            }
             if (!soundSelectCharacterPlayer_1)
             {
                 eventWise.StartEvent(soundSelectCharacter);
@@ -285,7 +320,8 @@ public class SelectedPlayers : MonoBehaviour
         }
         if (cursorPlayer2.condirmed)
         {
-            spriteCursor2.color = Color.yellow;
+            cursorSelectorSelected2.SetActive(true);
+            cursorSelectorNormie2.SetActive(false);
             if (!soundSelectCharacterPlayer_2)
             {
                 eventWise.StartEvent(soundSelectCharacter);
@@ -315,7 +351,8 @@ public class SelectedPlayers : MonoBehaviour
                 }
             }
         }
-        if (cursorPlayer1.condirmed && cursorPlayer2.condirmed)
+        if (cursorPlayer1.condirmed && cursorPlayer2.condirmed && 
+            ((CursorGrandeSelected.activeSelf || CursorChicoSelected.activeSelf) && cursorSelectorSelected2.activeSelf))
         {
             SceneManager.LoadScene(nameNextScene);
         }

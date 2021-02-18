@@ -67,6 +67,7 @@ public class PowerUpContainerManager : MonoBehaviour
         if (gameData == null) return;
         DeselectAllPowerUps();
         currentIndexPowerUp = powerUpContainerContent.Count - 1;
+
         for (int i = 0; i < gameData.dataPlayerPowerUp.Length; i++)
         {
             if (i < powerUpContainerContent.Count && powerUpContainerContent[i].powerUp != null)

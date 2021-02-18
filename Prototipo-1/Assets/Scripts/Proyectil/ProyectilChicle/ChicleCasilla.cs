@@ -72,7 +72,7 @@ public class ChicleCasilla : MonoBehaviour
             }
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
@@ -85,6 +85,7 @@ public class ChicleCasilla : MonoBehaviour
                 return;
             }
             player.transform.position = new Vector3(transform.position.x, player.transform.position.y, player.transform.position.z);
+            player.enumsPlayers.estadoJugador = EnumsPlayers.EstadoJugador.Atrapado;
         }
         if (collision.tag == "Enemy")
         {
@@ -97,6 +98,7 @@ public class ChicleCasilla : MonoBehaviour
                 return;
             }
             enemy.transform.position = new Vector3(transform.position.x, enemy.transform.position.y, enemy.transform.position.z);
+            enemy.enumsEnemy.SetStateEnemy(EnumsEnemy.EstadoEnemigo.Atrapado);
         }
     }
 }

@@ -100,6 +100,12 @@ public class SpriteEnemy : SpriteCharacter
     }
     public override void CheckActualSprite()
     {
+        if ((enemy.enumsEnemy.GetStateEnemy() == EnumsEnemy.EstadoEnemigo.Atrapado || enemy.enumsEnemy.GetStateEnemy() == EnumsEnemy.EstadoEnemigo.Congelado)
+            && enemy.transform.position.y > enemy.InitialPosition.y)
+        {
+            ActualSprite = SpriteActual.Salto;
+        }
+
         for (int i = 0; i < Animations.Count; i++)
         {
             if (ActualSprite.ToString() == Animations[i].nameSpriteActual
@@ -107,7 +113,9 @@ public class SpriteEnemy : SpriteCharacter
             {
                 if (ActualSprite != SpriteActual.AgachadoDefensa
                     && ActualSprite != SpriteActual.ParadoDefensa
-                    && ActualSprite != SpriteActual.SaltoDefensa)
+                    && ActualSprite != SpriteActual.SaltoDefensa
+                    && enemy.enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.Atrapado
+                    && enemy.enumsEnemy.GetStateEnemy() != EnumsEnemy.EstadoEnemigo.Congelado)
                 {
                     spriteRenderer.color = Color.white;
                 }
@@ -134,6 +142,8 @@ public class SpriteEnemy : SpriteCharacter
                 }
             }
         }
+
+        
     }
     public void InSpecialAttack()
     {
