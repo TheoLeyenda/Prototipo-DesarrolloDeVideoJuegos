@@ -15,7 +15,18 @@ public class Gaseosa : MonoBehaviour
     private void OnEnable()
     {
         timeLife = auxTimeLife;
+        Enemy.OnDie += DisableObjectForDeadCurrentEnemy;
     }
+    private void OnDisable()
+    {
+        Enemy.OnDie -= DisableObjectForDeadCurrentEnemy;
+    }
+
+    private void DisableObjectForDeadCurrentEnemy(Enemy currentEnemy)
+    {
+        timeLife = 0;
+    }
+
     private void Update()
     {
         CheckTimeLife();

@@ -349,6 +349,12 @@ public class Enemy : Character
                 OnDisableModifireState(this, "Atrapado Chicle");
             }
 
+            if (transform.position.y > InitialPosition.y)
+            {
+                enumsEnemy.SetMovement(EnumsEnemy.Movimiento.Saltar);
+                SpeedJump = auxSpeedJump;
+            }
+
         }
     }
 

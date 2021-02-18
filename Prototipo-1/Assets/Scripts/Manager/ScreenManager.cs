@@ -68,11 +68,16 @@ public class ScreenManager : MonoBehaviour
     }
     public void HighScore()
     {
+        
         gm.CanvasGameOver.SetActive(false);
         if (!gm.CanvasGameOver.activeSelf)
         {
             LevelLoader.nextLevel = "HighScore";
-            SceneManager.LoadScene("HighScore");
+            if (panelTransitions != null)
+                panelTransitions.LoadScene("HighScore");
+            else
+                SceneManager.LoadScene("HighScore");
+
         }
     }
      

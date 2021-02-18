@@ -65,21 +65,12 @@ public class GranadaGaseosa : ProyectilParabola
         {
             OnParabola(null, PLAYER2, typeProyectil.AtaqueEspecial);
         }
-
-        Enemy.OnDie += DisableObjectForDeadCurrentEnemy;
     }
 
     private void OnDisable()
     {
         inAnimation = false;
         soundgenerate = false;
-
-        Enemy.OnDie -= DisableObjectForDeadCurrentEnemy;
-    }
-
-    private void DisableObjectForDeadCurrentEnemy(Enemy currentEnemy)
-    {
-        timeLife = 0;
     }
 
     public override void Sonido()
