@@ -536,10 +536,10 @@ public class ProfesorAnatomia : Enemy
     {
         life = life - proyectil.damage;
         proyectil.AnimationHit();
+        eventWise.StartEvent("golpear_p1");
+
         if (fsmProfesorAnatomia.GetCurrentState() == (int)EstadoProfesorAnatomia.MasiveAttack)
         {
-            eventWise.StartEvent("golpear_p1");
-
             spriteBoss_ProfesorAnatomia.PlayAnimation("RecibirDanio");
         }
     }

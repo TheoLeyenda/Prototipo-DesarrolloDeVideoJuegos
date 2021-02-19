@@ -426,19 +426,16 @@ public class ProfesorHistoria : Enemy
             {
                 life = life - proyectil.damage;
                 proyectil.AnimationHit();
+                eventWise.StartEvent("golpear_p1");
+
+                if (proyectil.GetPlayer() != null)
+                    proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + proyectil.GetPlayer().PD.scoreForHit;
+
+                if (proyectil.GetPlayer2() != null)
+                    proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
+
                 if (fsmProfesorHistoria.GetCurrentState() == (int)ProfesorHistoria.EstadoProfesorHistoria.MasiveAttack)
-                {
-                    if (proyectil.GetPlayer() != null)
-                        proyectil.GetPlayer().PD.score = proyectil.GetPlayer().PD.score + proyectil.GetPlayer().PD.scoreForHit;
-
-                    if (proyectil.GetPlayer2() != null)
-                        proyectil.GetPlayer2().PD.score = proyectil.GetPlayer2().PD.score + proyectil.GetPlayer2().PD.scoreForHit;
-
-                    eventWise.StartEvent("golpear_p1");
-
                     spriteBoss_ProfesorHistoria.PlayAnimation("RecibirDanio");
-
-                }
             }
         }
     }

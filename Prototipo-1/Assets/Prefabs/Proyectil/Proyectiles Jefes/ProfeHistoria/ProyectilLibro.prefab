@@ -290,8 +290,8 @@ MonoBehaviour:
   timeLife: 10
   auxTimeLife: 10
   damageCounterAttack: 200
-  damage: 100
-  auxDamage: 100
+  damage: 50
+  auxDamage: 50
   rg2D: {fileID: 2780204401200600695}
   vectorForward: {fileID: 2742194915532298585}
   vectorForwardUp: {fileID: 2027898793419473202}
@@ -303,12 +303,14 @@ MonoBehaviour:
   animator: {fileID: 224392468914567601}
   initialPosition: {fileID: 0}
   colisionPlayer: 0
+  eventWise: {fileID: 0}
   spriteLibros:
   - {fileID: 21300000, guid: 6a21656cf7aa49145b6f33fb3742c7bb, type: 3}
   - {fileID: 21300000, guid: 7ef7edfaab62d4d45acebbea0345a5b2, type: 3}
   - {fileID: 21300000, guid: 36a0353004a943445998e9a997e4e18e, type: 3}
   librosColoridos: 1
   boxCollider2D: {fileID: 2417063672511138636}
+  delayCounterAttack: 0.1
 --- !u!61 &2417063672511138636
 BoxCollider2D:
   m_ObjectHideFlags: 0
