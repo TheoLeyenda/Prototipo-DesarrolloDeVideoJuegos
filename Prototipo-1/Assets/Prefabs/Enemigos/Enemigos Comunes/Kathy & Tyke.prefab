@@ -2273,10 +2273,10 @@ MonoBehaviour:
   inEnemy: 1
   inPlayer: 0
   ZonaContraAtaque: 0
-  eventWise: {fileID: 0}
   enableCounterAttack: 0
   delayEnableCounterAttack: 0.05
   auxDelayEnableCounterAttack: 0.05
+  eventWise: {fileID: 0}
   state: 1
 --- !u!1 &3119680522371982043
 GameObject:
@@ -2375,10 +2375,10 @@ MonoBehaviour:
   inEnemy: 1
   inPlayer: 0
   ZonaContraAtaque: 0
-  eventWise: {fileID: 0}
   enableCounterAttack: 0
   delayEnableCounterAttack: 0.05
   auxDelayEnableCounterAttack: 0.05
+  eventWise: {fileID: 0}
   state: 1
 --- !u!1 &3119680523735379842
 GameObject:
@@ -2477,10 +2477,10 @@ MonoBehaviour:
   inEnemy: 1
   inPlayer: 0
   ZonaContraAtaque: 0
-  eventWise: {fileID: 0}
   enableCounterAttack: 0
   delayEnableCounterAttack: 0.05
   auxDelayEnableCounterAttack: 0.05
+  eventWise: {fileID: 0}
   state: 1
 --- !u!1 &3119680524290456989
 GameObject:
@@ -2579,10 +2579,10 @@ MonoBehaviour:
   inEnemy: 1
   inPlayer: 0
   ZonaContraAtaque: 0
-  eventWise: {fileID: 0}
   enableCounterAttack: 0
   delayEnableCounterAttack: 0.05
   auxDelayEnableCounterAttack: 0.05
+  eventWise: {fileID: 0}
   state: 1
 --- !u!1 &3413106557907316305
 GameObject:
@@ -9178,10 +9178,10 @@ MonoBehaviour:
   inEnemy: 1
   inPlayer: 0
   ZonaContraAtaque: 1
-  eventWise: {fileID: 0}
   enableCounterAttack: 0
   delayEnableCounterAttack: 0.05
   auxDelayEnableCounterAttack: 0.05
+  eventWise: {fileID: 0}
   state: 1
 --- !u!1 &6291037100087010933
 GameObject:
@@ -9766,6 +9766,7 @@ MonoBehaviour:
   CantCasillasOcupadas_Y: 2
   ColumnaActual: 1
   timeStuned: 0
+  gd: {fileID: 0}
   limo_gameObject: {fileID: 5387009178580966653}
   CounchDefense: 1
 --- !u!114 &7020909385814843154
@@ -9954,6 +9955,16 @@ PrefabInstance:
       propertyPath: SpawnPosition
       value: 
       objectReference: {fileID: 1153630530}
+    - target: {fileID: 8882296330058483476, guid: 16b97232546ed434180be7b8dc4d5e1e,
+        type: 3}
+      propertyPath: damage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8882296330058483476, guid: 16b97232546ed434180be7b8dc4d5e1e,
+        type: 3}
+      propertyPath: auxDamage
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1878668730704329940, guid: 16b97232546ed434180be7b8dc4d5e1e,
         type: 3}
       propertyPath: m_SortingOrder

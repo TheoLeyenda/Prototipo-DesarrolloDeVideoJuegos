@@ -79,6 +79,8 @@ public class DataCombatPvP : MonoBehaviour
 
     private GameData gd;
 
+    [SerializeField] private GameObject inputControllerObject;
+
     void Start()
     {
         gd = GameData.instaceGameData;
@@ -175,6 +177,7 @@ public class DataCombatPvP : MonoBehaviour
 
     public void CheckWinPvP()
     {
+        
         if (player1.PD.lifePlayer <= 0)
         {
             ResetScore();
@@ -252,7 +255,7 @@ public class DataCombatPvP : MonoBehaviour
 
                 soundEnter = true;
             }
-
+            inputControllerObject.SetActive(false);
             menuPausa_P1.SetActive(false);
             menuPausa_P2.SetActive(false);
             FondosNivel[(int)level_selected].SetActive(false);
